@@ -1,0 +1,10 @@
+{
+  "测试ID": 0,
+  "body": {
+    "old": "e",
+    "new": "z"
+  },
+  "type": "RS",
+  "assert": "ff2d3f1fcf22f073f0f221d86dc28d1e6d5c88d22ed3632131c4ca649f9fa0fd",
+  "comment": "merkle树update方法，oldObj不存在于原merkle树测试"
+}
