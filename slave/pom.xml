@@ -170,12 +170,6 @@
             <artifactId>concurrentlinkedhashmap-lru</artifactId>
         </dependency>
 
-        <!--seg-->
-        <dependency>
-            <groupId>cn.primeledger.seg</groupId>
-            <artifactId>stability-spring-boot-starter</artifactId>
-        </dependency>
-
         <!--redisson-->
         <!-- redis client -->
         <dependency>
