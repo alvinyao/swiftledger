@@ -287,19 +287,6 @@
                 <version>1.4.2</version>
             </dependency>
 
-            <!--seg-->
-            <dependency>
-                <groupId>cn.primeledger.seg</groupId>
-                <artifactId>stability-spring-boot-starter</artifactId>
-                <version>1.1.2-SNAPSHOT</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.amqp</groupId>
-                        <artifactId>spring-rabbit</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
             <!--redisson-->
             <!-- redis client -->
             <dependency>
