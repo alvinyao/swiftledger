@@ -43,7 +43,7 @@ public class ActionJsonDeserializer implements ObjectDeserializer {
     static Map<ActionTypeEnum, Type> actionMap = new HashMap<>(20);
     static {
         actionMap.put(ActionTypeEnum.OPEN_ACCOUNT, OpenAccount.class);
-        actionMap.put(ActionTypeEnum.UNFREEZE, AccountUnFreeze.class);
+        actionMap.put(ActionTypeEnum.FREEZE, AccountUnFreeze.class);
         actionMap.put(ActionTypeEnum.UNFREEZE, AccountUnFreeze.class);
         actionMap.put(ActionTypeEnum.UTXO, UTXOAction.class);
         actionMap.put(ActionTypeEnum.ACCOUNTING, AccountOperation.class);
