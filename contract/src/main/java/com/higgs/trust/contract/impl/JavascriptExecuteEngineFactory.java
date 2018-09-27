@@ -50,18 +50,18 @@ import java.util.Map;
         Bindings bindings = createBindings(variables);
         Context context = new Context(new Options("nashorn"), new ErrorManager(), getAppClassLoader());
         Context.setGlobal(context.createGlobal());
-        try {
-            MethodHandle requireMethod = MethodHandles.lookup().findStatic(ExecuteContext.class, "require", type(void.class, Object.class, Boolean.class, String.class));
-            MethodHandle exceptionMethod = MethodHandles.lookup().findStatic(ExecuteContext.class, "exception", type(void.class, Object.class, String.class));
-            bindings.put("require", ScriptFunction.createBuiltin("require", requireMethod));
-            bindings.put("exception", ScriptFunction.createBuiltin("exception", exceptionMethod));
-        } catch (NoSuchMethodException e) {
-            log.warn(e.getMessage());
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            log.warn(e.getMessage());
-            e.printStackTrace();
-        }
+        //try {
+        //    MethodHandle requireMethod = MethodHandles.lookup().findStatic(ExecuteContext.class, "require", type(void.class, Object.class, Boolean.class, String.class));
+        //    MethodHandle exceptionMethod = MethodHandles.lookup().findStatic(ExecuteContext.class, "exception", type(void.class, Object.class, String.class));
+        //    bindings.put("require", ScriptFunction.createBuiltin("require", requireMethod));
+        //    bindings.put("exception", ScriptFunction.createBuiltin("exception", exceptionMethod));
+        //} catch (NoSuchMethodException e) {
+        //    log.warn(e.getMessage());
+        //    e.printStackTrace();
+        //} catch (IllegalAccessException e) {
+        //    log.warn(e.getMessage());
+        //    e.printStackTrace();
+        //}
 
         scriptEngine.setBindings(bindings, ScriptContext.GLOBAL_SCOPE);
 
