@@ -27,10 +27,6 @@
         </dependency>
         <dependency>
             <groupId>com.higgs.trust</groupId>
-            <artifactId>management</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.higgs.trust</groupId>
             <artifactId>tester</artifactId>
         </dependency>
         <!-- internal end -->
