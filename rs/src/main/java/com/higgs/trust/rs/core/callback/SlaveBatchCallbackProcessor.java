@@ -102,8 +102,10 @@ import java.util.Map;
         for (RsCoreTxVO tx : allTxs) {
             try {
                 RespData respData = new RespData();
-                respData.setCode(tx.getErrorCode());
-                respData.setMsg(tx.getErrorMsg());
+                if(tx.getExecuteResult() != CoreTxResultEnum.SUCCESS) {
+                    respData.setCode(tx.getErrorCode());
+                    respData.setMsg(tx.getErrorMsg());
+                }
                 persistedResultMap.put(tx.getTxId(), respData);
             } catch (Throwable e) {
                 log.warn("[onPersisted]sync notify rs resp data failed", e);
@@ -138,8 +140,10 @@ import java.util.Map;
         for (RsCoreTxVO tx : allTxs) {
             try {
                 RespData respData = new RespData();
-                respData.setCode(tx.getErrorCode());
-                respData.setMsg(tx.getErrorMsg());
+                if(tx.getExecuteResult() != CoreTxResultEnum.SUCCESS) {
+                    respData.setCode(tx.getErrorCode());
+                    respData.setMsg(tx.getErrorMsg());
+                }
                 clusterPersistedResultMap.put(tx.getTxId(), respData);
             } catch (Throwable e) {
                 log.warn("[onClusterPersisted]sync notify rs resp data failed", e);
