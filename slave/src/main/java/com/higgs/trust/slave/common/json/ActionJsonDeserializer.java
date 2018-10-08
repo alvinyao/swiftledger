@@ -10,10 +10,7 @@ import com.higgs.trust.common.lambda.Mapper;
 import com.higgs.trust.consensus.p2pvalid.core.ResponseCommand;
 import com.higgs.trust.consensus.p2pvalid.core.ValidCommand;
 import com.higgs.trust.slave.api.enums.ActionTypeEnum;
-import com.higgs.trust.slave.model.bo.account.AccountOperation;
-import com.higgs.trust.slave.model.bo.account.AccountUnFreeze;
-import com.higgs.trust.slave.model.bo.account.IssueCurrency;
-import com.higgs.trust.slave.model.bo.account.OpenAccount;
+import com.higgs.trust.slave.model.bo.account.*;
 import com.higgs.trust.slave.model.bo.action.Action;
 import com.higgs.trust.slave.model.bo.action.DataIdentityAction;
 import com.higgs.trust.slave.model.bo.action.UTXOAction;
@@ -44,7 +41,7 @@ public class ActionJsonDeserializer implements ObjectDeserializer {
     static Map<ActionTypeEnum, Type> actionMap = new HashMap<>(20);
     static {
         actionMap.put(ActionTypeEnum.OPEN_ACCOUNT, OpenAccount.class);
-        actionMap.put(ActionTypeEnum.FREEZE, AccountUnFreeze.class);
+        actionMap.put(ActionTypeEnum.FREEZE, AccountFreeze.class);
         actionMap.put(ActionTypeEnum.UNFREEZE, AccountUnFreeze.class);
         actionMap.put(ActionTypeEnum.UTXO, UTXOAction.class);
         actionMap.put(ActionTypeEnum.ACCOUNTING, AccountOperation.class);
