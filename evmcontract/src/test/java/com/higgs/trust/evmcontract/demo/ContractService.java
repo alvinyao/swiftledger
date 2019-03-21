@@ -148,7 +148,7 @@ public class ContractService {
         contractTrack.commit();
         txTrack.commit();
 //        repository.commit();
-        System.out.println("合約result:" + Hex.toHexString(result.getHReturn()));
+//        System.out.println("合約result:" + Hex.toHexString(result.getHReturn()));
 //        byte[] root = repository.getRoot();
 //        System.out.println("RootHash:" + Hex.toHexString(root));
         return result.getHReturn();
