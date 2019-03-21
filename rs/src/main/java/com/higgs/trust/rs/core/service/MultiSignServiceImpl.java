@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.testng.collections.Lists;
 
 import java.io.File;
-import java.io.IOException;
 
 import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR;
 
@@ -30,44 +29,49 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
  * @description
  * @date 2019-03-20
  */
-@Service
-@Slf4j
-public class MultiSignServiceImpl implements MultiSignService{
-    @Value("$rs.contract.multi-sign.path")String contractCodePath;
+@Service @Slf4j public class MultiSignServiceImpl implements MultiSignService {
+    private final static String CONTRACT_CONSTRUCTOR = "MultiSign";
+    /**
+     * config path
+     */
+    @Value("$rs.contract.multi-sign.path") String contractCodePath;
 
     @Autowired CoreTransactionConvertor coreTransactionConvertor;
     @Autowired CoreTransactionService coreTransactionService;
 
     @Override public RespData<String> createAddress(MultiSignRuleVO rule) throws RsCoreException {
-        log.info("createAddress rule:{}",rule);
+        log.info("createAddress rule:{}", rule);
         //get contract code from file path
         String contractHexCode = null;
         try {
-            log.info("createAddress contractCodePath:{}",contractCodePath);
+            log.info("createAddress contractCodePath:{}", contractCodePath);
             contractHexCode = FileUtils.readFileToString(new File(contractCodePath), Charsets.UTF_8);
         } catch (Exception e) {
-            log.error("createAddress has error,read contract code is error",e);
+            log.error("createAddress has error,read contract code is error", e);
             throw new RsCoreException(RS_CORE_CONTRACT_READ_ERROR);
         }
-        //build contract code TODO:add construct、args
-        contractHexCode = coreTransactionConvertor.buildContractCode(contractHexCode,"","");
+        //build contract code
+        contractHexCode = coreTransactionConvertor
+            .buildContractCode(contractHexCode, CONTRACT_CONSTRUCTOR, rule.getAddrs(), rule.getVerifyNum(),
+                rule.getMustAddrs());
         //create contract address
         String contractAddress = Hex.toHexString(new ECKey().getAddress());
-        log.info("createAddress contractAddress:{}",contractAddress);
+        log.info("createAddress contractAddress:{}", contractAddress);
         //make action
-        ContractCreationV2Action contractCreationV2Action = coreTransactionConvertor.buildContractCreationV2Action(contractAddress,
-                                                            contractAddress, contractHexCode, 0);
+        ContractCreationV2Action contractCreationV2Action = coreTransactionConvertor
+            .buildContractCreationV2Action(contractAddress, contractAddress, contractHexCode, 0);
         //make core-transaction
-        CoreTransaction coreTransaction = coreTransactionConvertor.buildCoreTransaction(rule.getRequestId(),new JSONObject(),
-            Lists.newArrayList(contractCreationV2Action), InitPolicyEnum.CONTRACT_ISSUE.getPolicyId());
+        CoreTransaction coreTransaction = coreTransactionConvertor
+            .buildCoreTransaction(rule.getRequestId(), new JSONObject(), Lists.newArrayList(contractCreationV2Action),
+                InitPolicyEnum.CONTRACT_ISSUE.getPolicyId());
         //submit tx
         coreTransactionService.submitTx(coreTransaction);
         //wait for the results of the cluster
-        RespData respData = coreTransactionService.syncWait(coreTransaction.getTxId(),true);
-        log.info("createAddress result:{}",respData);
+        RespData respData = coreTransactionService.syncWait(coreTransaction.getTxId(), true);
+        log.info("createAddress result:{}", respData);
         //check result
-        if(!respData.isSuccess()){
-            return new RespData<>(respData.getRespCode(),respData.getMsg());
+        if (!respData.isSuccess()) {
+            return new RespData<>(respData.getRespCode(), respData.getMsg());
         }
         //return address
         return RespData.success(contractAddress);
