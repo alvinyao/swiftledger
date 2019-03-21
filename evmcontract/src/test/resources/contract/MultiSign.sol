@@ -7,10 +7,10 @@ interface VerifyMultiSign {
 }
 
 contract MultiSign is VerifyMultiSign {
-    address[] allAddrs;             //创建多重签名合约的所有地址
-    uint16 verifyNum;               //验签数量（必须大于0）
-    address[] mustAddrs;            //必须验签的地址数组
-    uint8 constant SIGN_LEN = 65;   //签名长度
+    address[] allAddrs;             //Create all addresses of a multisigned contract
+    uint16 verifyNum;               //Number of verified signatures (must be greater than zero)
+    address[] mustAddrs;            //An array of addresses that must be checked
+    uint8 constant SIGN_LEN = 65;   //signature length
 
     uint allAddrsLen;
     uint mustAddrsLen;

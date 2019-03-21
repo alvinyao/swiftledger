@@ -7,9 +7,9 @@ interface VerifyMultiSign {
 }
 
 contract Token {
-    address ownerAddress;       //拥有人地址
-    string tokenSymbol;        //token符号（如BTC）
-    uint totalSupplyAmount;   //发行数量 (用最低单位表示)
+    address ownerAddress;
+    string tokenSymbol;
+    uint totalSupplyAmount;
     uint count = 0;
 
     constructor (
