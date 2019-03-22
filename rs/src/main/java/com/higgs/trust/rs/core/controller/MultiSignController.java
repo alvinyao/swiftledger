@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2013-2017, suimi
- */
 package com.higgs.trust.rs.core.controller;
 
 import com.higgs.trust.rs.core.api.MultiSignService;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2019/3/21
  */
 
+@RequestMapping(path = "/multiSign")
 @RestController
 @Slf4j
 public class MultiSignController {
@@ -33,7 +31,7 @@ public class MultiSignController {
      * @param rule
      * @return
      */
-    @RequestMapping(value = "/multiSign/create")
+    @RequestMapping(value = "/create")
     RespData<String> create(@RequestBody MultiSignRuleVO rule) {
         return multiSignService.createAddress(rule);
     }
