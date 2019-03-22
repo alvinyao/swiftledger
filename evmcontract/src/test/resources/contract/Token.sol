@@ -44,17 +44,19 @@ contract Token {
         return sha256(abi.encodePacked(_from, _to, amount, count));
     }
 
-    function transfer(address from, address _to, uint256 _value, bool multiSignFlag, bytes signedStrs, address multiSignContractAddr) public payable returns (bool){
+    function transfer(address _to, uint256 _value, bool multiSignFlag, bytes signedStrs, address multiSignContractAddr) public payable returns (bool){
         bytes32 sourceHash;
         if (multiSignFlag) {
+            require(multiSignContractAddr != 0x0, "multiple signature contract address is 0x0");
             sourceHash = getSourceHash(multiSignContractAddr, _to, _value);
             VerifyMultiSign verifyMultiSign = VerifyMultiSign(multiSignContractAddr);
             require(verifyMultiSign.verifyMultiSign(signedStrs, sourceHash));
             return transferFrom(multiSignContractAddr, _to, _value);
         }
-        sourceHash = getSourceHash(from, _to, _value);
-        require(from == recovery(signedStrs, sourceHash), "sender signature verification failed");
-        return transferFrom(from, _to, _value);
+        require(msg.sender != 0x0, "from address is 0x0");
+        sourceHash = getSourceHash(msg.sender, _to, _value);
+        require(msg.sender == recovery(signedStrs, sourceHash), "sender signature verification failed");
+        return transferFrom(msg.sender, _to, _value);
     }
 
     function transferFrom(address _from, address _to, uint256 _value) private returns (bool){

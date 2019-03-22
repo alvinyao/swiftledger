@@ -86,7 +86,7 @@ public class TestContract {
         Abi.Function getAllParam = Abi.Function.of("(address[], address[], uint) getAllParam()");
         Abi.Function balanceOf = Abi.Function.of("(uint, uint) balanceOf(address)");
         Abi.Function verifyMultiSign = Abi.Function.of("(bool) verifyMultiSign(bytes,bytes32)");
-        Abi.Function transfer = Abi.Function.of("(bool) transfer(address,address,uint,bool,bytes,address)");
+        Abi.Function transfer = Abi.Function.of("(bool) transfer(address,uint,bool,bytes,address)");
 
         String priKey = "191a31158f6d44d2956a5b406cff3ba193852ecf50abfd55921a6ad879d67fc7";
         String fromAddress = "d395363c3615fb28f16fa9adb358233efea7c40f";
@@ -102,7 +102,7 @@ public class TestContract {
         //参数编码
         boolean multiSignFlag = false;
 //        multiSignFlag = true;
-//        byte[] transferEncode = transfer.encode(fromAddress, toAddress, amount,multiSignFlag, null, multiSignContractAddr);
+//        byte[] transferEncode = transfer.encode(toAddress, amount,multiSignFlag, null, multiSignContractAddr);
         byte[] verfiyMultiEncode = verifyMultiSign.encode(signedMultiStrs, getSourceHash(contractAddress, fromAddress, toAddress, amount));
         //合约调用
         runContractTest(Hex.decode(multiSignContractAddr), verifyMultiSign, verfiyMultiEncode);

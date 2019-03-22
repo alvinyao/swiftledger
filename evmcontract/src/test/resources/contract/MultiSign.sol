@@ -3,7 +3,7 @@ pragma solidity ^0.4.12;
 interface VerifyMultiSign {
     //@param  signedStrs：signature info
     // @param  sourceHash：source data hash
-    function verifyMultiSign(bytes signedStrs, bytes32 sourceHash) external view returns (bool verifyResult);
+    function verifyMultiSign(bytes signedStrs, bytes32 sourceHash) external returns (bool verifyResult);
 }
 
 contract MultiSign is VerifyMultiSign {
@@ -15,7 +15,7 @@ contract MultiSign is VerifyMultiSign {
     uint allAddrsLen;
     uint mustAddrsLen;
 
-    event Log(uint len1, uint len2, uint len3);
+    event Log(uint _mustHave, uint _mustAddrsLen, uint _success, uint _verifyNum);
 
     constructor (
         address[] _allAddrs,
@@ -34,28 +34,48 @@ contract MultiSign is VerifyMultiSign {
     }
     mapping(address => bool) allAddrsMap;
     mapping(address => bool) mustAddrsMap;
+    mapping(address => bool) checkRepeatSignMap;
 
-    function verifyMultiSign(bytes signedStrs, bytes32 sourceHash) external view returns (bool verifyResult){
+    function verifyMultiSign(bytes signedStrs, bytes32 sourceHash) external returns (bool verifyResult){
         uint signedNum = signedStrs.length / SIGN_LEN;
-        require(signedNum >= verifyNum, "The number of signatures is less than the number of checkups");
+        require(signedNum >= verifyNum, "Too few signatures");
+        require(signedNum <= allAddrsLen, "Too many signatures");
         address addr;
         uint success = 0;
         uint mustHave = 0;
-        for (uint i = 0; i < allAddrsLen; i++) {
+        for (uint i = 0; i < signedNum; i++) {
             addr = recovery(slice(signedStrs, i * SIGN_LEN, SIGN_LEN), sourceHash);
-            if (allAddrsMap[addr]) {
-                if (mustHave < mustAddrsLen) {
-                    if (mustAddrsMap[addr]) {
-                        mustHave++;
-                    }
+            if (!allAddrsMap[addr]) {
+                continue;
+            }
+            if (success == 0) {
+                // The first address to be approved
+                checkRepeatSignMap[addr] = true;
+            } else {
+                //check duplicate signatures
+                if (checkRepeatSignMap[addr]) {
+                    restoreCheckMap();
+                    //error log
+                    require(checkRepeatSignMap[addr], "duplicate signatures");
+                    return false;
                 }
-                success++;
-                if ((success == verifyNum) && (mustHave == mustAddrsLen)) {
-                    break;
+                checkRepeatSignMap[addr] = true;
+            }
+            if (mustHave < mustAddrsLen) {
+                if (mustAddrsMap[addr]) {
+                    mustHave++;
                 }
             }
+            success++;
+            if ((success == verifyNum) && (mustHave == mustAddrsLen)) {
+                break;
+            }
         }
-        emit Log(mustHave, mustAddrsLen, success);
+        emit Log(mustHave, mustAddrsLen, success, verifyNum);
+        if (success == 0) {
+            return false;
+        }
+        restoreCheckMap();
         require(mustHave == mustAddrsLen, "The array of addresses that must be checked does not pass verification");
         require(success == verifyNum, "Multiple signature verification failed.");
         return true;
@@ -64,14 +84,13 @@ contract MultiSign is VerifyMultiSign {
     function initMap() private {
         for (uint i = 0; i < allAddrsLen; i++) {
             require(allAddrs[i] != 0x00, "all address array has 0x00 address");
-            require(!allAddrsMap[allAddrs[i]], "repeat address");
+            require(!allAddrsMap[allAddrs[i]], "duplicate address");
             allAddrsMap[allAddrs[i]] = true;
         }
         for (uint j = 0; j < mustAddrsLen; j++) {
             require(allAddrsMap[mustAddrs[j]], "The required address does not exist in all addresses arrays");
             mustAddrsMap[mustAddrs[j]] = true;
         }
-        emit Log(allAddrsLen, mustAddrsLen, verifyNum);
     }
 
     function getAllParam() public view returns (address[] all, address[] must, uint16 verifyNumber){
@@ -108,5 +127,11 @@ contract MultiSign is VerifyMultiSign {
             b[i] = data[i + start];
         }
         return b;
+    }
+
+    function restoreCheckMap() private {
+        for (uint i = 0; i < allAddrsLen; i++) {
+            checkRepeatSignMap[allAddrs[i]] = false;
+        }
     }
 }
