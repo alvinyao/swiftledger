@@ -30,7 +30,7 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
  * @date 2019-03-20
  */
 @Service @Slf4j public class MultiSignServiceImpl implements MultiSignService {
-    private final static String CONTRACT_CONSTRUCTOR = "MultiSign";
+    private final static String CONTRACT_CONSTRUCTOR_NAME = "MultiSign";
     /**
      * config path
      */
@@ -41,10 +41,10 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
 
     @Override public RespData<String> createAddress(MultiSignRuleVO rule) throws RsCoreException {
         log.info("createAddress rule:{}", rule);
-        //get contract code from file path
         String contractHexCode = null;
         try {
             log.info("createAddress contractCodePath:{}", contractCodePath);
+            //get contract code from file path
             contractHexCode = FileUtils.readFileToString(new File(contractCodePath), Charsets.UTF_8);
         } catch (Exception e) {
             log.error("createAddress has error,read contract code is error", e);
@@ -52,7 +52,7 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
         }
         //build contract code
         contractHexCode = coreTransactionConvertor
-            .buildContractCode(contractHexCode, CONTRACT_CONSTRUCTOR, rule.getAddrs(), rule.getVerifyNum(),
+            .buildContractCode(contractHexCode, CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(), rule.getVerifyNum(),
                 rule.getMustAddrs());
         //create contract address
         String contractAddress = Hex.toHexString(new ECKey().getAddress());
