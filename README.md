@@ -1,5 +1,6 @@
-
+[![Build Status](https://travis-ci.org/Aurorasic/swiftledger.svg?branch=master)](https://travis-ci.org/Aurorasic/swiftledger)
 # 欢迎来到 SWIFTLEDGER
+
 ## SWIFTLEDGER是什么？
 SWIFTLEDGER为行业用户提供牢固可靠的信任基础，为开展业务协同提供高效一致的共识达成。
 其主要模块如下： 
