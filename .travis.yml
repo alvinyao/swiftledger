@@ -6,7 +6,7 @@ jdk:
 
 addons:
   sonarcloud:
-    organization: "aurorasic-github" # the key of the org you chose at step #3
+    organization: " aurorasic-github" # the key of the org you chose at step #3
     token:
       secure: 7a2e339ba7c2e8ecde350714862d53529b496ab0 # encrypted value of your token
 
