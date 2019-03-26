@@ -2,8 +2,7 @@ pragma solidity ^0.4.12;
 
 interface VerifyMultiSign {
     //@param  signedStrs：signature info
-    // @param  sourceHash：source data hash
-    function verifyMultiSign(bytes signedStrs, bytes32 sourceHash) external returns (bool verifyResult);
+    function verifyMultiSign(address _from, address _to, uint amount, bytes signedStrs) external returns (bool verifyResult);
 }
 
 contract MultiSign is VerifyMultiSign {
@@ -11,6 +10,7 @@ contract MultiSign is VerifyMultiSign {
     uint16 verifyNum;               //Number of verified signatures (must be greater than zero)
     address[] mustAddrs;            //An array of addresses that must be checked
     uint8 constant SIGN_LEN = 65;   //signature length
+    uint count = 0;
 
     uint allAddrsLen;
     uint mustAddrsLen;
@@ -36,10 +36,11 @@ contract MultiSign is VerifyMultiSign {
     mapping(address => bool) mustAddrsMap;
     mapping(address => bool) checkRepeatSignMap;
 
-    function verifyMultiSign(bytes signedStrs, bytes32 sourceHash) external returns (bool verifyResult){
+    function verifyMultiSign(address _from, address _to, uint amount, bytes signedStrs) external returns (bool verifyResult){
         uint signedNum = signedStrs.length / SIGN_LEN;
         require(signedNum >= verifyNum, "Too few signatures");
         require(signedNum <= allAddrsLen, "Too many signatures");
+        bytes32 sourceHash = getSourceHash(_from, _to, amount);
         address addr;
         uint success = 0;
         uint mustHave = 0;
@@ -78,6 +79,7 @@ contract MultiSign is VerifyMultiSign {
         restoreCheckMap();
         require(mustHave == mustAddrsLen, "The array of addresses that must be checked does not pass verification");
         require(success == verifyNum, "Multiple signature verification failed.");
+        count++;
         return true;
     }
 
@@ -95,6 +97,17 @@ contract MultiSign is VerifyMultiSign {
 
     function getAllParam() public view returns (address[] all, address[] must, uint16 verifyNumber){
         return (allAddrs, mustAddrs, verifyNum);
+    }
+
+    function getRandomNumber() public view returns (uint randomNumber){
+        return count;
+    }
+
+    function getSourceHash(address _from, address _to, uint amount) public view returns (bytes32 sourceHash){
+        require(_from != 0x0, "from address is 0x0");
+        require(_to != 0x0, "from address is 0x0");
+        require(amount > 0, "The amount is less than or equal to 0");
+        return sha256(abi.encodePacked(_from, _to, amount, count));
     }
 
     function recovery(bytes sig, bytes32 hash) private pure returns (address) {

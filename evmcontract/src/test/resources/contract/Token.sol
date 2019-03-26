@@ -2,8 +2,7 @@ pragma solidity ^0.4.12;
 
 interface VerifyMultiSign {
     //@param  signedStrs：signature info
-    // @param  sourceHash：source data hash
-    function verifyMultiSign(bytes signedStrs, bytes32 sourceHash) external view returns (bool verifyResult);
+    function verifyMultiSign(address _from, address _to, uint amount, bytes signedStrs) external view returns (bool verifyResult);
 }
 
 contract Token {
@@ -41,20 +40,20 @@ contract Token {
     }
 
     function getSourceHash(address _from, address _to, uint amount) public view returns (bytes32 sourceHash){
+        require(_from != 0x0, "from address is 0x0");
+        require(_to != 0x0, "from address is 0x0");
+        require(amount > 0, "The amount is less than or equal to 0");
         return sha256(abi.encodePacked(_from, _to, amount, count));
     }
 
-    function transfer(address _to, uint256 _value, bool multiSignFlag, bytes signedStrs, address multiSignContractAddr) public payable returns (bool){
-        bytes32 sourceHash;
-        if (multiSignFlag) {
-            require(multiSignContractAddr != 0x0, "multiple signature contract address is 0x0");
-            sourceHash = getSourceHash(multiSignContractAddr, _to, _value);
-            VerifyMultiSign verifyMultiSign = VerifyMultiSign(multiSignContractAddr);
-            require(verifyMultiSign.verifyMultiSign(signedStrs, sourceHash));
-            return transferFrom(multiSignContractAddr, _to, _value);
-        }
+    function transfer(address _to, uint256 _value, bool multiSignFlag, bytes signedStrs) public payable returns (bool){
         require(msg.sender != 0x0, "from address is 0x0");
-        sourceHash = getSourceHash(msg.sender, _to, _value);
+        if (multiSignFlag) {
+            VerifyMultiSign verifyMultiSign = VerifyMultiSign(msg.sender);
+            require(verifyMultiSign.verifyMultiSign(msg.sender, _to, _value, signedStrs));
+            return transferFrom(msg.sender, _to, _value);
+        }
+        bytes32 sourceHash = getSourceHash(msg.sender, _to, _value);
         require(msg.sender == recovery(signedStrs, sourceHash), "sender signature verification failed");
         return transferFrom(msg.sender, _to, _value);
     }
