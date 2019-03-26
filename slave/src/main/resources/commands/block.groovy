@@ -33,7 +33,7 @@ class block {
 
     @Usage('get the block info')
     @Command
-    def info(InvocationContext context, @Usage('the block height') @Option(names = ["g", "height"]) String heightStr) {
+    def info(InvocationContext context, @Usage('the block height') @Option(names = ["e", "height"]) String heightStr) {
         BeanFactory beans = context.attributes['spring.beanfactory']
         def blockService = beans.getBean(BlockService.class)
         long height
