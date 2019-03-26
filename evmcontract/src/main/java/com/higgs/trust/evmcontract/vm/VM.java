@@ -528,7 +528,7 @@ public class VM {
                 if ( LOGGER.isInfoEnabled()) {
                     hint = word1.value() + " && " + word2.value();
                 }
-                //确保栈比特位被正确设置，相同为真且为真
+                //Make sure the stack bits are set correctly, same as true and true
                 word1.and(word2);
                 program.stackPush(word1);
                 program.step();
@@ -600,7 +600,7 @@ public class VM {
             }
             break;
 
-            /**签名方法
+            /**
              * SHA3
              */
             case SHA3: {
@@ -620,7 +620,7 @@ public class VM {
             }
             break;
 
-            /**获取owner地址
+            /**get owner address
              * Environmental Information
              */
             case ADDRESS: {
@@ -634,7 +634,7 @@ public class VM {
                 program.step();
             }
             break;
-            //获取账户余额
+            //get account balance
             case BALANCE: {
                 DataWord address = program.stackPop();
                 DataWord balance = program.getBalance(address);
@@ -649,7 +649,7 @@ public class VM {
                 program.step();
             }
             break;
-            //获取原始地址
+            //get origin address
             case ORIGIN: {
                 DataWord originAddress = program.getOriginAddress();
 
@@ -661,7 +661,7 @@ public class VM {
                 program.step();
             }
             break;
-            //获取执行地址
+            //get address of caller
             case CALLER: {
 
                 DataWord callerAddress = program.getCallerAddress();
@@ -785,12 +785,11 @@ public class VM {
                     DataWord address = program.stackPop();
                     fullCode = program.getCodeAt(address);
                 }
-                //00
+                //value of memory start offset
                 int memOffset = program.stackPop().intValueSafe();
-                //00fd转十进制为253，表示合约代码的开始位置为253
+                //offset of real code in data
                 int codeOffset = program.stackPop().intValueSafe();
-                //01ef转十进制为495，表示合约代码的长度为495，
-                // 运行合约代码的code需要从整个code中拷贝出来
+                // length of contract code
                 int lengthData = program.stackPop().intValueSafe();
 
                 int sizeToBeCopied =
@@ -807,7 +806,7 @@ public class VM {
                 if ( LOGGER.isInfoEnabled()) {
                     hint = "code: " + toHexString(codeCopy);
                 }
-                //将拷贝出来的合约代码存放到memory中，合约运行结束会将codeCopy存储到stroage中
+                //copy contract code save in memory ,when  create contract call finish save copy code  to storage
                 program.memorySave(memOffset, codeCopy);
                 program.step();
             }
@@ -917,7 +916,7 @@ public class VM {
             case DUP14:
             case DUP15:
             case DUP16: {
-                //复制栈中数据到栈顶
+                //copy value to top of stack
                 int n = op.val() - OpCode.DUP1.val() + 1;
                 DataWord word_1 = stack.get(stack.size() - n);
                 program.stackPush(word_1.clone());
@@ -941,7 +940,7 @@ public class VM {
             case SWAP14:
             case SWAP15:
             case SWAP16: {
-                //与栈顶交换
+                //exchange data to top of stack
                 int n = op.val() - OpCode.SWAP1.val() + 2;
                 stack.swap(stack.size() - 1, stack.size() - n);
                 program.step();
