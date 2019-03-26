@@ -39,7 +39,7 @@ public class ExplorerController {
     public RespData<List<BlockVO>> queryBlocksByPage(@RequestBody @Valid QueryBlockVO req) {
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryBlocksByPage", req);
 
-        RespData<List<BlockVO>> respData = explorerCache.get(key, RespData.class);
+        RespData<List<BlockVO>> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }
@@ -61,7 +61,7 @@ public class ExplorerController {
     @RequestMapping(value = "/queryTxsByPage", method = RequestMethod.POST)
     public RespData<List<CoreTransactionVO>> queryTxsByPage(@RequestBody @Valid QueryTransactionVO req) {
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryTxsByPage", req);
-        RespData<List<CoreTransactionVO>> respData = explorerCache.get(key, RespData.class);
+        RespData<List<CoreTransactionVO>> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }
@@ -86,7 +86,7 @@ public class ExplorerController {
     public RespData<BlockVO> queryBlockByHeight(@RequestBody @Valid QueryBlockByHeightVO vo) {
         Long height = vo.getHeight();
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryBlockByHeight", height);
-        RespData<BlockVO> respData = explorerCache.get(key, RespData.class);
+        RespData<BlockVO> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }
@@ -110,7 +110,7 @@ public class ExplorerController {
     public RespData<CoreTransactionVO> queryTxById(@RequestBody @Valid  QueryTxVO vo) {
         String txId = vo.getTxId();
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryTxById", txId);
-        RespData<CoreTransactionVO> respData = explorerCache.get(key, RespData.class);
+        RespData<CoreTransactionVO> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }
@@ -134,7 +134,7 @@ public class ExplorerController {
     public RespData<List<UTXOVO>> queryUTXO(@RequestBody @Valid QueryTxVO vo) {
         String txId = vo.getTxId();
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryUTXO", txId);
-        RespData<List<UTXOVO>> respData = explorerCache.get(key, RespData.class);
+        RespData<List<UTXOVO>> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }
@@ -157,7 +157,7 @@ public class ExplorerController {
     @RequestMapping(value = "/queryAccountsByPage", method = RequestMethod.POST)
     public RespData<List<AccountInfoVO>> queryAccountsByPage(@RequestBody @Valid QueryAccountVO req) {
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryAccountsByPage", req);
-        RespData<List<AccountInfoVO>> respData = explorerCache.get(key, RespData.class);
+        RespData<List<AccountInfoVO>> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }
@@ -181,7 +181,7 @@ public class ExplorerController {
     @RequestMapping(value = "/queryContractsByPage", method = RequestMethod.POST)
     public RespData<List<ContractVO>> queryContractsByPage(@RequestBody @Valid QueryContractVO req) {
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryContractsByPage", req);
-        RespData<List<ContractVO>> respData = explorerCache.get(key, RespData.class);
+        RespData<List<ContractVO>> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }
@@ -199,7 +199,7 @@ public class ExplorerController {
     @RequestMapping(value = "/queryPeersInfo", method = RequestMethod.POST)
     public RespData<List<NodeInfoVO>> queryPeersInfo() {
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryPeersInfo", null);
-        RespData<List<NodeInfoVO>> respData = explorerCache.get(key, RespData.class);
+        RespData<List<NodeInfoVO>> respData = explorerCache.get(key);
         if (respData != null) {
             return respData;
         }

@@ -27,14 +27,14 @@ import java.util.concurrent.TimeUnit;
     /**
      * 缓存对象
      */
-    private Cache<Object, String> CACHE = null;
+    private Cache<Object, Object> CACHE = null;
 
     @Override public void afterPropertiesSet() throws Exception {
         if (duration == null) {
             duration = 60L;
         }
         CACHE = CacheBuilder.newBuilder().initialCapacity(100).maximumSize(5000)
-            .refreshAfterWrite(duration, TimeUnit.SECONDS).build(new CacheLoader<Object, String>() {
+            .refreshAfterWrite(duration, TimeUnit.SECONDS).build(new CacheLoader<Object, Object>() {
                 @Override public String load(Object key) throws Exception {
                     return null;
                 }
@@ -55,22 +55,20 @@ import java.util.concurrent.TimeUnit;
      * get
      *
      * @param key
-     * @param clazz
-     * @param <T>
      * @return
      */
-    public <T> T get(CacheKey key, Class<T> clazz) {
+    public <T> T get(CacheKey key) {
         try {
-            String value = null;
-            value = CACHE.get(JSON.toJSONString(key), new Callable<String>() {
-                @Override public String call() throws Exception {
+            Object value = null;
+            value = CACHE.get(JSON.toJSONString(key), new Callable<Object>() {
+                @Override public Object call() throws Exception {
                     return "-1";
                 }
             });
-            if (StringUtils.isEmpty(value) || StringUtils.equals("-1", value)) {
+            if (value == null || StringUtils.equals("-1", String.valueOf(null))) {
                 return null;
             }
-            return JSON.parseObject(value, clazz);
+            return (T)value;
         } catch (CacheLoader.InvalidCacheLoadException e) {
             log.error("get has error", e);
         } catch (ExecutionException e) {
