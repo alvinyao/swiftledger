@@ -10,6 +10,7 @@ import com.higgs.trust.rs.core.api.ContractV2QueryService;
 import com.higgs.trust.rs.core.api.CoreTransactionService;
 import com.higgs.trust.rs.core.api.MultiSignService;
 import com.higgs.trust.rs.core.api.RsBlockChainService;
+import com.higgs.trust.rs.core.vo.CreateCurrencyVO;
 import com.higgs.trust.rs.core.vo.MultiSignHashVO;
 import com.higgs.trust.rs.core.vo.MultiSignRuleVO;
 import com.higgs.trust.rs.core.vo.MultiSignTxVO;
@@ -17,6 +18,7 @@ import com.higgs.trust.slave.api.enums.ActionTypeEnum;
 import com.higgs.trust.slave.api.enums.manage.InitPolicyEnum;
 import com.higgs.trust.slave.api.vo.RespData;
 import com.higgs.trust.slave.model.bo.CoreTransaction;
+import com.higgs.trust.slave.model.bo.account.IssueCurrency;
 import com.higgs.trust.slave.model.bo.contract.ContractCreationV2Action;
 import com.higgs.trust.slave.model.bo.contract.ContractInvokeV2Action;
 import lombok.extern.slf4j.Slf4j;
@@ -42,13 +44,15 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
  */
 @Service @Slf4j public class MultiSignServiceImpl implements MultiSignService {
     private final static int SCALE_NUMBER = 8;
-    private final static String CONTRACT_CONSTRUCTOR_NAME = "MultiSign";
+    private final static String MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME = "MultiSign(address[],uint,address[])";
+    private final static String CURRENCY_CONTRACT_CONSTRUCTOR_NAME = "Token(address,string,uint)";
     private final static String METHOD_GET_SIGN_HASH = "(bytes32) getSourceHash(address,address,uint)";
     private final static String METHOD_TRANSFER = "(bool) transfer(address,uint256,bool,bytes)";
     /**
      * config path
      */
-    @Value("$rs.contract.multi-sign.path") String contractCodePath;
+    @Value("$rs.contract.multi-sign.path") String multiContractCodePath;
+    @Value("$rs.contract.currency.path") String currencyContractCodePath;
 
     @Autowired CoreTransactionConvertor coreTransactionConvertor;
     @Autowired CoreTransactionService coreTransactionService;
@@ -59,17 +63,17 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
         log.info("createAddress rule:{}", rule);
         String contractHexCode = null;
         try {
-            log.info("createAddress contractCodePath:{}", contractCodePath);
+            log.info("createAddress contractCodePath:{}", multiContractCodePath);
             //get contract code from file path
-            contractHexCode = FileUtils.readFileToString(new File(contractCodePath), Charsets.UTF_8);
+            contractHexCode = FileUtils.readFileToString(new File(multiContractCodePath), Charsets.UTF_8);
         } catch (Exception e) {
             log.error("createAddress has error,read contract code is error", e);
             throw new RsCoreException(RS_CORE_CONTRACT_READ_ERROR);
         }
         //build contract code
         contractHexCode = coreTransactionConvertor
-            .buildContractCode(contractHexCode, CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(), rule.getVerifyNum(),
-                rule.getMustAddrs());
+            .buildContractCode(contractHexCode, MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(),
+                rule.getVerifyNum(), rule.getMustAddrs());
         //create contract address
         String contractAddress = Hex.toHexString(new ECKey().getAddress());
         log.info("createAddress contractAddress:{}", contractAddress);
@@ -91,6 +95,48 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
         }
         //return address
         return RespData.success(contractAddress);
+    }
+
+    @Override public RespData<Boolean> createCurrencyContract(CreateCurrencyVO vo) throws RsCoreException {
+        log.info("createCurrencyContract vo:{}", vo);
+        String contractAddress = Hex.toHexString(new ECKey().getAddress());
+        log.info("createCurrencyContract contractAddress:{}", contractAddress);
+        String contractHexCode = null;
+        try {
+            log.info("createCurrencyContract currencyContractCodePath:{}", currencyContractCodePath);
+            //get contract code from file path
+            contractHexCode = FileUtils.readFileToString(new File(currencyContractCodePath), Charsets.UTF_8);
+        } catch (Exception e) {
+            log.error("createCurrencyContract has error,read contract code is error", e);
+            throw new RsCoreException(RS_CORE_CONTRACT_READ_ERROR);
+        }
+        BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
+        //build contract code
+        contractHexCode = coreTransactionConvertor
+            .buildContractCode(contractHexCode, CURRENCY_CONTRACT_CONSTRUCTOR_NAME, vo.getAddress(), vo.getCurrency(),
+                amount);
+
+        //make actions
+        IssueCurrency issueCurrencyAction =
+            coreTransactionConvertor.buildIssueCurrencyAction(vo.getCurrency(), 0, contractAddress, null, null);
+        ContractCreationV2Action contractCreationV2Action = coreTransactionConvertor
+            .buildContractCreationV2Action(vo.getAddress(), contractAddress, contractHexCode, 1);
+
+        //make core-transaction
+        CoreTransaction coreTransaction = coreTransactionConvertor
+            .buildCoreTransaction(vo.getRequestId(), new JSONObject(),
+                Lists.newArrayList(issueCurrencyAction, contractCreationV2Action),
+                InitPolicyEnum.CONTRACT_INVOKE.getPolicyId());
+        //submit tx
+        coreTransactionService.submitTx(coreTransaction);
+        //wait for the results of the cluster
+        RespData respData = coreTransactionService.syncWait(coreTransaction.getTxId(), true);
+        log.info("createCurrencyContract result:{}", respData);
+        //check result
+        if (!respData.isSuccess()) {
+            return new RespData<>(respData.getRespCode(), respData.getMsg());
+        }
+        return RespData.success(true);
     }
 
     @Override public RespData<String> getSignHashValue(MultiSignHashVO vo) throws RsCoreException {
@@ -131,7 +177,7 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
         signs.forEach(v -> {
             sb.append(v);
         });
-        action.setArgs(new Object[] {vo.getToAddr(), amount, true, Hex.decode(sb.toString())});
+        action.setArgs(new Object[] {vo.getToAddr(), amount, vo.isMultiSign(), Hex.decode(sb.toString())});
         log.info("transfer action:{}", action);
         //make core-transaction
         CoreTransaction coreTransaction = coreTransactionConvertor
@@ -148,5 +194,4 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
         }
         return RespData.success(true);
     }
-
 }

@@ -41,6 +41,25 @@ import org.springframework.web.bind.annotation.RestController;
     }
 
     /**
+     * create currency
+     *
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "/createCurrency") RespData<Boolean> createCurrency(@RequestBody CreateCurrencyVO vo) {
+        try {
+            return multiSignService.createCurrencyContract(vo);
+        } catch (RsCoreException e) {
+            log.error("createCurrency has error", e);
+            return RespData.error(e.getCode().getCode(), e.getCode().getDescription(), null);
+        } catch (Throwable t) {
+            log.error("createCurrency has error", t);
+        }
+        return RespData.error(RsCoreErrorEnum.RS_CORE_UNKNOWN_EXCEPTION.getCode(),
+            RsCoreErrorEnum.RS_CORE_UNKNOWN_EXCEPTION.getDescription(), null);
+    }
+
+    /**
      * get sign hash
      *
      * @param vo

@@ -48,6 +48,10 @@ public class MultiSignTxVO extends BaseBO {
     @NotNull
     private BigDecimal amount;
     /**
+     * is multi-sign
+     */
+    private boolean multiSign;
+    /**
      *  signature information
      */
     @NotEmpty
