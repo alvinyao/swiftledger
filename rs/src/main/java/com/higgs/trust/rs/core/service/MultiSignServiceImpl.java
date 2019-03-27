@@ -100,7 +100,8 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
             .query(null, vo.getFromAddr(), METHOD_GET_SIGN_HASH, vo.getFromAddr(), vo.getToAddr(), amount);
         if (CollectionUtils.isEmpty(result) || result.get(0) == null) {
             log.info("getSignHashValue result is empty");
-            return null;
+            return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getCode(),
+                RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getDescription(), null);
         }
         log.info("getSignHashValue vo:{},result:{}", vo, result);
         return new RespData<>(Hex.toHexString((byte[])result.get(0)));
