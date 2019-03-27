@@ -5,22 +5,30 @@ import com.google.common.base.Charsets;
 import com.higgs.trust.evmcontract.crypto.ECKey;
 import com.higgs.trust.rs.common.exception.RsCoreException;
 import com.higgs.trust.rs.common.utils.CoreTransactionConvertor;
+import com.higgs.trust.rs.core.api.ContractV2QueryService;
 import com.higgs.trust.rs.core.api.CoreTransactionService;
 import com.higgs.trust.rs.core.api.MultiSignService;
+import com.higgs.trust.rs.core.vo.MultiSignHashVO;
 import com.higgs.trust.rs.core.vo.MultiSignRuleVO;
+import com.higgs.trust.rs.core.vo.MultiSignTxVO;
+import com.higgs.trust.slave.api.enums.ActionTypeEnum;
 import com.higgs.trust.slave.api.enums.manage.InitPolicyEnum;
 import com.higgs.trust.slave.api.vo.RespData;
 import com.higgs.trust.slave.model.bo.CoreTransaction;
 import com.higgs.trust.slave.model.bo.contract.ContractCreationV2Action;
+import com.higgs.trust.slave.model.bo.contract.ContractInvokeV2Action;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.spongycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.testng.collections.Lists;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.util.List;
 
 import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR;
 
@@ -30,7 +38,10 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
  * @date 2019-03-20
  */
 @Service @Slf4j public class MultiSignServiceImpl implements MultiSignService {
+    private final static int SCALE_NUMBER = 8;
     private final static String CONTRACT_CONSTRUCTOR_NAME = "MultiSign";
+    private final static String METHOD_GET_SIGN_HASH = "(bytes32) getSourceHash(address,address,uint)";
+    private final static String METHOD_TRANSFER = "(bool) transfer(address,uint256,bool,bytes)";
     /**
      * config path
      */
@@ -38,6 +49,7 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
 
     @Autowired CoreTransactionConvertor coreTransactionConvertor;
     @Autowired CoreTransactionService coreTransactionService;
+    @Autowired ContractV2QueryService contractV2QueryService;
 
     @Override public RespData<String> createAddress(MultiSignRuleVO rule) throws RsCoreException {
         log.info("createAddress rule:{}", rule);
@@ -76,4 +88,51 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
         //return address
         return RespData.success(contractAddress);
     }
+
+    @Override public RespData<String> getSignHashValue(MultiSignHashVO vo) throws RsCoreException {
+        BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
+        log.info("getSignHashValue amount:{}", amount);
+        List<?> result = contractV2QueryService
+            .query(null, vo.getFromAddr(), METHOD_GET_SIGN_HASH, vo.getFromAddr(), vo.getToAddr(), amount);
+        if (CollectionUtils.isEmpty(result) || result.get(0) == null) {
+            log.info("getSignHashValue result is empty");
+            return null;
+        }
+        log.info("getSignHashValue vo:{},result:{}", vo, result);
+        return new RespData<>(Hex.toHexString((byte[])result.get(0)));
+    }
+
+    @Override public RespData<Boolean> transfer(MultiSignTxVO vo) throws RsCoreException {
+        log.info("transfer vo:{}",vo);
+        //make action
+        ContractInvokeV2Action action = new ContractInvokeV2Action();
+        action.setIndex(0);
+        action.setType(ActionTypeEnum.CONTRACT_INVOKED);
+        action.setFrom(vo.getFromAddr());
+        action.setTo(vo.getToAddr());
+        action.setMethodSignature(METHOD_TRANSFER);
+        BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
+        StringBuilder sb = new StringBuilder();
+        List<String> signs = vo.getSigns();
+        signs.forEach(v->{
+            sb.append(v);
+        });
+        action.setArgs(new Object[]{vo.getToAddr(),amount,true,sb.toString()});
+        log.info("transfer action:{}",action);
+        //make core-transaction
+        CoreTransaction coreTransaction = coreTransactionConvertor
+            .buildCoreTransaction(vo.getRequestId(), new JSONObject(), Lists.newArrayList(action),
+                InitPolicyEnum.CONTRACT_INVOKE.getPolicyId());
+        //submit tx
+        coreTransactionService.submitTx(coreTransaction);
+        //wait for the results of the cluster
+        RespData respData = coreTransactionService.syncWait(coreTransaction.getTxId(), true);
+        log.info("transfer result:{}", respData);
+        //check result
+        if (!respData.isSuccess()) {
+            return new RespData<>(respData.getRespCode(), respData.getMsg());
+        }
+        return RespData.success(true);
+    }
+
 }

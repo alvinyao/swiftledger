@@ -3,9 +3,7 @@ package com.higgs.trust.rs.core.controller;
 import com.higgs.trust.rs.core.api.MultiSignService;
 import com.higgs.trust.rs.core.api.VoteService;
 import com.higgs.trust.rs.core.bo.VoteReceipt;
-import com.higgs.trust.rs.core.vo.MultiSignRuleVO;
-import com.higgs.trust.rs.core.vo.ReceiptRequest;
-import com.higgs.trust.rs.core.vo.VotingRequest;
+import com.higgs.trust.rs.core.vo.*;
 import com.higgs.trust.slave.api.vo.RespData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +32,15 @@ public class MultiSignController {
     @RequestMapping(value = "/create")
     RespData<String> create(@RequestBody MultiSignRuleVO rule) {
         return multiSignService.createAddress(rule);
+    }
+
+    @RequestMapping(value = "/getSignHash")
+    RespData<String> getSignHashValue(@RequestBody MultiSignHashVO vo) {
+        return multiSignService.getSignHashValue(vo);
+    }
+
+    @RequestMapping(value = "/transfer")
+    RespData<Boolean> transfer(@RequestBody MultiSignTxVO vo) {
+        return multiSignService.transfer(vo);
     }
 }
