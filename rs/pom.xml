@@ -187,7 +187,7 @@
             <artifactId>consensus-api</artifactId>
         </dependency>
     </dependencies>
-   <!-- <build>
+  <build>
          <finalName>rs</finalName>
          <plugins>
              <plugin>
@@ -221,5 +221,5 @@
                  </executions>
              </plugin>
          </plugins>
-     </build>-->
+     </build>
 </project>
