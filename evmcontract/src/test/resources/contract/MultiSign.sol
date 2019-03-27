@@ -107,7 +107,7 @@ contract MultiSign is VerifyMultiSign {
         require(_from != 0x0, "from address is 0x0");
         require(_to != 0x0, "from address is 0x0");
         require(amount > 0, "The amount is less than or equal to 0");
-        return sha256(abi.encodePacked(_from, _to, amount, count));
+        return sha256(abi.encodePacked(allAddrs, mustAddrs, verifyNum, _from, _to, amount, count));
     }
 
     function recovery(bytes sig, bytes32 hash) private pure returns (address) {
