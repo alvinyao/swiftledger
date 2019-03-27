@@ -109,7 +109,8 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
         action.setIndex(0);
         action.setType(ActionTypeEnum.CONTRACT_INVOKED);
         action.setFrom(vo.getFromAddr());
-        action.setTo(vo.getToAddr());
+        //the contract address
+        action.setTo(vo.getFromAddr());
         action.setMethodSignature(METHOD_TRANSFER);
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         StringBuilder sb = new StringBuilder();
