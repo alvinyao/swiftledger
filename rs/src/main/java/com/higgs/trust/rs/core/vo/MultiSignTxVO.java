@@ -26,6 +26,11 @@ public class MultiSignTxVO extends BaseBO {
     @Length(max = 64)
     private String requestId;
     /**
+     * currency name
+     */
+    @NotNull
+    private String currency;
+    /**
      * from address the Multi-Sign contract address
      */
     @NotNull

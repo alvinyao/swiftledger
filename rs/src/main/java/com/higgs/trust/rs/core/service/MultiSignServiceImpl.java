@@ -3,11 +3,13 @@ package com.higgs.trust.rs.core.service;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Charsets;
 import com.higgs.trust.evmcontract.crypto.ECKey;
+import com.higgs.trust.rs.common.enums.RsCoreErrorEnum;
 import com.higgs.trust.rs.common.exception.RsCoreException;
 import com.higgs.trust.rs.common.utils.CoreTransactionConvertor;
 import com.higgs.trust.rs.core.api.ContractV2QueryService;
 import com.higgs.trust.rs.core.api.CoreTransactionService;
 import com.higgs.trust.rs.core.api.MultiSignService;
+import com.higgs.trust.rs.core.api.RsBlockChainService;
 import com.higgs.trust.rs.core.vo.MultiSignHashVO;
 import com.higgs.trust.rs.core.vo.MultiSignRuleVO;
 import com.higgs.trust.rs.core.vo.MultiSignTxVO;
@@ -24,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.testng.collections.Lists;
 
 import java.io.File;
@@ -50,6 +53,7 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
     @Autowired CoreTransactionConvertor coreTransactionConvertor;
     @Autowired CoreTransactionService coreTransactionService;
     @Autowired ContractV2QueryService contractV2QueryService;
+    @Autowired RsBlockChainService rsBlockChainService;
 
     @Override public RespData<String> createAddress(MultiSignRuleVO rule) throws RsCoreException {
         log.info("createAddress rule:{}", rule);
@@ -103,23 +107,31 @@ import static com.higgs.trust.rs.common.enums.RsCoreErrorEnum.RS_CORE_CONTRACT_R
     }
 
     @Override public RespData<Boolean> transfer(MultiSignTxVO vo) throws RsCoreException {
-        log.info("transfer vo:{}",vo);
+        log.info("transfer vo:{}", vo);
         //make action
         ContractInvokeV2Action action = new ContractInvokeV2Action();
         action.setIndex(0);
         action.setType(ActionTypeEnum.CONTRACT_INVOKED);
+        //the multi-sign contract address
         action.setFrom(vo.getFromAddr());
-        //the contract address
-        action.setTo(vo.getFromAddr());
+        //get contract address for trade
+        String tradeContractAddress = rsBlockChainService.queryContractAddressByCurrency(vo.getCurrency());
+        if (StringUtils.isEmpty(tradeContractAddress)) {
+            log.info("transfer get trade contract address is fail,currency:{}", vo.getCurrency());
+            return RespData.error(RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getCode(),
+                RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getDescription(), null);
+        }
+        //trade contract address
+        action.setTo(tradeContractAddress);
         action.setMethodSignature(METHOD_TRANSFER);
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         StringBuilder sb = new StringBuilder();
         List<String> signs = vo.getSigns();
-        signs.forEach(v->{
+        signs.forEach(v -> {
             sb.append(v);
         });
-        action.setArgs(new Object[]{vo.getToAddr(),amount,true,sb.toString()});
-        log.info("transfer action:{}",action);
+        action.setArgs(new Object[] {vo.getToAddr(), amount, true, Hex.decode(sb.toString())});
+        log.info("transfer action:{}", action);
         //make core-transaction
         CoreTransaction coreTransaction = coreTransactionConvertor
             .buildCoreTransaction(vo.getRequestId(), new JSONObject(), Lists.newArrayList(action),

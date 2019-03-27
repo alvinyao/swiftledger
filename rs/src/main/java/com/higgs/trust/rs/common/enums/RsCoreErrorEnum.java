@@ -63,6 +63,7 @@ public enum RsCoreErrorEnum {
     RS_CORE_ROCKS_KEY_IS_NOT_EXIST("310", "rocks key is not exist", false),
     RS_CORE_ROCKS_TRANSACTION_IS_NULL("311", "rocks transaction is null", false),
     RS_CORE_REQUEST_ADD_FAILED("312", "insert request failed", false),
+    RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR("313", "get contract addr by currency error", false),
     ;
     //@formatter:on
 
