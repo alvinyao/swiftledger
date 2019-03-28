@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.scheduler;
 
-import com.higgs.trust.common.enums.MonitorTargetEnum;
-import com.higgs.trust.common.utils.MonitorLogUtils;
+import com.higgschain.trust.common.enums.MonitorTargetEnum;
+import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgs.trust.consensus.config.NodeState;
 import com.higgs.trust.consensus.config.NodeStateEnum;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;

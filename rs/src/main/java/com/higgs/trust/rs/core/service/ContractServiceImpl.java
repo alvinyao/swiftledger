@@ -1,6 +1,6 @@
 package com.higgs.trust.rs.core.service;
 
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.consensus.config.NodeState;
 import com.higgs.trust.evmcontract.crypto.ECKey;
 import com.higgs.trust.rs.common.enums.RsCoreErrorEnum;

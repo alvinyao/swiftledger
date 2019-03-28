@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.service;
 
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.slave.IntegrateBaseTest;
 import com.higgs.trust.slave.api.enums.ActionTypeEnum;
 import com.higgs.trust.slave.api.enums.account.FundDirectionEnum;

@@ -1,7 +1,7 @@
 package commands
 
 import com.alibaba.fastjson.JSON
-import com.higgs.trust.common.dao.RocksDBHelper
+import com.higgschain.trust.common.dao.RocksDBHelper
 import lombok.extern.slf4j.Slf4j
 import org.crsh.cli.Argument
 import org.crsh.cli.Command

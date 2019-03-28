@@ -1,7 +1,7 @@
 package com.higgs.trust.press;
 
 import com.alibaba.fastjson.JSON;
-import com.higgs.trust.common.utils.OkHttpClientManager;
+import com.higgschain.trust.common.utils.OkHttpClientManager;
 import com.higgs.trust.slave.api.vo.RespData;
 
 /**

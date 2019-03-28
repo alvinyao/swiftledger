@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.service.action;
 
 import com.alibaba.fastjson.JSON;
-import com.higgs.trust.common.crypto.rsa.Rsa;
+import com.higgschain.trust.common.crypto.rsa.Rsa;
 import com.higgs.trust.slave.BaseTest;
 import com.higgs.trust.slave.api.enums.ActionTypeEnum;
 import com.higgs.trust.slave.api.enums.VersionEnum;

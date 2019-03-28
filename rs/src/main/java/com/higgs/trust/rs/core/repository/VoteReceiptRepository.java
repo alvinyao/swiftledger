@@ -1,6 +1,6 @@
 package com.higgs.trust.rs.core.repository;
 
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.rs.common.config.RsConfig;
 import com.higgs.trust.rs.core.api.enums.VoteResultEnum;
 import com.higgs.trust.rs.core.bo.VoteReceipt;

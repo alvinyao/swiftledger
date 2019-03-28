@@ -1,10 +1,10 @@
 package com.higgs.trust.config.crypto;
 
-import com.higgs.trust.common.crypto.Crypto;
-import com.higgs.trust.common.crypto.ecc.EccCrypto;
-import com.higgs.trust.common.crypto.gm.GmCrypto;
-import com.higgs.trust.common.crypto.rsa.RsaCrypto;
-import com.higgs.trust.common.enums.CryptoTypeEnum;
+import com.higgschain.trust.common.crypto.Crypto;
+import com.higgschain.trust.common.crypto.ecc.EccCrypto;
+import com.higgschain.trust.common.crypto.gm.GmCrypto;
+import com.higgschain.trust.common.crypto.rsa.RsaCrypto;
+import com.higgschain.trust.common.enums.CryptoTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

@@ -3,7 +3,7 @@ package com.higgs.trust.slave.core.service.action.contract;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.higgs.trust.common.crypto.rsa.Rsa;
+import com.higgschain.trust.common.crypto.rsa.Rsa;
 import com.higgs.trust.slave.api.enums.VersionEnum;
 import com.higgs.trust.slave.api.enums.manage.InitPolicyEnum;
 import com.higgs.trust.slave.model.bo.*;

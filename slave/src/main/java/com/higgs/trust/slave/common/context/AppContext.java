@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.common.context;
 
-import com.higgs.trust.common.constant.Constant;
+import com.higgschain.trust.common.constant.Constant;
 import com.higgs.trust.slave.api.vo.RespData;
 import com.higgs.trust.slave.common.util.asynctosync.HashBlockingMap;
 import com.higgs.trust.slave.model.bo.SignedTransaction;

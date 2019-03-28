@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.common.exception;
 
-import com.higgs.trust.common.exception.ErrorInfo;
+import com.higgschain.trust.common.exception.ErrorInfo;
 
 /**
  *snapshot exception

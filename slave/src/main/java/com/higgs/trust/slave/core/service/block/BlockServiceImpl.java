@@ -3,7 +3,7 @@ package com.higgs.trust.slave.core.service.block;
 import com.google.common.base.Charsets;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
-import com.higgs.trust.common.utils.Profiler;
+import com.higgschain.trust.common.utils.Profiler;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgs.trust.slave.common.exception.SlaveException;
 import com.higgs.trust.slave.core.Blockchain;

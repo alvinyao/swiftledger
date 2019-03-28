@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.service.action.account;
 
-import com.higgs.trust.common.utils.Profiler;
+import com.higgschain.trust.common.utils.Profiler;
 import com.higgs.trust.contract.ExecuteContext;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgs.trust.slave.common.exception.SlaveException;

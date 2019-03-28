@@ -3,7 +3,7 @@ package com.higgs.trust.slave.dao.mysql.transaction;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.slave.IntegrateBaseTest;
 import com.higgs.trust.slave.api.enums.ActionTypeEnum;
 import com.higgs.trust.slave.api.enums.utxo.UTXOActionTypeEnum;

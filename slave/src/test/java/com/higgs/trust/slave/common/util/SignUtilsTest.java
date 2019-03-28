@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.common.util;
 
-import com.higgs.trust.common.crypto.rsa.Rsa;
+import com.higgschain.trust.common.crypto.rsa.Rsa;
 import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertEquals;

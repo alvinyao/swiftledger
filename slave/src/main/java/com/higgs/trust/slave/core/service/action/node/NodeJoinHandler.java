@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.service.action.node;
 
-import com.higgs.trust.common.utils.Profiler;
+import com.higgschain.trust.common.utils.Profiler;
 import com.higgs.trust.consensus.config.NodeState;
 import com.higgs.trust.consensus.core.ConsensusStateMachine;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;

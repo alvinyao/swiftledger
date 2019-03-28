@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.dao.mysql.utxo;
 
 import com.google.common.collect.Lists;
-import com.higgs.trust.common.utils.CollectionBean;
+import com.higgschain.trust.common.utils.CollectionBean;
 import com.higgs.trust.slave.dao.po.utxo.TxOutPO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;

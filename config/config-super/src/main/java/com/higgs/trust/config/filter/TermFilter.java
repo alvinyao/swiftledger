@@ -3,8 +3,8 @@
  */
 package com.higgs.trust.config.filter;
 
-import com.higgs.trust.common.enums.MonitorTargetEnum;
-import com.higgs.trust.common.utils.MonitorLogUtils;
+import com.higgschain.trust.common.enums.MonitorTargetEnum;
+import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgs.trust.config.master.ChangeMasterService;
 import com.higgs.trust.config.master.MasterHeartbeatService;
 import com.higgs.trust.config.node.command.TermCommand;

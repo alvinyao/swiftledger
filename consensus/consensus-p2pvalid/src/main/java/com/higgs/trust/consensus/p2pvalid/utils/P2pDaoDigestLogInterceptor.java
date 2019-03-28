@@ -1,6 +1,6 @@
 package com.higgs.trust.consensus.p2pvalid.utils;
 
-import com.higgs.trust.common.utils.LoggerName;
+import com.higgschain.trust.common.utils.LoggerName;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

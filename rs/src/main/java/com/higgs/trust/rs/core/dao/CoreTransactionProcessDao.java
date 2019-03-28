@@ -1,6 +1,6 @@
 package com.higgs.trust.rs.core.dao;
 
-import com.higgs.trust.common.mybatis.BaseDao;
+import com.higgschain.trust.common.mybatis.BaseDao;
 import com.higgs.trust.rs.core.dao.po.CoreTransactionProcessPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

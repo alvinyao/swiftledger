@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.service.snapshot.agent;
 
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.slave.api.enums.SnapshotBizKeyEnum;
 import com.higgs.trust.slave.core.repository.contract.AccountContractBindingRepository;
 import com.higgs.trust.slave.core.service.snapshot.CacheLoader;

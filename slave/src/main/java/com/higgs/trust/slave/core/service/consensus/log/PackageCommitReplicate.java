@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.service.consensus.log;
 
-import com.higgs.trust.common.utils.TraceUtils;
+import com.higgschain.trust.common.utils.TraceUtils;
 import com.higgs.trust.consensus.annotation.Replicator;
 import com.higgs.trust.consensus.core.ConsensusCommit;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;

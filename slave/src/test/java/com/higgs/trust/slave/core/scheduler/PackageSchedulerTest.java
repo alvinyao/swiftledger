@@ -2,7 +2,7 @@ package com.higgs.trust.slave.core.scheduler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.higgs.trust.common.crypto.rsa.Rsa;
+import com.higgschain.trust.common.crypto.rsa.Rsa;
 import com.higgs.trust.slave.BaseTest;
 import com.higgs.trust.slave.api.enums.ActionTypeEnum;
 import com.higgs.trust.slave.api.enums.VersionEnum;

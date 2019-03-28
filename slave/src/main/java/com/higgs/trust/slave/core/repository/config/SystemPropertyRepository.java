@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.repository.config;
 
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.slave.common.config.InitConfig;
 import com.higgs.trust.slave.dao.mysql.config.SystemPropertyDao;
 import com.higgs.trust.slave.dao.po.config.SystemPropertyPO;

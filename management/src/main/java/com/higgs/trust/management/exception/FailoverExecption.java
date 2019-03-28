@@ -3,7 +3,7 @@
  */
 package com.higgs.trust.management.exception;
 
-import com.higgs.trust.common.exception.ErrorInfo;
+import com.higgschain.trust.common.exception.ErrorInfo;
 import com.higgs.trust.slave.common.exception.SlaveException;
 
 /**

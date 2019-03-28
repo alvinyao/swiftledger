@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.dao.mysql.contract;
 
-import com.higgs.trust.common.mybatis.BaseDao;
+import com.higgschain.trust.common.mybatis.BaseDao;
 import com.higgs.trust.slave.dao.po.contract.ContractPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

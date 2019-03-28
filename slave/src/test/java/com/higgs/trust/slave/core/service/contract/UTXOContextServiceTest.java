@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.service.contract;
 
 import com.google.common.collect.Lists;
-import com.higgs.trust.common.crypto.KeyPair;
+import com.higgschain.trust.common.crypto.KeyPair;
 import com.higgs.trust.config.crypto.CryptoUtil;
 import com.higgs.trust.slave.BaseTest;
 import com.higgs.trust.slave.model.bo.utxo.Sign;

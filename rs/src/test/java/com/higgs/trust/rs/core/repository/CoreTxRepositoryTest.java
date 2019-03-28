@@ -2,8 +2,8 @@ package com.higgs.trust.rs.core.repository;
 
 import com.alibaba.fastjson.JSONObject;
 import com.higgs.trust.IntegrateBaseTest;
-import com.higgs.trust.common.dao.RocksUtils;
-import com.higgs.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.common.dao.RocksUtils;
+import com.higgschain.trust.common.utils.ThreadLocalUtils;
 import com.higgs.trust.rs.core.api.enums.CoreTxResultEnum;
 import com.higgs.trust.rs.core.api.enums.CoreTxStatusEnum;
 import com.higgs.trust.rs.core.dao.po.CoreTransactionPO;

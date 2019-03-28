@@ -1,6 +1,6 @@
 package commands
 
-import com.higgs.trust.common.utils.LogLevelChanger
+import com.higgschain.trust.common.utils.LogLevelChanger
 import com.higgs.trust.config.view.ClusterViewManager
 import com.higgs.trust.consensus.config.NodeState
 import com.higgs.trust.consensus.config.NodeStateEnum

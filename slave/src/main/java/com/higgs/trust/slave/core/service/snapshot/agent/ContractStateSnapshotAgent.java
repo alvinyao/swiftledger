@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.service.snapshot.agent;
 
-import com.higgs.trust.common.utils.MD5;
+import com.higgschain.trust.common.utils.MD5;
 import com.higgs.trust.contract.ContractStateStore;
 import com.higgs.trust.contract.JsonHelper;
 import com.higgs.trust.slave.api.enums.MerkleTypeEnum;

@@ -1,7 +1,7 @@
 package com.higgs.trust.rs.core.dao;
 
 import com.google.common.collect.Lists;
-import com.higgs.trust.common.utils.CollectionBean;
+import com.higgschain.trust.common.utils.CollectionBean;
 import com.higgs.trust.rs.core.dao.po.CoreTransactionPO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.service.merkle;
 
 import com.alibaba.fastjson.JSON;
-import com.higgs.trust.common.utils.Profiler;
+import com.higgschain.trust.common.utils.Profiler;
 import com.higgs.trust.slave.api.enums.MerkleStatusEnum;
 import com.higgs.trust.slave.api.enums.MerkleTypeEnum;
 import com.higgs.trust.slave.common.SnowflakeIdWorker;

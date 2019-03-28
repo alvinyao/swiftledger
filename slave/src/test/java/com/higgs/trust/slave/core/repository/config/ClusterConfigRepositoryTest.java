@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.repository.config;
 
-import com.higgs.trust.common.dao.RocksUtils;
-import com.higgs.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.common.dao.RocksUtils;
+import com.higgschain.trust.common.utils.ThreadLocalUtils;
 import com.higgs.trust.slave.BaseTest;
 import com.higgs.trust.slave.common.config.InitConfig;
 import com.higgs.trust.slave.dao.po.config.ClusterConfigPO;

@@ -3,8 +3,8 @@
  */
 package com.higgs.trust.consensus.exception;
 
-import com.higgs.trust.common.exception.ErrorInfo;
-import com.higgs.trust.common.exception.TrustException;
+import com.higgschain.trust.common.exception.ErrorInfo;
+import com.higgschain.trust.common.exception.TrustException;
 
 /**
  * @author suimi

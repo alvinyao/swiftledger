@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.dao.mysql.dataIdentity;
 
-import com.higgs.trust.common.utils.CollectionBean;
+import com.higgschain.trust.common.utils.CollectionBean;
 import com.higgs.trust.slave.dao.po.DataIdentityPO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;

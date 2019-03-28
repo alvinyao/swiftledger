@@ -3,8 +3,8 @@
  */
 package com.higgs.trust.config.master;
 
-import com.higgs.trust.common.enums.MonitorTargetEnum;
-import com.higgs.trust.common.utils.MonitorLogUtils;
+import com.higgschain.trust.common.enums.MonitorTargetEnum;
+import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgs.trust.config.crypto.CryptoUtil;
 import com.higgs.trust.config.master.command.*;
 import com.higgs.trust.config.view.ClusterView;

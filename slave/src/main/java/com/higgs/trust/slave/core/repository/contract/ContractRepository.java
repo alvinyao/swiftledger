@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.repository.contract;
 
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.slave.api.vo.ContractVO;
 import com.higgs.trust.slave.common.config.InitConfig;
 import com.higgs.trust.slave.dao.mysql.contract.ContractDao;

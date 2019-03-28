@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.common.util;
 
-import com.higgs.trust.common.constant.LoggerName;
+import com.higgschain.trust.common.constant.LoggerName;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;

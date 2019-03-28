@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.repository.account;
 
-import com.higgs.trust.common.utils.BeanConvertor;
-import com.higgs.trust.common.utils.Profiler;
+import com.higgschain.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.Profiler;
 import com.higgs.trust.slave.api.enums.account.AccountStateEnum;
 import com.higgs.trust.slave.api.vo.AccountInfoVO;
 import com.higgs.trust.slave.common.config.InitConfig;

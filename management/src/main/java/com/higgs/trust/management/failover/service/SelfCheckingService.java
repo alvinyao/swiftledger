@@ -1,7 +1,7 @@
 package com.higgs.trust.management.failover.service;
 
-import com.higgs.trust.common.enums.MonitorTargetEnum;
-import com.higgs.trust.common.utils.MonitorLogUtils;
+import com.higgschain.trust.common.enums.MonitorTargetEnum;
+import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgs.trust.consensus.config.NodeProperties;
 import com.higgs.trust.consensus.config.NodeStateEnum;
 import com.higgs.trust.consensus.config.listener.StateChangeListener;

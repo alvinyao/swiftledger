@@ -1,8 +1,8 @@
 package com.higgs.trust.slave.core.repository;
 
 import com.alibaba.fastjson.JSON;
-import com.higgs.trust.common.enums.MonitorTargetEnum;
-import com.higgs.trust.common.utils.MonitorLogUtils;
+import com.higgschain.trust.common.enums.MonitorTargetEnum;
+import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgs.trust.slave.common.config.InitConfig;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgs.trust.slave.common.exception.SlaveException;

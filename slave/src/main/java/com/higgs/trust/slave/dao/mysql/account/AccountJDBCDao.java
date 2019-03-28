@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.dao.mysql.account;
 
 import com.google.common.collect.Lists;
-import com.higgs.trust.common.utils.CollectionBean;
+import com.higgschain.trust.common.utils.CollectionBean;
 import com.higgs.trust.slave.model.bo.account.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

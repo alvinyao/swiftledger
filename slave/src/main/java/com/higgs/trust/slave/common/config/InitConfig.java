@@ -4,7 +4,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.higgs.trust.common.constant.Constant;
+import com.higgschain.trust.common.constant.Constant;
 import com.higgs.trust.evmcontract.config.SystemProperties;
 import com.higgs.trust.evmcontract.core.Repository;
 import com.higgs.trust.evmcontract.datasource.DbSource;

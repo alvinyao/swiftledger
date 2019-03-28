@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.dao.mysql.transaction;
 
-import com.higgs.trust.common.utils.CollectionBean;
+import com.higgschain.trust.common.utils.CollectionBean;
 import com.higgs.trust.slave.dao.po.transaction.TransactionPO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

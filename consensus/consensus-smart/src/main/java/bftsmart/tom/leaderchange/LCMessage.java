@@ -17,7 +17,7 @@ package bftsmart.tom.leaderchange;
 
 import bftsmart.communication.SystemMessage;
 import bftsmart.tom.util.TOMUtil;
-import com.higgs.trust.common.utils.HashUtil;
+import com.higgschain.trust.common.utils.HashUtil;
 
 import java.io.IOException;
 import java.io.ObjectInput;

@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.dao.rocks.config;
 
-import com.higgs.trust.common.dao.RocksBaseDao;
-import com.higgs.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.common.dao.RocksBaseDao;
+import com.higgschain.trust.common.utils.ThreadLocalUtils;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgs.trust.slave.common.exception.SlaveException;
 import com.higgs.trust.slave.dao.po.config.ClusterConfigPO;

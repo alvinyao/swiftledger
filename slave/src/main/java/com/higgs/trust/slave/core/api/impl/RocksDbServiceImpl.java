@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.core.api.impl;
 
-import com.higgs.trust.common.dao.RocksUtils;
+import com.higgschain.trust.common.dao.RocksUtils;
 import com.higgs.trust.slave.api.RocksDbService;
 import com.higgs.trust.slave.api.vo.RespData;
 import lombok.extern.slf4j.Slf4j;

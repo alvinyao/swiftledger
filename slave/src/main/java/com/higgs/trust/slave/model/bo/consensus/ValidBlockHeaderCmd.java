@@ -3,7 +3,7 @@
  */
 package com.higgs.trust.slave.model.bo.consensus;
 
-import com.higgs.trust.common.constant.Constant;
+import com.higgschain.trust.common.constant.Constant;
 import com.higgs.trust.consensus.p2pvalid.core.IdValidCommand;
 import com.higgs.trust.slave.model.bo.BlockHeader;
 import lombok.Getter;

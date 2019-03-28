@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.common;
 
-import com.higgs.trust.common.utils.IdGenerator;
-import com.higgs.trust.common.utils.IpUtil;
+import com.higgschain.trust.common.utils.IdGenerator;
+import com.higgschain.trust.common.utils.IpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

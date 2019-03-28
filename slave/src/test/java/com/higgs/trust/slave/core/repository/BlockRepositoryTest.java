@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.repository;
 
 import com.alibaba.fastjson.JSONObject;
-import com.higgs.trust.common.constant.Constant;
+import com.higgschain.trust.common.constant.Constant;
 import com.higgs.trust.slave.BaseTest;
 import com.higgs.trust.slave.api.enums.ActionTypeEnum;
 import com.higgs.trust.slave.api.enums.manage.DecisionTypeEnum;

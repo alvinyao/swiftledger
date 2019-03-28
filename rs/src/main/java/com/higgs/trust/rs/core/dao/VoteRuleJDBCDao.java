@@ -1,6 +1,6 @@
 package com.higgs.trust.rs.core.dao;
 
-import com.higgs.trust.common.utils.CollectionBean;
+import com.higgschain.trust.common.utils.CollectionBean;
 import com.higgs.trust.rs.core.dao.po.VoteRulePO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

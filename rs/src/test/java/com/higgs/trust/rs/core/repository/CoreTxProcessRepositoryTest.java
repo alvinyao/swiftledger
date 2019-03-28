@@ -2,8 +2,8 @@
 package com.higgs.trust.rs.core.repository;
 
 import com.higgs.trust.IntegrateBaseTest;
-import com.higgs.trust.common.dao.RocksUtils;
-import com.higgs.trust.common.utils.ThreadLocalUtils;
+import RocksUtils;
+import ThreadLocalUtils;
 import com.higgs.trust.rs.core.api.enums.CoreTxStatusEnum;
 import com.higgs.trust.rs.core.dao.po.CoreTransactionProcessPO;
 import com.higgs.trust.rs.core.vo.RsCoreTxVO;

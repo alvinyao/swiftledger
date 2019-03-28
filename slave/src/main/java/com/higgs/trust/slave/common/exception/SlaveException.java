@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.common.exception;
 
-import com.higgs.trust.common.exception.ErrorInfo;
-import com.higgs.trust.common.exception.TrustException;
+import com.higgschain.trust.common.exception.ErrorInfo;
+import com.higgschain.trust.common.exception.TrustException;
 
 public class SlaveException extends TrustException {
 

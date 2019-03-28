@@ -1,6 +1,6 @@
 package com.higgs.trust.slave.dao.mysql.account;
 
-import com.higgs.trust.common.mybatis.BaseDao;
+import com.higgschain.trust.common.mybatis.BaseDao;
 import com.higgs.trust.slave.dao.po.account.AccountDetailFreezePO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

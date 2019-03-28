@@ -1,7 +1,7 @@
 package com.higgs.trust.consensus.p2pvalid.core.service;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.config.crypto.CryptoUtil;
 import com.higgs.trust.config.view.ClusterView;
 import com.higgs.trust.config.view.IClusterViewManager;

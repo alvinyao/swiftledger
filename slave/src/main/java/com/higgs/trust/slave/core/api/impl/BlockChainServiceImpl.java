@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.api.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.higgs.trust.common.constant.Constant;
+import com.higgschain.trust.common.constant.Constant;
 import com.higgs.trust.consensus.config.NodeState;
 import com.higgs.trust.consensus.config.NodeStateEnum;
 import com.higgs.trust.contract.StateManager;

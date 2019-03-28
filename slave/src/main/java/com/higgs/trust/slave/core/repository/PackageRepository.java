@@ -1,8 +1,8 @@
 package com.higgs.trust.slave.core.repository;
 
-import com.higgs.trust.common.constant.Constant;
-import com.higgs.trust.common.dao.RocksUtils;
-import com.higgs.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.common.constant.Constant;
+import com.higgschain.trust.common.dao.RocksUtils;
+import com.higgschain.trust.common.utils.ThreadLocalUtils;
 import com.higgs.trust.slave.common.config.InitConfig;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgs.trust.slave.common.exception.SlaveException;

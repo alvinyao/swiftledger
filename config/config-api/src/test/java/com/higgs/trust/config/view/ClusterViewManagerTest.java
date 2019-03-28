@@ -1,6 +1,6 @@
 package com.higgs.trust.config.view;
 
-import com.higgs.trust.common.crypto.rsa.RsaCrypto;
+import com.higgschain.trust.common.crypto.rsa.RsaCrypto;
 import com.higgs.trust.config.crypto.CryptoUtil;
 import com.higgs.trust.config.exception.ConfigException;
 import com.higgs.trust.config.node.command.ViewCommand;

@@ -1,7 +1,7 @@
 package com.higgs.trust.slave.core.service.datahandler.utxo;
 
 import com.alibaba.fastjson.JSON;
-import com.higgs.trust.common.utils.BeanConvertor;
+import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgs.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgs.trust.slave.common.exception.SlaveException;
 import com.higgs.trust.slave.core.repository.TxOutRepository;

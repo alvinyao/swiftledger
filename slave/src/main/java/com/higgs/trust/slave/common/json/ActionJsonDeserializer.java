@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.DefaultJSONParser;
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.parser.deserializer.ObjectDeserializer;
-import com.higgs.trust.common.lambda.Mapper;
+import com.higgschain.trust.common.lambda.Mapper;
 import com.higgs.trust.consensus.p2pvalid.core.ResponseCommand;
 import com.higgs.trust.consensus.p2pvalid.core.ValidCommand;
 import com.higgs.trust.slave.api.enums.ActionTypeEnum;

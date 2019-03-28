@@ -3,7 +3,7 @@
  */
 package com.higgs.trust.slave.core.service.consensus.cluster;
 
-import com.higgs.trust.common.constant.Constant;
+import com.higgschain.trust.common.constant.Constant;
 import com.higgs.trust.config.crypto.CryptoUtil;
 import com.higgs.trust.config.view.ClusterView;
 import com.higgs.trust.config.view.IClusterViewManager;
