@@ -46,15 +46,16 @@ contract Token {
         return sha256(abi.encodePacked(_from, _to, amount, count));
     }
 
-    function transfer(address _to, uint256 _value, bool multiSignFlag, bytes signedStrs) public payable returns (bool){
+    function transfer(address _to, uint256 _value, bool multiSignFlag, string signedStrs) public payable returns (bool){
         require(msg.sender != 0x0, "from address is 0x0");
+        bytes memory signedBytes = hexStr2bytes(signedStrs);
         if (multiSignFlag) {
             VerifyMultiSign verifyMultiSign = VerifyMultiSign(msg.sender);
-            require(verifyMultiSign.verifyMultiSign(msg.sender, _to, _value, signedStrs));
+            require(verifyMultiSign.verifyMultiSign(msg.sender, _to, _value, signedBytes));
             return transferFrom(msg.sender, _to, _value);
         }
         bytes32 sourceHash = getSourceHash(msg.sender, _to, _value);
-        require(msg.sender == recovery(signedStrs, sourceHash), "sender signature verification failed");
+        require(msg.sender == recovery(signedBytes, sourceHash), "sender signature verification failed");
         return transferFrom(msg.sender, _to, _value);
     }
 
@@ -93,5 +94,31 @@ contract Token {
             return address(0);
         }
         return ecrecover(hash, v, r, s);
+    }
+
+    function hexStr2bytes(string data) public pure returns (bytes){
+        bytes memory a = bytes(data);
+        uint[] memory b = new uint[](a.length);
+
+        for (uint i = 0; i < a.length; i++) {
+            uint _a = uint(a[i]);
+
+            if (_a > 96) {
+                b[i] = _a - 97 + 10;
+            }
+            else if (_a > 66) {
+                b[i] = _a - 65 + 10;
+            }
+            else {
+                b[i] = _a - 48;
+            }
+        }
+
+        bytes memory c = new bytes(b.length / 2);
+        for (uint _i = 0; _i < b.length; _i += 2) {
+            c[_i / 2] = byte(b[_i] * 16 + b[_i + 1]);
+        }
+
+        return c;
     }
 }

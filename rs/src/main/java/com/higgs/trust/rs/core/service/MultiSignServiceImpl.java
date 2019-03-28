@@ -49,7 +49,7 @@ public class MultiSignServiceImpl implements MultiSignService {
     private final static String MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME = "MultiSign(address[],uint,address[])";
     private final static String CURRENCY_CONTRACT_CONSTRUCTOR_NAME = "Token(address,string,uint)";
     private final static String METHOD_GET_SIGN_HASH = "(bytes32) getSourceHash(address,address,uint)";
-    private final static String METHOD_TRANSFER = "(bool) transfer(address,uint256,bool,bytes)";
+    private final static String METHOD_TRANSFER = "(bool) transfer(address,uint256,bool,string)";
     /**
      * config path
      */
@@ -201,7 +201,7 @@ public class MultiSignServiceImpl implements MultiSignService {
         signs.forEach(v -> {
             sb.append(v);
         });
-        action.setArgs(new Object[]{vo.getToAddr(), amount, vo.isMultiSign(), Hex.decode(sb.toString())});
+        action.setArgs(new Object[]{vo.getToAddr(), amount, vo.isMultiSign(), sb.toString()});
         log.info("transfer action:{}", action);
         //make core-transaction
         CoreTransaction coreTransaction = coreTransactionConvertor
