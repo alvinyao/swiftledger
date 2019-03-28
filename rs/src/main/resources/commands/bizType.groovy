@@ -1,6 +1,6 @@
 package commands
 
-import com.higgs.trust.rs.core.repository.BizTypeRepository
+import com.higgschain.trust.rs.core.repository.BizTypeRepository
 import lombok.extern.slf4j.Slf4j
 import org.crsh.cli.Argument
 import org.crsh.cli.Command

@@ -1,7 +1,7 @@
 {
   "TRUST": {
     "ribbon": {
-      "NFLoadBalancerRuleClassName": "com.higgs.trust.common.feign.RequestHeaderRoundRobinRule"
+      "NFLoadBalancerRuleClassName": "com.higgschain.trust.common.feign.RequestHeaderRoundRobinRule"
     }
   },
   "atomix": {

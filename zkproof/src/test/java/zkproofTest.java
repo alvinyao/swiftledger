@@ -1,4 +1,4 @@
-import com.higgs.trust.zkproof.EncryptAmount;
+import com.higgschain.trust.zkproof.EncryptAmount;
 import org.junit.Test;
 
 import java.math.BigDecimal;

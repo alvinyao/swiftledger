@@ -1,8 +1,8 @@
 package commands
 
-import com.higgs.trust.consensus.config.NodeState
-import com.higgs.trust.consensus.config.NodeStateEnum
-import com.higgs.trust.management.failover.service.StandbyService
+import com.higgschain.trust.consensus.config.NodeState
+import com.higgschain.trust.consensus.config.NodeStateEnum
+import com.higgschain.trust.management.failover.service.StandbyService
 import lombok.extern.slf4j.Slf4j
 import org.crsh.cli.Command
 import org.crsh.cli.Usage

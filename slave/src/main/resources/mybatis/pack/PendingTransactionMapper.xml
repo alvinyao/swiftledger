@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mappers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.pack.PendingTransactionDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.pack.PendingTransactionDao">
     <!-- Result Map -->
-    <resultMap id="baseResultMap" type="com.higgs.trust.slave.dao.po.pack.PendingTransactionPO">
+    <resultMap id="baseResultMap" type="com.higgschain.trust.slave.dao.po.pack.PendingTransactionPO">
         <result column="tx_id" property="txId"/>
         <result column="tx_data" property="txData"/>
         <result column="status" property="status"/>
@@ -83,7 +83,7 @@
         <include refid="baseColumnList"/>
         from pending_transaction where height=#{height} order by tx_id asc
     </select>
-    <select id="queryByTxIds" resultType="com.higgs.trust.slave.dao.po.pack.PendingTransactionPO">
+    <select id="queryByTxIds" resultType="com.higgschain.trust.slave.dao.po.pack.PendingTransactionPO">
         select
         <include refid="baseColumnList"/>
         from pending_transaction

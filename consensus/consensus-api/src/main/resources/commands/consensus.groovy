@@ -1,6 +1,6 @@
 package commands
 
-import com.higgs.trust.consensus.core.ConsensusStateMachine
+import com.higgschain.trust.consensus.core.ConsensusStateMachine
 import lombok.extern.slf4j.Slf4j
 import org.crsh.cli.Command
 import org.crsh.cli.Usage

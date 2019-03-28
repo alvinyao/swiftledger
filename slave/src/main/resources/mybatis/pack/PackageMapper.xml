@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mappers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.pack.PackageDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.pack.PackageDao">
     <!-- Result Map -->
-    <resultMap id="baseResultMap" type="com.higgs.trust.slave.dao.po.pack.PackagePO">
+    <resultMap id="baseResultMap" type="com.higgschain.trust.slave.dao.po.pack.PackagePO">
         <result column="height" property="height"/>
         <result column="status" property="status"/>
         <result column="callbacked" property="callbacked"/>

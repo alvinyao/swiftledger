@@ -8,7 +8,7 @@
         "coreTx": {
           "actionList": [
             {
-              "@type": "com.higgs.trust.slave.model.bo.action.DataIdentityAction",
+              "@type": "com.higgschain.trust.slave.model.bo.action.DataIdentityAction",
               "chainOwner": "BANK_CHAIN",
               "dataOwner": "TRUST-NODE33",
               "identity": "lingssd724498110",
@@ -16,7 +16,7 @@
               "type": "CREATE_DATA_IDENTITY"
             },
             {
-              "@type": "com.higgs.trust.slave.model.bo.action.UTXOAction",
+              "@type": "com.higgschain.trust.slave.model.bo.action.UTXOAction",
               "contractAddress": "1234567",
               "index": 1,
               "inputList": null,

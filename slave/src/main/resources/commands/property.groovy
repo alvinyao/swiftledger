@@ -1,6 +1,6 @@
 package commands
 
-import com.higgs.trust.slave.core.service.datahandler.manage.SystemPropertyHandler
+import com.higgschain.trust.slave.core.service.datahandler.manage.SystemPropertyHandler
 import lombok.extern.slf4j.Slf4j
 import org.crsh.cli.Argument
 import org.crsh.cli.Command

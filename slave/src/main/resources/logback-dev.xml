@@ -169,12 +169,12 @@
         <appender-ref ref="ERROR-APPENDER"/>
     </Logger>
 
-    <Logger name="com.higgs.trust.common.utils.Profiler" level="debug" additivity="false">
+    <Logger name="com.higgschain.trust.common.utils.Profiler" level="debug" additivity="false">
         <appender-ref ref="PERF-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
     </Logger>
 
-    <logger name="com.higgs.trust" level="debug" additivity="false">
+    <logger name="com.higgschain.trust" level="debug" additivity="false">
         <appender-ref ref="BIZ-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
     </logger>

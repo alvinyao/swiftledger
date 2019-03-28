@@ -8,7 +8,7 @@
         "coreTx": {
           "actionList": [
             {
-              "@type": "com.higgs.trust.slave.model.bo.action.DataIdentityAction",
+              "@type": "com.higgschain.trust.slave.model.bo.action.DataIdentityAction",
               "chainOwner": "BANK_CHAIN",
               "dataOwner": "TRUST-NODE33",
               "identity": "lingssd724498110",
@@ -16,7 +16,7 @@
               "type": "CREATE_DATA_IDENTITY"
             },
             {
-              "@type": "com.higgs.trust.slave.model.bo.action.UTXOAction",
+              "@type": "com.higgschain.trust.slave.model.bo.action.UTXOAction",
               "contractAddress": "1234567",
               "index": 1,
               "inputList": null,
@@ -61,8 +61,8 @@
     "status": "VALIDATING"
   },
   "beforeSql": [
-    "INSERT INTO `block_header` (`id`, `height`, `type`, `header_data`, `create_time`)VALUES(1, 2, 'TEMP_TYPE', '{\"@type\":\"com.higgs.trust.slave.model.bo.BlockHeader\",\"blockHash\":\"74db726c2c1e9a762c3dbe2956103ce3fbcd53c7b1fb5609b4460562d4edc9c0\",\"blockTime\":1526700650223,\"height\":2,\"previousHash\":\"48f662666b5ad8869c21026d588ba5024d47cdaa67334ce83bd088cad55b58f4\",\"stateRootHash\":{\"accountRootHash\":\"NO_TREE\",\"contractRootHash\":\"NO_TREE\",\"policyRootHash\":\"NO_TREE\",\"rsRootHash\":\"NO_TREE\",\"txReceiptRootHash\":\"1fa6fa094bee6dca06c3f38928d8a768123acc74c9224399d1dc45488cd08486\",\"txRootHash\":\"b151f44ffec48757abca32c7e036b783da0d14670d2b87fc9caf4ec05c6a5e9d\"},\"version\":\"v1.0\"}', '2018-05-19 11:30:50.734')",
-    "INSERT INTO `block_header` (`id`, `height`, `type`, `header_data`, `create_time`)VALUES(2, 2, 'CONSENSUS_VALIDATE_TYPE', '{\"@type\":\"com.higgs.trust.slave.model.bo.BlockHeader\",\"blockHash\":\"74db726c2c1e9a762c3dbe2956103ce3fbcd53c7b1fb5609b4460562d4edc9c0\",\"blockTime\":1526700650223,\"height\":2,\"previousHash\":\"48f662666b5ad8869c21026d588ba5024d47cdaa67334ce83bd088cad55b58f4\",\"stateRootHash\":{\"accountRootHash\":\"NO_TREE\",\"contractRootHash\":\"NO_TREE\",\"policyRootHash\":\"NO_TREE\",\"rsRootHash\":\"NO_TREE\",\"txReceiptRootHash\":\"1fa6fa094bee6dca06c3f38928d8a768123acc74c9224399d1dc45488cd08486\",\"txRootHash\":\"b151f44ffec48757abca32c7e036b783da0d14670d2b87fc9caf4ec05c6a5e9d\"},\"version\":\"v1.0\"}', '2018-05-19 11:30:50.962')"
+    "INSERT INTO `block_header` (`id`, `height`, `type`, `header_data`, `create_time`)VALUES(1, 2, 'TEMP_TYPE', '{\"@type\":\"com.higgschain.trust.slave.model.bo.BlockHeader\",\"blockHash\":\"74db726c2c1e9a762c3dbe2956103ce3fbcd53c7b1fb5609b4460562d4edc9c0\",\"blockTime\":1526700650223,\"height\":2,\"previousHash\":\"48f662666b5ad8869c21026d588ba5024d47cdaa67334ce83bd088cad55b58f4\",\"stateRootHash\":{\"accountRootHash\":\"NO_TREE\",\"contractRootHash\":\"NO_TREE\",\"policyRootHash\":\"NO_TREE\",\"rsRootHash\":\"NO_TREE\",\"txReceiptRootHash\":\"1fa6fa094bee6dca06c3f38928d8a768123acc74c9224399d1dc45488cd08486\",\"txRootHash\":\"b151f44ffec48757abca32c7e036b783da0d14670d2b87fc9caf4ec05c6a5e9d\"},\"version\":\"v1.0\"}', '2018-05-19 11:30:50.734')",
+    "INSERT INTO `block_header` (`id`, `height`, `type`, `header_data`, `create_time`)VALUES(2, 2, 'CONSENSUS_VALIDATE_TYPE', '{\"@type\":\"com.higgschain.trust.slave.model.bo.BlockHeader\",\"blockHash\":\"74db726c2c1e9a762c3dbe2956103ce3fbcd53c7b1fb5609b4460562d4edc9c0\",\"blockTime\":1526700650223,\"height\":2,\"previousHash\":\"48f662666b5ad8869c21026d588ba5024d47cdaa67334ce83bd088cad55b58f4\",\"stateRootHash\":{\"accountRootHash\":\"NO_TREE\",\"contractRootHash\":\"NO_TREE\",\"policyRootHash\":\"NO_TREE\",\"rsRootHash\":\"NO_TREE\",\"txReceiptRootHash\":\"1fa6fa094bee6dca06c3f38928d8a768123acc74c9224399d1dc45488cd08486\",\"txRootHash\":\"b151f44ffec48757abca32c7e036b783da0d14670d2b87fc9caf4ec05c6a5e9d\"},\"version\":\"v1.0\"}', '2018-05-19 11:30:50.962')"
   ],
   "assert": "package block hash is null error[SLAVE_PACKAGE_HEADER_IS_NULL_ERROR]",
   "afterSql": [

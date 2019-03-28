@@ -1,6 +1,6 @@
 package commands
 
-import com.higgs.trust.rs.core.service.NodeConsensusService
+import com.higgschain.trust.rs.core.service.NodeConsensusService
 import lombok.extern.slf4j.Slf4j
 import org.crsh.cli.Command
 import org.crsh.cli.Usage

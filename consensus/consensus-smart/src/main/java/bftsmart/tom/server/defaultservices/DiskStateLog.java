@@ -18,8 +18,8 @@ package bftsmart.tom.server.defaultservices;
 import bftsmart.statemanagement.ApplicationState;
 import bftsmart.tom.MessageContext;
 import bftsmart.tom.util.Logger;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
 
 import java.io.*;
 import java.nio.ByteBuffer;

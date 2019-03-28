@@ -1,10 +1,10 @@
 package commands
 
 
-import com.higgs.trust.rs.core.api.CoreTransactionService
-import com.higgs.trust.rs.core.vo.RsCoreTxVO
-import com.higgs.trust.slave.core.repository.PolicyRepository
-import com.higgs.trust.slave.model.bo.action.Action
+import com.higgschain.trust.rs.core.api.CoreTransactionService
+import com.higgschain.trust.rs.core.vo.RsCoreTxVO
+import com.higgschain.trust.slave.core.repository.PolicyRepository
+import com.higgschain.trust.slave.model.bo.action.Action
 import lombok.extern.slf4j.Slf4j
 import org.apache.commons.lang3.time.DateFormatUtils
 import org.crsh.cli.Argument

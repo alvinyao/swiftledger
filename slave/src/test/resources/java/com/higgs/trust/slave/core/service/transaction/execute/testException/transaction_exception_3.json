@@ -4,7 +4,7 @@
     "coreTx": {
       "actionList": [
         {
-          "@type": "com.higgs.trust.slave.model.bo.manage.RegisterPolicy",
+          "@type": "com.higgschain.trust.slave.model.bo.manage.RegisterPolicy",
           "index": 0,
           "policyId": "test-policy-0002",
           "policyName": "测试policy注册",
@@ -14,7 +14,7 @@
           ],
           "type": "REGISTER_POLICY"
         }, {
-          "@type": "com.higgs.trust.slave.model.bo.manage.RegisterPolicy",
+          "@type": "com.higgschain.trust.slave.model.bo.manage.RegisterPolicy",
           "index": 2,
           "policyId": "test-policy-0003",
           "policyName": "测试policy注册2",

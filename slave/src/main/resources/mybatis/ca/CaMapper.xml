@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.ca.CaDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.ca.CaDao">
 
-    <insert id="insertCa" parameterType="com.higgs.trust.slave.dao.po.ca.CaPO">
+    <insert id="insertCa" parameterType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		INSERT INTO ca(version,
 								period,
 								valid,
@@ -23,7 +23,7 @@
 	</insert>
 
 
-    <insert id="batchInsert" parameterType="com.higgs.trust.slave.dao.po.ca.CaPO">
+    <insert id="batchInsert" parameterType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		INSERT INTO
 		ca(version,
 			period,
@@ -47,7 +47,7 @@
 	</insert>
 
 
-    <update id="updateCa" parameterType="com.higgs.trust.slave.dao.po.ca.CaPO">
+    <update id="updateCa" parameterType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		UPDATE ca
 		<trim prefix="SET" suffixOverrides=",">
             update_time=now(3),
@@ -63,7 +63,7 @@
 	</update>
 
 
-    <update id="batchUpdate" parameterType="com.higgs.trust.slave.dao.po.ca.CaPO">
+    <update id="batchUpdate" parameterType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		UPDATE ca
 		<trim prefix="SET" suffixOverrides=",">
 			<!-- set update_time -->
@@ -108,7 +108,7 @@
 
 
     <select id="getCaForBiz" parameterType="java.lang.String"
-            resultType="com.higgs.trust.slave.dao.po.ca.CaPO">
+            resultType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		SELECT    version as version,
 								period as period,
 								valid as valid,
@@ -122,7 +122,7 @@
 
 
     <select id="getCaForConsensus" parameterType="java.lang.String"
-            resultType="com.higgs.trust.slave.dao.po.ca.CaPO">
+            resultType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		SELECT    version as version,
 								period as period,
 								valid as valid,
@@ -134,7 +134,7 @@
 		      FROM ca WHERE `user`=#{user} and `usage`='consensus'
 	</select>
 
-    <select id="getAllCa"  resultType="com.higgs.trust.slave.dao.po.ca.CaPO">
+    <select id="getAllCa"  resultType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		SELECT    version as version,
 				period as period,
 				valid as valid,
@@ -146,7 +146,7 @@
 		FROM ca WHERE valid=1
 	</select>
 
-	<select id="getAllPubkeyByUsage"  resultType="com.higgs.trust.slave.dao.po.ca.CaPO">
+	<select id="getAllPubkeyByUsage"  resultType="com.higgschain.trust.slave.dao.po.ca.CaPO">
 		SELECT
 		pub_key as pubKey,
 		`user` as `user`,

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.higgs.trust</groupId>
+        <groupId>com.higgschain.trust</groupId>
         <artifactId>parent</artifactId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
@@ -14,48 +14,48 @@
     <dependencies>
         <!-- internal begin -->
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>consensus-api</artifactId>
         </dependency>
         <!--        <dependency>
-                    <groupId>com.higgs.trust</groupId>
+                    <groupId>com.higgschain.trust</groupId>
                     <artifactId>consensus-smart</artifactId>
                 </dependency>-->
         <!-- <dependency>
-             <groupId>com.higgs.trust</groupId>
+             <groupId>com.higgschain.trust</groupId>
              <artifactId>consensus-zk</artifactId>
              <version>2.0.0-SNAPSHOT</version>
          </dependency>-->
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>zkproof</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>consensus-p2pvalid</artifactId>
         </dependency>
         <!--   <dependency>
-               <groupId>com.higgs.trust</groupId>
+               <groupId>com.higgschain.trust</groupId>
                <artifactId>config-properties</artifactId>
            </dependency>-->
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>config-super</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>contract</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>evmcontract</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>network</artifactId>
         </dependency>
         <!-- internal end -->
@@ -202,7 +202,7 @@
             <artifactId>powermock-module-junit4</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>tester</artifactId>
             <scope>test</scope>
         </dependency>

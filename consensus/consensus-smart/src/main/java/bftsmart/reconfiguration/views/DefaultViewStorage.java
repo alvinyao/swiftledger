@@ -15,8 +15,8 @@
  */
 package bftsmart.reconfiguration.views;
 
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
 
 import java.io.*;
 

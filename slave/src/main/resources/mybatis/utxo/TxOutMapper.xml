@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mappers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.utxo.TxOutDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.utxo.TxOutDao">
     <!-- Result Map -->
-    <resultMap id="baseResultMap" type="com.higgs.trust.slave.dao.po.utxo.TxOutPO">
+    <resultMap id="baseResultMap" type="com.higgschain.trust.slave.dao.po.utxo.TxOutPO">
         <result column="tx_id" property="txId"/>
         <result column="index" property="index"/>
         <result column="action_index" property="actionIndex"/>
@@ -47,20 +47,20 @@
         </trim>
     </sql>
     <!-- insert row -->
-    <insert id="add" parameterType="com.higgs.trust.slave.dao.po.utxo.TxOutPO">
+    <insert id="add" parameterType="com.higgschain.trust.slave.dao.po.utxo.TxOutPO">
         insert into
         tx_out(tx_id,`index`,action_index,identity,state_class,`state`,contract_address,status,create_time,update_time)
         values(#{txId},#{index},#{actionIndex},#{identity},#{stateClass},#{state},#{contractAddress},#{status},now(3),now(3))
     </insert>
     <!-- queryByCount -->
     <select id="queryByCount" resultType="java.lang.Integer"
-            parameterType="com.higgs.trust.slave.dao.po.utxo.TxOutPO">
+            parameterType="com.higgschain.trust.slave.dao.po.utxo.TxOutPO">
         select count(1) from tx_out
         <include refid="baseWhereClause"/>
     </select>
     <!-- queryByList -->
     <select id="queryByList" resultMap="baseResultMap"
-            parameterType="com.higgs.trust.slave.dao.po.utxo.TxOutPO">
+            parameterType="com.higgschain.trust.slave.dao.po.utxo.TxOutPO">
         select
         <include refid="baseColumnList"/>
         from tx_out
@@ -69,21 +69,21 @@
     <!-- below are auto create -->
 
     <select id="queryTxOut" resultMap="baseResultMap"
-            parameterType="com.higgs.trust.slave.dao.po.utxo.TxOutPO">
+            parameterType="com.higgschain.trust.slave.dao.po.utxo.TxOutPO">
         select
         <include refid="baseColumnList"/>
         from tx_out
         where
         tx_id = #{txId} and `index` = #{index} and action_index = #{actionIndex}
     </select>
-    <select id="queryByTxId" resultType="com.higgs.trust.slave.dao.po.utxo.TxOutPO">
+    <select id="queryByTxId" resultType="com.higgschain.trust.slave.dao.po.utxo.TxOutPO">
         select
         <include refid="baseColumnList"/>
         from tx_out
         where
         tx_id = #{txId}
     </select>
-    <select id="queryBySTxId" resultType="com.higgs.trust.slave.dao.po.utxo.TxOutPO">
+    <select id="queryBySTxId" resultType="com.higgschain.trust.slave.dao.po.utxo.TxOutPO">
         select
         <include refid="baseColumnList"/>
         from tx_out

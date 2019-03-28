@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.config.ConfigDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.config.ConfigDao">
 
     <!--if node join multi times, should update its pub/priKey pair-->
-    <insert id="insertConfig" parameterType="com.higgs.trust.slave.dao.po.config.ConfigPO">
+    <insert id="insertConfig" parameterType="com.higgschain.trust.slave.dao.po.config.ConfigPO">
         INSERT INTO config(version,
             valid,
             pub_key,
@@ -27,7 +27,7 @@
     </insert>
 
 
-    <insert id="batchInsert" parameterType="com.higgs.trust.slave.dao.po.config.ConfigPO">
+    <insert id="batchInsert" parameterType="com.higgschain.trust.slave.dao.po.config.ConfigPO">
         INSERT INTO
         config(version,
         valid,
@@ -52,7 +52,7 @@
 
 
     <!--only usage = biz, then pub/priKey pair can be updated-->
-    <update id="updateConfig" parameterType="com.higgs.trust.slave.dao.po.config.ConfigPO">
+    <update id="updateConfig" parameterType="com.higgschain.trust.slave.dao.po.config.ConfigPO">
         UPDATE config
         <trim prefix="SET" suffixOverrides=",">
             update_time=now(3),
@@ -74,7 +74,7 @@
     </update>
 
 
-    <update id="batchUpdate" parameterType="com.higgs.trust.slave.dao.po.config.ConfigPO">
+    <update id="batchUpdate" parameterType="com.higgschain.trust.slave.dao.po.config.ConfigPO">
         UPDATE config
         <trim prefix="SET" suffixOverrides=",">
             <!-- set update_time -->
@@ -110,8 +110,8 @@
     </update>
 
 
-    <select id="getConfig" parameterType="com.higgs.trust.slave.dao.po.config.ConfigPO"
-            resultType="com.higgs.trust.slave.dao.po.config.ConfigPO">
+    <select id="getConfig" parameterType="com.higgschain.trust.slave.dao.po.config.ConfigPO"
+            resultType="com.higgschain.trust.slave.dao.po.config.ConfigPO">
         SELECT version as version,
         valid as valid,
         pub_key as pubKey,

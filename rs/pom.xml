@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
-        <groupId>com.higgs.trust</groupId>
+        <groupId>com.higgschain.trust</groupId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -27,31 +27,31 @@
         </dependency>
         <!-- internal begin -->
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>contract</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>evmcontract</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>slave</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>consensus-atomix</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>management</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>tester</artifactId>
         </dependency>
         <!-- internal end -->
@@ -156,7 +156,7 @@
             <artifactId>powermock-module-junit4</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>test-framwork</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>system</scope>
@@ -183,7 +183,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>consensus-api</artifactId>
         </dependency>
     </dependencies>
@@ -207,7 +207,7 @@
                          <configuration>
                              <artifactItems>
                                  <artifactItem>
-                                     <groupId>com.higgs.trust</groupId>
+                                     <groupId>com.higgschain.trust</groupId>
                                      <artifactId>rs</artifactId>
                                      <type>jar</type>
                                      <destFileName>trust.jar</destFileName>

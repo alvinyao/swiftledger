@@ -20,10 +20,10 @@ import bftsmart.tom.core.TOMLayer;
 import bftsmart.tom.core.messages.TOMMessage;
 import bftsmart.tom.util.Logger;
 import bftsmart.tom.util.TOMUtil;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.NumberNameMapping;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.NumberNameMappingForDisk;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.NumberNameMapping;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.NumberNameMappingForDisk;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
 import org.springframework.util.StringUtils;
 
 import java.net.InetSocketAddress;

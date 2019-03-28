@@ -1,8 +1,8 @@
 package commands
 
-import com.higgs.trust.config.master.ChangeMasterService
-import com.higgs.trust.config.master.INodeInfoService
-import com.higgs.trust.config.snapshot.TermManager
+import com.higgschain.trust.config.master.ChangeMasterService
+import com.higgschain.trust.config.master.INodeInfoService
+import com.higgschain.trust.config.snapshot.TermManager
 import lombok.extern.slf4j.Slf4j
 import org.crsh.cli.*
 import org.crsh.command.InvocationContext

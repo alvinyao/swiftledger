@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <groupId>com.higgs.trust</groupId>
+    <groupId>com.higgschain.trust</groupId>
     <artifactId>parent</artifactId>
     <version>3.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -45,111 +45,111 @@
 
             <!-- internal begin -->
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>rs</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>slave</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>contract</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>network</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>tester</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus-smart</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus-solo</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus-atomix</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus-p2pvalid</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>config</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>config-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>config-properties</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>config-super</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>management</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>registry</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>zkproof</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>evmcontract</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -376,7 +376,7 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.higgs.trust</groupId>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>test-framwork</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <scope>test</scope>

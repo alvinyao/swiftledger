@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mappers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.transaction.TransactionDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.transaction.TransactionDao">
     <!-- Result Map -->
-    <resultMap id="baseResultMap" type="com.higgs.trust.slave.dao.po.transaction.TransactionPO">
+    <resultMap id="baseResultMap" type="com.higgschain.trust.slave.dao.po.transaction.TransactionPO">
         <result column="tx_id" property="txId"/>
         <result column="biz_model" property="bizModel"/>
         <result column="policy_id" property="policyId"/>
@@ -60,20 +60,20 @@
         </trim>
     </sql>
     <!-- insert row -->
-    <insert id="add" parameterType="com.higgs.trust.slave.dao.po.transaction.TransactionPO">
+    <insert id="add" parameterType="com.higgschain.trust.slave.dao.po.transaction.TransactionPO">
         insert into
         transaction(tx_id,biz_model,policy_id,lock_time,version,block_height,block_time,send_time,sender,sign_datas,action_datas,execute_result,error_code,tx_type)
         values(#{txId},#{bizModel},#{policyId},#{lockTime},#{version},#{blockHeight},#{blockTime},#{sendTime},#{sender},#{signDatas},#{actionDatas},#{executeResult},#{errorCode},#{txType})
     </insert>
     <!-- 列表总数 -->
     <select id="queryByCount" resultType="java.lang.Integer"
-            parameterType="com.higgs.trust.slave.dao.po.transaction.TransactionPO">
+            parameterType="com.higgschain.trust.slave.dao.po.transaction.TransactionPO">
         select count(1) from transaction
         <include refid="baseWhereClause"/>
     </select>
     <!-- 查询列表 -->
     <select id="queryByList" resultMap="baseResultMap"
-            parameterType="com.higgs.trust.slave.dao.po.transaction.TransactionPO">
+            parameterType="com.higgschain.trust.slave.dao.po.transaction.TransactionPO">
         select
         <include refid="baseColumnList"/>
         from transaction
@@ -97,14 +97,14 @@
         </foreach>
     </insert>
     <!--query by block height-->
-    <select id="queryByBlockHeight" resultType="com.higgs.trust.slave.dao.po.transaction.TransactionPO">
+    <select id="queryByBlockHeight" resultType="com.higgschain.trust.slave.dao.po.transaction.TransactionPO">
         select
         <include refid="baseColumnList"/>
         from transaction
         where block_height=#{blockHeight}
     </select>
     <!--query by tx ids-->
-    <select id="queryByTxIds" resultType="com.higgs.trust.slave.dao.po.transaction.TransactionPO">
+    <select id="queryByTxIds" resultType="com.higgschain.trust.slave.dao.po.transaction.TransactionPO">
         select
         <include refid="baseColumnList"/>
         from transaction
@@ -114,7 +114,7 @@
         </foreach>
         order by id desc
     </select>
-    <select id="queryTxWithCondition" resultType="com.higgs.trust.slave.dao.po.transaction.TransactionPO">
+    <select id="queryTxWithCondition" resultType="com.higgschain.trust.slave.dao.po.transaction.TransactionPO">
         select
         <include refid="baseColumnList"/>
         from transaction

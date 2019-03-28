@@ -1,10 +1,10 @@
 package commands
 
-import com.higgs.trust.slave.core.repository.PolicyRepository
-import com.higgs.trust.slave.core.service.block.BlockService
-import com.higgs.trust.slave.model.bo.Block
-import com.higgs.trust.slave.model.bo.BlockHeader
-import com.higgs.trust.slave.model.bo.CoreTransaction
+import com.higgschain.trust.slave.core.repository.PolicyRepository
+import com.higgschain.trust.slave.core.service.block.BlockService
+import com.higgschain.trust.slave.model.bo.Block
+import com.higgschain.trust.slave.model.bo.BlockHeader
+import com.higgschain.trust.slave.model.bo.CoreTransaction
 import lombok.extern.slf4j.Slf4j
 import org.apache.commons.lang3.StringUtils
 import org.apache.commons.lang3.time.DateFormatUtils

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mappers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.rs.core.dao.BizTypeDao">
+<mapper namespace="com.higgschain.trust.rs.core.dao.BizTypeDao">
 	<!-- Result Map -->
-	<resultMap id="baseResultMap" type="com.higgs.trust.rs.core.dao.po.BizTypePO">
+	<resultMap id="baseResultMap" type="com.higgschain.trust.rs.core.dao.po.BizTypePO">
 		<result column="id" property="id" />
 		<result column="policy_id" property="policyId" />
 		<result column="biz_type" property="bizType" />

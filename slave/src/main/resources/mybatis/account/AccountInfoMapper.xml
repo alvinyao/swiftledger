@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mappers.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.account.AccountInfoDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.account.AccountInfoDao">
     <!-- Result Map -->
-    <resultMap id="baseResultMap" type="com.higgs.trust.slave.dao.po.account.AccountInfoPO">
+    <resultMap id="baseResultMap" type="com.higgschain.trust.slave.dao.po.account.AccountInfoPO">
         <result column="id" property="id"/>
         <result column="account_no" property="accountNo"/>
         <result column="currency" property="currency"/>
@@ -16,7 +16,7 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <resultMap id="queryAccountInfoMap" type="com.higgs.trust.slave.dao.po.account.AccountInfoWithOwnerPO">
+    <resultMap id="queryAccountInfoMap" type="com.higgschain.trust.slave.dao.po.account.AccountInfoWithOwnerPO">
         <result column="account_no" property="accountNo"/>
         <result column="currency" property="currency"/>
         <result column="balance" property="balance"/>
@@ -183,7 +183,7 @@
 	</update>
 
     <!--batch query the account info-->
-    <select id="queryByAccountNos" resultType="com.higgs.trust.slave.dao.po.account.AccountInfoPO">
+    <select id="queryByAccountNos" resultType="com.higgschain.trust.slave.dao.po.account.AccountInfoPO">
         select
         <include refid="baseColumnList"/>
         from account_info

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.higgs.trust.slave.dao.mysql.manage.RsNodeDao">
+<mapper namespace="com.higgschain.trust.slave.dao.mysql.manage.RsNodeDao">
     <!-- Result Map -->
-    <resultMap id="baseResultMap" type="com.higgs.trust.slave.dao.po.manage.RsNodePO">
+    <resultMap id="baseResultMap" type="com.higgschain.trust.slave.dao.po.manage.RsNodePO">
         <result column="rs_id" property="rsId"/>
         <result column="status" property="status"/>
         <result column="desc" property="desc"/>
@@ -82,7 +82,7 @@
         where status='COMMON'
     </select>
 
-    <select id="queryRsAndPubKey" resultType="com.higgs.trust.slave.model.bo.manage.RsPubKey" parameterType="object">
+    <select id="queryRsAndPubKey" resultType="com.higgschain.trust.slave.model.bo.manage.RsPubKey" parameterType="object">
         select rs.rs_id as rsId, c.pub_key as pubKey
          from rs_node rs
         INNER JOIN

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>config</artifactId>
-        <groupId>com.higgs.trust</groupId>
+        <groupId>com.higgschain.trust</groupId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -14,11 +14,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>config-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>consensus-api</artifactId>
         </dependency>
         <dependency>
@@ -26,7 +26,7 @@
             <artifactId>atomix-utils</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>consensus-p2pvalid</artifactId>
         </dependency>
         <dependency>
@@ -34,7 +34,7 @@
             <artifactId>spring-boot-starter-remote-shell</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.higgs.trust</groupId>
+            <groupId>com.higgschain.trust</groupId>
             <artifactId>tester</artifactId>
             <scope>test</scope>
         </dependency>

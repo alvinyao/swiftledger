@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Aurorasic/swiftledger.svg?branch=master)](https://travis-ci.org/Aurorasic/swiftledger)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.higgs.trust%3Aparent&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.higgs.trust%3Aparent)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.higgschain.trust%3Aparent&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.higgschain.trust%3Aparent)
 # 欢迎来到 SWIFTLEDGER
 
 ## SWIFTLEDGER是什么？

@@ -1,13 +1,13 @@
-package com.higgs.trust.slave.core.service.merkle;
+package com.higgschain.trust.slave.core.service.merkle;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.higgs.trust.slave.JsonFileUtil;
-import com.higgs.trust.slave.api.enums.MerkleTypeEnum;
-import com.higgs.trust.slave.common.exception.MerkleException;
-import com.higgs.trust.slave.model.bo.merkle.MerkleTree;
-import com.higgs.trust.tester.dbunit.DataBaseManager;
+import com.higgschain.trust.slave.JsonFileUtil;
+import com.higgschain.trust.slave.api.enums.MerkleTypeEnum;
+import com.higgschain.trust.slave.common.exception.MerkleException;
+import com.higgschain.trust.slave.model.bo.merkle.MerkleTree;
+import com.higgschain.trust.tester.dbunit.DataBaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

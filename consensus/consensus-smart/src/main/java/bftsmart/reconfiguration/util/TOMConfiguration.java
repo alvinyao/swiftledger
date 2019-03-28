@@ -16,8 +16,8 @@
 package bftsmart.reconfiguration.util;
 
 import bftsmart.tom.util.Logger;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.CustomKeyLoader;
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.CustomKeyLoader;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

@@ -15,7 +15,8 @@
  */
 package bftsmart.reconfiguration.util;
 
-import com.higgs.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.SpringUtil;
+import com.higgschain.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
 import org.springframework.util.StringUtils;
 
 import java.net.InetSocketAddress;
@@ -26,7 +27,7 @@ import java.util.StringTokenizer;
 
 public class HostsConfig {
 
-    private com.higgs.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig config;
+    private SmartConfig config;
 
     private Hashtable servers = new Hashtable();
 
@@ -37,7 +38,7 @@ public class HostsConfig {
      * Creates a new instance of ServersConfig
      */
     public HostsConfig(String configHome, String fileName) {
-        config = SpringUtil.getBean(com.higgs.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig.class);
+        config = SpringUtil.getBean(SmartConfig.class);
         loadConfig(configHome, fileName);
     }
 

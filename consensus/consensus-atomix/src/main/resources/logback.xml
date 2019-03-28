@@ -175,7 +175,7 @@
         <appender-ref ref="MANAGE-APPENDER"/>
     </logger>
 
-    <Logger name="com.higgs.trust.slave.common.util.TrustDaoDigestLogInterceptor" level="INFO" additivity="false">
+    <Logger name="com.higgschain.trust.slave.common.util.TrustDaoDigestLogInterceptor" level="INFO" additivity="false">
         <appender-ref ref="DAO-DIGEST-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
     </Logger>
@@ -185,33 +185,33 @@
         <appender-ref ref="ERROR-APPENDER"/>
     </Logger>
 
-    <Logger name="com.higgs.trust.common.utils.Profiler" level="INFO" additivity="false">
+    <Logger name="com.higgschain.trust.common.utils.Profiler" level="INFO" additivity="false">
         <appender-ref ref="PERF-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
     </Logger>
 
-    <logger name="com.higgs.trust" level="info" additivity="false">
+    <logger name="com.higgschain.trust" level="info" additivity="false">
         <appender-ref ref="BIZ-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
 
-    <logger name="com.higgs.trust.slave.dao" level="info" additivity="false">
+    <logger name="com.higgschain.trust.slave.dao" level="info" additivity="false">
         <appender-ref ref="BIZ-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
-    <logger name="com.higgs.trust.consensus.p2pvalid.dao" level="info" additivity="false">
+    <logger name="com.higgschain.trust.consensus.p2pvalid.dao" level="info" additivity="false">
         <appender-ref ref="BIZ-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
-    <logger name="com.higgs.trust.rs.core.dao" level="info" additivity="false">
+    <logger name="com.higgschain.trust.rs.core.dao" level="info" additivity="false">
         <appender-ref ref="BIZ-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
-    <logger name="com.higgs.trust.rs.custom.dao" level="info" additivity="false">
+    <logger name="com.higgschain.trust.rs.custom.dao" level="info" additivity="false">
         <appender-ref ref="BIZ-APPENDER"/>
         <appender-ref ref="ERROR-APPENDER"/>
         <appender-ref ref="CONSOLE"/>
