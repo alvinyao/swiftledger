@@ -51,9 +51,9 @@ public class MultiSignServiceImpl implements MultiSignService {
     /**
      * config path
      */
-    @Value("${rs.contract.multi-sign.path}")
+    @Value("${rs.contract.multi-sign.path:/data/home/admin/trust/multi-sign-temp.sol}")
     String multiContractCodePath;
-    @Value("${rs.contract.currency.path}")
+    @Value("${rs.contract.currency.path:/data/home/admin/trust/currency-temp.sol}")
     String currencyContractCodePath;
 
     @Autowired
