@@ -1255,6 +1255,7 @@ public class VM {
 
                 if (op == OpCode.REVERT) {
                     program.getResult().setRevert();
+                    LOGGER.warn("vm happen 【REVERT】 hReturn:{}",ByteUtil.toHexString(hReturn));
                 }
             }
             break;
