@@ -2,6 +2,7 @@ package com.higgschain.trust.rs.tx;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.higgschain.trust.common.crypto.ecc.CryptoUtils;
 import com.higgschain.trust.evmcontract.crypto.ECKey;
 import com.higgschain.trust.rs.core.vo.CreateCurrencyVO;
 import com.higgschain.trust.rs.core.vo.MultiSignHashVO;
@@ -25,7 +26,7 @@ public class MultiSignTest {
     private static final String TRANSFER = "http://localhost:7073/multiSign/transfer";
     private String priKey = "87385e10d018f971f66cf2c065663d4aa427286f259f85bb8b2438130f4f1ee7";
     private String owerAddress = "e53a3fd600be283181f7396c35da469050651be7";
-    private String multiContractAddr = "cdfbe82b2ebe76a80c8e3eeac5789bab801f93ff";
+    private String multiContractAddr = "24a4b09676068bd6a9bc14bf80b5eca2ac66a7d8";
     private BigDecimal amount = new BigDecimal("100");
     private List<String> allAddress = new ArrayList<>(3);
     private List<String> mustAddress = new ArrayList<>(2);
@@ -35,8 +36,8 @@ public class MultiSignTest {
         allAddress.add("4a4375e93a728c7d68c04d3a4fe89cca1ddc6e4d");
         allAddress.add("010f774849c57fcb9f73d159daa85c20e197f0d2");
 
-        mustAddress.add("e53a3fd600be283181f7396c35da469050651be7");
-        mustAddress.add("4a4375e93a728c7d68c04d3a4fe89cca1ddc6e4d");
+//        mustAddress.add("e53a3fd600be283181f7396c35da469050651be7");
+//        mustAddress.add("4a4375e93a728c7d68c04d3a4fe89cca1ddc6e4d");
     }
 
     @Test
@@ -45,7 +46,7 @@ public class MultiSignTest {
         vo.setAddrs(allAddress);
         vo.setMustAddrs(mustAddress);
         vo.setVerifyNum(2);
-        vo.setRequestId("4df64fd98714472554201150b1d69a3b174d342d62e9f4517b320198f4a9fde9");
+        vo.setRequestId(generate64TxId(vo.toString()));
         String result = HttpUtils.postJson(CREATE_MULTI_CONTRACT, JSON.toJSON(vo));
         System.out.println(result);
     }
@@ -56,7 +57,7 @@ public class MultiSignTest {
         vo.setAddress(owerAddress);
         vo.setAmount(new BigDecimal("1000000000000000000"));
         vo.setCurrency("AB");
-        vo.setRequestId("4df64f198774492554101250b1d69a3b174d342d62e9f4517b320198f4a91de9");
+        vo.setRequestId(generate64TxId(vo.toString()));
         String result = HttpUtils.postJson(CREATE_TOKEN, JSON.toJSON(vo));
         System.out.println(result);
     }
@@ -65,13 +66,14 @@ public class MultiSignTest {
     public void transferTest() {
         MultiSignTxVO vo = new MultiSignTxVO();
         vo.setCurrency("AB");
-        vo.setAmount(new BigDecimal("100000"));
+        vo.setAmount(new BigDecimal("10"));
         vo.setFromAddr(multiContractAddr);
         vo.setToAddr(owerAddress);
         vo.setMultiSign(true);
-        vo.setRequestId("4df64f198774172551c21231b111913b174d142d62e1f4017b320198f4091de9");
+        vo.setRequestId(generate64TxId(vo.toString()));
         byte[] sourceHash = getSourceHash(vo.getFromAddr(), vo.getToAddr(), vo.getAmount(), null);
 //        byte[] sourceHash = getSourceHash(vo.getFromAddr(), vo.getToAddr(), vo.getAmount(), vo.getCurrency());
+        System.out.println(Hex.toHexString(sourceHash));
         if (vo.isMultiSign()) {
             vo.setSigns(getMultiSignList(sourceHash));
         } else {
@@ -97,7 +99,6 @@ public class MultiSignTest {
         if (sourceHash == null) {
             throw new RuntimeException("get source hash error");
         }
-        System.out.println(sourceHash);
         return Hex.decode(sourceHash);
     }
 
@@ -109,11 +110,18 @@ public class MultiSignTest {
         };
         List<String> list = new ArrayList<>(allAddress.size());
         for (int i = 0; i < pris.length; i++) {
-            list.add(ECKey.fromPrivate(Hex.decode(pris[0])).sign(sourceHash).toHex());
-//            if (i==0){
-//               list.set(i, 2+list.get(i).substring(1));
+//            if (i==1){
+//                continue;
 //            }
+            list.add(ECKey.fromPrivate(Hex.decode(pris[0])).sign(sourceHash).toHex());
         }
         return list;
+    }
+
+    private String generate64TxId(String originalTxId) {
+        originalTxId = originalTxId + System.currentTimeMillis();
+        byte[] txIdBytes = originalTxId.getBytes();
+        byte[] txIdHash256 = CryptoUtils.sha256hashTwice256(txIdBytes);
+        return CryptoUtils.HEX.encode(txIdHash256);
     }
 }

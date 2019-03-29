@@ -54,13 +54,6 @@ contract MultiSign is VerifyMultiSign {
                 checkRepeatSignMap[addr] = true;
             } else {
                 require(!checkRepeatSignMap[addr], "duplicate signatures");
-                //                //check duplicate signatures
-                //                if (checkRepeatSignMap[addr]) {
-                //                    restoreCheckMap();
-                //                    //error log
-                //                    require(checkRepeatSignMap[addr], "duplicate signatures");
-                //                    return false;
-                //                }
                 checkRepeatSignMap[addr] = true;
             }
             if (mustHave < mustAddrsLen) {
@@ -74,9 +67,6 @@ contract MultiSign is VerifyMultiSign {
             }
         }
         emit Log(mustHave, mustAddrsLen, success, verifyNum);
-        //        if (success == 0) {
-        //            return false;
-        //        }
         require(mustHave == mustAddrsLen, "The array of addresses that must be checked does not pass verification");
         require(success == verifyNum, "Multiple signature verification failed.");
         count++;
