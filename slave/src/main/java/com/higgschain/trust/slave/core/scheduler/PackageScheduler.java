@@ -91,7 +91,7 @@ public class PackageScheduler {
                     return;
                 }
                 if (pack.getPackageTime() < packageCache.getLastPackTime()) {
-                    nodeState.changeMaster(nodeState.MASTER_NA);
+                    nodeState.changeMaster(NodeState.MASTER_NA);
                     return;
                 }
                 try {
