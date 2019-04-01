@@ -34,9 +34,9 @@ package com.higgschain.trust.evmcontract.crypto;
 
 
 import com.higgschain.trust.evmcontract.config.Constants;
-import com.higgschain.trust.evmcontract.util.ByteUtil;
 import com.higgschain.trust.evmcontract.crypto.jce.*;
 import com.higgschain.trust.evmcontract.util.BIUtil;
+import com.higgschain.trust.evmcontract.util.ByteUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.asn1.ASN1InputStream;
@@ -74,8 +74,6 @@ import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
-
-import static com.higgschain.trust.evmcontract.util.ByteUtil.bigIntegerToBytes;
 
 
 /**
@@ -707,8 +705,8 @@ public class ECKey implements Serializable {
                     : this.v;
 
             return ByteUtil.merge(
-                    ByteUtil.bigIntegerToBytes(this.r),
-                    ByteUtil.bigIntegerToBytes(this.s),
+                    ByteUtil.bigIntegerToBytes(this.r, 32),
+                    ByteUtil.bigIntegerToBytes(this.s, 32),
                     new byte[]{fixedV});
         }
 
