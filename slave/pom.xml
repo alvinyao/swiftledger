@@ -7,6 +7,7 @@
         <groupId>com.higgschain.trust</groupId>
         <artifactId>parent</artifactId>
         <version>3.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>slave</artifactId>
     <packaging>jar</packaging>
