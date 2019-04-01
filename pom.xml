@@ -325,22 +325,22 @@
                 <version>1.4.2</version>
             </dependency>
             <!--<dependency>-->
-                <!--<groupId>org.rocksdb</groupId>-->
-                <!--<artifactId>rocksdbjni</artifactId>-->
-                <!--<version>5.14.2</version>-->
+            <!--<groupId>org.rocksdb</groupId>-->
+            <!--<artifactId>rocksdbjni</artifactId>-->
+            <!--<version>5.14.2</version>-->
             <!--</dependency>-->
 
             <!--seg-->
             <!--<dependency>-->
-                <!--<groupId>cn.primeledger.seg</groupId>-->
-                <!--<artifactId>stability-spring-boot-starter</artifactId>-->
-                <!--<version>1.1.2-SNAPSHOT</version>-->
-                <!--<exclusions>-->
-                    <!--<exclusion>-->
-                        <!--<groupId>org.springframework.amqp</groupId>-->
-                        <!--<artifactId>spring-rabbit</artifactId>-->
-                    <!--</exclusion>-->
-                <!--</exclusions>-->
+            <!--<groupId>cn.primeledger.seg</groupId>-->
+            <!--<artifactId>stability-spring-boot-starter</artifactId>-->
+            <!--<version>1.1.2-SNAPSHOT</version>-->
+            <!--<exclusions>-->
+            <!--<exclusion>-->
+            <!--<groupId>org.springframework.amqp</groupId>-->
+            <!--<artifactId>spring-rabbit</artifactId>-->
+            <!--</exclusion>-->
+            <!--</exclusions>-->
             <!--</dependency>-->
 
             <!--redisson-->
@@ -620,5 +620,19 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>ethereum-repo</id>
+            <name>ethereum-repo</name>
+            <url>https://dl.bintray.com/ethereum/maven/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
