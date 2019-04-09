@@ -175,4 +175,12 @@ public interface BlockChainService {
      * @return
      */
     List<CoreTransactionVO> queryTxByIds(List<String> txIds);
+
+    /**
+     * get policy name by id
+     *
+     * @param policyId
+     * @return
+     */
+    String getPolicyNameById(String policyId);
 }
