@@ -13,7 +13,7 @@ import com.higgschain.trust.slave.api.enums.RespCodeEnum;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.api.enums.VersionEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.core.repository.config.ConfigRepository;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.SignInfo;

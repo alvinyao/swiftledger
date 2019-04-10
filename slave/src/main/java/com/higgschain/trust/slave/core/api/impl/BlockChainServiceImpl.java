@@ -2,6 +2,7 @@ package com.higgschain.trust.slave.core.api.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.higgschain.trust.common.constant.Constant;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.contract.StateManager;

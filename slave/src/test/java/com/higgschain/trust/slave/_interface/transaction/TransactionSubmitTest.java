@@ -3,7 +3,7 @@ package com.higgschain.trust.slave._interface.transaction;
 import com.alibaba.fastjson.JSON;
 import com.higgschain.trust.slave._interface.InterfaceCommonTest;
 import com.higgschain.trust.slave.api.BlockChainService;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.api.vo.TransactionVO;
 import com.higgschain.trust.slave.model.bo.SignedTransaction;
 import lombok.extern.slf4j.Slf4j;

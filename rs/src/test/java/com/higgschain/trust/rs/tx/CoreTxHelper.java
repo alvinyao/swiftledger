@@ -6,7 +6,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.higgschain.trust.common.utils.OkHttpClientManager;
 import com.higgschain.trust.slave.api.enums.VersionEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.action.Action;
 import lombok.extern.slf4j.Slf4j;

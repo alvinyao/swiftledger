@@ -8,7 +8,7 @@ import com.higgschain.trust.rs.core.api.RsCoreFacade;
 import com.higgschain.trust.slave.api.enums.ActionTypeEnum;
 import com.higgschain.trust.slave.api.enums.VersionEnum;
 import com.higgschain.trust.slave.api.enums.account.FundDirectionEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.account.*;
 import com.higgschain.trust.slave.model.bo.action.Action;

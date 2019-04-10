@@ -2,7 +2,7 @@ package com.higgschain.trust.press;
 
 import com.alibaba.fastjson.JSON;
 import com.higgschain.trust.common.utils.OkHttpClientManager;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 
 /**
  * @author liuyu

@@ -2,7 +2,7 @@ package com.higgschain.trust.rs.core.api;
 
 import com.higgschain.trust.rs.common.exception.RsCoreException;
 import com.higgschain.trust.rs.core.vo.RsCoreTxVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

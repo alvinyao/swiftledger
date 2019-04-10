@@ -1,7 +1,7 @@
 package com.higgschain.trust.rs.core.integration;
 
 import com.higgschain.trust.slave.api.vo.CaVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.ca.Ca;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

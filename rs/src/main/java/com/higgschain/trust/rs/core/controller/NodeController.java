@@ -2,7 +2,7 @@ package com.higgschain.trust.rs.core.controller;
 
 import com.higgschain.trust.rs.core.service.NodeConsensusService;
 import com.higgschain.trust.rs.core.vo.NodeOptVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

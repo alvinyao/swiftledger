@@ -2,7 +2,7 @@ package com.higgschain.trust.rs.core.api;
 
 import com.higgschain.trust.rs.core.bo.CoreTxBO;
 import com.higgschain.trust.rs.core.vo.RsCoreTxVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 
 import java.util.List;

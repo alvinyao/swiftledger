@@ -20,7 +20,7 @@ import com.higgschain.trust.slave.api.enums.ActionTypeEnum;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.DecisionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.core.repository.PolicyRepository;
 import com.higgschain.trust.slave.core.repository.RsNodeRepository;
 import com.higgschain.trust.slave.core.repository.ca.CaRepository;

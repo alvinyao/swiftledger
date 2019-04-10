@@ -16,7 +16,7 @@ import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.slave.api.SlaveBatchCallbackHandler;
 import com.higgschain.trust.slave.api.SlaveCallbackHandler;
 import com.higgschain.trust.slave.api.SlaveCallbackRegistor;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.common.config.InitConfig;
 import com.higgschain.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgschain.trust.slave.common.exception.SlaveException;

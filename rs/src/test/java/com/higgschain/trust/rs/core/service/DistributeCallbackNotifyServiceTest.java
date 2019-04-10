@@ -6,7 +6,7 @@ import com.higgschain.trust.rs.core.api.DistributeCallbackNotifyService;
 import com.higgschain.trust.rs.core.api.enums.RedisMegGroupEnum;
 import com.higgschain.trust.rs.core.api.enums.RedisTopicEnum;
 import com.higgschain.trust.rs.core.callback.SlaveBatchCallbackProcessor;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;

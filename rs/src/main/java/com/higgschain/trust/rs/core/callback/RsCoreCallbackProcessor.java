@@ -17,7 +17,7 @@ import com.higgschain.trust.rs.core.vo.VotingRequest;
 import com.higgschain.trust.slave.api.enums.ActionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
 import com.higgschain.trust.slave.api.enums.manage.VotePatternEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.core.repository.config.ConfigRepository;
 import com.higgschain.trust.slave.model.bo.BlockHeader;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;

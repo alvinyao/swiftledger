@@ -31,7 +31,7 @@ import com.higgschain.trust.slave.api.enums.RespCodeEnum;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
 import com.higgschain.trust.slave.api.enums.manage.VotePatternEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.api.vo.TransactionVO;
 import com.higgschain.trust.slave.common.exception.SlaveException;
 import com.higgschain.trust.slave.common.util.asynctosync.HashBlockingMap;

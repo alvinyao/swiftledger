@@ -4,7 +4,7 @@ import com.higgschain.trust.rs.common.enums.RequestEnum;
 import com.higgschain.trust.rs.core.dao.po.RequestPO;
 import com.higgschain.trust.rs.core.vo.RequestVO;
 import com.higgschain.trust.rs.core.vo.RsCoreTxVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 
 import java.util.List;
 

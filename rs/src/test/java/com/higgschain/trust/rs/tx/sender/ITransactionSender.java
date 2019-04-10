@@ -1,7 +1,7 @@
 package com.higgschain.trust.rs.tx.sender;
 
 import com.higgschain.trust.rs.core.bo.ContractQueryRequestV2;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.SignedTransaction;
 import retrofit2.Call;
 import retrofit2.http.Body;

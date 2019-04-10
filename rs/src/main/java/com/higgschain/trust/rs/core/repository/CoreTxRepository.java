@@ -20,7 +20,7 @@ import com.higgschain.trust.rs.core.dao.rocks.CoreTxProcessRocksDao;
 import com.higgschain.trust.rs.core.dao.rocks.CoreTxRocksDao;
 import com.higgschain.trust.rs.core.vo.RsCoreTxVO;
 import com.higgschain.trust.slave.api.enums.VersionEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.SignInfo;
 import com.higgschain.trust.slave.model.bo.action.Action;

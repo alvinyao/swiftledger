@@ -2,7 +2,7 @@ package com.higgschain.trust.slave.api.controller;
 
 import com.higgschain.trust.evmcontract.core.TransactionResultInfo;
 import com.higgschain.trust.slave.api.BlockChainService;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.api.vo.TransactionVO;
 import com.higgschain.trust.slave.core.Blockchain;
 import com.higgschain.trust.slave.model.bo.SignedTransaction;

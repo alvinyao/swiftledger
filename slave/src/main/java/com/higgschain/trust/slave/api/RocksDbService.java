@@ -1,6 +1,6 @@
 package com.higgschain.trust.slave.api;
 
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 
 /**
  * @author tangfashuang

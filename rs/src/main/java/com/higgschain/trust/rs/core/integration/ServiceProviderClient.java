@@ -6,7 +6,7 @@ package com.higgschain.trust.rs.core.integration;
 import com.higgschain.trust.rs.core.bo.VoteReceipt;
 import com.higgschain.trust.rs.core.vo.ReceiptRequest;
 import com.higgschain.trust.rs.core.vo.VotingRequest;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

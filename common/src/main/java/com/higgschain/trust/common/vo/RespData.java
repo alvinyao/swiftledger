@@ -1,4 +1,4 @@
-package com.higgschain.trust.slave.api.vo;
+package com.higgschain.trust.common.vo;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;

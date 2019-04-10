@@ -7,7 +7,7 @@ import com.higgschain.trust.rs.core.vo.ReceiptRequest;
 import com.higgschain.trust.rs.core.vo.VotingRequest;
 import com.higgschain.trust.slave.api.enums.manage.DecisionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.VotePatternEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.SignInfo;
 
 import java.util.List;

@@ -6,7 +6,7 @@ import com.higgschain.trust.presstest.vo.StoreVO;
 import com.higgschain.trust.rs.common.config.RsConfig;
 import com.higgschain.trust.rs.core.api.RsCoreFacade;
 import com.higgschain.trust.slave.api.enums.VersionEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,7 +6,7 @@ import com.higgschain.trust.rs.core.bo.ContractQueryRequest;
 import com.higgschain.trust.slave.api.vo.ContractVO;
 import com.higgschain.trust.slave.api.vo.PageVO;
 import com.higgschain.trust.slave.api.vo.QueryContractVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 
 import java.math.BigDecimal;
 import java.util.List;

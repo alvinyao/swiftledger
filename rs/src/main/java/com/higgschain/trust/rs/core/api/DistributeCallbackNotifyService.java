@@ -1,7 +1,7 @@
 package com.higgschain.trust.rs.core.api;
 
 import com.higgschain.trust.rs.core.api.enums.RedisMegGroupEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

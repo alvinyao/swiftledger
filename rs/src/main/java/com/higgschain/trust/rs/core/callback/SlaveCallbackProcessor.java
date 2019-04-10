@@ -15,7 +15,7 @@ import com.higgschain.trust.rs.core.vo.RsCoreTxVO;
 import com.higgschain.trust.slave.api.SlaveCallbackHandler;
 import com.higgschain.trust.slave.api.SlaveCallbackRegistor;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.BlockHeader;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.SignInfo;

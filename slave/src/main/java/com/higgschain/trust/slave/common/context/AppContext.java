@@ -1,7 +1,7 @@
 package com.higgschain.trust.slave.common.context;
 
 import com.higgschain.trust.common.constant.Constant;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.common.util.asynctosync.HashBlockingMap;
 import com.higgschain.trust.slave.model.bo.SignedTransaction;
 import org.springframework.beans.BeansException;

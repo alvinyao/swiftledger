@@ -16,7 +16,7 @@ import com.higgschain.trust.rs.core.vo.MultiSignRuleVO;
 import com.higgschain.trust.rs.core.vo.MultiSignTxVO;
 import com.higgschain.trust.slave.api.enums.ActionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.account.IssueCurrency;
 import com.higgschain.trust.slave.model.bo.contract.ContractCreationV2Action;

@@ -5,7 +5,7 @@ import com.higgschain.trust.config.view.IClusterViewManager;
 import com.higgschain.trust.network.HttpClient;
 import com.higgschain.trust.network.NetworkManage;
 import com.higgschain.trust.slave.api.vo.CaVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.ca.Ca;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

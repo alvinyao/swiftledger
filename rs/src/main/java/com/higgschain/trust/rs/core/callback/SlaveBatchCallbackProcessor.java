@@ -19,7 +19,7 @@ import com.higgschain.trust.slave.api.SlaveBatchCallbackHandler;
 import com.higgschain.trust.slave.api.SlaveCallbackRegistor;
 import com.higgschain.trust.slave.api.enums.VersionEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgschain.trust.slave.model.bo.BlockHeader;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;

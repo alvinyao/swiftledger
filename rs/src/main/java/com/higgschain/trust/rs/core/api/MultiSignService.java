@@ -5,7 +5,7 @@ import com.higgschain.trust.rs.core.vo.CreateCurrencyVO;
 import com.higgschain.trust.rs.core.vo.MultiSignHashVO;
 import com.higgschain.trust.rs.core.vo.MultiSignRuleVO;
 import com.higgschain.trust.rs.core.vo.MultiSignTxVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 
 /**
  * @author liuyu

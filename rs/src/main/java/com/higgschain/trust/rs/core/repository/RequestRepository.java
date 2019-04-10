@@ -10,7 +10,7 @@ import com.higgschain.trust.rs.core.dao.po.RequestPO;
 import com.higgschain.trust.rs.core.dao.rocks.RequestRocksDao;
 import com.higgschain.trust.rs.core.vo.RequestVO;
 import com.higgschain.trust.rs.core.vo.RsCoreTxVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

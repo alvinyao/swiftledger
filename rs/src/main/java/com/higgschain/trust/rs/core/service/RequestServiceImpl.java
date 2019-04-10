@@ -8,7 +8,7 @@ import com.higgschain.trust.rs.core.dao.po.RequestPO;
 import com.higgschain.trust.rs.core.repository.RequestRepository;
 import com.higgschain.trust.rs.core.vo.RequestVO;
 import com.higgschain.trust.rs.core.vo.RsCoreTxVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

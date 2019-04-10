@@ -2,7 +2,7 @@ package com.higgschain.trust.rs.core.controller;
 
 import com.higgschain.trust.rs.core.api.CaService;
 import com.higgschain.trust.slave.api.vo.CaVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.ca.Ca;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

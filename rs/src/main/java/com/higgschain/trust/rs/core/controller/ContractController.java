@@ -4,7 +4,7 @@ import com.higgschain.trust.rs.core.api.ContractService;
 import com.higgschain.trust.rs.core.api.ContractV2QueryService;
 import com.higgschain.trust.slave.api.vo.ContractVO;
 import com.higgschain.trust.slave.api.vo.PageVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.rs.core.bo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

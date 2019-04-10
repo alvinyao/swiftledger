@@ -1,7 +1,7 @@
 package com.higgschain.trust.rs.core.controller;
 
 import com.higgschain.trust.rs.core.api.CoreTransactionService;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

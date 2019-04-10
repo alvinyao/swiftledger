@@ -2,7 +2,7 @@ package com.higgschain.trust.rs.tx.sender;
 
 import com.alibaba.fastjson.JSON;
 import com.higgschain.trust.rs.core.bo.ContractQueryRequestV2;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.SignedTransaction;
 import com.higgschain.trust.slave.model.bo.contract.ContractCreationV2Action;
 import lombok.AllArgsConstructor;

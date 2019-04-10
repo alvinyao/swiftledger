@@ -10,7 +10,7 @@ import com.higgschain.trust.rs.core.api.enums.RedisMegGroupEnum;
 import com.higgschain.trust.rs.core.api.enums.RedisTopicEnum;
 import com.higgschain.trust.rs.core.bo.RedisTopicMsg;
 import com.higgschain.trust.rs.core.bo.WaitAsyncFinishLockObject;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.redisson.api.RTopic;

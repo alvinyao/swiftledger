@@ -20,7 +20,7 @@ import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
 import com.higgschain.trust.slave.api.vo.ContractVO;
 import com.higgschain.trust.slave.api.vo.PageVO;
 import com.higgschain.trust.slave.api.vo.QueryContractVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.core.repository.contract.ContractRepository;
 import com.higgschain.trust.slave.core.service.contract.StandardSmartContract;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;

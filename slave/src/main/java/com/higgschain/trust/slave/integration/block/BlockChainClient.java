@@ -3,7 +3,7 @@
  */
 package com.higgschain.trust.slave.integration.block;
 
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.api.vo.TransactionVO;
 import com.higgschain.trust.slave.model.bo.Block;
 import com.higgschain.trust.slave.model.bo.BlockHeader;

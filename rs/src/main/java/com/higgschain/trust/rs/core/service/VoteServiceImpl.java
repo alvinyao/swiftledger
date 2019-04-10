@@ -25,7 +25,7 @@ import com.higgschain.trust.rs.core.vo.VotingRequest;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.DecisionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.VotePatternEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgschain.trust.slave.common.exception.SlaveException;
 import com.higgschain.trust.slave.core.repository.RsNodeRepository;

@@ -1,5 +1,6 @@
 package com.higgschain.trust.slave.api;
 
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.api.enums.utxo.UTXOActionTypeEnum;
 import com.higgschain.trust.slave.api.vo.*;
 import com.higgschain.trust.slave.model.bo.Block;

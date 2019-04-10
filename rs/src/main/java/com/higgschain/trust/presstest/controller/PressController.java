@@ -7,7 +7,7 @@ import com.higgschain.trust.presstest.service.StoreService;
 import com.higgschain.trust.rs.common.enums.RsCoreErrorEnum;
 import com.higgschain.trust.rs.common.exception.RsCoreException;
 import com.higgschain.trust.rs.core.api.RsCoreFacade;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.presstest.vo.*;
 import lombok.extern.slf4j.Slf4j;

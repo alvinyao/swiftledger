@@ -3,7 +3,7 @@ package com.higgschain.trust.rs.core.controller;
 import com.higgschain.trust.rs.common.enums.RsCoreErrorEnum;
 import com.higgschain.trust.rs.common.exception.RsCoreException;
 import com.higgschain.trust.rs.core.api.MultiSignService;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.rs.core.vo.CreateCurrencyVO;
 import com.higgschain.trust.rs.core.vo.MultiSignHashVO;
 import com.higgschain.trust.rs.core.vo.MultiSignRuleVO;

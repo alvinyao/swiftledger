@@ -5,7 +5,7 @@ import com.higgschain.trust.rs.core.vo.manage.CancelRsVO;
 import com.higgschain.trust.rs.core.vo.manage.RegisterPolicyVO;
 import com.higgschain.trust.rs.core.vo.manage.RegisterRsVO;
 import com.higgschain.trust.slave.api.enums.RespCodeEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

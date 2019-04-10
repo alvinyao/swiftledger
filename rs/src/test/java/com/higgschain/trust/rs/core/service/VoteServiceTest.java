@@ -9,7 +9,7 @@ import com.higgschain.trust.rs.core.repository.CoreTxRepository;
 import com.higgschain.trust.rs.core.vo.ReceiptRequest;
 import com.higgschain.trust.rs.core.vo.VotingRequest;
 import com.higgschain.trust.slave.api.enums.manage.VotePatternEnum;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.core.repository.PolicyRepository;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.manage.Policy;

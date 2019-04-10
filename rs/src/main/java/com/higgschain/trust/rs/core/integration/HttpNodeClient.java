@@ -3,7 +3,7 @@ package com.higgschain.trust.rs.core.integration;
 import com.higgschain.trust.network.HttpClient;
 import com.higgschain.trust.network.NetworkManage;
 import com.higgschain.trust.rs.core.vo.NodeOptVO;
-import com.higgschain.trust.slave.api.vo.RespData;
+import com.higgschain.trust.common.vo.RespData;
 import org.springframework.stereotype.Component;
 
 /**
