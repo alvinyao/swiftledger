@@ -38,7 +38,7 @@ public class ManageController {
 
         if (result.hasErrors()) {
             log.error("[ManageController.registerRs] register rs request param is invalid, errMsg={}", result.getAllErrors());
-            return new RespData(RespCodeEnum.PARAM_NOT_VALID);
+            return new RespData(RespCodeEnum.PARAM_NOT_VALID.getRespCode(),RespCodeEnum.PARAM_NOT_VALID.getMsg());
         }
 
         return rsManageService.registerRs(registerRsVO);
@@ -54,7 +54,7 @@ public class ManageController {
 
         if (result.hasErrors()) {
             log.error("[ManageController.cancelRs] cancel rs request param is invalid, errMsg={}", result.getAllErrors());
-            return new RespData(RespCodeEnum.PARAM_NOT_VALID);
+            return new RespData(RespCodeEnum.PARAM_NOT_VALID.getRespCode(),RespCodeEnum.PARAM_NOT_VALID.getMsg());
         }
 
         return rsManageService.cancelRs(cancelRsVO);
@@ -66,7 +66,7 @@ public class ManageController {
 
         if (result.hasErrors()) {
             log.error("[ManageController.registerPolicy] register policy request param is invalid, errMsg={}", result.getAllErrors());
-            return new RespData(RespCodeEnum.PARAM_NOT_VALID);
+            return new RespData(RespCodeEnum.PARAM_NOT_VALID.getRespCode(),RespCodeEnum.PARAM_NOT_VALID.getMsg());
         }
 
         return rsManageService.registerPolicy(registerPolicyVO);

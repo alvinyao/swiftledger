@@ -104,7 +104,7 @@ import java.util.UUID;
             coreTransactionService.submitTx(constructJoinCoreTx(vo));
         } catch (Throwable e) {
             log.error("send node join transaction error", e);
-            return new RespData(RespCodeEnum.SYS_FAIL.getRespCode());
+            return new RespData(RespCodeEnum.SYS_FAIL.getRespCode(),RespCodeEnum.SYS_FAIL.getMsg());
         }
         log.info("[joinConsensusTx] submit joinConsensusTx to slave success");
         return new RespData();

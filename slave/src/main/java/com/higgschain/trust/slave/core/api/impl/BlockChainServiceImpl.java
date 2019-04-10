@@ -94,7 +94,7 @@ import static com.higgschain.trust.consensus.config.NodeState.MASTER_NA;
         }
         if (CollectionUtils.isEmpty(transactions)) {
             log.error("received transaction list is empty");
-            return new RespData(RespCodeEnum.PARAM_NOT_VALID);
+            return new RespData(RespCodeEnum.PARAM_NOT_VALID.getRespCode(),RespCodeEnum.PARAM_NOT_VALID.getMsg());
         }
 
         if (StringUtils.equals(nodeState.getMasterName(), MASTER_NA)) {
@@ -207,7 +207,7 @@ import static com.higgschain.trust.consensus.config.NodeState.MASTER_NA;
         //TODO 放到消费队列里面
         if (AppContext.PENDING_TO_SUBMIT_QUEUE.size() > Constant.MAX_PENDING_TX_QUEUE_SIZE) {
             log.warn("pending to submit queue is full, size={}", AppContext.PENDING_TO_SUBMIT_QUEUE.size());
-            return new RespData(RespCodeEnum.SYS_FAIL);
+            return new RespData(RespCodeEnum.SYS_FAIL.getRespCode(),RespCodeEnum.SYS_FAIL.getMsg());
         }
 
         AppContext.PENDING_TO_SUBMIT_QUEUE.offer(tx);
