@@ -48,7 +48,6 @@ class tx {
         if (ctx.bizModel != null) {
             context.provide(["Name": "BizModel", "Value": ctx.bizModel])
         }
-        context.provide(["Name": "Status", "Value": ctx.status])
         context.provide(["Name": "Result", "Value": ctx.executeResult])
         context.provide(["Name": "ErrorCode", "Value": ctx.errorCode])
         context.provide(["Name": "ErrorMsg", "Value": ctx.errorMsg])
