@@ -3,6 +3,7 @@ package commands
 
 import com.higgschain.trust.rs.core.api.CoreTransactionService
 import com.higgschain.trust.rs.core.vo.RsCoreTxVO
+import com.higgschain.trust.slave.api.BlockChainService
 import com.higgschain.trust.slave.core.repository.PolicyRepository
 import com.higgschain.trust.slave.model.bo.action.Action
 import lombok.extern.slf4j.Slf4j
@@ -37,12 +38,11 @@ class tx {
 
     def printTxDetail(InvocationContext context, RsCoreTxVO ctx) {
         BeanFactory beans = context.attributes['spring.beanfactory']
-        def policyRepository = beans.getBean(PolicyRepository.class)
+        def blockChainService = beans.getBean(BlockChainService.class)
         context.provide("TxInfo": "TxID", "": ctx.txId)
         context.provide("Name": "Version", "value": ctx.version)
         context.provide(["Name": "PolicyId", "Value": ctx.policyId])
-        context.provide(["Name": "PolicyType", "Value": policyRepository.getPolicyType(ctx.getPolicyId())])
-        context.provide(["Name": "TxType", "Value": ctx.txType])
+        context.provide(["Name": "PolicyType", "Value": blockChainService.getPolicyNameById(ctx.getPolicyId())])
         context.provide(["Name": "Sender", "Value": ctx.sender])
         context.provide(["Name": "SendTime", "Value": DateFormatUtils.format(ctx.sendTime, "yyyy-MM-dd HH:mm:ss.SSS")])
         if(ctx.bizModel!=null){
