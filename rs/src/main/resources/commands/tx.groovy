@@ -45,7 +45,7 @@ class tx {
         context.provide(["Name": "PolicyType", "Value": blockChainService.getPolicyNameById(ctx.getPolicyId())])
         context.provide(["Name": "Sender", "Value": ctx.sender])
         context.provide(["Name": "SendTime", "Value": DateFormatUtils.format(ctx.sendTime, "yyyy-MM-dd HH:mm:ss.SSS")])
-        if(ctx.bizModel!=null){
+        if (ctx.bizModel != null) {
             context.provide(["Name": "BizModel", "Value": ctx.bizModel])
         }
         context.provide(["Name": "Status", "Value": ctx.status])
@@ -53,7 +53,9 @@ class tx {
         context.provide(["Name": "ErrorCode", "Value": ctx.errorCode])
         context.provide(["Name": "ErrorMsg", "Value": ctx.errorMsg])
         out.println("")
-        ctx.getActionList().forEach({ a -> printAction(context, a,) })
+        if (ctx.actionList != null && ctx.actionList.size() > 0) {
+            ctx.getActionList().forEach({ a -> printAction(context, a,) })
+        }
     }
 
     def printAction(InvocationContext context, Action action) {
