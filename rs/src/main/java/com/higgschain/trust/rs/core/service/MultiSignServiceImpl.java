@@ -32,6 +32,7 @@ import org.springframework.util.CollectionUtils;
 import org.testng.collections.Lists;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -85,11 +86,11 @@ import java.util.stream.Collectors;
             log.error("createAddress has error,read contract code is error", e);
             throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
         }
-        if(StringUtils.isEmpty(contractHexCode)){
+        if (StringUtils.isEmpty(contractHexCode)) {
             log.error("createAddress has error,contract code is empty");
             throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
         }
-        log.info("createAddress contract code is:{}",contractHexCode);
+        log.info("createAddress contract code is:{}", contractHexCode);
         //build contract code
         contractHexCode = coreTransactionConvertor
             .buildContractCode(contractHexCode, MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(),
@@ -130,11 +131,11 @@ import java.util.stream.Collectors;
             log.error("createCurrencyContract has error,read contract code is error", e);
             throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
         }
-        if(StringUtils.isEmpty(contractHexCode)){
+        if (StringUtils.isEmpty(contractHexCode)) {
             log.error("createCurrencyContract has error,contract code is empty");
             throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
         }
-        log.info("createCurrencyContract contract code is:{}",contractHexCode);
+        log.debug("createCurrencyContract contract code is:{}", contractHexCode);
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         //build contract code
         contractHexCode = coreTransactionConvertor
@@ -192,6 +193,16 @@ import java.util.stream.Collectors;
 
     @Override public RespData<Boolean> transfer(MultiSignTxVO vo) throws RsCoreException {
         log.info("transfer vo:{}", vo);
+        if (vo.getAmount().compareTo(BigDecimal.ZERO) <= 1) {
+            log.info("transfer amount is illegal:{}", vo.getAmount());
+            return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_AMOUNT_IS_ILLEGAL.getCode(),
+                RsCoreErrorEnum.RS_CORE_CONTRACT_AMOUNT_IS_ILLEGAL.getDescription(), null);
+        }
+        if (CollectionUtils.isEmpty(vo.getSigns())) {
+            log.info("transfer signs is empty:{}", vo.getSigns());
+            return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_SIGNS_IS_EMPTY.getCode(),
+                RsCoreErrorEnum.RS_CORE_CONTRACT_SIGNS_IS_EMPTY.getDescription(), null);
+        }
         //make action
         ContractInvokeV2Action action = new ContractInvokeV2Action();
         action.setIndex(0);
@@ -210,8 +221,7 @@ import java.util.stream.Collectors;
         action.setMethodSignature(METHOD_TRANSFER);
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         StringBuilder sb = new StringBuilder();
-        List<String> signs = vo.getSigns();
-        signs.forEach(v -> {
+        vo.getSigns().forEach(v -> {
             sb.append(v);
         });
         action.setArgs(new Object[] {vo.getToAddr(), amount, vo.isMultiSign(), sb.toString()});
