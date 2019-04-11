@@ -200,8 +200,8 @@ import java.util.stream.Collectors;
         }
         if (CollectionUtils.isEmpty(vo.getSigns())) {
             log.info("transfer signs is empty:{}", vo.getSigns());
-            return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_SIGNS_IS_EMPTY.getCode(),
-                RsCoreErrorEnum.RS_CORE_CONTRACT_SIGNS_IS_EMPTY.getDescription(), null);
+            return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_SIGNS_IS_NOT_EMPTY.getCode(),
+                RsCoreErrorEnum.RS_CORE_CONTRACT_SIGNS_IS_NOT_EMPTY.getDescription(), null);
         }
         //make action
         ContractInvokeV2Action action = new ContractInvokeV2Action();

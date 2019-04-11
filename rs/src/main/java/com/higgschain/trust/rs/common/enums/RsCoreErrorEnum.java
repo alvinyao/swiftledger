@@ -64,6 +64,8 @@ public enum RsCoreErrorEnum {
     RS_CORE_ROCKS_TRANSACTION_IS_NULL("311", "rocks transaction is null", false),
     RS_CORE_REQUEST_ADD_FAILED("312", "insert request failed", false),
     RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR("313", "get contract addr by currency error", false),
+    RS_CORE_CONTRACT_AMOUNT_IS_ILLEGAL("314", "transfer.contract amount is illegal", false),
+    RS_CORE_CONTRACT_SIGNS_IS_NOT_EMPTY("315", "transfer.contract signs is not empty", false),
     ;
     //@formatter:on
 
