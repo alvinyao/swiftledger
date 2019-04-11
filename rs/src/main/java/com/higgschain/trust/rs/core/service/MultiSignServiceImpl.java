@@ -2,6 +2,7 @@ package com.higgschain.trust.rs.core.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Charsets;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.evmcontract.crypto.ECKey;
 import com.higgschain.trust.rs.common.enums.RsCoreErrorEnum;
 import com.higgschain.trust.rs.common.exception.RsCoreException;
@@ -16,33 +17,31 @@ import com.higgschain.trust.rs.core.vo.MultiSignRuleVO;
 import com.higgschain.trust.rs.core.vo.MultiSignTxVO;
 import com.higgschain.trust.slave.api.enums.ActionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.account.IssueCurrency;
 import com.higgschain.trust.slave.model.bo.contract.ContractCreationV2Action;
 import com.higgschain.trust.slave.model.bo.contract.ContractInvokeV2Action;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.spongycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import org.testng.collections.Lists;
 
 import java.io.File;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author liuyu
  * @description
  * @date 2019-03-20
  */
-@Service
-@Slf4j
-public class MultiSignServiceImpl implements MultiSignService {
+@Service @Slf4j public class MultiSignServiceImpl implements MultiSignService {
     private final static int SCALE_NUMBER = 8;
     private final static String MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME = "MultiSign(address[],uint,address[])";
     private final static String CURRENCY_CONTRACT_CONSTRUCTOR_NAME = "Token(address,string,uint)";
@@ -51,23 +50,32 @@ public class MultiSignServiceImpl implements MultiSignService {
     /**
      * config path
      */
-    @Value("${rs.contract.multi-sign.path:/data/home/admin/trust/multi-sign-temp.sol}")
-    String multiContractCodePath;
-    @Value("${rs.contract.currency.path:/data/home/admin/trust/currency-temp.sol}")
-    String currencyContractCodePath;
+    @Value("${rs.contract.multi-sign.path:/data/home/admin/trust/multi-sign-temp.sol}") String multiContractCodePath;
+    @Value("${rs.contract.currency.path:/data/home/admin/trust/currency-temp.sol}") String currencyContractCodePath;
 
-    @Autowired
-    CoreTransactionConvertor coreTransactionConvertor;
-    @Autowired
-    CoreTransactionService coreTransactionService;
-    @Autowired
-    ContractV2QueryService contractV2QueryService;
-    @Autowired
-    RsBlockChainService rsBlockChainService;
+    @Autowired CoreTransactionConvertor coreTransactionConvertor;
+    @Autowired CoreTransactionService coreTransactionService;
+    @Autowired ContractV2QueryService contractV2QueryService;
+    @Autowired RsBlockChainService rsBlockChainService;
 
-    @Override
-    public RespData<String> createAddress(MultiSignRuleVO rule) throws RsCoreException {
+    @Override public RespData<String> createAddress(MultiSignRuleVO rule) throws RsCoreException {
         log.info("createAddress rule:{}", rule);
+        List<String> addrs = rule.getAddrs();
+        List<String> mustAddrs = rule.getMustAddrs();
+        if (!CollectionUtils.isEmpty(mustAddrs)) {
+            //check size
+            if (mustAddrs.size() > addrs.size()) {
+                log.info("createAddress mustAddrs.size can`t greater than addrs.size");
+                throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_BUILD_ERROR);
+            }
+            //check exist
+            List<String> collect = mustAddrs.stream().filter(a -> addrs.contains(a)).collect(Collectors.toList());
+            if (CollectionUtils.isEmpty(collect)) {
+                log.info("createAddress mustAddrs.item can`t found in addrs");
+                throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_BUILD_ERROR);
+            }
+        }
+
         String contractHexCode = null;
         try {
             log.info("createAddress contractCodePath:{}", multiContractCodePath);
@@ -79,18 +87,18 @@ public class MultiSignServiceImpl implements MultiSignService {
         }
         //build contract code
         contractHexCode = coreTransactionConvertor
-                .buildContractCode(contractHexCode, MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(),
-                        rule.getVerifyNum(), rule.getMustAddrs());
+            .buildContractCode(contractHexCode, MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(),
+                rule.getVerifyNum(), rule.getMustAddrs());
         //create contract address
         String contractAddress = Hex.toHexString(new ECKey().getAddress());
         log.info("createAddress contractAddress:{}", contractAddress);
         //make action
         ContractCreationV2Action contractCreationV2Action = coreTransactionConvertor
-                .buildContractCreationV2Action(contractAddress, contractAddress, contractHexCode, 0);
+            .buildContractCreationV2Action(contractAddress, contractAddress, contractHexCode, 0);
         //make core-transaction
         CoreTransaction coreTransaction = coreTransactionConvertor
-                .buildCoreTransaction(rule.getRequestId(), new JSONObject(), Lists.newArrayList(contractCreationV2Action),
-                        InitPolicyEnum.CONTRACT_ISSUE.getPolicyId());
+            .buildCoreTransaction(rule.getRequestId(), new JSONObject(), Lists.newArrayList(contractCreationV2Action),
+                InitPolicyEnum.CONTRACT_ISSUE.getPolicyId());
         //submit tx
         coreTransactionService.submitTx(coreTransaction);
         //wait for the results of the cluster
@@ -104,8 +112,7 @@ public class MultiSignServiceImpl implements MultiSignService {
         return RespData.success(contractAddress);
     }
 
-    @Override
-    public RespData<Boolean> createCurrencyContract(CreateCurrencyVO vo) throws RsCoreException {
+    @Override public RespData<Boolean> createCurrencyContract(CreateCurrencyVO vo) throws RsCoreException {
         log.info("createCurrencyContract vo:{}", vo);
         String contractAddress = Hex.toHexString(new ECKey().getAddress());
         log.info("createCurrencyContract contractAddress:{}", contractAddress);
@@ -121,20 +128,20 @@ public class MultiSignServiceImpl implements MultiSignService {
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         //build contract code
         contractHexCode = coreTransactionConvertor
-                .buildContractCode(contractHexCode, CURRENCY_CONTRACT_CONSTRUCTOR_NAME, vo.getAddress(), vo.getCurrency(),
-                        amount);
+            .buildContractCode(contractHexCode, CURRENCY_CONTRACT_CONSTRUCTOR_NAME, vo.getAddress(), vo.getCurrency(),
+                amount);
 
         //make actions
         IssueCurrency issueCurrencyAction =
-                coreTransactionConvertor.buildIssueCurrencyAction(vo.getCurrency(), 0, contractAddress, null, null);
+            coreTransactionConvertor.buildIssueCurrencyAction(vo.getCurrency(), 0, contractAddress, null, null);
         ContractCreationV2Action contractCreationV2Action = coreTransactionConvertor
-                .buildContractCreationV2Action(vo.getAddress(), contractAddress, contractHexCode, 1);
+            .buildContractCreationV2Action(vo.getAddress(), contractAddress, contractHexCode, 1);
 
         //make core-transaction
         CoreTransaction coreTransaction = coreTransactionConvertor
-                .buildCoreTransaction(vo.getRequestId(), new JSONObject(),
-                        Lists.newArrayList(issueCurrencyAction, contractCreationV2Action),
-                        InitPolicyEnum.CONTRACT_INVOKE.getPolicyId());
+            .buildCoreTransaction(vo.getRequestId(), new JSONObject(),
+                Lists.newArrayList(issueCurrencyAction, contractCreationV2Action),
+                InitPolicyEnum.CONTRACT_INVOKE.getPolicyId());
         //submit tx
         coreTransactionService.submitTx(coreTransaction);
         //wait for the results of the cluster
@@ -147,8 +154,7 @@ public class MultiSignServiceImpl implements MultiSignService {
         return RespData.success(true);
     }
 
-    @Override
-    public RespData<String> getSignHashValue(MultiSignHashVO vo) throws RsCoreException {
+    @Override public RespData<String> getSignHashValue(MultiSignHashVO vo) throws RsCoreException {
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         log.info("getSignHashValue amount:{}", amount);
         String contractAddress = null;
@@ -160,22 +166,21 @@ public class MultiSignServiceImpl implements MultiSignService {
             if (StringUtils.isEmpty(contractAddress)) {
                 log.info("transfer get trade contract address is fail,currency:{}", vo.getCurrency());
                 return RespData.error(RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getCode(),
-                        RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getDescription(), null);
+                    RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getDescription(), null);
             }
         }
         List<?> result = contractV2QueryService
-                .query(null, contractAddress, METHOD_GET_SIGN_HASH, vo.getFromAddr(), vo.getToAddr(), amount);
+            .query(null, contractAddress, METHOD_GET_SIGN_HASH, vo.getFromAddr(), vo.getToAddr(), amount);
         if (CollectionUtils.isEmpty(result) || result.get(0) == null) {
             log.info("getSignHashValue result is empty");
             return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getCode(),
-                    RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getDescription(), null);
+                RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getDescription(), null);
         }
         log.info("getSignHashValue vo:{},result:{}", vo, result);
-        return RespData.success((String) result.get(0));
+        return RespData.success((String)result.get(0));
     }
 
-    @Override
-    public RespData<Boolean> transfer(MultiSignTxVO vo) throws RsCoreException {
+    @Override public RespData<Boolean> transfer(MultiSignTxVO vo) throws RsCoreException {
         log.info("transfer vo:{}", vo);
         //make action
         ContractInvokeV2Action action = new ContractInvokeV2Action();
@@ -188,7 +193,7 @@ public class MultiSignServiceImpl implements MultiSignService {
         if (StringUtils.isEmpty(tradeContractAddress)) {
             log.info("transfer get trade contract address is fail,currency:{}", vo.getCurrency());
             return RespData.error(RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getCode(),
-                    RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getDescription(), null);
+                RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getDescription(), null);
         }
         //trade contract address
         action.setTo(tradeContractAddress);
@@ -199,12 +204,12 @@ public class MultiSignServiceImpl implements MultiSignService {
         signs.forEach(v -> {
             sb.append(v);
         });
-        action.setArgs(new Object[]{vo.getToAddr(), amount, vo.isMultiSign(), sb.toString()});
+        action.setArgs(new Object[] {vo.getToAddr(), amount, vo.isMultiSign(), sb.toString()});
         log.info("transfer action:{}", action);
         //make core-transaction
         CoreTransaction coreTransaction = coreTransactionConvertor
-                .buildCoreTransaction(vo.getRequestId(), new JSONObject(), Lists.newArrayList(action),
-                        InitPolicyEnum.CONTRACT_INVOKE.getPolicyId());
+            .buildCoreTransaction(vo.getRequestId(), new JSONObject(), Lists.newArrayList(action),
+                InitPolicyEnum.CONTRACT_INVOKE.getPolicyId());
         //submit tx
         coreTransactionService.submitTx(coreTransaction);
         //wait for the results of the cluster
