@@ -193,7 +193,7 @@ import java.util.stream.Collectors;
 
     @Override public RespData<Boolean> transfer(MultiSignTxVO vo) throws RsCoreException {
         log.info("transfer vo:{}", vo);
-        if (vo.getAmount().compareTo(BigDecimal.ZERO) <= 1) {
+        if (vo.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
             log.info("transfer amount is illegal:{}", vo.getAmount());
             return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_AMOUNT_IS_ILLEGAL.getCode(),
                 RsCoreErrorEnum.RS_CORE_CONTRACT_AMOUNT_IS_ILLEGAL.getDescription(), null);
