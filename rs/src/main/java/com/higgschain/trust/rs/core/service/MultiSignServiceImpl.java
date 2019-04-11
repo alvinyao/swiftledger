@@ -85,6 +85,11 @@ import java.util.stream.Collectors;
             log.error("createAddress has error,read contract code is error", e);
             throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
         }
+        if(StringUtils.isEmpty(contractHexCode)){
+            log.error("createAddress has error,contract code is empty");
+            throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
+        }
+        log.info("createAddress contract code is:{}",contractHexCode);
         //build contract code
         contractHexCode = coreTransactionConvertor
             .buildContractCode(contractHexCode, MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(),
@@ -125,6 +130,11 @@ import java.util.stream.Collectors;
             log.error("createCurrencyContract has error,read contract code is error", e);
             throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
         }
+        if(StringUtils.isEmpty(contractHexCode)){
+            log.error("createCurrencyContract has error,contract code is empty");
+            throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR);
+        }
+        log.info("createCurrencyContract contract code is:{}",contractHexCode);
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         //build contract code
         contractHexCode = coreTransactionConvertor
