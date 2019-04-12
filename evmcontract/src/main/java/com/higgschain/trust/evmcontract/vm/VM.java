@@ -975,6 +975,7 @@ public class VM {
 
                 if ( LOGGER.isInfoEnabled()) {
                     hint = logInfo.toString();
+                    LOGGER.info("contract log info:{}", logInfo.toString());
                 }
 
                 program.getResult().addLogInfo(logInfo);
