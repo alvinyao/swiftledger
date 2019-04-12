@@ -76,8 +76,7 @@ import java.util.stream.Collectors;
                 throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_BUILD_ERROR);
             }
         }
-
-        String contractHexCode = null;
+        String contractHexCode;
         try {
             log.info("createAddress contractCodePath:{}", multiContractCodePath);
             //get contract code from file path
@@ -122,7 +121,7 @@ import java.util.stream.Collectors;
         log.info("createCurrencyContract vo:{}", vo);
         String contractAddress = Hex.toHexString(new ECKey().getAddress());
         log.info("createCurrencyContract contractAddress:{}", contractAddress);
-        String contractHexCode = null;
+        String contractHexCode;
         try {
             log.info("createCurrencyContract currencyContractCodePath:{}", currencyContractCodePath);
             //get contract code from file path
@@ -166,12 +165,18 @@ import java.util.stream.Collectors;
     }
 
     @Override public RespData<String> getSignHashValue(MultiSignHashVO vo) throws RsCoreException {
+        log.info("getSignHashValue vo:{}", vo);
         BigInteger amount = vo.getAmount().scaleByPowerOfTen(SCALE_NUMBER).toBigInteger();
         log.info("getSignHashValue amount:{}", amount);
-        String contractAddress = null;
-        if (StringUtils.isEmpty(vo.getCurrency())) {
+        String contractAddress;
+        if (vo.isMultiSign()) {
             contractAddress = vo.getFromAddr();
         } else {
+            if (StringUtils.isEmpty(vo.getCurrency())) {
+                log.info("transfer get trade contract address is fail,currency is empty");
+                return RespData.error(RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getCode(),
+                    RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getDescription(), null);
+            }
             //get contract address for trade
             contractAddress = rsBlockChainService.queryContractAddressByCurrency(vo.getCurrency());
             if (StringUtils.isEmpty(contractAddress)) {
@@ -187,7 +192,7 @@ import java.util.stream.Collectors;
             return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getCode(),
                 RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getDescription(), null);
         }
-        log.info("getSignHashValue vo:{},result:{}", vo, result);
+        log.info("getSignHashValue result:{}", result);
         return RespData.success((String)result.get(0));
     }
 

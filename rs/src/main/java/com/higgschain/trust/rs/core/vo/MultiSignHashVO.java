@@ -38,4 +38,8 @@ public class MultiSignHashVO extends BaseBO {
      * otherwise, use fromAddr for the multi-sign contract address
      */
     private String currency;
+    /**
+     * is multi-sign
+     */
+    private boolean multiSign;
 }
