@@ -34,8 +34,7 @@ public class MultiSignHashVO extends BaseBO {
     @NotNull
     private BigDecimal amount;
     /**
-     * If not null, look for the token contract method;
-     * otherwise, use fromAddr for the multi-sign contract address
+     * If not null, look for the token contract method
      */
     private String currency;
     /**
