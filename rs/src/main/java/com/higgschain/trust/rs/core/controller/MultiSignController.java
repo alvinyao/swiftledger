@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * @author liuyu
  * @date 2019/3/21
@@ -28,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
      * @param rule
      * @return
      */
-    @RequestMapping(value = "/create") RespData<String> create(@RequestBody MultiSignRuleVO rule) {
+    @RequestMapping(value = "/create") RespData<String> create(@RequestBody @Valid MultiSignRuleVO rule) {
         try {
             return multiSignService.createAddress(rule);
         } catch (RsCoreException e) {
@@ -47,7 +49,8 @@ import org.springframework.web.bind.annotation.RestController;
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/createCurrency") RespData<Boolean> createCurrency(@RequestBody CreateCurrencyVO vo) {
+    @RequestMapping(value = "/createCurrency") RespData<Boolean> createCurrency(
+        @RequestBody @Valid CreateCurrencyVO vo) {
         try {
             return multiSignService.createCurrencyContract(vo);
         } catch (RsCoreException e) {
@@ -66,7 +69,7 @@ import org.springframework.web.bind.annotation.RestController;
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/getSignHash") RespData<String> getSignHashValue(@RequestBody MultiSignHashVO vo) {
+    @RequestMapping(value = "/getSignHash") RespData<String> getSignHashValue(@RequestBody @Valid MultiSignHashVO vo) {
         try {
             return multiSignService.getSignHashValue(vo);
         } catch (RsCoreException e) {
@@ -85,7 +88,7 @@ import org.springframework.web.bind.annotation.RestController;
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/transfer") RespData<Boolean> transfer(@RequestBody MultiSignTxVO vo) {
+    @RequestMapping(value = "/transfer") RespData<Boolean> transfer(@RequestBody @Valid MultiSignTxVO vo) {
         try {
             return multiSignService.transfer(vo);
         } catch (RsCoreException e) {
