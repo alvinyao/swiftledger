@@ -44,9 +44,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/Aurorasic/swiftledger.git</connection>
-        <developerConnection>scm:git:ssh://github.com/Aurorasic/swiftledger.git</developerConnection>
-        <url>https://github.com/Aurorasic/swiftledger</url>
+        <connection>scm:git:git@github.com:Aurorasic/swiftledger.git</connection>
+        <developerConnection>scm:git:git@github.com:Aurorasic/swiftledger.git</developerConnection>
+        <url>git@github.com:Aurorasic/swiftledger</url>
     </scm>
 
     <developers>
