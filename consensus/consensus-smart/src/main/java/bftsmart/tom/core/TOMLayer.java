@@ -55,12 +55,21 @@ import java.util.logging.Level;
 public final class TOMLayer extends Thread implements RequestReceiver {
 
     private boolean doWork = true;
+    /**
+     * The Exec manager.
+     */
     //other components used by the TOMLayer (they are never changed)
     public ExecutionManager execManager; // Execution manager
+    /**
+     * The Acceptor.
+     */
     public Acceptor acceptor; // Acceptor role of the PaW algorithm
     private ServerCommunicationSystem communication; // Communication system between replicas
     //private OutOfContextMessageThread ot; // Thread which manages messages that do not belong to the current consensus
     private DeliveryThread dt; // Thread which delivers total ordered messages to the appication
+    /**
+     * The State manager.
+     */
     public StateManager stateManager = null; // object which deals with the state transfer protocol
 
     /**
@@ -77,11 +86,17 @@ public final class TOMLayer extends Thread implements RequestReceiver {
     private int inExecution = -1;
     private int lastExecuted = -1;
 
+    /**
+     * The Md.
+     */
     public MessageDigest md;
     private Signature engine;
 
     private ReentrantLock hashLock = new ReentrantLock();
 
+    /**
+     * The Bb.
+     */
     //the next two are used to generate non-deterministic data in a deterministic way (by the leader)
     public BatchBuilder bb = new BatchBuilder(System.nanoTime());
 
@@ -94,6 +109,9 @@ public final class TOMLayer extends Thread implements RequestReceiver {
     private Condition canPropose = proposeLock.newCondition();
 
     private PrivateKey prk;
+    /**
+     * The Controller.
+     */
     public ServerViewController controller;
 
     private RequestVerifier verifier;
@@ -105,11 +123,11 @@ public final class TOMLayer extends Thread implements RequestReceiver {
      *
      * @param manager    Execution manager
      * @param receiver   Object that receives requests from clients
-     * @param recoverer
+     * @param recoverer  the recoverer
      * @param a          Acceptor role of the PaW algorithm
      * @param cs         Communication system between replicas
      * @param controller Reconfiguration Manager
-     * @param verifier
+     * @param verifier   the verifier
      */
     public TOMLayer(ExecutionManager manager, ServiceReplica receiver, Recoverable recoverer, Acceptor a,
         ServerCommunicationSystem cs, ServerViewController controller, RequestVerifier verifier) {
@@ -174,6 +192,12 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         return ret;
     }
 
+    /**
+     * Sign signed object.
+     *
+     * @param obj the obj
+     * @return the signed object
+     */
     public SignedObject sign(Serializable obj) {
         try {
             return new SignedObject(obj, prk, engine);
@@ -208,6 +232,9 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         return this.communication;
     }
 
+    /**
+     * Im am the leader.
+     */
     public void imAmTheLeader() {
         leaderLock.lock();
         iAmLeader.signal();
@@ -259,8 +286,7 @@ public final class TOMLayer extends Thread implements RequestReceiver {
     /**
      * Gets the ID of the consensus currently beign executed
      *
-     * @return ID of the consensus currently beign executed (if no consensus ir
-     * executing, -1 is returned)
+     * @return ID of the consensus currently beign executed (if no consensus ir executing, -1 is returned)
      */
     public int getInExec() {
         return this.inExecution;
@@ -428,7 +454,8 @@ public final class TOMLayer extends Thread implements RequestReceiver {
      * <p>
      * TODO: verify timestamps and nonces
      *
-     * @param proposedValue the value being proposed
+     * @param proposedValue      the value being proposed
+     * @param addToClientManager the add to client manager
      * @return Valid messages contained in the proposed value
      */
     public TOMMessage[] checkProposedValue(byte[] proposedValue, boolean addToClientManager) {
@@ -477,6 +504,11 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         return requests;
     }
 
+    /**
+     * Forward request to leader.
+     *
+     * @param request the request
+     */
     public void forwardRequestToLeader(TOMMessage request) {
         int leaderId = execManager.getCurrentLeader();
         if (this.controller.isCurrentViewMember(leaderId)) {
@@ -486,6 +518,11 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         }
     }
 
+    /**
+     * Is retrieving state boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRetrievingState() {
         //lockTimer.lock();
         boolean result = stateManager != null && stateManager.isRetrievingState();
@@ -494,6 +531,9 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         return result;
     }
 
+    /**
+     * Sets no exec.
+     */
     public void setNoExec() {
         Logger.println("(TOMLayer.setNoExec) modifying inExec from " + this.inExecution + " to " + -1);
 
@@ -504,6 +544,9 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         proposeLock.unlock();
     }
 
+    /**
+     * Process out of context.
+     */
     public void processOutOfContext() {
         for (int nextConsensus = getLastExec() + 1; execManager.receivedOutOfContextPropose(nextConsensus);
              nextConsensus = getLastExec() + 1) {
@@ -511,10 +554,20 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         }
     }
 
+    /**
+     * Gets state manager.
+     *
+     * @return the state manager
+     */
     public StateManager getStateManager() {
         return stateManager;
     }
 
+    /**
+     * Gets synchronizer.
+     *
+     * @return the synchronizer
+     */
     public Synchronizer getSynchronizer() {
         return syncher;
     }
@@ -525,10 +578,18 @@ public final class TOMLayer extends Thread implements RequestReceiver {
         messagesLock.unlock();
     }
 
+    /**
+     * Gets delivery thread.
+     *
+     * @return the delivery thread
+     */
     public DeliveryThread getDeliveryThread() {
         return dt;
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
         this.doWork = false;
         imAmTheLeader();

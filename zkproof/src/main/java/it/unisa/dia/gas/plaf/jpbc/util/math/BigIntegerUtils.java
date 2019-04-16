@@ -7,25 +7,69 @@ import static java.math.BigInteger.ONE;
 import static java.math.BigInteger.ZERO;
 
 /**
+ * The type Big integer utils.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class BigIntegerUtils {
+    /**
+     * The constant TWO.
+     */
     public static final BigInteger TWO = BigInteger.valueOf(2);
+    /**
+     * The constant THREE.
+     */
     public static final BigInteger THREE = BigInteger.valueOf(3);
+    /**
+     * The constant FOUR.
+     */
     public static final BigInteger FOUR = BigInteger.valueOf(4);
+    /**
+     * The constant FIVE.
+     */
     public static final BigInteger FIVE = BigInteger.valueOf(5);
+    /**
+     * The constant SIX.
+     */
     public static final BigInteger SIX = BigInteger.valueOf(6);
+    /**
+     * The constant SEVEN.
+     */
     public static final BigInteger SEVEN = BigInteger.valueOf(7);
+    /**
+     * The constant EIGHT.
+     */
     public static final BigInteger EIGHT = BigInteger.valueOf(8);
+    /**
+     * The constant TWELVE.
+     */
     public static final BigInteger TWELVE = BigInteger.valueOf(12);
+    /**
+     * The constant MAXINT.
+     */
     public static final BigInteger MAXINT = BigInteger.valueOf(Integer.MAX_VALUE);
+    /**
+     * The constant ITERBETTER.
+     */
     public static final BigInteger ITERBETTER = ONE.shiftLeft(1024);
 
-
+    /**
+     * Is odd boolean.
+     *
+     * @param bigInteger the big integer
+     * @return the boolean
+     */
     public static boolean isOdd(BigInteger bigInteger) {
         return bigInteger.testBit(0);
     }
 
+    /**
+     * Naf byte [ ].
+     *
+     * @param n the n
+     * @param k the k
+     * @return the byte [ ]
+     */
     //windowed naf form of BigInteger n, k is the window size
     public static byte[] naf(BigInteger n, byte k) {
         // The window NAF is at most 1 element longer than the binary
@@ -79,6 +123,13 @@ public class BigIntegerUtils {
         return wnafShort;
     }
 
+    /**
+     * Hamming weight int.
+     *
+     * @param bytes  the bytes
+     * @param length the length
+     * @return the int
+     */
     public static int hammingWeight(byte[] bytes, int length) {
         int weight = 0;
         for (int i = 0; i <= length; i++) {
@@ -87,8 +138,14 @@ public class BigIntegerUtils {
         }
         return weight;
     }
-    
 
+    /**
+     * Generate solinas prime big integer.
+     *
+     * @param bits   the bits
+     * @param random the random
+     * @return the big integer
+     */
     public static BigInteger generateSolinasPrime(int bits, SecureRandom random) {
         // r is picked to be a Solinas prime, that is,
         // r has the form 2a +- 2b +- 1 for some integers 0 < b < a.
@@ -127,10 +184,22 @@ public class BigIntegerUtils {
 
     }
 
+    /**
+     * Factorial big integer.
+     *
+     * @param n the n
+     * @return the big integer
+     */
     public static BigInteger factorial(int n) {
         return factorial(BigInteger.valueOf(n));
     }
 
+    /**
+     * Factorial big integer.
+     *
+     * @param n the n
+     * @return the big integer
+     */
     public static BigInteger factorial(BigInteger n) {
         if (n.equals(ZERO))
             return ONE;
@@ -147,10 +216,10 @@ public class BigIntegerUtils {
      * Compute trace of Frobenius at q^n given trace at q
      * see p.105 of Blake, Seroussi and Smart
      *
-     * @param q
-     * @param trace
-     * @param n
-     * @return
+     * @param q     the q
+     * @param trace the trace
+     * @param n     the n
+     * @return big integer
      */
     public static BigInteger computeTrace(BigInteger q, BigInteger trace, int n) {
         int i;
@@ -174,6 +243,14 @@ public class BigIntegerUtils {
 
     // Given q, t such that #E(F_q) = q - t + 1, compute #E(F_q^k).
 
+    /**
+     * Pbc mpz curve order extn big integer.
+     *
+     * @param q the q
+     * @param t the t
+     * @param k the k
+     * @return the big integer
+     */
     public static BigInteger pbc_mpz_curve_order_extn(BigInteger q, BigInteger t, int k) {
         BigInteger z = q.pow(k).add(BigInteger.ONE);
         BigInteger tk = computeTrace(q, t, k);
@@ -181,15 +258,33 @@ public class BigIntegerUtils {
         return z;
     }
 
-
+    /**
+     * Is divisible boolean.
+     *
+     * @param a the a
+     * @param b the b
+     * @return the boolean
+     */
     public static boolean isDivisible(BigInteger a, BigInteger b) {
         return a.remainder(b).compareTo(ZERO) == 0;
     }
 
+    /**
+     * Is perfect square boolean.
+     *
+     * @param n the n
+     * @return the boolean
+     */
     public static boolean isPerfectSquare(BigInteger n) {
         return fullSqrt(n)[1].signum() == 0;
     }
 
+    /**
+     * Sqrt big integer.
+     *
+     * @param n the n
+     * @return the big integer
+     */
     public static BigInteger sqrt(BigInteger n) {
         return fullSqrt(n)[0];
     }
@@ -199,6 +294,12 @@ public class BigIntegerUtils {
         Postcondition: Result sr has the property sr[0]^2 <= n < (sr[0] + 1)^2 and (sr[0]^2 + sr[1] = n)
     */
 
+    /**
+     * Full sqrt big integer [ ].
+     *
+     * @param n the n
+     * @return the big integer [ ]
+     */
     public static BigInteger[] fullSqrt(BigInteger n) {
 
         if (n.compareTo(MAXINT) < 1) {
@@ -224,14 +325,21 @@ public class BigIntegerUtils {
      * Calculate the Legendre symbol (a/p). This is defined only for p an odd positive prime,
      * and for such p it's identical to the Jacobi symbol.
      *
-     * @param a
-     * @param n
-     * @return
+     * @param a the a
+     * @param n the n
+     * @return int
      */
     public static int legendre(BigInteger a, BigInteger n) {
         return jacobi(a, n);
     }
 
+    /**
+     * Jacobi int.
+     *
+     * @param a the a
+     * @param n the n
+     * @return the int
+     */
     public static int jacobi(BigInteger a, BigInteger n) {
         /* Precondition: a, n >= 0; n is odd */
 /*        int ans = 0;
@@ -299,6 +407,13 @@ public class BigIntegerUtils {
 
     }
 
+    /**
+     * Scan one int.
+     *
+     * @param a          the a
+     * @param startIndex the start index
+     * @return the int
+     */
     public static int scanOne(BigInteger a, int startIndex) {
         for (int i = startIndex, size = a.bitLength(); i < size; i++) {
             if (a.testBit(i))
@@ -307,10 +422,23 @@ public class BigIntegerUtils {
         return -1;
     }
 
+    /**
+     * Gets random.
+     *
+     * @param limit the limit
+     * @return the random
+     */
     public static BigInteger getRandom(BigInteger limit) {
         return getRandom(limit, new SecureRandom());
     }
 
+    /**
+     * Gets random.
+     *
+     * @param limit  the limit
+     * @param random the random
+     * @return the random
+     */
     public static BigInteger getRandom(BigInteger limit, SecureRandom random) {
         BigInteger result;
         do {
@@ -319,6 +447,13 @@ public class BigIntegerUtils {
         return result;
     }
 
+    /**
+     * Gets random.
+     *
+     * @param nbBits the nb bits
+     * @param random the random
+     * @return the random
+     */
     public static BigInteger getRandom(int nbBits, SecureRandom random) {
         if (nbBits <= 1)
             return random.nextBoolean() ? BigInteger.ZERO : BigInteger.ONE;
@@ -326,15 +461,14 @@ public class BigIntegerUtils {
             return new BigInteger(nbBits, random).subtract(BigInteger.ONE.shiftLeft(nbBits - 1));
     }
 
-
     /**
      * Compute trace of Frobenius at q^n given trace at q.
      * See p.105 of Blake, Seroussi and Smart.
      *
-     * @param q
-     * @param trace
-     * @param n
-     * @return
+     * @param q     the q
+     * @param trace the trace
+     * @param n     the n
+     * @return big integer
      */
     public static BigInteger traceN(BigInteger q, BigInteger trace, int n) {
         BigInteger c2 = TWO;
@@ -380,6 +514,12 @@ public class BigIntegerUtils {
         return new BigInteger[]{s.shiftLeft(log2b).add(q), qu[1].shiftLeft(log2b).add(n.and(mask)).subtract(q.multiply(q))};
     }
 
+    /**
+     * Hamming weight int.
+     *
+     * @param value the value
+     * @return the int
+     */
     public static int hammingWeight(BigInteger value) {
         int weight = 0;
         for (int i = 0; i <= value.bitLength(); i++) {
@@ -389,6 +529,13 @@ public class BigIntegerUtils {
         return weight;
     }
 
+    /**
+     * Mod near big integer.
+     *
+     * @param a the a
+     * @param b the b
+     * @return the big integer
+     */
     public static BigInteger modNear(BigInteger a, BigInteger b) {
         BigInteger res = a.mod(b);
 
@@ -398,12 +545,18 @@ public class BigIntegerUtils {
         return res;
     }
 
+    /**
+     * Mod big integer.
+     *
+     * @param a the a
+     * @param b the b
+     * @return the big integer
+     */
     public static BigInteger mod(BigInteger a, BigInteger b) {
         BigInteger res = a.mod(b);
 
         return res;
     }
-
 
     /**
      * Divides `n` with primes up to `limit`. For each factor found,
@@ -411,12 +564,26 @@ public class BigIntegerUtils {
      * Otherwise returns 0.
      */
     public static abstract class TrialDivide {
+        /**
+         * The Limit.
+         */
         protected BigInteger limit;
 
+        /**
+         * Instantiates a new Trial divide.
+         *
+         * @param limit the limit
+         */
         public TrialDivide(BigInteger limit) {
             this.limit = limit;
         }
 
+        /**
+         * Trial divide int.
+         *
+         * @param n the n
+         * @return the int
+         */
         public int trialDivide(BigInteger n) {
             BigInteger m = n;
             BigInteger p = TWO;
@@ -444,7 +611,13 @@ public class BigIntegerUtils {
             return 0;
         }
 
-
+        /**
+         * Fun int.
+         *
+         * @param factor       the factor
+         * @param multiplicity the multiplicity
+         * @return the int
+         */
         protected abstract int fun(BigInteger factor, int multiplicity);
 
     }

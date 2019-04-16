@@ -21,13 +21,31 @@ import org.springframework.transaction.support.TransactionTemplate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * The type Contract creation handler test.
+ */
 public class ContractCreationHandlerTest extends BaseTest {
 
+    /**
+     * The Snapshot.
+     */
     @Autowired SnapshotService snapshot;
+    /**
+     * The Creation handler.
+     */
     @Autowired
     ContractCreationHandler creationHandler;
+    /**
+     * The Package service.
+     */
     @Autowired PackageServiceImpl packageService;
+    /**
+     * The Agent.
+     */
     @Autowired ContractSnapshotAgent agent;
+    /**
+     * The Platform transaction manager.
+     */
     @Autowired PlatformTransactionManager platformTransactionManager;
 
 
@@ -43,6 +61,9 @@ public class ContractCreationHandlerTest extends BaseTest {
         return action;
     }
 
+    /**
+     * Test process.
+     */
     @Test
     public void testProcess() {
         Action action = createContractCreationAction();
@@ -74,6 +95,9 @@ public class ContractCreationHandlerTest extends BaseTest {
         }
     }
 
+    /**
+     * Test process 2.
+     */
     @Test
     public void testProcess2() {
         Action action = createContractCreationAction();
@@ -90,6 +114,11 @@ public class ContractCreationHandlerTest extends BaseTest {
         packageService.process(packContext, false,false);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         //JSON auto detect class type
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);

@@ -15,8 +15,10 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
+ * The type Contract controller.
+ *
  * @author duhongming
- * @date 2018/5/14
+ * @date 2018 /5/14
  */
 @RestController
 @Slf4j
@@ -44,6 +46,12 @@ public class ContractController {
         return respData;
     }
 
+    /**
+     * Deploy resp data.
+     *
+     * @param code the code
+     * @return the resp data
+     */
     @PutMapping
     public RespData<String> deploy(@RequestBody String code) {
         if (StringUtils.isEmpty(code)) {
@@ -54,6 +62,12 @@ public class ContractController {
         return result.isSuccess() ? ok(txId) : fail(txId, result.getRespCode(), result.getMsg());
     }
 
+    /**
+     * Deploy 2 resp data.
+     *
+     * @param request the request
+     * @return the resp data
+     */
     @PutMapping(path = "deploy2")
     public RespData<String> deploy2(@RequestBody ContractCreateRequest request) {
         String code = request.getCode();
@@ -65,6 +79,12 @@ public class ContractController {
         return result.isSuccess() ? ok(txId) : fail(txId, result.getRespCode(), result.getMsg());
     }
 
+    /**
+     * Deploy v 2 resp data.
+     *
+     * @param request the request
+     * @return the resp data
+     */
     @PutMapping(path = "deployV2")
     public RespData<String> deployV2(@RequestBody ContractCreateV2Request request) {
         String code = request.getSourceCode();
@@ -76,6 +96,12 @@ public class ContractController {
         return result.isSuccess() ? ok(txId) : fail(txId, result.getRespCode(), result.getMsg());
     }
 
+    /**
+     * Invoke resp data.
+     *
+     * @param invokeRequest the invoke request
+     * @return the resp data
+     */
     @PostMapping(path = "/invoke")
     public RespData<String> invoke(@RequestBody ContractInvokeRequest invokeRequest) {
         if (invokeRequest == null) {
@@ -89,6 +115,12 @@ public class ContractController {
         return result.isSuccess() ? ok(txId) : fail(txId, result.getRespCode(), result.getMsg());
     }
 
+    /**
+     * Invoke v 2 resp data.
+     *
+     * @param invokeV2Request the invoke v 2 request
+     * @return the resp data
+     */
     @PostMapping(path = "/invokeV2")
     public RespData<String> invokeV2(@RequestBody ContractInvokeV2Request invokeV2Request) {
         if (invokeV2Request == null) {
@@ -110,6 +142,12 @@ public class ContractController {
         return result.isSuccess() ? ok(invokeV2Request.getTxId()) : fail(invokeV2Request.getTxId(), result.getRespCode(), result.getMsg());
     }
 
+    /**
+     * Migration resp data.
+     *
+     * @param migrationRequest the migration request
+     * @return the resp data
+     */
     @PostMapping(path = "/migration")
     public RespData<String> migration(@RequestBody ContractMigrationRequest migrationRequest) {
         if (migrationRequest == null) {
@@ -128,18 +166,39 @@ public class ContractController {
                 fail(migrationRequest.getTxId(), result.getRespCode(), result.getMsg());
     }
 
+    /**
+     * Query resp data.
+     *
+     * @param request the request
+     * @return the resp data
+     */
     @PostMapping(path = "/query")
     public RespData<Object> query(@RequestBody ContractQueryRequest request) {
         Object result = contractService.query(request);
         return ok(result);
     }
 
+    /**
+     * Inquire resp data.
+     *
+     * @param request the request
+     * @return the resp data
+     */
     @PostMapping(path = "/inquire")
     public RespData<Object> inquire(@RequestBody ContractQueryRequest request) {
         Object result = contractService.query(request);
         return ok(result);
     }
 
+    /**
+     * Query list resp data.
+     *
+     * @param height    the height
+     * @param txId      the tx id
+     * @param pageIndex the page index
+     * @param pageSize  the page size
+     * @return the resp data
+     */
     @GetMapping(path = "/list")
     public RespData<PageVO<ContractVO>> queryList(@RequestParam Long height, @RequestParam(required = false) String txId, @RequestParam Integer pageIndex, @RequestParam Integer pageSize) {
         try {

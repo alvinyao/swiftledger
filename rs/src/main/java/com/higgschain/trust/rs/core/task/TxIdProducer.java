@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
+ * The type Tx id producer.
+ *
  * @author liuyu
  */
 @Component @Slf4j public class TxIdProducer implements InitializingBean {
@@ -25,7 +27,7 @@ import java.util.concurrent.LinkedBlockingQueue;
     /**
      * put txId
      *
-     * @param txId
+     * @param txId the tx id
      */
     public void put(TxIdBO txId) {
         try {
@@ -42,7 +44,8 @@ import java.util.concurrent.LinkedBlockingQueue;
     /**
      * take txId for status
      *
-     * @return
+     * @param statusEnum the status enum
+     * @return tx id bo
      */
     public TxIdBO take(CoreTxStatusEnum statusEnum) {
         try {
@@ -59,7 +62,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
     /**
      * size for init
-     * @return
+     *
+     * @return int
      */
     public int initSize(){
         return queueInit.size();
@@ -68,7 +72,7 @@ import java.util.concurrent.LinkedBlockingQueue;
     /**
      * size for wait
      *
-     * @return
+     * @return int
      */
     public int waitSize(){
         return queueWait.size();

@@ -41,15 +41,32 @@ import java.util.Arrays;
 public class CountingBytesSource extends AbstractChainedSource<byte[], byte[], byte[], byte[]>
         implements HashedKeySource<byte[], byte[]> {
 
+    /**
+     * The Filter.
+     */
     QuotientFilter filter;
+    /**
+     * The Dirty.
+     */
     boolean dirty = false;
     private byte[] filterKey = HashUtil.sha3("countingStateFilter".getBytes());
 
+    /**
+     * Instantiates a new Counting bytes source.
+     *
+     * @param src the src
+     */
     public CountingBytesSource(Source<byte[], byte[]> src) {
         this(src, false);
 
     }
 
+    /**
+     * Instantiates a new Counting bytes source.
+     *
+     * @param src   the src
+     * @param bloom the bloom
+     */
     public CountingBytesSource(Source<byte[], byte[]> src, boolean bloom) {
         super(src);
         byte[] filterBytes = src.get(filterKey);
@@ -123,6 +140,9 @@ public class CountingBytesSource extends AbstractChainedSource<byte[], byte[], b
 
     /**
      * Extracts value from the backing Source counter + value byte array
+     *
+     * @param srcVal the src val
+     * @return the byte [ ]
      */
     protected byte[] decodeValue(byte[] srcVal) {
         return srcVal == null ? null : Arrays.copyOfRange(srcVal, RLP.decode(srcVal, 0).getPos(), srcVal.length);
@@ -130,6 +150,9 @@ public class CountingBytesSource extends AbstractChainedSource<byte[], byte[], b
 
     /**
      * Extracts counter from the backing Source counter + value byte array
+     *
+     * @param srcVal the src val
+     * @return the int
      */
     protected int decodeCount(byte[] srcVal) {
         return srcVal == null ? 0 : ByteUtil.byteArrayToInt((byte[]) RLP.decode(srcVal, 0).getDecoded());
@@ -137,6 +160,10 @@ public class CountingBytesSource extends AbstractChainedSource<byte[], byte[], b
 
     /**
      * Composes value and counter into backing Source value
+     *
+     * @param val   the val
+     * @param count the count
+     * @return the byte [ ]
      */
     protected byte[] encodeCount(byte[] val, int count) {
         return ByteUtil.merge(RLP.encodeInt(count), val);

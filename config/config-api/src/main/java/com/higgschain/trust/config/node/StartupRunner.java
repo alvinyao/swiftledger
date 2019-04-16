@@ -16,8 +16,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Startup runner.
+ *
  * @author suimi
- * @date 2018/6/13
+ * @date 2018 /6/13
  */
 @ConditionalOnProperty(prefix = "higgs.trust", name = {"autoRunning"}, havingValue = "true", matchIfMissing = true)
 @Order
@@ -25,7 +27,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class StartupRunner implements CommandLineRunner {
 
-
+    /**
+     * The Node state.
+     */
     @Autowired
     NodeState nodeState;
 

@@ -14,8 +14,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Data identity rocks dao.
+ *
  * @author tangfashuang
- * @desc key: identity, value: dataIdentityPO
+ * @desc key : identity, value: dataIdentityPO
  */
 @Service
 @Slf4j
@@ -24,6 +26,12 @@ public class DataIdentityRocksDao extends RocksBaseDao<DataIdentityPO>{
         return "dataIdentity";
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param dataIdentityPOList the data identity po list
+     * @return the int
+     */
     public int batchInsert(List<DataIdentityPO> dataIdentityPOList) {
         if (CollectionUtils.isEmpty(dataIdentityPOList)) {
             return 0;

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
+ * The type Biz type rocks dao.
+ *
  * @author tangfashuang
- * @desc key: policyId, value: bizType
+ * @desc key : policyId, value: bizType
  */
 @Slf4j
 @Service
@@ -20,6 +22,11 @@ public class BizTypeRocksDao extends RocksBaseDao<BizTypePO>{
         return "bizType";
     }
 
+    /**
+     * Add.
+     *
+     * @param bizTypePO the biz type po
+     */
     public void add(BizTypePO bizTypePO) {
         String key = bizTypePO.getPolicyId();
         if (keyMayExist(key) && null != get(key)) {
@@ -30,6 +37,12 @@ public class BizTypeRocksDao extends RocksBaseDao<BizTypePO>{
         put(key, bizTypePO);
     }
 
+    /**
+     * Update.
+     *
+     * @param policyId the policy id
+     * @param bizType  the biz type
+     */
     public void update(String policyId, String bizType) {
         BizTypePO bizTypePO = get(policyId);
         if (null == bizTypePO) {

@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * The type Json property source loader.
+ *
  * @author ShenTeng
  */
 public class JsonPropertySourceLoader implements PropertySourceLoader {

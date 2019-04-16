@@ -13,6 +13,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Reply manager.
+ *
  * @author snake
  */
 public class ReplyManager {
@@ -20,6 +22,12 @@ public class ReplyManager {
     private LinkedList<ReplyThread> threads;
     private int iteration;
 
+    /**
+     * Instantiates a new Reply manager.
+     *
+     * @param numThreads the num threads
+     * @param cs         the cs
+     */
     public ReplyManager(int numThreads, ServerCommunicationSystem cs) {
 
         this.threads = new LinkedList();
@@ -33,6 +41,11 @@ public class ReplyManager {
             t.start();
     }
 
+    /**
+     * Send.
+     *
+     * @param msg the msg
+     */
     public void send(TOMMessage msg) {
 
         iteration++;
@@ -41,6 +54,9 @@ public class ReplyManager {
     }
 }
 
+/**
+ * The type Reply thread.
+ */
 class ReplyThread extends Thread {
 
     private static final long POOL_TIME = 5000;
@@ -48,11 +64,21 @@ class ReplyThread extends Thread {
     private LinkedBlockingQueue<TOMMessage> replies;
     private ServerCommunicationSystem cs = null;
 
+    /**
+     * Instantiates a new Reply thread.
+     *
+     * @param cs the cs
+     */
     ReplyThread(ServerCommunicationSystem cs) {
         this.cs = cs;
         this.replies = new LinkedBlockingQueue<TOMMessage>();
     }
 
+    /**
+     * Send.
+     *
+     * @param msg the msg
+     */
     void send(TOMMessage msg) {
         replies.add(msg);
     }

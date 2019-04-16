@@ -10,9 +10,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
+/**
+ * The type Snapshot service impl test.
+ */
 public class SnapshotServiceImplTest {
 
+    /**
+     * Test sort.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testSort() throws Exception {
         List<Pair<Object, Object>> sortingList = new ArrayList<>();

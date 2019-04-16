@@ -20,6 +20,9 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
+/**
+ * The type Cluster view filter test.
+ */
 /*
  * Copyright (c) 2013-2017, suimi
  */
@@ -29,14 +32,23 @@ public class ClusterViewFilterTest {
 
     @Mock private ClusterViewManager viewManager;
 
+    /**
+     * Before.
+     */
     @BeforeClass public void before() {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Before method.
+     */
     @BeforeMethod public void beforeMethod() {
         Mockito.reset(viewManager);
     }
 
+    /**
+     * Test do filter old view.
+     */
     @Test public void testDoFilterOldView() {
         ClusterView view = new ClusterView(1, 0, 1, 10, new HashMap<>());
         ClusterView view2 = new ClusterView(2, 0, 10, 20, new HashMap<>());
@@ -76,6 +88,9 @@ public class ClusterViewFilterTest {
         Mockito.verify(viewManager, Mockito.times(0)).changeView(Mockito.any());
     }
 
+    /**
+     * Test do filter current view.
+     */
     @Test public void testDoFilterCurrentView() {
         ClusterOptTx optTx = new ClusterOptTx();
         ClusterView view = new ClusterView(2, 0, 10, -1, new HashMap<>());
@@ -134,6 +149,9 @@ public class ClusterViewFilterTest {
         Mockito.verify(viewManager, Mockito.times(0)).changeView(Mockito.any());
     }
 
+    /**
+     * Test pack time reject.
+     */
     @Test public void testPackTimeReject(){
         Mockito.when(viewManager.getLastPackage()).thenReturn(new LastPackage(10L,1L));
         ConsensusCommit<? extends AbstractConsensusCommand> commit = buildCommit(1, 11, 0,null);
@@ -142,6 +160,9 @@ public class ClusterViewFilterTest {
         Assert.assertTrue(commit.isClosed());
     }
 
+    /**
+     * Test pack time.
+     */
     @Test public void testPackTime(){
         LastPackage lastPackage = new LastPackage(9L, 1L);
         Mockito.when(viewManager.getLastPackage()).thenReturn(lastPackage);
@@ -190,6 +211,14 @@ public class ClusterViewFilterTest {
 
         private ClusterOptTx clusterOptTx;
 
+        /**
+         * Instantiates a new Package mock command.
+         *
+         * @param view     the view
+         * @param height   the height
+         * @param packTime the pack time
+         * @param optTx    the opt tx
+         */
         public PackageMockCommand(long view, long height, long packTime, ClusterOptTx optTx) {
             super(optTx);
             this.view = view;

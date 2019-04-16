@@ -7,9 +7,11 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * @desc CA information
+ * The type Ca po.
+ *
  * @author WangQuanzhou
- * @date 2018/6/5 10:21    
+ * @desc CA information
+ * @date 2018 /6/5 10:21
  */
 @Getter @Setter public class CaPO extends BaseEntity {
 

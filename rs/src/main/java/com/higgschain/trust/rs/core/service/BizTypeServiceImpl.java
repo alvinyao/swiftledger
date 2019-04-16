@@ -6,7 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Biz type service.
+ */
 @Service @Slf4j public class BizTypeServiceImpl implements BizTypeService {
+    /**
+     * The Biz type repository.
+     */
     @Autowired BizTypeRepository bizTypeRepository;
 
     @Override public String getByPolicyId(String policyId) {

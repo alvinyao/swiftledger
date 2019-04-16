@@ -9,9 +9,11 @@ import lombok.Setter;
 import java.util.List;
 
 /**
+ * The type Policy.
+ *
  * @author tangfashuang
  * @desc policy bo
- * @date 2018-04-02
+ * @date 2018 -04-02
  */
 @Setter @Getter public class Policy extends BaseBO implements MerkleTreeSnapshotAgent.MerkleDataNode {
 

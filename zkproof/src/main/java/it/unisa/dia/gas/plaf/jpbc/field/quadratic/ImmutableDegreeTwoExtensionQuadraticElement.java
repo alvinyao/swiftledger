@@ -5,10 +5,18 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable degree two extension quadratic element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ImmutableDegreeTwoExtensionQuadraticElement<E extends Element> extends DegreeTwoExtensionQuadraticElement<E> {
 
+    /**
+     * Instantiates a new Immutable degree two extension quadratic element.
+     *
+     * @param element the element
+     */
     public ImmutableDegreeTwoExtensionQuadraticElement(DegreeTwoExtensionQuadraticElement<E> element) {
         super((DegreeTwoExtensionQuadraticField)element.getField());
 

@@ -38,9 +38,11 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
+ * The type Ca service.
+ *
  * @author WangQuanzhou
  * @desc ca service
- * @date 2018/6/5 15:48
+ * @date 2018 /6/5 15:48
  */
 @Service @Slf4j public class CaServiceImpl implements CaService {
 

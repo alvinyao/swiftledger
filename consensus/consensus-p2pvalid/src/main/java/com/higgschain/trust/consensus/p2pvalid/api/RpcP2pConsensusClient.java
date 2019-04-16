@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * The type Rpc p 2 p consensus client.
+ *
  * @author duhongming
- * @date 2018/9/18
+ * @date 2018 /9/18
  */
 @ConditionalOnProperty(name = "network.rpc", havingValue = "netty", matchIfMissing = true)
 @Component
@@ -32,6 +34,9 @@ public class RpcP2pConsensusClient implements P2pConsensusClient {
     @Autowired
     private NetworkManage networkManage;
 
+    /**
+     * Instantiates a new Rpc p 2 p consensus client.
+     */
     public RpcP2pConsensusClient() {
         log.info("Use RpcP2pConsensusClient");
     }

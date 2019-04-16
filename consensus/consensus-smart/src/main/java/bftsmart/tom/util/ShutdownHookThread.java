@@ -32,6 +32,11 @@ public class ShutdownHookThread extends Thread {
     private final TOMLayer tomLayer;
     private final MessageDigest md;
 
+    /**
+     * Instantiates a new Shutdown hook thread.
+     *
+     * @param tomLayer the tom layer
+     */
     public ShutdownHookThread(TOMLayer tomLayer) {
 
         this.tomLayer = tomLayer;

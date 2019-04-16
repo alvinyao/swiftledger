@@ -4,13 +4,18 @@
 package com.higgschain.trust.common.exception;
 
 /**
+ * The type Trust exception.
+ *
  * @author suimi
- * @date 2018/6/12
+ * @date 2018 /6/12
  */
 public class TrustException extends RuntimeException {
 
     private static final long serialVersionUID = -5816044871155545343L;
 
+    /**
+     * The Code.
+     */
     protected ErrorInfo code;
 
     /**
@@ -88,6 +93,8 @@ public class TrustException extends RuntimeException {
     // ~~~ bean方法
 
     /**
+     * Gets code.
+     *
      * @return Returns the code.
      */
     public ErrorInfo getCode() {
@@ -95,6 +102,8 @@ public class TrustException extends RuntimeException {
     }
 
     /**
+     * Sets code.
+     *
      * @param code The code to set.
      */
     public void setCode(ErrorInfo code) {

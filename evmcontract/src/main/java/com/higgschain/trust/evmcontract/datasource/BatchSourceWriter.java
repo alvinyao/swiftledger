@@ -24,11 +24,22 @@ import java.util.Map;
  * Clue class between Source and BatchSource
  * <p>
  * Created by Anton Nashatyrev on 29.11.2016.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public class BatchSourceWriter<Key, Value> extends AbstractChainedSource<Key, Value, Key, Value> {
 
+    /**
+     * The Buf.
+     */
     Map<Key, Value> buf = new HashMap<>();
 
+    /**
+     * Instantiates a new Batch source writer.
+     *
+     * @param src the src
+     */
     public BatchSourceWriter(BatchSource<Key, Value> src) {
         super(src);
     }

@@ -26,6 +26,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
+ * The type Program invoke.
+ *
  * @author Roman Mandeleil
  * @since 03.06.2014
  */
@@ -49,6 +51,9 @@ public class ProgramInvokeImpl implements ProgramInvoke {
     private final DataWord prevHash, coinbase, timestamp,
             number, difficulty, gaslimit;
     private final Repository repository;
+    /**
+     * The Msg data.
+     */
     byte[] msgData;
     private BlockStore blockStore;
     private DataWord callValue;
@@ -58,6 +63,29 @@ public class ProgramInvokeImpl implements ProgramInvoke {
     private int callDeep = 0;
     private boolean isStaticCall = false;
 
+    /**
+     * Instantiates a new Program invoke.
+     *
+     * @param address        the address
+     * @param origin         the origin
+     * @param caller         the caller
+     * @param balance        the balance
+     * @param gasPrice       the gas price
+     * @param gas            the gas
+     * @param callValue      the call value
+     * @param msgData        the msg data
+     * @param lastHash       the last hash
+     * @param coinbase       the coinbase
+     * @param timestamp      the timestamp
+     * @param number         the number
+     * @param difficulty     the difficulty
+     * @param gaslimit       the gaslimit
+     * @param repository     the repository
+     * @param callDeep       the call deep
+     * @param blockStore     the block store
+     * @param isStaticCall   the is static call
+     * @param byTestingSuite the by testing suite
+     */
     public ProgramInvokeImpl(DataWord address, DataWord origin, DataWord caller, DataWord balance,
                              DataWord gasPrice, DataWord gas, DataWord callValue, byte[] msgData,
                              DataWord lastHash, DataWord coinbase, DataWord timestamp, DataWord number, DataWord
@@ -92,7 +120,27 @@ public class ProgramInvokeImpl implements ProgramInvoke {
         this.byTestingSuite = byTestingSuite;
     }
 
-
+    /**
+     * Instantiates a new Program invoke.
+     *
+     * @param address        the address
+     * @param origin         the origin
+     * @param caller         the caller
+     * @param balance        the balance
+     * @param gasPrice       the gas price
+     * @param gas            the gas
+     * @param callValue      the call value
+     * @param msgData        the msg data
+     * @param lastHash       the last hash
+     * @param coinbase       the coinbase
+     * @param timestamp      the timestamp
+     * @param number         the number
+     * @param difficulty     the difficulty
+     * @param gaslimit       the gaslimit
+     * @param repository     the repository
+     * @param blockStore     the block store
+     * @param byTestingSuite the by testing suite
+     */
     public ProgramInvokeImpl(byte[] address, byte[] origin, byte[] caller, byte[] balance,
                              byte[] gasPrice, byte[] gas, byte[] callValue, byte[] msgData,
                              byte[] lastHash, byte[] coinbase, long timestamp, long number, byte[] difficulty,
@@ -103,6 +151,26 @@ public class ProgramInvokeImpl implements ProgramInvoke {
         this.byTestingSuite = byTestingSuite;
     }
 
+    /**
+     * Instantiates a new Program invoke.
+     *
+     * @param address    the address
+     * @param origin     the origin
+     * @param caller     the caller
+     * @param balance    the balance
+     * @param gasPrice   the gas price
+     * @param gas        the gas
+     * @param callValue  the call value
+     * @param msgData    the msg data
+     * @param lastHash   the last hash
+     * @param coinbase   the coinbase
+     * @param timestamp  the timestamp
+     * @param number     the number
+     * @param difficulty the difficulty
+     * @param gaslimit   the gaslimit
+     * @param repository the repository
+     * @param blockStore the block store
+     */
     public ProgramInvokeImpl(byte[] address, byte[] origin, byte[] caller, byte[] balance,
                              byte[] gasPrice, byte[] gas, byte[] callValue, byte[] msgData,
                              byte[] lastHash, byte[] coinbase, long timestamp, long number, byte[] difficulty,
@@ -281,6 +349,11 @@ public class ProgramInvokeImpl implements ProgramInvoke {
         return gaslimit;
     }
 
+    /**
+     * Gets storage.
+     *
+     * @return the storage
+     */
     /*  Storage */
     public Map<DataWord, DataWord> getStorage() {
         return storage;

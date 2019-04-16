@@ -40,6 +40,9 @@ import org.springframework.util.Assert;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+/**
+ * The type Sync service.
+ */
 @StateListener @Order(2) @Service @Slf4j public class SyncService implements PackageListener {
 
     @Autowired private FailoverProperties properties;
@@ -55,6 +58,9 @@ import java.util.concurrent.Executors;
     private Long receivedFistHeight = null;
     private Long currentPackageHeight = null;
 
+    /**
+     * Async auto sync.
+     */
     public void asyncAutoSync() {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
@@ -197,8 +203,9 @@ import java.util.concurrent.Executors;
     /**
      * 从指定节点同步指定数量的区块
      *
-     * @param startHeight 开始高度
-     * @param size        同步数量
+     * @param startHeight  开始高度
+     * @param size         同步数量
+     * @param fromNodeName the from node name
      */
     public synchronized void sync(long startHeight, int size, String fromNodeName) {
         if (!nodeState.isState(NodeStateEnum.ArtificialSync)) {
@@ -263,11 +270,19 @@ import java.util.concurrent.Executors;
         } while (startIndex < headerSize - 1);
     }
 
+    /**
+     * Sync genesis.
+     */
     public void syncGenesis() {
         List<Block> blocks = getAndValidatingBlock(null, 1, 1);
         syncGenesis(blocks.get(0));
     }
 
+    /**
+     * Sync genesis.
+     *
+     * @param fromNode the from node
+     */
     public void syncGenesis(String fromNode) {
         List<Block> blocks = getAndValidatingBlock(null, 1, 1, fromNode);
         syncGenesis(blocks.get(0));

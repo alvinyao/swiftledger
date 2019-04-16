@@ -4,9 +4,11 @@ package it.unisa.dia.gas.jpbc;
  * This interface represents an algebraic structure defined
  * over another.
  *
+ * @param <F> the type parameter
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
- * @since 1.0.0
  * @see Field
+ * @since 1.0.0
  */
 public interface FieldOver<F extends Field, E extends Element> extends Field<E> {
 

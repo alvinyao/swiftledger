@@ -26,8 +26,10 @@ import java.util.function.Function;
 import static com.higgschain.trust.network.utils.Threads.namedThreads;
 
 /**
+ * The type Messaging service.
+ *
  * @author duhongming
- * @date 2018/8/21
+ * @date 2018 /8/21
  */
 public class MessagingService {
 
@@ -48,7 +50,13 @@ public class MessagingService {
     private final Peer localPeer;
     private final AtomicBoolean started = new AtomicBoolean(false);
     private final Map<String, BiConsumer<NetworkRequest, ServerConnection>> handlers = new ConcurrentHashMap<>();
+    /**
+     * The Client connections.
+     */
     final Map<Channel, RemoteClientConnection> clientConnections = Maps.newConcurrentMap();
+    /**
+     * The Server connections.
+     */
     final Map<Channel, RemoteServerConnection> serverConnections = Maps.newConcurrentMap();
     private final AtomicLong messageIdGenerator = new AtomicLong(0);
 
@@ -58,11 +66,19 @@ public class MessagingService {
     private final Map<Address, List<CompletableFuture<Channel>>> channels = Maps.newConcurrentMap();
 
     private EventLoopGroup serverGroup;
+    /**
+     * The Client group.
+     */
     EventLoopGroup clientGroup;
     private ScheduledExecutorService timeoutExecutor;
     private NodeServer trustServer;
     private NodeClient trustClient;
 
+    /**
+     * Instantiates a new Messaging service.
+     *
+     * @param networkManage the network manage
+     */
     protected MessagingService(final NetworkManage networkManage) {
         this.networkManage = networkManage;
         this.config = networkManage.config();
@@ -71,14 +87,29 @@ public class MessagingService {
         this.maxTimeoutMillis = config.timeout() <= 0 ? MAX_TIMEOUT_MILLIS : config.timeout() * 1000;
     }
 
+    /**
+     * Address address.
+     *
+     * @return the address
+     */
     public Address address() {
         return localAddress;
     }
 
+    /**
+     * Peer peer.
+     *
+     * @return the peer
+     */
     public Peer peer() {
         return localPeer;
     }
 
+    /**
+     * Start completable future.
+     *
+     * @return the completable future
+     */
     public CompletableFuture<MessagingService> start() {
         if (started.get()) {
             log.warn("Already running at local address: {}", localAddress);
@@ -96,6 +127,11 @@ public class MessagingService {
         }).thenApply(v -> this);
     }
 
+    /**
+     * Is running boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRunning() {
         return started.get();
     }
@@ -115,24 +151,68 @@ public class MessagingService {
         }
     }
 
+    /**
+     * Send async completable future.
+     *
+     * @param address the address
+     * @param action  the action
+     * @param payload the payload
+     * @return the completable future
+     */
     public CompletableFuture<Void> sendAsync(Address address, String action, byte[] payload) {
         long id = messageIdGenerator.incrementAndGet();
         NetworkRequest message = new NetworkRequest(id, action, payload).sender(localAddress);
         return executeOnPooledConnection(address, action, c -> c.sendAsync(message), MoreExecutors.directExecutor());
     }
 
+    /**
+     * Send and receive completable future.
+     *
+     * @param address the address
+     * @param action  the action
+     * @param payload the payload
+     * @return the completable future
+     */
     public CompletableFuture<byte[]> sendAndReceive(Address address, String action, byte[] payload) {
         return sendAndReceive(address, action, payload, null, MoreExecutors.directExecutor());
     }
 
+    /**
+     * Send and receive completable future.
+     *
+     * @param address  the address
+     * @param action   the action
+     * @param payload  the payload
+     * @param executor the executor
+     * @return the completable future
+     */
     public CompletableFuture<byte[]> sendAndReceive(Address address, String action, byte[] payload, Executor executor) {
         return sendAndReceive(address, action, payload, null, executor);
     }
 
+    /**
+     * Send and receive completable future.
+     *
+     * @param address the address
+     * @param action  the action
+     * @param payload the payload
+     * @param timeout the timeout
+     * @return the completable future
+     */
     public CompletableFuture<byte[]> sendAndReceive(Address address, String action, byte[] payload, Duration timeout) {
         return sendAndReceive(address, action, payload, timeout, MoreExecutors.directExecutor());
     }
 
+    /**
+     * Send and receive completable future.
+     *
+     * @param address  the address
+     * @param action   the action
+     * @param payload  the payload
+     * @param timeout  the timeout
+     * @param executor the executor
+     * @return the completable future
+     */
     public CompletableFuture<byte[]> sendAndReceive(Address address, String action, byte[] payload, Duration timeout, Executor executor) {
         long messageId = messageIdGenerator.incrementAndGet();
         NetworkRequest request = new NetworkRequest(messageId, action, payload).sender(localAddress);
@@ -278,11 +358,25 @@ public class MessagingService {
         return connection;
     }
 
+    /**
+     * Register handler.
+     *
+     * @param type     the type
+     * @param handler  the handler
+     * @param executor the executor
+     */
     public void registerHandler(String type, BiConsumer<Address, byte[]> handler, Executor executor) {
         handlers.put(type, (message, connection) -> executor.execute(() ->
             handler.accept(message.sender(), message.payload())));
     }
 
+    /**
+     * Register handler.
+     *
+     * @param type     the type
+     * @param handler  the handler
+     * @param executor the executor
+     */
     public void registerHandler(String type, BiFunction<Address, byte[], byte[]> handler, Executor executor) {
         handlers.put(type, (message, connection) -> executor.execute(() -> {
             byte[] responsePayload = null;
@@ -297,6 +391,12 @@ public class MessagingService {
         }));
     }
 
+    /**
+     * Register handler.
+     *
+     * @param type    the type
+     * @param handler the handler
+     */
     public void registerHandler(String type, BiFunction<Address, byte[], CompletableFuture<byte[]>> handler) {
         handlers.put(type, (request, connection) -> {
             CompletableFuture<byte[]> future = handler.apply(request.sender(), request.payload());
@@ -313,6 +413,11 @@ public class MessagingService {
         });
     }
 
+    /**
+     * Unregister handler.
+     *
+     * @param type the type
+     */
     public void unregisterHandler(String type) {
         handlers.remove(type);
     }
@@ -321,6 +426,11 @@ public class MessagingService {
         return trustClient.connect(address);
     }
 
+    /**
+     * Stop completable future.
+     *
+     * @return the completable future
+     */
     public CompletableFuture<Void> stop() {
         if (started.compareAndSet(true, false)) {
             return CompletableFuture.supplyAsync(() -> {
@@ -514,7 +624,13 @@ public class MessagingService {
      * Remote connection implementation.
      */
     private abstract class AbstractClientConnection implements ClientConnection {
+        /**
+         * The Futures.
+         */
         final Map<Long, Callback> futures = Maps.newConcurrentMap();
+        /**
+         * The Closed.
+         */
         final AtomicBoolean closed = new AtomicBoolean(false);
 
         /**
@@ -545,14 +661,34 @@ public class MessagingService {
             }
         }
 
+        /**
+         * Register callback.
+         *
+         * @param id      the id
+         * @param subject the subject
+         * @param timeout the timeout
+         * @param future  the future
+         */
         protected void registerCallback(long id, String subject, Duration timeout, CompletableFuture<byte[]> future) {
             futures.put(id, new Callback(subject, timeout, future));
         }
 
+        /**
+         * Complete callback callback.
+         *
+         * @param id the id
+         * @return the callback
+         */
         protected Callback completeCallback(long id) {
             return futures.remove(id);
         }
 
+        /**
+         * Fail callback callback.
+         *
+         * @param id the id
+         * @return the callback
+         */
         protected Callback failCallback(long id) {
             return futures.remove(id);
         }
@@ -607,6 +743,11 @@ public class MessagingService {
     private static final class LocalServerConnection implements ServerConnection {
         private final CompletableFuture<byte[]> future;
 
+        /**
+         * Instantiates a new Local server connection.
+         *
+         * @param future the future
+         */
         LocalServerConnection(CompletableFuture<byte[]> future) {
             this.future = future;
         }
@@ -633,6 +774,11 @@ public class MessagingService {
     private final class RemoteClientConnection extends AbstractClientConnection {
         private final Channel channel;
 
+        /**
+         * Instantiates a new Remote client connection.
+         *
+         * @param channel the channel
+         */
         RemoteClientConnection(Channel channel) {
             this.channel = channel;
         }
@@ -703,6 +849,11 @@ public class MessagingService {
     private final class RemoteServerConnection implements ServerConnection {
         private final Channel channel;
 
+        /**
+         * Instantiates a new Remote server connection.
+         *
+         * @param channel the channel
+         */
         RemoteServerConnection(Channel channel) {
             this.channel = channel;
         }

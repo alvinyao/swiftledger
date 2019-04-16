@@ -8,13 +8,20 @@ import org.mozilla.javascript.Scriptable;
 import java.util.Calendar;
 
 /**
+ * The type Date funcs.
+ *
  * @author liuyu
  * @description
- * @date 2018-11-09
+ * @date 2018 -11-09
  */
 public class DateFuncs {
     private static DateFuncs instance = new DateFuncs();
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static DateFuncs getInstance() {
         return instance;
     }
@@ -45,6 +52,11 @@ public class DateFuncs {
         return calendar;
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         Calendar leftNow = Calendar.getInstance();
         leftNow.set(Calendar.DAY_OF_YEAR, -1);

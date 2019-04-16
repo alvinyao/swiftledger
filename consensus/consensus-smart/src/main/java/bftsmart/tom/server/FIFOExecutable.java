@@ -25,8 +25,26 @@ import bftsmart.tom.MessageContext;
  */
 public interface FIFOExecutable extends SingleExecutable {
 
+    /**
+     * Execute ordered fifo byte [ ].
+     *
+     * @param command     the command
+     * @param msgCtx      the msg ctx
+     * @param clientId    the client id
+     * @param operationId the operation id
+     * @return the byte [ ]
+     */
     public byte[] executeOrderedFIFO(byte[] command, MessageContext msgCtx, int clientId, int operationId);
 
+    /**
+     * Execute unordered fifo byte [ ].
+     *
+     * @param command     the command
+     * @param msgCtx      the msg ctx
+     * @param clientId    the client id
+     * @param operationId the operation id
+     * @return the byte [ ]
+     */
     public byte[] executeUnorderedFIFO(byte[] command, MessageContext msgCtx, int clientId, int operationId);
 
 }

@@ -8,9 +8,11 @@ import lombok.Setter;
 import java.util.Map;
 
 /**
+ * The type Merkle tree.
+ *
  * @author WangQuanzhou
  * @desc merkle tree BO
- * @date 2018/3/29 15:19
+ * @date 2018 /3/29 15:19
  */
 @Getter @Setter public class MerkleTree extends BaseBO {
     // Merkle Root
@@ -28,13 +30,30 @@ import java.util.Map;
     // merkle node map
     private Map<String, MerkleNode> nodeMap;
 
+    /**
+     * Instantiates a new Merkle tree.
+     */
     public MerkleTree() {
     }
 
+    /**
+     * Instantiates a new Merkle tree.
+     *
+     * @param treeType the tree type
+     */
     public MerkleTree(MerkleTypeEnum treeType) {
         this.treeType = treeType;
     }
 
+    /**
+     * Instantiates a new Merkle tree.
+     *
+     * @param rootHash   the root hash
+     * @param totalLevel the total level
+     * @param maxIndex   the max index
+     * @param treeType   the tree type
+     * @param nodeMap    the node map
+     */
     public MerkleTree(String rootHash, int totalLevel, Long maxIndex, MerkleTypeEnum treeType,
         Map<String, MerkleNode> nodeMap) {
         this.rootHash = rootHash;

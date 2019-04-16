@@ -21,11 +21,20 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static org.testng.Assert.*;
 
+/**
+ * The type Snapshot service impl test.
+ */
 public class SnapshotServiceImplTest extends BaseTest {
 
     @Autowired
     private SnapshotServiceImpl snapshotService;
 
+    /**
+     * Init data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider
     public Object[][] initData(Method method) {
@@ -34,6 +43,12 @@ public class SnapshotServiceImplTest extends BaseTest {
         return arrmap;
     }
 
+    /**
+     * Destroy data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider
     public Object[][] destroyData(Method method) {
@@ -52,7 +67,8 @@ public class SnapshotServiceImplTest extends BaseTest {
      * packageCache中是否含有key为SnapshotBizKeyEnum.CONTRACT类型缓存对象
      * packageCache中是否含有key为SnapshotBizKeyEnum.CONTRACT_CONTRACT_BIND类型缓存对象
      * packageCache中是否含有key为SnapshotBizKeyEnum.CONTRACT_SATE类型缓存对象
-     * @param params
+     *
+     * @param params the params
      */
     @Test(dataProvider = "initData",priority = 1)
     public void testInit(Map<?,?> params) {
@@ -99,7 +115,8 @@ public class SnapshotServiceImplTest extends BaseTest {
 
     /**
      * 方法执行完成后，isOpenTransaction是否为true
-     * @throws Exception
+     *
+     * @throws Exception the exception
      */
     @Test(priority = 5)
     public void testStartTransaction1() throws Exception {
@@ -525,7 +542,8 @@ public class SnapshotServiceImplTest extends BaseTest {
      * packageCache中是否含有key为SnapshotBizKeyEnum.CONTRACT类型缓存对象
      * packageCache中是否含有key为SnapshotBizKeyEnum.CONTRACT_CONTRACT_BIND类型缓存对象
      * packageCache中是否含有key为SnapshotBizKeyEnum.CONTRACT_SATE类型缓存对象
-     * @param params
+     *
+     * @param params the params
      */
     @Test(dataProvider = "destroyData", priority = 11)
     public void testDestroy(Map<?,?> params) {
@@ -636,6 +654,11 @@ public class SnapshotServiceImplTest extends BaseTest {
         return null;
     }
 
+    /**
+     * Gets is open transaction.
+     *
+     * @return the is open transaction
+     */
     public boolean getIsOpenTransaction() {
         Class<SnapshotServiceImpl> clazz = (Class<SnapshotServiceImpl>) snapshotService.getClass();
         try {
@@ -649,6 +672,11 @@ public class SnapshotServiceImplTest extends BaseTest {
         return false;
     }
 
+    /**
+     * Sets is open transaction.
+     *
+     * @param flag the flag
+     */
     public void setIsOpenTransaction(boolean flag) {
         Class<SnapshotServiceImpl> clazz = (Class<SnapshotServiceImpl>) snapshotService.getClass();
         try {
@@ -660,6 +688,11 @@ public class SnapshotServiceImplTest extends BaseTest {
         }
     }
 
+    /**
+     * Sets maxnum size.
+     *
+     * @param maxSize the max size
+     */
     public void setMaxnumSize(int maxSize) {
         Class<SnapshotServiceImpl> clazz = (Class<SnapshotServiceImpl>) snapshotService.getClass();
         try {

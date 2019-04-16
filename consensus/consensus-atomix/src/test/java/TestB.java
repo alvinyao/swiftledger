@@ -7,8 +7,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * The type Test b.
+ *
  * @author suimi
- * @date 2018/8/27
+ * @date 2018 /8/27
  */
 @ToString @Getter @Setter public class TestB {
 

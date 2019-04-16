@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type Tx process need vote schedule.
+ */
 @ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
 @Service
 @Slf4j
@@ -27,6 +30,9 @@ public class TxProcessNeedVoteSchedule {
      */
     private String lastPreKey = null;
 
+    /**
+     * Exe.
+     */
     @Scheduled(fixedDelayString = "${rs.core.schedule.processNeedVote:3000}") public void exe() {
         List<CoreTransactionProcessPO> list =
             coreTxRepository.queryByStatus(CoreTxStatusEnum.NEED_VOTE, (pageNo - 1) * pageSize, pageSize, lastPreKey);

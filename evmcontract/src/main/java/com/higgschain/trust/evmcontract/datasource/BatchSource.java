@@ -26,16 +26,16 @@ import java.util.Map;
  * can be atomic or other.
  * <p>
  * Created by Anton Nashatyrev on 01.11.2016.
+ *
+ * @param <K> the type parameter
+ * @param <V> the type parameter
  */
 public interface BatchSource<K, V> extends Source<K, V> {
 
     /**
      * Do batch update
      *
-     * @param rows Normally this Map is treated just as a collection
-     *             of key-value pairs and shouldn't conform to a normal
-     *             Map contract. Though it is up to implementation to
-     *             require passing specific Maps
+     * @param rows Normally this Map is treated just as a collection             of key-value pairs and shouldn't conform to a normal             Map contract. Though it is up to implementation to             require passing specific Maps
      */
     void updateBatch(Map<K, V> rows);
 }

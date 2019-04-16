@@ -19,6 +19,9 @@ import org.springframework.beans.factory.BeanFactory
  * suimi
  */
 
+/**
+ *  The type Tx.
+ */
 @Slf4j
 @Usage("about tx info operation")
 class tx {

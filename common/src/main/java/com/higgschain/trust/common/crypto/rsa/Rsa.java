@@ -10,9 +10,18 @@ import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+/**
+ * The type Rsa.
+ */
 @Slf4j public class Rsa {
 
+    /**
+     * The constant KEY_ALGORITHM.
+     */
     public static final String KEY_ALGORITHM = "RSA";
+    /**
+     * The constant SIGNATURE_ALGORITHM.
+     */
     public static final String SIGNATURE_ALGORITHM = "SHA256withRSA";
 
     private static final String EQUAL_SIGN = "=";
@@ -22,7 +31,8 @@ import java.security.spec.X509EncodedKeySpec;
      * 用私钥对信息生成数字签名s
      *
      * @param dataString // 签名对象
-     * @return
+     * @param privateKey the private key
+     * @return string
      * @throws Exception
      */
     public static String sign(String dataString, String privateKey) {
@@ -54,7 +64,8 @@ import java.security.spec.X509EncodedKeySpec;
      *
      * @param verifyString 验签对象
      * @param sign         数字签名
-     * @return
+     * @param publicKey    the public key
+     * @return boolean
      * @throws Exception
      */
     public static boolean verify(String verifyString, String sign, String publicKey) {
@@ -80,6 +91,11 @@ import java.security.spec.X509EncodedKeySpec;
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         String pubKey =
             "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtM0Sx9KskNepKi9YAFHO+GrWem80TwGVGRHwTY13mLISHJHaa4+2i8JHQLsFHxK/NKUEDmrbOX65IbZDcDfIxFe90lss2H3QayAONxAwOygotl5Ih5bZFlicaUowmhXYz77fW9tY0p5rfojUEnpJzJMQJ/+umOAGVY40o/XW/sQIDAQAB";

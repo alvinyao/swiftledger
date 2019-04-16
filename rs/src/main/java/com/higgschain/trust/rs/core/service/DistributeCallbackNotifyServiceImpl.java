@@ -32,7 +32,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * DistributeCallbackNotify
  *
  * @author lingchao
- * @create 2018年08月23日14:27
+ * @create 2018年08月23日14 :27
  */
 @Slf4j
 @Service
@@ -41,6 +41,9 @@ public class DistributeCallbackNotifyServiceImpl implements DistributeCallbackNo
     @Autowired
     private RedissonClient redissonClient;
 
+    /**
+     * The Bean factory.
+     */
     @Autowired BeanFactory beanFactory;
 
     @Override

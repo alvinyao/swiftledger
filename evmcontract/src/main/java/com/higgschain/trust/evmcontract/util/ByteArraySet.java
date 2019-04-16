@@ -28,12 +28,23 @@ import java.util.Set;
  * Created by Anton Nashatyrev on 06.10.2016.
  */
 public class ByteArraySet implements Set<byte[]> {
+    /**
+     * The Delegate.
+     */
     Set<ByteArrayWrapper> delegate;
 
+    /**
+     * Instantiates a new Byte array set.
+     */
     public ByteArraySet() {
         this(new HashSet<ByteArrayWrapper>());
     }
 
+    /**
+     * Instantiates a new Byte array set.
+     *
+     * @param delegate the delegate
+     */
     ByteArraySet(Set<ByteArrayWrapper> delegate) {
         this.delegate = delegate;
     }

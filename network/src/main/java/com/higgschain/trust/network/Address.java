@@ -6,8 +6,10 @@ import java.net.UnknownHostException;
 import java.util.Objects;
 
 /**
+ * The type Address.
+ *
  * @author duhongming
- * @date 2018/8/21
+ * @date 2018 /8/21
  */
 public final class Address implements Serializable {
     private static final int DEFAULT_PORT = 7070;
@@ -15,26 +17,57 @@ public final class Address implements Serializable {
     private int port;
     private String host;
 
+    /**
+     * Gets host.
+     *
+     * @return the host
+     */
     public String getHost() {
         return host;
     }
 
+    /**
+     * Sets host.
+     *
+     * @param host the host
+     */
     public void setHost(String host) {
         this.host = host;
     }
 
+    /**
+     * Gets port.
+     *
+     * @return the port
+     */
     public int getPort() {
         return port;
     }
 
+    /**
+     * Sets port.
+     *
+     * @param port the port
+     */
     public void setPort(int port) {
         this.port = port;
     }
 
+    /**
+     * Local address.
+     *
+     * @return the address
+     */
     public static Address local() {
         return from(DEFAULT_PORT);
     }
 
+    /**
+     * Instantiates a new Address.
+     *
+     * @param host the host
+     * @param port the port
+     */
     public Address(String host, int port) {
         if (host == null || host.trim().equals("")) {
             try {
@@ -49,6 +82,12 @@ public final class Address implements Serializable {
         this.port = port;
     }
 
+    /**
+     * From address.
+     *
+     * @param port the port
+     * @return the address
+     */
     public static Address from(int port) {
         try {
             InetAddress inetAddress = getLocalAddress();

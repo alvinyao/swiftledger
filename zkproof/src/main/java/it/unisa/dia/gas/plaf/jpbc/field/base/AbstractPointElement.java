@@ -5,13 +5,27 @@ import it.unisa.dia.gas.jpbc.Point;
 import it.unisa.dia.gas.jpbc.Vector;
 
 /**
+ * The type Abstract point element.
+ *
+ * @param <E> the type parameter
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractPointElement<E extends Element, F extends AbstractFieldOver> extends AbstractElement<F> implements Point<E>, Vector<E> {
 
-    protected E  x, y;
+    /**
+     * The X.
+     */
+    protected E  x, /**
+     * The Y.
+     */
+    y;
 
-
+    /**
+     * Instantiates a new Abstract point element.
+     *
+     * @param field the field
+     */
     protected AbstractPointElement(F field) {
         super(field);
     }

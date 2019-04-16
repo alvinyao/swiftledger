@@ -11,11 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Safe native java object.
+ *
  * @author duhongming
- * @date 2018/6/8
+ * @date 2018 /6/8
  */
 public class SafeNativeJavaObject extends NativeJavaObject {
 
+    /**
+     * Instantiates a new Safe native java object.
+     *
+     * @param scope      the scope
+     * @param javaObject the java object
+     * @param staticType the static type
+     */
     public SafeNativeJavaObject(final Scriptable scope, final Object javaObject, final Class<?> staticType) {
         super(scope, javaObject, staticType);
     }

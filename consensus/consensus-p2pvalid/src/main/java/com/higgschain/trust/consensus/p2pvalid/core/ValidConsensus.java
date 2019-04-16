@@ -17,6 +17,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
+ * The type Valid consensus.
+ *
  * @author cwy
  */
 @Component @Slf4j public class ValidConsensus implements ApplicationContextAware {
@@ -29,18 +31,37 @@ import java.util.function.Function;
 
     @Autowired private SyncSendService syncSendService;
 
+    /**
+     * Instantiates a new Valid consensus.
+     */
     public ValidConsensus() {
         executor = new ValidExecutor();
     }
 
+    /**
+     * Submit.
+     *
+     * @param command the command
+     */
     public final void submit(ValidCommand<?> command) {
         sendService.submit(command);
     }
 
+    /**
+     * Submit sync response command.
+     *
+     * @param command the command
+     * @return the response command
+     */
     public final ResponseCommand<?> submitSync(ValidCommand<?> command) {
         return syncSendService.send(command);
     }
 
+    /**
+     * Gets valid executor.
+     *
+     * @return the valid executor
+     */
     public ValidExecutor getValidExecutor() {
         return executor;
     }

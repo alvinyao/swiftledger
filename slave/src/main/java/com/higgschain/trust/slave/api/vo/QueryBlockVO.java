@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * The type Query block vo.
+ *
  * @author tangfashuang
  */
 @Getter

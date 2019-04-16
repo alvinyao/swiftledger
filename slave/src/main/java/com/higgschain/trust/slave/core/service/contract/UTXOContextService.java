@@ -23,6 +23,9 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * The type Utxo context service.
+ */
 @Slf4j
 @Service
 public class UTXOContextService extends ContractApiService {
@@ -33,7 +36,11 @@ public class UTXOContextService extends ContractApiService {
     @Autowired
     private CurrencyInfoDao currencyInfoDao;
 
-
+    /**
+     * Gets action.
+     *
+     * @return the action
+     */
     public UTXOAction getAction() {
         return getContextData(UTXOExecuteContextData.class).getAction();
     }
@@ -41,8 +48,8 @@ public class UTXOContextService extends ContractApiService {
     /**
      * get utxo action type
      *
-     * @param name
-     * @return
+     * @param name the name
+     * @return utxo action type
      */
     public UTXOActionTypeEnum getUTXOActionType(String name) {
         return UTXOActionTypeEnum.getUTXOActionTypeEnumByName(name);
@@ -51,8 +58,8 @@ public class UTXOContextService extends ContractApiService {
     /**
      * query UTXO list
      *
-     * @param inputList
-     * @return
+     * @param inputList the input list
+     * @return list
      */
     public List<UTXO> queryUTXOList(List<TxIn> inputList) {
         log.info("When process UTXO contract  querying queryTxOutList by inputList:{}", inputList);
@@ -62,8 +69,8 @@ public class UTXOContextService extends ContractApiService {
     /**
      * 根据币种获取同态公钥
      *
-     * @param currency
-     * @return
+     * @param currency the currency
+     * @return currency homomorphic pk
      */
     public String getCurrencyHomomorphicPk(String currency) {
         log.info("get a homomorphic key when verify a crypto currency");
@@ -79,9 +86,9 @@ public class UTXOContextService extends ContractApiService {
      * usually used by add  amount
      * return  augend + addend
      *
-     * @param addend
-     * @param augend
-     * @return
+     * @param augend the augend
+     * @param addend the addend
+     * @return big decimal
      */
     public BigDecimal add(String augend, String addend) {
         BigDecimal a = null;
@@ -101,11 +108,10 @@ public class UTXOContextService extends ContractApiService {
      * usually used by subtract  amount
      * return  minuend -  reduction
      *
-     * @param minuend
-     * @param reduction
-     * @return
+     * @param minuend   the minuend
+     * @param reduction the reduction
+     * @return big decimal
      */
-
     public BigDecimal subtract(String minuend, String reduction) {
         BigDecimal a = null;
         BigDecimal b = null;
@@ -125,9 +131,9 @@ public class UTXOContextService extends ContractApiService {
      * if a == b then return 0
      * if a < b then return -1
      *
-     * @param a
-     * @param b
-     * @return
+     * @param a the a
+     * @param b the b
+     * @return int
      */
     public int compare(String a, String b) {
         BigDecimal a0 = null;
@@ -142,14 +148,13 @@ public class UTXOContextService extends ContractApiService {
         return a0.compareTo(b0);
     }
 
-
     /**
      * verify UTXO Signature list
      * all the Signature is sign from the same message with different private key
      *
-     * @param signList
-     * @param message
-     * @return
+     * @param signList the sign list
+     * @param message  the message
+     * @return boolean
      */
     public boolean verifySignature(List<Sign> signList, String message) {
         if (CollectionUtils.isEmpty(signList) || null == message) {
@@ -169,6 +174,13 @@ public class UTXOContextService extends ContractApiService {
         return true;
     }
 
+    /**
+     * Cipher compare int.
+     *
+     * @param a the a
+     * @param b the b
+     * @return the int
+     */
     public int cipherCompare(String a, String b) {
         if (EncryptAmount.cipherCompare(a, b)) {
             return 0;
@@ -176,11 +188,22 @@ public class UTXOContextService extends ContractApiService {
         return 1;
     }
 
-
+    /**
+     * Init pub key.
+     *
+     * @param pubKey the pub key
+     */
     public void initPubKey(String pubKey) {
         EncryptAmount.setHomomorphicEncryptionKey(pubKey);
     }
 
+    /**
+     * Cipher add string.
+     *
+     * @param em1 the em 1
+     * @param em2 the em 2
+     * @return the string
+     */
     public String cipherAdd(String em1, String em2) {
         if (em1.equals("0")) {
             return em2;
@@ -191,14 +214,21 @@ public class UTXOContextService extends ContractApiService {
     /**
      * 初始发币加密
      *
-     * @param amount
-     * @return
+     * @param amount the amount
+     * @return string
      */
     public String issueEnrypt(String amount) {
         EncryptAmount encryptAmount = new EncryptAmount(new BigDecimal(amount), EncryptAmount.FULL_RANDOM);
         return encryptAmount.toString();
     }
 
+    /**
+     * Verify tx in signature boolean.
+     *
+     * @param signList the sign list
+     * @param txInList the tx in list
+     * @return the boolean
+     */
     public boolean verifyTxInSignature(List<Sign> signList, List<TxIn> txInList) {
         String message = UTXOConvert.toTxInString(txInList);
         return verifySignature(signList, message);

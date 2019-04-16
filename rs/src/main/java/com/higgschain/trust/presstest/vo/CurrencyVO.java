@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Currency vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-30
+ * @date 2018 -08-30
  */
 @Getter @Setter public class CurrencyVO extends BaseVO {
     /**

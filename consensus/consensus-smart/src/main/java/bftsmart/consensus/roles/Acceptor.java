@@ -63,7 +63,7 @@ public final class Acceptor {
      *
      * @param communication Replicas communication system
      * @param factory       Message factory for PaW messages
-     * @param controller
+     * @param controller    the controller
      */
     public Acceptor(ServerCommunicationSystem communication, MessageFactory factory, ServerViewController controller) {
         this.communication = communication;
@@ -79,6 +79,11 @@ public final class Acceptor {
         }
     }
 
+    /**
+     * Gets factory.
+     *
+     * @return the factory
+     */
     public MessageFactory getFactory() {
         return factory;
     }
@@ -151,7 +156,8 @@ public final class Acceptor {
      * Called when a PROPOSE message is received or when processing a formerly out of context propose which
      * is know belongs to the current consensus.
      *
-     * @param msg The PROPOSE message to by processed
+     * @param epoch the epoch
+     * @param msg   The PROPOSE message to by processed
      */
     public void proposeReceived(Epoch epoch, ConsensusMessage msg) {
         int cid = epoch.getConsensus().getId();

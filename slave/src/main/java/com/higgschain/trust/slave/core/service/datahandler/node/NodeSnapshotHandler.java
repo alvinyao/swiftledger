@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type Node snapshot handler.
+ *
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/6/6 10:54
+ * @date 2018 /6/6 10:54
  */
 @Service @Slf4j public class NodeSnapshotHandler implements NodeHandler {
 

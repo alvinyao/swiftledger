@@ -13,6 +13,9 @@ import org.springframework.beans.factory.BeanFactory
  * lingchao
  */
 
+/**
+ *  The type Property.
+ */
 @Slf4j
 @Usage("about system property operation")
 class property {

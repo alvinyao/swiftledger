@@ -15,8 +15,10 @@ import java.util.Comparator;
 import java.util.Map;
 
 /**
+ * The type Change master command.
+ *
  * @author suimi
- * @date 2018/6/5
+ * @date 2018 /6/5
  */
 @ToString(callSuper = true, exclude = {"sign"}) @Getter public class ChangeMasterCommand
     extends AbstractConsensusCommand<Map<String, ChangeMasterVerifyResponse>> implements SignatureCommand {
@@ -42,6 +44,14 @@ import java.util.Map;
      */
     @Setter private String sign;
 
+    /**
+     * Instantiates a new Change master command.
+     *
+     * @param term       the term
+     * @param view       the view
+     * @param masterName the master name
+     * @param value      the value
+     */
     public ChangeMasterCommand(long term, long view, String masterName, Map<String, ChangeMasterVerifyResponse> value) {
         super(value);
         this.term = term;

@@ -12,22 +12,56 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Byte buffer big integer array sector.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
 public class ByteBufferBigIntegerArraySector implements ArraySector<BigInteger> {
 
+    /**
+     * The Buffer.
+     */
     protected ByteBuffer buffer;
-    protected int offset, recordSize, recordLength, numRecords;
+    /**
+     * The Offset.
+     */
+    protected int offset, /**
+     * The Record size.
+     */
+    recordSize, /**
+     * The Record length.
+     */
+    recordLength, /**
+     * The Num records.
+     */
+    numRecords;
+    /**
+     * The Length in bytes.
+     */
     protected int lengthInBytes;
 
+    /**
+     * The In.
+     */
     protected PairingDataInput in;
+    /**
+     * The Out.
+     */
     protected PairingDataOutput out;
 
+    /**
+     * The Labels map.
+     */
     protected Map<String, Integer> labelsMap;
 
-
-
+    /**
+     * Instantiates a new Byte buffer big integer array sector.
+     *
+     * @param recordSize the record size
+     * @param numRecords the num records
+     * @throws IOException the io exception
+     */
     public ByteBufferBigIntegerArraySector(int recordSize, int numRecords) throws IOException {
         this.lengthInBytes = 4 + ((recordSize + 4) * numRecords);
 
@@ -37,6 +71,14 @@ public class ByteBufferBigIntegerArraySector implements ArraySector<BigInteger> 
         this.numRecords = numRecords;
     }
 
+    /**
+     * Instantiates a new Byte buffer big integer array sector.
+     *
+     * @param recordSize the record size
+     * @param numRecords the num records
+     * @param labels     the labels
+     * @throws IOException the io exception
+     */
     public ByteBufferBigIntegerArraySector(int recordSize, int numRecords, String... labels) throws IOException {
         this(recordSize, numRecords);
 

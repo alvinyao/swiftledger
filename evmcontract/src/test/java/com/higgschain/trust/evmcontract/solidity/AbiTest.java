@@ -9,12 +9,18 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * The type Abi test.
+ *
  * @author duhongming
- * @date 2018/11/22
+ * @date 2018 /11/22
  */
-
 public class AbiTest {
 
+    /**
+     * Simple test.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void simpleTest() throws IOException {
         String contractAbi = "[{"

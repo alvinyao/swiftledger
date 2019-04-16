@@ -17,14 +17,22 @@ import java.util.Objects;
 import java.util.function.Function;
 
 /**
+ * The type Server.
+ *
  * @author: Zhouyafeng
- * @create: 2018/6/15 14:57
+ * @create: 2018 /6/15 14:57
  * @description:
  */
 public class Server extends DefaultRecoverable {
 
     private static Logger log = LoggerFactory.getLogger(Server.class);
+    /**
+     * The Machine.
+     */
     SmartCommitReplicateComposite machine;
+    /**
+     * The Function map.
+     */
     Map<Class<?>, Function<ConsensusCommit<?>, ?>> functionMap;
 
     private ServiceReplica serviceReplica;
@@ -33,6 +41,13 @@ public class Server extends DefaultRecoverable {
 
     private Serializer serializer;
 
+    /**
+     * Instantiates a new Server.
+     *
+     * @param serverId           the server id
+     * @param snapshot           the snapshot
+     * @param replicateComposite the replicate composite
+     */
     public Server(int serverId, IConsensusSnapshot snapshot, SmartCommitReplicateComposite replicateComposite) {
         this.snapshot = snapshot;
         this.machine = replicateComposite;
@@ -112,6 +127,11 @@ public class Server extends DefaultRecoverable {
         return executeSingle(command, msgCtx);
     }
 
+    /**
+     * Gets service replica.
+     *
+     * @return the service replica
+     */
     public ServiceReplica getServiceReplica() {
         return serviceReplica;
     }

@@ -13,8 +13,10 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * The type Node server.
+ *
  * @author duhongming
- * @date 2018/9/5
+ * @date 2018 /9/5
  */
 public class NodeServer {
 
@@ -28,6 +30,15 @@ public class NodeServer {
 
     private Channel serverChannel;
 
+    /**
+     * Instantiates a new Node server.
+     *
+     * @param localAddress      the local address
+     * @param messageDispatcher the message dispatcher
+     * @param serverGroup       the server group
+     * @param clientGroup       the client group
+     * @param config            the config
+     */
     public NodeServer(
             final Address localAddress,
             final ChannelHandler messageDispatcher,
@@ -40,6 +51,11 @@ public class NodeServer {
         this.config = config;
     }
 
+    /**
+     * Start completable future.
+     *
+     * @return the completable future
+     */
     public CompletableFuture<Void> start() {
         CompletableFuture<Void> future = new CompletableFuture<>();
         ServerBootstrap b = new ServerBootstrap();
@@ -78,6 +94,11 @@ public class NodeServer {
         return future;
     }
 
+    /**
+     * Close channel.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     public void closeChannel() throws InterruptedException {
         serverChannel.close().sync();
     }

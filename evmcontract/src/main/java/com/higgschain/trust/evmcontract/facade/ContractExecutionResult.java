@@ -15,7 +15,7 @@ import java.util.Set;
  * An instance of this class is used to save result of contract execution.
  *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 public class ContractExecutionResult {
 
@@ -58,6 +58,11 @@ public class ContractExecutionResult {
     @Getter
     private List<LogInfo> logInfoList;
 
+    /**
+     * Sets log info list.
+     *
+     * @param logInfoList the log info list
+     */
     public void setLogInfoList(List<LogInfo> logInfoList) {
         if (logInfoList == null) {
             return;
@@ -124,6 +129,11 @@ public class ContractExecutionResult {
     @Setter
     private boolean revert;
 
+    /**
+     * Gets revert.
+     *
+     * @return the revert
+     */
     public boolean getRevert() {
         return revert;
     }
@@ -135,10 +145,10 @@ public class ContractExecutionResult {
     @Setter
     private long timeCost;
 
-
     /**
      * Set the result to ThreadLocal
-     * @param result
+     *
+     * @param result the result
      */
     public static void setCurrentResult(ContractExecutionResult result) {
         CURRENT_RESULT.set(result);
@@ -146,7 +156,8 @@ public class ContractExecutionResult {
 
     /**
      * Get result from ThreadLocal
-     * @return
+     *
+     * @return current result
      */
     public static ContractExecutionResult getCurrentResult() {
         return CURRENT_RESULT.get();

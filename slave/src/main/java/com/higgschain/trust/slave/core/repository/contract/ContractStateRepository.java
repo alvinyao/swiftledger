@@ -17,16 +17,34 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Contract state repository.
+ */
 @Repository
 @Slf4j
 public class ContractStateRepository {
 
+    /**
+     * The Contract state dao.
+     */
     @Autowired
     ContractStateDao contractStateDao;
+    /**
+     * The Contract state rocks dao.
+     */
     @Autowired
     ContractStateRocksDao contractStateRocksDao;
+    /**
+     * The Init config.
+     */
     @Autowired InitConfig initConfig;
 
+    /**
+     * Batch insert boolean.
+     *
+     * @param list the list
+     * @return the boolean
+     */
     public boolean batchInsert(Collection<ContractStatePO> list) {
         if (CollectionUtils.isEmpty(list)) {
             return true;
@@ -41,6 +59,12 @@ public class ContractStateRepository {
         return result == list.size();
     }
 
+    /**
+     * Batch update boolean.
+     *
+     * @param list the list
+     * @return the boolean
+     */
     public boolean batchUpdate(Collection<ContractStatePO> list) {
         if (CollectionUtils.isEmpty(list)) {
             return true;
@@ -54,6 +78,12 @@ public class ContractStateRepository {
         return result == list.size();
     }
 
+    /**
+     * Get map.
+     *
+     * @param address the address
+     * @return the map
+     */
     public Map<String, Object> get(String address) {
         ContractStatePO po;
         if (initConfig.isUseMySQL()) {
@@ -72,6 +102,12 @@ public class ContractStateRepository {
         return newState;
     }
 
+    /**
+     * Gets state.
+     *
+     * @param address the address
+     * @return the state
+     */
     public ContractState getState(String address) {
         ContractStatePO po;
         if (initConfig.isUseMySQL()) {
@@ -98,6 +134,12 @@ public class ContractStateRepository {
         return contractState;
     }
 
+    /**
+     * Put.
+     *
+     * @param address the address
+     * @param state   the state
+     */
     public void put(String address,Object state) {
         ContractStatePO po = new ContractStatePO();
         po.setAddress(address);

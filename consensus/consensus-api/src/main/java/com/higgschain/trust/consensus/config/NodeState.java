@@ -27,11 +27,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static com.higgschain.trust.consensus.config.NodeStateEnum.*;
 
+/**
+ * The type Node state.
+ */
 @Component
 @Scope("singleton")
 @Slf4j
 public class NodeState implements InitializingBean {
 
+    /**
+     * The constant MASTER_NA.
+     */
     public static final String MASTER_NA = "N/A";
 
     @Autowired
@@ -146,7 +152,7 @@ public class NodeState implements InitializingBean {
     /**
      * register master listener
      *
-     * @param listener
+     * @param listener the listener
      */
     public void registerMasterListener(MasterChangeListener listener) {
         masterListeners.add(listener);
@@ -155,8 +161,8 @@ public class NodeState implements InitializingBean {
     /**
      * node state change from -> to
      *
-     * @param from
-     * @param to
+     * @param from the from
+     * @param to   the to
      */
     public void changeState(NodeStateEnum from, NodeStateEnum to) {
         Assert.notNull(from, "from state can't be null");
@@ -224,7 +230,7 @@ public class NodeState implements InitializingBean {
     /**
      * node change the master
      *
-     * @param masterName
+     * @param masterName the master name
      */
     public void changeMaster(String masterName) {
         Assert.isTrue(StringUtils.isNotBlank(masterName), "master name can't be null");
@@ -237,6 +243,11 @@ public class NodeState implements InitializingBean {
         }
     }
 
+    /**
+     * Is master boolean.
+     *
+     * @return the boolean
+     */
     public boolean isMaster() {
         return master;
     }
@@ -244,8 +255,8 @@ public class NodeState implements InitializingBean {
     /**
      * 是否给定的其中状态
      *
-     * @param state
-     * @return
+     * @param state the state
+     * @return boolean
      */
     public boolean isState(NodeStateEnum... state) {
         for (int i = 0; i < state.length; i++) {
@@ -259,7 +270,7 @@ public class NodeState implements InitializingBean {
     /**
      * the regex of node name which exclude me
      *
-     * @return
+     * @return string
      */
     public String notMeNodeNameReg() {
         return "(?!" + this.nodeName.toUpperCase(Locale.ROOT) + ")" + this.clusterName.toUpperCase(Locale.ROOT) + "(\\S)*";

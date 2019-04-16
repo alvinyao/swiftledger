@@ -28,7 +28,7 @@ import java.util.Map;
  * txOut repository
  *
  * @author lingchao
- * @create 2018年04月12日21:35
+ * @create 2018年04月12日21 :35
  */
 @Repository
 @Slf4j
@@ -42,16 +42,19 @@ public class TxOutRepository {
     @Autowired
     private TxOutRocksDao txOutRocksDao;
 
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
 
     /**
      * query txOut by txId, index and actionIndex
      *
-     * @param txId
-     * @param index
-     * @param actionIndex
-     * @return
+     * @param txId        the tx id
+     * @param index       the index
+     * @param actionIndex the action index
+     * @return tx out po
      */
     public TxOutPO queryTxOut(String txId, Integer index, Integer actionIndex) {
         if (initConfig.isUseMySQL()) {
@@ -63,8 +66,8 @@ public class TxOutRepository {
     /**
      * batch insert
      *
-     * @param txOutPOList
-     * @return
+     * @param txOutPOList the tx out po list
+     * @return boolean
      */
     public boolean batchInsert(List<TxOutPO> txOutPOList) {
         int affectRows;
@@ -85,8 +88,8 @@ public class TxOutRepository {
     /**
      * batch update
      *
-     * @param txOutPOList
-     * @return
+     * @param txOutPOList the tx out po list
+     * @return boolean
      */
     public boolean batchUpdate(List<TxOutPO> txOutPOList) {
         int affectRows;
@@ -98,6 +101,12 @@ public class TxOutRepository {
         return txOutPOList.size() == affectRows;
     }
 
+    /**
+     * Query tx out by tx id list.
+     *
+     * @param txId the tx id
+     * @return the list
+     */
     public List<UTXOVO> queryTxOutByTxId(String txId) {
         List<TxOutPO> list = txOutDao.queryByTxId(txId);
         if (CollectionUtils.isEmpty(list)) {

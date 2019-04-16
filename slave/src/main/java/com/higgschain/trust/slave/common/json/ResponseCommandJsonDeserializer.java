@@ -16,12 +16,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Response command json deserializer.
+ *
  * @author duhongming
- * @date 2018/8/3
+ * @date 2018 /8/3
  */
 @Slf4j
 public class ResponseCommandJsonDeserializer implements ObjectDeserializer {
 
+    /**
+     * The Type map.
+     */
     static Map<String, Type> typeMap = new HashMap<>();
 
     static {

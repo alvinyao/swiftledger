@@ -23,14 +23,24 @@ import java.util.*;
 
 /**
  * Created by Anton Nashatyrev on 06.10.2016.
+ *
+ * @param <V> the type parameter
  */
 public class ByteArrayMap<V> implements Map<byte[], V> {
     private final Map<ByteArrayWrapper, V> delegate;
 
+    /**
+     * Instantiates a new Byte array map.
+     */
     public ByteArrayMap() {
         this(new HashMap<ByteArrayWrapper, V>());
     }
 
+    /**
+     * Instantiates a new Byte array map.
+     *
+     * @param delegate the delegate
+     */
     public ByteArrayMap(Map<ByteArrayWrapper, V> delegate) {
         this.delegate = delegate;
     }

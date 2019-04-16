@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Transaction rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -25,6 +27,12 @@ public class TransactionRocksDao extends RocksBaseDao<TransactionReceiptPO> {
         return "transaction";
     }
 
+    /**
+     * Query tx receipts list.
+     *
+     * @param txIds the tx ids
+     * @return the list
+     */
     public List<TransactionReceiptPO> queryTxReceipts(List<String> txIds) {
 
         if (CollectionUtils.isEmpty(txIds)) {
@@ -45,6 +53,12 @@ public class TransactionRocksDao extends RocksBaseDao<TransactionReceiptPO> {
         return pos;
     }
 
+    /**
+     * Query tx ids list.
+     *
+     * @param txIds the tx ids
+     * @return the list
+     */
     public List<String> queryTxIds(List<String> txIds) {
 
         if (CollectionUtils.isEmpty(txIds)) {
@@ -55,6 +69,11 @@ public class TransactionRocksDao extends RocksBaseDao<TransactionReceiptPO> {
         return multiGetKeys(txIds);
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param receiptPOS the receipt pos
+     */
     public void batchInsert(List<TransactionReceiptPO> receiptPOS) {
         if (CollectionUtils.isEmpty(receiptPOS)) {
             log.info("[TransactionRocksDao.batchInsert] receiptPOS is empty");

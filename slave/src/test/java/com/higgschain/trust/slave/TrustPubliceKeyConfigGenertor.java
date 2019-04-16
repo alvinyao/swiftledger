@@ -19,11 +19,18 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * The type Trust publice key config genertor.
+ *
  * @author suimi
- * @date 2018/9/7
+ * @date 2018 /9/7
  */
 @Slf4j public class TrustPubliceKeyConfigGenertor {
 
+    /**
+     * Genertor.
+     *
+     * @throws NoSuchAlgorithmException the no such algorithm exception
+     */
     @Test public void genertor() throws NoSuchAlgorithmException {
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
         keyPairGen.initialize(2048);
@@ -68,11 +75,18 @@ import java.util.List;
 
     }
 
+    /**
+     * The type Node.
+     */
     @Data @Builder public static class Node {
         private String name;
         private KeyPair bizKey;
         private KeyPair conKey;
     }
+
+    /**
+     * The type Genius block.
+     */
     @Builder@Data
     public static class GeniusBlock{
         private long height = 1;
@@ -83,17 +97,26 @@ import java.util.List;
 
     }
 
+    /**
+     * The type Transaction.
+     */
     @Builder@Data
     public static class Transaction{
         private List<Action> actions;
     }
 
+    /**
+     * The type Action.
+     */
     @Builder@Data
     public static class Action{
         private String nodeName;
         private List<Key> keys;
     }
 
+    /**
+     * The type Key.
+     */
     @Builder@Data
     public static class Key{
         private String publicKey;

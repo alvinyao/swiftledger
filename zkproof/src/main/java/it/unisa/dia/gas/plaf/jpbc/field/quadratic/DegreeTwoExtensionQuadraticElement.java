@@ -3,11 +3,18 @@ package it.unisa.dia.gas.plaf.jpbc.field.quadratic;
 import it.unisa.dia.gas.jpbc.Element;
 
 /**
+ * The type Degree two extension quadratic element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class DegreeTwoExtensionQuadraticElement<E extends Element> extends QuadraticElement<E> {
 
-
+    /**
+     * Instantiates a new Degree two extension quadratic element.
+     *
+     * @param field the field
+     */
     public DegreeTwoExtensionQuadraticElement(DegreeTwoExtensionQuadraticField field) {
         super(field);
 
@@ -15,6 +22,11 @@ public class DegreeTwoExtensionQuadraticElement<E extends Element> extends Quadr
         this.y = (E) field.getTargetField().newElement();
     }
 
+    /**
+     * Instantiates a new Degree two extension quadratic element.
+     *
+     * @param element the element
+     */
     public DegreeTwoExtensionQuadraticElement(DegreeTwoExtensionQuadraticElement element) {
         super((QuadraticField) element.field);
 

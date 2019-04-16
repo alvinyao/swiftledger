@@ -17,8 +17,9 @@ import java.util.*;
  * it and implement the 'getColumnFamilyName' method. The 'getColumnFamilyName' must be
  * contained by the ColumnFamilyDescriptor.
  *
+ * @param <V> the type parameter
  * @author zhao xiaogang
- * @create 2018-05-21
+ * @create 2018 -05-21
  */
 public abstract class RocksBaseDao<V> {
 
@@ -26,6 +27,9 @@ public abstract class RocksBaseDao<V> {
 
     private Class<V> clazz;
 
+    /**
+     * Instantiates a new Rocks base dao.
+     */
     public RocksBaseDao() {
         clazz = getRealType();
     }
@@ -33,10 +37,16 @@ public abstract class RocksBaseDao<V> {
     /**
      * get column family name
      *
-     * @return
+     * @return column family name
      */
     protected abstract String getColumnFamilyName();
 
+    /**
+     * Get v.
+     *
+     * @param k the k
+     * @return the v
+     */
     public V get(String k) {
         try {
             ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
@@ -52,6 +62,15 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Gets for update.
+     *
+     * @param tx          the tx
+     * @param readOptions the read options
+     * @param key         the key
+     * @param exclusive   the exclusive
+     * @return the for update
+     */
     public V getForUpdate(Transaction tx, ReadOptions readOptions, String key, boolean exclusive) {
         try {
             ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
@@ -67,12 +86,24 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Key may exist boolean.
+     *
+     * @param k the k
+     * @return the boolean
+     */
     public boolean keyMayExist(String k) {
         ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
         byte[] key = JSON.toJSONBytes(k);
         return rocksDBWrapper.getRocksDB().keyMayExist(columnFamilyHandle, key, new StringBuilder());
     }
 
+    /**
+     * Put.
+     *
+     * @param k the k
+     * @param v the v
+     */
     public void put(String k, V v) {
         try {
             ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
@@ -85,6 +116,11 @@ public abstract class RocksBaseDao<V> {
         }
     }
 
+    /**
+     * Delete.
+     *
+     * @param k the k
+     */
     public void delete(String k) {
         try {
             ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
@@ -96,16 +132,32 @@ public abstract class RocksBaseDao<V> {
         }
     }
 
+    /**
+     * Iterator rocks iterator.
+     *
+     * @return the rocks iterator
+     */
     public RocksIterator iterator() {
         ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
         return rocksDBWrapper.getRocksDB().newIterator(columnFamilyHandle);
     }
 
+    /**
+     * Iterator rocks iterator.
+     *
+     * @param ro the ro
+     * @return the rocks iterator
+     */
     public RocksIterator iterator(ReadOptions ro) {
         ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
         return rocksDBWrapper.getRocksDB().newIterator(columnFamilyHandle, ro);
     }
 
+    /**
+     * Query all list.
+     *
+     * @return the list
+     */
     public List<V> queryAll() {
         RocksIterator iterator = iterator();
         List<V> list = new ArrayList<>();
@@ -115,14 +167,35 @@ public abstract class RocksBaseDao<V> {
         return list;
     }
 
+    /**
+     * Query by prefix list.
+     *
+     * @param prefix the prefix
+     * @return the list
+     */
     public List<V> queryByPrefix(String prefix) {
         return queryByPrefix(prefix, -1, null);
     }
 
+    /**
+     * Query by prefix list.
+     *
+     * @param prefix the prefix
+     * @param limit  the limit
+     * @return the list
+     */
     public List<V> queryByPrefix(String prefix, int limit) {
         return queryByPrefix(prefix, limit, null);
     }
 
+    /**
+     * Query by prefix list.
+     *
+     * @param prefix   the prefix
+     * @param limit    the limit
+     * @param position the position
+     * @return the list
+     */
     public List<V> queryByPrefix(String prefix, int limit, String position) {
         ReadOptions readOptions = new ReadOptions();
         readOptions.setPrefixSameAsStart(true);
@@ -163,6 +236,13 @@ public abstract class RocksBaseDao<V> {
         return keyStr.startsWith(prefix);
     }
 
+    /**
+     * Query keys by prefix list.
+     *
+     * @param prefix the prefix
+     * @param limit  the limit
+     * @return the list
+     */
     public List<String> queryKeysByPrefix(String prefix, int limit) {
         RocksIterator iterator = iterator(new ReadOptions().setPrefixSameAsStart(true).setTotalOrderSeek(true));
         List<String> list = new ArrayList<>();
@@ -174,6 +254,12 @@ public abstract class RocksBaseDao<V> {
         return list;
     }
 
+    /**
+     * Query for prev v.
+     *
+     * @param prefix the prefix
+     * @return the v
+     */
     public V queryForPrev(String prefix) {
         if (StringUtils.isEmpty(prefix)) {
             return null;
@@ -188,6 +274,12 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query key for prev string.
+     *
+     * @param prefix the prefix
+     * @return the string
+     */
     public String queryKeyForPrev(String prefix) {
         if (StringUtils.isEmpty(prefix)) {
             return null;
@@ -202,6 +294,11 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query last key string.
+     *
+     * @return the string
+     */
     public String queryLastKey() {
         RocksIterator iterator = iterator();
         for (iterator.seekToLast(); iterator.isValid(); iterator.prev()) {
@@ -210,6 +307,11 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query last value v.
+     *
+     * @return the v
+     */
     public V queryLastValue() {
         RocksIterator iterator = iterator();
         for (iterator.seekToLast(); iterator.isValid(); iterator.prev()) {
@@ -218,6 +320,12 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query last value with prefix v.
+     *
+     * @param prefix the prefix
+     * @return the v
+     */
     public V queryLastValueWithPrefix(String prefix) {
         RocksIterator iterator = iterator();
         for (iterator.seekToLast(); iterator.isValid(); iterator.prev()) {
@@ -229,6 +337,12 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query first key string.
+     *
+     * @param prefix the prefix
+     * @return the string
+     */
     public String queryFirstKey(String prefix) {
         RocksIterator iterator = iterator();
         if (StringUtils.isEmpty(prefix)) {
@@ -246,6 +360,12 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query first value by prefix v.
+     *
+     * @param prefix the prefix
+     * @return the v
+     */
     public V queryFirstValueByPrefix(String prefix) {
         if (StringUtils.isEmpty(prefix)) {
             return null;
@@ -259,6 +379,13 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query more than by prefix and position v.
+     *
+     * @param prefix   the prefix
+     * @param position the position
+     * @return the v
+     */
     public V queryMoreThanByPrefixAndPosition(String prefix, String position) {
         byte[] prefixByte = JSON.toJSONBytes(prefix);
 
@@ -272,6 +399,13 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Query less than by prefix and position list.
+     *
+     * @param prefix   the prefix
+     * @param position the position
+     * @return the list
+     */
     public List<V> queryLessThanByPrefixAndPosition(String prefix, String position) {
         byte[] prefixByte = JSON.toJSONBytes(prefix);
 
@@ -288,6 +422,11 @@ public abstract class RocksBaseDao<V> {
         return list;
     }
 
+    /**
+     * Keys list.
+     *
+     * @return the list
+     */
     public List<String> keys() {
         ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
 
@@ -303,8 +442,8 @@ public abstract class RocksBaseDao<V> {
     /**
      * Returns a map of keys for which values were found in DB
      *
-     * @param keys
-     * @return
+     * @param keys the keys
+     * @return map
      * @throws RocksDBException
      */
     public Map<String, V> multiGet(List<String> keys) {
@@ -339,8 +478,8 @@ public abstract class RocksBaseDao<V> {
     /**
      * Returns a map of keys for which values were found in DB
      *
-     * @param keys
-     * @return
+     * @param keys the keys
+     * @return list
      * @throws RocksDBException
      */
     public List<String> multiGetKeys(List<String> keys) {
@@ -371,6 +510,12 @@ public abstract class RocksBaseDao<V> {
         return null;
     }
 
+    /**
+     * Delete range.
+     *
+     * @param beginKey the begin key
+     * @param endKey   the end key
+     */
     public void deleteRange(String beginKey, String endKey) {
         ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
 
@@ -398,6 +543,13 @@ public abstract class RocksBaseDao<V> {
         return columnFamilyHandle;
     }
 
+    /**
+     * Tx put.
+     *
+     * @param tx  the tx
+     * @param key the key
+     * @param v   the v
+     */
     public void txPut(Transaction tx, String key, V v) {
         try {
             ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
@@ -410,6 +562,12 @@ public abstract class RocksBaseDao<V> {
         }
     }
 
+    /**
+     * Tx delete.
+     *
+     * @param tx  the tx
+     * @param key the key
+     */
     public void txDelete(Transaction tx, String key) {
         ColumnFamilyHandle columnFamilyHandle = getColumnFamilyHandle();
 
@@ -429,7 +587,7 @@ public abstract class RocksBaseDao<V> {
     /**
      * show all defined table names
      *
-     * @return
+     * @return list
      */
     public List<String> showTables() {
         if (rocksDBWrapper.getColumnFamilyHandleMap() == null) {
@@ -443,9 +601,10 @@ public abstract class RocksBaseDao<V> {
     /**
      * query by prefix 、count and order
      *
-     * @param count
-     * @param order
-     * @return
+     * @param prefix the prefix
+     * @param count  the count
+     * @param order  the order
+     * @return list
      */
     public List<V> queryByPrefix(String prefix, int count, int order) {
         RocksIterator iterator = getIteratorByPrefix(prefix, order);
@@ -505,8 +664,8 @@ public abstract class RocksBaseDao<V> {
     /**
      * count by
      *
-     * @param prefix
-     * @return
+     * @param prefix the prefix
+     * @return long
      */
     public long count(String prefix) {
         long count = 0L;

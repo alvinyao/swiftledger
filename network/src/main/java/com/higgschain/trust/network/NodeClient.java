@@ -18,11 +18,16 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * The type Node client.
+ *
  * @author duhongming
- * @date 2018/9/5
+ * @date 2018 /9/5
  */
 public class NodeClient {
 
+    /**
+     * The constant channelAttrKey.
+     */
     protected static final AttributeKey<String> channelAttrKey = AttributeKey.newInstance("session");
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -32,6 +37,14 @@ public class NodeClient {
     private final Address localAddress;
     private final ChannelHandler messageDispatcher;
 
+    /**
+     * Instantiates a new Node client.
+     *
+     * @param localAddress      the local address
+     * @param messageDispatcher the message dispatcher
+     * @param clientGroup       the client group
+     * @param config            the config
+     */
     public NodeClient(final Address localAddress, final ChannelHandler messageDispatcher,
                       final EventLoopGroup clientGroup, final NetworkConfig config) {
         this.clientGroup = clientGroup;
@@ -66,6 +79,12 @@ public class NodeClient {
         return bootstrap;
     }
 
+    /**
+     * Connect completable future.
+     *
+     * @param address the address
+     * @return the completable future
+     */
     public CompletableFuture<Channel> connect(Address address) {
         CompletableFuture<Channel> retFuture = new CompletableFuture<>();
         Bootstrap bootstrap = bootstrapClient(address);

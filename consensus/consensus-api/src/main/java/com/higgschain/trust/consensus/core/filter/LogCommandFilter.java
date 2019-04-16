@@ -10,8 +10,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Log command filter.
+ *
  * @author suimi
- * @date 2018/6/1
+ * @date 2018 /6/1
  */
 @Order(0)
 @Component @Slf4j public class LogCommandFilter implements CommandFilter {

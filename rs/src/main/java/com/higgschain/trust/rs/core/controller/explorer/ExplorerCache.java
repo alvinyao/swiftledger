@@ -18,9 +18,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Explorer cache.
+ *
  * @author liuyu
  * @description
- * @date 2018-07-17
+ * @date 2018 -07-17
  */
 @Component @Slf4j public class ExplorerCache implements InitializingBean {
     @Value("${rs.core.explorer.duration:60}") private Long duration;
@@ -44,8 +46,8 @@ import java.util.concurrent.TimeUnit;
     /**
      * put
      *
-     * @param key
-     * @param value
+     * @param key   the key
+     * @param value the value
      */
     public void put(CacheKey key, Object value) {
         CACHE.put(JSON.toJSONString(key), JSON.toJSONString(value));
@@ -54,8 +56,9 @@ import java.util.concurrent.TimeUnit;
     /**
      * get
      *
-     * @param key
-     * @return
+     * @param <T> the type parameter
+     * @param key the key
+     * @return t
      */
     public <T> T get(CacheKey key) {
         try {
@@ -79,6 +82,11 @@ import java.util.concurrent.TimeUnit;
         return null;
     }
 
+    /**
+     * The type Cache key.
+     *
+     * @param <T> the type parameter
+     */
     @AllArgsConstructor @Getter @Setter public static class CacheKey<T> {
         private String type;
         private T keyData;

@@ -28,31 +28,45 @@ import static org.junit.Assert.*;
 import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompiler.Options.*;
 
 /**
+ * The type Executor test.
+ *
  * @author Chen Jiawei
- * @date 2018-11-21
+ * @date 2018 -11-21
  */
 public class ExecutorTest {
     private static ExecutorFactory<ContractExecutionContext, ContractExecutionResult> factory;
     private static BlockStore blockStore;
     private Repository blockRepository;
 
+    /**
+     * Sets up.
+     */
     @BeforeClass
     public static void setUp() {
         factory = new ContractExecutorFactory();
         blockStore = buildBlockStore();
     }
 
+    /**
+     * Tear down.
+     */
     @AfterClass
     public static void tearDown() {
         blockStore = null;
         factory = null;
     }
 
+    /**
+     * Init.
+     */
     @Before
     public void init() {
         blockRepository = buildBlockRepository();
     }
 
+    /**
+     * Finish.
+     */
     @After
     public void finish() {
         blockRepository = null;
@@ -94,6 +108,7 @@ public class ExecutorTest {
     //            return data;
     //        }
     //    }
+
     /**
      * 部署成功。
      */
@@ -170,6 +185,7 @@ public class ExecutorTest {
     //            return data;
     //        }
     //    }
+
     /**
      * 部署失败：value不为0。
      */
@@ -335,6 +351,7 @@ public class ExecutorTest {
     //            return data;
     //        }
     //    }
+
     /**
      * 部署成功：含非默认构造方法，传参18。
      */
@@ -418,6 +435,7 @@ public class ExecutorTest {
     //            return data;
     //        }
     //    }
+
     /**
      * 合约调用：调用get方法，返回字段18。
      */
@@ -615,8 +633,11 @@ public class ExecutorTest {
     //            emit Sent(25, msg.sender, 56);
     //        }
     //    }
+
     /**
      * 事件日志。
+     *
+     * @throws IOException the io exception
      */
     @Test//(timeout = 1000L)
     public void testExecute_Logs_009() throws IOException {
@@ -772,6 +793,8 @@ public class ExecutorTest {
 
     /**
      * 合约内调用合约。
+     *
+     * @throws IOException the io exception
      */
     @Test//(timeout = 1000L)
     public void testExecute_InvokeContract_010() throws IOException {
@@ -906,6 +929,11 @@ public class ExecutorTest {
         return  (byte[]) list.get(0);
     }
 
+    /**
+     * Test execute create contract 011.
+     *
+     * @throws IOException the io exception
+     */
     @Test(timeout = 3000L)
     public void testExecute_CreateContract_011() throws IOException {
         deployCreateCreate();
@@ -964,6 +992,9 @@ public class ExecutorTest {
 ////        Assert.assertFalse(executor.getContractRepository().isExist(contractAddress));
 //    }
 
+    /**
+     * Test event abi.
+     */
     @Test
     public void testEventAbi() {
         byte[] encodedLog = Hex.decode("f89b9400a615668486da40f31fd050854fb137b317e056f842a02e0c9b7721d4bcc1b5781e2248e010b07b94a614f855a3406b43d03aad9ad4d2a00000000000000000000000000000000000000000000000000000000000000019b84000000000000000000000000005792f204d45f061a5b68847534b428a127ae5830000000000000000000000000000000000000000000000000000000000000038");
@@ -986,7 +1017,9 @@ public class ExecutorTest {
         assertEquals(3, parameters.size());
     }
 
-
+    /**
+     * Test create and invoke.
+     */
     //    pragma solidity ^0.4.24;
     //
     //    contract DataStorage {

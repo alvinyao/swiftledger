@@ -89,7 +89,7 @@ public class CompactEncoder {
      * Pack nibbles to binary
      *
      * @param nibbles sequence. may have a terminator
-     * @return hex-encoded byte array
+     * @return hex -encoded byte array
      */
     public static byte[] packNibbles(byte[] nibbles) {
         int terminator = 0;
@@ -114,6 +114,12 @@ public class CompactEncoder {
         return buffer.toByteArray();
     }
 
+    /**
+     * Has terminator boolean.
+     *
+     * @param packedKey the packed key
+     * @return the boolean
+     */
     public static boolean hasTerminator(byte[] packedKey) {
         return ((packedKey[0] >> 4) & 2) != 0;
     }
@@ -158,7 +164,12 @@ public class CompactEncoder {
         return hexEncodedTerminated;
     }
 
-
+    /**
+     * Bin to nibbles no terminator byte [ ].
+     *
+     * @param str the str
+     * @return the byte [ ]
+     */
     public static byte[] binToNibblesNoTerminator(byte[] str) {
 
         byte[] hexEncoded = encode(str);

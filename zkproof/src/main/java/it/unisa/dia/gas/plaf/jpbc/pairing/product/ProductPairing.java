@@ -10,12 +10,30 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.DefaultPairingPreProcessing;
 import java.security.SecureRandom;
 
 /**
+ * The type Product pairing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ProductPairing implements Pairing {
+    /**
+     * The Base pairing.
+     */
     protected Pairing basePairing;
-    protected Field G1, G2;
+    /**
+     * The G 1.
+     */
+    protected Field G1, /**
+     * The G 2.
+     */
+    G2;
 
+    /**
+     * Instantiates a new Product pairing.
+     *
+     * @param random      the random
+     * @param basePairing the base pairing
+     * @param n           the n
+     */
     public ProductPairing(SecureRandom random, Pairing basePairing, int n) {
         this.basePairing = basePairing;
 

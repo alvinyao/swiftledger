@@ -58,6 +58,10 @@ public class RSAKeyLoader {
 
     /**
      * Creates a new instance of RSAKeyLoader
+     *
+     * @param id          the id
+     * @param configHome  the config home
+     * @param defaultKeys the default keys
      */
     public RSAKeyLoader(int id, String configHome, boolean defaultKeys) {
 
@@ -70,12 +74,16 @@ public class RSAKeyLoader {
         }
     }
 
+    /**
+     * Instantiates a new Rsa key loader.
+     */
     public RSAKeyLoader() {
     }
 
     /**
      * Loads the public key of some processes from configuration files
      *
+     * @param id the id
      * @return the PublicKey loaded from config/keys/publickey<id>
      * @throws Exception problems reading or parsing the key
      */
@@ -98,11 +106,24 @@ public class RSAKeyLoader {
         return ret;
     }
 
+    /**
+     * Load public key public key.
+     *
+     * @param pubKeyStr the pub key str
+     * @return the public key
+     * @throws Exception the exception
+     */
     //TODO zyf add
     public PublicKey loadPublicKey(String pubKeyStr) throws Exception {
         return getPublicKeyFromString(pubKeyStr);
     }
 
+    /**
+     * Load public key public key.
+     *
+     * @return the public key
+     * @throws Exception the exception
+     */
     public PublicKey loadPublicKey() throws Exception {
 
         if (defaultKeys) {
@@ -149,6 +170,13 @@ public class RSAKeyLoader {
         return priKey;
     }
 
+    /**
+     * Gets private key from string.
+     *
+     * @param key the key
+     * @return the private key from string
+     * @throws Exception the exception
+     */
     //utility methods for going from string to public/private key
     public PrivateKey getPrivateKeyFromString(String key) throws Exception {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
@@ -157,6 +185,13 @@ public class RSAKeyLoader {
         return privateKey;
     }
 
+    /**
+     * Gets public key from string.
+     *
+     * @param key the key
+     * @return the public key from string
+     * @throws Exception the exception
+     */
     public PublicKey getPublicKeyFromString(String key) throws Exception {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(Base64.decodeBase64(key));

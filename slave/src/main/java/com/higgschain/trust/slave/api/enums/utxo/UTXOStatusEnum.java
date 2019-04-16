@@ -6,12 +6,24 @@ import lombok.Getter;
  * utxo status enum
  *
  * @author lingchao
- * @create 2018年03月27日16:53
+ * @create 2018年03月27日16 :53
  */
-@Getter public enum UTXOStatusEnum {
-    UNSPENT("UNSPENT", "it is utxo"), SPENT("SPENT", "is is STXO"),;
+@Getter public enum UTXOStatusEnum {/**
+ * The Unspent.
+ */
+UNSPENT("UNSPENT", "it is utxo"),
+    /**
+     * The Spent.
+     */
+    SPENT("SPENT", "is is STXO"),;
 
+    /**
+     * The Code.
+     */
     String code;
+    /**
+     * The Desc.
+     */
     String desc;
 
     UTXOStatusEnum(String code, String desc) {

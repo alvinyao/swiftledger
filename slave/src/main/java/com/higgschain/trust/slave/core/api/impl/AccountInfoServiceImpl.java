@@ -12,13 +12,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * The type Account info service.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-09
+ * @date 2018 -05-09
  */
 @Service
 @Slf4j
 public class AccountInfoServiceImpl implements AccountInfoService {
+    /**
+     * The Account repository.
+     */
     @Autowired
     AccountRepository accountRepository;
 

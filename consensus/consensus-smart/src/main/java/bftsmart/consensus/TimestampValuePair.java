@@ -88,7 +88,7 @@ public class TimestampValuePair implements Externalizable {
     /**
      * Get value
      *
-     * @return Value
+     * @return Value byte [ ]
      */
     public byte[] getValue() {
         return value;

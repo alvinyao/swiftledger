@@ -42,7 +42,7 @@ public interface ApplicationState extends Serializable {
     /**
      * Retrieves the certified decision for the last consensus present in this object
      *
-     * @param controller
+     * @param controller the controller
      * @return The certified decision for the last consensus present in this object
      */
     public CertifiedDecision getCertifiedDecision(ServerViewController controller);

@@ -11,10 +11,17 @@ import com.higgschain.trust.evmcontract.vm.program.invoke.ProgramInvoke;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
+ * The type Contract creation executor.
+ *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 public class ContractCreationExecutor extends BaseContractExecutor {
+    /**
+     * Instantiates a new Contract creation executor.
+     *
+     * @param contractExecutionContext the contract execution context
+     */
     ContractCreationExecutor(ContractExecutionContext contractExecutionContext) {
         super(contractExecutionContext);
     }

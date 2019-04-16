@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
+ * The type Manage controller.
+ *
  * @author tangfashuang
- * @date 2018/05/18 11:26
+ * @date 2018 /05/18 11:26
  * @desc manage controller
  */
 @RequestMapping("/v1/manage")
@@ -29,8 +31,11 @@ public class ManageController {
     private RsManageService rsManageService;
 
     /**
-     * @param registerRsVO
-     * @return
+     * Register rs resp data.
+     *
+     * @param registerRsVO the register rs vo
+     * @param result       the result
+     * @return resp data
      */
     @RequestMapping("/rs/register")
     public RespData registerRs(@RequestBody @Valid RegisterRsVO registerRsVO, BindingResult result) {
@@ -45,8 +50,11 @@ public class ManageController {
     }
 
     /**
-     * @param cancelRsVO
-     * @return
+     * Cancel rs resp data.
+     *
+     * @param cancelRsVO the cancel rs vo
+     * @param result     the result
+     * @return resp data
      */
     @RequestMapping("/rs/cancel")
     public RespData cancelRs(@RequestBody @Valid CancelRsVO cancelRsVO, BindingResult result) {
@@ -60,6 +68,13 @@ public class ManageController {
         return rsManageService.cancelRs(cancelRsVO);
     }
 
+    /**
+     * Register policy resp data.
+     *
+     * @param registerPolicyVO the register policy vo
+     * @param result           the result
+     * @return the resp data
+     */
     @RequestMapping("/policy/register")
     public RespData registerPolicy(@RequestBody @Valid RegisterPolicyVO registerPolicyVO, BindingResult result) {
         log.info("[ManageController.registerPolicy] register policy request receive. {}", registerPolicyVO);

@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
  * dataIdentity test
  *
  * @author lingchao
- * @create 2018年05月08日18:56
+ * @create 2018年05月08日18 :56
  */
 @Slf4j
 public class DataIdentityTest extends InterfaceCommonTest {
@@ -37,6 +37,11 @@ public class DataIdentityTest extends InterfaceCommonTest {
         return PROVIDER_ROOT_PATH;
     }
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1)
     public void paramValidate(Map<?, ?> param) {
         log.info("[paramValidate]{}", param.get("comment"));
@@ -44,6 +49,11 @@ public class DataIdentityTest extends InterfaceCommonTest {
         executeActionHandler(param, dataIdentityActionHandler, action);
     }
 
+    /**
+     * Test regular.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 2)
     public void testRegular(Map<?, ?> param) {
         log.info("[testRegular]{}", param.get("comment"));
@@ -59,6 +69,11 @@ public class DataIdentityTest extends InterfaceCommonTest {
         executeAfterSql(param);
     }
 
+    /**
+     * Test exception.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 3)
     public void testException(Map<?, ?> param) {
         log.info("[testException]{}", param.get("comment"));
@@ -70,7 +85,11 @@ public class DataIdentityTest extends InterfaceCommonTest {
         executeAfterSql(param);
     }
 
-
+    /**
+     * Service param validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 4)
     public void serviceParamValidate(Map<?, ?> param) {
         log.info("[paramValidate]{}", param.get("comment"));
@@ -81,7 +100,11 @@ public class DataIdentityTest extends InterfaceCommonTest {
         assertEquals(isTrue, Boolean.parseBoolean(assertData));
     }
 
-
+    /**
+     * Service test regular.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 5)
     public void serviceTestRegular(Map<?, ?> param) {
         log.info("[serviceTestRegular]{}", param.get("comment"));
@@ -92,7 +115,11 @@ public class DataIdentityTest extends InterfaceCommonTest {
         assertEquals(isTrue, Boolean.parseBoolean(assertData));
     }
 
-
+    /**
+     * Service test exception.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 6)
     public void serviceTestException(Map<?, ?> param) {
         log.info("[serviceTestException]{}", param.get("comment"));

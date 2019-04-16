@@ -14,8 +14,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * The type Contract query service.
+ *
  * @author duhongming
- * @date 2018/6/22
+ * @date 2018 /6/22
  */
 @Slf4j
 @Service
@@ -63,6 +65,9 @@ public class ContractQueryServiceImpl implements ContractQueryService {
         private String methodSignature;
         private Object[] methodInputArgs;
 
+        /**
+         * Check.
+         */
         public void check() {
             Matcher matcher = METHOD_SIGNATURE_PATTERN.matcher(methodSignature);
             if (!matcher.find()) {
@@ -77,11 +82,23 @@ public class ContractQueryServiceImpl implements ContractQueryService {
             }
         }
 
+        /**
+         * With method signature parameter checker.
+         *
+         * @param methodSignature the method signature
+         * @return the parameter checker
+         */
         public ParameterChecker withMethodSignature(String methodSignature) {
             this.methodSignature = methodSignature;
             return this;
         }
 
+        /**
+         * With method input args parameter checker.
+         *
+         * @param methodInputArgs the method input args
+         * @return the parameter checker
+         */
         public ParameterChecker withMethodInputArgs(Object[] methodInputArgs) {
             this.methodInputArgs = methodInputArgs;
             return this;

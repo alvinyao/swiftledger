@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * The type State sender server.
+ */
 public class StateSenderServer implements Runnable {
 
     private ServerSocket server;
@@ -32,19 +35,39 @@ public class StateSenderServer implements Runnable {
     private DurabilityCoordinator coordinator;
     private CSTRequest request;
 
+    /**
+     * Sets state.
+     *
+     * @param state the state
+     */
     public void setState(ApplicationState state) {
         this.state = state;
     }
 
+    /**
+     * Sets recoverable.
+     *
+     * @param recoverable the recoverable
+     */
     public void setRecoverable(Recoverable recoverable) {
         this.recoverable = recoverable;
         coordinator = (DurabilityCoordinator)(recoverable);
     }
 
+    /**
+     * Sets request.
+     *
+     * @param request the request
+     */
     public void setRequest(CSTRequest request) {
         this.request = request;
     }
 
+    /**
+     * Instantiates a new State sender server.
+     *
+     * @param port the port
+     */
     public StateSenderServer(int port) {
         try {
             server = new ServerSocket(port);

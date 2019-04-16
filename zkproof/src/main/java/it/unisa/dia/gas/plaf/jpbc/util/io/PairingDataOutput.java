@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 /**
+ * The type Pairing data output.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class PairingDataOutput implements DataOutput {
@@ -15,11 +17,21 @@ public class PairingDataOutput implements DataOutput {
 
     private Pairing pairing;
 
-
+    /**
+     * Instantiates a new Pairing data output.
+     *
+     * @param dataOutput the data output
+     */
     public PairingDataOutput(DataOutput dataOutput) {
         this(null, dataOutput);
     }
 
+    /**
+     * Instantiates a new Pairing data output.
+     *
+     * @param pairing    the pairing
+     * @param dataOutput the data output
+     */
     public PairingDataOutput(Pairing pairing, DataOutput dataOutput) {
         this.pairing = pairing;
         this.dataOutput = dataOutput;
@@ -82,7 +94,12 @@ public class PairingDataOutput implements DataOutput {
         dataOutput.writeUTF(s);
     }
 
-
+    /**
+     * Write element.
+     *
+     * @param element the element
+     * @throws IOException the io exception
+     */
     public void writeElement(Element element) throws IOException {
         if (element == null)
             writeInt(0);
@@ -93,6 +110,12 @@ public class PairingDataOutput implements DataOutput {
         }
     }
 
+    /**
+     * Write elements.
+     *
+     * @param elements the elements
+     * @throws IOException the io exception
+     */
     public void writeElements(Element[] elements) throws IOException {
         if (elements == null)
             writeInt(0);
@@ -103,6 +126,12 @@ public class PairingDataOutput implements DataOutput {
         }
     }
 
+    /**
+     * Write pre processing.
+     *
+     * @param processing the processing
+     * @throws IOException the io exception
+     */
     public void writePreProcessing(PreProcessing processing) throws IOException {
         byte[] buffer = processing.toBytes();
 
@@ -116,6 +145,12 @@ public class PairingDataOutput implements DataOutput {
         writeBytes(buffer);
     }
 
+    /**
+     * Write ints.
+     *
+     * @param ints the ints
+     * @throws IOException the io exception
+     */
     public void writeInts(int[] ints) throws IOException {
         if (ints == null) {
             writeInt(0);
@@ -125,23 +160,43 @@ public class PairingDataOutput implements DataOutput {
         }
     }
 
+    /**
+     * Write bytes.
+     *
+     * @param buffer the buffer
+     * @throws IOException the io exception
+     */
     public void writeBytes(byte[] buffer) throws IOException{
         writeInt(buffer.length);
         write(buffer);
     }
 
-
+    /**
+     * Gets pairing.
+     *
+     * @return the pairing
+     */
     public Pairing getPairing() {
         return pairing;
     }
 
-
-
+    /**
+     * Write big integer.
+     *
+     * @param bigInteger the big integer
+     * @throws IOException the io exception
+     */
     public void writeBigInteger(BigInteger bigInteger) throws IOException {
         writeBytes(bigInteger.toByteArray());
     }
 
-
+    /**
+     * Write big integer.
+     *
+     * @param bigInteger   the big integer
+     * @param ensureLength the ensure length
+     * @throws IOException the io exception
+     */
     public void writeBigInteger(BigInteger bigInteger, int ensureLength) throws IOException {
         byte[] bytes = bigInteger.toByteArray();
 
@@ -161,6 +216,12 @@ public class PairingDataOutput implements DataOutput {
         writeBytes(bytes);
     }
 
+    /**
+     * Write big integers.
+     *
+     * @param bigIntegers the big integers
+     * @throws IOException the io exception
+     */
     public void writeBigIntegers(BigInteger[] bigIntegers) throws IOException {
         writeInt(bigIntegers.length);
         for (BigInteger bigInteger : bigIntegers) {
@@ -168,6 +229,13 @@ public class PairingDataOutput implements DataOutput {
         }
     }
 
+    /**
+     * Write big integers.
+     *
+     * @param bigIntegers  the big integers
+     * @param ensureLength the ensure length
+     * @throws IOException the io exception
+     */
     public void writeBigIntegers(BigInteger[] bigIntegers, int ensureLength) throws IOException {
         writeInt(bigIntegers.length);
         for (BigInteger bigInteger : bigIntegers) {
@@ -175,6 +243,12 @@ public class PairingDataOutput implements DataOutput {
         }
     }
 
+    /**
+     * Write pairing field index.
+     *
+     * @param field the field
+     * @throws IOException the io exception
+     */
     protected void writePairingFieldIndex(Field field) throws IOException {
         int index = getPairing().getFieldIndex(field);
         if (index == -1)

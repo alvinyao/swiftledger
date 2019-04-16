@@ -11,47 +11,51 @@ import java.util.List;
  * TransactionPO data deal dao
  *
  * @author lingchao
- * @create 2018年03月27日20:10
+ * @create 2018年03月27日20 :10
  */
 @Mapper public interface TransactionDao extends BaseDao<TransactionPO> {
 
     /**
      * query transaction by transaction id
      *
-     * @param txId
-     * @return
+     * @param txId the tx id
+     * @return transaction po
      */
     TransactionPO queryByTxId(String txId);
 
     /**
      * batch insert
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     int batchInsert(List<TransactionPO> list);
 
     /**
      * query by block height
-     * @param blockHeight
-     * @return
+     *
+     * @param blockHeight the block height
+     * @return list
      */
     List<TransactionPO> queryByBlockHeight(@Param("blockHeight") Long blockHeight);
 
     /**
      * query by tx ids
      *
-     * @param txIds
-     * @return
+     * @param txIds the tx ids
+     * @return list
      */
     List<TransactionPO> queryByTxIds(@Param("txIds") List<String> txIds);
 
     /**
      * query transactions with condition
-     * @param blockHeight
-     * @param txId
-     * @param sender
-     * @return
+     *
+     * @param blockHeight the block height
+     * @param txId        the tx id
+     * @param sender      the sender
+     * @param start       the start
+     * @param end         the end
+     * @return list
      */
     List<TransactionPO> queryTxWithCondition(@Param("height") Long blockHeight,
         @Param("txId") String txId, @Param("sender") String sender,
@@ -59,10 +63,11 @@ import java.util.List;
 
     /**
      * count transaction with condition
-     * @param blockHeight
-     * @param txId
-     * @param sender
-     * @return
+     *
+     * @param blockHeight the block height
+     * @param txId        the tx id
+     * @param sender      the sender
+     * @return long
      */
     long countTxWithCondition(@Param("height") Long blockHeight,
         @Param("txId") String txId, @Param("sender") String sender);

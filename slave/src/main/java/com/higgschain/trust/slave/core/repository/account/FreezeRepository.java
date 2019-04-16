@@ -27,33 +27,60 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Freeze repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-10
+ * @date 2018 -04-10
  */
 @Repository @Slf4j public class FreezeRepository {
+    /**
+     * The Account info dao.
+     */
     @Autowired
     AccountInfoDao accountInfoDao;
+    /**
+     * The Account info rocks dao.
+     */
     @Autowired
     AccountInfoRocksDao accountInfoRocksDao;
+    /**
+     * The Account freeze record rocks dao.
+     */
     @Autowired
     AccountFreezeRecordRocksDao accountFreezeRecordRocksDao;
+    /**
+     * The Account freeze record dao.
+     */
     @Autowired
     AccountFreezeRecordDao accountFreezeRecordDao;
+    /**
+     * The Account detail freeze rocks dao.
+     */
     @Autowired
     AccountDetailFreezeRocksDao accountDetailFreezeRocksDao;
+    /**
+     * The Account detail freeze dao.
+     */
     @Autowired
     AccountDetailFreezeDao accountDetailFreezeDao;
+    /**
+     * The Account jdbc dao.
+     */
     @Autowired
     AccountJDBCDao accountJDBCDao;
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
+
     /**
      * query account freeze record
      *
-     * @param bizFlowNo
-     * @param accountNo
-     * @return
+     * @param bizFlowNo the biz flow no
+     * @param accountNo the account no
+     * @return account freeze record
      */
     public AccountFreezeRecord queryByFlowNoAndAccountNo(String bizFlowNo, String accountNo) {
         AccountFreezeRecordPO accountFreezeRecordPO;
@@ -68,9 +95,9 @@ import java.util.List;
     /**
      * build a new record
      *
-     * @param accountFreeze
-     * @param blockHeight
-     * @return
+     * @param accountFreeze the account freeze
+     * @param blockHeight   the block height
+     * @return account freeze record
      */
     public AccountFreezeRecord build(AccountFreeze accountFreeze, Long blockHeight) {
         AccountFreezeRecord accountFreezeRecord = new AccountFreezeRecord();
@@ -86,7 +113,7 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param accountFreezeRecords
+     * @param accountFreezeRecords the account freeze records
      */
     public void batchInsert(List<AccountFreezeRecord> accountFreezeRecords) {
         if (CollectionUtils.isEmpty(accountFreezeRecords)) {
@@ -116,7 +143,7 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param accountFreezeRecords
+     * @param accountFreezeRecords the account freeze records
      */
     public void batchUpdate(List<AccountFreezeRecord> accountFreezeRecords) {
         if (CollectionUtils.isEmpty(accountFreezeRecords)) {
@@ -142,7 +169,7 @@ import java.util.List;
     /**
      * batch insert detail freeze
      *
-     * @param detailFreezes
+     * @param detailFreezes the detail freezes
      */
     public void batchInsertDetailFreezes(List<AccountDetailFreeze> detailFreezes) {
         if (CollectionUtils.isEmpty(detailFreezes)) {

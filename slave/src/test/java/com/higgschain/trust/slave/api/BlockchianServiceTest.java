@@ -15,21 +15,32 @@ public class BlockchianServiceTest extends BaseTest {
     @Autowired
     private BlockChainService blockChainService;
 
+    /**
+     * Test save.
+     */
     @Test
     public void testSave() {
     }
 
+    /**
+     * Test remove.
+     */
     @Test
     public void testRemove() {
     }
 
+    /**
+     * Test query system property by key.
+     */
     @Test
     public void testQuerySystemPropertyByKey() {
         System.out.println("CHAIN_OWNER:" + blockChainService.querySystemPropertyByKey("CHAIN_OWNER"));
         System.out.println("UTXO_CONTRACT_ADDRESS:" + blockChainService.querySystemPropertyByKey("UTXO_CONTRACT_ADDRESS"));
     }
 
-
+    /**
+     * Test query utxo list.
+     */
     @Test
     public void testQueryUTXOList() {
         List<TxIn> inputList = Lists.newArrayList();

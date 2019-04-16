@@ -7,11 +7,16 @@ import com.higgschain.trust.consensus.core.IConsensusSnapshot;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * The type Example snapshot.
+ *
  * @author suimi
- * @date 2018/8/15
+ * @date 2018 /8/15
  */
 @Slf4j public class ExampleSnapshot implements IConsensusSnapshot {
 
+    /**
+     * The Current index.
+     */
     long currentIndex = 0;
 
     @Override public byte[] getSnapshot() {
@@ -30,6 +35,11 @@ import lombok.extern.slf4j.Slf4j;
         }
     }
 
+    /**
+     * Update index.
+     *
+     * @param index the index
+     */
     public void updateIndex(long index) {
         if (this.currentIndex != index - 1) {
             log.warn("the index:{} is not allowed, current index:{}", index, this.currentIndex);
@@ -38,6 +48,11 @@ import lombok.extern.slf4j.Slf4j;
         }
     }
 
+    /**
+     * Gets current index.
+     *
+     * @return the current index
+     */
     public long getCurrentIndex() {
         return currentIndex;
     }

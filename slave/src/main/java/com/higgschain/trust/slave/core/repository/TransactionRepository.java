@@ -29,23 +29,45 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 /**
+ * The type Transaction repository.
+ *
  * @author tangfashuang
  * @desc pending transaction repository
- * @date 2018/4/9
+ * @date 2018 /4/9
  */
-
 @Repository @Slf4j public class TransactionRepository {
+    /**
+     * The Transaction dao.
+     */
     @Autowired
     TransactionDao transactionDao;
+    /**
+     * The Transaction jdbc dao.
+     */
     @Autowired
     TransactionJDBCDao transactionJDBCDao;
+    /**
+     * The Transaction rocks dao.
+     */
     @Autowired
     TransactionRocksDao transactionRocksDao;
+    /**
+     * The Block rocks dao.
+     */
     @Autowired
     BlockRocksDao blockRocksDao;
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
 
+    /**
+     * Is exist boolean.
+     *
+     * @param txId the tx id
+     * @return the boolean
+     */
     public boolean isExist(String txId) {
         if (initConfig.isUseMySQL()) {
             if (null != transactionDao.queryByTxId(txId)) {
@@ -62,8 +84,8 @@ import java.util.*;
     /**
      * query more execute receipt for txs
      *
-     * @param blockHeight
-     * @return
+     * @param blockHeight the block height
+     * @return object [ ]
      */
     public Object[] queryFinalTxsForMysql(Long blockHeight) {
         List<TransactionPO> txPOs = transactionDao.queryByBlockHeight(blockHeight);
@@ -88,8 +110,8 @@ import java.util.*;
     /**
      * query more execute receipt for txs by rocks db
      *
-     * @param txs
-     * @return
+     * @param txs the txs
+     * @return map
      */
     public Map<String, TransactionReceipt> queryTxReceiptMapForRocksdb(List<SignedTransaction> txs) {
         if (CollectionUtils.isEmpty(txs)) {
@@ -115,8 +137,8 @@ import java.util.*;
     /**
      * query transactions by block height
      *
-     * @param blockHeight
-     * @return
+     * @param blockHeight the block height
+     * @return list
      */
     public List<SignedTransaction> queryTransactions(Long blockHeight) {
         List<TransactionPO> txPOs;
@@ -133,6 +155,12 @@ import java.util.*;
         return convertPOsToBOs(txPOs);
     }
 
+    /**
+     * Convert p os to b os list.
+     *
+     * @param txPOs the tx p os
+     * @return the list
+     */
     public List<SignedTransaction> convertPOsToBOs(List<TransactionPO> txPOs) {
         List<SignedTransaction> txs = new ArrayList<>();
         for (TransactionPO tx : txPOs) {
@@ -156,9 +184,10 @@ import java.util.*;
     /**
      * batch process transaction
      *
-     * @param blockHeight
-     * @param txs
-     * @param txReceiptMap
+     * @param blockHeight  the block height
+     * @param blockTime    the block time
+     * @param txs          the txs
+     * @param txReceiptMap the tx receipt map
      */
     public void batchSaveTransaction(Long blockHeight, Date blockTime, List<SignedTransaction> txs,
         Map<String, TransactionReceipt> txReceiptMap) {
@@ -206,6 +235,15 @@ import java.util.*;
         return receiptPOS;
     }
 
+    /**
+     * Build transaction p os list.
+     *
+     * @param blockHeight  the block height
+     * @param blockTime    the block time
+     * @param txs          the txs
+     * @param txReceiptMap the tx receipt map
+     * @return the list
+     */
     public List<TransactionPO> buildTransactionPOs(Long blockHeight, Date blockTime, List<SignedTransaction> txs,
         Map<String, TransactionReceipt> txReceiptMap) {
         List<TransactionPO> txPOs = new ArrayList<>();
@@ -235,8 +273,8 @@ import java.util.*;
     /**
      * return txIds from db
      *
-     * @param txs
-     * @return
+     * @param txs the txs
+     * @return list
      */
     public List<String> queryTxIds(List<SignedTransaction> txs) {
         List<String> datas = new ArrayList<>();
@@ -269,6 +307,12 @@ import java.util.*;
         return datas;
     }
 
+    /**
+     * Query tx ids by ids list.
+     *
+     * @param txIds the tx ids
+     * @return the list
+     */
     public List<String> queryTxIdsByIds(List<String> txIds) {
         if (CollectionUtils.isEmpty(txIds)) {
             return null;
@@ -297,12 +341,12 @@ import java.util.*;
     /**
      * query by condition、page
      *
-     * @param blockHeight
-     * @param txId
-     * @param sender
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param blockHeight the block height
+     * @param txId        the tx id
+     * @param sender      the sender
+     * @param pageNum     the page num
+     * @param pageSize    the page size
+     * @return list
      */
     public List<CoreTransactionVO> queryTxsWithCondition(Long blockHeight, String txId, String sender, Integer pageNum,
                                                          Integer pageSize) {
@@ -317,6 +361,14 @@ import java.util.*;
         return BeanConvertor.convertList(list, CoreTransactionVO.class);
     }
 
+    /**
+     * Count txs with condition long.
+     *
+     * @param blockHeight the block height
+     * @param txId        the tx id
+     * @param sender      the sender
+     * @return the long
+     */
     @Deprecated public long countTxsWithCondition(Long blockHeight, String txId, String sender) {
         return transactionDao.countTxWithCondition(blockHeight, txId, sender);
     }
@@ -324,8 +376,8 @@ import java.util.*;
     /**
      * query tx by id
      *
-     * @param txId
-     * @return
+     * @param txId the tx id
+     * @return core transaction vo
      */
     public CoreTransactionVO queryTxById(String txId) {
         TransactionPO transactionPO = transactionDao.queryByTxId(txId);
@@ -338,8 +390,8 @@ import java.util.*;
     /**
      * return CoreTransactionVO from db
      *
-     * @param txIds
-     * @return
+     * @param txIds the tx ids
+     * @return list
      */
     public List<CoreTransactionVO> queryTxs(List<String> txIds) {
         if (CollectionUtils.isEmpty(txIds)) {

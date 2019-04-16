@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Utxovo.
+ */
 @Setter
 @Getter
 public class UTXOVO extends BaseBO {

@@ -10,8 +10,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * The type Function parser.
+ *
  * @author Chen Jiawei
- * @date 2018-12-29
+ * @date 2018 -12-29
  */
 public class FunctionParser implements MemberParser<String, Abi.Function> {
     private static final FunctionParser INSTANCE = new FunctionParser();
@@ -19,6 +21,11 @@ public class FunctionParser implements MemberParser<String, Abi.Function> {
     private FunctionParser() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static FunctionParser getInstance() {
         return INSTANCE;
     }

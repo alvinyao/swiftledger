@@ -1,12 +1,22 @@
 package com.higgschain.trust.network.message;
 
 /**
+ * The type Network message.
+ *
  * @author duhongming
- * @date 2018/9/3
+ * @date 2018 /9/3
  */
 public abstract class NetworkMessage {
-    public enum Type {
-        REQUEST(1),
+    /**
+     * The enum Type.
+     */
+    public enum Type {/**
+     * Request type.
+     */
+    REQUEST(1),
+        /**
+         * Response type.
+         */
         RESPONSE(2);
 
         private final int id;
@@ -45,15 +55,31 @@ public abstract class NetworkMessage {
     private long id;
     private byte[] payload;
 
+    /**
+     * Instantiates a new Network message.
+     *
+     * @param id      the id
+     * @param payload the payload
+     */
     public NetworkMessage(long id, byte[] payload) {
         this.id = id;
         this.payload = payload;
     }
 
+    /**
+     * Id long.
+     *
+     * @return the long
+     */
     public long id() {
         return this.id;
     }
 
+    /**
+     * Payload byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] payload() {
         return payload;
     }
@@ -61,10 +87,15 @@ public abstract class NetworkMessage {
     /**
      * Returns the message type
      *
-     * @return
+     * @return type
      */
     public abstract Type type();
 
+    /**
+     * Is request boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRequest() {
         return type() == Type.REQUEST;
     }

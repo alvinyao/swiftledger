@@ -16,7 +16,7 @@ import static java.lang.String.format;
  * store the data of the memory operation code execution process
  *
  * @author tangkun
- * @date 2018-12-05
+ * @date 2018 -12-05
  */
 public class Memory implements ProgramListenerAware {
 
@@ -36,6 +36,13 @@ public class Memory implements ProgramListenerAware {
         this.programListener = traceListener;
     }
 
+    /**
+     * Read byte [ ].
+     *
+     * @param address the address
+     * @param size    the size
+     * @return the byte [ ]
+     */
     public byte[] read(int address, int size) {
         if (size <= 0) {
             return ByteUtil.EMPTY_BYTE_ARRAY;
@@ -72,6 +79,14 @@ public class Memory implements ProgramListenerAware {
         return data;
     }
 
+    /**
+     * Write.
+     *
+     * @param address  the address
+     * @param data     the data
+     * @param dataSize the data size
+     * @param limited  the limited
+     */
     public void write(int address, byte[] data, int dataSize, boolean limited) {
 
         if (data.length < dataSize) {
@@ -110,12 +125,24 @@ public class Memory implements ProgramListenerAware {
         }
     }
 
-
+    /**
+     * Extend and write.
+     *
+     * @param address   the address
+     * @param allocSize the alloc size
+     * @param data      the data
+     */
     public void extendAndWrite(int address, int allocSize, byte[] data) {
         extend(address, allocSize);
         write(address, data, data.length, false);
     }
 
+    /**
+     * Extend.
+     *
+     * @param address the address
+     * @param size    the size
+     */
     public void extend(int address, int size) {
 
         if (size <= 0) {
@@ -141,6 +168,12 @@ public class Memory implements ProgramListenerAware {
         }
     }
 
+    /**
+     * Read word data word.
+     *
+     * @param address the address
+     * @return the data word
+     */
     //读取一个32个字节的word
     public DataWord readWord(int address) {
         return new DataWord(read(address, 32));
@@ -194,14 +227,29 @@ public class Memory implements ProgramListenerAware {
         return memoryData.toString();
     }
 
+    /**
+     * Size int.
+     *
+     * @return the int
+     */
     public int size() {
         return softSize;
     }
 
+    /**
+     * Internal size int.
+     *
+     * @return the int
+     */
     public int internalSize() {
         return chunks.size() * CHUNK_SIZE;
     }
 
+    /**
+     * Gets chunks.
+     *
+     * @return the chunks
+     */
     public List<byte[]> getChunks() {
         return new LinkedList<>(chunks);
     }

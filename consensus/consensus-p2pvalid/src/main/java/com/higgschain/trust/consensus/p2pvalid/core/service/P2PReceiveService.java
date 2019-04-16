@@ -21,9 +21,11 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * The type P 2 p receive service.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-20
+ * @date 2018 -08-20
  */
 @Component @Slf4j public class P2PReceiveService implements InitializingBean {
     @Autowired private NodeState nodeState;
@@ -34,6 +36,9 @@ import java.util.concurrent.ConcurrentHashMap;
      * store max received command number
      */
     @Value("${p2p.receive.maxCommandNum:5000}") int maxCommandNum;
+    /**
+     * The Retry num.
+     */
     @Value("${p2p.receive.retryNum:100}") int retryNum;
 
     /**
@@ -66,7 +71,7 @@ import java.util.concurrent.ConcurrentHashMap;
     /**
      * process received command
      *
-     * @param validCommandWrap
+     * @param validCommandWrap the valid command wrap
      */
     public void receive(ValidCommandWrap validCommandWrap) {
         if (log.isDebugEnabled()) {

@@ -10,8 +10,10 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
+ * The type Package vo.
+ *
  * @author tangfashuang
- * @date 2018/04/11 19:41
+ * @date 2018 /04/11 19:41
  * @desc receive from master or master send other node
  */
 @Getter @Setter public class PackageVO extends BaseBO {

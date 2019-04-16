@@ -9,18 +9,33 @@ import it.unisa.dia.gas.plaf.jpbc.util.concurrent.accumultor.Accumulator;
 import java.util.concurrent.Callable;
 
 /**
+ * The type Abstract pairing accumulator.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
 public abstract class AbstractPairingAccumulator extends AbstractAccumulator<Element> implements PairingAccumulator {
 
+    /**
+     * The Pairing.
+     */
     protected Pairing pairing;
 
-
+    /**
+     * Instantiates a new Abstract pairing accumulator.
+     *
+     * @param pairing the pairing
+     */
     public AbstractPairingAccumulator(Pairing pairing) {
         this(pairing, pairing.getGT().newOneElement());
     }
 
+    /**
+     * Instantiates a new Abstract pairing accumulator.
+     *
+     * @param pairing the pairing
+     * @param value   the value
+     */
     public AbstractPairingAccumulator(Pairing pairing, Element value) {
         this.pairing = pairing;
         this.result = value;

@@ -23,20 +23,29 @@ import java.util.Collection;
  * Source which internally caches underlying Source key-value pairs
  * <p>
  * Created by Anton Nashatyrev on 21.10.2016.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public interface CachedSource<Key, Value> extends Source<Key, Value> {
 
     /**
+     * Gets source.
+     *
      * @return The underlying Source
      */
     Source<Key, Value> getSource();
 
     /**
+     * Gets modified.
+     *
      * @return Modified entry keys if this is a write cache
      */
     Collection<Key> getModified();
 
     /**
+     * Has modified boolean.
+     *
      * @return indicates the cache has modified entries
      */
     boolean hasModified();
@@ -51,6 +60,8 @@ public interface CachedSource<Key, Value> extends Source<Key, Value> {
 
     /**
      * Just a convenient shortcut to the most popular Sources with byte[] key
+     *
+     * @param <Value> the type parameter
      */
     interface BytesKey<Value> extends CachedSource<byte[], Value> {
     }

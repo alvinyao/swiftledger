@@ -14,9 +14,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * The type Account jdbc dao.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-20
+ * @date 2018 -06-20
  */
 @Component @Slf4j public class AccountJDBCDao {
     @Autowired private NamedParameterJdbcTemplate jdbc;
@@ -25,8 +27,8 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     public int batchInsertAccount(List<AccountInfo> list) {
         StringBuilder sql = new StringBuilder("INSERT INTO ACCOUNT_INFO "
@@ -45,8 +47,8 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     public int batchUpdateAccount(List<AccountInfo> list) {
         String sql = "UPDATE ACCOUNT_INFO";
@@ -86,8 +88,8 @@ import java.util.List;
     /**
      * batch insert account detail
      *
-     * @param accountDetails
-     * @return
+     * @param accountDetails the account details
+     * @return int
      */
     public int batchInsertAccountDetail(List<AccountDetail> accountDetails) {
         StringBuilder sql = new StringBuilder("INSERT INTO ACCOUNT_DETAIL "
@@ -107,8 +109,8 @@ import java.util.List;
     /**
      * batch insert account dc detail
      *
-     * @param dcRecords
-     * @return
+     * @param dcRecords the dc records
+     * @return int
      */
     public int batchInsertDcRecords(List<AccountDcRecord> dcRecords) {
         StringBuilder sql = new StringBuilder(
@@ -125,7 +127,8 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param currencyInfos
+     * @param currencyInfos the currency infos
+     * @return the int
      */
     public int batchInsertCurrency(List<CurrencyInfo> currencyInfos) {
         StringBuilder sql =
@@ -142,7 +145,8 @@ import java.util.List;
     /**
      * batch insert freeze record
      *
-     * @param accountFreezeRecords
+     * @param accountFreezeRecords the account freeze records
+     * @return the int
      */
     public int batchInsertFreezeRecord(List<AccountFreezeRecord> accountFreezeRecords) {
         StringBuilder sql = new StringBuilder("INSERT INTO ACCOUNT_FREEZE_RECORD"
@@ -161,7 +165,8 @@ import java.util.List;
     /**
      * batch update freeze record
      *
-     * @param accountFreezeRecords
+     * @param accountFreezeRecords the account freeze records
+     * @return the int
      */
     public int batchUpdateFreezeRecord(List<AccountFreezeRecord> accountFreezeRecords) {
         String sql = "UPDATE ACCOUNT_FREEZE_RECORD SET ";
@@ -216,7 +221,8 @@ import java.util.List;
     /**
      * batch insert detail freeze
      *
-     * @param detailFreezes
+     * @param detailFreezes the detail freezes
+     * @return the int
      */
     public int batchInsertDetailFreezes(List<AccountDetailFreeze> detailFreezes) {
         StringBuilder sql = new StringBuilder(

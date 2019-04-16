@@ -36,7 +36,6 @@ package com.higgschain.trust.evmcontract.util;
 
 import com.google.common.primitives.UnsignedBytes;
 
-
 /**
  * Utility code to do optimized byte-array comparison.
  * This is borrowed and slightly modified from Guava's {@link UnsignedBytes}
@@ -45,6 +44,13 @@ import com.google.common.primitives.UnsignedBytes;
 @SuppressWarnings("restriction")
 public abstract class FastByteComparisons {
 
+    /**
+     * Equal boolean.
+     *
+     * @param b1 the b 1
+     * @param b2 the b 2
+     * @return the boolean
+     */
     public static boolean equal(byte[] b1, byte[] b2) {
         return b1.length == b2.length && compareTo(b1, 0, b1.length, b2, 0, b2.length) == 0;
     }
@@ -58,7 +64,7 @@ public abstract class FastByteComparisons {
      * @param b2 buffer2
      * @param s2 offset2
      * @param l2 length2
-     * @return int
+     * @return int int
      */
     public static int compareTo(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {
         return LexicographicalComparerHolder.BEST_COMPARER.compareTo(
@@ -66,6 +72,17 @@ public abstract class FastByteComparisons {
     }
 
     private interface Comparer<T> {
+        /**
+         * Compare to int.
+         *
+         * @param buffer1 the buffer 1
+         * @param offset1 the offset 1
+         * @param length1 the length 1
+         * @param buffer2 the buffer 2
+         * @param offset2 the offset 2
+         * @param length2 the length 2
+         * @return the int
+         */
         int compareTo(T buffer1, int offset1, int length1,
                       T buffer2, int offset2, int length2);
     }
@@ -81,14 +98,22 @@ public abstract class FastByteComparisons {
      * {@code Unsafe} isn't available.
      */
     private static class LexicographicalComparerHolder {
+        /**
+         * The Unsafe comparer name.
+         */
         static final String UNSAFE_COMPARER_NAME =
                 LexicographicalComparerHolder.class.getName() + "$UnsafeComparer";
 
+        /**
+         * The Best comparer.
+         */
         static final Comparer<byte[]> BEST_COMPARER = getBestComparer();
 
         /**
          * Returns the Unsafe-using Comparer, or falls back to the pure-Java
          * implementation if unable to do so.
+         *
+         * @return the best comparer
          */
         static Comparer<byte[]> getBestComparer() {
             try {
@@ -105,6 +130,9 @@ public abstract class FastByteComparisons {
         }
 
         private enum PureJavaComparer implements Comparer<byte[]> {
+            /**
+             * Instance pure java comparer.
+             */
             INSTANCE;
 
             @Override

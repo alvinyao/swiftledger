@@ -11,8 +11,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
+ * The type Safe wrap factory.
+ *
  * @author duhongming
- * @date 2018/6/8
+ * @date 2018 /6/8
  */
 public class SafeWrapFactory extends WrapFactory {
 

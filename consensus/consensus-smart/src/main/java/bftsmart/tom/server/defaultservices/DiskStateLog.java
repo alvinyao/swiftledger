@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Disk state log.
+ */
 public class DiskStateLog extends StateLog {
 
     private int id;
@@ -44,6 +47,16 @@ public class DiskStateLog extends StateLog {
     private ReentrantLock checkpointLock = new ReentrantLock();
     private Map<Integer, Long> logPointers;
 
+    /**
+     * Instantiates a new Disk state log.
+     *
+     * @param id           the id
+     * @param initialState the initial state
+     * @param initialHash  the initial hash
+     * @param isToLog      the is to log
+     * @param syncLog      the sync log
+     * @param syncCkp      the sync ckp
+     */
     public DiskStateLog(int id, byte[] initialState, byte[] initialHash, boolean isToLog, boolean syncLog,
         boolean syncCkp) {
         super(id, initialState, initialHash);
@@ -231,6 +244,12 @@ public class DiskStateLog extends StateLog {
         return null;
     }
 
+    /**
+     * Transfer application state.
+     *
+     * @param sChannel the s channel
+     * @param cid      the cid
+     */
     public void transferApplicationState(SocketChannel sChannel, int cid) {
         FileRecoverer fr = new FileRecoverer(id, defaultDir);
         fr.transferCkpState(sChannel, lastCkpPath);
@@ -242,6 +261,13 @@ public class DiskStateLog extends StateLog {
         //		}
     }
 
+    /**
+     * Sets last cid.
+     *
+     * @param cid               the cid
+     * @param checkpointPeriod  the checkpoint period
+     * @param checkpointPortion the checkpoint portion
+     */
     public void setLastCID(int cid, int checkpointPeriod, int checkpointPortion) {
         super.setLastCID(cid);
         // save the file pointer to retrieve log information later
@@ -269,6 +295,11 @@ public class DiskStateLog extends StateLog {
         setLastCheckpointCID(transState.getLastCheckpointCID());
     }
 
+    /**
+     * Load durable state application state.
+     *
+     * @return the application state
+     */
     protected ApplicationState loadDurableState() {
         FileRecoverer fr = new FileRecoverer(id, defaultDir);
         lastCkpPath = fr.getLatestFile(".ckp");

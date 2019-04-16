@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Register rs handler.
+ *
  * @author tangfashuang
- * @date 2018/03/28
+ * @date 2018 /03/28
  * @desc register RS handler
  */
 @Slf4j @Component public class RegisterRsHandler implements ActionHandler {

@@ -19,27 +19,46 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Log replicate handler.
+ *
  * @Description: replicate the sorted package to cluster
  * @author: pengdi
- **/
-
+ */
 @Slf4j @Service public class LogReplicateHandlerImpl implements LogReplicateHandler {
     /**
      * client from the log replicate consensus layer
      */
     @Autowired ConsensusClient consensusClient;
 
+    /**
+     * The Package service.
+     */
     @Autowired
     PackageService packageService;
 
+    /**
+     * The Package thread pool.
+     */
     @Autowired ExecutorService packageThreadPool;
 
+    /**
+     * The Package process.
+     */
     @Autowired PackageProcess packageProcess;
 
+    /**
+     * The Node state.
+     */
     @Autowired NodeState nodeState;
 
+    /**
+     * The Properties.
+     */
     @Autowired NodeProperties properties;
 
+    /**
+     * The View manager.
+     */
     @Autowired IClusterViewManager viewManager;
 
     /**

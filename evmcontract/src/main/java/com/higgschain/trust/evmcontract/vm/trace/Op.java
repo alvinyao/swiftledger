@@ -21,6 +21,9 @@ import com.higgschain.trust.evmcontract.vm.OpCode;
 
 import java.math.BigInteger;
 
+/**
+ * The type Op.
+ */
 public class Op {
 
     private OpCode code;
@@ -29,42 +32,92 @@ public class Op {
     private BigInteger gas;
     private OpActions actions;
 
+    /**
+     * Gets code.
+     *
+     * @return the code
+     */
     public OpCode getCode() {
         return code;
     }
 
+    /**
+     * Sets code.
+     *
+     * @param code the code
+     */
     public void setCode(OpCode code) {
         this.code = code;
     }
 
+    /**
+     * Gets deep.
+     *
+     * @return the deep
+     */
     public int getDeep() {
         return deep;
     }
 
+    /**
+     * Sets deep.
+     *
+     * @param deep the deep
+     */
     public void setDeep(int deep) {
         this.deep = deep;
     }
 
+    /**
+     * Gets pc.
+     *
+     * @return the pc
+     */
     public int getPc() {
         return pc;
     }
 
+    /**
+     * Sets pc.
+     *
+     * @param pc the pc
+     */
     public void setPc(int pc) {
         this.pc = pc;
     }
 
+    /**
+     * Gets gas.
+     *
+     * @return the gas
+     */
     public BigInteger getGas() {
         return gas;
     }
 
+    /**
+     * Sets gas.
+     *
+     * @param gas the gas
+     */
     public void setGas(BigInteger gas) {
         this.gas = gas;
     }
 
+    /**
+     * Gets actions.
+     *
+     * @return the actions
+     */
     public OpActions getActions() {
         return actions;
     }
 
+    /**
+     * Sets actions.
+     *
+     * @param actions the actions
+     */
     public void setActions(OpActions actions) {
         this.actions = actions;
     }

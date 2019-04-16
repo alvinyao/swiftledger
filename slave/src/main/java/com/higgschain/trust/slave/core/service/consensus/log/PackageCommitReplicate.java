@@ -26,13 +26,25 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.zip.DataFormatException;
 
+/**
+ * The type Package commit replicate.
+ */
 @Replicator @Slf4j @Component public class PackageCommitReplicate implements ApplicationContextAware, InitializingBean {
 
+    /**
+     * The Package service.
+     */
     @Autowired
     PackageService packageService;
 
+    /**
+     * The Package thread pool.
+     */
     @Autowired ExecutorService packageThreadPool;
 
+    /**
+     * The Package process.
+     */
     @Autowired PackageProcess packageProcess;
 
     private ApplicationContext applicationContext;
@@ -42,7 +54,7 @@ import java.util.zip.DataFormatException;
     /**
      * package has been replicated by raft/copycat-smart/pbft/etc
      *
-     * @param commit
+     * @param commit the commit
      * @return
      */
     public void packageReplicated(ConsensusCommit<PackageCommand> commit) {

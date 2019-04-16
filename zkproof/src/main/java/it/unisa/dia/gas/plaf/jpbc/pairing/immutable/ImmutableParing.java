@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Immutable paring.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
@@ -17,7 +19,11 @@ public class ImmutableParing implements Pairing {
     private Pairing pairing;
     private Map<Integer, Field> fieldMap;
 
-
+    /**
+     * Instantiates a new Immutable paring.
+     *
+     * @param pairing the pairing
+     */
     public ImmutableParing(Pairing pairing) {
         this.pairing = pairing;
         this.fieldMap = new HashMap<Integer, Field>();

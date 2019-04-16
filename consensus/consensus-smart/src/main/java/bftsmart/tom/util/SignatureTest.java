@@ -18,10 +18,18 @@ package bftsmart.tom.util;
 import java.security.*;
 
 /**
+ * The type Signature test.
+ *
  * @author alysson
  */
 public class SignatureTest {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
         byte[] data = new byte[20];
         byte[] signature;

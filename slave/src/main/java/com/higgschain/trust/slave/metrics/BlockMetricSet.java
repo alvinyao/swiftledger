@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Block metric set.
+ *
  * @author duhongming
- * @date 2019/1/3
+ * @date 2019 /1/3
  */
 public class BlockMetricSet {
 
@@ -20,7 +22,9 @@ public class BlockMetricSet {
     private long lastRecordCount;
     private long currentTotalCount;
 
-
+    /**
+     * Instantiates a new Block metric set.
+     */
     public BlockMetricSet() {
         blockTimer = new Timer();
         histogram = new Histogram(new UniformReservoir());
@@ -29,6 +33,11 @@ public class BlockMetricSet {
         perSecondCountGauge = new ValuedGauge<>();
     }
 
+    /**
+     * Gets metrics.
+     *
+     * @return the metrics
+     */
     public Map<String, Metric> getMetrics() {
         final Map<String, Metric> metrics = new HashMap<>();
 
@@ -52,10 +61,20 @@ public class BlockMetricSet {
         return metrics;
     }
 
+    /**
+     * Time timer . context.
+     *
+     * @return the timer . context
+     */
     public Timer.Context time() {
         return blockTimer.time();
     }
 
+    /**
+     * Time.
+     *
+     * @param run the run
+     */
     public void time(Runnable run) {
         blockTimer.time(run);
     }

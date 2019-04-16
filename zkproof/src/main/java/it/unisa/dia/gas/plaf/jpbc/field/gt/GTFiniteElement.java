@@ -7,13 +7,26 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.PairingMap;
 import java.math.BigInteger;
 
 /**
+ * The type Gt finite element.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class GTFiniteElement extends AbstractElement {
+    /**
+     * The Pairing.
+     */
     protected PairingMap pairing;
+    /**
+     * The Value.
+     */
     protected Element value;
 
-
+    /**
+     * Instantiates a new Gt finite element.
+     *
+     * @param pairing the pairing
+     * @param field   the field
+     */
     public GTFiniteElement(PairingMap pairing, GTFiniteField field) {
         super(field);
 
@@ -21,6 +34,13 @@ public class GTFiniteElement extends AbstractElement {
         this.value = field.getTargetField().newElement().setToOne();
     }
 
+    /**
+     * Instantiates a new Gt finite element.
+     *
+     * @param pairing the pairing
+     * @param field   the field
+     * @param value   the value
+     */
     public GTFiniteElement(PairingMap pairing, GTFiniteField field, Element value) {
         super(field);
 
@@ -28,6 +48,11 @@ public class GTFiniteElement extends AbstractElement {
         this.value = value;
     }
 
+    /**
+     * Instantiates a new Gt finite element.
+     *
+     * @param element the element
+     */
     public GTFiniteElement(GTFiniteElement element) {
         super(element.field);
 

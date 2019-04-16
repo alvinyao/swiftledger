@@ -2,8 +2,16 @@ package com.higgschain.trust.network;
 
 import java.util.Scanner;
 
+/**
+ * The type Demo node.
+ */
 public class DemoNode {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         String nodeName = args[0];
         int port = Integer.parseInt(args[1]);
@@ -55,6 +63,11 @@ public class DemoNode {
         }
     }
 
+    /**
+     * Init handler.
+     *
+     * @param networkManage the network manage
+     */
     static void initHandler(NetworkManage networkManage) {
         //networkManage.messagingService.registerHandler("receive_command", receiveCommandHandler);
     }

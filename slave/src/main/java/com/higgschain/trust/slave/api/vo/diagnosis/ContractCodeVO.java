@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Contract code vo.
+ *
  * @author Chen Jiawei
- * @date 2019-01-21
+ * @date 2019 -01-21
  */
 @Getter
 @Setter

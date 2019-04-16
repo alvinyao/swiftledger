@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Pending state impl test.
+ */
 /*
  *
  * @desc
@@ -41,6 +44,11 @@ public class PendingStateImplTest extends BaseTest {
     private static final String priKey2 =
         "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAKQwv8kaTmN15Z7c6gz3/7a8wmtuJqgn25uWAkBO5vTs6DpfB0Nf7N5jOH2pMhkgqkdiOlpNpTb+zoJZ+DNy28mHHbpb99GDEoa5zvcXxypU5yrNhmrch1bJbKZQiGoX/5NAia9t/Kltxdcs6EmWuOQB79fLhLDgwHeUDzYOdM13AgMBAAECgYAFWznGe78262+0QQy5o5WKBpppGszUC4jUiI5GPsy2DMx+qv73qbd2gdIj91MVEsW7Um8I5yOOqb1e70RzmTmmSgmIbc7L2ogkEVa/AWdnmFIqVV7EOokc7pExc0UMlIBXCiNynrQic0YtxV65JjaE/JAFomCCAUBbsP9TSs/ZMQJBANRq8rBvR1PCA9pwzqfwalKAAzpwsOs0tavP8XF80xm7XKNZrnOIIiLSj+ME630ECYJZ2XTKF1g/TblIHV8zAYMCQQDF4LQcqKuNbeUeu0Xf3VX0TXPImIdB3ZbbQyPuynhk5D0Fx72q29gRKUZifrm1Kog6fvrwN1IyuoZem3oijEX9AkApkKPckmnKofRPEjPd+NVVP2diUBrOa4oBDLeaFWrZZihCbpIMWV8UoU82hQfvdpLFxv8eM01OH1T+JHZa4ogxAkA2WEs/H7fV5NurQAWlwPUNXoQxEGr9VO1MlLj2qRa9ps13m+7kUPKba/mPrXw1XFQDtMIYXSkvE3k53HuDp4DFAkAxhxi9veGOKa24Fp+4MFSF3L9UdR6MROqIYVGgE0gHj7r+NIuCqk/l9acw9W4E5gAN03P3RAKpjmcqxOkZyj7h";
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @BeforeMethod
     public void setUp() throws Exception {
         SignedTransaction signedTx1 = new SignedTransaction();
@@ -105,11 +113,17 @@ public class PendingStateImplTest extends BaseTest {
         signedTxList.add(signedTx2);
     }
 
+    /**
+     * Add pending transactions.
+     */
     @Test public void addPendingTransactions() {
         List<TransactionVO> voList = pendingState.addPendingTransactions(signedTxList);
         Assert.assertEquals(1, voList.size());
     }
 
+    /**
+     * Gets pending transactions.
+     */
     @Test public void getPendingTransactions() {
         Object[] objs = pendingState.getPendingTransactions(2);
         List<SignedTransaction> signedTransactions = (List<SignedTransaction>)objs[0];

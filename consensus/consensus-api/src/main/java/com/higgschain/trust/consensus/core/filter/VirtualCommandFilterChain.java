@@ -9,8 +9,10 @@ import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
 import java.util.List;
 
 /**
+ * The type Virtual command filter chain.
+ *
  * @author suimi
- * @date 2018/6/1
+ * @date 2018 /6/1
  */
 public class VirtualCommandFilterChain implements CommandFilterChain {
 
@@ -18,6 +20,11 @@ public class VirtualCommandFilterChain implements CommandFilterChain {
 
     private int currentPosition = 0;
 
+    /**
+     * Instantiates a new Virtual command filter chain.
+     *
+     * @param filters the filters
+     */
     public VirtualCommandFilterChain(List<CommandFilter> filters) {
         this.filters = filters;
     }

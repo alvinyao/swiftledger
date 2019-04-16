@@ -22,8 +22,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Provider;
 
+/**
+ * The type Ec key agreement.
+ */
 public final class ECKeyAgreement {
 
+    /**
+     * The constant ALGORITHM.
+     */
     public static final String ALGORITHM = "ECDH";
 
     private static final String ALGORITHM_ASSERTION_MSG =
@@ -32,6 +38,11 @@ public final class ECKeyAgreement {
     private ECKeyAgreement() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static KeyAgreement getInstance() {
         try {
             return KeyAgreement.getInstance(ALGORITHM);
@@ -40,6 +51,13 @@ public final class ECKeyAgreement {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param provider the provider
+     * @return the instance
+     * @throws NoSuchProviderException the no such provider exception
+     */
     public static KeyAgreement getInstance(final String provider) throws NoSuchProviderException {
         try {
             return KeyAgreement.getInstance(ALGORITHM, provider);
@@ -48,6 +66,12 @@ public final class ECKeyAgreement {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param provider the provider
+     * @return the instance
+     */
     public static KeyAgreement getInstance(final Provider provider) {
         try {
             return KeyAgreement.getInstance(ALGORITHM, provider);

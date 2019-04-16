@@ -8,17 +8,17 @@ import java.util.Date;
  * Data identity convert
  *
  * @author lingchao
- * @create 2018年04月17日20:32
+ * @create 2018年04月17日20 :32
  */
 public class DataIdentityConvert {
 
     /**
      * build a data identity bo
      *
-     * @param identity
-     * @param chainOwner
-     * @param dataOwner
-     * @return
+     * @param identity   the identity
+     * @param chainOwner the chain owner
+     * @param dataOwner  the data owner
+     * @return data identity
      */
     public static  DataIdentity buildDataIdentity(String identity, String chainOwner, String dataOwner){
         DataIdentity dataIdentity = new DataIdentity();

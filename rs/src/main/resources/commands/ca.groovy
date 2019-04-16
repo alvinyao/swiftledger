@@ -15,6 +15,9 @@ import org.springframework.beans.factory.BeanFactory
  * @date 2018/5/29 16:54    
  */
 
+/**
+ *  The type Ca.
+ */
 @Slf4j
 @Usage("ca information")
 class ca {

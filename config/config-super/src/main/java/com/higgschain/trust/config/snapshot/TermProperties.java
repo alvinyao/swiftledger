@@ -7,8 +7,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * The type Term properties.
+ *
  * @author Zhu_Yuanxiang
- * @create 2018-08-28
+ * @create 2018 -08-28
  */
 @Getter
 @Setter

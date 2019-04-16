@@ -20,10 +20,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Action data mock builder.
+ */
 public class ActionDataMockBuilder {
 
+    /**
+     * The constant privateKey1.
+     */
     public static final String privateKey1 =
         "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAIsMM2JkqnQACN+RUqRF4UkW58XnjpjA+RP4mnA4uD9KCjlJeTxvY0yHDqsvIaiXr7Ge0QB1VAKq0xit2BWHfVU/XlO1tqK+ea7YxooeoglvOkddiJiYTZUNjKM5AhttG950PpzrmeUcl9YGEZ/DwKKee+8tqaDWdIEHBnplO6mVAgMBAAECgYBtrWwCmoDRCw30uv5C0VQIgObE9gdGekB9/kRjbHn4ggBae5gDkaDzxjxNztlv0GYnZqxY/jML/46PEuE06jBzGcOlBuobQJJ38pTg0pnNVHbkTckxfUIr1MYUDhtO18tJZUZuMbYMwwgZ9K9E0N8kjKXk+rRx+BDjlbxNPds6KQJBAMLS/HCXjAfJlzSEWqkBavAKoW+bBhZlkTH+DoNk/KidASgdFBqtPUf5w3U+j8dK4nvt8R9X7zGxRAYXpDGHUucCQQC2tZlmL858suIA/+XfQVGoKOEvLlI5tGNDLXlDaKldY8UZGqxcyKaOsqEWMQnJCUy/0zTariN7kNssptYm04wjAkB3qVlt2lcizVn24rhAh+NjzlO7le8WQIn+t7m4UIWzFsQIHFwlynQSSkEYOTXcRY14avwnsT30Opm6WDj8Rs7PAkBytzqFSmbfLIFyFzmBH0Xhyyj3sqG10WixeQ+2HzSXiljqFjE6YFETL1yszkVSkCA8IKQC2Ws13hF+y5GR9yj5AkBAeUJj/a8wpdxJCufDpoaVUsB/XGK9XCqlGZvSy2TrjWLLBjZ3jiyjTlqIssfqI/IiJ4H2peocDaHXjFT0m+Av";
+    /**
+     * The constant privateKey2.
+     */
     public static final String privateKey2 =
         "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJE5lYYWx1AE5E0XaxmQvg2putYOrya+Azd+QCHVA0rE8vUiXAuFia7TgjGQjhFO66SrcOJ3W2xSeHw6F1ApvZ8kfLB3ZsZT1e54QaWKU0ae0fcmk9dgrkpaniLCbd3PP8A+UUjwNeexIDjThYSzzatNGg06qdxgSCMc9bX7jwPlAgMBAAECgYA5Vtcmvk+r1IKfvaNX0MJ5eo5+fgXB8jwq6PpBYW2PU/vptctJ8UvPb0t0bnLpepOnzNkhUacTOezAf988k35+gw9Vrh6rXG4x7cZ65qbQOP+Xh0sx3YElyZKUBJzl5CMjNzT5ANc/QdpCD8LOOiPF4xpcHqKih74NGXc8hQv1AQJBAMNm1i6AC/oJM7XDnXPyswNVyjjIG+wi9xBgMGlt8JLH3c7/HblyAPHS/sFnljroVsHOyvoi45aZlIluhZsh6tUCQQC+QygmlnViImHq+MgL6bWaTLjKyTpH6k7zGQxvOxqJlioeWh73wxHAq/depKi8ElMrkEhMBA05ReCJl4Nb8xzRAkA28/HiS/KSVAot4SCj3iqIEpV3mJd5tm+jNFoJHHke3oS71TWH1M79M2if/cDbOkJD6SNea3d0ACcs6185vLUtAkBtrWLw05z5JB7UB/Oxwli4iO+hnlxlZnF6e38Kg8SpeZHwCz18z8tlCPzBZyQJvnqJS1QR1egVku18A4Zqs/txAkAg5kjdDw0v9QoQMr4oHZSuHxaG9I91SRkCPspN8urIg1Wu7cdTKfPdaAtSoU/xp/qpzfX+CPkhv7DoGlBLeo8e";
     private Block block = new Block();
@@ -34,10 +43,18 @@ public class ActionDataMockBuilder {
 
     private SignedTransaction currentSignedTransaction = null;
 
+    /**
+     * Instantiates a new Action data mock builder.
+     */
     public ActionDataMockBuilder() {
         this.block.setSignedTxList(transList);
     }
 
+    /**
+     * Gets db connect string.
+     *
+     * @return the db connect string
+     */
     public static String getDbConnectString() {
         try {
             String json = IOUtils.toString(ContractBaseTest.class.getResource("/test-application.json"), "UTF-8");
@@ -58,6 +75,11 @@ public class ActionDataMockBuilder {
         return null;
     }
 
+    /**
+     * Gets block height.
+     *
+     * @return the block height
+     */
     public static long getBlockHeight() {
         DataBaseManager dataBaseManager = new DataBaseManager();
         JSONArray array = dataBaseManager
@@ -68,11 +90,23 @@ public class ActionDataMockBuilder {
         return ((JSONObject)array.get(0)).getLong("height");
     }
 
+    /**
+     * Sets block header.
+     *
+     * @param header the header
+     * @return the block header
+     */
     public ActionDataMockBuilder setBlockHeader(BlockHeader header) {
         this.block.setBlockHeader(header);
         return this;
     }
 
+    /**
+     * Create signed transaction action data mock builder.
+     *
+     * @param policyEnum the policy enum
+     * @return the action data mock builder
+     */
     public ActionDataMockBuilder createSignedTransaction(InitPolicyEnum policyEnum) {
         actions = new ArrayList<>();
         CoreTransaction coreTx = new CoreTransaction();
@@ -92,6 +126,13 @@ public class ActionDataMockBuilder {
         return this;
     }
 
+    /**
+     * Sets transaction policy id if.
+     *
+     * @param policyId  the policy id
+     * @param condition the condition
+     * @return the transaction policy id if
+     */
     public ActionDataMockBuilder setTransactionPolicyIdIf(String policyId, boolean condition) {
         if (condition) {
             currentSignedTransaction.getCoreTx().setPolicyId(policyId);
@@ -99,6 +140,12 @@ public class ActionDataMockBuilder {
         return this;
     }
 
+    /**
+     * Sets tx id.
+     *
+     * @param txId the tx id
+     * @return the tx id
+     */
     public ActionDataMockBuilder setTxId(String txId) {
         if (null != this.currentSignedTransaction) {
             this.currentSignedTransaction.getCoreTx().setTxId(txId);
@@ -106,11 +153,22 @@ public class ActionDataMockBuilder {
         return this;
     }
 
+    /**
+     * Sets biz model.
+     *
+     * @param bizModel the biz model
+     * @return the biz model
+     */
     public ActionDataMockBuilder setBizModel(JSONObject bizModel) {
         this.currentSignedTransaction.getCoreTx().setBizModel(bizModel);
         return this;
     }
 
+    /**
+     * Sets block height.
+     *
+     * @return the block height
+     */
     public ActionDataMockBuilder setBlockHeight() {
         long height = getBlockHeight() + 1;
         this.currentPackage.setHeight(height);
@@ -118,12 +176,25 @@ public class ActionDataMockBuilder {
         return this;
     }
 
+    /**
+     * Sets block height.
+     *
+     * @param height the height
+     * @return the block height
+     */
     public ActionDataMockBuilder setBlockHeight(long height) {
         this.currentPackage.setHeight(height);
         this.block.getBlockHeader().setHeight(height);
         return this;
     }
 
+    /**
+     * Signature action data mock builder.
+     *
+     * @param owner      the owner
+     * @param privateKey the private key
+     * @return the action data mock builder
+     */
     public ActionDataMockBuilder signature(String owner, String privateKey) {
         if (null != this.currentSignedTransaction) {
             String data = JSON.toJSONString(this.currentSignedTransaction.getCoreTx());
@@ -140,6 +211,12 @@ public class ActionDataMockBuilder {
         return this;
     }
 
+    /**
+     * Add action action data mock builder.
+     *
+     * @param action the action
+     * @return the action data mock builder
+     */
     public ActionDataMockBuilder addAction(Action action) {
         if (action == null) {
             return this;
@@ -149,6 +226,11 @@ public class ActionDataMockBuilder {
         return this;
     }
 
+    /**
+     * Make block header action data mock builder.
+     *
+     * @return the action data mock builder
+     */
     public ActionDataMockBuilder makeBlockHeader() {
         BlockHeader blockHeader = new BlockHeader();
         blockHeader.setPreviousHash("xxxx");
@@ -169,6 +251,11 @@ public class ActionDataMockBuilder {
         return this;
     }
 
+    /**
+     * Build pack context.
+     *
+     * @return the pack context
+     */
     public PackContext build() {
         this.packContext.setCurrentPackage(this.currentPackage);
         this.currentPackage.setPackageTime(new Date().getTime());
@@ -179,6 +266,11 @@ public class ActionDataMockBuilder {
         return packContext;
     }
 
+    /**
+     * Gets builder.
+     *
+     * @return the builder
+     */
     public static ActionDataMockBuilder getBuilder() {
         return new ActionDataMockBuilder();
     }

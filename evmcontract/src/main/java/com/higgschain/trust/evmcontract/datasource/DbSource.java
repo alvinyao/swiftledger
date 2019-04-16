@@ -21,16 +21,22 @@ import java.util.Set;
 
 /**
  * Interface represents DB source which is normally the final Source in the chain
+ *
+ * @param <V> the type parameter
  */
 public interface DbSource<V> extends BatchSource<byte[], V> {
 
     /**
      * Sets the DB name.
      * This could be the underlying DB table/dir name
+     *
+     * @param name the name
      */
     void setName(String name);
 
     /**
+     * Gets name.
+     *
      * @return DB name
      */
     String getName();
@@ -49,6 +55,8 @@ public interface DbSource<V> extends BatchSource<byte[], V> {
     void init(DbSettings settings);
 
     /**
+     * Is alive boolean.
+     *
      * @return true if DB connection is alive
      */
     boolean isAlive();
@@ -59,6 +67,8 @@ public interface DbSource<V> extends BatchSource<byte[], V> {
     void close();
 
     /**
+     * Keys set.
+     *
      * @return DB keys if this option is available
      * @throws RuntimeException if the method is not supported
      */

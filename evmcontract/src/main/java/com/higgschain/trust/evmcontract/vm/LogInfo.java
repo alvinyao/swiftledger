@@ -29,15 +29,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Log info.
+ *
  * @author tangkun
- * @date 2018-12-05
+ * @date 2018 -12-05
  */
 public class LogInfo {
 
+    /**
+     * The Address.
+     */
     byte[] address = new byte[]{};
+    /**
+     * The Topics.
+     */
     List<DataWord> topics = new ArrayList<>();
+    /**
+     * The Data.
+     */
     byte[] data = new byte[]{};
 
+    /**
+     * Instantiates a new Log info.
+     *
+     * @param rlp the rlp
+     */
     public LogInfo(byte[] rlp) {
 
         RLPList params = RLP.decode2(rlp);
@@ -56,26 +72,50 @@ public class LogInfo {
         }
     }
 
+    /**
+     * Instantiates a new Log info.
+     *
+     * @param address the address
+     * @param topics  the topics
+     * @param data    the data
+     */
     public LogInfo(byte[] address, List<DataWord> topics, byte[] data) {
         this.address = (address != null) ? address : new byte[]{};
         this.topics = (topics != null) ? topics : new ArrayList<DataWord>();
         this.data = (data != null) ? data : new byte[]{};
     }
 
+    /**
+     * Get address byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getAddress() {
         return address;
     }
 
+    /**
+     * Gets topics.
+     *
+     * @return the topics
+     */
     public List<DataWord> getTopics() {
         return topics;
     }
 
+    /**
+     * Get data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getData() {
         return data;
     }
 
     /**
      * [address, [topic, topic ...] data]
+     *
+     * @return the byte [ ]
      */
     public byte[] getEncoded() {
 
@@ -96,6 +136,11 @@ public class LogInfo {
         return RLP.encodeList(addressEncoded, RLP.encodeList(topicsEncoded), dataEncoded);
     }
 
+    /**
+     * Gets bloom.
+     *
+     * @return the bloom
+     */
     public Bloom getBloom() {
         Bloom ret = Bloom.create(HashUtil.sha3(address));
         for (DataWord topic : topics) {

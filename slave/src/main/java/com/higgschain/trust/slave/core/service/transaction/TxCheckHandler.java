@@ -27,8 +27,10 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
+ * The type Tx check handler.
+ *
  * @author tangfashuang
- * @date 2018/03/38
+ * @date 2018 /03/38
  * @desc check tx include verify signature
  */
 @Slf4j @Component public class TxCheckHandler {
@@ -39,9 +41,9 @@ import java.util.*;
     /**
      * verify signatures
      *
-     * @param signedTransaction
-     * @param rsPubKeys
-     * @return
+     * @param signedTransaction the signed transaction
+     * @param rsPubKeys         the rs pub keys
+     * @return boolean
      */
     public boolean verifySignatures(SignedTransaction signedTransaction, Map<String, String> rsPubKeys) {
         try {
@@ -189,6 +191,12 @@ import java.util.*;
         }
     }
 
+    /**
+     * Check actions boolean.
+     *
+     * @param coreTx the core tx
+     * @return the boolean
+     */
     public boolean checkActions(CoreTransaction coreTx) {
         if (CollectionUtils.isEmpty(coreTx.getActionList())) {
             return true;

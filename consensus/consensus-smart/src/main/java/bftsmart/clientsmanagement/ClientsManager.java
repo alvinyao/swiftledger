@@ -30,6 +30,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 
 /**
+ * The type Clients manager.
+ *
  * @author alysson
  */
 public class ClientsManager {
@@ -41,6 +43,13 @@ public class ClientsManager {
 
     private ReentrantLock clientsLock = new ReentrantLock();
 
+    /**
+     * Instantiates a new Clients manager.
+     *
+     * @param controller the controller
+     * @param timer      the timer
+     * @param verifier   the verifier
+     */
     public ClientsManager(ServerViewController controller, RequestsTimer timer, RequestVerifier verifier) {
         this.controller = controller;
         this.timer = timer;
@@ -51,7 +60,7 @@ public class ClientsManager {
      * We are assuming that no more than one thread will access
      * the same clientData during creation.
      *
-     * @param clientId
+     * @param clientId the client id
      * @return the ClientData stored on the manager
      */
     public ClientData getClientData(int clientId) {
@@ -194,6 +203,13 @@ public class ClientsManager {
         return pendingMessage;
     }
 
+    /**
+     * Request received boolean.
+     *
+     * @param request    the request
+     * @param fromClient the from client
+     * @return the boolean
+     */
     public boolean requestReceived(TOMMessage request, boolean fromClient) {
         return requestReceived(request, fromClient, null);
     }
@@ -202,13 +218,10 @@ public class ClientsManager {
      * Notifies the ClientsManager that a new request from a client arrived.
      * This method updates the ClientData of the client request.getSender().
      *
-     * @param request      the received request
-     * @param fromClient   the message was received from client or not?
-     * @param storeMessage the message should be stored or not? (read-only requests are not stored)
-     * @param cs           server com. system to be able to send replies to already processed requests
-     * @return true if the request is ok and is added to the pending messages
-     * for this client, false if there is some problem and the message was not
-     * accounted
+     * @param request    the received request
+     * @param fromClient the message was received from client or not?
+     * @param cs         server com. system to be able to send replies to already processed requests
+     * @return true if the request is ok and is added to the pending messages for this client, false if there is some problem and the message was not accounted
      */
     public boolean requestReceived(TOMMessage request, boolean fromClient, ServerCommunicationSystem cs) {
 
@@ -351,10 +364,18 @@ public class ClientsManager {
         clientData.clientLock.unlock();
     }
 
+    /**
+     * Gets clients lock.
+     *
+     * @return the clients lock
+     */
     public ReentrantLock getClientsLock() {
         return clientsLock;
     }
 
+    /**
+     * Clear.
+     */
     public void clear() {
         clientsLock.lock();
         clientsData.clear();

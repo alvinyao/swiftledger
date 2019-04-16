@@ -23,6 +23,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 /**
+ * The type Reconfigure request.
+ *
  * @author eduardo
  */
 public class ReconfigureRequest implements Externalizable {
@@ -34,53 +36,117 @@ public class ReconfigureRequest implements Externalizable {
     private int number;
     private String nodeName;
 
+    /**
+     * Instantiates a new Reconfigure request.
+     */
     public ReconfigureRequest() {
     }
 
+    /**
+     * Gets node name.
+     *
+     * @return the node name
+     */
     public String getNodeName() {
         return nodeName;
     }
 
+    /**
+     * Sets node name.
+     *
+     * @param nodeName the node name
+     */
     public void setNodeName(String nodeName) {
         this.nodeName = nodeName;
     }
 
+    /**
+     * Get other signature byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getOtherSignature() {
         return otherSignature;
     }
 
+    /**
+     * Gets number.
+     *
+     * @return the number
+     */
     public int getNumber() {
         return number;
     }
 
+    /**
+     * Sets number.
+     *
+     * @param number the number
+     */
     public void setNumber(int number) {
         this.number = number;
     }
 
+    /**
+     * Sets other signature.
+     *
+     * @param otherSignature the other signature
+     */
     public void setOtherSignature(byte[] otherSignature) {
         this.otherSignature = otherSignature;
     }
 
+    /**
+     * Instantiates a new Reconfigure request.
+     *
+     * @param sender the sender
+     */
     public ReconfigureRequest(int sender) {
         this.sender = sender;
     }
 
+    /**
+     * Sets signature.
+     *
+     * @param signature the signature
+     */
     public void setSignature(byte[] signature) {
         this.signature = signature;
     }
 
+    /**
+     * Get signature byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getSignature() {
         return signature;
     }
 
+    /**
+     * Gets properties.
+     *
+     * @return the properties
+     */
     public Hashtable<Integer, String> getProperties() {
         return properties;
     }
 
+    /**
+     * Gets sender.
+     *
+     * @return the sender
+     */
     public int getSender() {
         return sender;
     }
 
+    /**
+     * Sets property.
+     *
+     * @param prop  the prop
+     * @param value the value
+     */
     public void setProperty(int prop, String value) {
         this.properties.put(prop, value);
     }

@@ -32,12 +32,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The type Core tx repository test.
+ */
 @Slf4j public class CoreTxRepositoryTest extends IntegrateBaseTest {
 
     @Autowired private CoreTxRepository coreTxRepository;
 
     @Autowired private CoreTxRocksDao coreTxRocksDao;
 
+    /**
+     * Build core tx.
+     */
     @BeforeMethod public void buildCoreTx() {
         CoreTransaction coreTx = new CoreTransaction();
         List<Action> actionList = new ArrayList<>();
@@ -73,6 +79,11 @@ import java.util.Random;
         signInfos.add(signInfo);
     }
 
+    /**
+     * Test add.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testAdd() throws Exception {
         CoreTransaction coreTx = new CoreTransaction();
 
@@ -113,14 +124,29 @@ import java.util.Random;
         coreTxRepository.add(coreTx, signInfos, null);
     }
 
+    /**
+     * Test add 1.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testAdd1() throws Exception {
     }
 
+    /**
+     * Test query by tx id.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryByTxId() throws Exception {
         List<String> keys = coreTxRocksDao.keys();
         CoreTransactionPO po = coreTxRepository.queryByTxId(keys.get(0), false);
     }
 
+    /**
+     * Test query by tx ids.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryByTxIds() throws Exception {
         List<String> txIds = new ArrayList<>();
         txIds.add("test-tx-id-21");
@@ -138,11 +164,21 @@ import java.util.Random;
         System.out.println(pos);
     }
 
+    /**
+     * Test is exist.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testIsExist() throws Exception {
         Assert.assertEquals(coreTxRepository.isExist("test-tx-id-111"), true);
         Assert.assertEquals(coreTxRepository.isExist("test-tx-id-122"), false);
     }
 
+    /**
+     * Test update sign datas.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testUpdateSignDatas() throws Exception {
 
         List<SignInfo> signInfos = new ArrayList<>();
@@ -162,6 +198,11 @@ import java.util.Random;
         System.out.println(po);
     }
 
+    /**
+     * Test save execute result and height.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testSaveExecuteResultAndHeight() throws Exception {
         Transaction tx = RocksUtils.beginTransaction(new WriteOptions());
         ThreadLocalUtils.putRocksTx(tx);
@@ -173,6 +214,11 @@ import java.util.Random;
         CoreTransactionPO po = coreTxRepository.queryByTxId("test-tx-id-113", false);
     }
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsert() throws Exception {
         List<RsCoreTxVO> rsCoreTxVOS = new ArrayList<>(100);
         for (int i = 100; i < 120; i++) {
@@ -215,6 +261,11 @@ import java.util.Random;
         ThreadLocalUtils.clearRocksTx();
     }
 
+    /**
+     * Test batch update.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchUpdate() throws Exception {
         List<RsCoreTxVO> rsCoreTxVOS = new ArrayList<>(100);
         for (int i = 25; i < 41; i++) {
@@ -257,6 +308,11 @@ import java.util.Random;
         ThreadLocalUtils.clearRocksTx();
     }
 
+    /**
+     * Test get for update.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetForUpdate() throws Exception {
         CoreTransaction coreTx = new CoreTransaction();
 

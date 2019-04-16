@@ -9,6 +9,8 @@ import it.unisa.dia.gas.plaf.jpbc.util.concurrent.accumultor.Accumulator;
 import java.util.concurrent.Callable;
 
 /**
+ * The type Sequential mul pairing accumulator.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
@@ -17,12 +19,22 @@ public class SequentialMulPairingAccumulator implements PairingAccumulator {
     private Pairing pairing;
     private Element value;
 
-
+    /**
+     * Instantiates a new Sequential mul pairing accumulator.
+     *
+     * @param pairing the pairing
+     */
     public SequentialMulPairingAccumulator(Pairing pairing) {
         this.pairing = pairing;
         this.value = pairing.getGT().newOneElement();
     }
 
+    /**
+     * Instantiates a new Sequential mul pairing accumulator.
+     *
+     * @param pairing the pairing
+     * @param value   the value
+     */
     public SequentialMulPairingAccumulator(Pairing pairing, Element value) {
         this.pairing = pairing;
         this.value = value;

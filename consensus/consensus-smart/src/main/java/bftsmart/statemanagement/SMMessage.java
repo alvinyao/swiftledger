@@ -36,6 +36,9 @@ public abstract class SMMessage extends SystemMessage {
     private int type; // Message type
     private int regency; // Current regency
     private int leader; // Current leader
+    /**
+     * The Trigger sm locally.
+     */
     public final boolean TRIGGER_SM_LOCALLY; // indicates that the replica should
     // initiate the SM protocol locally
 
@@ -45,8 +48,10 @@ public abstract class SMMessage extends SystemMessage {
      * @param sender  Process Id of the sender
      * @param cid     Consensus ID up to which the sender needs to be updated
      * @param type    Message type
-     * @param replica Replica that should send the state
      * @param state   State log
+     * @param view    the view
+     * @param regency the regency
+     * @param leader  the leader
      */
     protected SMMessage(int sender, int cid, int type, ApplicationState state, View view, int regency, int leader) {
         super(sender);
@@ -65,6 +70,9 @@ public abstract class SMMessage extends SystemMessage {
 
     }
 
+    /**
+     * Instantiates a new Sm message.
+     */
     protected SMMessage() {
         this.TRIGGER_SM_LOCALLY = false;
     }

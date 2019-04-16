@@ -7,24 +7,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Log querier.
+ *
  * @author Chen Jiawei
- * @date 2018-11-26
+ * @date 2018 -11-26
  */
 public class LogQuerier {
     private LogFilter logFilter;
 
+    /**
+     * Instantiates a new Log querier.
+     */
     public LogQuerier() {
         logFilter = new LogFilter();
     }
 
+    /**
+     * With contract address.
+     *
+     * @param contractAddress the contract address
+     */
     public void withContractAddress(byte[] contractAddress) {
         logFilter.withContractAddress(contractAddress);
     }
 
+    /**
+     * With topic.
+     *
+     * @param topic the topic
+     */
     public void withTopic(byte[] topic) {
         logFilter.withTopic(topic);
     }
 
+    /**
+     * Match list.
+     *
+     * @param txBloom  the tx bloom
+     * @param logInfos the log infos
+     * @return the list
+     */
     public List<LogInfo> match(Bloom txBloom, List<LogInfo> logInfos) {
         List<LogInfo> logInfoList = new ArrayList<>();
 

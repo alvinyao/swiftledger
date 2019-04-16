@@ -16,12 +16,25 @@
 package bftsmart.reconfiguration.views;
 
 /**
+ * The interface View storage.
+ *
  * @author eduardo
  */
 public interface ViewStorage {
 
+    /**
+     * Store view boolean.
+     *
+     * @param view the view
+     * @return the boolean
+     */
     public boolean storeView(View view);
 
+    /**
+     * Read view view.
+     *
+     * @return the view
+     */
     public View readView();
 
 }

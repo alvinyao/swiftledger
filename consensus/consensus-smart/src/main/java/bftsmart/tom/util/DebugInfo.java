@@ -18,15 +18,37 @@ package bftsmart.tom.util;
 import bftsmart.tom.core.messages.TOMMessage;
 
 /**
+ * The type Debug info.
+ *
  * @author Joao Sousa
  */
 public class DebugInfo {
 
+    /**
+     * The Cid.
+     */
     public final int cid;
+    /**
+     * The Epoch.
+     */
     public final int epoch;
+    /**
+     * The Leader.
+     */
     public final int leader;
+    /**
+     * The Msg.
+     */
     public final TOMMessage msg;
 
+    /**
+     * Instantiates a new Debug info.
+     *
+     * @param cid    the cid
+     * @param epoch  the epoch
+     * @param leader the leader
+     * @param msg    the msg
+     */
     public DebugInfo(int cid, int epoch, int leader, TOMMessage msg) {
         this.cid = cid;
         this.epoch = epoch;

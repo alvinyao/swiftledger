@@ -23,15 +23,28 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+/**
+ * The type State sender.
+ */
 public class StateSender implements Runnable {
 
     private final Socket socket;
     private ApplicationState state;
 
+    /**
+     * Instantiates a new State sender.
+     *
+     * @param socket the socket
+     */
     public StateSender(Socket socket) {
         this.socket = socket;
     }
 
+    /**
+     * Sets state.
+     *
+     * @param state the state
+     */
     public void setState(ApplicationState state) {
         this.state = state;
     }

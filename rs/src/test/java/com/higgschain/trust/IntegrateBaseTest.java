@@ -15,11 +15,21 @@ import org.testng.annotations.BeforeSuite;
 //import org.junit.BeforeClass;
 //import org.junit.runner.RunWith;
 
+/**
+ * The type Integrate base test.
+ */
 //@RunWith(SpringRunner.class)
 @SpringBootTest
 public class IntegrateBaseTest extends AbstractTestNGSpringContextTests {
 
+    /**
+     * The constant DB_URL.
+     */
     public static String DB_URL = "jdbc:mysql://localhost:3306/trust?user=root&password=root";
+
+    /**
+     * Before class.
+     */
     @BeforeSuite public static void beforeClass() {
         System.setProperty("spring.config.location", "classpath:test-application.json");
         //JSON auto detect class type
@@ -34,10 +44,16 @@ public class IntegrateBaseTest extends AbstractTestNGSpringContextTests {
         JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.MapSortField.getMask();
     }
 
+    /**
+     * Run before.
+     */
     @BeforeClass public void runBefore() {
         initMock();
     }
 
+    /**
+     * Run after.
+     */
     @AfterClass public void runAfter() {
         runLast();
     }
@@ -46,6 +62,9 @@ public class IntegrateBaseTest extends AbstractTestNGSpringContextTests {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Run last.
+     */
     protected void runLast() {
     }
 }

@@ -13,15 +13,30 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.AbstractMillerPairingPreProcessing
 import java.math.BigInteger;
 
 /**
+ * The type Type a tate affine miller pairing map.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeATateAffineMillerPairingMap extends AbstractMillerPairingMap {
+    /**
+     * The Pairing.
+     */
     protected final TypeAPairing pairing;
 
+    /**
+     * The Pairing pre processing table length.
+     */
     protected int pairingPreProcessingTableLength = -1;
+    /**
+     * The Pairing pre processing length in bytes.
+     */
     protected int pairingPreProcessingLengthInBytes = -1;
 
-
+    /**
+     * Instantiates a new Type a tate affine miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeATateAffineMillerPairingMap(final TypeAPairing pairing) {
         super(pairing);
 
@@ -204,6 +219,12 @@ public class TypeATateAffineMillerPairingMap extends AbstractMillerPairingMap {
         return new TypeAMillerAffinePairingPreProcessing(source, offset);
     }
 
+    /**
+     * Tate pow element.
+     *
+     * @param element the element
+     * @return the element
+     */
     public Element tatePow(Element element) {
         Element t0, t1;
         t0 = element.getField().newElement();
@@ -216,6 +237,14 @@ public class TypeATateAffineMillerPairingMap extends AbstractMillerPairingMap {
         return element;
     }
 
+    /**
+     * Tate pow.
+     *
+     * @param out      the out
+     * @param in       the in
+     * @param temp     the temp
+     * @param cofactor the cofactor
+     */
     final void tatePow(Point out, Point in, Point temp, BigInteger cofactor) {
         Element in1 = in.getY();
         //simpler but slower:
@@ -253,18 +282,36 @@ public class TypeATateAffineMillerPairingMap extends AbstractMillerPairingMap {
         im.set(b).mul(Qy);
     }
 
-
+    /**
+     * Gets pairing pre processing table length.
+     *
+     * @return the pairing pre processing table length
+     */
     public int getPairingPreProcessingTableLength() {
         getPairingPreProcessingLengthInBytes();
         return pairingPreProcessingTableLength;
     }
 
+    /**
+     * The type Type a miller affine pairing pre processing.
+     */
     public class TypeAMillerAffinePairingPreProcessing extends AbstractMillerPairingPreProcessing {
 
+        /**
+         * Instantiates a new Type a miller affine pairing pre processing.
+         *
+         * @param source the source
+         * @param offset the offset
+         */
         public TypeAMillerAffinePairingPreProcessing(byte[] source, int offset) {
             super(pairing, source, offset);
         }
 
+        /**
+         * Instantiates a new Type a miller affine pairing pre processing.
+         *
+         * @param in1 the in 1
+         */
         public TypeAMillerAffinePairingPreProcessing(Point in1) {
             super(in1, getPairingPreProcessingTableLength());
 

@@ -6,9 +6,11 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * The type Data identity.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-10
+ * @date 2018 -04-10
  */
 @Getter @Setter public class DataIdentity extends BaseBO {
     /**

@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
+ * The type Pack rocks dao.
+ *
  * @author tangfashuang
- * @desc key: height, value: packagePO
+ * @desc key : height, value: packagePO
  */
 @Service
 @Slf4j
@@ -24,6 +26,11 @@ public class PackRocksDao extends RocksBaseDao<PackagePO> {
         return "package";
     }
 
+    /**
+     * Save.
+     *
+     * @param po the po
+     */
     public void save(PackagePO po) {
 
         Transaction tx = ThreadLocalUtils.getRocksTx();
@@ -42,6 +49,13 @@ public class PackRocksDao extends RocksBaseDao<PackagePO> {
         txPut(tx, height, po);
     }
 
+    /**
+     * Update status.
+     *
+     * @param height the height
+     * @param from   the from
+     * @param to     the to
+     */
     public void updateStatus(Long height, String from, String to) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -67,6 +81,12 @@ public class PackRocksDao extends RocksBaseDao<PackagePO> {
         txPut(tx, heightStr, po);
     }
 
+    /**
+     * Query height list by height list.
+     *
+     * @param packHeights the pack heights
+     * @return the list
+     */
     public List<Long> queryHeightListByHeight(List<String> packHeights) {
         List<Long> heights = new ArrayList<>();
         Map<String, PackagePO> resultMap = multiGet(packHeights);
@@ -83,6 +103,11 @@ public class PackRocksDao extends RocksBaseDao<PackagePO> {
         return heights;
     }
 
+    /**
+     * Batch delete.
+     *
+     * @param h the h
+     */
     public void batchDelete(Long h) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {

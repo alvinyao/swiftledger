@@ -17,24 +17,60 @@
  */
 package com.higgschain.trust.evmcontract.solidity.compiler;
 
+/**
+ * The type Contract exception.
+ */
 public class ContractException extends RuntimeException {
 
+    /**
+     * Instantiates a new Contract exception.
+     *
+     * @param message the message
+     */
     public ContractException(String message) {
         super(message);
     }
 
+    /**
+     * Permission error contract exception.
+     *
+     * @param msg  the msg
+     * @param args the args
+     * @return the contract exception
+     */
     public static ContractException permissionError(String msg, Object... args) {
         return error("contract permission error", msg, args);
     }
 
+    /**
+     * Compilation error contract exception.
+     *
+     * @param msg  the msg
+     * @param args the args
+     * @return the contract exception
+     */
     public static ContractException compilationError(String msg, Object... args) {
         return error("contract compilation error", msg, args);
     }
 
+    /**
+     * Validation error contract exception.
+     *
+     * @param msg  the msg
+     * @param args the args
+     * @return the contract exception
+     */
     public static ContractException validationError(String msg, Object... args) {
         return error("contract validation error", msg, args);
     }
 
+    /**
+     * Assemble error contract exception.
+     *
+     * @param msg  the msg
+     * @param args the args
+     * @return the contract exception
+     */
     public static ContractException assembleError(String msg, Object... args) {
         return error("contract assemble error", msg, args);
     }

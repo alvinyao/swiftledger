@@ -17,22 +17,30 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type P 2 p send service.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-20
+ * @date 2018 -08-20
  */
 @Component @Slf4j public class P2PSendService {
 
     @Autowired private NodeState nodeState;
+    /**
+     * The View manager.
+     */
     @Autowired protected IClusterViewManager viewManager;
     @Autowired private P2pConsensusClient p2pConsensusClient;
     @Autowired private ThreadPoolTaskExecutor p2pSendExecutor;
+    /**
+     * The Retry num.
+     */
     @Value("${p2p.send.retryNum:3}") int retryNum;
 
     /**
      * submit command to p2p layer
      *
-     * @param validCommand
+     * @param validCommand the valid command
      */
     public void submit(ValidCommand<?> validCommand) {
         if (!nodeState.isState(NodeStateEnum.Running)) {

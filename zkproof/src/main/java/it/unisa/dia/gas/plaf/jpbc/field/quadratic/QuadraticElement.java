@@ -6,11 +6,18 @@ import it.unisa.dia.gas.plaf.jpbc.field.base.AbstractPointElement;
 import java.math.BigInteger;
 
 /**
+ * The type Quadratic element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class QuadraticElement<E extends Element> extends AbstractPointElement<E, QuadraticField> {
 
-
+    /**
+     * Instantiates a new Quadratic element.
+     *
+     * @param field the field
+     */
     public QuadraticElement(QuadraticField field) {
         super(field);
 
@@ -18,6 +25,11 @@ public class QuadraticElement<E extends Element> extends AbstractPointElement<E,
         this.y = (E) field.getTargetField().newElement();
     }
 
+    /**
+     * Instantiates a new Quadratic element.
+     *
+     * @param element the element
+     */
     public QuadraticElement(QuadraticElement element) {
         super(element.getField());
 

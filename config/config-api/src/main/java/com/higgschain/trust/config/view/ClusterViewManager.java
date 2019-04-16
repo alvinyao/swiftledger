@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
+ * The type Cluster view manager.
+ *
  * @author suimi
- * @date 2018/8/31
+ * @date 2018 /8/31
  */
 @Slf4j @Component public class ClusterViewManager implements IClusterViewManager {
 

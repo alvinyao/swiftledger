@@ -30,8 +30,7 @@ public class VarInt {
     /**
      * Constructs a new VarInt with the given unsigned long value.
      *
-     * @param value the unsigned long value (beware widening conversion of
-     *              negatives!)
+     * @param value the unsigned long value (beware widening conversion of              negatives!)
      */
     public VarInt(long value) {
         this.value = value;
@@ -65,8 +64,7 @@ public class VarInt {
     /**
      * Returns the minimum encoded size of the given unsigned long value.
      *
-     * @param value the unsigned long value (beware widening conversion of
-     *              negatives!)
+     * @param value the unsigned long value (beware widening conversion of              negatives!)
      * @return the minimum encoded size of the given unsigned long value
      */
     public static int sizeOf(long value) {
@@ -83,15 +81,17 @@ public class VarInt {
     }
 
     /**
-     * @return the original number of bytes used to encode the value if it was
-     * deserialized from a byte array, or the minimum encoded size if it
-     * was not.
+     * Gets original size in bytes.
+     *
+     * @return the original number of bytes used to encode the value if it was deserialized from a byte array, or the minimum encoded size if it was not.
      */
     public int getOriginalSizeInBytes() {
         return originallyEncodedSize;
     }
 
     /**
+     * Gets size in bytes.
+     *
      * @return the minimum encoded size of the value.
      */
     public final int getSizeInBytes() {

@@ -57,10 +57,20 @@ public abstract class TOMSender implements ReplyReceiver, Closeable, AutoCloseab
         cs.close();
     }
 
+    /**
+     * Gets communication system.
+     *
+     * @return the communication system
+     */
     public CommunicationSystemClientSide getCommunicationSystem() {
         return this.cs;
     }
 
+    /**
+     * Gets view manager.
+     *
+     * @return the view manager
+     */
     //******* EDUARDO BEGIN **************//
     public ClientViewController getViewManager() {
         return this.viewController;
@@ -77,6 +87,12 @@ public abstract class TOMSender implements ReplyReceiver, Closeable, AutoCloseab
         startsCS(processId);
     }
 
+    /**
+     * Init.
+     *
+     * @param processId  the process id
+     * @param configHome the config home
+     */
     public void init(int processId, String configHome) {
         this.viewController = new ClientViewController(processId, configHome);
         startsCS(processId);
@@ -91,10 +107,21 @@ public abstract class TOMSender implements ReplyReceiver, Closeable, AutoCloseab
     }
     //******* EDUARDO END **************//
 
+    /**
+     * Gets process id.
+     *
+     * @return the process id
+     */
     public int getProcessId() {
         return me;
     }
 
+    /**
+     * Generate request id int.
+     *
+     * @param type the type
+     * @return the int
+     */
     public int generateRequestId(TOMMessageType type) {
         lock.lock();
         int id;
@@ -107,19 +134,46 @@ public abstract class TOMSender implements ReplyReceiver, Closeable, AutoCloseab
         return id;
     }
 
+    /**
+     * Generate operation id int.
+     *
+     * @return the int
+     */
     public int generateOperationId() {
         return opCounter.getAndIncrement();
     }
 
+    /**
+     * To multicast.
+     *
+     * @param sm the sm
+     */
     public void TOMulticast(TOMMessage sm) {
         cs.send(useSignatures, this.viewController.getCurrentViewProcesses(), sm);
     }
 
+    /**
+     * To multicast.
+     *
+     * @param m           the m
+     * @param reqId       the req id
+     * @param operationId the operation id
+     * @param reqType     the req type
+     */
     public void TOMulticast(byte[] m, int reqId, int operationId, TOMMessageType reqType) {
         cs.send(useSignatures, viewController.getCurrentViewProcesses(),
             new TOMMessage(me, session, reqId, operationId, m, viewController.getCurrentViewId(), reqType));
     }
 
+    /**
+     * Send message to targets.
+     *
+     * @param m           the m
+     * @param reqId       the req id
+     * @param operationId the operation id
+     * @param targets     the targets
+     * @param type        the type
+     */
     public void sendMessageToTargets(byte[] m, int reqId, int operationId, int[] targets, TOMMessageType type) {
         if (this.getViewManager().getStaticConf().isTheTTP()) {
             type = TOMMessageType.ASK_STATUS;
@@ -128,6 +182,11 @@ public abstract class TOMSender implements ReplyReceiver, Closeable, AutoCloseab
             new TOMMessage(me, session, reqId, operationId, m, viewController.getCurrentViewId(), type));
     }
 
+    /**
+     * Gets session.
+     *
+     * @return the session
+     */
     public int getSession() {
         return session;
     }

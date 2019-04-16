@@ -7,7 +7,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @param <V>
+ * The type Hash blocking map.
+ *
+ * @param <V> the type parameter
  * @author tangfashuang
  */
 public class HashBlockingMap<V> implements BlockingMap<V> {
@@ -16,6 +18,11 @@ public class HashBlockingMap<V> implements BlockingMap<V> {
 
     private final ReentrantLock lock = new ReentrantLock();
 
+    /**
+     * Instantiates a new Hash blocking map.
+     *
+     * @param maxSize the max size
+     */
     public HashBlockingMap(int maxSize) {
         map = new ConcurrentLinkedHashMap.Builder<String, Item<V>>().maximumWeightedCapacity(maxSize).build();
     }

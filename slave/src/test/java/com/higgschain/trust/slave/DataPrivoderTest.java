@@ -13,12 +13,21 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Data privoder test.
+ */
 @Slf4j
 public class DataPrivoderTest{
 
     @Autowired
     private com.higgschain.trust.slave.core.service.action.utxo.UTXOActionHandler UTXOActionHandler;
 
+    /**
+     * Provide numbers object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider
     public Object[][] provideNumbers(Method method){
@@ -28,6 +37,12 @@ public class DataPrivoderTest{
         return arrmap;
     }
 
+    /**
+     * Test validate.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideNumbers")
     public void testValidate(Map<?, ?> param) throws InterruptedException{
         System.out.println(param.get("body"));
@@ -39,6 +54,9 @@ public class DataPrivoderTest{
        // UTXOAction action = JSON.parseObject(obj.get("utxoAction").toString(),UTXOAction.class);
     }
 
+    /**
+     * Test spring.
+     */
     @Test
     public void testSpring(){
         DataBaseManager dataBaseManager = new DataBaseManager();

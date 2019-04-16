@@ -6,6 +6,7 @@ import lombok.Setter;
 
 /**
  * cancel rs bean
+ *
  * @author tangfashuang
  */
 @Getter

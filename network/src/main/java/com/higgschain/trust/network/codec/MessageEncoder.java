@@ -13,8 +13,10 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
+ * The type Message encoder.
+ *
  * @author duhongming
- * @date 2018/8/21
+ * @date 2018 /8/21
  */
 public class MessageEncoder extends MessageToByteEncoder<NetworkMessage> {
 
@@ -23,6 +25,11 @@ public class MessageEncoder extends MessageToByteEncoder<NetworkMessage> {
 
     private final Address address;
 
+    /**
+     * Instantiates a new Message encoder.
+     *
+     * @param address the address
+     */
     public MessageEncoder(Address address) {
         this.address = address;
     }

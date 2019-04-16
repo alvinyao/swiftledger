@@ -9,8 +9,10 @@ import lombok.ToString;
 import java.util.List;
 
 /**
+ * The type Test a.
+ *
  * @author suimi
- * @date 2018/8/27
+ * @date 2018 /8/27
  */
 @ToString
 @Getter @Setter public class TestA {

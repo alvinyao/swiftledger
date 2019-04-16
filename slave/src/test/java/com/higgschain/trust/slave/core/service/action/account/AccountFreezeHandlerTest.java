@@ -12,25 +12,42 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 /**
+ * The type Account freeze handler test.
+ *
  * @author hanson
- * @Date 2018/4/28
+ * @Date 2018 /4/28
  * @Description:
  */
 public class AccountFreezeHandlerTest extends InterfaceCommonTest {
 
     private final static String rootPath = "java/com/higgs/trust/slave/core/service/accounting/freezeAccount/";
 
+    /**
+     * The Account freeze handler.
+     */
     @Autowired
     AccountFreezeHandler accountFreezeHandler;
 
+    /**
+     * The Open account handler.
+     */
     @Autowired
     OpenAccountHandler openAccountHandler;
 
+    /**
+     * The Account operation handler.
+     */
     @Autowired
     AccountOperationHandler accountOperationHandler;
+    /**
+     * The Manage snapshot agent.
+     */
     @Autowired
     ManageSnapshotAgent manageSnapshotAgent;
 
+    /**
+     * The Policy repository.
+     */
     @Autowired
     PolicyRepository policyRepository;
 
@@ -39,12 +56,24 @@ public class AccountFreezeHandlerTest extends InterfaceCommonTest {
         return rootPath;
     }
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     * @throws Exception the exception
+     */
     @Test(dataProvider = "defaultProvider", priority = 0)
     public void paramValidate(Map<?, ?> param) throws Exception {
         AccountFreeze freeze = getBodyData(param, AccountFreeze.class);
         executeActionHandler(param, accountFreezeHandler, freeze);
     }
 
+    /**
+     * Test exception.
+     *
+     * @param param the param
+     * @throws Exception the exception
+     */
     @Test(dataProvider = "defaultProvider", priority = 1)
     public void testException(Map<?, ?> param) throws Exception {
         executeBeforeSql(param);
@@ -54,6 +83,12 @@ public class AccountFreezeHandlerTest extends InterfaceCommonTest {
 
     }
 
+    /**
+     * Test regular.
+     *
+     * @param param the param
+     * @throws Exception the exception
+     */
     @Test(dataProvider = "defaultProvider", priority = 2)
     public void testRegular(Map<?, ?> param) throws Exception {
         JSONObject object = (JSONObject)param.get("body");

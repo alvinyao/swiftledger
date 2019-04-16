@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Contract rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -23,6 +25,12 @@ public class ContractRocksDao extends RocksBaseDao<ContractPO>{
         return "contract";
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param list the list
+     * @return the int
+     */
     public int batchInsert(List<ContractPO> list) {
         if (CollectionUtils.isEmpty(list)) {
             return 0;

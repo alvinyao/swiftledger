@@ -22,8 +22,16 @@ import org.spongycastle.jce.provider.BouncyCastleProvider;
 import java.security.Provider;
 import java.security.Security;
 
+/**
+ * The type Spongy castle provider.
+ */
 public final class SpongyCastleProvider {
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static Provider getInstance() {
         return Holder.INSTANCE;
     }

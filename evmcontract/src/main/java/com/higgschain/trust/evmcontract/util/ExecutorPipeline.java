@@ -36,6 +36,9 @@ import java.util.function.Function;
  * the same order they were added to the previous executor
  * <p>
  * Created by Anton Nashatyrev on 23.02.2016.
+ *
+ * @param <In>  the type parameter
+ * @param <Out> the type parameter
  */
 public class ExecutorPipeline<In, Out> {
 
@@ -55,6 +58,15 @@ public class ExecutorPipeline<In, Out> {
     private static AtomicInteger pipeNumber = new AtomicInteger(1);
     private AtomicInteger threadNumber = new AtomicInteger(1);
 
+    /**
+     * Instantiates a new Executor pipeline.
+     *
+     * @param threads          the threads
+     * @param queueSize        the queue size
+     * @param preserveOrder    the preserve order
+     * @param processor        the processor
+     * @param exceptionHandler the exception handler
+     */
     public ExecutorPipeline(int threads, int queueSize, boolean preserveOrder, Function<In, Out> processor,
                             Consumer<Throwable> exceptionHandler) {
         queue = new LimitedQueue<>(queueSize);
@@ -67,6 +79,14 @@ public class ExecutorPipeline<In, Out> {
         this.threadPoolName = "pipe-" + pipeNumber.getAndIncrement();
     }
 
+    /**
+     * Add executor pipeline.
+     *
+     * @param threads   the threads
+     * @param queueSize the queue size
+     * @param consumer  the consumer
+     * @return the executor pipeline
+     */
     public ExecutorPipeline<Out, Void> add(int threads, int queueSize, final Consumer<Out> consumer) {
         return add(threads, queueSize, false, out -> {
             consumer.accept(out);
@@ -74,6 +94,16 @@ public class ExecutorPipeline<In, Out> {
         });
     }
 
+    /**
+     * Add executor pipeline.
+     *
+     * @param <NextOut>     the type parameter
+     * @param threads       the threads
+     * @param queueSize     the queue size
+     * @param preserveOrder the preserve order
+     * @param processor     the processor
+     * @return the executor pipeline
+     */
     public <NextOut> ExecutorPipeline<Out, NextOut> add(int threads, int queueSize, boolean preserveOrder,
                                                         Function<Out, NextOut> processor) {
         ExecutorPipeline<Out, NextOut> ret = new ExecutorPipeline<>(threads, queueSize, preserveOrder, processor, exceptionHandler);
@@ -109,6 +139,11 @@ public class ExecutorPipeline<In, Out> {
         }
     }
 
+    /**
+     * Push.
+     *
+     * @param in the in
+     */
     public void push(final In in) {
         final long order = orderCounter.getAndIncrement();
         exec.execute(() -> {
@@ -120,25 +155,49 @@ public class ExecutorPipeline<In, Out> {
         });
     }
 
+    /**
+     * Push all.
+     *
+     * @param list the list
+     */
     public void pushAll(final List<In> list) {
         for (In in : list) {
             push(in);
         }
     }
 
+    /**
+     * Sets thread pool name.
+     *
+     * @param threadPoolName the thread pool name
+     * @return the thread pool name
+     */
     public ExecutorPipeline<In, Out> setThreadPoolName(String threadPoolName) {
         this.threadPoolName = threadPoolName;
         return this;
     }
 
+    /**
+     * Gets queue.
+     *
+     * @return the queue
+     */
     public BlockingQueue<Runnable> getQueue() {
         return queue;
     }
 
+    /**
+     * Gets order map.
+     *
+     * @return the order map
+     */
     public Map<Long, Out> getOrderMap() {
         return orderMap;
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
         try {
             exec.shutdown();
@@ -149,6 +208,11 @@ public class ExecutorPipeline<In, Out> {
         }
     }
 
+    /**
+     * Is shutdown boolean.
+     *
+     * @return the boolean
+     */
     public boolean isShutdown() {
         return exec.isShutdown();
     }
@@ -157,7 +221,7 @@ public class ExecutorPipeline<In, Out> {
      * Shutdowns executors and waits until all pipeline
      * submitted tasks complete
      *
-     * @throws InterruptedException
+     * @throws InterruptedException the interrupted exception
      */
     public void join() throws InterruptedException {
         exec.shutdown();
@@ -168,6 +232,11 @@ public class ExecutorPipeline<In, Out> {
     }
 
     private static class LimitedQueue<E> extends LinkedBlockingQueue<E> {
+        /**
+         * Instantiates a new Limited queue.
+         *
+         * @param maxSize the max size
+         */
         public LimitedQueue(int maxSize) {
             super(maxSize);
         }

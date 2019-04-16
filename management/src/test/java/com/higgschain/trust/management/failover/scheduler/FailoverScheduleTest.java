@@ -31,29 +31,74 @@ import java.util.ArrayList;
 
 import static org.testng.Assert.*;
 
+/**
+ * The type Failover schedule test.
+ */
 @RunWith(PowerMockRunner.class) public class FailoverScheduleTest {
 
+    /**
+     * The Failover schedule.
+     */
     @InjectMocks @Autowired
     FailoverSchedule failoverSchedule;
 
+    /**
+     * The Block sync service.
+     */
     @Mock BlockSyncService blockSyncService;
+    /**
+     * The Block service.
+     */
     @Mock BlockService blockService;
+    /**
+     * The Package service.
+     */
     @Mock PackageService packageService;
+    /**
+     * The Block repository.
+     */
     @Mock BlockRepository blockRepository;
+    /**
+     * The Package repository.
+     */
     @Mock PackageRepository packageRepository;
+    /**
+     * The Node state.
+     */
     @Mock NodeState nodeState;
+    /**
+     * The Properties.
+     */
     @Mock FailoverProperties properties;
+    /**
+     * The Pack.
+     */
     @Mock Package pack;
+    /**
+     * The Current block.
+     */
     @Mock Block currentBlock;
+    /**
+     * The Current header.
+     */
     @Mock BlockHeader currentHeader;
+    /**
+     * The Tx nested.
+     */
     @Mock TransactionTemplate txNested;
     private String currentHash = "preHash";
 
+    /**
+     * Before.
+     */
     @BeforeClass public void before() {
         MockitoAnnotations.initMocks(this);
         Mockito.when(currentBlock.getBlockHeader()).thenReturn(currentHeader);
     }
 
+    /**
+     * Before method.
+     */
     @BeforeMethod public void beforeMethod() {
         MockitoAnnotations.initMocks(this);
         Mockito.when(currentBlock.getBlockHeader()).thenReturn(currentHeader);
@@ -64,12 +109,18 @@ import static org.testng.Assert.*;
         });
     }
 
+    /**
+     * Test failover not running.
+     */
     @Test public void testFailoverNotRunning() {
         Mockito.when(nodeState.isState(NodeStateEnum.Running)).thenReturn(false);
         failoverSchedule.failover();
         Mockito.verify(blockRepository, Mockito.times(0)).getBlockHeader(Matchers.anyLong());
     }
 
+    /**
+     * Test failover not height.
+     */
     @Test public void testFailoverNotHeight() {
         long height = 1L;
         Mockito.when(nodeState.isState(NodeStateEnum.Running)).thenReturn(true);
@@ -94,6 +145,9 @@ import static org.testng.Assert.*;
         Mockito.verify(blockRepository, Mockito.times(0)).getBlockHeader(Matchers.anyLong());
     }
 
+    /**
+     * Test failover not package.
+     */
     @Test public void testFailoverNotPackage() {
         long height = 1L;
         Mockito.when(nodeState.isState(NodeStateEnum.Running)).thenReturn(true);
@@ -106,6 +160,9 @@ import static org.testng.Assert.*;
         Mockito.verify(blockRepository, Mockito.times(0)).getBlockHeader(Matchers.anyLong());
     }
 
+    /**
+     * Test failover step.
+     */
     @Test public void testFailoverStep() {
         long height = 2L;
         int times = 5;
@@ -139,6 +196,9 @@ import static org.testng.Assert.*;
         Mockito.verify(properties, Mockito.times(times)).getFailoverStep();
     }
 
+    /**
+     * Test failover slave exception.
+     */
     @Test public void testFailoverSLAVEException() {
         long height = 2L;
         Mockito.when(nodeState.isState(NodeStateEnum.Running)).thenReturn(true);
@@ -168,6 +228,9 @@ import static org.testng.Assert.*;
         failoverSchedule.failover();
     }
 
+    /**
+     * Test failover other exception.
+     */
     @Test public void testFailoverOtherException() {
         Mockito.when(nodeState.isState(NodeStateEnum.Running)).thenReturn(true);
         Mockito.when(nodeState.isState(NodeStateEnum.Running, NodeStateEnum.ArtificialSync)).thenReturn(true);
@@ -177,6 +240,9 @@ import static org.testng.Assert.*;
         Mockito.verify(properties, Mockito.times(0)).getFailoverStep();
     }
 
+    /**
+     * Test failover height false.
+     */
     @Test public void testFailoverHeightFalse() {
         long height = 1L;
         ArrayList<Block> blocks = new ArrayList<>();
@@ -202,6 +268,9 @@ import static org.testng.Assert.*;
         assertFalse(failoverSchedule.failover(height));
     }
 
+    /**
+     * Test failover height.
+     */
     @Test public void testFailoverHeight() {
         long height = 2L;
         Mockito.when(nodeState.isState(NodeStateEnum.Running, NodeStateEnum.ArtificialSync)).thenReturn(true);
@@ -220,6 +289,9 @@ import static org.testng.Assert.*;
         Mockito.verify(blockSyncService, Mockito.times(times)).getBlocks(height, 1);
     }
 
+    /**
+     * Test failover block.
+     */
     @Test public void testFailoverBlock() {
         long height = 2L;
         Mockito.when(nodeState.isState(NodeStateEnum.Running, NodeStateEnum.ArtificialSync)).thenReturn(true);

@@ -11,9 +11,11 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
+ * The type Multi sign rule vo.
+ *
  * @author liuyu
  * @description
- * @date 2019-03-20
+ * @date 2019 -03-20
  */
 @Getter
 @Setter

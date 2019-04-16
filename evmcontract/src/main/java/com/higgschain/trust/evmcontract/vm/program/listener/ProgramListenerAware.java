@@ -17,7 +17,15 @@
  */
 package com.higgschain.trust.evmcontract.vm.program.listener;
 
+/**
+ * The interface Program listener aware.
+ */
 public interface ProgramListenerAware {
 
+    /**
+     * Sets program listener.
+     *
+     * @param listener the listener
+     */
     void setProgramListener(ProgramListener listener);
 }

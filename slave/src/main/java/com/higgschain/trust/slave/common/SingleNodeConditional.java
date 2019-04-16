@@ -9,6 +9,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 import java.util.Map;
 
+/**
+ * The type Single node conditional.
+ */
 public class SingleNodeConditional implements Condition {
     @Override public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         String property = context.getEnvironment().getProperty("consensus.p2p.cluster");

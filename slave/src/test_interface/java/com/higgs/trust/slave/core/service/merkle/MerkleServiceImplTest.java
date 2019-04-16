@@ -22,16 +22,33 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.AssertJUnit.fail;
 
 /**
+ * The type Merkle service impl test.
+ *
  * @author WangQuanzhou
  * @desc test case for  MerkleServiceImpl
- * @date 2018/4/12 16:53
+ * @date 2018 /4/12 16:53
  */
 public class MerkleServiceImplTest extends BaseTest {
 
+    /**
+     * The Data base manager.
+     */
     DataBaseManager dataBaseManager = new DataBaseManager();
+    /**
+     * The Url.
+     */
     String url="jdbc:mysql://localhost:3306/trust?user=root&password=root&useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true&useAffectedRows=true";
+    /**
+     * The Sql.
+     */
     String sql = "truncate table merkle_node;truncate table merkle_tree;";
 
+    /**
+     * Provide build data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider public Object[][] provideBuildData(Method method) {
         String filepath = JsonFileUtil.findJsonFile("java/com/higgs/trust/slave/core/service/merkle/testBuild/testRegular");
@@ -39,6 +56,12 @@ public class MerkleServiceImplTest extends BaseTest {
         return arrmap;
     }
 
+    /**
+     * Provide build exception data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider public Object[][] provideBuildExceptionData(Method method) {
         String filepath = JsonFileUtil.findJsonFile("java/com/higgs/trust/slave/core/service/merkle/testBuild/testException");
@@ -46,6 +69,12 @@ public class MerkleServiceImplTest extends BaseTest {
         return arrmap;
     }
 
+    /**
+     * Provide update data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider public Object[][] provideUpdateData(Method method) {
         String filepath = JsonFileUtil.findJsonFile("java/com/higgs/trust/slave/core/service/merkle/testUpdate/testRegular");
@@ -53,6 +82,12 @@ public class MerkleServiceImplTest extends BaseTest {
         return arrmap;
     }
 
+    /**
+     * Provide update exception data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider public Object[][] provideUpdateExceptionData(Method method) {
         String filepath = JsonFileUtil.findJsonFile("java/com/higgs/trust/slave/core/service/merkle/testUpdate/testException");
@@ -60,6 +95,12 @@ public class MerkleServiceImplTest extends BaseTest {
         return arrmap;
     }
 
+    /**
+     * Provide add data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider public Object[][] provideAddData(Method method) {
         String filepath = JsonFileUtil.findJsonFile("java/com/higgs/trust/slave/core/service/merkle/testAdd/testRegular");
@@ -67,6 +108,12 @@ public class MerkleServiceImplTest extends BaseTest {
         return arrmap;
     }
 
+    /**
+     * Provide add exception data object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     //数据驱动
     @DataProvider public Object[][] provideAddExceptionData(Method method) {
         String filepath = JsonFileUtil.findJsonFile("java/com/higgs/trust/slave/core/service/merkle/testAdd/testException");
@@ -77,6 +124,12 @@ public class MerkleServiceImplTest extends BaseTest {
     @Autowired
     private MerkleService merkleService;
 
+    /**
+     * Test build.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideBuildData",priority = 0)
     public void testBuild(Map<?, ?> param) throws InterruptedException {
         dataBaseManager.executeSingleDelete(sql,url);
@@ -95,7 +148,12 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
-
+    /**
+     * Test build exception.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideBuildExceptionData",priority = 10)
     public void testBuildException(Map<?, ?> param) throws InterruptedException {
         dataBaseManager.executeSingleDelete(sql,url);
@@ -117,6 +175,9 @@ public class MerkleServiceImplTest extends BaseTest {
         }
     }
 
+    /**
+     * Init update.
+     */
     @Test(priority = 20)
     public void initUpdate(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -130,6 +191,12 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Test update.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideUpdateData",priority = 30)
     public void testUpdate(Map<?, ?> param) throws InterruptedException {
         MerkleTree merkleTree =  merkleService.queryMerkleTree(MerkleTypeEnum.getBizTypeEnumBycode((String)param.get("type")));
@@ -142,6 +209,9 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Init update 1.
+     */
     @Test(priority = 40)
     public void initUpdate1(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -155,6 +225,12 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Test update exception.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideUpdateExceptionData",priority = 50)
     public void testUpdateException(Map<?, ?> param) throws InterruptedException {
         try {
@@ -170,6 +246,9 @@ public class MerkleServiceImplTest extends BaseTest {
         }
     }
 
+    /**
+     * Init add.
+     */
     @Test(priority = 60)
     public void initAdd(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -182,6 +261,12 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Test add.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideAddData",priority = 70)
     public void testAdd(Map<?, ?> param) throws InterruptedException {
         MerkleTree merkleTree =  merkleService.queryMerkleTree(MerkleTypeEnum.getBizTypeEnumBycode((String)param.get("type")));
@@ -191,6 +276,9 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Init add 1.
+     */
     @Test(priority = 80)
     public void initAdd1(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -204,6 +292,12 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Test add 1.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideAddData",priority = 90)
     public void testAdd1(Map<?, ?> param) throws InterruptedException {
         MerkleTree merkleTree =  merkleService.queryMerkleTree(MerkleTypeEnum.getBizTypeEnumBycode((String)param.get("type")));
@@ -213,6 +307,9 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Init add 2.
+     */
     @Test(priority = 100)
     public void initAdd2(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -227,6 +324,12 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Test add 2.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideAddData",priority = 110)
     public void testAdd2(Map<?, ?> param) throws InterruptedException {
         MerkleTree merkleTree =  merkleService.queryMerkleTree(MerkleTypeEnum.getBizTypeEnumBycode((String)param.get("type")));
@@ -236,6 +339,9 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Init add 3.
+     */
     @Test(priority = 120)
     public void initAdd3(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -248,6 +354,12 @@ public class MerkleServiceImplTest extends BaseTest {
         merkleService.flush(merkleTree);
     }
 
+    /**
+     * Test add exception.
+     *
+     * @param param the param
+     * @throws InterruptedException the interrupted exception
+     */
     @Test(dataProvider = "provideAddExceptionData",priority = 130)
     public void testAddException(Map<?, ?> param) throws InterruptedException {
         try {
@@ -260,6 +372,9 @@ public class MerkleServiceImplTest extends BaseTest {
         }
     }
 
+    /**
+     * Test flush.
+     */
     @Test(priority = 140)
     public void testFlush() {
         dataBaseManager.executeSingleDelete(sql,url);
@@ -283,13 +398,18 @@ public class MerkleServiceImplTest extends BaseTest {
 
     }
 
-
+    /**
+     * Test query merkle tree.
+     */
     @Test(priority = 150)
     public void testQueryMerkleTree(){
         MerkleTypeEnum treeType = MerkleTypeEnum.RS;
         assertEquals(merkleService.queryMerkleTree(treeType).getTreeType(),treeType);
     }
 
+    /**
+     * Test query merkle tree exception.
+     */
     @Test(priority = 160)
     public void testQueryMerkleTreeException(){
         try{
@@ -299,6 +419,9 @@ public class MerkleServiceImplTest extends BaseTest {
         }
     }
 
+    /**
+     * Verify.
+     */
     @Test
     public void verify(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -323,6 +446,9 @@ public class MerkleServiceImplTest extends BaseTest {
         assertEquals(merkleTree1.getRootHash(),merkleTree.getRootHash());
     }
 
+    /**
+     * Verify 1.
+     */
     @Test
     public void verify1(){
         dataBaseManager.executeSingleDelete(sql,url);
@@ -339,6 +465,9 @@ public class MerkleServiceImplTest extends BaseTest {
         }
     }
 
+    /**
+     * Verify 2.
+     */
     @Test
     public void verify2(){
         dataBaseManager.executeSingleDelete(sql,url);

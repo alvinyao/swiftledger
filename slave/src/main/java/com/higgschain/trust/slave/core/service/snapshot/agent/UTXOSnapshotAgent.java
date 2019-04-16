@@ -29,7 +29,7 @@ import java.util.List;
  * UTXO snapshot agent
  *
  * @author lingchao
- * @create 2018年04月13日16:53
+ * @create 2018年04月13日16 :53
  */
 @Slf4j
 @Service
@@ -78,10 +78,10 @@ public class UTXOSnapshotAgent implements CacheLoader {
      * <p>
      * query UTXO by txId, index and actionIndex
      *
-     * @param txId
-     * @param index
-     * @param actionIndex
-     * @return
+     * @param txId        the tx id
+     * @param index       the index
+     * @param actionIndex the action index
+     * @return utxo
      */
     public UTXO queryUTXO(String txId, Integer index, Integer actionIndex) {
         TxOutCacheKey txOutCacheKey = new TxOutCacheKey(txId, index, actionIndex);
@@ -94,7 +94,10 @@ public class UTXOSnapshotAgent implements CacheLoader {
     }
 
     /**
-     * @param txOutPOList
+     * Batch insert tx out boolean.
+     *
+     * @param txOutPOList the tx out po list
+     * @return the boolean
      */
     public boolean batchInsertTxOut(List<TxOutPO> txOutPOList) {
         for (TxOutPO txOutPO : txOutPOList) {
@@ -107,7 +110,8 @@ public class UTXOSnapshotAgent implements CacheLoader {
     /**
      * update data in the snapshot
      *
-     * @param txOutPOList
+     * @param txOutPOList the tx out po list
+     * @return the boolean
      */
     public boolean bachUpdateTxOut(List<TxOutPO> txOutPOList) {
         for (TxOutPO txOutPO : txOutPOList) {

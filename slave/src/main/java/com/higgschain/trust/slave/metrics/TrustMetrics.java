@@ -13,8 +13,10 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Trust metrics.
+ *
  * @author duhongming
- * @date 2018/12/27
+ * @date 2018 /12/27
  */
 public class TrustMetrics {
 
@@ -34,6 +36,11 @@ public class TrustMetrics {
 
     private static TrustMetrics defaultTrustMetrics = new TrustMetrics();
 
+    /**
+     * Gets default.
+     *
+     * @return the default
+     */
     public static TrustMetrics getDefault() {
         return defaultTrustMetrics;
     }
@@ -52,46 +59,102 @@ public class TrustMetrics {
         register.register("thread", new ThreadStatesGaugeSet());
     }
 
+    /**
+     * Block block metric set.
+     *
+     * @return the block metric set
+     */
     public BlockMetricSet block() {
         return blockMetricSet;
     }
 
+    /**
+     * Transactions transactions metric set.
+     *
+     * @return the transactions metric set
+     */
     public TransactionsMetricSet transactions() {
         return transactionsMetricSet;
     }
 
+    /**
+     * Gets reporter.
+     *
+     * @return the reporter
+     */
     public MetricsReporter getReporter() {
         return reporter;
     }
 
+    /**
+     * Gets reported metrics.
+     *
+     * @return the reported metrics
+     */
     public Map<String, Object> getReportedMetrics() {
         return reportedMetrics;
     }
 
+    /**
+     * Start report.
+     */
     public void startReport() {
         reporter.start(1, TimeUnit.SECONDS);
     }
 
+    /**
+     * Increment.
+     *
+     * @param metricName the metric name
+     */
     public void increment(String metricName) {
         increment(metricName, 1);
     }
 
+    /**
+     * Increment.
+     *
+     * @param metricName the metric name
+     * @param n          the n
+     */
     public void increment(String metricName, long n) {
         register.counter(metricName).inc(n);
     }
 
+    /**
+     * Mark.
+     *
+     * @param metricName the metric name
+     */
     public void mark(String metricName) {
         mark(metricName, 1);
     }
 
+    /**
+     * Mark.
+     *
+     * @param metricName the metric name
+     * @param n          the n
+     */
     public void mark(String metricName, long n) {
         register.meter(metricName).mark(n);
     }
 
+    /**
+     * Update.
+     *
+     * @param metricName the metric name
+     * @param value      the value
+     */
     public void update(String metricName, long value) {
         register.histogram(metricName).update(value);
     }
 
+    /**
+     * Gets register.
+     *
+     * @return the register
+     */
     public MetricRegistry getRegister() {
         return register;
     }

@@ -19,13 +19,23 @@ import bftsmart.reconfiguration.views.View;
 import bftsmart.tom.util.Logger;
 
 /**
+ * The type Reconfiguration test.
+ *
  * @author eduardo
  */
 public class ReconfigurationTest {
 
+    /**
+     * Instantiates a new Reconfiguration test.
+     */
     public ReconfigurationTest() {
     }
 
+    /**
+     * Run.
+     *
+     * @param id the id
+     */
     public void run(int id) {
        /* ServiceProxy proxy = new ServiceProxy(id);
         
@@ -52,6 +62,11 @@ public class ReconfigurationTest {
         rec.close();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new ReconfigurationTest().run(Integer.parseInt(args[0]));
     }

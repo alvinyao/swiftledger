@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 /**
+ * The type Byte buffer data input.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
@@ -12,6 +14,11 @@ public class ByteBufferDataInput implements DataInput {
 
     private ByteBuffer byteBuffer;
 
+    /**
+     * Instantiates a new Byte buffer data input.
+     *
+     * @param byteBuffer the byte buffer
+     */
     public ByteBufferDataInput(ByteBuffer byteBuffer) {
         this.byteBuffer = byteBuffer;
     }

@@ -9,9 +9,11 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
+ * The type Account un freeze.
+ *
  * @author liuyu
  * @description account unfreeze action BO
- * @date 2018-03-30
+ * @date 2018 -03-30
  */
 @Getter @Setter public class AccountUnFreeze extends Action {
     /**

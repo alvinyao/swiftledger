@@ -18,17 +18,38 @@
 package com.higgschain.trust.evmcontract.vm;
 
 /**
+ * The type Call create.
+ *
  * @author Roman Mandeleil
  * @since 03.07.2014
  */
 public class CallCreate {
 
+    /**
+     * The Data.
+     */
     final byte[] data;
+    /**
+     * The Destination.
+     */
     final byte[] destination;
+    /**
+     * The Gas limit.
+     */
     final byte[] gasLimit;
+    /**
+     * The Value.
+     */
     final byte[] value;
 
-
+    /**
+     * Instantiates a new Call create.
+     *
+     * @param data        the data
+     * @param destination the destination
+     * @param gasLimit    the gas limit
+     * @param value       the value
+     */
     public CallCreate(byte[] data, byte[] destination, byte[] gasLimit, byte[] value) {
         this.data = data;
         this.destination = destination;
@@ -36,18 +57,38 @@ public class CallCreate {
         this.value = value;
     }
 
+    /**
+     * Get data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getData() {
         return data;
     }
 
+    /**
+     * Get destination byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getDestination() {
         return destination;
     }
 
+    /**
+     * Get gas limit byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getGasLimit() {
         return gasLimit;
     }
 
+    /**
+     * Get value byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getValue() {
         return value;
     }

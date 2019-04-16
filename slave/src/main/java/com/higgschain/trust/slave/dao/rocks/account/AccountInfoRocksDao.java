@@ -18,8 +18,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Account info rocks dao.
+ *
  * @author tangfashuang
- * @desc key: accountNo, value: AccountInfoPO
+ * @desc key : accountNo, value: AccountInfoPO
  */
 @Service
 @Slf4j
@@ -29,6 +31,12 @@ public class AccountInfoRocksDao extends RocksBaseDao<AccountInfoPO> {
         return "accountInfo";
     }
 
+    /**
+     * Freeze.
+     *
+     * @param accountNo the account no
+     * @param amount    the amount
+     */
     public void freeze(String accountNo, BigDecimal amount) {
         AccountInfoPO po = get(accountNo);
         if (null == po) {
@@ -54,6 +62,12 @@ public class AccountInfoRocksDao extends RocksBaseDao<AccountInfoPO> {
         put(accountNo, po);
     }
 
+    /**
+     * Un freeze.
+     *
+     * @param accountNo the account no
+     * @param amount    the amount
+     */
     public void unFreeze(String accountNo, BigDecimal amount) {
         AccountInfoPO po = get(accountNo);
         if (null == po) {
@@ -74,6 +88,11 @@ public class AccountInfoRocksDao extends RocksBaseDao<AccountInfoPO> {
         put(accountNo, po);
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param pos the pos
+     */
     public void batchInsert(List<AccountInfoPO> pos) {
         if (CollectionUtils.isEmpty(pos)) {
             return;
@@ -96,6 +115,12 @@ public class AccountInfoRocksDao extends RocksBaseDao<AccountInfoPO> {
 
     }
 
+    /**
+     * Query by account nos list.
+     *
+     * @param accountNos the account nos
+     * @return the list
+     */
     public List<AccountInfoPO> queryByAccountNos(List<String> accountNos) {
         if (CollectionUtils.isEmpty(accountNos)) {
             return null;

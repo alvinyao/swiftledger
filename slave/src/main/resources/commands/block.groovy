@@ -18,6 +18,9 @@ import org.springframework.beans.factory.BeanFactory
  * suimi
  */
 
+/**
+ *  The type Block.
+ */
 @Slf4j
 @Usage("about block info operation")
 class block {

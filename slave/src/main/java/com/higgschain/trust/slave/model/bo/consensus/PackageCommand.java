@@ -16,9 +16,11 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
+ * The type Package command.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 @ToString(callSuper = true, exclude = {"sign"}) @Getter @Setter public class PackageCommand
     extends AbstractConsensusCommand<Package> implements SignatureCommand, TermCommand, ViewCommand {
 
@@ -56,6 +58,12 @@ import org.hibernate.validator.constraints.NotEmpty;
      */
     @NotEmpty @JSONField(label = "sign") private String sign;
 
+    /**
+     * Instantiates a new Package command.
+     *
+     * @param masterName the master name
+     * @param value      the value
+     */
     public PackageCommand(String masterName, Package value) {
         super(value);
         this.masterName = masterName;
@@ -63,6 +71,14 @@ import org.hibernate.validator.constraints.NotEmpty;
         this.time = value.getPackageTime();
     }
 
+    /**
+     * Instantiates a new Package command.
+     *
+     * @param masterName the master name
+     * @param value      the value
+     * @param height     the height
+     * @param time       the time
+     */
     public PackageCommand(String masterName,byte[] value,long height, long time){
         super(value);
         this.masterName = masterName;

@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * The type Register rs vo.
+ *
  * @author tangfashuang
  */
 @Getter

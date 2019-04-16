@@ -15,6 +15,9 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Pack process test.
+ */
 @Slf4j
 public class PackProcessTest extends InterfaceCommonTest{
     private static String PROVIDER_ROOT_PATH = "java/com/higgs/trust/slave/core/service/pack/process/";
@@ -26,6 +29,11 @@ public class PackProcessTest extends InterfaceCommonTest{
         return PROVIDER_ROOT_PATH;
     }
 
+    /**
+     * Test received fail.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1)
     public void testReceivedFail(Map<?, ?> param) {
         log.info("[testReceivedFail] param:{}", param);
@@ -39,11 +47,21 @@ public class PackProcessTest extends InterfaceCommonTest{
         }
     }
 
+    /**
+     * Test received success.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 2)
     public void testReceivedSuccess(Map<?, ?> param) {
         log.info("[testReceivedSuccess] param:{}", param);
     }
 
+    /**
+     * Test validating fail.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 3)
     public void testValidatingFail(Map<?, ?> param) {
         log.info("[testValidatingFail] param:{}", param);
@@ -56,6 +74,11 @@ public class PackProcessTest extends InterfaceCommonTest{
         }
     }
 
+    /**
+     * Test validating success.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 4)
     public void testValidatingSuccess(Map<?, ?> param) {
         log.info("[testValidatingSuccess] param:{}", param);
@@ -76,7 +99,11 @@ public class PackProcessTest extends InterfaceCommonTest{
         executeAfterSql(param);
     }
 
-
+    /**
+     * Test wait validate consensus fail.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 5)
     public void testWaitValidateConsensusFail(Map<?, ?> param) {
         log.info("[testWaitValidateConsensusFail] param:{}", param);
@@ -94,18 +121,33 @@ public class PackProcessTest extends InterfaceCommonTest{
 
     }
 
+    /**
+     * Test wait validate consensus success.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 6)
     public void testWaitValidateConsensusSuccess(Map<?, ?> param) {
         log.info("[testWaitValidateConsensusSuccess] param:{}", param);
         
     }
 
+    /**
+     * Test validated fail.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 7)
     public void testValidatedFail(Map<?, ?> param) {
         log.info("[testValidatedFail] param:{}", param);
 
     }
 
+    /**
+     * Test validated success.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 8)
     public void testValidatedSuccess(Map<?, ?> param) {
         log.info("[testValidatedSuccess] param:{}", param);

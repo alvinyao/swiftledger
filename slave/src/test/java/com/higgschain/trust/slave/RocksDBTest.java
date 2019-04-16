@@ -6,18 +6,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Rocks db test.
+ */
 public class RocksDBTest {
     private static final String dbPath = "log/rocks/";
     static {
         RocksDB.loadLibrary();
     }
 
+    /**
+     * The Rocks db.
+     */
     RocksDB rocksDB;
 
+    /**
+     * Instantiates a new Rocks db test.
+     *
+     * @throws RocksDBException the rocks db exception
+     */
     public RocksDBTest() throws RocksDBException {
 
     }
 
+    /**
+     * Test default column family.
+     *
+     * @throws RocksDBException the rocks db exception
+     */
     //  RocksDB.DEFAULT_COLUMN_FAMILY
     public void testDefaultColumnFamily() throws RocksDBException {
         Options options = new Options();
@@ -62,6 +78,11 @@ public class RocksDBTest {
 
     }
 
+    /**
+     * Test certain column family.
+     *
+     * @throws RocksDBException the rocks db exception
+     */
     public void testCertainColumnFamily() throws RocksDBException {
         String table = "pendingTx";
         String key = "txId-1";
@@ -122,6 +143,11 @@ public class RocksDBTest {
         }
     }
 
+    /**
+     * Iterator.
+     *
+     * @throws RocksDBException the rocks db exception
+     */
     public void iterator() throws RocksDBException {
 
         List<ColumnFamilyDescriptor> columnFamilyDescriptors = new ArrayList<>();
@@ -148,7 +174,12 @@ public class RocksDBTest {
         }
     }
 
-
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws RocksDBException the rocks db exception
+     */
     public static void main(String[] args) throws RocksDBException {
         RocksDBTest test = new RocksDBTest();
         //      test.testDefaultColumnFamily();

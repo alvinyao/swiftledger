@@ -23,9 +23,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * The type Ca repository.
+ *
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/6/6 11:32
+ * @date 2018 /6/6 11:32
  */
 @Repository @Slf4j public class CaRepository {
     @Autowired private CaDao caDao;
@@ -33,7 +35,9 @@ import java.util.List;
     @Autowired private InitConfig initConfig;
 
     /**
-     * @param ca
+     * Insert ca.
+     *
+     * @param ca the ca
      * @return
      * @desc insert CA into db
      */
@@ -48,7 +52,9 @@ import java.util.List;
     }
 
     /**
-     * @param ca
+     * Update ca.
+     *
+     * @param ca the ca
      * @return
      * @desc update CA information
      */
@@ -63,8 +69,10 @@ import java.util.List;
     }
 
     /**
-     * @param user
-     * @return CaPO
+     * Gets ca for biz.
+     *
+     * @param user the user
+     * @return CaPO ca for biz
      * @desc get CA information by nodeName
      */
     public Ca getCaForBiz(String user) {
@@ -83,6 +91,13 @@ import java.util.List;
         return newCa;
     }
 
+    /**
+     * Gets ca list by users.
+     *
+     * @param users the users
+     * @param usage the usage
+     * @return the ca list by users
+     */
     public List<Ca> getCaListByUsers(List<String> users, String usage) {
         if (CollectionUtils.isEmpty(users)) {
             return null;
@@ -98,6 +113,11 @@ import java.util.List;
 
     }
 
+    /**
+     * Gets all ca.
+     *
+     * @return the all ca
+     */
     public List<Ca> getAllCa() {
         List<CaPO> list;
         if (initConfig.isUseMySQL()) {
@@ -118,8 +138,8 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param caPOList
-     * @return
+     * @param caPOList the ca po list
+     * @return boolean
      */
     public boolean batchInsert(List<CaPO> caPOList) {
         int affectRows;
@@ -139,8 +159,8 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param caPOList
-     * @return
+     * @param caPOList the ca po list
+     * @return boolean
      */
     public boolean batchUpdate(List<CaPO> caPOList) {
         if (initConfig.isUseMySQL()) {
@@ -149,6 +169,12 @@ import java.util.List;
         return caPOList.size() == caRocksDao.batchInsert(caPOList);
     }
 
+    /**
+     * Get ca for consensus ca.
+     *
+     * @param user the user
+     * @return the ca
+     */
     public Ca getCaForConsensus(String user){
         CaPO caPO;
         if (initConfig.isUseMySQL()) {
@@ -168,8 +194,8 @@ import java.util.List;
     /**
      * get all pubkeys
      *
-     * @param usage
-     * @return
+     * @param usage the usage
+     * @return list
      */
     public List<RsPubKey> getAllPubkeyByUsage(UsageEnum usage){
         List<CaPO> caPOs = caDao.getAllPubkeyByUsage(usage.getCode());

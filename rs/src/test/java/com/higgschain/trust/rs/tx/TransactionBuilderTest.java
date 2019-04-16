@@ -23,8 +23,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * The type Transaction builder test.
+ *
  * @author kongyu
- * @date 2018-12-07
+ * @date 2018 -12-07
  * @desc
  */
 @Slf4j
@@ -41,7 +43,9 @@ public class TransactionBuilderTest extends AutoTestContext {
     private CoreTransaction coreTx;
     private String privateKey;
 
-
+    /**
+     * Instantiates a new Transaction builder test.
+     */
     public TransactionBuilderTest() {
 
     }
@@ -59,6 +63,12 @@ public class TransactionBuilderTest extends AutoTestContext {
         JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.MapSortField.getMask();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
         configJsonSerializer();
         while (true) {
@@ -163,36 +173,77 @@ public class TransactionBuilderTest extends AutoTestContext {
         return tx;
     }
 
+    /**
+     * With action transaction builder test.
+     *
+     * @param action the action
+     * @return the transaction builder test
+     */
     public TransactionBuilderTest withAction(Action action) {
         coreTx.getActionList().add(action);
         return this;
     }
 
+    /**
+     * With tx type transaction builder test.
+     *
+     * @param txType the tx type
+     * @return the transaction builder test
+     */
     public TransactionBuilderTest withTxType(TxTypeEnum txType) {
         coreTx.setTxType(txType.getCode());
         return this;
     }
 
+    /**
+     * With policy id transaction builder test.
+     *
+     * @param policyId the policy id
+     * @return the transaction builder test
+     */
     public TransactionBuilderTest withPolicyId(String policyId) {
         coreTx.setPolicyId(policyId);
         return this;
     }
 
+    /**
+     * With sender transaction builder test.
+     *
+     * @param sender the sender
+     * @return the transaction builder test
+     */
     public TransactionBuilderTest withSender(String sender) {
         coreTx.setSender(sender);
         return this;
     }
 
+    /**
+     * With tx id transaction builder test.
+     *
+     * @param txId the tx id
+     * @return the transaction builder test
+     */
     public TransactionBuilderTest withTxId(String txId) {
         coreTx.setTxId(txId);
         return this;
     }
 
+    /**
+     * With private key transaction builder test.
+     *
+     * @param privateKey the private key
+     * @return the transaction builder test
+     */
     public TransactionBuilderTest withPrivateKey(String privateKey) {
         this.privateKey = privateKey;
         return this;
     }
 
+    /**
+     * Build signed transaction.
+     *
+     * @return the signed transaction
+     */
     public SignedTransaction build() {
         SignedTransaction signedTransaction = new SignedTransaction();
         signedTransaction.setCoreTx(coreTx);

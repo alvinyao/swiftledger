@@ -13,12 +13,22 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * The type Command primitive builder.
+ *
  * @author suimi
- * @date 2018/8/6
+ * @date 2018 /8/6
  */
 @Slf4j
 public class CommandPrimitiveBuilder
     extends PrimitiveBuilder<CommandPrimitiveBuilder, CommandPrimitiveConfig, ICommandPrimitive> {
+    /**
+     * Instantiates a new Command primitive builder.
+     *
+     * @param type              the type
+     * @param name              the name
+     * @param config            the config
+     * @param managementService the management service
+     */
     public CommandPrimitiveBuilder(PrimitiveType type, String name, CommandPrimitiveConfig config,
         PrimitiveManagementService managementService) {
         super(type, name, config, managementService);

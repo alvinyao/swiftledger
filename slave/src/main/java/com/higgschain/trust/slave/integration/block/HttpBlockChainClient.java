@@ -17,8 +17,10 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
+ * The type Http block chain client.
+ *
  * @author duhongming
- * @date 2018/9/14
+ * @date 2018 /9/14
  */
 @ConditionalOnProperty(name = "network.rpc", havingValue = "http")
 @Component
@@ -40,6 +42,9 @@ public class HttpBlockChainClient implements BlockChainClient {
         }
     }
 
+    /**
+     * Instantiates a new Http block chain client.
+     */
     public HttpBlockChainClient() {
         log.info("Use HttpBlockChainClient");
     }

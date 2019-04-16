@@ -5,11 +5,19 @@ import com.higgschain.trust.slave.model.bo.BlockHeader;
 import com.higgschain.trust.slave.model.bo.StateRootHash;
 
 /**
+ * The type Block convert.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 public class BlockConvert {
 
+    /**
+     * Convert block po to block header block header.
+     *
+     * @param blockPO the block po
+     * @return the block header
+     */
     public static BlockHeader convertBlockPOToBlockHeader(BlockPO blockPO) {
         BlockHeader header = new BlockHeader();
         header.setBlockTime(blockPO.getBlockTime().getTime());

@@ -18,14 +18,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Account detail snapshot agent.
+ *
  * @author liuyu
  * @description an agent for account snapshot
- * @date 2018-04-09
+ * @date 2018 -04-09
  */
 @Slf4j @Component public class AccountDetailSnapshotAgent implements CacheLoader {
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Account repository.
+     */
     @Autowired AccountRepository accountRepository;
+    /**
+     * The Freeze repository.
+     */
     @Autowired FreezeRepository freezeRepository;
 
     private void insert(Object key, Object object) {
@@ -35,7 +46,7 @@ import java.util.List;
     /**
      * create account detail
      *
-     * @param detail
+     * @param detail the detail
      */
     public void createAccountDetail(AccountDetail detail) {
 //        insert(detail, detail);
@@ -44,7 +55,7 @@ import java.util.List;
     /**
      * create account DC record
      *
-     * @param dcRecord
+     * @param dcRecord the dc record
      */
     public void createAccountDCRecord(AccountDcRecord dcRecord) {
 //        insert(dcRecord, dcRecord);
@@ -53,7 +64,7 @@ import java.util.List;
     /**
      * create account detail freeze
      *
-     * @param detailFreeze
+     * @param detailFreeze the detail freeze
      */
     public void createAccountDetailFreeze(AccountDetailFreeze detailFreeze) {
         insert(detailFreeze, detailFreeze);

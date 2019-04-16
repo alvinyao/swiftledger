@@ -7,11 +7,12 @@ import java.io.*;
 import java.util.Map;
 
 /**
+ * The type Number name mapping for disk.
+ *
  * @author: zhouyafeng
- * @create: 2018/07/15 10:06
+ * @create: 2018 /07/15 10:06
  * @description:
  */
-
 @Component
 public class NumberNameMappingForDisk implements NumberNameMapping {
 

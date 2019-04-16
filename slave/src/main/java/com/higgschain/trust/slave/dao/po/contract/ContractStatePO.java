@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import java.util.Date;
 
+/**
+ * The type Contract state po.
+ */
 @Getter
 @Setter
 public class ContractStatePO {

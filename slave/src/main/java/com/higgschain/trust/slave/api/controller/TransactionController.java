@@ -18,7 +18,7 @@ import java.util.Map;
  * transaction tx
  *
  * @author lingchao
- * @create 2018年04月18日14:29
+ * @create 2018年04月18日14 :29
  */
 @RequestMapping(value = "/transaction")
 @RestController
@@ -29,6 +29,12 @@ public class TransactionController {
     @Autowired
     private Blockchain blockchain;
 
+    /**
+     * Submit transactions resp data.
+     *
+     * @param transactions the transactions
+     * @return the resp data
+     */
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @ResponseBody
     public RespData submitTransactions(@RequestBody List<SignedTransaction> transactions) {
@@ -38,6 +44,12 @@ public class TransactionController {
         return blockChainService.submitTransactions(transactions);
     }
 
+    /**
+     * Submit transaction resp data.
+     *
+     * @param transaction the transaction
+     * @return the resp data
+     */
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     @ResponseBody
     public RespData submitTransaction(@RequestBody SignedTransaction transaction) {
@@ -51,6 +63,12 @@ public class TransactionController {
         return blockChainService.submitTransactions(signedTransactionList);
     }
 
+    /**
+     * Master receive resp data.
+     *
+     * @param transactions the transactions
+     * @return the resp data
+     */
     @RequestMapping(value = "/master/submit", method = RequestMethod.POST)
     @ResponseBody
     public RespData<List<TransactionVO>> masterReceive(@RequestBody List<SignedTransaction> transactions) {
@@ -60,7 +78,12 @@ public class TransactionController {
         return blockChainService.submitToMaster(transactions);
     }
 
-
+    /**
+     * Query result map.
+     *
+     * @param txId the tx id
+     * @return the map
+     */
     @GetMapping("result/{txId}")
     public Map<String, Object> queryResult(@PathVariable("txId") String txId) {
         TransactionResultInfo resultInfo =  blockchain.getTransactionResultInfo(txId);

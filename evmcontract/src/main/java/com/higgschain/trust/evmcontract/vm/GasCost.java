@@ -91,210 +91,470 @@ public class GasCost {
     private final int EXT_CODE_COPY = 20;
     private final int NEW_ACCT_SUICIDE = 0;
 
+    /**
+     * Gets step.
+     *
+     * @return the step
+     */
     public int getSTEP() {
         return STEP;
     }
 
+    /**
+     * Gets sstore.
+     *
+     * @return the sstore
+     */
     public int getSSTORE() {
         return SSTORE;
     }
 
+    /**
+     * Gets zerostep.
+     *
+     * @return the zerostep
+     */
     public int getZEROSTEP() {
         return ZEROSTEP;
     }
 
+    /**
+     * Gets quickstep.
+     *
+     * @return the quickstep
+     */
     public int getQUICKSTEP() {
         return QUICKSTEP;
     }
 
+    /**
+     * Gets fasteststep.
+     *
+     * @return the fasteststep
+     */
     public int getFASTESTSTEP() {
         return FASTESTSTEP;
     }
 
+    /**
+     * Gets faststep.
+     *
+     * @return the faststep
+     */
     public int getFASTSTEP() {
         return FASTSTEP;
     }
 
+    /**
+     * Gets midstep.
+     *
+     * @return the midstep
+     */
     public int getMIDSTEP() {
         return MIDSTEP;
     }
 
+    /**
+     * Gets slowstep.
+     *
+     * @return the slowstep
+     */
     public int getSLOWSTEP() {
         return SLOWSTEP;
     }
 
+    /**
+     * Gets extstep.
+     *
+     * @return the extstep
+     */
     public int getEXTSTEP() {
         return EXTSTEP;
     }
 
+    /**
+     * Gets genesisgaslimit.
+     *
+     * @return the genesisgaslimit
+     */
     public int getGENESISGASLIMIT() {
         return GENESISGASLIMIT;
     }
 
+    /**
+     * Gets mingaslimit.
+     *
+     * @return the mingaslimit
+     */
     public int getMINGASLIMIT() {
         return MINGASLIMIT;
     }
 
+    /**
+     * Gets balance.
+     *
+     * @return the balance
+     */
     public int getBALANCE() {
         return BALANCE;
     }
 
+    /**
+     * Gets sha 3.
+     *
+     * @return the sha 3
+     */
     public int getSHA3() {
         return SHA3;
     }
 
+    /**
+     * Gets sha 3 word.
+     *
+     * @return the sha 3 word
+     */
     public int getSHA3_WORD() {
         return SHA3_WORD;
     }
 
+    /**
+     * Gets sload.
+     *
+     * @return the sload
+     */
     public int getSLOAD() {
         return SLOAD;
     }
 
+    /**
+     * Gets stop.
+     *
+     * @return the stop
+     */
     public int getSTOP() {
         return STOP;
     }
 
+    /**
+     * Gets suicide.
+     *
+     * @return the suicide
+     */
     public int getSUICIDE() {
         return SUICIDE;
     }
 
+    /**
+     * Gets clear sstore.
+     *
+     * @return the clear sstore
+     */
     public int getCLEAR_SSTORE() {
         return CLEAR_SSTORE;
     }
 
+    /**
+     * Gets set sstore.
+     *
+     * @return the set sstore
+     */
     public int getSET_SSTORE() {
         return SET_SSTORE;
     }
 
+    /**
+     * Gets reset sstore.
+     *
+     * @return the reset sstore
+     */
     public int getRESET_SSTORE() {
         return RESET_SSTORE;
     }
 
+    /**
+     * Gets refund sstore.
+     *
+     * @return the refund sstore
+     */
     public int getREFUND_SSTORE() {
         return REFUND_SSTORE;
     }
 
+    /**
+     * Gets create.
+     *
+     * @return the create
+     */
     public int getCREATE() {
         return CREATE;
     }
 
+    /**
+     * Gets jumpdest.
+     *
+     * @return the jumpdest
+     */
     public int getJUMPDEST() {
         return JUMPDEST;
     }
 
+    /**
+     * Gets create data byte.
+     *
+     * @return the create data byte
+     */
     public int getCREATE_DATA_BYTE() {
         return CREATE_DATA_BYTE;
     }
 
+    /**
+     * Gets call.
+     *
+     * @return the call
+     */
     public int getCALL() {
         return CALL;
     }
 
+    /**
+     * Gets stipend call.
+     *
+     * @return the stipend call
+     */
     public int getSTIPEND_CALL() {
         return STIPEND_CALL;
     }
 
+    /**
+     * Gets vt call.
+     *
+     * @return the vt call
+     */
     public int getVT_CALL() {
         return VT_CALL;
     }
 
+    /**
+     * Gets new acct call.
+     *
+     * @return the new acct call
+     */
     public int getNEW_ACCT_CALL() {
         return NEW_ACCT_CALL;
     }
 
+    /**
+     * Gets new acct suicide.
+     *
+     * @return the new acct suicide
+     */
     public int getNEW_ACCT_SUICIDE() {
         return NEW_ACCT_SUICIDE;
     }
 
+    /**
+     * Gets memory.
+     *
+     * @return the memory
+     */
     public int getMEMORY() {
         return MEMORY;
     }
 
+    /**
+     * Gets suicide refund.
+     *
+     * @return the suicide refund
+     */
     public int getSUICIDE_REFUND() {
         return SUICIDE_REFUND;
     }
 
+    /**
+     * Gets quad coeff div.
+     *
+     * @return the quad coeff div
+     */
     public int getQUAD_COEFF_DIV() {
         return QUAD_COEFF_DIV;
     }
 
+    /**
+     * Gets create data.
+     *
+     * @return the create data
+     */
     public int getCREATE_DATA() {
         return CREATE_DATA;
     }
 
+    /**
+     * Gets tx no zero data.
+     *
+     * @return the tx no zero data
+     */
     public int getTX_NO_ZERO_DATA() {
         return TX_NO_ZERO_DATA;
     }
 
+    /**
+     * Gets tx zero data.
+     *
+     * @return the tx zero data
+     */
     public int getTX_ZERO_DATA() {
         return TX_ZERO_DATA;
     }
 
+    /**
+     * Gets transaction.
+     *
+     * @return the transaction
+     */
     public int getTRANSACTION() {
         return TRANSACTION;
     }
 
+    /**
+     * Gets transaction create contract.
+     *
+     * @return the transaction create contract
+     */
     public int getTRANSACTION_CREATE_CONTRACT() {
         return TRANSACTION_CREATE_CONTRACT;
     }
 
+    /**
+     * Gets log gas.
+     *
+     * @return the log gas
+     */
     public int getLOG_GAS() {
         return LOG_GAS;
     }
 
+    /**
+     * Gets log data gas.
+     *
+     * @return the log data gas
+     */
     public int getLOG_DATA_GAS() {
         return LOG_DATA_GAS;
     }
 
+    /**
+     * Gets log topic gas.
+     *
+     * @return the log topic gas
+     */
     public int getLOG_TOPIC_GAS() {
         return LOG_TOPIC_GAS;
     }
 
+    /**
+     * Gets copy gas.
+     *
+     * @return the copy gas
+     */
     public int getCOPY_GAS() {
         return COPY_GAS;
     }
 
+    /**
+     * Gets exp gas.
+     *
+     * @return the exp gas
+     */
     public int getEXP_GAS() {
         return EXP_GAS;
     }
 
+    /**
+     * Gets exp byte gas.
+     *
+     * @return the exp byte gas
+     */
     public int getEXP_BYTE_GAS() {
         return EXP_BYTE_GAS;
     }
 
+    /**
+     * Gets identity.
+     *
+     * @return the identity
+     */
     public int getIDENTITY() {
         return IDENTITY;
     }
 
+    /**
+     * Gets identity word.
+     *
+     * @return the identity word
+     */
     public int getIDENTITY_WORD() {
         return IDENTITY_WORD;
     }
 
+    /**
+     * Gets ripemd 160.
+     *
+     * @return the ripemd 160
+     */
     public int getRIPEMD160() {
         return RIPEMD160;
     }
 
+    /**
+     * Gets ripemd 160 word.
+     *
+     * @return the ripemd 160 word
+     */
     public int getRIPEMD160_WORD() {
         return RIPEMD160_WORD;
     }
 
+    /**
+     * Gets sha 256.
+     *
+     * @return the sha 256
+     */
     public int getSHA256() {
         return SHA256;
     }
 
+    /**
+     * Gets sha 256 word.
+     *
+     * @return the sha 256 word
+     */
     public int getSHA256_WORD() {
         return SHA256_WORD;
     }
 
+    /**
+     * Gets ec recover.
+     *
+     * @return the ec recover
+     */
     public int getEC_RECOVER() {
         return EC_RECOVER;
     }
 
+    /**
+     * Gets ext code size.
+     *
+     * @return the ext code size
+     */
     public int getEXT_CODE_SIZE() {
         return EXT_CODE_SIZE;
     }
 
+    /**
+     * Gets ext code copy.
+     *
+     * @return the ext code copy
+     */
     public int getEXT_CODE_COPY() {
         return EXT_CODE_COPY;
     }

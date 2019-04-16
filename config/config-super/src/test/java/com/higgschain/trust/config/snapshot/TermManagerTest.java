@@ -15,29 +15,49 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 /**
+ * The type Term manager test.
+ *
  * @author Zhu_Yuanxiang
- * @create 2018-09-20
+ * @create 2018 -09-20
  */
 public class TermManagerTest extends PowerMockTestCase {
 
+    /**
+     * The Term manager.
+     */
     @InjectMocks
     @Autowired
     TermManager termManager;
 
+    /**
+     * The Node state.
+     */
     @Mock
     NodeState nodeState;
+    /**
+     * The Properties.
+     */
     @Mock
     TermProperties properties;
 
+    /**
+     * Before.
+     */
     @BeforeClass
     public void before() {}
 
+    /**
+     * Before method.
+     */
     @BeforeMethod
     public void beforeMethod() {
         MockitoAnnotations.initMocks(this);
         Mockito.when(properties.getMaxTermsSize()).thenReturn(20);
     }
 
+    /**
+     * Test start new term.
+     */
     @Test
     public void testStartNewTerm() {
         Mockito.when(nodeState.getNodeName()).thenReturn("master");
@@ -57,6 +77,9 @@ public class TermManagerTest extends PowerMockTestCase {
         Assert.assertEquals(terminfo, termManager.getTerms().get(0));
     }
 
+    /**
+     * Test start new term with start height.
+     */
     @Test
     public void testStartNewTermWithStartHeight() {
         Mockito.when(nodeState.getNodeName()).thenReturn("master");

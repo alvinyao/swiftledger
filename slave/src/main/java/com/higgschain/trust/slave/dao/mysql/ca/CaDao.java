@@ -8,36 +8,46 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * The interface Ca dao.
+ *
  * @author WangQuanzhou
  * @desc CA dao
- * @date 2018/6/5 10:18
+ * @date 2018 /6/5 10:18
  */
 @Mapper public interface CaDao extends BaseDao {
 
     /**
-     * @param caPO
+     * Insert ca.
+     *
+     * @param caPO the ca po
      * @return
      * @desc insert CA into db
      */
     void insertCa(CaPO caPO);
 
     /**
-     * @param caPO
+     * Update ca.
+     *
+     * @param caPO the ca po
      * @return
      * @desc update CA information
      */
     void updateCa(CaPO caPO);
 
     /**
-     * @param user
-     * @return CaPO
+     * Gets ca for biz.
+     *
+     * @param user the user
+     * @return CaPO ca for biz
      * @desc get CA information by nodeName
      */
     CaPO getCaForBiz(String user);
 
     /**
+     * Gets all ca.
+     *
      * @param
-     * @return
+     * @return all ca
      * @desc get all CA information
      */
     List<CaPO> getAllCa();
@@ -45,29 +55,33 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param caPOList
-     * @return
+     * @param caPOList the ca po list
+     * @return int
      */
     int batchInsert(List<CaPO> caPOList);
 
     /**
      * batch update
      *
-     * @param caPOList
-     * @return
+     * @param caPOList the ca po list
+     * @return int
      */
     int batchUpdate(List<CaPO> caPOList);
 
-    /** 
+    /**
+     * Gets ca for consensus.
+     *
+     * @param user the user
+     * @return ca for consensus
      * @desc get ca info for consensus layer
-     * @param user
-     * @return   
-     */  
+     */
     CaPO getCaForConsensus(String user);
 
     /**
      * get all pubKeys
-     * @return
+     *
+     * @param usage the usage
+     * @return all pubkey by usage
      */
     List<CaPO> getAllPubkeyByUsage(@Param("usage")String usage);
 }

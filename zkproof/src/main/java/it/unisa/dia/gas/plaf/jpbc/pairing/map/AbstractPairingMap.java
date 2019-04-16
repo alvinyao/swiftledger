@@ -8,12 +8,22 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.accumulator.PairingAccumulator;
 import it.unisa.dia.gas.plaf.jpbc.pairing.accumulator.PairingAccumulatorFactory;
 
 /**
+ * The type Abstract pairing map.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractPairingMap implements PairingMap {
 
+    /**
+     * The Pairing.
+     */
     protected final Pairing pairing;
 
+    /**
+     * Instantiates a new Abstract pairing map.
+     *
+     * @param pairing the pairing
+     */
     protected AbstractPairingMap(Pairing pairing) {
         this.pairing = pairing;
     }
@@ -56,7 +66,15 @@ public abstract class AbstractPairingMap implements PairingMap {
         }
     }
 
-
+    /**
+     * Point to affine.
+     *
+     * @param Vx the vx
+     * @param Vy the vy
+     * @param z  the z
+     * @param z2 the z 2
+     * @param e0 the e 0
+     */
     protected final void pointToAffine(Element Vx, Element Vy, Element z, Element z2, Element e0) {
         // Vx = Vx * z^-2
         Vx.mul(e0.set(z.invert()).square());

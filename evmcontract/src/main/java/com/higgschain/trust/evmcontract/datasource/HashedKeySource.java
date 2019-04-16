@@ -25,6 +25,9 @@ package com.higgschain.trust.evmcontract.datasource;
  * Usually such kind of sources are Merkle Trie backing stores
  * <p>
  * Created by Anton Nashatyrev on 08.11.2016.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public interface HashedKeySource<Key, Value> extends Source<Key, Value> {
 }

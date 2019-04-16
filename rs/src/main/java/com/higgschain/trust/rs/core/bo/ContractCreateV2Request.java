@@ -6,8 +6,10 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * The type Contract create v 2 request.
+ *
  * @author duhongming
- * @date 2018/6/24
+ * @date 2018 /6/24
  */
 @Getter @Setter public class ContractCreateV2Request {
     @NotBlank

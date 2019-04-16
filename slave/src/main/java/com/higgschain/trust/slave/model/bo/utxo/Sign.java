@@ -16,8 +16,9 @@ import java.util.stream.Collectors;
 /**
  * Sign info for  UTXO
  * every signature is for the same message with different priKey
+ *
  * @author lingchao
- * @create 2018年09月03日10:41
+ * @create 2018年09月03日10 :41
  */
 @Getter
 @Setter
@@ -47,8 +48,9 @@ public class Sign  extends BaseBO {
      * make map of sign data
      * key:pubKey
      * value:sign
-     * @param signList
-     * @return
+     *
+     * @param signList the sign list
+     * @return map
      */
     public static Map<String, String> makeSignMap(List<Sign> signList) {
         if (CollectionUtils.isEmpty(signList)) {

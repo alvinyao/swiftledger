@@ -10,11 +10,16 @@ import org.spongycastle.util.encoders.Hex;
 import static org.junit.Assert.assertArrayEquals;
 
 /**
+ * The type Repository root test.
+ *
  * @author tangkun
- * @date 2018-11-14
+ * @date 2018 -11-14
  */
 public class RepositoryRootTest {
 
+    /**
+     * Test 11.
+     */
     @Test
     public void test11() {
 

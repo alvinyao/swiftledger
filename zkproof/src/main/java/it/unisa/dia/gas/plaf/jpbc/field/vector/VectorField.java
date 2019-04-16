@@ -7,12 +7,27 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Vector field.
+ *
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class VectorField<F extends Field> extends AbstractFieldOver<F, VectorElement> {
-    protected int n, lenInBytes;
+    /**
+     * The N.
+     */
+    protected int n, /**
+     * The Len in bytes.
+     */
+    lenInBytes;
 
-
+    /**
+     * Instantiates a new Vector field.
+     *
+     * @param random      the random
+     * @param targetField the target field
+     * @param n           the n
+     */
     public VectorField(SecureRandom random, F targetField, int n) {
         super(random, targetField);
 
@@ -41,6 +56,11 @@ public class VectorField<F extends Field> extends AbstractFieldOver<F, VectorEle
             throw new IllegalStateException("Not Implemented yet!");
     }
 
+    /**
+     * Gets n.
+     *
+     * @return the n
+     */
     public int getN() {
         return n;
     }

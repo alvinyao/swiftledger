@@ -21,8 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Policy snapshot handler.
+ *
  * @author tangfashuang
- * @date 2018/04/17 19:24
+ * @date 2018 /04/17 19:24
  * @desc policy snapshot handler
  */
 @Service

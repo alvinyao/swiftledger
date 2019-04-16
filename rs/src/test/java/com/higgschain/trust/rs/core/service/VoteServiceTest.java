@@ -19,15 +19,29 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
+ * The type Vote service test.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-08
+ * @date 2018 -06-08
  */
 public class VoteServiceTest extends IntegrateBaseTest {
+    /**
+     * The Vote service.
+     */
     @Autowired VoteService voteService;
+    /**
+     * The Core tx repository.
+     */
     @Autowired CoreTxRepository coreTxRepository;
+    /**
+     * The Policy repository.
+     */
     @Autowired PolicyRepository policyRepository;
 
+    /**
+     * Test request voting.
+     */
     @Test
     public void testRequestVoting() {
         CoreTxBO coreTxBO = coreTxRepository.convertTxBO(coreTxRepository.queryByTxId("tx_id_001",false));
@@ -39,6 +53,9 @@ public class VoteServiceTest extends IntegrateBaseTest {
         System.out.println(receipts);
     }
 
+    /**
+     * Test accept voting.
+     */
     @Test
     public void testAcceptVoting() {
         CoreTxBO coreTxBO = coreTxRepository.convertTxBO(coreTxRepository.queryByTxId("tx_id_001",false));
@@ -49,6 +66,9 @@ public class VoteServiceTest extends IntegrateBaseTest {
         System.out.println(voteReceipt);
     }
 
+    /**
+     * Test receipt vote.
+     */
     @Test
     public void testReceiptVote() {
         String txId = "tx_id_001";
@@ -56,6 +76,9 @@ public class VoteServiceTest extends IntegrateBaseTest {
         voteService.receiptVote(txId,agree);
     }
 
+    /**
+     * Test accept receipt.
+     */
     @Test
     public void testAcceptReceipt() {
         ReceiptRequest receiptRequest = new ReceiptRequest();

@@ -8,13 +8,27 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 /**
+ * The interface Transaction sender.
+ *
  * @author Chen Jiawei
- * @date 2019-01-03
+ * @date 2019 -01-03
  */
 public interface ITransactionSender {
+    /**
+     * Post call.
+     *
+     * @param signedTransaction the signed transaction
+     * @return the call
+     */
     @POST("/transaction/post")
     Call<RespData> post(@Body SignedTransaction signedTransaction);
 
+    /**
+     * Post call.
+     *
+     * @param contractQueryRequestV2 the contract query request v 2
+     * @return the call
+     */
     @POST("/contract/query2")
     Call<RespData> post(@Body ContractQueryRequestV2 contractQueryRequestV2);
 }

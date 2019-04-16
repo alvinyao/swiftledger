@@ -36,11 +36,10 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.ArrayUtils.subarray;
 import static org.apache.commons.lang3.StringUtils.stripEnd;
 
-
 /**
  * Creates a contract function call transaction.
  * Serializes arguments according to the function ABI .
- *
+ * <p>
  * Created by Anton Nashatyrev on 25.08.2015.
  */
 public class CallTransaction {
@@ -70,48 +69,132 @@ public class CallTransaction {
 //        return createRawTransaction(nonce, gasPrice, gasLimit, toAddress, value, callData);
 //    }
 
-
+    /**
+     * The type Param.
+     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Param {
+        /**
+         * The Indexed.
+         */
         public Boolean indexed;
+        /**
+         * The Name.
+         */
         public String name;
+        /**
+         * The Type.
+         */
         public SolidityType type;
 
+        /**
+         * Gets type.
+         *
+         * @return the type
+         */
         @JsonGetter("type")
         public String getType() {
             return type.getName();
         }
     }
 
-    public enum StateMutabilityType {
-        pure,
+    /**
+     * The enum State mutability type.
+     */
+    public enum StateMutabilityType {/**
+     * Pure state mutability type.
+     */
+    pure,
+        /**
+         * View state mutability type.
+         */
         view,
+        /**
+         * Nonpayable state mutability type.
+         */
         nonpayable,
+        /**
+         * Payable state mutability type.
+         */
         payable
     }
 
-    public enum FunctionType {
-        constructor,
+    /**
+     * The enum Function type.
+     */
+    public enum FunctionType {/**
+     * Constructor function type.
+     */
+    constructor,
+        /**
+         * Function function type.
+         */
         function,
+        /**
+         * Event function type.
+         */
         event,
+        /**
+         * Fallback function type.
+         */
         fallback
     }
 
+    /**
+     * The type Function.
+     */
     public static class Function {
+        /**
+         * The Anonymous.
+         */
         public boolean anonymous;
+        /**
+         * The Constant.
+         */
         public boolean constant;
+        /**
+         * The Payable.
+         */
         public boolean payable;
+        /**
+         * The Name.
+         */
         public String name = "";
+        /**
+         * The Inputs.
+         */
         public Param[] inputs = new Param[0];
+        /**
+         * The Outputs.
+         */
         public Param[] outputs = new Param[0];
+        /**
+         * The Type.
+         */
         public FunctionType type;
+        /**
+         * The State mutability.
+         */
         public StateMutabilityType stateMutability;
 
         private Function() {}
 
+        /**
+         * Encode byte [ ].
+         *
+         * @param args the args
+         * @return the byte [ ]
+         */
         public byte[] encode(Object ... args) {
             return ByteUtil.merge(encodeSignature(), encodeArguments(args));
         }
+
+        /**
+         * Encode arguments byte [ ].
+         *
+         * @param args the args
+         * @return the byte [ ]
+         */
         public byte[] encodeArguments(Object ... args) {
             if (args.length > inputs.length) {
                 throw new RuntimeException("Too many arguments: " + args.length + " > " + inputs.length);
@@ -161,14 +244,31 @@ public class CallTransaction {
             return ret;
         }
 
+        /**
+         * Decode object [ ].
+         *
+         * @param encoded the encoded
+         * @return the object [ ]
+         */
         public Object[] decode(byte[] encoded) {
             return decode(subarray(encoded, 4, encoded.length), inputs);
         }
 
+        /**
+         * Decode result object [ ].
+         *
+         * @param encodedRet the encoded ret
+         * @return the object [ ]
+         */
         public Object[] decodeResult(byte[] encodedRet) {
             return decode(encodedRet, outputs);
         }
 
+        /**
+         * Format signature string.
+         *
+         * @return the string
+         */
         public String formatSignature() {
             StringBuilder paramsTypes = new StringBuilder();
             for (Param param : inputs) {
@@ -178,12 +278,22 @@ public class CallTransaction {
             return format("%s(%s)", name, stripEnd(paramsTypes.toString(), ","));
         }
 
+        /**
+         * Encode signature long byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] encodeSignatureLong() {
             String signature = formatSignature();
             byte[] sha3Fingerprint = HashUtil.sha3(signature.getBytes());
             return sha3Fingerprint;
         }
 
+        /**
+         * Encode signature byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] encodeSignature() {
             return Arrays.copyOfRange(encodeSignatureLong(), 0, 4);
         }
@@ -193,6 +303,12 @@ public class CallTransaction {
             return formatSignature();
         }
 
+        /**
+         * From json interface function.
+         *
+         * @param json the json
+         * @return the function
+         */
         public static Function fromJsonInterface(String json) {
             try {
                 return DEFAULT_MAPPER.readValue(json, Function.class);
@@ -201,10 +317,25 @@ public class CallTransaction {
             }
         }
 
+        /**
+         * From signature function.
+         *
+         * @param funcName   the func name
+         * @param paramTypes the param types
+         * @return the function
+         */
         public static Function fromSignature(String funcName, String ... paramTypes) {
             return fromSignature(funcName, paramTypes, new String[0]);
         }
 
+        /**
+         * From signature function.
+         *
+         * @param funcName    the func name
+         * @param paramTypes  the param types
+         * @param resultTypes the result types
+         * @return the function
+         */
         public static Function fromSignature(String funcName, String[] paramTypes, String[] resultTypes) {
             Function ret = new Function();
             ret.name = funcName;
@@ -228,7 +359,15 @@ public class CallTransaction {
 
     }
 
+    /**
+     * The type Contract.
+     */
     public static class Contract {
+        /**
+         * Instantiates a new Contract.
+         *
+         * @param jsonInterface the json interface
+         */
         public Contract(String jsonInterface) {
             try {
                 functions = new ObjectMapper().readValue(jsonInterface, Function[].class);
@@ -237,6 +376,12 @@ public class CallTransaction {
             }
         }
 
+        /**
+         * Gets by name.
+         *
+         * @param name the name
+         * @return the by name
+         */
         public Function getByName(String name) {
             for (Function function : functions) {
                 if (name.equals(function.name)) {
@@ -246,6 +391,11 @@ public class CallTransaction {
             return null;
         }
 
+        /**
+         * Gets constructor.
+         *
+         * @return the constructor
+         */
         public Function getConstructor() {
             for (Function function : functions) {
                 if (function.type == FunctionType.constructor) {
@@ -276,6 +426,9 @@ public class CallTransaction {
 
         /**
          * Parses function and its arguments from transaction invocation binary data
+         *
+         * @param data the data
+         * @return the invocation
          */
         public Invocation parseInvocation(byte[] data) {
             if (data.length < 4) {
@@ -291,6 +444,9 @@ public class CallTransaction {
 
         /**
          * Parses Solidity Event and its data members from transaction receipt LogInfo
+         *
+         * @param eventLog the event log
+         * @return the invocation
          */
         public Invocation parseEvent(LogInfo eventLog) {
             CallTransaction.Function event = getBySignatureHash(eventLog.getTopics().get(0).getData());
@@ -322,6 +478,9 @@ public class CallTransaction {
             return new Invocation(this, event, args);
         }
 
+        /**
+         * The Functions.
+         */
         public Function[] functions;
     }
 
@@ -330,10 +489,26 @@ public class CallTransaction {
      * or Event instance with its data members
      */
     public static class Invocation {
+        /**
+         * The Contract.
+         */
         public final Contract contract;
+        /**
+         * The Function.
+         */
         public final Function function;
+        /**
+         * The Args.
+         */
         public final Object[] args;
 
+        /**
+         * Instantiates a new Invocation.
+         *
+         * @param contract the contract
+         * @param function the function
+         * @param args     the args
+         */
         public Invocation(Contract contract, Function function, Object[] args) {
             this.contract = contract;
             this.function = function;

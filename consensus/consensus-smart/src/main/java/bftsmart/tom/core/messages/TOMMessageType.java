@@ -20,15 +20,40 @@ package bftsmart.tom.core.messages;
  *
  * @author alysson
  */
-public enum TOMMessageType {
-    ORDERED_REQUEST, //0
+public enum TOMMessageType {/**
+ * Ordered request tom message type.
+ */
+ORDERED_REQUEST, //0
+    /**
+     * Unordered request tom message type.
+     */
     UNORDERED_REQUEST, //1
+    /**
+     * Reply tom message type.
+     */
     REPLY, //2
+    /**
+     * Reconfig tom message type.
+     */
     RECONFIG, //3
+    /**
+     * Ask status tom message type.
+     */
     ASK_STATUS, // 4
+    /**
+     * Status reply tom message type.
+     */
     STATUS_REPLY,// 5
+    /**
+     * Unordered hashed request tom message type.
+     */
     UNORDERED_HASHED_REQUEST; //6
 
+    /**
+     * To int int.
+     *
+     * @return the int
+     */
     public int toInt() {
         switch (this) {
             case ORDERED_REQUEST:
@@ -50,6 +75,12 @@ public enum TOMMessageType {
         }
     }
 
+    /**
+     * From int tom message type.
+     *
+     * @param i the
+     * @return the tom message type
+     */
     public static TOMMessageType fromInt(int i) {
         switch (i) {
             case 0:

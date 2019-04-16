@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * The type Http client.
+ *
  * @author duhongming
- * @date 2018/9/14
+ * @date 2018 /9/14
  */
 public class HttpClient {
 
@@ -26,20 +28,54 @@ public class HttpClient {
 
     private OkHttpClient httpClient;
 
+    /**
+     * Instantiates a new Http client.
+     *
+     * @param networkManage the network manage
+     */
     public HttpClient(NetworkManage networkManage) {
         this.networkManage = networkManage;
         this.random = new Random();
         httpClient = new OkHttpClient.Builder().build();
     }
 
+    /**
+     * Post json t.
+     *
+     * @param <T>         the type parameter
+     * @param nodeName    the node name
+     * @param resourceUrl the resource url
+     * @param json        the json
+     * @param resultClass the result class
+     * @return the t
+     */
     public <T> T postJson(String nodeName, String resourceUrl, Object json, Class<T> resultClass) {
         return postJson(getUrl(nodeName, resourceUrl), json, resultClass);
     }
 
+    /**
+     * Post json t.
+     *
+     * @param <T>         the type parameter
+     * @param nodeName    the node name
+     * @param resourceUrl the resource url
+     * @param json        the json
+     * @param resultType  the result type
+     * @return the t
+     */
     public <T> T postJson(String nodeName, String resourceUrl, Object json, Type resultType) {
         return postJson(getUrl(nodeName, resourceUrl), json, resultType);
     }
 
+    /**
+     * Post json t.
+     *
+     * @param <T>         the type parameter
+     * @param url         the url
+     * @param json        the json
+     * @param resultClass the result class
+     * @return the t
+     */
     public <T> T postJson(String url, Object json, Class<T> resultClass) {
         RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, JSON.toJSONString(json));
         Request request = new Request.Builder()
@@ -58,19 +94,53 @@ public class HttpClient {
         return execute(request, resultType);
     }
 
+    /**
+     * Get t.
+     *
+     * @param <T>        the type parameter
+     * @param nodeName   the node name
+     * @param url        the url
+     * @param resultType the result type
+     * @return the t
+     */
     public <T> T get(String nodeName, String url, Type resultType) {
         return get(getUrl(nodeName, url), resultType);
     }
 
+    /**
+     * Get t.
+     *
+     * @param <T>        the type parameter
+     * @param url        the url
+     * @param resultType the result type
+     * @return the t
+     */
     public <T> T get(String url, Type resultType) {
         Request request = new Request.Builder().url(url).build();
         return execute(request, resultType);
     }
 
+    /**
+     * Gets list.
+     *
+     * @param <T>         the type parameter
+     * @param nodeName    the node name
+     * @param url         the url
+     * @param resultClass the result class
+     * @return the list
+     */
     public <T> List<T> getList(String nodeName, String url, Class<T> resultClass) {
         return getList(getUrl(nodeName, url), resultClass);
     }
 
+    /**
+     * Gets list.
+     *
+     * @param <T>         the type parameter
+     * @param url         the url
+     * @param resultClass the result class
+     * @return the list
+     */
     public <T> List<T> getList(String url, Class<T> resultClass) {
         log.trace("get {}", url);
         Request request = new Request.Builder().url(url).build();
@@ -122,6 +192,12 @@ public class HttpClient {
         return peer;
     }
 
+    /**
+     * Gets random peer.
+     *
+     * @param names the names
+     * @return the random peer
+     */
     public Peer getRandomPeer(List<String> names) {
         String localName = networkManage.localPeer().getNodeName();
         String nodeName = localName;

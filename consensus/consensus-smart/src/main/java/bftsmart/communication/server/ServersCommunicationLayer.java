@@ -41,6 +41,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * The type Servers communication layer.
+ *
  * @author alysson
  */
 public class ServersCommunicationLayer extends Thread {
@@ -59,6 +61,14 @@ public class ServersCommunicationLayer extends Thread {
     private SecretKey selfPwd;
     private static final String PASSWORD = "commsyst";
 
+    /**
+     * Instantiates a new Servers communication layer.
+     *
+     * @param controller the controller
+     * @param inQueue    the in queue
+     * @param replica    the replica
+     * @throws Exception the exception
+     */
     public ServersCommunicationLayer(ServerViewController controller, LinkedBlockingQueue<SystemMessage> inQueue,
         ServiceReplica replica) throws Exception {
 
@@ -90,6 +100,12 @@ public class ServersCommunicationLayer extends Thread {
         start();
     }
 
+    /**
+     * Gets secret key.
+     *
+     * @param id the id
+     * @return the secret key
+     */
     public SecretKey getSecretKey(int id) {
         if (id == controller.getStaticConf().getProcessId())
             return selfPwd;
@@ -97,6 +113,9 @@ public class ServersCommunicationLayer extends Thread {
             return connections.get(id).getSecretKey();
     }
 
+    /**
+     * Update connections.
+     */
     //******* EDUARDO BEGIN **************//
     public void updateConnections() {
         connectionsLock.lock();
@@ -144,6 +163,13 @@ public class ServersCommunicationLayer extends Thread {
     }
     //******* EDUARDO END **************//
 
+    /**
+     * Send.
+     *
+     * @param targets the targets
+     * @param sm      the sm
+     * @param useMAC  the use mac
+     */
     public final void send(int[] targets, SystemMessage sm, boolean useMAC) {
         ByteArrayOutputStream bOut = new ByteArrayOutputStream(248);
         try {
@@ -172,6 +198,9 @@ public class ServersCommunicationLayer extends Thread {
         }
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
 
         bftsmart.tom.util.Logger.println("Shutting down replica sockets");
@@ -191,6 +220,9 @@ public class ServersCommunicationLayer extends Thread {
         }
     }
 
+    /**
+     * Join view received.
+     */
     //******* EDUARDO BEGIN **************//
     public void joinViewReceived() {
         waitViewLock.lock();
@@ -269,6 +301,11 @@ public class ServersCommunicationLayer extends Thread {
     }
     //******* EDUARDO END **************//
 
+    /**
+     * Sets socket options.
+     *
+     * @param socket the socket
+     */
     public static void setSocketOptions(Socket socket) {
         try {
             socket.setTcpNoDelay(true);
@@ -294,15 +331,30 @@ public class ServersCommunicationLayer extends Thread {
         return str;
     }
 
+    /**
+     * The type Pending connection.
+     */
     //******* EDUARDO BEGIN: List entry that stores pending connections,
     // as a server may accept connections only after learning the current view,
     // i.e., after receiving the response to the join*************//
     // This is for avoiding that the server accepts connectsion from everywhere
     public class PendingConnection {
 
+        /**
+         * The S.
+         */
         public Socket s;
+        /**
+         * The Remote id.
+         */
         public int remoteId;
 
+        /**
+         * Instantiates a new Pending connection.
+         *
+         * @param s        the s
+         * @param remoteId the remote id
+         */
         public PendingConnection(Socket s, int remoteId) {
             this.s = s;
             this.remoteId = remoteId;
@@ -311,6 +363,11 @@ public class ServersCommunicationLayer extends Thread {
 
     //******* EDUARDO END **************//
 
+    /**
+     * Gets connections.
+     *
+     * @return the connections
+     */
     //TODO zyfmodified
     public Hashtable<Integer, ServerConnection> getConnections() {
         return connections;

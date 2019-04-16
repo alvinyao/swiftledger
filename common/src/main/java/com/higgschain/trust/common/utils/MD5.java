@@ -2,8 +2,17 @@ package com.higgschain.trust.common.utils;
 
 import java.security.MessageDigest;
 
+/**
+ * The type Md 5.
+ */
 public class MD5 {
 
+    /**
+     * Encode string.
+     *
+     * @param buf the buf
+     * @return the string
+     */
     public static String encode(String buf) {
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
@@ -18,6 +27,12 @@ public class MD5 {
         }
     }
 
+    /**
+     * Byte hex string.
+     *
+     * @param ib the ib
+     * @return the string
+     */
     public static String byteHEX(byte ib) {
         char[] Digit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         char[] ob = new char[2];

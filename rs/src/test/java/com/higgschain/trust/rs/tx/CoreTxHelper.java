@@ -15,9 +15,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Core tx helper.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-22
+ * @date 2018 -06-22
  */
 @Slf4j public class CoreTxHelper {
     /**
@@ -47,9 +49,9 @@ import java.util.List;
     /**
      * 构建 基本 交易对象
      *
-     * @param txId
-     * @param actions
-     * @return
+     * @param txId    the tx id
+     * @param actions the actions
+     * @return core transaction
      */
     public static CoreTransaction makeSimpleTx(String txId, List<Action> actions) {
         return makeSimpleTx(txId, InitPolicyEnum.NA.getPolicyId(), actions, SENDER);
@@ -58,11 +60,11 @@ import java.util.List;
     /**
      * 构建 基本 交易对象
      *
-     * @param txId
-     * @param policyId
-     * @param actions
-     * @param sender
-     * @return
+     * @param txId     the tx id
+     * @param policyId the policy id
+     * @param actions  the actions
+     * @param sender   the sender
+     * @return core transaction
      */
     public static CoreTransaction makeSimpleTx(String txId, String policyId, List<Action> actions, String sender) {
         CoreTransaction vo = new CoreTransaction();
@@ -80,16 +82,17 @@ import java.util.List;
     /**
      * 发送交易请求
      *
-     * @param tx
+     * @param tx the tx
      */
     public static void post(CoreTransaction tx) {
         post(TX_URL,tx);
     }
+
     /**
      * 发送交易请求
      *
-     * @param url
-     * @param param
+     * @param url   the url
+     * @param param the param
      */
     public static void post(String url,Object param) {
         String requestJSON = JSON.toJSONString(param);

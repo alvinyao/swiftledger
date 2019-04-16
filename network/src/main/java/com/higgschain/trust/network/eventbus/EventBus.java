@@ -3,8 +3,10 @@ package com.higgschain.trust.network.eventbus;
 import java.util.concurrent.Executor;
 
 /**
+ * The type Event bus.
+ *
  * @author duhongming
- * @date 2018/8/16
+ * @date 2018 /8/16
  */
 public class EventBus implements Bus {
     private static final String DEFAULT_BUS_NAME = "default";
@@ -14,18 +16,38 @@ public class EventBus implements Bus {
     private String busName;
     private final Dispatcher dispatcher;
 
+    /**
+     * Instantiates a new Event bus.
+     */
     public EventBus() {
         this(DEFAULT_BUS_NAME, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
+    /**
+     * Instantiates a new Event bus.
+     *
+     * @param busName the bus name
+     */
     public EventBus(String busName) {
         this(busName, null, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
+    /**
+     * Instantiates a new Event bus.
+     *
+     * @param exceptionHandler the exception handler
+     */
     public EventBus(EventExceptionHandler exceptionHandler) {
         this(DEFAULT_BUS_NAME, exceptionHandler, Dispatcher.SEQ_EXECUTOR_SERVICE);
     }
 
+    /**
+     * Instantiates a new Event bus.
+     *
+     * @param busName          the bus name
+     * @param exceptionHandler the exception handler
+     * @param executor         the executor
+     */
     public EventBus(String busName, EventExceptionHandler exceptionHandler, Executor executor) {
         this.busName = busName;
         this.dispatcher = Dispatcher.newDispatcher(exceptionHandler, executor);

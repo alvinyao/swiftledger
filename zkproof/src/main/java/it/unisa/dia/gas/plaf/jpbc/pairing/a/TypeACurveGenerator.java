@@ -13,14 +13,35 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Type a curve generator.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeACurveGenerator implements PairingParametersGenerator {
+    /**
+     * The Random.
+     */
     protected SecureRandom random;
-    protected int rbits, qbits;
+    /**
+     * The Rbits.
+     */
+    protected int rbits, /**
+     * The Qbits.
+     */
+    qbits;
+    /**
+     * The Generate curve field gen.
+     */
     protected boolean generateCurveFieldGen;
 
-
+    /**
+     * Instantiates a new Type a curve generator.
+     *
+     * @param random                the random
+     * @param rbits                 the rbits
+     * @param qbits                 the qbits
+     * @param generateCurveFieldGen the generate curve field gen
+     */
     public TypeACurveGenerator(SecureRandom random, int rbits, int qbits, boolean generateCurveFieldGen) {
         this.random = random;
         this.rbits = rbits;
@@ -28,10 +49,23 @@ public class TypeACurveGenerator implements PairingParametersGenerator {
         this.generateCurveFieldGen = generateCurveFieldGen;
     }
 
+    /**
+     * Instantiates a new Type a curve generator.
+     *
+     * @param rbits the rbits
+     * @param qbits the qbits
+     */
     public TypeACurveGenerator(int rbits, int qbits) {
         this(new SecureRandom(), rbits, qbits, false);
     }
 
+    /**
+     * Instantiates a new Type a curve generator.
+     *
+     * @param rbits                 the rbits
+     * @param qbits                 the qbits
+     * @param generateCurveFieldGen the generate curve field gen
+     */
     public TypeACurveGenerator(int rbits, int qbits, boolean generateCurveFieldGen) {
         this(new SecureRandom(), rbits, qbits, generateCurveFieldGen);
     }
@@ -125,6 +159,11 @@ public class TypeACurveGenerator implements PairingParametersGenerator {
         return params;
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         if (args.length < 2)
             throw new IllegalArgumentException("Too few arguments. Usage <rbits> <qbits>");

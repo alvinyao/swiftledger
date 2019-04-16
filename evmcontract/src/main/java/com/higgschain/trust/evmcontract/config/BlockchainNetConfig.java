@@ -27,11 +27,16 @@ public interface BlockchainNetConfig {
 
     /**
      * Get the config for the specific block
+     *
+     * @param blockNumber the block number
+     * @return the config for block
      */
     BlockChainConfig getConfigForBlock(long blockNumber);
 
     /**
      * Returns the constants common for all the blocks in this blockchain
+     *
+     * @return the common constants
      */
     Constants getCommonConstants();
 }

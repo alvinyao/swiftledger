@@ -100,6 +100,9 @@ public class RLP {
      * [0xb8, 0xbf].
      */
     private static final int OFFSET_LONG_ITEM = 0xb7;
+    /**
+     * The constant EMPTY_ELEMENT_RLP.
+     */
     public static final byte[] EMPTY_ELEMENT_RLP = encodeElement(new byte[0]);
     /**
      * [0xc0]
@@ -142,6 +145,13 @@ public class RLP {
         return 0;
     }
 
+    /**
+     * Decode int int.
+     *
+     * @param data  the data
+     * @param index the index
+     * @return the int
+     */
     public static int decodeInt(byte[] data, int index) {
 
         int value = 0;
@@ -174,6 +184,13 @@ public class RLP {
         return value;
     }
 
+    /**
+     * Decode short short.
+     *
+     * @param data  the data
+     * @param index the index
+     * @return the short
+     */
     static short decodeShort(byte[] data, int index) {
 
         short value = 0;
@@ -202,6 +219,13 @@ public class RLP {
         return value;
     }
 
+    /**
+     * Decode long long.
+     *
+     * @param data  the data
+     * @param index the index
+     * @return the long
+     */
     public static long decodeLong(byte[] data, int index) {
 
         long value = 0;
@@ -242,6 +266,13 @@ public class RLP {
         }
     }
 
+    /**
+     * Decode big integer big integer.
+     *
+     * @param data  the data
+     * @param index the index
+     * @return the big integer
+     */
     public static BigInteger decodeBigInteger(byte[] data, int index) {
 
         final byte[] valueBytes = decodeItemBytes(data, index);
@@ -296,6 +327,13 @@ public class RLP {
         return -1;
     }
 
+    /**
+     * Decode ip 4 bytes byte [ ].
+     *
+     * @param data  the data
+     * @param index the index
+     * @return the byte [ ]
+     */
     public static byte[] decodeIP4Bytes(byte[] data, int index) {
 
         int offset = 1;
@@ -314,6 +352,13 @@ public class RLP {
         return result;
     }
 
+    /**
+     * Gets first list element.
+     *
+     * @param payload the payload
+     * @param pos     the pos
+     * @return the first list element
+     */
     public static int getFirstListElement(byte[] payload, int pos) {
 
         if (pos >= payload.length) {
@@ -339,6 +384,13 @@ public class RLP {
         return -1;
     }
 
+    /**
+     * Gets next element index.
+     *
+     * @param payload the payload
+     * @param pos     the pos
+     * @return the next element index
+     */
     public static int getNextElementIndex(byte[] payload, int pos) {
 
         if (pos >= payload.length) {
@@ -423,6 +475,12 @@ public class RLP {
         return length;
     }
 
+    /**
+     * Gets command code.
+     *
+     * @param data the data
+     * @return the command code
+     */
     public static byte getCommandCode(byte[] data) {
         int index = getFirstListElement(data, 0);
         final byte command = data[index];
@@ -434,8 +492,7 @@ public class RLP {
      *
      * @param msgData    - raw RLP data
      * @param depthLimit - limits depth of decoding
-     * @return rlpList
-     * - outcome of recursive RLP structure
+     * @return rlpList  - outcome of recursive RLP structure
      */
     public static RLPList decode2(byte[] msgData, int depthLimit) {
         if (depthLimit < 1) {
@@ -450,8 +507,7 @@ public class RLP {
      * Parse wire byte[] message into RLP elements
      *
      * @param msgData - raw RLP data
-     * @return rlpList
-     * - outcome of recursive RLP structure
+     * @return rlpList  - outcome of recursive RLP structure
      */
     public static RLPList decode2(byte[] msgData) {
         RLPList rlpList = new RLPList();
@@ -474,6 +530,13 @@ public class RLP {
         return (RLPList) decode2(msgData, 2).get(0);
     }
 
+    /**
+     * Decode 2 one item rlp element.
+     *
+     * @param msgData  the msg data
+     * @param startPos the start pos
+     * @return the rlp element
+     */
     public static RLPElement decode2OneItem(byte[] msgData, int startPos) {
         RLPList rlpList = new RLPList();
         fullTraverse(msgData, 0, startPos, startPos + 1, rlpList, Integer.MAX_VALUE);
@@ -482,6 +545,13 @@ public class RLP {
 
     /**
      * Get exactly one message payload
+     *
+     * @param msgData  the msg data
+     * @param level    the level
+     * @param startPos the start pos
+     * @param endPos   the end pos
+     * @param rlpList  the rlp list
+     * @param depth    the depth
      */
     static void fullTraverse(byte[] msgData, int level, int startPos,
                              int endPos, RLPList rlpList, int depth) {
@@ -685,10 +755,24 @@ public class RLP {
         }
     }
 
+    /**
+     * Decode lazy list l list.
+     *
+     * @param data the data
+     * @return the l list
+     */
     public static LList decodeLazyList(byte[] data) {
         return decodeLazyList(data, 0, data.length).getList(0);
     }
 
+    /**
+     * Decode lazy list l list.
+     *
+     * @param data   the data
+     * @param pos    the pos
+     * @param length the length
+     * @return the l list
+     */
     public static LList decodeLazyList(byte[] data, int pos, int length) {
         if (data == null || data.length < 1) {
             return null;
@@ -787,6 +871,10 @@ public class RLP {
 
     /**
      * Integer limitation goes up to 2^31-1 so length can never be bigger than MAX_ITEM_LENGTH
+     *
+     * @param length the length
+     * @param offset the offset
+     * @return the byte [ ]
      */
     public static byte[] encodeLength(int length, int offset) {
         if (length < SIZE_THRESHOLD) {
@@ -806,6 +894,12 @@ public class RLP {
         }
     }
 
+    /**
+     * Encode byte byte [ ].
+     *
+     * @param singleByte the single byte
+     * @return the byte [ ]
+     */
     public static byte[] encodeByte(byte singleByte) {
         if ((singleByte & 0xFF) == 0) {
             return new byte[]{(byte) OFFSET_SHORT_ITEM};
@@ -816,6 +910,12 @@ public class RLP {
         }
     }
 
+    /**
+     * Encode short byte [ ].
+     *
+     * @param singleShort the single short
+     * @return the byte [ ]
+     */
     public static byte[] encodeShort(short singleShort) {
 
         if ((singleShort & 0xFF) == singleShort) {
@@ -827,6 +927,12 @@ public class RLP {
         }
     }
 
+    /**
+     * Encode int byte [ ].
+     *
+     * @param singleInt the single int
+     * @return the byte [ ]
+     */
     public static byte[] encodeInt(int singleInt) {
 
         if ((singleInt & 0xFF) == singleInt) {
@@ -847,10 +953,22 @@ public class RLP {
         }
     }
 
+    /**
+     * Encode string byte [ ].
+     *
+     * @param srcString the src string
+     * @return the byte [ ]
+     */
     public static byte[] encodeString(String srcString) {
         return encodeElement(srcString.getBytes());
     }
 
+    /**
+     * Encode big integer byte [ ].
+     *
+     * @param srcBigInteger the src big integer
+     * @return the byte [ ]
+     */
     public static byte[] encodeBigInteger(BigInteger srcBigInteger) {
         if (srcBigInteger.compareTo(BigInteger.ZERO) < 0) {
             throw new RuntimeException("negative numbers are not allowed");
@@ -863,6 +981,12 @@ public class RLP {
         }
     }
 
+    /**
+     * Encode element byte [ ].
+     *
+     * @param srcData the src data
+     * @return the byte [ ]
+     */
     public static byte[] encodeElement(byte[] srcData) {
 
         // [0x80]
@@ -915,6 +1039,12 @@ public class RLP {
         }
     }
 
+    /**
+     * Calc element prefix size int.
+     *
+     * @param srcData the src data
+     * @return the int
+     */
     public static int calcElementPrefixSize(byte[] srcData) {
 
         if (ByteUtil.isNullOrZeroArray(srcData)) {
@@ -939,6 +1069,12 @@ public class RLP {
         }
     }
 
+    /**
+     * Encode list header byte [ ].
+     *
+     * @param size the size
+     * @return the byte [ ]
+     */
     public static byte[] encodeListHeader(int size) {
 
         if (size == 0) {
@@ -977,6 +1113,12 @@ public class RLP {
         return header;
     }
 
+    /**
+     * Encode long element header byte [ ].
+     *
+     * @param length the length
+     * @return the byte [ ]
+     */
     public static byte[] encodeLongElementHeader(int length) {
 
         if (length < SIZE_THRESHOLD) {
@@ -1012,6 +1154,12 @@ public class RLP {
         }
     }
 
+    /**
+     * Encode set byte [ ].
+     *
+     * @param data the data
+     * @return the byte [ ]
+     */
     public static byte[] encodeSet(Set<ByteArrayWrapper> data) {
 
         int dataLength = 0;
@@ -1042,6 +1190,9 @@ public class RLP {
      * A handy shortcut for {@link #encodeElement(byte[])} + {@link #encodeList(byte[]...)}
      * <p>
      * Encodes each data element and wraps them all into a list.
+     *
+     * @param data the data
+     * @return the byte [ ]
      */
     public static byte[] wrapList(byte[]... data) {
         byte[][] elements = new byte[data.length][];
@@ -1051,6 +1202,12 @@ public class RLP {
         return encodeList(elements);
     }
 
+    /**
+     * Encode list byte [ ].
+     *
+     * @param elements the elements
+     * @return the byte [ ]
+     */
     public static byte[] encodeList(byte[]... elements) {
 
         if (elements == null) {
@@ -1187,16 +1344,29 @@ public class RLP {
         }
     }
 
+    /**
+     * The type L list.
+     */
     public static final class LList {
         private final byte[] rlp;
         private final int[] offsets = new int[32];
         private final int[] lens = new int[32];
         private int cnt;
 
+        /**
+         * Instantiates a new L list.
+         *
+         * @param rlp the rlp
+         */
         public LList(byte[] rlp) {
             this.rlp = rlp;
         }
 
+        /**
+         * Get encoded byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] getEncoded() {
             byte[][] encoded = new byte[cnt][];
             for (int i = 0; i < cnt; i++) {
@@ -1205,6 +1375,13 @@ public class RLP {
             return encodeList(encoded);
         }
 
+        /**
+         * Add.
+         *
+         * @param off    the off
+         * @param len    the len
+         * @param isList the is list
+         */
         public void add(int off, int len, boolean isList) {
             try {
                 if (cnt == 32) {
@@ -1220,6 +1397,12 @@ public class RLP {
 
         }
 
+        /**
+         * Get bytes byte [ ].
+         *
+         * @param idx the idx
+         * @return the byte [ ]
+         */
         public byte[] getBytes(int idx) {
             int len = lens[idx];
             len = len < 0 ? (-len - 1) : len;
@@ -1228,14 +1411,31 @@ public class RLP {
             return ret;
         }
 
+        /**
+         * Gets list.
+         *
+         * @param idx the idx
+         * @return the list
+         */
         public LList getList(int idx) {
             return decodeLazyList(rlp, offsets[idx], -lens[idx] - 1);
         }
 
+        /**
+         * Is list boolean.
+         *
+         * @param idx the idx
+         * @return the boolean
+         */
         public boolean isList(int idx) {
             return lens[idx] < 0;
         }
 
+        /**
+         * Size int.
+         *
+         * @return the int
+         */
         public int size() {
             return cnt;
         }

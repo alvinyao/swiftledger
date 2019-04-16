@@ -36,8 +36,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Block chain service impl test.
+ *
  * @author tangfashuang
- * @date 2018/04/14 16:54
+ * @date 2018 /04/14 16:54
  */
 @Slf4j public class BlockChainServiceImplTest extends BaseTest {
 
@@ -51,6 +53,11 @@ import java.util.List;
         "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJE5lYYWx1AE5E0XaxmQvg2putYOrya+Azd+QCHVA0rE8vUiXAuFia7TgjGQjhFO66SrcOJ3W2xSeHw6F1ApvZ8kfLB3ZsZT1e54QaWKU0ae0fcmk9dgrkpaniLCbd3PP8A+UUjwNeexIDjThYSzzatNGg06qdxgSCMc9bX7jwPlAgMBAAECgYA5Vtcmvk+r1IKfvaNX0MJ5eo5+fgXB8jwq6PpBYW2PU/vptctJ8UvPb0t0bnLpepOnzNkhUacTOezAf988k35+gw9Vrh6rXG4x7cZ65qbQOP+Xh0sx3YElyZKUBJzl5CMjNzT5ANc/QdpCD8LOOiPF4xpcHqKih74NGXc8hQv1AQJBAMNm1i6AC/oJM7XDnXPyswNVyjjIG+wi9xBgMGlt8JLH3c7/HblyAPHS/sFnljroVsHOyvoi45aZlIluhZsh6tUCQQC+QygmlnViImHq+MgL6bWaTLjKyTpH6k7zGQxvOxqJlioeWh73wxHAq/depKi8ElMrkEhMBA05ReCJl4Nb8xzRAkA28/HiS/KSVAot4SCj3iqIEpV3mJd5tm+jNFoJHHke3oS71TWH1M79M2if/cDbOkJD6SNea3d0ACcs6185vLUtAkBtrWLw05z5JB7UB/Oxwli4iO+hnlxlZnF6e38Kg8SpeZHwCz18z8tlCPzBZyQJvnqJS1QR1egVku18A4Zqs/txAkAg5kjdDw0v9QoQMr4oHZSuHxaG9I91SRkCPspN8urIg1Wu7cdTKfPdaAtSoU/xp/qpzfX+CPkhv7DoGlBLeo8e";
     @Autowired private BlockChainService blockChainService;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @BeforeMethod public void setUp() throws Exception {
         //JSON auto detect class type
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
@@ -125,6 +132,9 @@ import java.util.List;
         return registerRSList;
     }
 
+    /**
+     * Create policy tx.
+     */
     @Test public void createPolicyTx() {
         SignedTransaction signedTx1 = new SignedTransaction();
         CoreTransaction coreTx1 = new CoreTransaction();
@@ -178,6 +188,11 @@ import java.util.List;
         return signList;
     }
 
+    /**
+     * Create identity tx.
+     *
+     * @throws Exception the exception
+     */
     @Test public void createIdentityTx() throws Exception {
         SignedTransaction signedTx1 = new SignedTransaction();
 
@@ -204,6 +219,11 @@ import java.util.List;
         System.out.println("create  identity tx:" + JSONObject.toJSONString(signedTxList));
     }
 
+    /**
+     * Create issue utxotx.
+     *
+     * @throws Exception the exception
+     */
     @Test public void createIssueUTXOTX() throws Exception {
         SignedTransaction signedTx1 = new SignedTransaction();
 
@@ -230,6 +250,11 @@ import java.util.List;
         System.out.println("issue UTXO tx:" + JSONObject.toJSONString(signedTxList));
     }
 
+    /**
+     * Create normal utxotx.
+     *
+     * @throws Exception the exception
+     */
     @Test public void createNormalUTXOTX() throws Exception {
         SignedTransaction signedTx1 = new SignedTransaction();
 
@@ -256,6 +281,11 @@ import java.util.List;
         System.out.println("issue UTXO tx:" + JSONObject.toJSONString(signedTxList));
     }
 
+    /**
+     * Creat destoy utxotx.
+     *
+     * @throws Exception the exception
+     */
     @Test public void creatDestoyUTXOTX() throws Exception {
         SignedTransaction signedTx1 = new SignedTransaction();
 
@@ -440,6 +470,9 @@ import java.util.List;
         return utxoActionList;
     }
 
+    /**
+     * Test submit transaction.
+     */
     @Test public void testSubmitTransaction() {
         try {
             //            System.out.println(JSON.toJSONString(signedTx));
@@ -452,6 +485,9 @@ import java.util.List;
         }
     }
 
+    /**
+     * Test query blocks with condition.
+     */
     @Test public void testQueryBlocksWithCondition() {
         QueryBlockVO req = new QueryBlockVO();
         req.setPageNo(1);
@@ -465,6 +501,9 @@ import java.util.List;
         }
     }
 
+    /**
+     * Test query txs with condition.
+     */
     @Test public void testQueryTxsWithCondition() {
         QueryTransactionVO req = new QueryTransactionVO();
         req.setTxId("tx_id_OPEN_ACCOUNT_0_1526047995917main");
@@ -481,6 +520,9 @@ import java.util.List;
         });
     }
 
+    /**
+     * Test query tx out.
+     */
     @Test public void testQueryTxOut() {
         System.out.println(blockChainService.queryUTXOByTxId("tx_id_UTXO_0_152610630004"));
     }

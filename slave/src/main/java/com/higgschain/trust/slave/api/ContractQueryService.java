@@ -3,17 +3,19 @@ package com.higgschain.trust.slave.api;
 import java.util.List;
 
 /**
+ * The interface Contract query service.
+ *
  * @author duhongming
- * @date 2018/6/22
+ * @date 2018 /6/22
  */
 public interface ContractQueryService {
     /**
      * Queries contract state.
      *
-     * @param address
-     * @param methodName
-     * @param args
-     * @return
+     * @param address    the address
+     * @param methodName the method name
+     * @param args       the args
+     * @return object
      */
     Object query(String address, String methodName, Object... args);
 

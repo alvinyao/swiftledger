@@ -9,6 +9,8 @@ import it.unisa.dia.gas.plaf.jpbc.util.concurrent.accumultor.Accumulator;
 import java.util.concurrent.Callable;
 
 /**
+ * The type Product pairing accumulator.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
@@ -20,7 +22,12 @@ public class ProductPairingAccumulator implements PairingAccumulator {
     private Element[] in1, in2;
     private Element result;
 
-
+    /**
+     * Instantiates a new Product pairing accumulator.
+     *
+     * @param pairing the pairing
+     * @param n       the n
+     */
     public ProductPairingAccumulator(Pairing pairing, int n) {
         this.pairing = pairing;
         this.in1 = new Element[n];

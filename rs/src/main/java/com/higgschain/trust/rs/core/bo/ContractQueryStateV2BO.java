@@ -9,8 +9,10 @@ import org.hibernate.validator.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
+ * The type Contract query state v 2 bo.
+ *
  * @author lingchao
- * @date 2019-01-06
+ * @date 2019 -01-06
  */
 @Getter
 @Setter

@@ -24,5 +24,13 @@ import bftsmart.tom.core.messages.TOMMessage;
  * @author alysson
  */
 public interface Extractor {
+    /**
+     * Extract response tom message.
+     *
+     * @param replies      the replies
+     * @param sameContent  the same content
+     * @param lastReceived the last received
+     * @return the tom message
+     */
     TOMMessage extractResponse(TOMMessage[] replies, int sameContent, int lastReceived);
 }

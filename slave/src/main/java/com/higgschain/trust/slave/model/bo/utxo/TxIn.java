@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * TxIn bo
  *
  * @author lingchao
- * @create 2018年03月27日21:20
+ * @create 2018年03月27日21 :20
  */
 @Getter @Setter public class TxIn extends BaseBO {
 

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Transaction receipt po.
+ *
  * @author tangfashuang
  */
 @Setter

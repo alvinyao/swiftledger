@@ -21,34 +21,60 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
+ * The type Network configuration.
+ *
  * @author duhongming
- * @date 2018/9/12
+ * @date 2018 /9/12
  */
 @Configuration
 @Slf4j
 @StateListener
 public class NetworkConfiguration {
+    /**
+     * The Host.
+     */
     @Value("${network.host}")
     public String host;
 
+    /**
+     * The Port.
+     */
     @Value("${network.port}")
     public int port;
 
+    /**
+     * The Timeout.
+     */
     @Value("${network.timeout:0}")
     public int timeout;
 
+    /**
+     * The Client thread num.
+     */
     @Value("${network.clientThreadNum:0}")
     public int clientThreadNum;
 
+    /**
+     * The Peers.
+     */
     @Value("${network.peers}")
     public String[] peers;
 
+    /**
+     * The Http port.
+     */
     @Value("${server.port}")
     public int httpPort;
 
+    /**
+     * The Pub key for consensus.
+     */
     @Value("${higgs.trust.keys.consensusPublicKey}")
     String pubKeyForConsensus;
 
+    /**
+     * The Pri key for consensus.
+     */
     @Value("${higgs.trust.keys.consensusPrivateKey}")
     String priKeyForConsensus;
 
@@ -67,6 +93,9 @@ public class NetworkConfiguration {
     @Autowired
     private NodeProperties nodeProperties;
 
+    /**
+     * Handle state change.
+     */
     @StateChangeListener({
             NodeStateEnum.Starting,
             NodeStateEnum.Initialize,
@@ -87,6 +116,11 @@ public class NetworkConfiguration {
         }
     }
 
+    /**
+     * Gets network manage.
+     *
+     * @return the network manage
+     */
     @Bean
     public NetworkManage getNetworkManage() {
         log.info("Init NetworkManage bean ...");

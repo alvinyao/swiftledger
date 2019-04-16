@@ -23,10 +23,15 @@ import java.io.ObjectOutput;
 /**
  * This is the super-class for all other kinds of messages created by JBP
  */
-
 public abstract class SystemMessage implements Externalizable {
 
+    /**
+     * The Sender.
+     */
     protected int sender; // ID of the process which sent the message
+    /**
+     * The Authenticated.
+     */
     public transient boolean authenticated; // set to TRUE if the message was received
     // with a (valid) mac, FALSE if no mac was given
     // note that if the message arrives with an
@@ -50,7 +55,7 @@ public abstract class SystemMessage implements Externalizable {
     /**
      * Returns the ID of the process which sent the message
      *
-     * @return
+     * @return sender
      */
     public final int getSender() {
         return sender;

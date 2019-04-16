@@ -13,6 +13,9 @@ import org.springframework.beans.factory.BeanFactory
  * @date 2018/5/29 16:54    
  */
 
+/**
+ *  The type Cluster.
+ */
 @Slf4j
 @Usage("cluster config")
 class cluster {

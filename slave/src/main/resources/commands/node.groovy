@@ -19,6 +19,9 @@ import org.springframework.beans.factory.BeanFactory
  * Copyright (c) 2013-2017, suimi
  */
 
+/**
+ *  The type Node.
+ */
 @Slf4j
 @Usage("about node info")
 class node {

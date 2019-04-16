@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Ca rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -27,6 +29,11 @@ public class CaRocksDao extends RocksBaseDao<CaPO>{
         return "ca";
     }
 
+    /**
+     * Save.
+     *
+     * @param caPO the ca po
+     */
     public void save(CaPO caPO) {
         String key = caPO.getUser() + Constant.SPLIT_SLASH + caPO.getUsage();
         if (keyMayExist(key) && null != get(key)) {
@@ -37,6 +44,11 @@ public class CaRocksDao extends RocksBaseDao<CaPO>{
         put(key, caPO);
     }
 
+    /**
+     * Update.
+     *
+     * @param caPO the ca po
+     */
     public void update(CaPO caPO) {
         String key = caPO.getUser() + Constant.SPLIT_SLASH + caPO.getUsage();
         if (null == get(key)) {
@@ -47,6 +59,12 @@ public class CaRocksDao extends RocksBaseDao<CaPO>{
         put(key, caPO);
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param caPOList the ca po list
+     * @return the int
+     */
     public int batchInsert(List<CaPO> caPOList) {
         if (CollectionUtils.isEmpty(caPOList)) {
             return 0;
@@ -71,6 +89,12 @@ public class CaRocksDao extends RocksBaseDao<CaPO>{
         return caPOList.size();
     }
 
+    /**
+     * Gets ca list by users.
+     *
+     * @param keys the keys
+     * @return the ca list by users
+     */
     public List<CaPO> getCaListByUsers(List<String> keys) {
         if (CollectionUtils.isEmpty(keys)) {
             return null;

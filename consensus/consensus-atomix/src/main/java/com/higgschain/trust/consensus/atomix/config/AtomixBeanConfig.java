@@ -33,24 +33,49 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Arrays;
 
 /**
+ * The type Atomix bean config.
+ *
  * @author suimi
- * @date 2018/7/5
+ * @date 2018 /7/5
  */
 @Configuration @Slf4j public class AtomixBeanConfig {
 
+    /**
+     * Replicate composite abstract commit replicate composite.
+     *
+     * @param filter the filter
+     * @return the abstract commit replicate composite
+     */
     @Autowired @Bean public AbstractCommitReplicateComposite replicateComposite(CompositeCommandFilter filter) {
         return new DefaultCommitReplicateComposite(filter);
     }
 
+    /**
+     * Snapshot consensus snapshot.
+     *
+     * @return the consensus snapshot
+     */
     @Bean @ConditionalOnMissingBean(IConsensusSnapshot.class) public IConsensusSnapshot snapshot() {
         return new DefaultConsensusSnapshot();
     }
 
+    /**
+     * Command primitive type command primitive type.
+     *
+     * @param replicateComposite the replicate composite
+     * @param snapshot           the snapshot
+     * @return the command primitive type
+     */
     @Bean public CommandPrimitiveType commandPrimitiveType(AbstractCommitReplicateComposite replicateComposite,
         IConsensusSnapshot snapshot) {
         return new CommandPrimitiveType(replicateComposite, snapshot);
     }
 
+    /**
+     * Atomix registry atomix registry.
+     *
+     * @return the atomix registry
+     */
     @Bean public AtomixRegistry atomixRegistry() {
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
         if (log.isDebugEnabled()) {
@@ -61,6 +86,12 @@ import java.util.Arrays;
             PrimitiveProtocol.Type.class, Profile.Type.class, NodeDiscoveryProvider.Type.class);
     }
 
+    /**
+     * Atomix config atomix config.
+     *
+     * @param registry the registry
+     * @return the atomix config
+     */
     @Bean public AtomixConfig atomixConfig(AtomixRegistry registry) {
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
         if (log.isDebugEnabled()) {

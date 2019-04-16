@@ -14,9 +14,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Core transaction.
+ *
  * @author WangQuanzhou
  * @desc core transaction class
- * @date 2018/3/26 16:59
+ * @date 2018 /3/26 16:59
  */
 @Getter
 @Setter

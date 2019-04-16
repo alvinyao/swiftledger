@@ -20,15 +20,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Freeze snapshot agent.
+ *
  * @author liuyu
  * @description an agent for account freeze snapshot
- * @date 2018-04-09
+ * @date 2018 -04-09
  */
 @Slf4j
 @Component
 public class FreezeSnapshotAgent implements CacheLoader {
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Freeze repository.
+     */
     @Autowired
     FreezeRepository freezeRepository;
 
@@ -47,9 +55,9 @@ public class FreezeSnapshotAgent implements CacheLoader {
     /**
      * get account freeze record from cache or db
      *
-     * @param accountNo
-     * @param bizFlowNo
-     * @return
+     * @param bizFlowNo the biz flow no
+     * @param accountNo the account no
+     * @return account freeze record
      */
     public AccountFreezeRecord getAccountFreezeRecord(String bizFlowNo, String accountNo) {
         return get(new FreezeCacheKey(bizFlowNo, accountNo));
@@ -58,7 +66,7 @@ public class FreezeSnapshotAgent implements CacheLoader {
     /**
      * create account freeze record from snapshot
      *
-     * @param accountFreezeRecord
+     * @param accountFreezeRecord the account freeze record
      */
     public void createAccountFreezeRecord(AccountFreezeRecord accountFreezeRecord) {
         insert(new FreezeCacheKey(accountFreezeRecord.getBizFlowNo(), accountFreezeRecord.getAccountNo()), accountFreezeRecord);
@@ -67,7 +75,7 @@ public class FreezeSnapshotAgent implements CacheLoader {
     /**
      * update account freeze record from snapshot
      *
-     * @param accountFreezeRecord
+     * @param accountFreezeRecord the account freeze record
      */
     public void updateAccountFreezeRecord(AccountFreezeRecord accountFreezeRecord) {
         update(new FreezeCacheKey(accountFreezeRecord.getBizFlowNo(), accountFreezeRecord.getAccountNo()), accountFreezeRecord);

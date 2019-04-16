@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * The type Transaction jdbc dao.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-20
+ * @date 2018 -06-20
  */
 @Component @Slf4j public class TransactionJDBCDao {
     @Autowired private NamedParameterJdbcTemplate jdbc;
@@ -21,8 +23,8 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     public int batchInsertTransaction(List<TransactionPO> list) {
         StringBuilder sql = new StringBuilder("INSERT INTO TRANSACTION "

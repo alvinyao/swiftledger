@@ -7,16 +7,33 @@ import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
 
 /**
+ * The type Protobuf util.
+ *
  * @author hanson
- * @Date 2018/9/30
+ * @Date 2018 /9/30
  * @Description:
  */
 public class ProtobufUtil {
+    /**
+     * Serializer byte [ ].
+     *
+     * @param <T> the type parameter
+     * @param o   the o
+     * @return the byte [ ]
+     */
     public static <T> byte[] serializer(T o) {
         Schema schema = RuntimeSchema.getSchema(o.getClass());
         return ProtobufIOUtil.toByteArray(o, schema, LinkedBuffer.allocate(256));
     }
 
+    /**
+     * Deserializer t.
+     *
+     * @param <T>   the type parameter
+     * @param bytes the bytes
+     * @param clazz the clazz
+     * @return the t
+     */
     public static <T> T deserializer(byte[] bytes, Class<T> clazz) {
 
         T obj = null;

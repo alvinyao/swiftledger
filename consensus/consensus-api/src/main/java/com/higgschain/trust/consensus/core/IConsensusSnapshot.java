@@ -3,9 +3,22 @@
  */
 package com.higgschain.trust.consensus.core;
 
+/**
+ * The interface Consensus snapshot.
+ */
 public interface IConsensusSnapshot {
 
+    /**
+     * Get snapshot byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getSnapshot();
 
+    /**
+     * Install snapshot.
+     *
+     * @param snapshot the snapshot
+     */
     void installSnapshot(byte[] snapshot);
 }

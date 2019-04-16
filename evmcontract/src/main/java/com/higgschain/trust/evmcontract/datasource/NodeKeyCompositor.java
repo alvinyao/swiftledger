@@ -20,15 +20,26 @@ import static java.lang.System.arraycopy;
  * This mechanism is a part of flat storage source which is free from reference counting
  *
  * @author Mikhail Kalinin
- * @see RepositoryRoot#RepositoryRoot(Source, byte[])
+ * @see RepositoryRoot#RepositoryRoot(Source, byte[]) RepositoryRoot#RepositoryRoot(Source, byte[])
  * @since 05.12.2017
  */
 public class NodeKeyCompositor implements Serializer<byte[], byte[]> {
 
+    /**
+     * The constant HASH_LEN.
+     */
     public static final int HASH_LEN = 32;
+    /**
+     * The constant PREFIX_BYTES.
+     */
     public static final int PREFIX_BYTES = 16;
     private byte[] addrHash;
 
+    /**
+     * Instantiates a new Node key compositor.
+     *
+     * @param addrOrHash the addr or hash
+     */
     public NodeKeyCompositor(byte[] addrOrHash) {
         this.addrHash = addrHash(addrOrHash);
     }
@@ -43,6 +54,13 @@ public class NodeKeyCompositor implements Serializer<byte[], byte[]> {
         return stream;
     }
 
+    /**
+     * Compose byte [ ].
+     *
+     * @param key        the key
+     * @param addrOrHash the addr or hash
+     * @return the byte [ ]
+     */
     public static byte[] compose(byte[] key, byte[] addrOrHash) {
         return composeInner(key, addrHash(addrOrHash));
     }

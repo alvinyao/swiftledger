@@ -15,8 +15,10 @@ import reactor.core.support.Assert;
 import java.util.Map;
 
 /**
+ * The type Account contract binding handler interface test.
+ *
  * @author duhongming
- * @date 2018/5/8
+ * @date 2018 /5/8
  */
 public class AccountContractBindingHandlerInterfaceTest extends ContractBaseTest {
 
@@ -49,6 +51,9 @@ public class AccountContractBindingHandlerInterfaceTest extends ContractBaseTest
         return packContext;
     }
 
+    /**
+     * Insert account and contract.
+     */
     //@BeforeClass
     public void insertAccountAndContract() {
         System.out.println("begin insertAccountAndContract");
@@ -68,6 +73,11 @@ public class AccountContractBindingHandlerInterfaceTest extends ContractBaseTest
         return "java/com/higgs/trust/slave/core/service/contract/binding/";
     }
 
+    /**
+     * Test validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 0)
     public void testValidate(Map<?, ?> param) {
         insertAccountAndContract();
@@ -88,6 +98,11 @@ public class AccountContractBindingHandlerInterfaceTest extends ContractBaseTest
         snapshot.commit();
     }
 
+    /**
+     * Test persist.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1)
     public void testPersist(Map<?, ?> param) {
         insertAccountAndContract();
@@ -106,6 +121,9 @@ public class AccountContractBindingHandlerInterfaceTest extends ContractBaseTest
         doTestPersist(param, packContext, bindingHandler);
     }
 
+    /**
+     * Test validate action type not expect.
+     */
     @Test
     public void testValidate_ActionType_Not_Expect() {
         insertAccountAndContract();
@@ -122,6 +140,9 @@ public class AccountContractBindingHandlerInterfaceTest extends ContractBaseTest
         }
     }
 
+    /**
+     * Test persist action is not contract creation action.
+     */
     @Test
     public void testPersist_Action_IsNot_ContractCreationAction() {
         insertAccountAndContract();

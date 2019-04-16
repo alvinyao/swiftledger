@@ -39,9 +39,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Slave batch callback processor.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-13
+ * @date 2018 -05-13
  */
 @Component @Slf4j public class SlaveBatchCallbackProcessor implements SlaveBatchCallbackHandler, InitializingBean {
     private static final String KEY_ALL = "ALL";

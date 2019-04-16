@@ -13,8 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Rhino execute engine.
+ *
  * @author duhongming
- * @date 2018/6/6
+ * @date 2018 /6/6
  */
 @Slf4j
 public class RhinoExecuteEngine implements ExecuteEngine {
@@ -27,6 +29,13 @@ public class RhinoExecuteEngine implements ExecuteEngine {
     private Map<String, Object> variables;
     private ExecuteConfig executeConfig;
 
+    /**
+     * Instantiates a new Rhino execute engine.
+     *
+     * @param code          the code
+     * @param variables     the variables
+     * @param executeConfig the execute config
+     */
     public RhinoExecuteEngine(String code, Map<String, Object> variables, ExecuteConfig executeConfig) {
         this.code = code;
         this.variables = variables;

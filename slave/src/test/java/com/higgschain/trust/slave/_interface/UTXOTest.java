@@ -13,7 +13,7 @@ import java.util.Map;
  * UTXO test
  *
  * @author lingchao
- * @create 2018年05月10日10:41
+ * @create 2018年05月10日10 :41
  */
 @Slf4j
 public class UTXOTest extends InterfaceCommonTest {
@@ -25,6 +25,11 @@ public class UTXOTest extends InterfaceCommonTest {
 
     @Autowired private UTXOActionHandler utxoActionHandler;
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1)
     public void paramValidate(Map<?, ?> param) {
         log.info("[paramValidate]{}", param.get("comment"));
@@ -32,6 +37,11 @@ public class UTXOTest extends InterfaceCommonTest {
         executeActionHandler(param, utxoActionHandler, action);
     }
 
+    /**
+     * Test regular.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 2)
     public void testRegular(Map<?, ?> param) {
         log.info("[testRegular]{}", param.get("comment"));
@@ -47,6 +57,11 @@ public class UTXOTest extends InterfaceCommonTest {
         executeAfterSql(param);
     }
 
+    /**
+     * Test exception.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 3)
     public void testException(Map<?, ?> param) {
         log.info("[testException]{}", param.get("comment"));
@@ -58,7 +73,11 @@ public class UTXOTest extends InterfaceCommonTest {
         executeAfterSql(param);
     }
 
-
+    /**
+     * Test.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1)
     public void test(Map<?, ?> param) {
         log.info("[paramValidate]{}", param.get("comment"));

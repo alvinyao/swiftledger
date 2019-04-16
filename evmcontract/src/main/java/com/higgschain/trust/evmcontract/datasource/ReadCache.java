@@ -39,6 +39,9 @@ import java.util.Map;
  * but get shrink when low heap
  * <p>
  * Created by Anton Nashatyrev on 05.10.2016.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public class ReadCache<Key, Value> extends AbstractCachedSource<Key, Value> {
 
@@ -49,6 +52,11 @@ public class ReadCache<Key, Value> extends AbstractCachedSource<Key, Value> {
     // the guard against incorrect Map implementation for byte[] keys
     private boolean checked = false;
 
+    /**
+     * Instantiates a new Read cache.
+     *
+     * @param src the src
+     */
     public ReadCache(Source<Key, Value> src) {
         super(src);
         withCache(new HashMap<Key, Value>());
@@ -56,6 +64,9 @@ public class ReadCache<Key, Value> extends AbstractCachedSource<Key, Value> {
 
     /**
      * Installs the specific cache Map implementation
+     *
+     * @param cache the cache
+     * @return the read cache
      */
     public ReadCache<Key, Value> withCache(Map<Key, Value> cache) {
         byteKeyMap = cache instanceof ByteArrayMap;
@@ -65,6 +76,9 @@ public class ReadCache<Key, Value> extends AbstractCachedSource<Key, Value> {
 
     /**
      * Sets the max number of entries to cache
+     *
+     * @param maxCapacity the max capacity
+     * @return the read cache
      */
     public ReadCache<Key, Value> withMaxCapacity(int maxCapacity) {
         return withCache(new LRUMap<Key, Value>(maxCapacity) {
@@ -149,9 +163,16 @@ public class ReadCache<Key, Value> extends AbstractCachedSource<Key, Value> {
     /**
      * Shortcut for ReadCache with byte[] keys. Also prevents accidental
      * usage of regular Map implementation (non byte[])
+     *
+     * @param <V> the type parameter
      */
     public static class BytesKey<V> extends ReadCache<byte[], V> implements CachedSource.BytesKey<V> {
 
+        /**
+         * Instantiates a new Bytes key.
+         *
+         * @param src the src
+         */
         public BytesKey(Source<byte[], V> src) {
             super(src);
             withCache(new ByteArrayMap<V>());

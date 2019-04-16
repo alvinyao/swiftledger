@@ -9,19 +9,42 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Type a 1 curve generator.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeA1CurveGenerator implements PairingParametersGenerator {
+    /**
+     * The Random.
+     */
     protected SecureRandom random;
-    protected int numPrimes, bits;
+    /**
+     * The Num primes.
+     */
+    protected int numPrimes, /**
+     * The Bits.
+     */
+    bits;
 
-
+    /**
+     * Instantiates a new Type a 1 curve generator.
+     *
+     * @param random    the random
+     * @param numPrimes the num primes
+     * @param bits      the bits
+     */
     public TypeA1CurveGenerator(SecureRandom random, int numPrimes, int bits) {
         this.random = random;
         this.numPrimes = numPrimes;
         this.bits = bits;
     }
 
+    /**
+     * Instantiates a new Type a 1 curve generator.
+     *
+     * @param numPrimes the num primes
+     * @param bits      the bits
+     */
     public TypeA1CurveGenerator(int numPrimes, int bits) {
         this(new SecureRandom(), numPrimes, bits);
     }
@@ -95,6 +118,11 @@ public class TypeA1CurveGenerator implements PairingParametersGenerator {
         return params;
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         TypeA1CurveGenerator generator = new TypeA1CurveGenerator(3, 512);
         PairingParameters curveParams = generator.generate();

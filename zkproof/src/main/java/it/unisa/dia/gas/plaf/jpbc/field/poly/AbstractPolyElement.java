@@ -9,14 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Abstract poly element.
+ *
+ * @param <E> the type parameter
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractPolyElement<E extends Element, F extends AbstractFieldOver>
         extends AbstractElement<F> implements Polynomial<E> {
 
+    /**
+     * The Coefficients.
+     */
     protected List<E> coefficients;
 
-
+    /**
+     * Instantiates a new Abstract poly element.
+     *
+     * @param field the field
+     */
     protected AbstractPolyElement(F field) {
         super(field);
 

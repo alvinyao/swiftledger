@@ -9,13 +9,16 @@ import org.testng.annotations.Test;
  * SystemPropertyDao test
  *
  * @author lingchao
- * @create 2018年09月17日11:11
+ * @create 2018年09月17日11 :11
  */
 public class SystemPropertyDaoTest extends BaseTest {
 
     @Autowired
     private SystemPropertyDao systemPropertyDao;
 
+    /**
+     * Update.
+     */
     @Test
     public void update() {
 

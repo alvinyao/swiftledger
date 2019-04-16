@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * DataIdentity  snapshot Handler
  *
  * @author lingchao
- * @create 2018年04月17日19:43
+ * @create 2018年04月17日19 :43
  */
 @Service
 public class DataIdentitySnapshotHandler implements DataIdentityHandler{

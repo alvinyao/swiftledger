@@ -31,8 +31,16 @@ import com.higgschain.trust.evmcontract.vm.DataWord;
 public class RepositoryRoot extends RepositoryImpl {
 
     private static class StorageCache extends ReadWriteCache<DataWord, DataWord> {
+        /**
+         * The Trie.
+         */
         Trie<byte[]> trie;
 
+        /**
+         * Instantiates a new Storage cache.
+         *
+         * @param trie the trie
+         */
         public StorageCache(Trie<byte[]> trie) {
             super(new SourceCodec<>(trie, Serializers.STORAGE_KEY_SERIALIZER, Serializers.STORAGE_VALUE_SERIALIZER), WriteCache.CacheType.SIMPLE);
             this.trie = trie;
@@ -40,6 +48,9 @@ public class RepositoryRoot extends RepositoryImpl {
     }
 
     private class MultiStorageCache extends MultiCache<StorageCache> {
+        /**
+         * Instantiates a new Multi storage cache.
+         */
         public MultiStorageCache() {
             super(null);
         }
@@ -78,6 +89,11 @@ public class RepositoryRoot extends RepositoryImpl {
     private CachedSource.BytesKey<byte[]> trieCache;
     private Trie<byte[]> stateTrie;
 
+    /**
+     * Instantiates a new Repository root.
+     *
+     * @param stateDS the state ds
+     */
     public RepositoryRoot(Source<byte[], byte[]> stateDS) {
         this(stateDS, null);
     }
@@ -90,8 +106,8 @@ public class RepositoryRoot extends RepositoryImpl {
      * \                 \-->>> storageKeyCompositor --> contractStorageTrie --> storageCodec --> storageCache
      * \--> codeCache
      *
-     * @param stateDS
-     * @param root
+     * @param stateDS the state ds
+     * @param root    the root
      */
     public RepositoryRoot(final Source<byte[], byte[]> stateDS, byte[] root) {
         this.stateDS = stateDS;
@@ -146,6 +162,13 @@ public class RepositoryRoot extends RepositoryImpl {
         stateTrie.setRoot(root);
     }
 
+    /**
+     * Create trie trie.
+     *
+     * @param trieCache the trie cache
+     * @param root      the root
+     * @return the trie
+     */
     protected TrieImpl createTrie(Source<byte[], byte[]> trieCache, byte[] root) {
         return new SecureTrie(trieCache, root);
     }

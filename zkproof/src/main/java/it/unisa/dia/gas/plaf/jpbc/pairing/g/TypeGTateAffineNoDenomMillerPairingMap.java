@@ -11,10 +11,20 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.AbstractMillerPairingMap;
 
 import java.util.List;
 
+/**
+ * The type Type g tate affine no denom miller pairing map.
+ */
 public class TypeGTateAffineNoDenomMillerPairingMap extends AbstractMillerPairingMap<Polynomial> {
+    /**
+     * The Pairing.
+     */
     protected TypeGPairing pairing;
 
-
+    /**
+     * Instantiates a new Type g tate affine no denom miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeGTateAffineNoDenomMillerPairingMap(TypeGPairing pairing) {
         super(pairing);
 
@@ -65,7 +75,12 @@ public class TypeGTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         return false;
     }
 
-
+    /**
+     * Tate pow element.
+     *
+     * @param element the element
+     * @return the element
+     */
     public Element tatePow(Element element) {
         Point<Polynomial> e0, e3;
         PolyModElement e2;
@@ -98,6 +113,18 @@ public class TypeGTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         return lucasEven(e0, pairing.phikOnr);
     }
 
+    /**
+     * Q power.
+     *
+     * @param sign  the sign
+     * @param e2    the e 2
+     * @param e0re  the e 0 re
+     * @param e0im  the e 0 im
+     * @param e0re0 the e 0 re 0
+     * @param e0im0 the e 0 im 0
+     * @param inre  the inre
+     * @param inim  the inim
+     */
     final void qPower(int sign, PolyModElement e2,
                       Element e0re, Element e0im, Element e0re0, Element e0im0,
                       List<Element> inre, List<Element> inim) {
@@ -135,7 +162,14 @@ public class TypeGTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         }
     }
 
-
+    /**
+     * Pairing element.
+     *
+     * @param P  the p
+     * @param Qx the qx
+     * @param Qy the qy
+     * @return the element
+     */
     protected Element pairing(Point P, Polynomial Qx, Polynomial Qy) {
         Element Px = P.getX();
         Element Py = P.getY();

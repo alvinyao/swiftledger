@@ -36,6 +36,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
 
+/**
+ * The type Failover schedule.
+ */
 @Service
 @Slf4j
 public class FailoverSchedule {
@@ -106,11 +109,11 @@ public class FailoverSchedule {
         syncService.autoSync();
     }
 
-
     /**
      * failover指定高度
      *
      * @param height 区块高度
+     * @return the boolean
      */
     public synchronized boolean failover(long height) {
         if (!nodeState.isState(NodeStateEnum.Running, NodeStateEnum.ArtificialSync)) {

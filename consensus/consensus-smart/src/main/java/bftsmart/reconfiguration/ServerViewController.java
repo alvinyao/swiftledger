@@ -30,12 +30,23 @@ import java.net.InetSocketAddress;
 import java.util.*;
 
 /**
+ * The type Server view controller.
+ *
  * @author eduardo
  */
 public class ServerViewController extends ViewController {
 
+    /**
+     * The constant ADD_SERVER.
+     */
     public static final int ADD_SERVER = 0;
+    /**
+     * The constant REMOVE_SERVER.
+     */
     public static final int REMOVE_SERVER = 1;
+    /**
+     * The constant CHANGE_F.
+     */
     public static final int CHANGE_F = 2;
 
     private int quorumBFT; // ((n + f) / 2) replicas
@@ -46,6 +57,11 @@ public class ServerViewController extends ViewController {
     private TOMLayer tomLayer;
     // protected View initialView;
 
+    /**
+     * Instantiates a new Server view controller.
+     *
+     * @param procId the proc id
+     */
     public ServerViewController(int procId) {
         this(procId, "");
         /*super(procId);
@@ -55,6 +71,12 @@ public class ServerViewController extends ViewController {
         reconfigureTo(initialView);*/
     }
 
+    /**
+     * Instantiates a new Server view controller.
+     *
+     * @param procId     the proc id
+     * @param configHome the config home
+     */
     public ServerViewController(int procId, String configHome) {
         super(procId, configHome);
         View cv = getViewStore().readView();
@@ -80,26 +102,56 @@ public class ServerViewController extends ViewController {
         return addresses;
     }
 
+    /**
+     * Sets tom layer.
+     *
+     * @param tomLayer the tom layer
+     */
     public void setTomLayer(TOMLayer tomLayer) {
         this.tomLayer = tomLayer;
     }
 
+    /**
+     * Is in current view boolean.
+     *
+     * @return the boolean
+     */
     public boolean isInCurrentView() {
         return this.currentView.isMember(getStaticConf().getProcessId());
     }
 
+    /**
+     * Get current view other acceptors int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getCurrentViewOtherAcceptors() {
         return this.otherProcesses;
     }
 
+    /**
+     * Get current view acceptors int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getCurrentViewAcceptors() {
         return this.currentView.getProcesses();
     }
 
+    /**
+     * Has updates boolean.
+     *
+     * @return the boolean
+     */
     public boolean hasUpdates() {
         return !this.updates.isEmpty();
     }
 
+    /**
+     * Enqueue update.
+     *
+     * @param up the up
+     */
     public void enqueueUpdate(TOMMessage up) {
         ReconfigureRequest request = (ReconfigureRequest)TOMUtil.getObject(up.getContent());
         //TODO 修改过，获取配置中的TTP公钥验签
@@ -164,6 +216,12 @@ public class ServerViewController extends ViewController {
         }
     }
 
+    /**
+     * Execute updates byte [ ].
+     *
+     * @param cid the cid
+     * @return the byte [ ]
+     */
     public byte[] executeUpdates(int cid) {
 
         List<Integer> jSet = new LinkedList<>();
@@ -278,6 +336,11 @@ public class ServerViewController extends ViewController {
             new ReconfigureReply(newV, jSetInfo.toArray(new String[0]), cid, tomLayer.execManager.getCurrentLeader()));
     }
 
+    /**
+     * Clear updates tom message [ ].
+     *
+     * @return the tom message [ ]
+     */
     public TOMMessage[] clearUpdates() {
         TOMMessage[] ret = new TOMMessage[updates.size()];
         for (int i = 0; i < updates.size(); i++) {
@@ -287,6 +350,12 @@ public class ServerViewController extends ViewController {
         return ret;
     }
 
+    /**
+     * Is in last join set boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     public boolean isInLastJoinSet(int id) {
         if (lastJoinStet != null) {
             for (int i = 0; i < lastJoinStet.length; i++) {
@@ -299,6 +368,11 @@ public class ServerViewController extends ViewController {
         return false;
     }
 
+    /**
+     * Process join result.
+     *
+     * @param r the r
+     */
     public void processJoinResult(ReconfigureReply r) {
         this.reconfigureTo(r.getView());
 
@@ -344,6 +418,11 @@ public class ServerViewController extends ViewController {
         return quorum2F;
     }*/
 
+    /**
+     * Gets quorum.
+     *
+     * @return the quorum
+     */
     public int getQuorum() {
         return getStaticConf().isBFT() ? quorumBFT : quorumCFT;
     }

@@ -8,8 +8,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * the action of  account contract binding
+ *
  * @author duhongming
- * @date 2018-04-18
+ * @date 2018 -04-18
  */
 @Getter @Setter public class AccountContractBindingAction extends Action {
 

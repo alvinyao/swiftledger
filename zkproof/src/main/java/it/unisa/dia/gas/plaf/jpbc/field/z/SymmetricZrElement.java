@@ -7,14 +7,27 @@ import it.unisa.dia.gas.plaf.jpbc.util.math.BigIntegerUtils;
 import java.math.BigInteger;
 
 /**
+ * The type Symmetric zr element.
+ *
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class SymmetricZrElement<F extends SymmetricZrField> extends AbstractZElement<F> {
 
+    /**
+     * The Order.
+     */
     protected BigInteger order;
+    /**
+     * The Half order.
+     */
     protected BigInteger halfOrder;
 
-
+    /**
+     * Instantiates a new Symmetric zr element.
+     *
+     * @param field the field
+     */
     public SymmetricZrElement(F field) {
         super(field);
 
@@ -24,6 +37,12 @@ public class SymmetricZrElement<F extends SymmetricZrField> extends AbstractZEle
         this.halfOrder = field.halfOrder;
     }
 
+    /**
+     * Instantiates a new Symmetric zr element.
+     *
+     * @param field the field
+     * @param value the value
+     */
     public SymmetricZrElement(F field, BigInteger value) {
         super(field);
 
@@ -32,6 +51,11 @@ public class SymmetricZrElement<F extends SymmetricZrField> extends AbstractZEle
         set(value);
     }
 
+    /**
+     * Instantiates a new Symmetric zr element.
+     *
+     * @param zrElement the zr element
+     */
     public SymmetricZrElement(SymmetricZrElement<F> zrElement) {
         super(zrElement.getField());
 

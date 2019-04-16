@@ -18,8 +18,10 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Send rc message.
+ *
  * @author: zhouyafeng
- * @create: 2018/05/30 15:02
+ * @create: 2018 /05/30 15:02
  * @description:
  */
 public class SendRCMessage {
@@ -27,6 +29,14 @@ public class SendRCMessage {
     private static final Logger log = LoggerFactory.getLogger(SendRCMessage.class);
     private RCMessage rcMessage;
 
+    /**
+     * Add.
+     *
+     * @param num      the num
+     * @param ip       the ip
+     * @param port     the port
+     * @param nodeName the node name
+     */
     public void add(int num, String ip, int port, String nodeName) {
         if (num < 0) {
             log.error("This value cannot be less than 0: {}", num);
@@ -52,6 +62,12 @@ public class SendRCMessage {
         rcMessage.setProperties(hashtable);
     }
 
+    /**
+     * Remove.
+     *
+     * @param num      the num
+     * @param nodeName the node name
+     */
     public void remove(int num, String nodeName) {
         if (num < 0) {
             log.error("This value cannot be less than 0: {}", num);
@@ -68,6 +84,14 @@ public class SendRCMessage {
 
     }
 
+    /**
+     * Send to ttp.
+     *
+     * @param ip           the ip
+     * @param port         the port
+     * @param ttpId        the ttp id
+     * @param rsaKeyLoader the rsa key loader
+     */
     public void sendToTTP(String ip, int port, int ttpId, RSAKeyLoader rsaKeyLoader) {
         if (ttpId < 0) {
             log.error("This value cannot be less than 0: {}", ttpId);

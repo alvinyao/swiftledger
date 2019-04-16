@@ -11,19 +11,29 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 /**
+ * The type Un freeze test.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-26
+ * @date 2018 -04-26
  */
 @Slf4j public class UnFreezeTest extends InterfaceCommonTest {
     private static String PROVIDER_ROOT_PATH = "java/com/higgs/trust/slave/core/service/accounting/unFreezeAccount/";
 
+    /**
+     * The Account un freeze handler.
+     */
     @Autowired AccountUnFreezeHandler accountUnFreezeHandler;
 
     @Override protected String getProviderRootPath() {
         return PROVIDER_ROOT_PATH;
     }
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void paramValidate(Map<?, ?> param) {
         log.info("[paramValidate]{}", param.get("comment"));
         AccountUnFreeze action = getAction(param, AccountUnFreeze.class, ActionTypeEnum.ACCOUNTING);

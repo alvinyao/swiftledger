@@ -37,12 +37,24 @@ import java.util.Random;
 import static com.higgschain.trust.evmcontract.util.ByteUtil.EMPTY_BYTE_ARRAY;
 import static java.util.Arrays.copyOfRange;
 
+/**
+ * The type Hash util.
+ */
 public class HashUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(HashUtil.class);
 
+    /**
+     * The constant EMPTY_DATA_HASH.
+     */
     public static final byte[] EMPTY_DATA_HASH;
+    /**
+     * The constant EMPTY_LIST_HASH.
+     */
     public static final byte[] EMPTY_LIST_HASH;
+    /**
+     * The constant EMPTY_TRIE_HASH.
+     */
     public static final byte[] EMPTY_TRIE_HASH;
 
     private static final Provider CRYPTO_PROVIDER;
@@ -62,6 +74,8 @@ public class HashUtil {
     }
 
     /**
+     * Sha 256 byte [ ].
+     *
      * @param input - data for hashing
      * @return - sha256 hash of the data
      */
@@ -75,6 +89,12 @@ public class HashUtil {
         }
     }
 
+    /**
+     * Sha 3 byte [ ].
+     *
+     * @param input the input
+     * @return the byte [ ]
+     */
     public static byte[] sha3(byte[] input) {
         MessageDigest digest;
         try {
@@ -88,6 +108,13 @@ public class HashUtil {
 
     }
 
+    /**
+     * Sha 3 byte [ ].
+     *
+     * @param input1 the input 1
+     * @param input2 the input 2
+     * @return the byte [ ]
+     */
     public static byte[] sha3(byte[] input1, byte[] input2) {
         MessageDigest digest;
         try {
@@ -121,6 +148,12 @@ public class HashUtil {
         }
     }
 
+    /**
+     * Sha 512 byte [ ].
+     *
+     * @param input the input
+     * @return the byte [ ]
+     */
     public static byte[] sha512(byte[] input) {
         MessageDigest digest;
         try {
@@ -134,6 +167,8 @@ public class HashUtil {
     }
 
     /**
+     * Ripemd 160 byte [ ].
+     *
      * @param data - message to hash
      * @return - reipmd160 hash of the message
      */
@@ -176,9 +211,11 @@ public class HashUtil {
     }
 
     /**
+     * Double digest byte [ ].
+     *
      * @param input -
      * @return -
-     * @see #doubleDigest(byte[], int, int)
+     * @see #doubleDigest(byte[], int, int) #doubleDigest(byte[], int, int)
      */
     public static byte[] doubleDigest(byte[] input) {
         return doubleDigest(input, 0, input.length);
@@ -207,8 +244,9 @@ public class HashUtil {
         }
     }
 
-
     /**
+     * Random hash byte [ ].
+     *
      * @return - generate random 32 byte hash
      */
     public static byte[] randomHash() {
@@ -219,6 +257,12 @@ public class HashUtil {
         return randomHash;
     }
 
+    /**
+     * Short hash string.
+     *
+     * @param hash the hash
+     * @return the string
+     */
     public static String shortHash(byte[] hash) {
         return Hex.toHexString(hash).substring(0, 6);
     }

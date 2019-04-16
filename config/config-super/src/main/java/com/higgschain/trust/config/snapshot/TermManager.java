@@ -18,8 +18,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
+ * The type Term manager.
+ *
  * @author suimi
- * @date 2018/6/12
+ * @date 2018 /6/12
  */
 @Slf4j @Component public class TermManager {
 
@@ -32,7 +34,7 @@ import java.util.stream.Collectors;
     /**
      * reset the terms of node, it's called by consensus level, will change the master name and current term
      *
-     * @param infos
+     * @param infos the infos
      */
     synchronized void resetTerms(List<TermInfo> infos) {
         this.terms = infos;
@@ -60,8 +62,8 @@ import java.util.stream.Collectors;
     /**
      * get the terminfo
      *
-     * @param term
-     * @return
+     * @param term the term
+     * @return term info
      */
     public Optional<TermInfo> getTermInfo(long term) {
         return terms.stream().filter(termInfo -> term == termInfo.getTerm()).findFirst();
@@ -70,8 +72,8 @@ import java.util.stream.Collectors;
     /**
      * start new term
      *
-     * @param term
-     * @param masterName
+     * @param term       the term
+     * @param masterName the master name
      */
     public void startNewTerm(long term, String masterName) {
         if (term != nodeState.getCurrentTerm() + 1) {
@@ -96,8 +98,9 @@ import java.util.stream.Collectors;
     /**
      * start new term
      *
-     * @param term
-     * @param masterName
+     * @param term        the term
+     * @param masterName  the master name
+     * @param startHeight the start height
      */
     public void startNewTerm(long term, String masterName, long startHeight) {
         nodeState.setCurrentTerm(term);
@@ -124,10 +127,10 @@ import java.util.stream.Collectors;
     /**
      * check if the package height belong the term
      *
-     * @param term
-     * @param masterName
-     * @param packageHeight
-     * @return
+     * @param term          the term
+     * @param masterName    the master name
+     * @param packageHeight the package height
+     * @return boolean
      */
     public boolean isTermHeight(long term, String masterName, long packageHeight) {
         Optional<TermInfo> optional = getTermInfo(term);
@@ -146,6 +149,11 @@ import java.util.stream.Collectors;
         }
     }
 
+    /**
+     * Reset end height.
+     *
+     * @param packageHeight the package height
+     */
     public void resetEndHeight(long packageHeight) {
         Optional<TermInfo> optional = getTermInfo(nodeState.getCurrentTerm());
         TermInfo termInfo = optional.get();
@@ -164,6 +172,9 @@ import java.util.stream.Collectors;
         }
     }
 
+    /**
+     * End term.
+     */
     public void endTerm() {
         if (nodeState.isMaster()) {
             nodeState.changeMaster(nodeState.MASTER_NA);

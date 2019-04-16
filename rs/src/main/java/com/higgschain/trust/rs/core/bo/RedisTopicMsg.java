@@ -11,7 +11,7 @@ import lombok.Setter;
  * redis topic message
  *
  * @author lingchao
- * @create 2018年08月23日14:27
+ * @create 2018年08月23日14 :27
  */
 @Getter
 @Setter

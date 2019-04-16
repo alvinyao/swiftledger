@@ -30,6 +30,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by Anton Nashatyrev on 18.01.2017.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public abstract class AsyncWriteCache<Key, Value> extends AbstractCachedSource<Key, Value> implements AsyncFlushable {
     private static final Logger logger = LoggerFactory.getLogger("com/higgsblock/db");
@@ -37,7 +40,13 @@ public abstract class AsyncWriteCache<Key, Value> extends AbstractCachedSource<K
     private static ListeningExecutorService flushExecutor = MoreExecutors.listeningDecorator(
             Executors.newFixedThreadPool(2, new ThreadFactoryBuilder().setNameFormat("AsyncWriteCacheThread-%d").build()));
 
+    /**
+     * The Cur cache.
+     */
     protected volatile WriteCache<Key, Value> curCache;
+    /**
+     * The Flushing cache.
+     */
     protected WriteCache<Key, Value> flushingCache;
 
     private ListenableFuture<Boolean> lastFlush = Futures.immediateFuture(false);
@@ -48,6 +57,11 @@ public abstract class AsyncWriteCache<Key, Value> extends AbstractCachedSource<K
 
     private String name = "<null>";
 
+    /**
+     * Instantiates a new Async write cache.
+     *
+     * @param source the source
+     */
     public AsyncWriteCache(Source<Key, Value> source) {
         super(source);
         flushingCache = createCache(source);
@@ -55,6 +69,12 @@ public abstract class AsyncWriteCache<Key, Value> extends AbstractCachedSource<K
         curCache = createCache(flushingCache);
     }
 
+    /**
+     * Create cache write cache.
+     *
+     * @param source the source
+     * @return the write cache
+     */
     protected abstract WriteCache<Key, Value> createCache(Source<Key, Value> source);
 
     @Override
@@ -151,6 +171,12 @@ public abstract class AsyncWriteCache<Key, Value> extends AbstractCachedSource<K
         return false;
     }
 
+    /**
+     * With name async write cache.
+     *
+     * @param name the name
+     * @return the async write cache
+     */
     public AsyncWriteCache<Key, Value> withName(String name) {
         this.name = name;
         return this;

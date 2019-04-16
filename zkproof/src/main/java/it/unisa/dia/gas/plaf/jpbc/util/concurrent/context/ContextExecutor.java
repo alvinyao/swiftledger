@@ -10,6 +10,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
 /**
+ * The type Context executor.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
@@ -17,12 +19,22 @@ public class ContextExecutor extends PoolExecutor implements MutablePairingParam
 
     private MutablePairingParameters parameters;
 
-
+    /**
+     * Instantiates a new Context executor.
+     *
+     * @param parameters the parameters
+     */
     public ContextExecutor(MutablePairingParameters parameters) {
         super(ExecutorServiceUtils.getCachedThreadPool());
         this.parameters = parameters;
     }
 
+    /**
+     * Instantiates a new Context executor.
+     *
+     * @param executor   the executor
+     * @param parameters the parameters
+     */
     public ContextExecutor(Executor executor, MutablePairingParameters parameters) {
         super(executor);
         this.parameters = parameters;
@@ -33,6 +45,12 @@ public class ContextExecutor extends PoolExecutor implements MutablePairingParam
         throw new IllegalStateException("Invalid method invocation!");
     }
 
+    /**
+     * Submit context executor.
+     *
+     * @param runnable the runnable
+     * @return the context executor
+     */
     public ContextExecutor submit(ContextRunnable runnable) {
         runnable.setExecutor(this);
         super.submit(runnable);

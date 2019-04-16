@@ -3,6 +3,7 @@ package it.unisa.dia.gas.jpbc;
 /**
  * This element represents a vector through its coordinates.
  *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 1.2.0
  */

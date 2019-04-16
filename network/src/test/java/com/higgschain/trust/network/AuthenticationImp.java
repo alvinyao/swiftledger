@@ -4,8 +4,10 @@ import com.higgschain.trust.network.Authentication;
 import com.higgschain.trust.network.Peer;
 
 /**
+ * The type Authentication imp.
+ *
  * @author duhongming
- * @date 2018/9/7
+ * @date 2018 /9/7
  */
 public class AuthenticationImp implements Authentication {
 

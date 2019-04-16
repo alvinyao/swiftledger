@@ -5,9 +5,8 @@ package com.higgschain.trust.evmcontract.facade;
  * a series of actions, and returns caller the operation result.
  *
  * @param <T> the type of the operation result
- *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 public interface Executor<T> {
     /**

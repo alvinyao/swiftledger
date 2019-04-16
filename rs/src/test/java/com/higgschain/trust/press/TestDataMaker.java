@@ -16,12 +16,22 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * The type Test data maker.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-17
+ * @date 2018 -04-17
  */
 public class TestDataMaker {
 
+    /**
+     * Make open account action action.
+     *
+     * @param accountNo         the account no
+     * @param index             the index
+     * @param fundDirectionEnum the fund direction enum
+     * @return the action
+     */
     public static Action makeOpenAccountAction(String accountNo, int index, FundDirectionEnum fundDirectionEnum) {
         OpenAccount action = new OpenAccount();
         action.setType(ActionTypeEnum.OPEN_ACCOUNT);
@@ -34,6 +44,14 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make freeze action action.
+     *
+     * @param accountNo the account no
+     * @param bizFlowNo the biz flow no
+     * @param amount    the amount
+     * @return the action
+     */
     public static Action makeFreezeAction(String accountNo, String bizFlowNo, BigDecimal amount) {
         AccountFreeze action = new AccountFreeze();
         action.setType(ActionTypeEnum.FREEZE);
@@ -43,6 +61,14 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make un freeze action action.
+     *
+     * @param accountNo the account no
+     * @param bizFlowNo the biz flow no
+     * @param amount    the amount
+     * @return the action
+     */
     public static Action makeUnFreezeAction(String accountNo, String bizFlowNo, BigDecimal amount) {
         AccountUnFreeze action = new AccountUnFreeze();
         action.setType(ActionTypeEnum.UNFREEZE);
@@ -52,6 +78,14 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make opertion action action.
+     *
+     * @param debitAccountNo  the debit account no
+     * @param creditAccountNo the credit account no
+     * @param happenAmount    the happen amount
+     * @return the action
+     */
     public static Action makeOpertionAction(String debitAccountNo, String creditAccountNo, BigDecimal happenAmount) {
         AccountOperation action = new AccountOperation();
         action.setType(ActionTypeEnum.ACCOUNTING);
@@ -70,6 +104,15 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make core tx core transaction.
+     *
+     * @param actions  the actions
+     * @param index    the index
+     * @param policyId the policy id
+     * @param bizModel the biz model
+     * @return the core transaction
+     */
     public static CoreTransaction makeCoreTx(List<Action> actions, int index, String policyId, JSONObject bizModel) {
         CoreTransaction coreTx = new CoreTransaction();
         coreTx.setPolicyId(policyId);

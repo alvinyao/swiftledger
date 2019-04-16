@@ -16,7 +16,7 @@ import java.util.List;
  * test
  *
  * @author lingchao
- * @create 2018年05月03日15:20
+ * @create 2018年05月03日15 :20
  */
 @Slf4j public class test {
     private static String pubk1 =
@@ -24,6 +24,12 @@ import java.util.List;
     private static String pubk2 =
         "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCROZWGFsdQBORNF2sZkL4NqbrWDq8mvgM3fkAh1QNKxPL1IlwLhYmu04IxkI4RTuukq3Did1tsUnh8OhdQKb2fJHywd2bGU9XueEGlilNGntH3JpPXYK5KWp4iwm3dzz/APlFI8DXnsSA404WEs82rTRoNOqncYEgjHPW1+48D5QIDAQAB";
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
         List<SignedTransaction> signedTransactions = makeRegisterPolicyTxs();
         //     System.out.println("sing1+pubk1:" + SignUtils.verify(JSON.toJSONString(signedTransactions.get(0).getCoreTx()), signedTransactions.get(0).getSignatureList().get(0), pubk1));
@@ -61,6 +67,9 @@ import java.util.List;
         return txs;
     }
 
+    /**
+     * Test.
+     */
     @Test public void test() {
         Long A = new Long(285150);
         Long B = new Long(285150);

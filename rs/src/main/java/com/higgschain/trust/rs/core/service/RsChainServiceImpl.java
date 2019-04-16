@@ -33,13 +33,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Rs chain service.
+ *
  * @author tangfashuang
- * @date 2018/05/13 15:58
+ * @date 2018 /05/13 15:58
  * @desc block chain service
  */
 @Slf4j
 @Service
 public class RsChainServiceImpl implements RsBlockChainService {
+    /**
+     * The constant CHAIN_OWNER_KEY.
+     */
     public static final String CHAIN_OWNER_KEY = "CHAIN_OWNER";
     @Autowired
     private BlockChainService blockChainService;

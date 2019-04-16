@@ -8,19 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Bean convertor.
+ *
  * @author liuyu
  * @description bean convertor
- * @date 2018-04-10
+ * @date 2018 -04-10
  */
 @Slf4j public class BeanConvertor {
 
     /**
      * convert bean,return new object
      *
-     * @param from
-     * @param toClazz
-     * @param <T>
-     * @return
+     * @param <T>     the type parameter
+     * @param from    the from
+     * @param toClazz the to clazz
+     * @return t
      */
     public static <T> T convertBean(Object from, Class<T> toClazz) {
         if (from == null) {
@@ -39,9 +41,11 @@ import java.util.List;
     /**
      * convert list bean,return new list for object
      *
-     * @param from
-     * @param toClazz
-     * @return
+     * @param <T>     the type parameter
+     * @param <O>     the type parameter
+     * @param from    the from
+     * @param toClazz the to clazz
+     * @return list
      */
     public static <T, O> List<T> convertList(List<O> from, Class<T> toClazz) {
         if (CollectionUtils.isEmpty(from)) {

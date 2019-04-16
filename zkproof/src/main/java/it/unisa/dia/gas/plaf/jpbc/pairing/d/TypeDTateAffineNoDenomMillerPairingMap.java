@@ -13,15 +13,30 @@ import it.unisa.dia.gas.plaf.jpbc.util.math.BigIntegerUtils;
 import java.util.List;
 
 /**
+ * The type Type d tate affine no denom miller pairing map.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeDTateAffineNoDenomMillerPairingMap extends AbstractMillerPairingMap<Polynomial> {
+    /**
+     * The Pairing.
+     */
     protected TypeDPairing pairing;
 
+    /**
+     * The Pairing pre processing table length.
+     */
     protected int pairingPreProcessingTableLength = -1;
+    /**
+     * The Pairing pre processing length in bytes.
+     */
     protected int pairingPreProcessingLengthInBytes = -1;
 
-
+    /**
+     * Instantiates a new Type d tate affine no denom miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeDTateAffineNoDenomMillerPairingMap(TypeDPairing pairing) {
         super(pairing);
 
@@ -112,7 +127,12 @@ public class TypeDTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         return false;
     }
 
-
+    /**
+     * Tate pow element.
+     *
+     * @param element the element
+     * @return the element
+     */
     public Element tatePow(Element element) {
         if (pairing.k == 6) {
             Point<Polynomial> e0, e3;
@@ -149,6 +169,18 @@ public class TypeDTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         }
     }
 
+    /**
+     * Q power.
+     *
+     * @param sign  the sign
+     * @param e2    the e 2
+     * @param e0re  the e 0 re
+     * @param e0im  the e 0 im
+     * @param e0re0 the e 0 re 0
+     * @param e0im0 the e 0 im 0
+     * @param inre  the inre
+     * @param inim  the inim
+     */
     final void qPower(int sign, PolyModElement e2,
                       Element e0re, Element e0im, Element e0re0, Element e0im0,
                       List<Element> inre, List<Element> inim) {
@@ -173,6 +205,14 @@ public class TypeDTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         }
     }
 
+    /**
+     * Pairing element.
+     *
+     * @param P  the p
+     * @param Qx the qx
+     * @param Qy the qy
+     * @return the element
+     */
     protected Element pairing(Point P, Polynomial Qx, Polynomial Qy) {
         Element Px = P.getX();
         Element Py = P.getY();
@@ -206,6 +246,13 @@ public class TypeDTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         return f;
     }
 
+    /**
+     * Pairing internal element.
+     *
+     * @param Ps the ps
+     * @param Qs the qs
+     * @return the element
+     */
     protected Element pairingInternal(Element[] Ps, Element[] Qs) {
         Field refField = Ps[0].getField();
 
@@ -254,18 +301,36 @@ public class TypeDTateAffineNoDenomMillerPairingMap extends AbstractMillerPairin
         rePart.getCoefficient(0).add(c);
     }
 
-
+    /**
+     * Gets pairing pre processing table length.
+     *
+     * @return the pairing pre processing table length
+     */
     public int getPairingPreProcessingTableLength() {
         getPairingPreProcessingLengthInBytes();
         return pairingPreProcessingTableLength;
     }
 
+    /**
+     * The type Type d miller no denom affine pairing pre processing.
+     */
     public class TypeDMillerNoDenomAffinePairingPreProcessing extends AbstractMillerPairingPreProcessing {
 
+        /**
+         * Instantiates a new Type d miller no denom affine pairing pre processing.
+         *
+         * @param source the source
+         * @param offset the offset
+         */
         public TypeDMillerNoDenomAffinePairingPreProcessing(byte[] source, int offset) {
             super(pairing, source, offset);
         }
 
+        /**
+         * Instantiates a new Type d miller no denom affine pairing pre processing.
+         *
+         * @param in1 the in 1
+         */
         public TypeDMillerNoDenomAffinePairingPreProcessing(Point in1) {
             super(in1, getPairingPreProcessingTableLength());
 

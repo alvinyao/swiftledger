@@ -15,11 +15,18 @@ import static org.hamcrest.core.StringContains.containsString;
 import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompiler.Options.*;
 
 /**
+ * The type Compiler test.
+ *
  * @author duhongming
- * @date 2018/11/22
+ * @date 2018 /11/22
  */
 public class CompilerTest {
 
+    /**
+     * Solc get version should work.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void solc_getVersion_shouldWork() throws IOException {
         final String version = SolidityCompiler.runGetVersionOutput();
@@ -32,6 +39,11 @@ public class CompilerTest {
         assertThat(version, containsString("Version:"));
     }
 
+    /**
+     * Simple test.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void simpleTest() throws IOException {
         String contract =
@@ -57,6 +69,11 @@ public class CompilerTest {
             Assert.fail();
     }
 
+    /**
+     * Default func test.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void defaultFuncTest() throws IOException {
         String contractSrc =
@@ -76,6 +93,11 @@ public class CompilerTest {
 //        System.out.print(contract.functions[0].toString());
     }
 
+    /**
+     * Compile files test.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void compileFilesTest() throws IOException {
 
@@ -94,6 +116,11 @@ public class CompilerTest {
 //        System.out.print(contract.functions[0].toString());
     }
 
+    /**
+     * Compile files with import test.
+     *
+     * @throws IOException the io exception
+     */
     @Test public void compileFilesWithImportTest() throws IOException {
 
         Path source = Paths.get("src","test","resources","solidity","file2.sol");
@@ -108,6 +135,11 @@ public class CompilerTest {
 //        System.out.print(contract.functions[0].toString());
     }
 
+    /**
+     * Compile files with import from parent file test.
+     *
+     * @throws IOException the io exception
+     */
     @Test public void compileFilesWithImportFromParentFileTest() throws IOException {
 
         Path source = Paths.get("src","test","resources","solidity","foo","file3.sol");
@@ -127,6 +159,11 @@ public class CompilerTest {
 //        System.out.print(contract.functions[0].toString());
     }
 
+    /**
+     * Compile files with import from parent string test.
+     *
+     * @throws IOException the io exception
+     */
     @Test public void compileFilesWithImportFromParentStringTest() throws IOException {
 
         Path source = Paths.get("src","test","resources","solidity","foo","file3.sol");
@@ -142,6 +179,11 @@ public class CompilerTest {
 //        System.out.print(contract.functions[0].toString());
     }
 
+    /**
+     * Compile files with import from parent path test.
+     *
+     * @throws IOException the io exception
+     */
     @Test public void compileFilesWithImportFromParentPathTest() throws IOException {
 
         Path source = Paths.get("src","test","resources","solidity","foo","file3.sol");
@@ -157,6 +199,12 @@ public class CompilerTest {
 //        System.out.print(contract.functions[0].toString());
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
         new CompilerTest().simpleTest();
     }

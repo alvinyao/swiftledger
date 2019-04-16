@@ -5,10 +5,18 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable vector element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ImmutableVectorElement<E extends Element> extends VectorElement<E> {
 
+    /**
+     * Instantiates a new Immutable vector element.
+     *
+     * @param element the element
+     */
     public ImmutableVectorElement(VectorElement element) {
         super(element.getField());
 

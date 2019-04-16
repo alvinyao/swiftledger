@@ -7,12 +7,19 @@ import com.higgschain.trust.consensus.zk.adapter.ZkCommitAdapter;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Zk commit replicate composite.
+ *
  * @author: zhouyafeng
- * @create: 2018/09/07 10:29
+ * @create: 2018 /09/07 10:29
  * @description:
  */
 @Component
 public class ZkCommitReplicateComposite extends AbstractCommitReplicateComposite {
+    /**
+     * Instantiates a new Zk commit replicate composite.
+     *
+     * @param filter the filter
+     */
     public ZkCommitReplicateComposite(CompositeCommandFilter filter) {
         super(filter);
     }

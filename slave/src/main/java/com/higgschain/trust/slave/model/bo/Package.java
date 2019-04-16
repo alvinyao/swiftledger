@@ -9,9 +9,11 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
+ * The type Package.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 @Getter @Setter public class Package extends BaseBO {
 
     /**

@@ -34,23 +34,55 @@ import java.util.*;
  */
 public class RepositoryImpl implements com.higgschain.trust.evmcontract.core.Repository, com.higgschain.trust.evmcontract.facade.Repository {
 
+    /**
+     * The Parent.
+     */
     protected RepositoryImpl parent;
 
+    /**
+     * The Account state cache.
+     */
     protected Source<byte[], AccountState> accountStateCache;
+    /**
+     * The Code cache.
+     */
     protected Source<byte[], byte[]> codeCache;
+    /**
+     * The Storage cache.
+     */
     protected MultiCache<? extends CachedSource<DataWord, DataWord>> storageCache;
 
+    /**
+     * The Config.
+     */
     @Autowired
     protected SystemProperties config = SystemProperties.getDefault();
 
+    /**
+     * Instantiates a new Repository.
+     */
     protected RepositoryImpl() {
     }
 
+    /**
+     * Instantiates a new Repository.
+     *
+     * @param accountStateCache the account state cache
+     * @param codeCache         the code cache
+     * @param storageCache      the storage cache
+     */
     public RepositoryImpl(Source<byte[], AccountState> accountStateCache, Source<byte[], byte[]> codeCache,
                           MultiCache<? extends CachedSource<DataWord, DataWord>> storageCache) {
         init(accountStateCache, codeCache, storageCache);
     }
 
+    /**
+     * Init.
+     *
+     * @param accountStateCache the account state cache
+     * @param codeCache         the code cache
+     * @param storageCache      the storage cache
+     */
     protected void init(Source<byte[], AccountState> accountStateCache, Source<byte[], byte[]> codeCache,
                         MultiCache<? extends CachedSource<DataWord, DataWord>> storageCache) {
         this.accountStateCache = accountStateCache;
@@ -76,6 +108,12 @@ public class RepositoryImpl implements com.higgschain.trust.evmcontract.core.Rep
         return accountStateCache.get(addr);
     }
 
+    /**
+     * Gets or create account state.
+     *
+     * @param addr the addr
+     * @return the or create account state
+     */
     synchronized AccountState getOrCreateAccountState(byte[] addr) {
         AccountState ret = accountStateCache.get(addr);
         if (ret == null) {
@@ -220,10 +258,20 @@ public class RepositoryImpl implements com.higgschain.trust.evmcontract.core.Rep
         throw new RuntimeException("Not supported");
     }
 
+    /**
+     * Gets trie dump.
+     *
+     * @return the trie dump
+     */
     public synchronized String getTrieDump() {
         return dumpStateTrie();
     }
 
+    /**
+     * Dump state trie string.
+     *
+     * @return the string
+     */
     public String dumpStateTrie() {
         throw new RuntimeException("Not supported");
     }
@@ -299,9 +347,17 @@ public class RepositoryImpl implements com.higgschain.trust.evmcontract.core.Rep
         throw new RuntimeException("Not supported");
     }
 
+    /**
+     * The type Contract details.
+     */
     class ContractDetailsImpl implements ContractDetails {
         private byte[] address;
 
+        /**
+         * Instantiates a new Contract details.
+         *
+         * @param address the address
+         */
         public ContractDetailsImpl(byte[] address) {
             this.address = address;
         }

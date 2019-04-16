@@ -28,8 +28,10 @@ import java.util.Date;
 import java.util.Map;
 
 /**
+ * The type Contract invoke handler interface test.
+ *
  * @author duhongming
- * @date 2018/5/7
+ * @date 2018 /5/7
  */
 public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
 
@@ -40,6 +42,9 @@ public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
     @Autowired private ContractStateSnapshotAgent stateSnapshotAgent;
     @Autowired private ContractSnapshotAgent contractSnapshotAgent;
 
+    /**
+     * Clear db.
+     */
     @AfterClass
     public void clearDb() {
         executeDelete("TRUNCATE TABLE contract;TRUNCATE TABLE contract_state");
@@ -113,6 +118,11 @@ public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
         return "java/com/higgs/trust/slave/core/service/contract/invoke/";
     }
 
+    /**
+     * Test validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider",priority = 0)
     public void testValidate(Map<?, ?> param) {
         snapshot.startTransaction();
@@ -121,12 +131,20 @@ public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
         snapshot.commit();
     }
 
+    /**
+     * Test persist.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider",priority = 1)
     public void testPersist(Map<?, ?> param) {
         PackContext packContext = createPackContext(param);
         doTestPersist(param, packContext, invokeHandler);
     }
 
+    /**
+     * Test validate repeat execution.
+     */
     @Test
     public void testValidate_Repeat_Execution() {
         snapshot.startTransaction();
@@ -145,6 +163,9 @@ public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
         snapshot.commit();
     }
 
+    /**
+     * Test persist repeat execution.
+     */
     @Test
     public void testPersist_Repeat_Execution() {
         String address = createContract("../code/putState.js");
@@ -164,6 +185,9 @@ public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
 //        Assert.assertEquals(actualRunCount, expectRunCount);
     }
 
+    /**
+     * Test validate action type not expect.
+     */
     @Test
     public void testValidate_ActionType_Not_Expect() {
         try {
@@ -179,6 +203,9 @@ public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
         }
     }
 
+    /**
+     * Test persist action type not expect.
+     */
     @Test
     public void testPersist_ActionType_Not_Expect() {
         try {
@@ -194,6 +221,9 @@ public class ContractInvokeHandlerInterfaceTest extends ContractBaseTest {
         }
     }
 
+    /**
+     * Test invoke.
+     */
     @Test
     public void testInvoke() {
         String address = createContract("../code/hello_contract.js");

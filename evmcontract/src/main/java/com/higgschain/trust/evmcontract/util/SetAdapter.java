@@ -24,11 +24,21 @@ import java.util.Set;
 
 /**
  * Created by Anton Nashatyrev on 06.10.2016.
+ *
+ * @param <E> the type parameter
  */
 public class SetAdapter<E> implements Set<E> {
     private static final Object DUMMY_VALUE = new Object();
+    /**
+     * The Delegate.
+     */
     Map<E, Object> delegate;
 
+    /**
+     * Instantiates a new Set adapter.
+     *
+     * @param delegate the delegate
+     */
     public SetAdapter(Map<E, ?> delegate) {
         this.delegate = (Map<E, Object>) delegate;
     }

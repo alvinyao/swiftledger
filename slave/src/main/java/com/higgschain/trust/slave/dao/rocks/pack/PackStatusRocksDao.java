@@ -15,8 +15,10 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 /**
+ * The type Pack status rocks dao.
+ *
  * @author tangfashuang
- * @desc key: status_height, value: height
+ * @desc key : status_height, value: height
  */
 @Service
 @Slf4j
@@ -27,6 +29,12 @@ public class PackStatusRocksDao extends RocksBaseDao<Long> {
         return "packageStatus";
     }
 
+    /**
+     * Gets max height by status.
+     *
+     * @param status the status
+     * @return the max height by status
+     */
     public Long getMaxHeightByStatus(String status) {
 
         List<String> indexList = PackageStatusEnum.getIndexs(status);
@@ -38,10 +46,22 @@ public class PackStatusRocksDao extends RocksBaseDao<Long> {
         return queryLastValueWithPrefix(status);
     }
 
+    /**
+     * Gets min height by status.
+     *
+     * @param status the status
+     * @return the min height by status
+     */
     public Long getMinHeightByStatus(String status) {
         return queryFirstValueByPrefix(status);
     }
 
+    /**
+     * Save.
+     *
+     * @param height the height
+     * @param status the status
+     */
     public void save(Long height, String status) {
 
         DecimalFormat df = new DecimalFormat(Constant.PACK_STATUS_HEIGHT_FORMAT);
@@ -60,6 +80,12 @@ public class PackStatusRocksDao extends RocksBaseDao<Long> {
         txPut(tx, key, height);
     }
 
+    /**
+     * Batch delete.
+     *
+     * @param height the height
+     * @param status the status
+     */
     public void batchDelete(Long height, String status) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -73,6 +99,13 @@ public class PackStatusRocksDao extends RocksBaseDao<Long> {
         txDelete(tx, key);
     }
 
+    /**
+     * Update.
+     *
+     * @param height the height
+     * @param from   the from
+     * @param to     the to
+     */
     public void update(Long height, String from , String to) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -95,6 +128,12 @@ public class PackStatusRocksDao extends RocksBaseDao<Long> {
         txPut(tx, newKey, height);
     }
 
+    /**
+     * Gets status by height.
+     *
+     * @param height the height
+     * @return the status by height
+     */
     public String getStatusByHeight(Long height) {
         List<String> indexList = PackageStatusEnum.getIndexs(null);
         DecimalFormat df = new DecimalFormat(Constant.PACK_STATUS_HEIGHT_FORMAT);
@@ -108,18 +147,37 @@ public class PackStatusRocksDao extends RocksBaseDao<Long> {
         return null;
     }
 
+    /**
+     * Query height list by height list.
+     *
+     * @param height the height
+     * @return the list
+     */
     public List<Long> queryHeightListByHeight(Long height) {
         DecimalFormat df = new DecimalFormat(Constant.PACK_STATUS_HEIGHT_FORMAT);
         String position = PackageStatusEnum.RECEIVED.getIndex() + Constant.SPLIT_SLASH + df.format(height);
         return queryByPrefix(PackageStatusEnum.RECEIVED.getIndex(), LOAD_LIMIT, position);
     }
 
+    /**
+     * Query by status and less than height list.
+     *
+     * @param index  the index
+     * @param height the height
+     * @return the list
+     */
     public List<Long> queryByStatusAndLessThanHeight(String index, Long height) {
         DecimalFormat df = new DecimalFormat(Constant.PACK_STATUS_HEIGHT_FORMAT);
         String position = index + Constant.SPLIT_SLASH + df.format(height);
         return queryLessThanByPrefixAndPosition(index, position);
     }
 
+    /**
+     * Get block heights by status list.
+     *
+     * @param status the status
+     * @return the list
+     */
     public List<Long> getBlockHeightsByStatus(String status){
         return queryByPrefix(status);
     }

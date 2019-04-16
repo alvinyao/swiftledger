@@ -26,7 +26,7 @@ import java.util.Objects;
  * Base executor encapsulating common operations or data for contract execution.
  *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 @Slf4j
 public abstract class BaseContractExecutor implements Executor<ContractExecutionResult> {
@@ -55,25 +55,53 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
      */
     protected final Repository contractRepository;
 
-
-    /*** bellow fields come from context ***/
+    /*** bellow fields come from context */
     protected final byte[] transactionHash;
+    /**
+     * The Data.
+     */
     protected final byte[] data;
+    /**
+     * The Gas limit.
+     */
     protected final byte[] gasLimit;
+    /**
+     * The Sender address.
+     */
     protected final byte[] senderAddress;
+    /**
+     * The Nonce.
+     */
     protected final byte[] nonce;
+    /**
+     * The Value.
+     */
     protected final byte[] value;
+    /**
+     * The Receiver address.
+     */
     protected byte[] receiverAddress;
+    /**
+     * The Gas price.
+     */
     protected final byte[] gasPrice;
     private final byte[] parentHash;
     private final byte[] minerAddress;
+    /**
+     * The Timestamp.
+     */
     protected final long timestamp;
+    /**
+     * The Number.
+     */
     protected final long number;
     private final byte[] difficulty;
     private final byte[] gasLimitBlock;
     private final BlockStore blockStore;
+    /**
+     * The System properties.
+     */
     protected final SystemProperties systemProperties;
-
 
     /**
      * Creates an executor according to the specified context.
@@ -149,11 +177,19 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
+    /**
+     * Calculate nonce byte [ ].
+     *
+     * @return the byte [ ]
+     */
     protected byte[] calculateNonce() {
         checkSenderAddress();
         return transactionRepository.getNonce(senderAddress).toByteArray();
     }
 
+    /**
+     * Check sender address.
+     */
     protected void checkSenderAddress() {
         if (ArrayUtils.isEmpty(senderAddress)) {
             throw new ContractContextException("Sender address cannot be empty");
@@ -213,6 +249,9 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         checkParentHash();
     }
 
+    /**
+     * Check data.
+     */
     protected void checkData() {
         if (ArrayUtils.isEmpty(data)) {
             throw new ContractContextException("Payload for contract cannot be empty");
@@ -237,6 +276,9 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
+    /**
+     * Check nonce.
+     */
     protected void checkNonce() {
         if (ArrayUtils.isEmpty(nonce)) {
             throw new ContractContextException("Nonce cannot be empty");
@@ -251,12 +293,18 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
+    /**
+     * Check value.
+     */
     protected void checkValue() {
         if (Objects.isNull(value)) {
             throw new ContractContextException("Value cannot be null");
         }
     }
 
+    /**
+     * Check balance.
+     */
     protected void checkBalance() {
         checkValue();
         BigInteger currentValue = ContractUtil.toBigInteger(value);
@@ -269,6 +317,9 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
+    /**
+     * Check receiver address.
+     */
     protected void checkReceiverAddress() {
         if (ArrayUtils.isEmpty(receiverAddress)) {
             throw new ContractContextException("Receiver address cannot be empty");
@@ -281,6 +332,9 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
+    /**
+     * Check receiver account.
+     */
     protected void checkReceiverAccount() {
         checkReceiverAddress();
 
@@ -290,6 +344,9 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
+    /**
+     * Check code.
+     */
     protected void checkCode() {
         checkReceiverAddress();
 
@@ -315,7 +372,6 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
-
     /**
      * Starts to execute contract.
      *
@@ -323,12 +379,20 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
      */
     protected abstract ContractExecutionResult executeContract();
 
+    /**
+     * Transfer value.
+     */
     protected void transferValue() {
         BigInteger transferValue = ContractUtil.toBigInteger(value);
         contractRepository.addBalance(senderAddress, transferValue.negate());
         contractRepository.addBalance(receiverAddress, transferValue);
     }
 
+    /**
+     * Build program invoke program invoke.
+     *
+     * @return the program invoke
+     */
     protected ProgramInvoke buildProgramInvoke() {
         // This is the sender of original transaction, never a contract.
         byte[] initialCaller = senderAddress;
@@ -342,10 +406,21 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
                 contractRepository, blockStore);
     }
 
+    /**
+     * Format message data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     protected byte[] formatMessageData() {
         return new byte[0];
     }
 
+    /**
+     * Process program result.
+     *
+     * @param programResult           the program result
+     * @param touchedAccountAddresses the touched account addresses
+     */
     protected void processProgramResult(final ProgramResult programResult,
                                         final ByteArraySet touchedAccountAddresses) {
         if (programResult.getException() != null || programResult.isRevert()) {
@@ -359,6 +434,13 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         }
     }
 
+    /**
+     * Build contract execution result contract execution result.
+     *
+     * @param programResult           the program result
+     * @param touchedAccountAddresses the touched account addresses
+     * @return the contract execution result
+     */
     protected ContractExecutionResult buildContractExecutionResult(final ProgramResult programResult,
                                                                    final ByteArraySet touchedAccountAddresses) {
         ContractExecutionResult contractExecutionResult = new ContractExecutionResult();

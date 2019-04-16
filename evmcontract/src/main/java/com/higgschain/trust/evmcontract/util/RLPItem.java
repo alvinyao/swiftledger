@@ -18,6 +18,8 @@
 package com.higgschain.trust.evmcontract.util;
 
 /**
+ * The type Rlp item.
+ *
  * @author Roman Mandeleil
  * @since 21.04.14
  */
@@ -25,6 +27,11 @@ public class RLPItem implements RLPElement {
 
     private final byte[] rlpData;
 
+    /**
+     * Instantiates a new Rlp item.
+     *
+     * @param rlpData the rlp data
+     */
     public RLPItem(byte[] rlpData) {
         this.rlpData = rlpData;
     }

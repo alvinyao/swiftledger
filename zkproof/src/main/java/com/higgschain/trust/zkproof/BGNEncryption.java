@@ -7,24 +7,47 @@ import it.unisa.dia.gas.plaf.jpbc.util.math.BigIntegerUtils;
 
 import java.math.BigInteger;
 
-
+/**
+ * The type Bgn encryption.
+ */
 public class BGNEncryption implements HomomorphicEncryption {
 
-	public static final String start = "start";
-	public static final String end = "end";
+    /**
+     * The constant start.
+     */
+    public static final String start = "start";
+    /**
+     * The constant end.
+     */
+    public static final String end = "end";
 	private BGNKey pk;
 
-
-	BGNEncryption(int bits){
+    /**
+     * Instantiates a new Bgn encryption.
+     *
+     * @param bits the bits
+     */
+    BGNEncryption(int bits){
 		pk = new BGNKey(bits);
 	}
 
-	BGNEncryption(String key){
+    /**
+     * Instantiates a new Bgn encryption.
+     *
+     * @param key the key
+     */
+    BGNEncryption(String key){
 		pk = new BGNKey(key);
 	}
 
-
-	public Element encrypt(BigInteger msg, BigInteger r) {
+    /**
+     * Encrypt element.
+     *
+     * @param msg the msg
+     * @param r   the r
+     * @return the element
+     */
+    public Element encrypt(BigInteger msg, BigInteger r) {
 		//BigInteger t = BigIntegerUtils.getRandom(PK.getN());
 		Field f = pk.getField();
 		Element A = f.newElement();
@@ -39,7 +62,14 @@ public class BGNEncryption implements HomomorphicEncryption {
 		return C;
 	}
 
-	public Element add(Element A, Element B) {
+    /**
+     * Add element.
+     *
+     * @param A the a
+     * @param B the b
+     * @return the element
+     */
+    public Element add(Element A, Element B) {
 		//BigInteger t = BigIntegerUtils.getRandom(PK.getN());
 		Field f = pk.getField();
 		Element output = f.newElement();
@@ -52,7 +82,14 @@ public class BGNEncryption implements HomomorphicEncryption {
 		return output;
 	}
 
-	public Element mul(Element C, Element D) {
+    /**
+     * Mul element.
+     *
+     * @param C the c
+     * @param D the d
+     * @return the element
+     */
+    public Element mul(Element C, Element D) {
 		BigInteger t = BigIntegerUtils.getRandom(pk.getN());
 
 		Element T = pk.doPairing(C, D);
@@ -62,7 +99,15 @@ public class BGNEncryption implements HomomorphicEncryption {
 		return T.mul(K);
 	}
 
-	public String decryptMul(BGNKey PK, BigInteger sk, Element C) {
+    /**
+     * Decrypt mul string.
+     *
+     * @param PK the pk
+     * @param sk the sk
+     * @param C  the c
+     * @return the string
+     */
+    public String decryptMul(BGNKey PK, BigInteger sk, Element C) {
 		Element PSK = PK.doPairing(PK.getP(), PK.getP());
 		PSK.pow(sk);
 
@@ -78,7 +123,14 @@ public class BGNEncryption implements HomomorphicEncryption {
 		return m.toString();
 	}
 
-	public String decrypt(BigInteger sk, Element C) {
+    /**
+     * Decrypt string.
+     *
+     * @param sk the sk
+     * @param C  the c
+     * @return the string
+     */
+    public String decrypt(BigInteger sk, Element C) {
 		Field f = pk.getField();
 		Element T = f.newElement();
 		Element K = f.newElement();

@@ -5,8 +5,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.PriorityOrdered;
 
 /**
+ * The type Spring context initializer.
+ *
  * @author duhongming
- * @date 2018/9/11
+ * @date 2018 /9/11
  */
 public class SpringContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext>,PriorityOrdered {
     @Override

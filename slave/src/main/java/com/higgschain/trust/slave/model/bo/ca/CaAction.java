@@ -7,9 +7,12 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * @desc TODO  
+ * The type Ca action.
+ *
+ * @param <T> the type parameter
  * @author WangQuanzhou
- * @date 2018/6/5 16:15    
+ * @desc TODO
+ * @date 2018 /6/5 16:15
  */
 @Getter @Setter public class CaAction<T> extends Action {
     private String version;

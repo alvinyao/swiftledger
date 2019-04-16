@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * The type Account controller.
+ *
  * @author suimi
- * @date 2018/4/24
+ * @date 2018 /4/24
  */
-
 @RestController @Slf4j @RequestMapping("/account") public class AccountController {
 
     @Autowired private AccountInfoService accountInfoService;
@@ -25,8 +26,8 @@ import java.util.List;
     /**
      * batch query the account info
      *
-     * @param accountNos
-     * @return
+     * @param accountNos the account nos
+     * @return list
      */
     @RequestMapping(value = "/batchQuery") List<AccountInfoVO> queryByAccountNos(
         @RequestBody List<String> accountNos) {

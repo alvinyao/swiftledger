@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type View.
+ *
  * @author eduardo
  */
 public class View implements Serializable {
@@ -33,6 +35,14 @@ public class View implements Serializable {
     private int[] processes;
     private Map<Integer, InetSocketAddress> addresses;
 
+    /**
+     * Instantiates a new View.
+     *
+     * @param id        the id
+     * @param processes the processes
+     * @param f         the f
+     * @param addresses the addresses
+     */
     public View(int id, int[] processes, int f, InetSocketAddress[] addresses) {
         this.id = id;
         this.processes = processes;
@@ -44,6 +54,12 @@ public class View implements Serializable {
         this.f = f;
     }
 
+    /**
+     * Is member boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     public boolean isMember(int id) {
         for (int i = 0; i < this.processes.length; i++) {
             if (this.processes[i] == id) {
@@ -53,6 +69,12 @@ public class View implements Serializable {
         return false;
     }
 
+    /**
+     * Gets pos.
+     *
+     * @param id the id
+     * @return the pos
+     */
     public int getPos(int id) {
         for (int i = 0; i < this.processes.length; i++) {
             if (this.processes[i] == id) {
@@ -62,18 +84,38 @@ public class View implements Serializable {
         return -1;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Gets f.
+     *
+     * @return the f
+     */
     public int getF() {
         return f;
     }
 
+    /**
+     * Gets n.
+     *
+     * @return the n
+     */
     public int getN() {
         return this.processes.length;
     }
 
+    /**
+     * Get processes int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getProcesses() {
         return processes;
     }
@@ -87,6 +129,12 @@ public class View implements Serializable {
         return ret;
     }
 
+    /**
+     * Gets address.
+     *
+     * @param id the id
+     * @return the address
+     */
     public InetSocketAddress getAddress(int id) {
         return addresses.get(id);
     }

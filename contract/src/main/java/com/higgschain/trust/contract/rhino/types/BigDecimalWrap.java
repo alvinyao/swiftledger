@@ -9,29 +9,57 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
+ * The type Big decimal wrap.
+ *
  * @author duhongming
- * @date 2018/7/17
+ * @date 2018 /7/17
  */
 public class BigDecimalWrap extends Number implements Scriptable {
 
     private BigDecimal rawBigDecimal;
 
+    /**
+     * Instantiates a new Big decimal wrap.
+     *
+     * @param bigDecimal the big decimal
+     */
     public BigDecimalWrap(BigDecimal bigDecimal) {
         this.rawBigDecimal = bigDecimal;
     }
 
+    /**
+     * Instantiates a new Big decimal wrap.
+     *
+     * @param bigInteger the big integer
+     */
     public BigDecimalWrap(BigInteger bigInteger) {
         this.rawBigDecimal = new BigDecimal(bigInteger);
     }
 
+    /**
+     * Instantiates a new Big decimal wrap.
+     *
+     * @param integer the integer
+     */
     public BigDecimalWrap(Integer integer) {
         this.rawBigDecimal = new BigDecimal(integer);
     }
 
+    /**
+     * Instantiates a new Big decimal wrap.
+     *
+     * @param d the d
+     */
     public BigDecimalWrap(Double d) {
         this.rawBigDecimal = new BigDecimal(d);
     }
 
+    /**
+     * Add big decimal.
+     *
+     * @param x the x
+     * @return the big decimal
+     */
     public BigDecimal add(Object x) {
         if (x instanceof BigDecimal) {
             return rawBigDecimal.add((BigDecimal) x);
@@ -39,6 +67,12 @@ public class BigDecimalWrap extends Number implements Scriptable {
         return rawBigDecimal.add(new BigDecimal(x.toString()));
     }
 
+    /**
+     * Subtract big decimal.
+     *
+     * @param x the x
+     * @return the big decimal
+     */
     public BigDecimal subtract(Object x) {
         if (x instanceof BigDecimal) {
             return rawBigDecimal.subtract((BigDecimal) x);
@@ -46,6 +80,12 @@ public class BigDecimalWrap extends Number implements Scriptable {
         return rawBigDecimal.subtract(new BigDecimal(x.toString()));
     }
 
+    /**
+     * Multiply big decimal.
+     *
+     * @param x the x
+     * @return the big decimal
+     */
     public BigDecimal multiply(Object x) {
         if (x instanceof BigDecimal) {
             return rawBigDecimal.multiply((BigDecimal) x);
@@ -53,6 +93,12 @@ public class BigDecimalWrap extends Number implements Scriptable {
         return rawBigDecimal.multiply(new BigDecimal(x.toString()));
     }
 
+    /**
+     * Divide big decimal.
+     *
+     * @param x the x
+     * @return the big decimal
+     */
     public BigDecimal divide(Object x) {
         if (x instanceof BigDecimal) {
             return rawBigDecimal.divide((BigDecimal) x);
@@ -62,8 +108,9 @@ public class BigDecimalWrap extends Number implements Scriptable {
 
     /**
      * equal
-     * @param x
-     * @return
+     *
+     * @param x the x
+     * @return boolean
      */
     public boolean eq(Object x) {
         BigDecimal bigDecimal = MathNativeFunction.toBigDecimal(x);
@@ -72,8 +119,9 @@ public class BigDecimalWrap extends Number implements Scriptable {
 
     /**
      * greater than
-     * @param x
-     * @return
+     *
+     * @param x the x
+     * @return boolean
      */
     public boolean gt(Object x) {
         BigDecimal bigDecimal = MathNativeFunction.toBigDecimal(x);
@@ -82,8 +130,9 @@ public class BigDecimalWrap extends Number implements Scriptable {
 
     /**
      * equal or greater than
-     * @param x
-     * @return
+     *
+     * @param x the x
+     * @return boolean
      */
     public boolean gte(Object x) {
         BigDecimal bigDecimal = MathNativeFunction.toBigDecimal(x);
@@ -92,8 +141,9 @@ public class BigDecimalWrap extends Number implements Scriptable {
 
     /**
      * less than
-     * @param x
-     * @return
+     *
+     * @param x the x
+     * @return boolean
      */
     public boolean lt(Object x) {
         BigDecimal bigDecimal = MathNativeFunction.toBigDecimal(x);
@@ -102,14 +152,20 @@ public class BigDecimalWrap extends Number implements Scriptable {
 
     /**
      * equal or less than
-     * @param x
-     * @return
+     *
+     * @param x the x
+     * @return boolean
      */
     public boolean lte(Object x) {
         BigDecimal bigDecimal = MathNativeFunction.toBigDecimal(x);
         return rawBigDecimal.compareTo(bigDecimal) <= 0;
     }
 
+    /**
+     * Gets raw big decimal.
+     *
+     * @return the raw big decimal
+     */
     public BigDecimal getRawBigDecimal() {
         return rawBigDecimal;
     }

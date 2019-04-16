@@ -5,6 +5,9 @@ import com.higgschain.trust.slave.dao.rocks.transaction.TransactionRocksDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
+/**
+ * The type Transaction repository test.
+ */
 public class TransactionRepositoryTest extends BaseTest {
     @Autowired
     private TransactionRocksDao transactionRocksDao;
@@ -12,6 +15,11 @@ public class TransactionRepositoryTest extends BaseTest {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    /**
+     * Test query tx ids.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryTxIds() throws Exception {
         for (int i = 0; i < 1000; i++) {
 //            List<String> txIds = transactionRocksDao.queryKeysByPrefix("tfs", 100);
@@ -34,6 +42,11 @@ public class TransactionRepositoryTest extends BaseTest {
         }
     }
 
+    /**
+     * Test query tx ids by ids.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryTxIdsByIds() throws Exception {
     }
 }

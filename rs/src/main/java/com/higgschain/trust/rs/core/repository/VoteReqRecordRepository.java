@@ -21,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Vote req record repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-06
+ * @date 2018 -06-06
  */
 @Slf4j @Repository public class VoteReqRecordRepository {
     @Autowired private RsConfig rsConfig;
@@ -33,7 +35,7 @@ import java.util.List;
     /**
      * create new vote-request-record
      *
-     * @param voteRequestRecord
+     * @param voteRequestRecord the vote request record
      */
     public void add(VoteRequestRecord voteRequestRecord) {
         VoteRequestRecordPO voteRequestRecordPO =
@@ -55,8 +57,8 @@ import java.util.List;
     /**
      * query vote-request-record by transaction id
      *
-     * @param txId
-     * @return
+     * @param txId the tx id
+     * @return vote request record
      */
     public VoteRequestRecord queryByTxId(String txId) {
         VoteRequestRecordPO voteRequestRecordPO;
@@ -76,9 +78,9 @@ import java.util.List;
     /**
      * query vote-request-record by transaction id
      *
-     * @param txId
-     * @param sign
-     * @param voteResult
+     * @param txId       the tx id
+     * @param sign       the sign
+     * @param voteResult the vote result
      * @return
      */
     public void setVoteResult(String txId, String sign,VoteResultEnum voteResult) {
@@ -96,9 +98,9 @@ import java.util.List;
     /**
      * query all request for init result
      *
-     * @param row
-     * @param count
-     * @return
+     * @param row   the row
+     * @param count the count
+     * @return list
      */
     public List<VoteRequestRecord> queryAllInitRequest(int row,int count){
         List<VoteRequestRecordPO> poList = voteRequestRecordDao.queryAllInitRequest(row,count);

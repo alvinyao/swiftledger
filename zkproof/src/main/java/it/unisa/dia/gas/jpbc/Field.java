@@ -5,6 +5,7 @@ import java.math.BigInteger;
 /**
  * Represents an algebraic structure.
  *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 1.0.0
  */
@@ -23,17 +24,17 @@ public interface Field<E extends Element> {
      *
      * @param value the value of the new element.
      * @return a new element whose value is passed as parameter.
-     * @see Element#set(int)
+     * @see Element#set(int) Element#set(int)
      * @since 1.0.0
      */
     E newElement(int value);
 
     /**
      * Returns a new element whose value is passed as parameter.
-     * 
+     *
      * @param value the value of the new element.
      * @return a new element whose value is passed as parameter.
-     * @see Element#set(BigInteger)
+     * @see Element#set(BigInteger) Element#set(BigInteger)
      * @since 1.0.0
      */
     E newElement(BigInteger value);
@@ -114,8 +115,7 @@ public interface Field<E extends Element> {
      * Returns <tt>true></tt> if the order is odd,
      * false otherwise.
      *
-     * @return <tt>true></tt> if the order is odd,
-     * false otherwise.
+     * @return <tt>true></tt> if the order is odd, false otherwise.
      * @since 1.2.0
      */
     boolean isOrderOdd();
@@ -139,6 +139,7 @@ public interface Field<E extends Element> {
     /**
      * Returns the length in bytes needed to represent an element of this Field.
      *
+     * @param e the e
      * @return the length in bytes needed to represent an element of this Field.
      * @since 1.0.0
      */
@@ -190,5 +191,10 @@ public interface Field<E extends Element> {
      */
     ElementPowPreProcessing getElementPowPreProcessingFromBytes(byte[] source, int offset);
 
+    /**
+     * Sets from string.
+     *
+     * @param str the str
+     */
     void setFromString(String str);
 }

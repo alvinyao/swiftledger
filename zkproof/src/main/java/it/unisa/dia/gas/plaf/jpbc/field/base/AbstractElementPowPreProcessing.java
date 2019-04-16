@@ -10,19 +10,44 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 /**
+ * The type Abstract element pow pre processing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class AbstractElementPowPreProcessing implements ElementPowPreProcessing {
+    /**
+     * The constant DEFAULT_K.
+     */
     public static final int DEFAULT_K = 5;
 
+    /**
+     * The Field.
+     */
     protected Field field;
 
+    /**
+     * The K.
+     */
     protected int k;
+    /**
+     * The Bits.
+     */
     protected int bits;
+    /**
+     * The Num lookups.
+     */
     protected int numLookups;
+    /**
+     * The Table.
+     */
     protected Element table[][];
 
-
+    /**
+     * Instantiates a new Abstract element pow pre processing.
+     *
+     * @param g the g
+     * @param k the k
+     */
     public AbstractElementPowPreProcessing(Element g, int k) {
         this.field = g.getField();
         this.bits = field.getOrder().bitLength();
@@ -31,6 +56,14 @@ public class AbstractElementPowPreProcessing implements ElementPowPreProcessing 
         initTable(g);
     }
 
+    /**
+     * Instantiates a new Abstract element pow pre processing.
+     *
+     * @param field  the field
+     * @param k      the k
+     * @param source the source
+     * @param offset the offset
+     */
     public AbstractElementPowPreProcessing(Field field, int k, byte[] source, int offset) {
         this.field = field;
         this.bits = field.getOrder().bitLength();
@@ -63,7 +96,12 @@ public class AbstractElementPowPreProcessing implements ElementPowPreProcessing 
         }
     }
 
-
+    /**
+     * Init table from bytes.
+     *
+     * @param source the source
+     * @param offset the offset
+     */
     protected void initTableFromBytes(byte[] source, int offset) {
         int lookupSize = 1 << k;
         numLookups = bits / k + 1;
@@ -99,6 +137,12 @@ public class AbstractElementPowPreProcessing implements ElementPowPreProcessing 
         }
     }
 
+    /**
+     * Pow base table element.
+     *
+     * @param n the n
+     * @return the element
+     */
     protected Element powBaseTable(BigInteger n) {
         /* early abort if raising to power 0 */
         if (n.signum() == 0) {

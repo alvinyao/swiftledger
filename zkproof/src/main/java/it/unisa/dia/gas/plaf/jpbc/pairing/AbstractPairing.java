@@ -6,20 +6,47 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.PairingMap;
 import java.security.SecureRandom;
 
 /**
+ * The type Abstract pairing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractPairing implements Pairing {
 
+    /**
+     * The Random.
+     */
     protected SecureRandom random;
 
-    protected Field G1, G2, GT, Zr;
+    /**
+     * The G 1.
+     */
+    protected Field G1, /**
+     * The G 2.
+     */
+    G2, /**
+     * The Gt.
+     */
+    GT, /**
+     * The Zr.
+     */
+    Zr;
+    /**
+     * The Pairing map.
+     */
     protected PairingMap pairingMap;
 
-
+    /**
+     * Instantiates a new Abstract pairing.
+     *
+     * @param random the random
+     */
     protected AbstractPairing(SecureRandom random) {
         this.random = (random == null) ? new SecureRandom() : random;
     }
 
+    /**
+     * Instantiates a new Abstract pairing.
+     */
     protected AbstractPairing() {
         this(new SecureRandom());
     }
@@ -91,6 +118,15 @@ public abstract class AbstractPairing implements Pairing {
         return pairingMap.pairing(source, offset);
     }
 
+    /**
+     * Is almost coddh boolean.
+     *
+     * @param a the a
+     * @param b the b
+     * @param c the c
+     * @param d the d
+     * @return the boolean
+     */
     public boolean isAlmostCoddh(Element a, Element b, Element c, Element d) {
         return pairingMap.isAlmostCoddh(a, b, c, d);
     }
@@ -133,11 +169,20 @@ public abstract class AbstractPairing implements Pairing {
         return pairingMap.getPairingPreProcessingLengthInBytes();
     }
 
-
+    /**
+     * Gets pairing map.
+     *
+     * @return the pairing map
+     */
     public PairingMap getPairingMap() {
         return pairingMap;
     }
 
+    /**
+     * Sets pairing map.
+     *
+     * @param pairingMap the pairing map
+     */
     public void setPairingMap(PairingMap pairingMap) {
         this.pairingMap = pairingMap;
     }

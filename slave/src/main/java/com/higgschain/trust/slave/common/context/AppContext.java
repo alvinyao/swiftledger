@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+/**
+ * The type App context.
+ */
 @Service
 public class AppContext implements ApplicationContextAware {
     /**
@@ -18,8 +21,14 @@ public class AppContext implements ApplicationContextAware {
      */
     public static ApplicationContext springContext;
 
+    /**
+     * The constant TX_HANDLE_RESULT_MAP.
+     */
     public static HashBlockingMap<RespData> TX_HANDLE_RESULT_MAP = new HashBlockingMap<>(Constant.MAX_BLOCKING_QUEUE_SIZE);
 
+    /**
+     * The constant PENDING_TO_SUBMIT_QUEUE.
+     */
     public static ConcurrentLinkedQueue<SignedTransaction> PENDING_TO_SUBMIT_QUEUE = new ConcurrentLinkedQueue<>();
 
     @Override public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

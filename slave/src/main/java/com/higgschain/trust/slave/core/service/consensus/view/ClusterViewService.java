@@ -31,8 +31,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Cluster view service.
+ *
  * @author suimi
- * @date 2018/6/19
+ * @date 2018 /6/19
  */
 @Slf4j @Service public class ClusterViewService {
 
@@ -54,6 +56,11 @@ import java.util.Map;
 
     @Autowired private PackageRepository packageRepository;
 
+    /**
+     * Init cluster view from db.
+     *
+     * @param useCurrentHeight the use current height
+     */
     public void initClusterViewFromDB(boolean useCurrentHeight) {
         //RS node do not to initClusterView
         if (!nodeProperties.isSlave()) {

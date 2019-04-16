@@ -47,6 +47,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
 /**
+ * The type Netty client server communication system server side.
+ *
  * @author Paulo
  */
 @Sharable public class NettyClientServerCommunicationSystemServerSide extends SimpleChannelInboundHandler<TOMMessage>
@@ -67,6 +69,11 @@ import java.util.logging.Level;
     private NettyServerPipelineFactory serverPipelineFactory;
     private org.slf4j.Logger logger = LoggerFactory.getLogger(NettyClientServerCommunicationSystemServerSide.class);
 
+    /**
+     * Instantiates a new Netty client server communication system server side.
+     *
+     * @param controller the controller
+     */
     public NettyClientServerCommunicationSystemServerSide(ServerViewController controller) {
         try {
 

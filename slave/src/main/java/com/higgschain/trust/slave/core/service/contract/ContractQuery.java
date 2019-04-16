@@ -17,19 +17,36 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * The type Contract query.
+ *
  * @author Chen Jiawei
- * @date 2018-11-29
+ * @date 2018 -11-29
  */
 @Service
 public class ContractQuery {
     private static final Pattern BLOCK_HASH_PATTERN = Pattern.compile("^[0-9a-fA-F]{64}$");
+    /**
+     * The Blockchain.
+     */
     @Autowired
     Blockchain blockchain;
+    /**
+     * The Node state.
+     */
     @Autowired
     NodeState nodeState;
     @Autowired
     private BlockRepository blockRepository;
 
+    /**
+     * Execute query list.
+     *
+     * @param blockHeight     the block height
+     * @param contractAddress the contract address
+     * @param methodSignature the method signature
+     * @param args            the args
+     * @return the list
+     */
     public List<?> executeQuery(long blockHeight, byte[] contractAddress, String methodSignature, Object... args) {
         ContractInvocation contractInvocation = new ContractInvocation();
         byte[] data = contractInvocation.getBytecodeForInvokeContract(methodSignature, args);

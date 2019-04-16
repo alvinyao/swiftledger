@@ -16,6 +16,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Node leave handler.
+ */
 @Slf4j @Component public class NodeLeaveHandler implements ActionHandler {
 
     @Autowired private NodeSnapshotHandler nodeSnapshotHandler;

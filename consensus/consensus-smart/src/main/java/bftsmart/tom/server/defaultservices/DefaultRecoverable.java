@@ -53,6 +53,9 @@ public abstract class DefaultRecoverable implements Recoverable, BatchExecutable
     private StateLog log;
     private StateManager stateManager;
 
+    /**
+     * Instantiates a new Default recoverable.
+     */
     public DefaultRecoverable() {
 
         try {
@@ -158,6 +161,12 @@ public abstract class DefaultRecoverable implements Recoverable, BatchExecutable
         return replies;
     }
 
+    /**
+     * Compute hash byte [ ].
+     *
+     * @param data the data
+     * @return the byte [ ]
+     */
     public final byte[] computeHash(byte[] data) {
         byte[] ret = null;
         hashLock.lock();
@@ -485,12 +494,37 @@ public abstract class DefaultRecoverable implements Recoverable, BatchExecutable
 
     }
 
+    /**
+     * Install snapshot.
+     *
+     * @param state the state
+     */
     public abstract void installSnapshot(byte[] state);
 
+    /**
+     * Get snapshot byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public abstract byte[] getSnapshot();
 
+    /**
+     * App execute batch byte [ ] [ ].
+     *
+     * @param commands      the commands
+     * @param msgCtxs       the msg ctxs
+     * @param fromConsensus the from consensus
+     * @return the byte [ ] [ ]
+     */
     public abstract byte[][] appExecuteBatch(byte[][] commands, MessageContext[] msgCtxs, boolean fromConsensus);
 
+    /**
+     * App execute unordered byte [ ].
+     *
+     * @param command the command
+     * @param msgCtx  the msg ctx
+     * @return the byte [ ]
+     */
     public abstract byte[] appExecuteUnordered(byte[] command, MessageContext msgCtx);
 
 }

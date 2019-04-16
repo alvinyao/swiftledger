@@ -17,7 +17,7 @@ public class HashUtil {
      * 利用java原生的摘要实现SHA256加密
      *
      * @param str 加密后的报文
-     * @return
+     * @return sha 256 s
      */
     public static String getSHA256S(String str) {
         MessageDigest messageDigest;
@@ -37,8 +37,8 @@ public class HashUtil {
     /**
      * 将byte转为16进制
      *
-     * @param bytes
-     * @return
+     * @param bytes the bytes
+     * @return string
      */
     public static String byte2Hex(byte[] bytes) {
         StringBuffer stringBuffer = new StringBuffer();
@@ -57,8 +57,8 @@ public class HashUtil {
     /**
      * 读取文件的hash值
      *
-     * @param file
-     * @return
+     * @param file the file
+     * @return hash for file
      */
     public static String getHashForFile(File file) {
         InputStream is = null;
@@ -91,6 +91,11 @@ public class HashUtil {
         return byte2Hex(complete.digest());
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         String s = getSHA256S("abcdef");
         System.out.println(s);

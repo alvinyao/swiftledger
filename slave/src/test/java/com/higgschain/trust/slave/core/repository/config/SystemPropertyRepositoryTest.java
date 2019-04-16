@@ -10,24 +10,47 @@ import org.rocksdb.WriteOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
+/**
+ * The type System property repository test.
+ */
 public class SystemPropertyRepositoryTest extends BaseTest {
     @Autowired
     private SystemPropertyRepository systemPropertyRepository;
 
+    /**
+     * Test query by key.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryByKey() throws Exception {
         SystemProperty bo = systemPropertyRepository.queryByKey(Constant.MAX_BLOCK_HEIGHT);
         System.out.println(bo);
     }
 
+    /**
+     * Test add.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testAdd() throws Exception {
         systemPropertyRepository.add(Constant.MAX_BLOCK_HEIGHT, "1", "max block height");
         SystemProperty bo = systemPropertyRepository.queryByKey(Constant.MAX_BLOCK_HEIGHT);
         System.out.println(bo);
     }
 
+    /**
+     * Test update.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testUpdate() throws Exception {
     }
 
+    /**
+     * Test save with transaction.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testSaveWithTransaction() throws Exception {
         Transaction tx = RocksUtils.beginTransaction(new WriteOptions());
         try {

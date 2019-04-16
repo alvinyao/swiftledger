@@ -24,15 +24,18 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The interface Repository.
+ */
 public interface Repository {
 
     /**
+     * Is exist boolean.
+     *
      * @param addr - account to check
-     * @return - true if account exist,
-     * false otherwise
+     * @return - true if account exist, false otherwise
      */
     boolean isExist(byte[] addr);
-
 
     /**
      * Retrieve balance of an account
@@ -42,7 +45,6 @@ public interface Repository {
      */
     BigInteger getBalance(byte[] addr);
 
-
     /**
      * Get current nonce of a given account
      *
@@ -51,7 +53,6 @@ public interface Repository {
      */
     BigInteger getNonce(byte[] addr);
 
-
     /**
      * Retrieve the code associated with an account
      *
@@ -59,7 +60,6 @@ public interface Repository {
      * @return code in byte-array format
      */
     byte[] getCode(byte[] addr);
-
 
     /**
      * Retrieve storage value from an account for a given key
@@ -90,7 +90,7 @@ public interface Repository {
      * Retrieve storage entries from an account for given keys
      *
      * @param addr of the account
-     * @param keys
+     * @param keys the keys
      * @return storage entries for specified keys, or full storage if keys parameter is <code>null</code>
      */
     Map<DataWord, DataWord> getStorage(byte[] addr, Collection<DataWord> keys);

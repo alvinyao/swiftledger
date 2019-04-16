@@ -9,12 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Vector element pow pre processing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class VectorElementPowPreProcessing implements ElementPowPreProcessing {
+    /**
+     * The Field.
+     */
     protected VectorField field;
+    /**
+     * The Processings.
+     */
     protected ElementPowPreProcessing[] processings;
 
+    /**
+     * Instantiates a new Vector element pow pre processing.
+     *
+     * @param vector the vector
+     */
     public VectorElementPowPreProcessing(VectorElement vector) {
         this.field = vector.getField();
         this.processings = new ElementPowPreProcessing[vector.getSize()];

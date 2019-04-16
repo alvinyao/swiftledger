@@ -8,9 +8,11 @@ import lombok.Setter;
 import java.util.List;
 
 /**
+ * The type Accounting vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-31
+ * @date 2018 -08-31
  */
 @Getter
 @Setter

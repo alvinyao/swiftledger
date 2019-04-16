@@ -39,7 +39,7 @@ public interface AsyncFlushable {
      * <p>
      * This call may block until a previous flush is completed (if still in progress)
      *
-     * @throws InterruptedException
+     * @throws InterruptedException the interrupted exception
      */
     void flipStorage() throws InterruptedException;
 
@@ -48,6 +48,7 @@ public interface AsyncFlushable {
      * This call may still block if the previous flush is not complete yet
      *
      * @return Future when the actual flush is complete
+     * @throws InterruptedException the interrupted exception
      */
     ListenableFuture<Boolean> flushAsync() throws InterruptedException;
 }

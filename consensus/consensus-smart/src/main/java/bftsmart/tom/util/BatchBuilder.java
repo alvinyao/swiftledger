@@ -33,6 +33,11 @@ public final class BatchBuilder {
 
     private Random rnd;
 
+    /**
+     * Instantiates a new Batch builder.
+     *
+     * @param seed the seed
+     */
     public BatchBuilder(long seed) {
         rnd = new Random(seed);
 
@@ -78,6 +83,15 @@ public final class BatchBuilder {
         }
     }
 
+    /**
+     * Make batch byte [ ].
+     *
+     * @param msgs       the msgs
+     * @param numNounces the num nounces
+     * @param timestamp  the timestamp
+     * @param controller the controller
+     * @return the byte [ ]
+     */
     public byte[] makeBatch(List<TOMMessage> msgs, int numNounces, long timestamp, ServerViewController controller) {
 
         int numMsgs = msgs.size();
@@ -107,6 +121,16 @@ public final class BatchBuilder {
 
     }
 
+    /**
+     * Make batch byte [ ].
+     *
+     * @param msgs       the msgs
+     * @param numNounces the num nounces
+     * @param seed       the seed
+     * @param timestamp  the timestamp
+     * @param controller the controller
+     * @return the byte [ ]
+     */
     public byte[] makeBatch(List<TOMMessage> msgs, int numNounces, long seed, long timestamp,
         ServerViewController controller) {
 

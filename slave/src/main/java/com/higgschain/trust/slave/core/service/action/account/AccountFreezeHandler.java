@@ -25,14 +25,25 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
+ * The type Account freeze handler.
+ *
  * @author liuyu
  * @description freeze account balance
- * @date 2018-03-29
+ * @date 2018 -03-29
  */
 @Slf4j @Component public class AccountFreezeHandler implements ActionHandler {
+    /**
+     * The Account snapshot handler.
+     */
     @Autowired
     AccountSnapshotHandler accountSnapshotHandler;
+    /**
+     * The Account contract binding handler.
+     */
     @Autowired AccountContractBindingHandler accountContractBindingHandler;
+    /**
+     * The Contract repository.
+     */
     @Autowired
     ContractRepository contractRepository;
 

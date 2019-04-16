@@ -25,7 +25,7 @@ import com.higgschain.trust.evmcontract.vm.program.listener.ProgramListenerAware
  * store the data of the operation code execution process
  *
  * @author tangkun
- * @date 2018-12-05
+ * @date 2018 -12-05
  */
 public class Stack extends java.util.Stack<DataWord> implements ProgramListenerAware {
 
@@ -52,6 +52,12 @@ public class Stack extends java.util.Stack<DataWord> implements ProgramListenerA
         return super.push(item);
     }
 
+    /**
+     * Swap.
+     *
+     * @param from the from
+     * @param to   the to
+     */
     public void swap(int from, int to) {
         if (isAccessible(from) && isAccessible(to) && (from != to)) {
             if (programListener != null) {

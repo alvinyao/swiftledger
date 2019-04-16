@@ -8,15 +8,24 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
+/**
+ * The type P 2 p base test.
+ */
 @SpringBootTest(classes = P2pTestApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public abstract class p2pBaseTest
         extends AbstractTestNGSpringContextTests {
 
+    /**
+     * Before class.
+     */
     @BeforeSuite
     public void beforeClass() {
         System.setProperty("spring.config.location", "classpath:test-application.json");
     }
 
+    /**
+     * Run before.
+     */
     @BeforeTest
     public void runBefore() {
         //JSON auto detect class type
@@ -34,11 +43,17 @@ public abstract class p2pBaseTest
         return;
     }
 
+    /**
+     * Run after.
+     */
     @BeforeTest
     public void runAfter() {
         runLast();
     }
 
+    /**
+     * Run last.
+     */
     protected void runLast() {
     }
 }

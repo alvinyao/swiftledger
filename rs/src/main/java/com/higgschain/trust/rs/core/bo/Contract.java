@@ -7,8 +7,10 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * The type Contract.
+ *
  * @author duhongming
- * @date 2018/5/15
+ * @date 2018 /5/15
  */
 @Getter @Setter public class Contract extends BaseBO {
     private String address;

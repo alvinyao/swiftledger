@@ -16,7 +16,7 @@ import java.util.List;
  * TxOut  JDBC  Dao
  *
  * @author lingchao
- * @create 2018年06月20日10:35
+ * @create 2018年06月20日10 :35
  */
 @Service
 public class TxOutJDBCDao {
@@ -29,8 +29,8 @@ public class TxOutJDBCDao {
     /**
      * batch insert
      *
-     * @param txOutPOList
-     * @return
+     * @param txOutPOList the tx out po list
+     * @return int
      */
     public int batchInsert(List<TxOutPO> txOutPOList) {
         if (CollectionUtils.isEmpty(txOutPOList)) {
@@ -52,8 +52,8 @@ public class TxOutJDBCDao {
     /**
      * batch update
      *
-     * @param txOutPOList
-     * @return
+     * @param txOutPOList the tx out po list
+     * @return int
      */
     public int batchUpdate(List<TxOutPO> txOutPOList) {
         if (CollectionUtils.isEmpty(txOutPOList)) {

@@ -7,10 +7,17 @@ import com.higgschain.trust.evmcontract.util.ByteArraySet;
 import java.util.Objects;
 
 /**
+ * The type Asset transfer executor.
+ *
  * @author Chen Jiawei
- * @date 2018-11-16
+ * @date 2018 -11-16
  */
 public class AssetTransferExecutor extends BaseContractExecutor {
+    /**
+     * Instantiates a new Asset transfer executor.
+     *
+     * @param contractExecutionContext the contract execution context
+     */
     AssetTransferExecutor(ContractExecutionContext contractExecutionContext) {
         super(contractExecutionContext);
     }

@@ -32,9 +32,11 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * The type Cluster init service.
+ *
  * @author WangQuanzhou
  * @desc cluster init service
- * @date 2018/6/28 19:53
+ * @date 2018 /6/28 19:53
  */
 @StateListener
 @Service @Slf4j public class ClusterInitService {
@@ -58,18 +60,36 @@ import java.util.List;
     @Autowired
     private NetworkManage networkManage;
 
+    /**
+     * The Pub key for biz.
+     */
     @Value("${higgs.trust.keys.bizPublicKey}")
     String pubKeyForBiz;
 
+    /**
+     * The Pri key for biz.
+     */
     @Value("${higgs.trust.keys.bizPrivateKey}")
     String priKeyForBiz;
 
+    /**
+     * The Pub key for consensus.
+     */
     @Value("${higgs.trust.keys.consensusPublicKey}")
     String pubKeyForConsensus;
 
+    /**
+     * The Pri key for consensus.
+     */
     @Value("${higgs.trust.keys.consensusPrivateKey}")
     String priKeyForConsensus;
 
+    /**
+     * Init.
+     *
+     * @throws IOException          the io exception
+     * @throws InterruptedException the interrupted exception
+     */
     @StateChangeListener(value = NodeStateEnum.Initialize, before = true)
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public void init() throws IOException, InterruptedException {

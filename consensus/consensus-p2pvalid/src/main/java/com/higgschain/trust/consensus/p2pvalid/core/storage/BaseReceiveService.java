@@ -8,12 +8,27 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * The type Base receive service.
+ */
 @Slf4j public abstract class BaseReceiveService {
 
+    /**
+     * The Valid consensus.
+     */
     @Autowired protected ValidConsensus validConsensus;
 
+    /**
+     * The View manager.
+     */
     @Autowired protected IClusterViewManager viewManager;
 
+    /**
+     * Receive valid response wrap.
+     *
+     * @param validCommandWrap the valid command wrap
+     * @return the valid response wrap
+     */
     public ValidResponseWrap<? extends ResponseCommand> receive(ValidCommandWrap validCommandWrap) {
         String messageDigest = validCommandWrap.getValidCommand().getMessageDigestHash();
         long viewId = validCommandWrap.getValidCommand().getView();
@@ -42,5 +57,11 @@ import org.springframework.beans.factory.annotation.Autowired;
         return receive(validCommandWrap.getValidCommand());
     }
 
+    /**
+     * Receive valid response wrap.
+     *
+     * @param validCommand the valid command
+     * @return the valid response wrap
+     */
     public abstract ValidResponseWrap<? extends ResponseCommand> receive(ValidCommand<?> validCommand);
 }

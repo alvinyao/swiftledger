@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * The type Rs config.
+ */
 @Configuration @Setter @Getter public class RsConfig implements InitializingBean {
     @NotNull @Value("${higgs.trust.nodeName}") private String rsName;
     @NotNull @Value("${rs.core.useHttpChannel:false}") private boolean useHttpChannel;

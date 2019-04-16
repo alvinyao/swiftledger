@@ -10,9 +10,11 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
+ * The type Signed transaction.
+ *
  * @Description: signed transaction class
  * @author: pengdi
- **/
+ */
 @Getter @Setter public class SignedTransaction extends BaseBO {
 
     private static final long serialVersionUID = -7372870730463030762L;

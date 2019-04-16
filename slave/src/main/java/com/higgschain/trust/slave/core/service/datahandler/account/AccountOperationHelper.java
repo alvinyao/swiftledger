@@ -13,9 +13,11 @@ import org.apache.commons.lang3.StringUtils;
 import java.math.BigDecimal;
 
 /**
+ * The type Account operation helper.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-16
+ * @date 2018 -04-16
  */
 @Slf4j public class AccountOperationHelper {
     /**
@@ -25,10 +27,10 @@ import java.math.BigDecimal;
      * 2.validate account usable balance by change direction
      * 3.return the after amount of trade
      *
-     * @param accountInfo
-     * @param tradeDirectionEnum
-     * @param happenAmount
-     * @return
+     * @param accountInfo        the account info
+     * @param tradeDirectionEnum the trade direction enum
+     * @param happenAmount       the happen amount
+     * @return big decimal
      */
     public static BigDecimal validateTradeInfo(AccountInfo accountInfo, TradeDirectionEnum tradeDirectionEnum,
         BigDecimal happenAmount) {
@@ -59,9 +61,9 @@ import java.math.BigDecimal;
     /**
      * get balance change direction
      *
-     * @param tradeDirectionEnum
-     * @param fundDirectionEnum
-     * @return
+     * @param tradeDirectionEnum the trade direction enum
+     * @param fundDirectionEnum  the fund direction enum
+     * @return balance change direction
      */
     public static ChangeDirectionEnum getBalanceChangeDirection(TradeDirectionEnum tradeDirectionEnum,
         FundDirectionEnum fundDirectionEnum) {

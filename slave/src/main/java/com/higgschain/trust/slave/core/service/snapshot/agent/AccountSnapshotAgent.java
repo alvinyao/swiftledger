@@ -26,19 +26,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Account snapshot agent.
+ *
  * @author liuyu
  * @description an agent for account snapshot
- * @date 2018-04-09
+ * @date 2018 -04-09
  */
 @Slf4j
 @Component
 public class AccountSnapshotAgent implements CacheLoader {
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Account repository.
+     */
     @Autowired
     AccountRepository accountRepository;
+    /**
+     * The Currency repository.
+     */
     @Autowired
     CurrencyRepository currencyRepository;
+    /**
+     * The Data identity snapshot agent.
+     */
     @Autowired
     DataIdentitySnapshotAgent dataIdentitySnapshotAgent;
 
@@ -57,8 +71,8 @@ public class AccountSnapshotAgent implements CacheLoader {
     /**
      * get account info from cache or db
      *
-     * @param accountNo
-     * @return
+     * @param accountNo the account no
+     * @return account info
      */
     public AccountInfo getAccountInfo(String accountNo) {
         return get(new AccountCacheKey(accountNo));
@@ -67,8 +81,8 @@ public class AccountSnapshotAgent implements CacheLoader {
     /**
      * query currency info
      *
-     * @param currency
-     * @return
+     * @param currency the currency
+     * @return currency info
      */
     public CurrencyInfo queryCurrency(String currency) {
         return get(new CurrencyInfoCacheKey(currency));
@@ -77,7 +91,8 @@ public class AccountSnapshotAgent implements CacheLoader {
     /**
      * open account info,return a new account
      *
-     * @param bo
+     * @param bo the bo
+     * @return the account info
      */
     public AccountInfo openAccount(OpenAccount bo) {
         // account info
@@ -94,7 +109,7 @@ public class AccountSnapshotAgent implements CacheLoader {
     /**
      * update account info from snapshot
      *
-     * @param accountInfo
+     * @param accountInfo the account info
      */
     public void updateAccountInfo(AccountInfo accountInfo) {
         update(new AccountCacheKey(accountInfo.getAccountNo()), accountInfo);
@@ -103,7 +118,7 @@ public class AccountSnapshotAgent implements CacheLoader {
     /**
      * isssue currency by snapshot
      *
-     * @param bo
+     * @param bo the bo
      */
     public void issueCurrency(IssueCurrency bo) {
         CurrencyInfo currencyInfo = currencyRepository.buildCurrencyInfo(bo.getCurrencyName(), bo.getRemark(),bo.getHomomorphicPk(), bo.getContractAddress());

@@ -10,6 +10,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
+ * The type Application.
+ *
  * @author young001
  */
 @SpringBootApplication
@@ -21,6 +23,9 @@ public class Application {
     /**
      * 启动入口。<br> 需要通过启动参数设置配置文件路径，例如：-Dspring.config.location=file:/data/home/admin/prime_demo/conf/dev_config.json<br>
      * mybatis代码生成工具：https://tower.im/projects/cc46ccaf6b1f4f398d7d2277fab3f67d/docs/52c7297b64a94da690191a891862939b/
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
      */
     public static void main(String[] args) throws Exception {
         //JSON auto detect class type

@@ -38,9 +38,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * The type Multi sign service.
+ *
  * @author liuyu
  * @description
- * @date 2019-03-20
+ * @date 2019 -03-20
  */
 @Service @Slf4j public class MultiSignServiceImpl implements MultiSignService {
     private final static int SCALE_NUMBER = 8;
@@ -52,11 +54,26 @@ import java.util.stream.Collectors;
      * config path
      */
     @Value("${rs.contract.multi-sign.path:/data/home/admin/trust/multi-sign-temp.sol}") String multiContractCodePath;
+    /**
+     * The Currency contract code path.
+     */
     @Value("${rs.contract.currency.path:/data/home/admin/trust/currency-temp.sol}") String currencyContractCodePath;
 
+    /**
+     * The Core transaction convertor.
+     */
     @Autowired CoreTransactionConvertor coreTransactionConvertor;
+    /**
+     * The Core transaction service.
+     */
     @Autowired CoreTransactionService coreTransactionService;
+    /**
+     * The Contract v 2 query service.
+     */
     @Autowired ContractV2QueryService contractV2QueryService;
+    /**
+     * The Rs block chain service.
+     */
     @Autowired RsBlockChainService rsBlockChainService;
 
     @Override public RespData<String> createAddress(MultiSignRuleVO rule) throws RsCoreException {

@@ -4,8 +4,10 @@ import com.higgschain.trust.evmcontract.core.TransactionResultInfo;
 import com.higgschain.trust.slave.model.bo.BlockHeader;
 
 /**
+ * The type Trust listener adapter.
+ *
  * @author duhongming
- * @date 2018/12/17
+ * @date 2018 /12/17
  */
 public class TrustListenerAdapter implements TrustListener {
 

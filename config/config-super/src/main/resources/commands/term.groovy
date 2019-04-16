@@ -12,6 +12,9 @@ import org.springframework.beans.factory.BeanFactory
  * Copyright (c) 2013-2017, suimi
  */
 
+/**
+ *  The type Term.
+ */
 @Slf4j
 @Usage("about term info")
 class term {

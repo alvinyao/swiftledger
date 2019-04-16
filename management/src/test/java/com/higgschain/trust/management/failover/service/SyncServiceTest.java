@@ -29,24 +29,63 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Sync service test.
+ */
 @RunWith(PowerMockRunner.class) public class SyncServiceTest {
 
+    /**
+     * The Sync service.
+     */
     @InjectMocks @Autowired
     SyncService syncService;
+    /**
+     * The Properties.
+     */
     @Mock FailoverProperties properties;
+    /**
+     * The Block service.
+     */
     @Mock BlockService blockService;
+    /**
+     * The Block repository.
+     */
     @Mock BlockRepository blockRepository;
+    /**
+     * The Block sync service.
+     */
     @Mock
     BlockSyncService blockSyncService;
+    /**
+     * The Package service.
+     */
     @Mock PackageService packageService;
+    /**
+     * The Node state.
+     */
     @Mock NodeState nodeState;
+    /**
+     * The Tx nested.
+     */
     @Mock TransactionTemplate txNested;
 
+    /**
+     * The Current height.
+     */
     long currentHeight = 1;
+    /**
+     * The Header.
+     */
     @Mock BlockHeader header;
 
+    /**
+     * The Blocks.
+     */
     @Mock List<Block> blocks;
 
+    /**
+     * Before method.
+     */
     @BeforeMethod public void beforeMethod() {
         MockitoAnnotations.initMocks(this);
         Mockito.reset(properties, nodeState);
@@ -55,12 +94,18 @@ import static org.testng.Assert.assertEquals;
         Mockito.when(properties.getHeaderStep()).thenReturn(10);
     }
 
+    /**
+     * Test sync not state.
+     */
     @Test public void testSyncNotState() {
         Mockito.when(nodeState.isState(NodeStateEnum.AutoSync, NodeStateEnum.ArtificialSync)).thenReturn(false);
         syncService.autoSync();
         Mockito.verify(blockRepository, Mockito.times(0)).getMaxHeight();
     }
 
+    /**
+     * Test sync get cluster height failed.
+     */
     @Test public void testSyncGetClusterHeightFailed() {
         Mockito.when(blockSyncService.getClusterHeight(Matchers.anyInt())).thenReturn(null);
         try {
@@ -70,7 +115,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
-
+    /**
+     * Test sync with param not state.
+     */
     @Test public void testSyncWithParamNotState() {
         long startHeight = currentHeight + 1;
         int size = 10;
@@ -83,6 +130,9 @@ import static org.testng.Assert.assertEquals;
         Mockito.verify(blockRepository, Mockito.times(0)).getMaxHeight();
     }
 
+    /**
+     * Test sync with param height not current.
+     */
     @Test public void testSyncWithParamHeightNotCurrent() {
         long startHeight = currentHeight + 1;
         int size = 10;
@@ -93,6 +143,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test sync with param get headers failed.
+     */
     @Test public void testSyncWithParamGetHeadersFailed() {
         long startHeight = currentHeight + 1;
         int size = 10;
@@ -150,6 +203,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test sync with param get blocks failed.
+     */
     @Test public void testSyncWithParamGetBlocksFailed() {
         long startHeight = currentHeight + 1;
         int size = 100, times = 3, blockStep = 10;
@@ -171,6 +227,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test sync with param get blocks bft failed.
+     */
     @Test public void testSyncWithParamGetBlocksBftFailed() {
         long startHeight = currentHeight + 1;
         int size = 100, times = 3, blockStep = 10;
@@ -193,6 +252,9 @@ import static org.testng.Assert.assertEquals;
         Mockito.verify(blockSyncService, Mockito.times(times)).getBlocks(Matchers.anyLong(), Matchers.anyInt());
     }
 
+    /**
+     * Test sync with param get block valid.
+     */
     @Test public void testSyncWithParamGetBlockValid() {
         long startHeight = currentHeight + 1;
         int size = 100, times = 3, blockStep = 10;
@@ -216,6 +278,9 @@ import static org.testng.Assert.assertEquals;
         Mockito.verify(blockService, Mockito.times(1)).compareBlockHeader(Matchers.any(), Matchers.any());
     }
 
+    /**
+     * Test sync block.
+     */
     @Test public void testSyncBlock() {
         long startHeight = currentHeight + 1;
         int size = 100, times = 3, blockStep = 10;
@@ -244,6 +309,9 @@ import static org.testng.Assert.assertEquals;
 //        Mockito.verify(packageService, Mockito.times(size)).persisting(Matchers.any());
     }
 
+    /**
+     * Test sync block validating failed.
+     */
     @Test public void testSyncBlockValidatingFailed() {
         long startHeight = currentHeight + 1;
         int size = 100, times = 3, blockStep = 10;
@@ -275,6 +343,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test sync block persisting failed.
+     */
     @Test public void testSyncBlockPersistingFailed() {
         long startHeight = currentHeight + 1;
         int size = 100, times = 3, blockStep = 10;
@@ -306,6 +377,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test sync.
+     */
     @Test public void testSync() {
         int times = 3, headerStep = 20, blockStep = 10;
         long clusterHeight = 100L, cacheMinHeight = 160;

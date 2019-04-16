@@ -7,6 +7,9 @@ import com.higgschain.trust.consensus.p2pvalid.core.ValidSyncCommit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Sync receive service.
+ */
 @Slf4j @Component public class SyncReceiveService extends BaseReceiveService {
 
     @Override public ValidResponseWrap<? extends ResponseCommand> receive(ValidCommand validCommand) {

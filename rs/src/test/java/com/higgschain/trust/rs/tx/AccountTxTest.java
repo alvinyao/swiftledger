@@ -14,13 +14,17 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Account tx test.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-22
+ * @date 2018 -06-22
  */
 public class AccountTxTest {
 
-
+    /**
+     * Test.
+     */
     @Test
     public void test(){
         testCreateCurrency();

@@ -24,18 +24,35 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 /**
+ * The type Standard sm message.
+ *
  * @author Marcel Santos
  */
 public class StandardSMMessage extends SMMessage {
 
     private int replica;
 
+    /**
+     * Instantiates a new Standard sm message.
+     *
+     * @param sender  the sender
+     * @param cid     the cid
+     * @param type    the type
+     * @param replica the replica
+     * @param state   the state
+     * @param view    the view
+     * @param regency the regency
+     * @param leader  the leader
+     */
     public StandardSMMessage(int sender, int cid, int type, int replica, ApplicationState state, View view, int regency,
         int leader) {
         super(sender, cid, type, state, view, regency, leader);
         this.replica = replica;
     }
 
+    /**
+     * Instantiates a new Standard sm message.
+     */
     public StandardSMMessage() {
         super();
     }

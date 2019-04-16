@@ -3,11 +3,19 @@ package it.unisa.dia.gas.plaf.jpbc.field.poly;
 import it.unisa.dia.gas.jpbc.Element;
 
 /**
+ * The type Poly utils.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class PolyUtils {
 
-
+    /**
+     * Const mul poly element.
+     *
+     * @param a    the a
+     * @param poly the poly
+     * @return the poly element
+     */
     public static PolyElement constMul(Element a, PolyElement poly) {
         int n = poly.getCoefficients().size();
 
@@ -22,6 +30,14 @@ public class PolyUtils {
         return res;
     }
 
+    /**
+     * Div.
+     *
+     * @param quot the quot
+     * @param rem  the rem
+     * @param a    the a
+     * @param b    the b
+     */
     public static void div(Element quot, Element rem, PolyElement a, PolyElement b) {
         if (b.isZero())
             throw new IllegalArgumentException("Division by zero!");
@@ -61,6 +77,13 @@ public class PolyUtils {
         rem.set(r);
     }
 
+    /**
+     * Reminder.
+     *
+     * @param rem the rem
+     * @param a   the a
+     * @param b   the b
+     */
     public static void reminder(Element rem, PolyElement a, PolyElement b) {
         if (b.isZero())
             throw new IllegalArgumentException("Division by zero!");

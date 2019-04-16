@@ -15,6 +15,9 @@ import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * The type Sync send service.
+ */
 @Component @Slf4j public class SyncSendService extends BaseSendService {
 
     private ExecutorService sendExecutorService =
@@ -108,14 +111,35 @@ import java.util.concurrent.atomic.AtomicInteger;
         counter.incrementAndGet();
     }
 
+    /**
+     * The type Command counter.
+     *
+     * @param <T> the type parameter
+     */
     @Getter class CommandCounter<T extends ResponseCommand> {
+        /**
+         * The Command.
+         */
         T command;
+        /**
+         * The Counter.
+         */
         AtomicInteger counter = new AtomicInteger(0);
 
+        /**
+         * Instantiates a new Command counter.
+         *
+         * @param command the command
+         */
         CommandCounter(T command) {
             this.command = command;
         }
 
+        /**
+         * Increment and get int.
+         *
+         * @return the int
+         */
         int incrementAndGet() {
             return counter.incrementAndGet();
         }

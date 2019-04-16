@@ -41,8 +41,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 /**
+ * The type Batch transaction sender test.
+ *
  * @author Chen Jiawei
- * @date 2018-12-18
+ * @date 2018 -12-18
  */
 public class BatchTransactionSenderTest {
     private static final String SERVER_IP = "127.0.0.1";
@@ -54,6 +56,9 @@ public class BatchTransactionSenderTest {
     private static Retrofit retrofit;
     private static IPostSignedTransaction signedTransactionSender;
 
+    /**
+     * Start up.
+     */
     @BeforeClass
     public static void startUp() {
         configJsonSerializer();
@@ -81,8 +86,21 @@ public class BatchTransactionSenderTest {
     }
 
     private interface IPostSignedTransaction {
+        /**
+         * Post call.
+         *
+         * @param signedTransaction the signed transaction
+         * @return the call
+         */
         @POST("/transaction/post")
         Call<RespData> post(@Body SignedTransaction signedTransaction);
+
+        /**
+         * Post call.
+         *
+         * @param contractQueryRequestV2 the contract query request v 2
+         * @return the call
+         */
         @POST("/contract/query2")
         Call<RespData> post(@Body ContractQueryRequestV2 contractQueryRequestV2);
     }
@@ -100,6 +118,9 @@ public class BatchTransactionSenderTest {
         JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.MapSortField.getMask();
     }
 
+    /**
+     * Tear down.
+     */
     @AfterClass
     public static void tearDown() {
         signedTransactionSender = null;
@@ -108,6 +129,11 @@ public class BatchTransactionSenderTest {
         crypto = null;
     }
 
+    /**
+     * Test send transactions.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void testSendTransactions() throws IOException {
         ContractQueryRequestV2 contractQueryRequestV2 = new ContractQueryRequestV2();

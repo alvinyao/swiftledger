@@ -18,19 +18,41 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.io.IOException;
 
 /**
+ * The type Spring transaction test.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-20
+ * @date 2018 -04-20
  */
 public class SpringTransactionTest extends IntegrateBaseTest {
 
+    /**
+     * The Tx nested.
+     */
     @Autowired TransactionTemplate txNested;
+    /**
+     * The Tx required.
+     */
     @Autowired TransactionTemplate txRequired;
+    /**
+     * The Tx requires new.
+     */
     @Autowired TransactionTemplate txRequiresNew;
 
+    /**
+     * The Account repository.
+     */
     @Autowired AccountRepository accountRepository;
+    /**
+     * The Account info dao.
+     */
     @Autowired AccountInfoDao accountInfoDao;
 
+    /**
+     * Test spring transaction.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void testSpringTransaction() throws IOException {
         OpenAccount openAccount = new OpenAccount();

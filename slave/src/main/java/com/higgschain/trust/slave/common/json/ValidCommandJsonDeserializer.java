@@ -19,12 +19,17 @@ import java.util.Map;
 //import ChangeMasterVerifyCmd;
 
 /**
+ * The type Valid command json deserializer.
+ *
  * @author duhongming
- * @date 2018/8/2
+ * @date 2018 /8/2
  */
 @Slf4j
 public class ValidCommandJsonDeserializer implements ObjectDeserializer {
 
+    /**
+     * The Type map.
+     */
     static Map<String, Type> typeMap = new HashMap<>();
 
     static {

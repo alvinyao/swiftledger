@@ -8,19 +8,31 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
 /**
+ * The type Abstract accumulator.
+ *
+ * @param <T> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
 public abstract class AbstractAccumulator<T> extends PoolExecutor<T> implements Accumulator<T> {
 
-
+    /**
+     * The Result.
+     */
     protected T result;
 
-
+    /**
+     * Instantiates a new Abstract accumulator.
+     */
     public AbstractAccumulator() {
         this(ExecutorServiceUtils.getFixedThreadPool());
     }
 
+    /**
+     * Instantiates a new Abstract accumulator.
+     *
+     * @param executor the executor
+     */
     public AbstractAccumulator(Executor executor) {
         super(executor);
     }
@@ -56,7 +68,11 @@ public abstract class AbstractAccumulator<T> extends PoolExecutor<T> implements 
         return awaitTermination().getResult();
     }
 
-
+    /**
+     * Reduce.
+     *
+     * @param value the value
+     */
     protected abstract void reduce(T value);
 
 }

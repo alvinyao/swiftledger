@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * The type Tx rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -22,6 +24,11 @@ public class TxRocksDao extends RocksBaseDao<TransactionPO> {
         return "tx";
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param pos the pos
+     */
     public void batchInsert(List<TransactionPO> pos) {
         if (CollectionUtils.isEmpty(pos)) {
             log.info("[TxRocksDao.batchInsert] pos is empty");

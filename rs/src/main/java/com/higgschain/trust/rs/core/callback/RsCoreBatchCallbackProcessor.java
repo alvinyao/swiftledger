@@ -31,9 +31,11 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
+ * The type Rs core batch callback processor.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-07
+ * @date 2018 -06-07
  */
 @Component
 @Slf4j
@@ -58,6 +60,12 @@ public class RsCoreBatchCallbackProcessor {
         return txCallbackHandler;
     }
 
+    /**
+     * On persisted.
+     *
+     * @param txs         the txs
+     * @param blockHeader the block header
+     */
     public void onPersisted(List<RsCoreTxVO> txs, BlockHeader blockHeader) {
         Map<String, List<RsCoreTxVO>> map = parseTx(txs);
         log.debug("[onPersisted]map:{}", map);
@@ -105,6 +113,12 @@ public class RsCoreBatchCallbackProcessor {
         }
     }
 
+    /**
+     * On end.
+     *
+     * @param txs         the txs
+     * @param blockHeader the block header
+     */
     public void onEnd(List<RsCoreTxVO> txs, BlockHeader blockHeader) {
         Map<String, List<RsCoreTxVO>> map = parseTx(txs);
         for (String policyId : map.keySet()) {
@@ -147,6 +161,12 @@ public class RsCoreBatchCallbackProcessor {
         }
     }
 
+    /**
+     * On failover.
+     *
+     * @param txs         the txs
+     * @param blockHeader the block header
+     */
     public void onFailover(List<RsCoreTxVO> txs, BlockHeader blockHeader) {
         Map<String, List<RsCoreTxVO>> map = parseTx(txs);
         for (String policyId : map.keySet()) {

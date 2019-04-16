@@ -26,9 +26,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Account controller test.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-20
+ * @date 2018 -04-20
  */
 public class AccountControllerTest {
     private static final String priKey1 =
@@ -36,6 +38,9 @@ public class AccountControllerTest {
     private static final String priKey2 =
         "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJE5lYYWx1AE5E0XaxmQvg2putYOrya+Azd+QCHVA0rE8vUiXAuFia7TgjGQjhFO66SrcOJ3W2xSeHw6F1ApvZ8kfLB3ZsZT1e54QaWKU0ae0fcmk9dgrkpaniLCbd3PP8A+UUjwNeexIDjThYSzzatNGg06qdxgSCMc9bX7jwPlAgMBAAECgYA5Vtcmvk+r1IKfvaNX0MJ5eo5+fgXB8jwq6PpBYW2PU/vptctJ8UvPb0t0bnLpepOnzNkhUacTOezAf988k35+gw9Vrh6rXG4x7cZ65qbQOP+Xh0sx3YElyZKUBJzl5CMjNzT5ANc/QdpCD8LOOiPF4xpcHqKih74NGXc8hQv1AQJBAMNm1i6AC/oJM7XDnXPyswNVyjjIG+wi9xBgMGlt8JLH3c7/HblyAPHS/sFnljroVsHOyvoi45aZlIluhZsh6tUCQQC+QygmlnViImHq+MgL6bWaTLjKyTpH6k7zGQxvOxqJlioeWh73wxHAq/depKi8ElMrkEhMBA05ReCJl4Nb8xzRAkA28/HiS/KSVAot4SCj3iqIEpV3mJd5tm+jNFoJHHke3oS71TWH1M79M2if/cDbOkJD6SNea3d0ACcs6185vLUtAkBtrWLw05z5JB7UB/Oxwli4iO+hnlxlZnF6e38Kg8SpeZHwCz18z8tlCPzBZyQJvnqJS1QR1egVku18A4Zqs/txAkAg5kjdDw0v9QoQMr4oHZSuHxaG9I91SRkCPspN8urIg1Wu7cdTKfPdaAtSoU/xp/qpzfX+CPkhv7DoGlBLeo8e";
 
+    /**
+     * Before.
+     */
     @Before public void before() {
         //JSON auto detect class type
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
@@ -51,6 +56,11 @@ public class AccountControllerTest {
         JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.WriteClassName.getMask();
     }
 
+    /**
+     * Test.
+     *
+     * @throws Exception the exception
+     */
     @Test public void test() throws Exception {
         String url = "http://10.200.172.97:7070/transaction/submit";
         // issue currency
@@ -74,6 +84,12 @@ public class AccountControllerTest {
         System.out.println("res.data:" + res);
     }
 
+    /**
+     * Create policy tx list.
+     *
+     * @return the list
+     * @throws Exception the exception
+     */
     public List<SignedTransaction> createPolicyTx() throws Exception {
 
         SignedTransaction signedTx1 = new SignedTransaction();

@@ -34,8 +34,10 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
+ * The type Change master service.
+ *
  * @author suimi
- * @date 2018/6/4
+ * @date 2018 /6/4
  */
 @StateListener
 @Slf4j @Service public class ChangeMasterService implements MasterChangeListener {
@@ -68,6 +70,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
         return thread;
     });
 
+    /**
+     * Start heartbeat timeout.
+     */
     @StateChangeListener(NodeStateEnum.Running) public void startHeartbeatTimeout() {
         log.info("start change master heartbeat timeout");
         resetHeartbeatTimeout();
@@ -98,6 +103,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
         heartbeatTimer = executor.schedule(this::changeMaster, delay, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * Change master.
+     */
     public void changeMaster() {
         if (log.isDebugEnabled()) {
             log.debug("start change master verify");
@@ -122,6 +130,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
         resetHeartbeatTimeout();
     }
 
+    /**
+     * Artificial change master.
+     *
+     * @param term        the term
+     * @param startHeight the start height
+     */
     public void artificialChangeMaster(int term, long startHeight) {
         ArtificialChangeMasterCommand command =
             new ArtificialChangeMasterCommand(term, viewManager.getCurrentViewId(), nodeState.getNodeName(),

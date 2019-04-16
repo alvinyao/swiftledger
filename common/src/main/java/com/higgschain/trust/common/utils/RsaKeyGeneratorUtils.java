@@ -11,15 +11,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Rsa key generator utils.
+ *
  * @author WangQuanzhou
  * @desc key generator util
- * @date 2018/6/4 17:27
+ * @date 2018 /6/4 17:27
  */
 public class RsaKeyGeneratorUtils {
+    /**
+     * The constant KEY_ALGORITHM.
+     */
     public static final String KEY_ALGORITHM = "RSA";
+    /**
+     * The constant PUB_KEY.
+     */
     public static final String PUB_KEY = "pubKey";
+    /**
+     * The constant PRI_KEY.
+     */
     public static final String PRI_KEY = "priKey";
 
+    /**
+     * Generate key pair map.
+     *
+     * @return the map
+     */
     public static Map generateKeyPair() {
         KeyPairGenerator keyPairGen = null;
         try {
@@ -41,6 +57,11 @@ public class RsaKeyGeneratorUtils {
         return map;
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         generateKeyPair();
     }

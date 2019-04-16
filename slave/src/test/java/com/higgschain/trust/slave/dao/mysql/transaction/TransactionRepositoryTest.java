@@ -25,25 +25,42 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Transaction repository test.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-10
+ * @date 2018 -05-10
  */
 public class TransactionRepositoryTest extends IntegrateBaseTest {
 
+    /**
+     * The Transaction repository.
+     */
     @Autowired
     TransactionRepository transactionRepository;
+    /**
+     * The Transaction dao.
+     */
     @Autowired
     TransactionDao transactionDao;
 
+    /**
+     * The Tx root hash builder.
+     */
     @Autowired
     TxRootHashBuilder txRootHashBuilder;
 
+    /**
+     * Test.
+     */
     @Test
     public void test() {
         transactionRepository.isExist("12345");
     }
 
+    /**
+     * Test add.
+     */
     @Test
     public void testAdd() {
         Long height = System.currentTimeMillis();

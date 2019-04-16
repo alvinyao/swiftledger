@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
+ * The type Multi sign controller.
+ *
  * @author liuyu
- * @date 2019/3/21
+ * @date 2019 /3/21
  */
-
 @RequestMapping(path = "/multiSign") @RestController @Slf4j public class MultiSignController {
     @Autowired private MultiSignService multiSignService;
 
     /**
      * create address
      *
-     * @param rule
-     * @return
+     * @param rule the rule
+     * @return resp data
      */
     @RequestMapping(value = "/create") RespData<String> create(@RequestBody @Valid MultiSignRuleVO rule) {
         try {
@@ -46,8 +47,8 @@ import javax.validation.Valid;
     /**
      * create currency
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/createCurrency") RespData<Boolean> createCurrency(
         @RequestBody @Valid CreateCurrencyVO vo) {
@@ -66,8 +67,8 @@ import javax.validation.Valid;
     /**
      * get sign hash
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return sign hash value
      */
     @RequestMapping(value = "/getSignHash") RespData<String> getSignHashValue(@RequestBody @Valid MultiSignHashVO vo) {
         try {
@@ -85,8 +86,8 @@ import javax.validation.Valid;
     /**
      * transfer
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/transfer") RespData<Boolean> transfer(@RequestBody @Valid MultiSignTxVO vo) {
         try {

@@ -15,9 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Pending state.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 @Service @Slf4j public class PendingStateImpl implements PendingState {
 
     @Autowired private MasterPackageCache packageCache;

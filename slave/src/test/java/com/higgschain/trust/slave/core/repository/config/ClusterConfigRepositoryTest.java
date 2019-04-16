@@ -14,20 +14,38 @@ import org.testng.annotations.Test;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Cluster config repository test.
+ */
 public class ClusterConfigRepositoryTest extends BaseTest{
 
     @Autowired private ClusterConfigRepository clusterConfigRepository;
     @Autowired private InitConfig initConfig;
 
+    /**
+     * Test insert cluster config.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testInsertClusterConfig() throws Exception {
 
     }
 
+    /**
+     * Test get cluster config.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetClusterConfig() throws Exception {
        ClusterConfig clusterConfig =  clusterConfigRepository.getClusterConfig("TRUST");
        System.out.println(clusterConfig);
     }
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsert() throws Exception {
         List list = new LinkedList();
         for (int i = 0;i<3;i++){
@@ -54,6 +72,11 @@ public class ClusterConfigRepositoryTest extends BaseTest{
 
     }
 
+    /**
+     * Test batch update.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchUpdate() throws Exception {
         List list = new LinkedList();
         for (int i = 0;i<3;i++){

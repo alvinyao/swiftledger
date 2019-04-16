@@ -5,6 +5,9 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Failover properties.
+ */
 @Component @ConfigurationProperties(prefix = "higgs.trust.failover") @Getter @Setter public class FailoverProperties {
 
     /**

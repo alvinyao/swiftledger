@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * The type Reconfiguration.
+ *
  * @author eduardo
  */
 public class Reconfiguration {
@@ -33,22 +35,44 @@ public class Reconfiguration {
     private ServiceProxy proxy;
     private int id;
 
+    /**
+     * Instantiates a new Reconfiguration.
+     *
+     * @param id the id
+     */
     public Reconfiguration(int id) {
         this.id = id;
         //proxy = new ServiceProxy(id);
         //request = new ReconfigureRequest(id);
     }
 
+    /**
+     * Connect.
+     */
     public void connect() {
         if (proxy == null) {
             proxy = new ServiceProxy(id);
         }
     }
 
+    /**
+     * Add server.
+     *
+     * @param id   the id
+     * @param ip   the ip
+     * @param port the port
+     * @param sign the sign
+     */
     public void addServer(int id, String ip, int port, byte[] sign) {
         this.setReconfiguration(ServerViewController.ADD_SERVER, id + ":" + ip + ":" + port, sign);
     }
 
+    /**
+     * Remove server.
+     *
+     * @param id   the id
+     * @param sign the sign
+     */
     public void removeServer(int id, byte[] sign) {
         this.setReconfiguration(ServerViewController.REMOVE_SERVER, String.valueOf(id), sign);
     }
@@ -57,6 +81,13 @@ public class Reconfiguration {
     //      this.setReconfiguration(ServerViewController.CHANGE_F,String.valueOf(f), sign, nodeName);
     //    }
 
+    /**
+     * Sets reconfiguration.
+     *
+     * @param prop  the prop
+     * @param value the value
+     * @param sign  the sign
+     */
     public void setReconfiguration(int prop, String value, byte[] sign) {
         if (request == null) {
             //request = new ReconfigureRequest(proxy.getViewManager().getStaticConf().getProcessId());
@@ -67,6 +98,11 @@ public class Reconfiguration {
         request.setProperty(prop, value);
     }
 
+    /**
+     * Execute reconfigure reply.
+     *
+     * @return the reconfigure reply
+     */
     public ReconfigureReply execute() {
         byte[] signature = new byte[0];
         try {
@@ -81,6 +117,9 @@ public class Reconfiguration {
         return (ReconfigureReply)TOMUtil.getObject(reply);
     }
 
+    /**
+     * Close.
+     */
     public void close() {
         proxy.close();
         proxy = null;

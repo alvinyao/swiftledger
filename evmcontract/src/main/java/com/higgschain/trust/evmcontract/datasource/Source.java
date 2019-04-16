@@ -21,23 +21,32 @@ package com.higgschain.trust.evmcontract.datasource;
  * Base interface for all data source classes
  * <p>
  * Created by Anton Nashatyrev on 05.10.2016.
+ *
+ * @param <K> the type parameter
+ * @param <V> the type parameter
  */
 public interface Source<K, V> {
 
     /**
      * Puts key-value pair into source
+     *
+     * @param key the key
+     * @param val the val
      */
     void put(K key, V val);
 
     /**
      * Gets a value by its key
      *
+     * @param key the key
      * @return value or <null/> if no such key in the source
      */
     V get(K key);
 
     /**
      * Deletes the key-value pair from the source
+     *
+     * @param key the key
      */
     void delete(K key);
 
@@ -48,8 +57,7 @@ public interface Source<K, V> {
      * The implementation may do 'cascading' flush, i.e. call
      * flush() on the underlying Source
      *
-     * @return true if any changes we flushed, false if the underlying
-     * Source didn't change
+     * @return true if any changes we flushed, false if the underlying Source didn't change
      */
     boolean flush();
 

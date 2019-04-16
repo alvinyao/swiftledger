@@ -19,16 +19,20 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * The type Multi version test.
+ *
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/3/27 16:34
+ * @date 2018 /3/27 16:34
  */
-
 public class MultiVersionTest extends BaseTest {
 
     @Autowired private TransactionExecutor executor;
     @Autowired private BlockService blockService;
 
+    /**
+     * Package root.
+     */
     @Test public void packageRoot() {
 
         Package pack = new Package();

@@ -29,14 +29,19 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompiler.Options.*;
+
 /**
+ * The type Transaction builder.
+ *
  * @author duhongming
- * @date 2018/12/6
+ * @date 2018 /12/6
  */
 @Slf4j
 public class TransactionBuilder extends AutoTestContext {
 
-
+    /**
+     * The constant STANDARD_TOKEN_CONTRACT_ADDRESS.
+     */
     public static final String STANDARD_TOKEN_CONTRACT_ADDRESS = "095e7baea6a6c7c4c2dfeb977efac316af552989";
 
     private static final String PRIVATE_KEY = "78d4646b8baa8cfbe4c02b9d245e4ee2406af092955d705d91e83238e012b707";
@@ -52,6 +57,9 @@ public class TransactionBuilder extends AutoTestContext {
     private final static String SERVICE_URL = "http://localhost:7070/transaction/post";
 
     private final static String QUERY_SERVICE_URL = "http://localhost:7070/transaction/result/%s";
+    /**
+     * The constant count.
+     */
     //批次计数器
     public static int count = 1;
     //
@@ -60,6 +68,9 @@ public class TransactionBuilder extends AutoTestContext {
     private CoreTransaction coreTx;
     private String privateKey;
 
+    /**
+     * Instantiates a new Transaction builder.
+     */
     public TransactionBuilder() {
 
     }
@@ -93,6 +104,11 @@ public class TransactionBuilder extends AutoTestContext {
         return sb.toString();
     }
 
+    /**
+     * Deploy.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void deploy() throws Exception {
 
@@ -250,6 +266,12 @@ public class TransactionBuilder extends AutoTestContext {
         return tx;
     }
 
+    /**
+     * With action transaction builder.
+     *
+     * @param action the action
+     * @return the transaction builder
+     */
     public TransactionBuilder withAction(Action action) {
         coreTx = buildCoreTransaction();
         privateKey = PRIVATE_KEY;
@@ -257,31 +279,66 @@ public class TransactionBuilder extends AutoTestContext {
         return this;
     }
 
+    /**
+     * With tx type transaction builder.
+     *
+     * @param txType the tx type
+     * @return the transaction builder
+     */
     public TransactionBuilder withTxType(TxTypeEnum txType) {
         coreTx.setTxType(txType.getCode());
         return this;
     }
 
+    /**
+     * With policy id transaction builder.
+     *
+     * @param policyId the policy id
+     * @return the transaction builder
+     */
     public TransactionBuilder withPolicyId(String policyId) {
         coreTx.setPolicyId(policyId);
         return this;
     }
 
+    /**
+     * With sender transaction builder.
+     *
+     * @param sender the sender
+     * @return the transaction builder
+     */
     public TransactionBuilder withSender(String sender) {
         coreTx.setSender(sender);
         return this;
     }
 
+    /**
+     * With tx id transaction builder.
+     *
+     * @param txId the tx id
+     * @return the transaction builder
+     */
     public TransactionBuilder withTxId(String txId) {
         coreTx.setTxId(txId);
         return this;
     }
 
+    /**
+     * With private key transaction builder.
+     *
+     * @param privateKey the private key
+     * @return the transaction builder
+     */
     public TransactionBuilder withPrivateKey(String privateKey) {
         this.privateKey = privateKey;
         return this;
     }
 
+    /**
+     * Build signed transaction.
+     *
+     * @return the signed transaction
+     */
     public SignedTransaction build() {
         SignedTransaction signedTransaction = new SignedTransaction();
         signedTransaction.setCoreTx(coreTx);

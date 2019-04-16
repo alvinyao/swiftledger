@@ -16,24 +16,32 @@ import java.math.BigDecimal;
 
 /**
  * contract context service
+ *
  * @author duhongming
- * @date 2018-04-17
+ * @date 2018 -04-17
  */
 @Slf4j @Service public class StandardContractContextService extends ContractApiService {
+    /**
+     * The Account un freeze handler.
+     */
     @Autowired AccountUnFreezeHandler accountUnFreezeHandler;
+    /**
+     * The Block chain service.
+     */
     @Autowired BlockChainService blockChainService;
 
     @Override
     public ExecuteContext getContext() {
         return super.getContext();
     }
+
     /**
      * execute unfreeze by js
      *
-     * @param bizFlowNo
-     * @param accountNo
-     * @param amount
-     * @param remark
+     * @param bizFlowNo the biz flow no
+     * @param accountNo the account no
+     * @param amount    the amount
+     * @param remark    the remark
      */
     public void unFreeze(String bizFlowNo,String accountNo,BigDecimal amount,String remark){
         AccountUnFreeze bo = new AccountUnFreeze();
@@ -52,15 +60,16 @@ import java.math.BigDecimal;
     /**
      * get max block header
      *
-     * @return
+     * @return block header
      */
     public BlockHeader getMaxBlockHeader(){
         return blockChainService.getMaxBlockHeader();
     }
+
     /**
      * get max block height
      *
-     * @return
+     * @return long
      */
     public Long getMaxBlockHeight(){
         return blockChainService.getMaxBlockHeight();
@@ -69,16 +78,17 @@ import java.math.BigDecimal;
     /**
      * get current package time
      *
-     * @return
+     * @return long
      */
     public Long getPackageTime(){
         ActionData actionData = getContextData(StandardExecuteContextData.class).getAction();
         return actionData.getCurrentPackage().getPackageTime();
     }
+
     /**
      * get current package height
      *
-     * @return
+     * @return long
      */
     public Long getPackageHeight(){
         ActionData actionData = getContextData(StandardExecuteContextData.class).getAction();

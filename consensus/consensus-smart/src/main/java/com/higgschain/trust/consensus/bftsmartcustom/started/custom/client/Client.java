@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * The type Client.
+ */
 @Component public class Client implements ConsensusClient {
 
     private static final Logger log = LoggerFactory.getLogger(Client.class);
@@ -22,6 +25,9 @@ import java.util.concurrent.CompletableFuture;
 
     private Serializer serializer;
 
+    /**
+     * Init.
+     */
     public void init() {
         log.info("-----ServiceProxy init-----");
         Namespace namespace = Namespace.builder()

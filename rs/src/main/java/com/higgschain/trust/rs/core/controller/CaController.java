@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * The type Ca controller.
+ *
  * @author WangQuanzhou
- * @date 2018/6/5 17:37
+ * @date 2018 /6/5 17:37
  */
 @RestController
 @Slf4j
@@ -27,8 +29,8 @@ public class CaController {
     /**
      * auth ca transaction
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return resp data
      */
     @RequestMapping(value = "/ca/auth")
     RespData<String> caAuth(@RequestBody List<CaVO> list) {
@@ -38,8 +40,8 @@ public class CaController {
     /**
      * update ca transaction
      *
-     * @param caVO
-     * @return
+     * @param caVO the ca vo
+     * @return resp data
      */
     @RequestMapping(value = "/ca/update")
     RespData<String> caUpdate(@RequestBody CaVO caVO) {
@@ -49,8 +51,8 @@ public class CaController {
     /**
      * cancel ca transaction
      *
-     * @param caVO
-     * @return
+     * @param caVO the ca vo
+     * @return resp data
      */
     @RequestMapping(value = "/ca/cancel")
     RespData<String> caCancel(@RequestBody CaVO caVO) {
@@ -60,8 +62,8 @@ public class CaController {
     /**
      * acquire ca transaction
      *
-     * @param
-     * @return
+     * @param user the user
+     * @return resp data
      */
     @RequestMapping(value = "/ca/get")
     RespData<Ca> acquireCA(@RequestParam("user") String user) {

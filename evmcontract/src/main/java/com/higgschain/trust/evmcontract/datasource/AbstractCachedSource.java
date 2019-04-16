@@ -22,6 +22,9 @@ package com.higgschain.trust.evmcontract.datasource;
  * supplied key and value MemSizeEstimator's
  * <p>
  * Created by Anton Nashatyrev on 01.12.2016.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public abstract class AbstractCachedSource<Key, Value>
         extends AbstractChainedSource<Key, Value, Key, Value>
@@ -32,19 +35,31 @@ public abstract class AbstractCachedSource<Key, Value>
     /**
      * Like the Optional interface represents either the value cached
      * or null cached (i.e. cache knows that underlying storage contain null)
-     * @param <V>
+     *
+     * @param <V> the type parameter
      */
     public interface Entry<V> {
         /**
          * entry value interface
-         * @return val
+         *
+         * @return val v
          */
         V value();
     }
 
+    /**
+     * The type Simple entry.
+     *
+     * @param <V> the type parameter
+     */
     static final class SimpleEntry<V> implements Entry<V> {
         private V val;
 
+        /**
+         * Instantiates a new Simple entry.
+         *
+         * @param val the val
+         */
         public SimpleEntry(V val) {
             this.val = val;
         }
@@ -55,10 +70,21 @@ public abstract class AbstractCachedSource<Key, Value>
         }
     }
 
+    /**
+     * The Key size estimator.
+     */
     protected MemSizeEstimator<Key> keySizeEstimator;
+    /**
+     * The Value size estimator.
+     */
     protected MemSizeEstimator<Value> valueSizeEstimator;
     private int size = 0;
 
+    /**
+     * Instantiates a new Abstract cached source.
+     *
+     * @param source the source
+     */
     public AbstractCachedSource(Source<Key, Value> source) {
         super(source);
     }
@@ -66,9 +92,9 @@ public abstract class AbstractCachedSource<Key, Value>
     /**
      * Returns the cached value if exist.
      * Method doesn't look into the underlying storage
-     *@param key get cache value by key
-     * @return The value Entry if it cached (Entry may has null value if null value is cached),
-     * or null if no information in the cache for this key
+     *
+     * @param key get cache value by key
+     * @return The value Entry if it cached (Entry may has null value if null value is cached), or null if no information in the cache for this key
      */
     abstract Entry<Value> getCached(Key key);
 
@@ -77,6 +103,9 @@ public abstract class AbstractCachedSource<Key, Value>
      * Only new entries should be accounted for accurate size tracking
      * If the value for the key is changed the {@link #cacheRemoved}
      * needs to be called first
+     *
+     * @param key   the key
+     * @param value the value
      */
     protected void cacheAdded(Key key, Value value) {
         synchronized (lock) {
@@ -91,6 +120,9 @@ public abstract class AbstractCachedSource<Key, Value>
 
     /**
      * Needs to be called by the implementation when cache entry is removed
+     *
+     * @param key   the key
+     * @param value the value
      */
     protected void cacheRemoved(Key key, Value value) {
         synchronized (lock) {
@@ -114,6 +146,10 @@ public abstract class AbstractCachedSource<Key, Value>
 
     /**
      * Sets the key/value size estimators
+     *
+     * @param keySizeEstimator   the key size estimator
+     * @param valueSizeEstimator the value size estimator
+     * @return the abstract cached source
      */
     public AbstractCachedSource<Key, Value> withSizeEstimators(MemSizeEstimator<Key> keySizeEstimator, MemSizeEstimator<Value> valueSizeEstimator) {
         this.keySizeEstimator = keySizeEstimator;

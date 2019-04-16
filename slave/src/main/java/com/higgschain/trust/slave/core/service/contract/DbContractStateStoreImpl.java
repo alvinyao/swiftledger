@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type Db contract state store.
+ *
  * @author duhongming
- * @date 2018/05/07
+ * @date 2018 /05/07
  */
 @Service public class DbContractStateStoreImpl implements ContractStateStore {
 

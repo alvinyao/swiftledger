@@ -25,8 +25,10 @@ import java.math.BigInteger;
 import static org.apache.commons.lang3.ArrayUtils.nullToEmpty;
 
 /**
+ * The type Contract service.
+ *
  * @author duhongming
- * @date 2018/11/15
+ * @date 2018 /11/15
  */
 public class ContractService {
 
@@ -39,6 +41,11 @@ public class ContractService {
     private final  static byte[] gasPrice = Hex.decode("e8d4a51000");  // 1000000000000
     private final  static byte[] gas = Hex.decode("27100000000000");            // 10000
 
+    /**
+     * Instantiates a new Contract service.
+     *
+     * @param rootHash the root hash
+     */
     public ContractService(byte[] rootHash) {
         this.config = SystemProperties.getDefault();
         this.db = new RocksDbDataSource("trust");
@@ -59,6 +66,11 @@ public class ContractService {
 //        System.out.println("balance: " + balance);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         byte[] root = Hex.decode("6060604052341561000f57600080fd5b5b6101a18061001f6000396000f300606060405263ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663b21e51f18114610069578063b2ab515414610084578063c226d9ee14610099578063e1cb0e52146100ae578063f0ba8440146100d3575b600080fd5b341561007457600080fd5b6100826004356024356100fb565b005b341561008f57600080fd5b610082610111565b005b34156100a457600080fd5b61008261013b565b005b34156100b957600080fd5b6100c161015c565b60405190815260200160405180910390f35b34156100de57600080fd5b6100c1600435610163565b60405190815260200160405180910390f35b60008281526002602052604090208190555b5050565b60015b600a8110156101375760008181526002602052604090208190555b600101610114565b5b50565b60005b60648110156101375760008054820190555b60010161013e565b5b50565b6000545b90565b600260205260009081526040902054815600a165627a7a7230582076eb7abd88c40d3d271ff78493107db7edfc5e0b57d2fa7ec5baa8c92fa117170029");
         ContractService contractService = new ContractService(root);
@@ -69,11 +81,17 @@ public class ContractService {
         contractService.commit();
     }
 
+    /**
+     * Destroy.
+     */
     public void destroy() {
         repository.close();
         db.close();
     }
 
+    /**
+     * Commit.
+     */
     public void commit() {
         this.repository.commit();
 //        String dumpStr = this.repository.dumpStateTrie();
@@ -82,6 +100,11 @@ public class ContractService {
         db.put("RootHash".getBytes(), repository.getRoot());
     }
 
+    /**
+     * Create contract byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] createContract() {
         byte[] nonce = BigIntegers.asUnsignedByteArray(BigInteger.ZERO);
         byte[] code = loadCodeFromResourceFile("D:\\tmp\\demo.txt");
@@ -93,6 +116,11 @@ public class ContractService {
         return address;
     }
 
+    /**
+     * Invoke.
+     *
+     * @param contractAddress the contract address
+     */
     public void invoke(byte[] contractAddress) {
         byte[] value = Hex.decode(""); //10000000000000000 2386f26fc10000"
         byte[] nonce = BigIntegers.asUnsignedByteArray(BigInteger.ZERO);
@@ -103,7 +131,15 @@ public class ContractService {
         invokeContract(nonce, contractAddress, value, data);
     }
 
-
+    /**
+     * Create contract byte [ ].
+     *
+     * @param nonce          the nonce
+     * @param receiveAddress the receive address
+     * @param value          the value
+     * @param data           the data
+     * @return the byte [ ]
+     */
     public byte[] createContract(byte[] nonce, byte[] receiveAddress, byte[] value, byte[] data) {
         Transaction tx = new Transaction(nonce, gasPrice, gas, receiveAddress, value, data);
 
@@ -131,6 +167,15 @@ public class ContractService {
         return tx.getContractAddress();
     }
 
+    /**
+     * Invoke contract byte [ ].
+     *
+     * @param nonce           the nonce
+     * @param contractAddress the contract address
+     * @param value           the value
+     * @param data            the data
+     * @return the byte [ ]
+     */
     public byte[] invokeContract(byte[] nonce, byte[] contractAddress, byte[] value, byte[] data) {
         Transaction tx = new Transaction(nonce, gasPrice, gas, contractAddress, value, data);
 
@@ -154,7 +199,15 @@ public class ContractService {
         return result.getHReturn();
     }
 
-
+    /**
+     * Create program invoke program invoke.
+     *
+     * @param tx         the tx
+     * @param block      the block
+     * @param repository the repository
+     * @param blockStore the block store
+     * @return the program invoke
+     */
     public ProgramInvoke createProgramInvoke(Transaction tx, Block block, Repository repository,
                                              BlockStore blockStore) {
         /***         ADDRESS op       ***/
@@ -210,6 +263,12 @@ public class ContractService {
                 repository, blockStore);
     }
 
+    /**
+     * Load code from resource file byte [ ].
+     *
+     * @param filePath the file path
+     * @return the byte [ ]
+     */
     public static byte[] loadCodeFromResourceFile(String filePath) {
         try {
             String code = IOUtils.toString(new File(filePath).toURI(), "UTF-8");

@@ -28,7 +28,7 @@ import java.security.MessageDigest;
  * internal block length.</p>
  * <p>
  * <p>Classes which use this template MUST provide a working {@link
- * #getBlockLength} method even before initialization (alternatively,
+ * #getBlockLength}* method even before initialization (alternatively,
  * they may define a custom {@link #getInternalBlockLength} which does
  * not call {@link #getBlockLength}. The {@link #getDigestLength} should
  * also be operational from the beginning, but it is acceptable that it
@@ -63,9 +63,8 @@ import java.security.MessageDigest;
  * </pre>
  *
  * @author Thomas Pornin &lt;thomas.pornin@cryptolog.com&gt;
- * @version $Revision: 229 $
+ * @version $Revision : 229 $
  */
-
 public abstract class DigestEngine extends MessageDigest implements Digest {
 
     /**
@@ -107,6 +106,8 @@ public abstract class DigestEngine extends MessageDigest implements Digest {
 
     /**
      * Instantiate the engine.
+     *
+     * @param alg the alg
      */
     public DigestEngine(String alg) {
         super(alg);

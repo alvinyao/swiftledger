@@ -5,8 +5,10 @@ import com.codahale.metrics.Gauge;
 import com.higgschain.trust.network.TrafficReporter;
 
 /**
+ * The type Network traffic reporter.
+ *
  * @author duhongming
- * @date 2018/12/27
+ * @date 2018 /12/27
  */
 public class NetworkTrafficReporter implements TrafficReporter {
 
@@ -19,6 +21,11 @@ public class NetworkTrafficReporter implements TrafficReporter {
     private Counter inboundCounter;
     private Counter outboundCounter;
 
+    /**
+     * Instantiates a new Network traffic reporter.
+     *
+     * @param trustMetrics the trust metrics
+     */
     public NetworkTrafficReporter(TrustMetrics trustMetrics) {
         this.inboundCounter = new Counter();
         this.outboundCounter = new Counter();

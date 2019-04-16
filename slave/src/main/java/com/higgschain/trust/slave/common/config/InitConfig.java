@@ -42,13 +42,18 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
+ * The type Init config.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 @Slf4j
 @Configuration
 @Getter
 public class InitConfig {
+    /**
+     * The Bean factory.
+     */
     @Autowired
     BeanFactory beanFactory;
     @Value("${trust.redisson.address:redis://127.0.0.1:6379}")
@@ -68,12 +73,23 @@ public class InitConfig {
     @Value("${trust.rocksdb.file.root:/data/home/admin/trust/rocks/}")
     private String dbFileRoot;
 
-
+    /**
+     * Tx required transaction template.
+     *
+     * @param platformTransactionManager the platform transaction manager
+     * @return the transaction template
+     */
     @Bean(name = "txRequired")
     public TransactionTemplate txRequired(PlatformTransactionManager platformTransactionManager) {
         return new TransactionTemplate(platformTransactionManager);
     }
 
+    /**
+     * Tx nested transaction template.
+     *
+     * @param platformTransactionManager the platform transaction manager
+     * @return the transaction template
+     */
     @Bean(name = "txNested")
     public TransactionTemplate txNested(PlatformTransactionManager platformTransactionManager) {
         TransactionTemplate tx = new TransactionTemplate(platformTransactionManager);
@@ -81,6 +97,12 @@ public class InitConfig {
         return tx;
     }
 
+    /**
+     * Tx requires new transaction template.
+     *
+     * @param platformTransactionManager the platform transaction manager
+     * @return the transaction template
+     */
     @Bean(name = "txRequiresNew")
     public TransactionTemplate txRequiresNew(PlatformTransactionManager platformTransactionManager) {
         TransactionTemplate tx = new TransactionTemplate(platformTransactionManager);
@@ -88,6 +110,11 @@ public class InitConfig {
         return tx;
     }
 
+    /**
+     * Package thread pool executor service.
+     *
+     * @return the executor service
+     */
     @Bean(name = "packageThreadPool")
     public ExecutorService packageThreadPool() {
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("package-pool-%d").build();
@@ -95,6 +122,11 @@ public class InitConfig {
         return new TraceableExecutorService(beanFactory, packageExecutor);
     }
 
+    /**
+     * Http message converters http message converters.
+     *
+     * @return the http message converters
+     */
     @Bean
     public HttpMessageConverters HttpMessageConverters() {
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
@@ -108,16 +140,31 @@ public class InitConfig {
         return new HttpMessageConverters(fastConverter);
     }
 
+    /**
+     * Persisted result map hash blocking map.
+     *
+     * @return the hash blocking map
+     */
     @Bean
     public HashBlockingMap persistedResultMap() {
         return new HashBlockingMap<>(Constant.MAX_BLOCKING_QUEUE_SIZE);
     }
 
+    /**
+     * Cluster persisted result map hash blocking map.
+     *
+     * @return the hash blocking map
+     */
     @Bean
     public HashBlockingMap clusterPersistedResultMap() {
         return new HashBlockingMap<>(Constant.MAX_BLOCKING_QUEUE_SIZE);
     }
 
+    /**
+     * Sync voting executor pool thread pool task executor.
+     *
+     * @return the thread pool task executor
+     */
     @Bean(name = "syncVotingExecutorPool")
     public ThreadPoolTaskExecutor syncVotingExecutorPool() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
@@ -129,6 +176,11 @@ public class InitConfig {
         return new LazyTraceThreadPoolTaskExecutor(beanFactory, threadPoolTaskExecutor);
     }
 
+    /**
+     * Async voting executor pool thread pool task executor.
+     *
+     * @return the thread pool task executor
+     */
     @Bean(name = "asyncVotingExecutorPool")
     public ThreadPoolTaskExecutor asyncVotingExecutorPool() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
@@ -140,6 +192,11 @@ public class InitConfig {
         return new LazyTraceThreadPoolTaskExecutor(beanFactory, threadPoolTaskExecutor);
     }
 
+    /**
+     * Tx consumer executor executor.
+     *
+     * @return the executor
+     */
     @Bean(name = "txConsumerExecutor")
     public Executor txConsumerExecutor() {
         NamedDaemonThreadFactory namedDaemonThreadFactory = new NamedDaemonThreadFactory("txConsumerExecutor-");
@@ -147,6 +204,11 @@ public class InitConfig {
         return new LazyTraceExecutor(beanFactory, service);
     }
 
+    /**
+     * P 2 p send executor thread pool task executor.
+     *
+     * @return the thread pool task executor
+     */
     @Bean (name = "p2pSendExecutor")  public ThreadPoolTaskExecutor p2pSendExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setCorePoolSize(10);
@@ -159,6 +221,11 @@ public class InitConfig {
         return new LazyTraceThreadPoolTaskExecutor(beanFactory, threadPoolTaskExecutor);
     }
 
+    /**
+     * P 2 p receive executor thread pool task executor.
+     *
+     * @return the thread pool task executor
+     */
     @Bean (name = "p2pReceiveExecutor")  public ThreadPoolTaskExecutor p2pReceiveExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setCorePoolSize(5);
@@ -171,11 +238,10 @@ public class InitConfig {
         return new LazyTraceThreadPoolTaskExecutor(beanFactory, threadPoolTaskExecutor);
     }
 
-
     /**
      * redisson single server bean
      *
-     * @return
+     * @return redisson client
      */
     @Bean
     @ConditionalOnProperty(name = "trust.redisson.single", havingValue = "true", matchIfMissing = true)
@@ -200,7 +266,7 @@ public class InitConfig {
     /**
      * redisson sentinel server bean
      *
-     * @return
+     * @return redisson client
      */
     @Bean
     @ConditionalOnProperty(name = "trust.redisson.single", havingValue = "false")
@@ -227,6 +293,11 @@ public class InitConfig {
         return Redisson.create(config);
     }
 
+    /**
+     * Default key value db source db source.
+     *
+     * @return the db source
+     */
     @Bean
     public DbSource<byte[]> defaultKeyValueDbSource() {
         RocksDbDataSource rocksDbDataSource = new RocksDbDataSource("StateDB", defaultSystemProperties()) {
@@ -238,12 +309,22 @@ public class InitConfig {
         return rocksDbDataSource;
     }
 
+    /**
+     * Default repository repository.
+     *
+     * @return the repository
+     */
     @Bean
     public Repository defaultRepository() {
         DbSource<byte[]> db = defaultKeyValueDbSource();
         return new RepositoryRoot(db, null);
     }
 
+    /**
+     * Default system properties system properties.
+     *
+     * @return the system properties
+     */
     @Bean
     public SystemProperties defaultSystemProperties() {
         System.setProperty("database.dir", dbFileRoot);

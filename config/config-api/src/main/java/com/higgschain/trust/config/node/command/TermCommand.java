@@ -3,12 +3,30 @@
  */
 package com.higgschain.trust.config.node.command;
 
+/**
+ * The interface Term command.
+ */
 public interface TermCommand {
 
+    /**
+     * Gets term.
+     *
+     * @return the term
+     */
     long getTerm();
 
+    /**
+     * Gets package height.
+     *
+     * @return the package height
+     */
     long getPackageHeight();
 
+    /**
+     * Gets node name.
+     *
+     * @return the node name
+     */
     String getNodeName();
 
 }

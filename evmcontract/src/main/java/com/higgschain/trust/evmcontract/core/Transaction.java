@@ -32,7 +32,6 @@ import java.util.Arrays;
 
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 
-
 /**
  * A transaction (formally, T) is a single cryptographically
  * signed instruction sent by an actor external to Ethereum.
@@ -47,7 +46,13 @@ public class Transaction {
     private static final BigInteger DEFAULT_GAS_PRICE = new BigInteger("10000000000000");
     private static final BigInteger DEFAULT_BALANCE_GAS = new BigInteger("21000");
 
+    /**
+     * The constant HASH_LENGTH.
+     */
     public static final int HASH_LENGTH = 32;
+    /**
+     * The constant ADDRESS_LENGTH.
+     */
     public static final int ADDRESS_LENGTH = 20;
 
     /* SHA3 hash of the RLP encoded transaction */
@@ -89,6 +94,9 @@ public class Transaction {
      * (including public key recovery bits) */
     private ECKey.ECDSASignature signature;
 
+    /**
+     * The Send address.
+     */
     protected byte[] sendAddress;
 
     /* Tx in encoded form */
@@ -97,15 +105,34 @@ public class Transaction {
      */
     protected byte[] rlpEncoded;
     private byte[] rawHash;
+    /**
+     * The Parsed.
+     */
     /* Indicates if this transaction has been parsed
      * from the RLP-encoded data */
     protected boolean parsed = false;
 
+    /**
+     * Instantiates a new Transaction.
+     *
+     * @param rawData the raw data
+     */
     public Transaction(byte[] rawData) {
         this.rlpEncoded = rawData;
         parsed = false;
     }
 
+    /**
+     * Instantiates a new Transaction.
+     *
+     * @param nonce          the nonce
+     * @param gasPrice       the gas price
+     * @param gasLimit       the gas limit
+     * @param receiveAddress the receive address
+     * @param value          the value
+     * @param data           the data
+     * @param chainId        the chain id
+     */
     public Transaction(byte[] nonce, byte[] gasPrice, byte[] gasLimit, byte[] receiveAddress, byte[] value, byte[] data,
                        Integer chainId) {
         this.nonce = nonce;
@@ -131,11 +158,32 @@ public class Transaction {
      * Warning: this transaction would not be protected by replay-attack protection mechanism
      * Use {@link Transaction#Transaction(byte[], byte[], byte[], byte[], byte[], byte[], Integer)} constructor instead
      * and specify the desired chainID
+     *
+     * @param nonce          the nonce
+     * @param gasPrice       the gas price
+     * @param gasLimit       the gas limit
+     * @param receiveAddress the receive address
+     * @param value          the value
+     * @param data           the data
      */
     public Transaction(byte[] nonce, byte[] gasPrice, byte[] gasLimit, byte[] receiveAddress, byte[] value, byte[] data) {
         this(nonce, gasPrice, gasLimit, receiveAddress, value, data, null);
     }
 
+    /**
+     * Instantiates a new Transaction.
+     *
+     * @param nonce          the nonce
+     * @param gasPrice       the gas price
+     * @param gasLimit       the gas limit
+     * @param receiveAddress the receive address
+     * @param value          the value
+     * @param data           the data
+     * @param r              the r
+     * @param s              the s
+     * @param v              the v
+     * @param chainId        the chain id
+     */
     public Transaction(byte[] nonce, byte[] gasPrice, byte[] gasLimit, byte[] receiveAddress, byte[] value, byte[] data,
                        byte[] r, byte[] s, byte v, Integer chainId) {
         this(nonce, gasPrice, gasLimit, receiveAddress, value, data, chainId);
@@ -146,6 +194,16 @@ public class Transaction {
      * Warning: this transaction would not be protected by replay-attack protection mechanism
      * Use {@link Transaction#Transaction(byte[], byte[], byte[], byte[], byte[], byte[], byte[], byte[], byte, Integer)}
      * constructor instead and specify the desired chainID
+     *
+     * @param nonce          the nonce
+     * @param gasPrice       the gas price
+     * @param gasLimit       the gas limit
+     * @param receiveAddress the receive address
+     * @param value          the value
+     * @param data           the data
+     * @param r              the r
+     * @param s              the s
+     * @param v              the v
      */
     public Transaction(byte[] nonce, byte[] gasPrice, byte[] gasLimit, byte[] receiveAddress, byte[] value, byte[] data,
                        byte[] r, byte[] s, byte v) {
@@ -186,12 +244,17 @@ public class Transaction {
         return (byte) (realV + inc);
     }
 
-
+    /**
+     * Verify.
+     */
     public synchronized void verify() {
         rlpParse();
         validate();
     }
 
+    /**
+     * Rlp parse.
+     */
     public synchronized void rlpParse() {
         if (parsed) {
             return;
@@ -265,14 +328,29 @@ public class Transaction {
         }
     }
 
+    /**
+     * Is parsed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isParsed() {
         return parsed;
     }
 
+    /**
+     * Sets hash.
+     *
+     * @param hash the hash
+     */
     public void setHash(byte[] hash) {
         this.hash = hash;
     }
 
+    /**
+     * Get hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getHash() {
         if (!isEmpty(hash)) {
             return hash;
@@ -282,6 +360,11 @@ public class Transaction {
         return hash;
     }
 
+    /**
+     * Get raw hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getRawHash() {
         rlpParse();
         if (rawHash != null) {
@@ -291,63 +374,122 @@ public class Transaction {
         return rawHash = HashUtil.sha3(plainMsg);
     }
 
-
+    /**
+     * Get nonce byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getNonce() {
         rlpParse();
 
         return nonce == null ? ByteUtil.ZERO_BYTE_ARRAY : nonce;
     }
 
+    /**
+     * Sets nonce.
+     *
+     * @param nonce the nonce
+     */
     protected void setNonce(byte[] nonce) {
         this.nonce = nonce;
         parsed = true;
     }
 
+    /**
+     * Is value tx boolean.
+     *
+     * @return the boolean
+     */
     public boolean isValueTx() {
         rlpParse();
         return value != null;
     }
 
+    /**
+     * Get value byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getValue() {
         rlpParse();
         return value == null ? ByteUtil.ZERO_BYTE_ARRAY : value;
     }
 
+    /**
+     * Sets value.
+     *
+     * @param value the value
+     */
     protected void setValue(byte[] value) {
         this.value = value;
         parsed = true;
     }
 
+    /**
+     * Get receive address byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getReceiveAddress() {
         rlpParse();
         return receiveAddress;
     }
 
+    /**
+     * Sets receive address.
+     *
+     * @param receiveAddress the receive address
+     */
     protected void setReceiveAddress(byte[] receiveAddress) {
         this.receiveAddress = receiveAddress;
         parsed = true;
     }
 
+    /**
+     * Get gas price byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getGasPrice() {
         rlpParse();
         return gasPrice == null ? ByteUtil.ZERO_BYTE_ARRAY : gasPrice;
     }
 
+    /**
+     * Sets gas price.
+     *
+     * @param gasPrice the gas price
+     */
     protected void setGasPrice(byte[] gasPrice) {
         this.gasPrice = gasPrice;
         parsed = true;
     }
 
+    /**
+     * Get gas limit byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getGasLimit() {
         rlpParse();
         return gasLimit == null ? ByteUtil.ZERO_BYTE_ARRAY : gasLimit;
     }
 
+    /**
+     * Sets gas limit.
+     *
+     * @param gasLimit the gas limit
+     */
     protected void setGasLimit(byte[] gasLimit) {
         this.gasLimit = gasLimit;
         parsed = true;
     }
 
+    /**
+     * Non zero data bytes long.
+     *
+     * @return the long
+     */
     public long nonZeroDataBytes() {
         if (data == null) {
             return 0;
@@ -361,6 +503,11 @@ public class Transaction {
         return counter;
     }
 
+    /**
+     * Zero data bytes long.
+     *
+     * @return the long
+     */
     public long zeroDataBytes() {
         if (data == null) {
             return 0;
@@ -374,22 +521,41 @@ public class Transaction {
         return counter;
     }
 
-
+    /**
+     * Get data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getData() {
         rlpParse();
         return data;
     }
 
+    /**
+     * Sets data.
+     *
+     * @param data the data
+     */
     protected void setData(byte[] data) {
         this.data = data;
         parsed = true;
     }
 
+    /**
+     * Gets signature.
+     *
+     * @return the signature
+     */
     public ECKey.ECDSASignature getSignature() {
         rlpParse();
         return signature;
     }
 
+    /**
+     * Get contract address byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getContractAddress() {
         if (!isContractCreation()) {
             return null;
@@ -397,6 +563,11 @@ public class Transaction {
         return HashUtil.calcNewAddr(this.getSender(), this.getNonce());
     }
 
+    /**
+     * Is contract creation boolean.
+     *
+     * @return the boolean
+     */
     public boolean isContractCreation() {
         rlpParse();
         return this.receiveAddress == null || Arrays.equals(this.receiveAddress, ByteUtil.EMPTY_BYTE_ARRAY);
@@ -406,11 +577,21 @@ public class Transaction {
      * Crypto
      */
 
+    /**
+     * Gets key.
+     *
+     * @return the key
+     */
     public ECKey getKey() {
         byte[] hash = getRawHash();
         return ECKey.recoverFromSignature(signature.v, signature, hash);
     }
 
+    /**
+     * Get sender byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public synchronized byte[] getSender() {
         try {
             if (sendAddress == null && getSignature() != null) {
@@ -423,18 +604,33 @@ public class Transaction {
         return null;
     }
 
+    /**
+     * Gets chain id.
+     *
+     * @return the chain id
+     */
     public Integer getChainId() {
         rlpParse();
         return chainId == null ? null : (int) chainId;
     }
 
     /**
+     * Sign.
+     *
+     * @param privKeyBytes the priv key bytes
+     * @throws MissingPrivateKeyException the missing private key exception
      * @deprecated should prefer #sign(ECKey) over this method
      */
     public void sign(byte[] privKeyBytes) throws ECKey.MissingPrivateKeyException {
         sign(ECKey.fromPrivate(privKeyBytes));
     }
 
+    /**
+     * Sign.
+     *
+     * @param key the key
+     * @throws MissingPrivateKeyException the missing private key exception
+     */
     public void sign(ECKey key) throws ECKey.MissingPrivateKeyException {
         this.signature = key.sign(this.getRawHash());
         this.rlpEncoded = null;
@@ -445,6 +641,12 @@ public class Transaction {
         return toString(Integer.MAX_VALUE);
     }
 
+    /**
+     * To string string.
+     *
+     * @param maxDataSize the max data size
+     * @return the string
+     */
     public String toString(int maxDataSize) {
         rlpParse();
         String dataS;
@@ -473,6 +675,8 @@ public class Transaction {
     /**
      * For signatures you have to keep also
      * RLP of the transaction without any signature data
+     *
+     * @return the byte [ ]
      */
     public byte[] getEncodedRaw() {
 
@@ -507,6 +711,11 @@ public class Transaction {
         return rlpRaw;
     }
 
+    /**
+     * Get encoded byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getEncoded() {
 
         if (rlpEncoded != null) {
@@ -579,17 +788,40 @@ public class Transaction {
     }
 
     /**
+     * Create default transaction.
+     *
+     * @param to     the to
+     * @param amount the amount
+     * @param nonce  the nonce
+     * @return the transaction
      * @deprecated Use {@link Transaction#createDefault(String, BigInteger, BigInteger, Integer)} instead
      */
     public static Transaction createDefault(String to, BigInteger amount, BigInteger nonce) {
         return create(to, amount, nonce, DEFAULT_GAS_PRICE, DEFAULT_BALANCE_GAS);
     }
 
+    /**
+     * Create default transaction.
+     *
+     * @param to      the to
+     * @param amount  the amount
+     * @param nonce   the nonce
+     * @param chainId the chain id
+     * @return the transaction
+     */
     public static Transaction createDefault(String to, BigInteger amount, BigInteger nonce, Integer chainId) {
         return create(to, amount, nonce, DEFAULT_GAS_PRICE, DEFAULT_BALANCE_GAS, chainId);
     }
 
     /**
+     * Create transaction.
+     *
+     * @param to       the to
+     * @param amount   the amount
+     * @param nonce    the nonce
+     * @param gasPrice the gas price
+     * @param gasLimit the gas limit
+     * @return the transaction
      * @deprecated use {@link Transaction#create(String, BigInteger, BigInteger, BigInteger, BigInteger, Integer)} instead
      */
     public static Transaction create(String to, BigInteger amount, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit) {
@@ -601,6 +833,17 @@ public class Transaction {
                 null);
     }
 
+    /**
+     * Create transaction.
+     *
+     * @param to       the to
+     * @param amount   the amount
+     * @param nonce    the nonce
+     * @param gasPrice the gas price
+     * @param gasLimit the gas limit
+     * @param chainId  the chain id
+     * @return the transaction
+     */
     public static Transaction create(String to, BigInteger amount, BigInteger nonce, BigInteger gasPrice,
                                      BigInteger gasLimit, Integer chainId) {
         return new Transaction(BigIntegers.asUnsignedByteArray(nonce),

@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Cluster node vo.
+ *
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/6/5 13:05
+ * @date 2018 /6/5 13:05
  */
 @Getter @Setter public class ClusterNodeVO extends BaseBO {
     private String reqNo;

@@ -17,8 +17,10 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
+ * The type Failover package filter.
+ *
  * @author suimi
- * @date 2018/6/21
+ * @date 2018 /6/21
  */
 @Order(4) @Slf4j @Component public class FailoverPackageFilter implements CommandFilter {
 

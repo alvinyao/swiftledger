@@ -29,6 +29,9 @@ import static org.junit.Assert.assertTrue;
 public class BloomFilterTest {
     private static final Logger logger = LoggerFactory.getLogger("test");
 
+    /**
+     * Test 1.
+     */
     @Test
     public void test1() {
         BloomFilter filter = BloomFilter.createNone();

@@ -69,7 +69,9 @@ public class LCManager {
     /**
      * Constructor
      *
-     * @param md The message digest engine from TOM layer
+     * @param tomLayer     the tom layer
+     * @param SVController the sv controller
+     * @param md           The message digest engine from TOM layer
      */
     public LCManager(TOMLayer tomLayer, ServerViewController SVController, MessageDigest md) {
         this.tomLayer = tomLayer;
@@ -212,6 +214,8 @@ public class LCManager {
 
     /**
      * Set the next regency
+     *
+     * @param nextreg the nextreg
      */
     public void setNextReg(int nextreg) {
         this.nextreg = nextreg;
@@ -242,6 +246,8 @@ public class LCManager {
 
     /**
      * Discard information about STOP messages up to specified regency
+     *
+     * @param regency the regency
      */
     public void removeStops(int regency) {
         Integer[] keys = new Integer[stops.keySet().size()];
@@ -329,6 +335,7 @@ public class LCManager {
     /**
      * Keep collect from an incoming SYNC message
      *
+     * @param regency       the regency
      * @param signedCollect the signed collect data
      */
     public void addCollect(int regency, SignedObject signedCollect) {
@@ -394,9 +401,7 @@ public class LCManager {
      * filtered using the method selectCollects()
      *
      * @param collects the collect data to which to apply the predicate.
-     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11
-     * <p>
-     * In addition, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
+     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11 <p> In addition, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
      */
     public boolean sound(HashSet<CollectData> collects) {
 
@@ -490,9 +495,7 @@ public class LCManager {
      * @param timestamp the timestamp to search for
      * @param value     the value to search for
      * @param collects  the collect data to which to apply the predicate.
-     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11
-     * <p>
-     * In addition, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
+     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11 <p> In addition, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
      */
     public boolean binds(int timestamp, byte[] value, HashSet<CollectData> collects) {
 
@@ -518,10 +521,7 @@ public class LCManager {
      * with a timestamp greater or equal to zero
      *
      * @param collects Set of collects from which to determine the value
-     * @return The bind value
-     * <p>
-     * See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11
-     * Also, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
+     * @return The bind value <p> See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11 Also, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
      */
     public byte[] getBindValue(HashSet<CollectData> collects) {
 
@@ -594,9 +594,7 @@ public class LCManager {
      * filtered using the method selectCollects()
      *
      * @param collects the collect data to which to apply the predicate.
-     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11
-     * <p>
-     * In addition, see page 253 from "Introduction to Reliable and Secure Distributed Programming"
+     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11 <p> In addition, see page 253 from "Introduction to Reliable and Secure Distributed Programming"
      */
     public boolean unbound(HashSet<CollectData> collects) {
 
@@ -632,9 +630,7 @@ public class LCManager {
      * @param timestamp the timestamp to search for
      * @param value     the value to search for
      * @param collects  the collect data to which to apply the predicate.
-     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), pages 10-11
-     * <p>
-     * In addition, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
+     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), pages 10-11 <p> In addition, see pages 252 and 253 from "Introduction to Reliable and Secure Distributed Programming"
      */
     public boolean quorumHighest(int timestamp, byte[] value, HashSet<CollectData> collects) {
 
@@ -691,9 +687,7 @@ public class LCManager {
      * @param timestamp the timestamp to search for
      * @param value     the value to search for
      * @param collects  the collect data to which to apply the predicate.
-     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11
-     * <p>
-     * In addition, see page 253 from "Introduction to Reliable and Secure Distributed Programming"
+     * @return See Cachin's 'Yet Another Visit to Paxos' (April 2011), page 11 <p> In addition, see page 253 from "Introduction to Reliable and Secure Distributed Programming"
      */
     public boolean certifiedValue(int timestamp, byte[] value, HashSet<CollectData> collects) {
 
@@ -752,6 +746,7 @@ public class LCManager {
      *
      * @param signedObjects original set of signed collects
      * @param cid           the CID to which to normalize the collects
+     * @param regency       the regency
      * @return a set of correctly signed and normalized collect data structures
      */
     public HashSet<CollectData> selectCollects(HashSet<SignedObject> signedObjects, int cid, int regency) {
@@ -851,6 +846,12 @@ public class LCManager {
         return highest;
     }
 
+    /**
+     * Has valid proof boolean.
+     *
+     * @param cDec the c dec
+     * @return the boolean
+     */
     // verifies is a proof associated with a decided value is valid
     public boolean hasValidProof(CertifiedDecision cDec) {
 

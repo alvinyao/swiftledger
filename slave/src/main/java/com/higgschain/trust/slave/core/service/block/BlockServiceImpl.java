@@ -23,12 +23,17 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
+ * The type Block service.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-12
+ * @date 2018 -04-12
  */
 @Slf4j @Component public class BlockServiceImpl implements BlockService {
     @Autowired private BlockRepository blockRepository;
+    /**
+     * The Snapshot root hash builder.
+     */
     @Autowired
     SnapshotRootHashBuilder snapshotRootHashBuilder;
     @Autowired private Blockchain blockchain;

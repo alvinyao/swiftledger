@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.ArrayUtils.*;
  * when opcode is call
  *
  * @author tangkun
- * @date 2018-12-05
+ * @date 2018 -12-05
  */
 public class InternalTransaction extends Transaction {
 
@@ -44,10 +44,30 @@ public class InternalTransaction extends Transaction {
     private boolean rejected = false;
     private String note;
 
+    /**
+     * Instantiates a new Internal transaction.
+     *
+     * @param rawData the raw data
+     */
     public InternalTransaction(byte[] rawData) {
         super(rawData);
     }
 
+    /**
+     * Instantiates a new Internal transaction.
+     *
+     * @param parentHash     the parent hash
+     * @param deep           the deep
+     * @param index          the index
+     * @param nonce          the nonce
+     * @param gasPrice       the gas price
+     * @param gasLimit       the gas limit
+     * @param sendAddress    the send address
+     * @param receiveAddress the receive address
+     * @param value          the value
+     * @param data           the data
+     * @param note           the note
+     */
     public InternalTransaction(byte[] parentHash, int deep, int index, byte[] nonce, DataWord gasPrice, DataWord gasLimit,
                                byte[] sendAddress, byte[] receiveAddress, byte[] value, byte[] data, String note) {
 
@@ -84,25 +104,48 @@ public class InternalTransaction extends Transaction {
         return bytesToInt(encoded);
     }
 
+    /**
+     * Reject.
+     */
     public void reject() {
         this.rejected = true;
     }
 
+    /**
+     * Gets deep.
+     *
+     * @return the deep
+     */
     public int getDeep() {
         rlpParse();
         return deep;
     }
 
+    /**
+     * Gets index.
+     *
+     * @return the index
+     */
     public int getIndex() {
         rlpParse();
         return index;
     }
 
+    /**
+     * Is rejected boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRejected() {
         rlpParse();
         return rejected;
     }
 
+    /**
+     * Gets note.
+     *
+     * @return the note
+     */
     public String getNote() {
         rlpParse();
         return note;
@@ -114,6 +157,11 @@ public class InternalTransaction extends Transaction {
         return sendAddress;
     }
 
+    /**
+     * Get parent hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getParentHash() {
         rlpParse();
         return parentHash;

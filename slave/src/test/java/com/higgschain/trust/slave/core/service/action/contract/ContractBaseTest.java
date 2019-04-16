@@ -26,11 +26,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Contract base test.
+ *
  * @author duhongming
- * @date 2018/5/2
+ * @date 2018 /5/2
  */
 public abstract class ContractBaseTest extends BaseTest {
 
+    /**
+     * The Snapshot.
+     */
     @Autowired SnapshotService snapshot;
 
     private static String toLowerCaseFirstChar(String s) {
@@ -39,6 +44,11 @@ public abstract class ContractBaseTest extends BaseTest {
         return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
     }
 
+    /**
+     * Gets db connect string.
+     *
+     * @return the db connect string
+     */
     public static String getDbConnectString() {
         try {
             String json = IOUtils.toString(ContractBaseTest.class.getResource("/test-application.json"), "UTF-8");
@@ -57,6 +67,13 @@ public abstract class ContractBaseTest extends BaseTest {
         return null;
     }
 
+    /**
+     * Do test validate.
+     *
+     * @param param       the param
+     * @param packContext the pack context
+     * @param handler     the handler
+     */
     protected void doTestValidate(Map<?, ?> param, PackContext packContext, ActionHandler handler) {
         try {
             handler.process(packContext);
@@ -69,6 +86,13 @@ public abstract class ContractBaseTest extends BaseTest {
         }
     }
 
+    /**
+     * Do test persist.
+     *
+     * @param param       the param
+     * @param packContext the pack context
+     * @param handler     the handler
+     */
     public void doTestPersist(Map<?, ?> param, PackContext packContext, ActionHandler handler) {
         try {
             handler.process(packContext);
@@ -81,12 +105,24 @@ public abstract class ContractBaseTest extends BaseTest {
         }
     }
 
+    /**
+     * Default provider object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     @DataProvider
     public Object[][] defaultProvider(Method method) {
         String providerPath = getProviderRootPath();
         return getProviderData(providerPath);
     }
 
+    /**
+     * By method name provider object [ ] [ ].
+     *
+     * @param method the method
+     * @return the object [ ] [ ]
+     */
     @DataProvider
     public Object[][] byMethodNameProvider(Method method) {
         String name = method.getName();
@@ -97,12 +133,26 @@ public abstract class ContractBaseTest extends BaseTest {
         return getProviderData(providerPath);
     }
 
+    /**
+     * Get provider data object [ ] [ ].
+     *
+     * @param providerPath the provider path
+     * @return the object [ ] [ ]
+     */
     protected Object[][] getProviderData(String providerPath) {
         String filePath = JsonFileUtil.findJsonFile(providerPath);
         HashMap<String, String>[][] arrMap = (HashMap<String, String>[][])JsonFileUtil.jsonFileToArry(filePath);
         return arrMap;
     }
 
+    /**
+     * Gets body.
+     *
+     * @param <T>   the type parameter
+     * @param param the param
+     * @param clazz the clazz
+     * @return the body
+     */
     protected <T> T getBody(Map<?, ?> param, Class<T> clazz) {
         String bodyJson = String.valueOf(param.get("body"));
         if (StringUtils.isEmpty(bodyJson) || StringUtils.equals(bodyJson, "null")) {
@@ -112,12 +162,23 @@ public abstract class ContractBaseTest extends BaseTest {
         return JSON.parseObject(bodyJson, clazz);
     }
 
+    /**
+     * Execute delete.
+     *
+     * @param sql the sql
+     */
     protected void executeDelete(String sql) {
         DataBaseManager dataBaseManager = new DataBaseManager();
         Connection conn = dataBaseManager.getMysqlConnection(getDbConnectString());
         dataBaseManager.executeDelete(sql, conn);
     }
 
+    /**
+     * Execute sql list.
+     *
+     * @param sqls the sqls
+     * @return the list
+     */
     protected List<JSONArray> executeSql(List<String> sqls) {
         if (CollectionUtils.isEmpty(sqls)) {
             return null;
@@ -141,5 +202,10 @@ public abstract class ContractBaseTest extends BaseTest {
         return queryResult;
     }
 
+    /**
+     * Gets provider root path.
+     *
+     * @return the provider root path
+     */
     public abstract String getProviderRootPath();
 }

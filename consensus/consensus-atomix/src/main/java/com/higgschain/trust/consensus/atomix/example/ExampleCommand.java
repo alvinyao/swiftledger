@@ -4,8 +4,10 @@ import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
 import lombok.Getter;
 
 /**
+ * The type Example command.
+ *
  * @author Zhu_Yuanxiang
- * @create 2018-08-01
+ * @create 2018 -08-01
  */
 @Getter public class ExampleCommand extends AbstractConsensusCommand<String> {
     private static final long serialVersionUID = 1L;//??
@@ -14,6 +16,12 @@ import lombok.Getter;
 
     private long index;
 
+    /**
+     * Instantiates a new Example command.
+     *
+     * @param value the value
+     * @param index the index
+     */
     public ExampleCommand(String value, long index) {
         super(value);
         msg = value;

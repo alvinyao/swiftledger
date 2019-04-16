@@ -10,10 +10,23 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Curve field.
+ *
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveElement> {
 
+    /**
+     * New curve field j curve field.
+     *
+     * @param <F>    the type parameter
+     * @param random the random
+     * @param j      the j
+     * @param order  the order
+     * @param cofac  the cofac
+     * @return the curve field
+     */
     public static <F extends Field> CurveField<F> newCurveFieldJ(SecureRandom random, Element j, BigInteger order, BigInteger cofac) {
         // Assumes j != 0, 1728
 
@@ -32,22 +45,62 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         return new CurveField<F>(random, a, b, order, cofac);
     }
 
-    protected Element a, b;
-    protected Element gen, genNoCofac;
+    /**
+     * The A.
+     */
+    protected Element a, /**
+     * The B.
+     */
+    b;
+    /**
+     * The Gen.
+     */
+    protected Element gen, /**
+     * The Gen no cofac.
+     */
+    genNoCofac;
+    /**
+     * The Gen pow.
+     */
     protected ElementPow genPow;
-    protected BigInteger order, cofac;
+    /**
+     * The Order.
+     */
+    protected BigInteger order, /**
+     * The Cofac.
+     */
+    cofac;
 
+    /**
+     * The Quotient cmp.
+     */
     // A non-NULL quotientCmp means we are working with the quotient group of
     // order #E / quotientCmp, and the points are actually coset
     // representatives. Thus for a comparison, we must multiply by quotientCmp
     // before comparing.
     protected BigInteger quotientCmp = null;
 
-
+    /**
+     * Instantiates a new Curve field.
+     *
+     * @param random the random
+     * @param a      the a
+     * @param b      the b
+     * @param order  the order
+     */
     public CurveField(SecureRandom random, Element a, Element b, BigInteger order) {
         this(random, a, b, order, (BigInteger) null);
     }
 
+    /**
+     * Instantiates a new Curve field.
+     *
+     * @param random the random
+     * @param a      the a
+     * @param b      the b
+     * @param order  the order
+     * @param gen    the gen
+     */
     public CurveField(SecureRandom random, Element a, Element b, BigInteger order, byte[] gen) {
         super(random, (F) a.getField());
 
@@ -57,6 +110,15 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         this.gen = newElementFromBytes(gen);
     }
 
+    /**
+     * Instantiates a new Curve field.
+     *
+     * @param random the random
+     * @param a      the a
+     * @param b      the b
+     * @param order  the order
+     * @param cofac  the cofac
+     */
     public CurveField(SecureRandom random, Element a, Element b, BigInteger order, BigInteger cofac) {
         super(random, (F) a.getField());
 
@@ -68,6 +130,16 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         initGen();
     }
 
+    /**
+     * Instantiates a new Curve field.
+     *
+     * @param random     the random
+     * @param a          the a
+     * @param b          the b
+     * @param order      the order
+     * @param cofac      the cofac
+     * @param genNoCofac the gen no cofac
+     */
     public CurveField(SecureRandom random, Element a, Element b, BigInteger order, BigInteger cofac, byte[] genNoCofac) {
         super(random, (F) a.getField());
 
@@ -80,6 +152,14 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         initGen(genNoCofac);
     }
 
+    /**
+     * Instantiates a new Curve field.
+     *
+     * @param random the random
+     * @param b      the b
+     * @param order  the order
+     * @param cofac  the cofac
+     */
     public CurveField(SecureRandom random, Element b, BigInteger order, BigInteger cofac) {
         this(random, b.getField().newZeroElement(), b, order, cofac);
     }
@@ -125,19 +205,38 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         return result;
     }
 
-
+    /**
+     * Gets a.
+     *
+     * @return the a
+     */
     public Element getA() {
         return a;
     }
 
+    /**
+     * Gets b.
+     *
+     * @return the b
+     */
     public Element getB() {
         return b;
     }
 
+    /**
+     * Gets quotient cmp.
+     *
+     * @return the quotient cmp
+     */
     public BigInteger getQuotientCmp() {
         return quotientCmp;
     }
 
+    /**
+     * Sets quotient cmp.
+     *
+     * @param quotientCmp the quotient cmp
+     */
     public void setQuotientCmp(BigInteger quotientCmp) {
         this.quotientCmp = quotientCmp;
     }
@@ -161,14 +260,27 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         return this;
     }
 
+    /**
+     * Gets gen no cofac.
+     *
+     * @return the gen no cofac
+     */
     public Element getGenNoCofac() {
         return genNoCofac;
     }
 
+    /**
+     * Gets gen.
+     *
+     * @return the gen
+     */
     public Element getGen() {
         return gen;
     }
 
+    /**
+     * Init gen.
+     */
     protected void initGen() {
         genNoCofac = getCurveRandomNoCofacSolvefory();
 
@@ -179,6 +291,11 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         }
     }
 
+    /**
+     * Init gen.
+     *
+     * @param genNoCofac the gen no cofac
+     */
     protected void initGen(byte[] genNoCofac) {
         if (genNoCofac == null) {
             this.genNoCofac = getCurveRandomNoCofacSolvefory();
@@ -193,6 +310,11 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         }
     }
 
+    /**
+     * Gets curve random no cofac solvefory.
+     *
+     * @return the curve random no cofac solvefory
+     */
     protected CurveElement getCurveRandomNoCofacSolvefory() {
         //TODO(-): with 0.5 probability negate y-coord
 
@@ -349,6 +471,11 @@ public class CurveField<F extends Field> extends AbstractFieldOver<F, CurveEleme
         return a;
     }
 
+    /**
+     * Gets gen pow.
+     *
+     * @return the gen pow
+     */
     public ElementPow getGenPow() {
         if (genPow == null)
             genPow = gen.getElementPowPreProcessing();

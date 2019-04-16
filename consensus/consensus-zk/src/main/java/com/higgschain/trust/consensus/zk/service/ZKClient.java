@@ -28,8 +28,10 @@ import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 /**
+ * The type Zk client.
+ *
  * @author: zhouyafeng
- * @create: 2018/09/06 16:32
+ * @create: 2018 /09/06 16:32
  * @description:
  */
 @Component
@@ -42,6 +44,9 @@ public class ZKClient implements ConsensusClient,ConsensusStateMachine,Initializ
     @Autowired
     private ZkCommitReplicateComposite zkCommitReplicateComposite;
 
+    /**
+     * The Function map.
+     */
     Map<Class<?>, Function<ConsensusCommit<?>, ?>> functionMap;
 
     @Value("${zk.connection.info}")
@@ -64,6 +69,11 @@ public class ZKClient implements ConsensusClient,ConsensusStateMachine,Initializ
         listener(curatorFramework);
     }
 
+    /**
+     * Submit command.
+     *
+     * @param command the command
+     */
     public void submitCommand(AbstractConsensusCommand command) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = null;
@@ -80,6 +90,11 @@ public class ZKClient implements ConsensusClient,ConsensusStateMachine,Initializ
         }
     }
 
+    /**
+     * Listener.
+     *
+     * @param client the client
+     */
     public void listener(CuratorFramework client) {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         final NodeCache nodeCache = new NodeCache(client, dataPath, false);

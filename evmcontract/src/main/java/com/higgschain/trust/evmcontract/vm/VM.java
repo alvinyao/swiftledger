@@ -114,6 +114,11 @@ public class VM {
      */
     private static final String DUMP_STYLE_PRETTY = "pretty";
 
+    /**
+     * Instantiates a new Vm.
+     *
+     * @param config the config
+     */
     public VM(SystemProperties config) {
         ((ch.qos.logback.classic.Logger) LOGGER).setLevel(Level.INFO);
         this.config = config;
@@ -121,6 +126,11 @@ public class VM {
         dumpBlock = config.dumpBlock();
     }
 
+    /**
+     * Sets vm hook.
+     *
+     * @param vmHook the vm hook
+     */
     public static void setVmHook(VMHook vmHook) {
         VM.vmHook = vmHook;
     }
@@ -190,6 +200,11 @@ public class VM {
         }
     }
 
+    /**
+     * Step.
+     *
+     * @param program the program
+     */
     public void step(Program program) {
 
         if (vmTrace) {
@@ -255,10 +270,12 @@ public class VM {
 
     /**
      * Execute operation
-     * @param op current op
-     * @param program context program
+     *
+     * @param op               current op
+     * @param program          context program
      * @param blockChainConfig config
-     * @param adjustedCallGas adjusted call gas
+     * @param adjustedCallGas  adjusted call gas
+     * @return the string
      */
     public String stepInto(final OpCode op, final Program program,  final BlockChainConfig blockChainConfig,
                          final DataWord adjustedCallGas){
@@ -1285,10 +1302,11 @@ public class VM {
 
     /**
      * calculate fees by op
-     * @param op current op
-     * @param program
-     * @param blockChainConfig
-     * @return CalculateFeeResult
+     *
+     * @param op               current op
+     * @param program          the program
+     * @param blockChainConfig the block chain config
+     * @return CalculateFeeResult calculate fee result
      */
     public CalculateFeeResult calculateFees(OpCode op,Program program,BlockChainConfig blockChainConfig){
 
@@ -1465,10 +1483,22 @@ public class VM {
     @Setter
     @Getter
     class CalculateFeeResult{
+        /**
+         * The Gas cost.
+         */
         long gasCost;
+        /**
+         * The Adjusted call gas.
+         */
         DataWord adjustedCallGas;
 
     }
+
+    /**
+     * Play.
+     *
+     * @param program the program
+     */
     public void play(Program program) {
         try {
             if (vmHook != null) {

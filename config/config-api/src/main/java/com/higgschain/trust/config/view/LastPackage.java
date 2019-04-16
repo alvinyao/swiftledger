@@ -8,14 +8,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * The type Last package.
+ *
  * @author suimi
- * @date 2018/11/13
+ * @date 2018 /11/13
  */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class LastPackage {
 
+    /**
+     * The Height.
+     */
     Long height;
 
+    /**
+     * The Time.
+     */
     Long time;
 
 }

@@ -9,29 +9,34 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * The interface Account contract binding dao.
+ *
  * @author duhongming
- * @date 2018/4/26
+ * @date 2018 /4/26
  */
 @Mapper public interface AccountContractBindingDao extends BaseDao<AccountContractBindingPO> {
 
     /**
      * batch insert
-     * @param list
-     * @return
+     *
+     * @param list the list
+     * @return int
      */
     int batchInsert(Collection<AccountContractBindingPO> list);
 
     /**
      * query AccountContractBinding list by accountNo
-     * @param accountNo
-     * @return
+     *
+     * @param accountNo the account no
+     * @return list
      */
     List<AccountContractBindingPO> queryListByAccountNo(@Param("accountNo") String accountNo);
 
     /**
      * query one AccountContractBinding by hash
-     * @param hash
-     * @return
+     *
+     * @param hash the hash
+     * @return account contract binding po
      */
     AccountContractBindingPO queryByHash(@Param("hash") String hash);
 }

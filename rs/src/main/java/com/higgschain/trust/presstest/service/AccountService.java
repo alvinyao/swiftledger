@@ -21,20 +21,29 @@ import java.util.Date;
 import java.util.Random;
 
 /**
+ * The type Account service.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-30
+ * @date 2018 -08-30
  */
 @Service @Slf4j public class AccountService {
 
+    /**
+     * The Rs core facade.
+     */
     @Autowired RsCoreFacade rsCoreFacade;
+    /**
+     * The Rs config.
+     */
     @Autowired
     RsConfig rsConfig;
 
     /**
      * 创建币种
      *
-     * @param vo
+     * @param vo the vo
+     * @return the resp data
      */
     public RespData createCurrency(CurrencyVO vo) {
         IssueCurrency action = new IssueCurrency();
@@ -51,7 +60,8 @@ import java.util.Random;
     /**
      * 开户
      *
-     * @param vo
+     * @param vo the vo
+     * @return the resp data
      */
     public RespData openAccount(OpenAccountVO vo) {
         OpenAccount action = new OpenAccount();
@@ -71,7 +81,8 @@ import java.util.Random;
     /**
      * 转账
      *
-     * @param vo
+     * @param vo the vo
+     * @return the resp data
      */
     public RespData accounting(AccountingVO vo) {
         AccountOperation action = new AccountOperation();
@@ -91,7 +102,8 @@ import java.util.Random;
     /**
      * 冻结
      *
-     * @param vo
+     * @param vo the vo
+     * @return the resp data
      */
     public RespData freeze(FreezeVO vo) {
         AccountFreeze action = new AccountFreeze();
@@ -110,7 +122,8 @@ import java.util.Random;
     /**
      * 解冻
      *
-     * @param vo
+     * @param vo the vo
+     * @return the resp data
      */
     public RespData unfreeze(UnFreezeVO vo) {
         AccountUnFreeze action = new AccountUnFreeze();

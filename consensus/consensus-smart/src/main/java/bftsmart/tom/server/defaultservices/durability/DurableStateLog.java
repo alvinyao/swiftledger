@@ -32,9 +32,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Durable state log.
+ */
 public class DurableStateLog extends StateLog {
 
     private int id;
+    /**
+     * The constant DEFAULT_DIR.
+     */
     public final static String DEFAULT_DIR = "files".concat(System.getProperty("file.separator"));
     private static final int INT_BYTE_SIZE = 4;
     private static final int EOF = 0;
@@ -49,6 +55,16 @@ public class DurableStateLog extends StateLog {
     private Map<Integer, Long> logPointers;
     private FileRecoverer fr;
 
+    /**
+     * Instantiates a new Durable state log.
+     *
+     * @param id           the id
+     * @param initialState the initial state
+     * @param initialHash  the initial hash
+     * @param isToLog      the is to log
+     * @param syncLog      the sync log
+     * @param syncCkp      the sync ckp
+     */
     public DurableStateLog(int id, byte[] initialState, byte[] initialHash, boolean isToLog, boolean syncLog,
         boolean syncCkp) {
         super(id, initialState, initialHash);
@@ -171,6 +187,12 @@ public class DurableStateLog extends StateLog {
         }
     }
 
+    /**
+     * Gets state.
+     *
+     * @param cstRequest the cst request
+     * @return the state
+     */
     public CSTState getState(CSTRequest cstRequest) {
         int cid = cstRequest.getCID();
 
@@ -251,6 +273,12 @@ public class DurableStateLog extends StateLog {
         return null;
     }
 
+    /**
+     * Transfer application state.
+     *
+     * @param sChannel the s channel
+     * @param cid      the cid
+     */
     public void transferApplicationState(SocketChannel sChannel, int cid) {
         fr.transferCkpState(sChannel, lastCkpPath);
 
@@ -262,6 +290,13 @@ public class DurableStateLog extends StateLog {
         //		}
     }
 
+    /**
+     * Sets last cid.
+     *
+     * @param cid               the cid
+     * @param checkpointPeriod  the checkpoint period
+     * @param checkpointPortion the checkpoint portion
+     */
     public void setLastCID(int cid, int checkpointPeriod, int checkpointPortion) {
         super.setLastCID(cid);
         // save the file pointer to retrieve log information later
@@ -281,15 +316,18 @@ public class DurableStateLog extends StateLog {
      * Updates this log, according to the information contained in the
      * TransferableState object
      *
-     * @param state
-     * @param transState TransferableState object containing the information which is
-     *                   used to updated this log
+     * @param state the state
      */
     public void update(CSTState state) {
         newCheckpoint(state.getSerializedState(), state.getStateHash(), state.getCheckpointCID());
         setLastCheckpointCID(state.getCheckpointCID());
     }
 
+    /**
+     * Load durable state cst state.
+     *
+     * @return the cst state
+     */
     protected CSTState loadDurableState() {
         FileRecoverer fr = new FileRecoverer(id, DEFAULT_DIR);
         lastCkpPath = fr.getLatestFile(".ckp");

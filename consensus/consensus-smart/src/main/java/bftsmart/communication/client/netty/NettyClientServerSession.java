@@ -22,6 +22,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * The type Netty client server session.
+ *
  * @author Paulo Sousa
  */
 public class NettyClientServerSession {
@@ -32,6 +34,14 @@ public class NettyClientServerSession {
     private Lock lock;
     private int lastMsgReceived;
 
+    /**
+     * Instantiates a new Netty client server session.
+     *
+     * @param channel    the channel
+     * @param macSend    the mac send
+     * @param macReceive the mac receive
+     * @param replicaId  the replica id
+     */
     public NettyClientServerSession(Channel channel, Mac macSend, Mac macReceive, int replicaId) {
         this.channel = channel;
         this.macSend = macSend;
@@ -41,30 +51,65 @@ public class NettyClientServerSession {
         this.lastMsgReceived = -1;
     }
 
+    /**
+     * Gets mac receive.
+     *
+     * @return the mac receive
+     */
     public Mac getMacReceive() {
         return macReceive;
     }
 
+    /**
+     * Gets mac send.
+     *
+     * @return the mac send
+     */
     public Mac getMacSend() {
         return macSend;
     }
 
+    /**
+     * Gets channel.
+     *
+     * @return the channel
+     */
     public Channel getChannel() {
         return channel;
     }
 
+    /**
+     * Gets replica id.
+     *
+     * @return the replica id
+     */
     public int getReplicaId() {
         return replicaId;
     }
 
+    /**
+     * Gets lock.
+     *
+     * @return the lock
+     */
     public Lock getLock() {
         return lock;
     }
 
+    /**
+     * Gets last msg received.
+     *
+     * @return the last msg received
+     */
     public int getLastMsgReceived() {
         return lastMsgReceived;
     }
 
+    /**
+     * Sets last msg received.
+     *
+     * @param lastMsgReceived_ the last msg received
+     */
     public void setLastMsgReceived(int lastMsgReceived_) {
         this.lastMsgReceived = lastMsgReceived_;
     }

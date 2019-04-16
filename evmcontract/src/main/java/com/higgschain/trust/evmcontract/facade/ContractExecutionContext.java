@@ -13,7 +13,7 @@ import org.spongycastle.util.encoders.Hex;
  * this context, not any other source.
  *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 public class ContractExecutionContext {
     /**
@@ -139,6 +139,23 @@ public class ContractExecutionContext {
     @Getter
     private SystemProperties systemProperties = SystemProperties.getDefault();
 
+    /**
+     * Instantiates a new Contract execution context.
+     *
+     * @param contractType    the contract type
+     * @param transactionHash the transaction hash
+     * @param nonce           the nonce
+     * @param senderAddress   the sender address
+     * @param receiverAddress the receiver address
+     * @param value           the value
+     * @param data            the data
+     * @param parentHash      the parent hash
+     * @param minerAddress    the miner address
+     * @param timestamp       the timestamp
+     * @param number          the number
+     * @param blockStore      the block store
+     * @param blockRepository the block repository
+     */
     public ContractExecutionContext(ContractTypeEnum contractType, byte[] transactionHash, byte[] nonce,
                                     byte[] senderAddress, byte[] receiverAddress, byte[] value, byte[] data,
                                     byte[] parentHash, byte[] minerAddress, long timestamp, long number,

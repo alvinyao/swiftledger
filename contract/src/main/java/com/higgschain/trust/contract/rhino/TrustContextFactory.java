@@ -8,23 +8,36 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Scriptable;
 
 /**
+ * The type Trust context factory.
+ *
  * @author duhongming
- * @date 2018/6/7
+ * @date 2018 /6/7
  */
 public class TrustContextFactory extends ContextFactory {
 
     private ExecuteConfig executeConfig;
 
+    /**
+     * Install.
+     */
     public static void install() {
         ContextFactory.getGlobalSetter().setContextFactoryGlobal(new TrustContextFactory());
         //ContextFactory.initGlobal(new TrustContextFactory());
     }
 
+    /**
+     * Instantiates a new Trust context factory.
+     */
     public TrustContextFactory() {
 //        System.out.println(" contractor TrustContextFactory");
 //        System.out.println(this);
     }
 
+    /**
+     * Instantiates a new Trust context factory.
+     *
+     * @param executeConfig the execute config
+     */
     public TrustContextFactory(ExecuteConfig executeConfig) {
         this.executeConfig = executeConfig;
     }

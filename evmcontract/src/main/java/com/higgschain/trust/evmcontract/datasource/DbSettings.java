@@ -25,16 +25,30 @@ package com.higgschain.trust.evmcontract.datasource;
  */
 public class DbSettings {
 
+    /**
+     * The constant DEFAULT.
+     */
     public static final DbSettings DEFAULT = new DbSettings()
             .withMaxThreads(1)
             .withMaxOpenFiles(32);
 
+    /**
+     * The Max open files.
+     */
     int maxOpenFiles;
+    /**
+     * The Max threads.
+     */
     int maxThreads;
 
     private DbSettings() {
     }
 
+    /**
+     * New instance db settings.
+     *
+     * @return the db settings
+     */
     public static DbSettings newInstance() {
         DbSettings settings = new DbSettings();
         settings.maxOpenFiles = DEFAULT.maxOpenFiles;
@@ -42,19 +56,41 @@ public class DbSettings {
         return settings;
     }
 
+    /**
+     * Gets max open files.
+     *
+     * @return the max open files
+     */
     public int getMaxOpenFiles() {
         return maxOpenFiles;
     }
 
+    /**
+     * With max open files db settings.
+     *
+     * @param maxOpenFiles the max open files
+     * @return the db settings
+     */
     public DbSettings withMaxOpenFiles(int maxOpenFiles) {
         this.maxOpenFiles = maxOpenFiles;
         return this;
     }
 
+    /**
+     * Gets max threads.
+     *
+     * @return the max threads
+     */
     public int getMaxThreads() {
         return maxThreads;
     }
 
+    /**
+     * With max threads db settings.
+     *
+     * @param maxThreads the max threads
+     * @return the db settings
+     */
     public DbSettings withMaxThreads(int maxThreads) {
         this.maxThreads = maxThreads;
         return this;

@@ -11,8 +11,10 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
+ * The type Register policy vo.
+ *
  * @author tangfashuang
- * @date 2018/05/18 14:13
+ * @date 2018 /05/18 14:13
  * @desc
  */
 @Getter

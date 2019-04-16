@@ -10,6 +10,9 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Map;
 
+/**
+ * The type Exceute engine manager test.
+ */
 public class ExceuteEngineManagerTest extends BaseTest {
 
     private ExecuteEngineManager getExceuteEngineManager() {
@@ -37,6 +40,9 @@ public class ExceuteEngineManagerTest extends BaseTest {
         return ExecuteContextDataImpl.newContextData(data);
     }
 
+    /**
+     * Test exceute contract by code.
+     */
     @Test public void testExceuteContractByCode() {
         ExecuteEngineManager manager = getExceuteEngineManager();
         String code = loadCodeFromResourceFile("/case2.js");
@@ -46,6 +52,9 @@ public class ExceuteEngineManagerTest extends BaseTest {
         System.out.println(result.toString());
     }
 
+    /**
+     * Test exceute contract by code 3.
+     */
     @Test public void testExceuteContractByCode3() {
         ExecuteEngineManager manager = getExceuteEngineManager();
         String code = loadCodeFromResourceFile("/case3.js");
@@ -58,6 +67,9 @@ public class ExceuteEngineManagerTest extends BaseTest {
         System.out.println(result.toString());
     }
 
+    /**
+     * Test demo.
+     */
     @Test public void testDemo() {
         String code = "function print() {  } " +
                 "function sayHello() {print('hello')} " +
@@ -76,7 +88,9 @@ public class ExceuteEngineManagerTest extends BaseTest {
         System.out.println(System.currentTimeMillis() - startTime);
     }
 
-
+    /**
+     * Test award.
+     */
     @Test public void testAward() {
         ExecuteEngineManager manager = getExceuteEngineManager();
         String code = loadCodeFromResourceFile("file:/Users/liuyu/IdeaProjects/trust-gsp/trust-gsp/src/main/resources/award.js");

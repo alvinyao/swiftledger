@@ -12,30 +12,78 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Type e pairing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeEPairing extends AbstractPairing {
+    /**
+     * The Exp 2.
+     */
     protected int exp2;
+    /**
+     * The Exp 1.
+     */
     protected int exp1;
+    /**
+     * The Sign 1.
+     */
     protected int sign1;
+    /**
+     * The Sign 0.
+     */
     protected int sign0;
 
+    /**
+     * The R.
+     */
     protected BigInteger r;
+    /**
+     * The Q.
+     */
     protected BigInteger q;
+    /**
+     * The H.
+     */
     protected BigInteger h;
+    /**
+     * The A.
+     */
     protected BigInteger a;
+    /**
+     * The B.
+     */
     protected BigInteger b;
 
+    /**
+     * The Phikonr.
+     */
     protected BigInteger phikonr;
+    /**
+     * The R.
+     */
     protected Point R;
 
+    /**
+     * The Fq.
+     */
     protected Field Fq;
 
-
+    /**
+     * Instantiates a new Type e pairing.
+     *
+     * @param properties the properties
+     */
     public TypeEPairing(PairingParameters properties) {
         this(new SecureRandom(), properties);
     }
 
+    /**
+     * Instantiates a new Type e pairing.
+     *
+     * @param random     the random
+     * @param properties the properties
+     */
     public TypeEPairing(SecureRandom random, PairingParameters properties) {
         super(random);
 
@@ -44,6 +92,11 @@ public class TypeEPairing extends AbstractPairing {
         initFields();
     }
 
+    /**
+     * Init params.
+     *
+     * @param curveParams the curve params
+     */
     protected void initParams(PairingParameters curveParams) {
         // validate the type
         String type = curveParams.getString("type");
@@ -64,7 +117,9 @@ public class TypeEPairing extends AbstractPairing {
         b = curveParams.getBigInteger("b");
     }
 
-
+    /**
+     * Init fields.
+     */
     protected void initFields() {
         // Init Zr
         Zr = initFp(r);
@@ -86,22 +141,39 @@ public class TypeEPairing extends AbstractPairing {
         R = (Point) Eq.getGenNoCofac().duplicate();
     }
 
-
+    /**
+     * Init fp field.
+     *
+     * @param order the order
+     * @return the field
+     */
     protected Field initFp(BigInteger order) {
         return new ZrField(random, order);
     }
 
+    /**
+     * Init eq curve field.
+     *
+     * @return the curve field
+     */
     protected CurveField<Field> initEq() {
         return new CurveField<Field>(random,
                                      Fq.newElement().set(a), Fq.newElement().set(b),
                                      r, h);
     }
 
+    /**
+     * Init gt field.
+     *
+     * @return the field
+     */
     protected Field initGT() {
         return new GTFiniteField(random, r, pairingMap, Fq);
     }
 
-
+    /**
+     * Init map.
+     */
     protected void initMap() {
         pairingMap = new TypeETateProjectiveMillerPairingMap(this);
     }

@@ -6,11 +6,18 @@ import org.springframework.cloud.sleuth.Span;
 import java.util.Random;
 
 /**
+ * The type Trace utils.
+ *
  * @author cwy
  */
 @Slf4j
 public class TraceUtils {
 
+    /**
+     * Create span span.
+     *
+     * @return the span
+     */
     public static Span createSpan(){
         try{
             return PrimeTraceUtil.openNewTracer(new Random().nextLong());
@@ -19,10 +26,12 @@ public class TraceUtils {
         }
         return null;
     }
+
     /**
      * create new span
+     *
      * @param traceId tranceId for new span
-     * @return Span
+     * @return Span span
      */
     public static Span createSpan(Long traceId){
         try{
@@ -36,13 +45,17 @@ public class TraceUtils {
     }
 
     /**
-     * @return Long
+     * Get trace id long.
+     *
+     * @return Long long
      */
     public static Long getTraceId(){
         return PrimeTraceUtil.getTraceId();
     }
 
     /**
+     * Close span.
+     *
      * @param span span to close
      */
     public static void closeSpan(Span span){

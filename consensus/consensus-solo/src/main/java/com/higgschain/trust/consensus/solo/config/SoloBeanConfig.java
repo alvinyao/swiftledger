@@ -8,11 +8,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * The type Solo bean config.
+ *
  * @author suimi
- * @date 2019/2/20
+ * @date 2019 /2/20
  */
 @Configuration public class SoloBeanConfig {
 
+    /**
+     * Replicate composite abstract commit replicate composite.
+     *
+     * @param filter the filter
+     * @return the abstract commit replicate composite
+     */
     @Autowired @Bean public AbstractCommitReplicateComposite replicateComposite(CompositeCommandFilter filter) {
         return new DefaultCommitReplicateComposite(filter);
     }

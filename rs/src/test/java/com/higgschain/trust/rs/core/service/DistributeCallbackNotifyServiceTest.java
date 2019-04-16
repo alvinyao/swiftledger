@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * DistributeCallbackNotifyService test
  *
  * @author lingchao
- * @create 2018年08月27日1:12
+ * @create 2018年08月27日1 :12
  */
 public class DistributeCallbackNotifyServiceTest extends IntegrateBaseTest {
     @Autowired
@@ -31,7 +31,11 @@ public class DistributeCallbackNotifyServiceTest extends IntegrateBaseTest {
     @Autowired
     private CoreTransactionService coreTransactionService;
 
-
+    /**
+     * Test.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void test() throws Exception {
         int num = 200;
@@ -52,10 +56,19 @@ public class DistributeCallbackNotifyServiceTest extends IntegrateBaseTest {
 
     }
 
+    /**
+     * The type Wait and notify.
+     */
     public class WaitAndNotify implements Runnable {
         private RedisMegGroupEnum redisMegGroupEnum;
         private String txId;
 
+        /**
+         * Instantiates a new Wait and notify.
+         *
+         * @param redisMegGroupEnum the redis meg group enum
+         * @param txId              the tx id
+         */
         WaitAndNotify(RedisMegGroupEnum redisMegGroupEnum, String txId) {
             this.redisMegGroupEnum = redisMegGroupEnum;
             this.txId = txId;
@@ -67,10 +80,19 @@ public class DistributeCallbackNotifyServiceTest extends IntegrateBaseTest {
         }
     }
 
+    /**
+     * The type Notify.
+     */
     public class Notify implements Runnable {
         private RedisMegGroupEnum redisMegGroupEnum;
         private String txId;
 
+        /**
+         * Instantiates a new Notify.
+         *
+         * @param redisMegGroupEnum the redis meg group enum
+         * @param txId              the tx id
+         */
         Notify(RedisMegGroupEnum redisMegGroupEnum, String txId) {
             this.redisMegGroupEnum = redisMegGroupEnum;
             this.txId = txId;
@@ -84,6 +106,9 @@ public class DistributeCallbackNotifyServiceTest extends IntegrateBaseTest {
         }
     }
 
+    /**
+     * Process init tx.
+     */
     @Test
     public void processInitTx(){
         RTopic<String> topic = redissonClient.getTopic(RedisTopicEnum.ASYNC_TO_PROCESS_INIT_TX.getCode());

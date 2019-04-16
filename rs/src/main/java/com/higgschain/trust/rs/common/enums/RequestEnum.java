@@ -8,8 +8,13 @@ import lombok.Getter;
  * @author lingchao
  */
 @Getter
-public enum RequestEnum {
-    PROCESS("PROCESS", "正在处理"),
+public enum RequestEnum {/**
+ * Process request enum.
+ */
+PROCESS("PROCESS", "正在处理"),
+    /**
+     * Done request enum.
+     */
     DONE("DONE", "处理完成");
 
     RequestEnum(String code, String desc) {

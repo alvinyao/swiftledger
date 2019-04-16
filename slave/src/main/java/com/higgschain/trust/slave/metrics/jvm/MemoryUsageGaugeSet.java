@@ -15,8 +15,10 @@ import java.util.regex.Pattern;
 import static com.codahale.metrics.MetricRegistry.name;
 
 /**
+ * The type Memory usage gauge set.
+ *
  * @author duhongming
- * @date 2018/12/28
+ * @date 2018 /12/28
  */
 public class MemoryUsageGaugeSet implements MetricSet {
     private static final Pattern WHITESPACE = Pattern.compile("[\\s]+");
@@ -24,14 +26,28 @@ public class MemoryUsageGaugeSet implements MetricSet {
     private final MemoryMXBean mxBean;
     private final List<MemoryPoolMXBean> memoryPools;
 
+    /**
+     * Instantiates a new Memory usage gauge set.
+     */
     public MemoryUsageGaugeSet() {
         this(ManagementFactory.getMemoryMXBean(), ManagementFactory.getMemoryPoolMXBeans());
     }
 
+    /**
+     * Instantiates a new Memory usage gauge set.
+     *
+     * @param memoryPools the memory pools
+     */
     public MemoryUsageGaugeSet(Collection<MemoryPoolMXBean> memoryPools) {
         this(ManagementFactory.getMemoryMXBean(), memoryPools);
     }
 
+    /**
+     * Instantiates a new Memory usage gauge set.
+     *
+     * @param mxBean      the mx bean
+     * @param memoryPools the memory pools
+     */
     public MemoryUsageGaugeSet(MemoryMXBean mxBean, Collection<MemoryPoolMXBean> memoryPools) {
         this.mxBean = mxBean;
         this.memoryPools = new ArrayList<>(memoryPools);

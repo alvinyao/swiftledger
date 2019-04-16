@@ -11,6 +11,9 @@ import org.springframework.beans.factory.BeanFactory
  * Copyright (c) 2013-2017, hanson
  */
 
+/**
+ *  The type Consensus.
+ */
 @Slf4j
 @Usage("operate the consensus cluster")
 class consensus {

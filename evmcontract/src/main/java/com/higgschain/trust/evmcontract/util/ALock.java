@@ -31,10 +31,20 @@ import java.util.concurrent.locks.Lock;
 public final class ALock implements AutoCloseable {
     private final Lock lock;
 
+    /**
+     * Instantiates a new A lock.
+     *
+     * @param l the l
+     */
     public ALock(Lock l) {
         this.lock = l;
     }
 
+    /**
+     * Lock a lock.
+     *
+     * @return the a lock
+     */
     public final ALock lock() {
         this.lock.lock();
         return this;

@@ -23,6 +23,9 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The type File recoverer.
+ */
 public class FileRecoverer {
 
     private byte[] ckpHash;
@@ -32,6 +35,12 @@ public class FileRecoverer {
     private int replicaId;
     private String defaultDir;
 
+    /**
+     * Instantiates a new File recoverer.
+     *
+     * @param replicaId  the replica id
+     * @param defaultDir the default dir
+     */
     public FileRecoverer(int replicaId, String defaultDir) {
         this.replicaId = replicaId;
         this.defaultDir = defaultDir;
@@ -42,6 +51,8 @@ public class FileRecoverer {
     /**
      * Reads all log messages from the last log file created
      *
+     * @param index   the index
+     * @param logPath the log path
      * @return an array with batches of messages executed for each consensus
      */
     //	public CommandsInfo[] getLogState() {
@@ -73,8 +84,10 @@ public class FileRecoverer {
     /**
      * Recover portions of the log for collaborative state transfer.
      *
-     * @param start  the index for which the commands start to be collected
-     * @param number the number of commands retrieved
+     * @param pointer     the pointer
+     * @param startOffset the start offset
+     * @param number      the number of commands retrieved
+     * @param logPath     the log path
      * @return The commands for the period selected
      */
     public CommandsInfo[] getLogState(long pointer, int startOffset, int number, String logPath) {
@@ -97,6 +110,12 @@ public class FileRecoverer {
         return null;
     }
 
+    /**
+     * Get ckp state byte [ ].
+     *
+     * @param ckpPath the ckp path
+     * @return the byte [ ]
+     */
     public byte[] getCkpState(String ckpPath) {
         RandomAccessFile ckp = null;
 
@@ -117,6 +136,11 @@ public class FileRecoverer {
         return null;
     }
 
+    /**
+     * Recover ckp hash.
+     *
+     * @param ckpPath the ckp path
+     */
     public void recoverCkpHash(String ckpPath) {
         RandomAccessFile ckp = null;
 
@@ -188,6 +212,13 @@ public class FileRecoverer {
         return ckpState;
     }
 
+    /**
+     * Transfer log.
+     *
+     * @param sChannel the s channel
+     * @param index    the index
+     * @param logPath  the log path
+     */
     public void transferLog(SocketChannel sChannel, int index, String logPath) {
         RandomAccessFile log = null;
 
@@ -220,6 +251,12 @@ public class FileRecoverer {
         }
     }
 
+    /**
+     * Transfer ckp state.
+     *
+     * @param sChannel the s channel
+     * @param ckpPath  the ckp path
+     */
     public void transferCkpState(SocketChannel sChannel, String ckpPath) {
         RandomAccessFile ckp = null;
 
@@ -263,14 +300,29 @@ public class FileRecoverer {
         }
     }
 
+    /**
+     * Get ckp state hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getCkpStateHash() {
         return ckpHash;
     }
 
+    /**
+     * Gets ckp last consensus id.
+     *
+     * @return the ckp last consensus id
+     */
     public int getCkpLastConsensusId() {
         return ckpLastConsensusId;
     }
 
+    /**
+     * Gets log last consensus id.
+     *
+     * @return the log last consensus id
+     */
     public int getLogLastConsensusId() {
         return logLastConsensusId;
     }
@@ -404,6 +456,12 @@ public class FileRecoverer {
         return null;
     }
 
+    /**
+     * Gets latest file.
+     *
+     * @param extention the extention
+     * @return the latest file
+     */
     public String getLatestFile(String extention) {
         File directory = new File(defaultDir);
         String latestFile = null;
@@ -427,6 +485,12 @@ public class FileRecoverer {
         private int id;
         private String extention;
 
+        /**
+         * Instantiates a new File list filter.
+         *
+         * @param id        the id
+         * @param extention the extention
+         */
         public FileListFilter(int id, String extention) {
             this.id = id;
             this.extention = extention;

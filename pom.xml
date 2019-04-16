@@ -55,6 +55,12 @@
             <organization>https://www.higgschain.com</organization>
             <timezone>+8</timezone>
         </developer>
+        <developer>
+            <name>lichengcai</name>
+            <email>lichengcai@primeledger.cn</email>
+            <organization>https://www.higgschain.com</organization>
+            <timezone>+8</timezone>
+        </developer>
     </developers>
 
     <dependencyManagement>

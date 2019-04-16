@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * The type Contract state migration handler.
+ *
  * @author duhongming
- * @date 2018/6/21
+ * @date 2018 /6/21
  */
 @Slf4j
 @Component

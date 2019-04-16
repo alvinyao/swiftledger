@@ -14,12 +14,21 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Service logger interceptor.
+ *
  * @Description:服务拦截器
  * @author: pengdi
- **/
+ */
 @Aspect @Component public class ServiceLoggerInterceptor {
     private static final Logger SERVICE_DIGEST_LOGGER = LoggerFactory.getLogger(LoggerName.SERVICE_DIGEST_LOGGER);
 
+    /**
+     * Service log object.
+     *
+     * @param pj the pj
+     * @return the object
+     * @throws Throwable the throwable
+     */
     @Around("execution(* com.higgschain.trust.slave.core.service.pack.PackageService.*(..)))") public Object serviceLog(ProceedingJoinPoint pj)
         throws Throwable {
         //get the start time

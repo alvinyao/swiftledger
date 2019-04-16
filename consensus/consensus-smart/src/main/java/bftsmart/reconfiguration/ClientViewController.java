@@ -20,10 +20,17 @@ import bftsmart.reconfiguration.views.View;
 import java.net.InetSocketAddress;
 
 /**
+ * The type Client view controller.
+ *
  * @author eduardo
  */
 public class ClientViewController extends ViewController {
 
+    /**
+     * Instantiates a new Client view controller.
+     *
+     * @param procId the proc id
+     */
     public ClientViewController(int procId) {
         super(procId);
         View cv = getViewStore().readView();
@@ -34,6 +41,12 @@ public class ClientViewController extends ViewController {
         }
     }
 
+    /**
+     * Instantiates a new Client view controller.
+     *
+     * @param procId     the proc id
+     * @param configHome the config home
+     */
     public ClientViewController(int procId, String configHome) {
         super(procId, configHome);
         View cv = getViewStore().readView();
@@ -44,6 +57,9 @@ public class ClientViewController extends ViewController {
         }
     }
 
+    /**
+     * Update current view from repository.
+     */
     public void updateCurrentViewFromRepository() {
         this.currentView = getViewStore().readView();
     }

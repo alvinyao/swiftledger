@@ -8,8 +8,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * The type Query account vo.
+ *
  * @author tangfashuang
- * @date 2018/05/12
+ * @date 2018 /05/12
  * @desc query account request
  */
 @Setter

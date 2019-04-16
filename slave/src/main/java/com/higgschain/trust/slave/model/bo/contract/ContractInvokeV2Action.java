@@ -7,9 +7,11 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 /**
+ * The type Contract invoke v 2 action.
+ *
  * @author kongyu
  * @description the action of contract invoke
- * @date 2018-11-30
+ * @date 2018 -11-30
  */
 @Getter
 @Setter

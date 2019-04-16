@@ -24,9 +24,11 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * The type Pending tx repository.
+ *
  * @author tangfashuang
  * @desc pending transaction repository
- * @date 2018/4/9
+ * @date 2018 /4/9
  */
 @Repository @Slf4j public class PendingTxRepository {
 
@@ -39,8 +41,8 @@ import java.util.List;
     /**
      * check if exist in pending_transaction table
      *
-     * @param txId
-     * @return
+     * @param txId the tx id
+     * @return boolean
      */
     public boolean isExist(String txId) {
         boolean flag = true;
@@ -56,6 +58,12 @@ import java.util.List;
         return flag;
     }
 
+    /**
+     * Batch insert to rocks.
+     *
+     * @param signedTransactions the signed transactions
+     * @param packHeight         the pack height
+     */
     public void batchInsertToRocks(List<SignedTransaction> signedTransactions, Long packHeight) {
         if (CollectionUtils.isEmpty(signedTransactions)) {
             log.info("signed transaction list is empty");
@@ -68,6 +76,13 @@ import java.util.List;
         pendingTxRocksDao.batchInsert(txIds, packHeight);
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param signedTransactions the signed transactions
+     * @param status             the status
+     * @param packHeight         the pack height
+     */
     public void batchInsert(List<SignedTransaction> signedTransactions, PendingTxStatusEnum status, Long packHeight) {
         if (CollectionUtils.isEmpty(signedTransactions)) {
             log.info("signed transaction list is empty");
@@ -99,8 +114,8 @@ import java.util.List;
     /**
      * get pending transaction list by block height
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return transactions by height
      */
     public List<SignedTransaction> getTransactionsByHeight(Long height) {
         List<SignedTransaction> signedTransactions = new ArrayList<>();
@@ -152,6 +167,12 @@ import java.util.List;
         return signedTransaction;
     }
 
+    /**
+     * Query tx ids list.
+     *
+     * @param txIds the tx ids
+     * @return the list
+     */
     public List<String> queryTxIds(List<String> txIds) {
 
         if (CollectionUtils.isEmpty(txIds)) {
@@ -180,8 +201,8 @@ import java.util.List;
     /**
      * delete by less than height
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return int
      */
     public int deleteLessThanHeight(Long height) {
         if (initConfig.isUseMySQL()) {
@@ -193,7 +214,8 @@ import java.util.List;
 
     /**
      * when delete package invoke
-     * @param signedTxList
+     *
+     * @param signedTxList the signed tx list
      */
     public void batchDelete(List<SignedTransaction> signedTxList) {
         if (CollectionUtils.isEmpty(signedTxList)) {
@@ -204,6 +226,12 @@ import java.util.List;
         }
     }
 
+    /**
+     * Delete by height int.
+     *
+     * @param height the height
+     * @return the int
+     */
     public int deleteByHeight(Long height){
         if (initConfig.isUseMySQL()) {
             return pendingTransactionDao.deleteByHeight(height);

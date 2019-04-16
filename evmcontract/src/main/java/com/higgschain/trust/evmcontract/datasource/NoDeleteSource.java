@@ -23,9 +23,17 @@ package com.higgschain.trust.evmcontract.datasource;
  * not delete older states
  * <p>
  * Created by Anton Nashatyrev on 03.11.2016.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public class NoDeleteSource<Key, Value> extends AbstractChainedSource<Key, Value, Key, Value> {
 
+    /**
+     * Instantiates a new No delete source.
+     *
+     * @param src the src
+     */
     public NoDeleteSource(Source<Key, Value> src) {
         super(src);
         setFlushSource(true);

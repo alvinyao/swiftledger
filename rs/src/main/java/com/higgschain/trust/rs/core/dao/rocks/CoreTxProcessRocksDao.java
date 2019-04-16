@@ -18,8 +18,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Core tx process rocks dao.
+ *
  * @author tangfashuang
- * @desc key: status_index + "_" + txId, value: CoreTransactionProcessPO
+ * @desc key : status_index + "_" + txId, value: CoreTransactionProcessPO
  */
 @Service
 @Slf4j
@@ -28,6 +30,12 @@ public class CoreTxProcessRocksDao extends RocksBaseDao<CoreTransactionProcessPO
         return "coreTransactionProcess";
     }
 
+    /**
+     * Save with transaction.
+     *
+     * @param po    the po
+     * @param index the index
+     */
     public void saveWithTransaction(CoreTransactionProcessPO po, String index) {
         String key = index + Constant.SPLIT_SLASH + po.getTxId();
         if (keyMayExist(key) && null != get(key)) {
@@ -46,6 +54,13 @@ public class CoreTxProcessRocksDao extends RocksBaseDao<CoreTransactionProcessPO
         txPut(tx, key, po);
     }
 
+    /**
+     * Update status.
+     *
+     * @param txId the tx id
+     * @param from the from
+     * @param to   the to
+     */
     public void updateStatus(String txId, CoreTxStatusEnum from, CoreTxStatusEnum to) {
 
         Transaction tx = ThreadLocalUtils.getRocksTx();
@@ -72,6 +87,12 @@ public class CoreTxProcessRocksDao extends RocksBaseDao<CoreTransactionProcessPO
         txPut(tx, newKey, po);
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param poList the po list
+     * @param index  the index
+     */
     public void batchInsert(List<CoreTransactionProcessPO> poList, String index) {
         if (CollectionUtils.isEmpty(poList)) {
             return;
@@ -90,6 +111,12 @@ public class CoreTxProcessRocksDao extends RocksBaseDao<CoreTransactionProcessPO
         }
     }
 
+    /**
+     * Batch delete.
+     *
+     * @param poList     the po list
+     * @param statusEnum the status enum
+     */
     public void batchDelete(List<RsCoreTxVO> poList, CoreTxStatusEnum statusEnum) {
         if (CollectionUtils.isEmpty(poList)){
             return;
@@ -107,6 +134,13 @@ public class CoreTxProcessRocksDao extends RocksBaseDao<CoreTransactionProcessPO
         }
     }
 
+    /**
+     * Query by tx id and status core tx status enum.
+     *
+     * @param txId  the tx id
+     * @param index the index
+     * @return the core tx status enum
+     */
     public CoreTxStatusEnum queryByTxIdAndStatus(String txId, String index) {
         if (!StringUtils.isEmpty(index)) {
             String key = index + Constant.SPLIT_SLASH + txId;

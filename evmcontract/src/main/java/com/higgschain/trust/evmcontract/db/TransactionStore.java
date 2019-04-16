@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * The type Transaction store.
+ *
  * @author duhongming
- * @date 2018/12/4
+ * @date 2018 /12/4
  */
 public class TransactionStore extends ObjectDataSource<TransactionResultInfo> {
     private static final Logger logger = LoggerFactory.getLogger("db");
@@ -36,6 +38,11 @@ public class TransactionStore extends ObjectDataSource<TransactionResultInfo> {
                 }
             };
 
+    /**
+     * Instantiates a new Transaction store.
+     *
+     * @param db the db
+     */
     public TransactionStore(Source<byte[], byte[]> db) {
         super(db, SERIALIZER, 256);
     }

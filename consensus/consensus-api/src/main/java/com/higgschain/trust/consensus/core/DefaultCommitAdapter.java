@@ -6,13 +6,21 @@ package com.higgschain.trust.consensus.core;
 import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
 
 /**
+ * The type Default commit adapter.
+ *
+ * @param <T> the type parameter
  * @author suimi
- * @date 2018/8/14
+ * @date 2018 /8/14
  */
 public class DefaultCommitAdapter<T extends AbstractConsensusCommand> implements ConsensusCommit<T> {
     private T command;
     private boolean isClosed;
 
+    /**
+     * Instantiates a new Default commit adapter.
+     *
+     * @param object the object
+     */
     public DefaultCommitAdapter(Object object) {
         if (object instanceof AbstractConsensusCommand) {
             this.command = (T)object;

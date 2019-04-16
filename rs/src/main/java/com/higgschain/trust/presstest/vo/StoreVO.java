@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Store vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-11
+ * @date 2018 -09-11
  */
 @Getter
 @Setter

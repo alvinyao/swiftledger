@@ -17,9 +17,10 @@ import java.util.regex.Pattern;
 import static com.codahale.metrics.MetricRegistry.name;
 
 /**
+ * The type Garbage collector metric set.
+ *
  * @author duhongming
- * @date 2018/12/28
- * A set of gauges for the counts and elapsed times of garbage collections.
+ * @date 2018 /12/28 A set of gauges for the counts and elapsed times of garbage collections.
  */
 public class GarbageCollectorMetricSet implements MetricSet {
     private static final Pattern WHITESPACE = Pattern.compile("[\\s]+");

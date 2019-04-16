@@ -17,8 +17,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Signature command filter.
+ *
  * @author suimi
- * @date 2018/6/1
+ * @date 2018 /6/1
  */
 @Order(1) @Component @Slf4j public class SignatureCommandFilter implements CommandFilter {
 

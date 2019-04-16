@@ -22,6 +22,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * The type Request repository.
+ *
  * @author tangfashuang
  */
 @Repository
@@ -42,8 +44,8 @@ public class RequestRepository {
     /**
      * check request idempotent
      *
-     * @param requestId
-     * @return
+     * @param requestId the request id
+     * @return resp data
      */
     public RespData<?> requestIdempotent(String requestId) {
         RespData<?> respData = null;
@@ -57,8 +59,8 @@ public class RequestRepository {
     /**
      * check request idempotent
      *
-     * @param requestId
-     * @return
+     * @param requestId the request id
+     * @return request vo
      */
     public RequestVO queryByRequestId(String requestId) {
         RequestPO requestPO = queryRequestPO(requestId);
@@ -88,7 +90,10 @@ public class RequestRepository {
     /**
      * request insert db
      *
-     * @param
+     * @param requestId   the request id
+     * @param requestEnum the request enum
+     * @param respCode    the resp code
+     * @param respMsg     the resp msg
      */
     public void insertRequest(String requestId, RequestEnum requestEnum, String respCode, String respMsg) {
         if (StringUtils.isBlank(requestId) || null == requestEnum) {
@@ -109,11 +114,10 @@ public class RequestRepository {
         }
     }
 
-
     /**
      * batch insert
      *
-     * @param requestPOList
+     * @param requestPOList the request po list
      */
     public void batchInsert(List<RequestPO> requestPOList) {
         if (CollectionUtils.isEmpty(requestPOList)) {
@@ -137,27 +141,25 @@ public class RequestRepository {
         }
     }
 
-
     /**
      * just update code
      *
-     * @param requestId
-     * @param respCode
-     * @param respMsg
+     * @param requestId the request id
+     * @param respCode  the resp code
+     * @param respMsg   the resp msg
      */
     public void updateCode(String requestId, String respCode, String respMsg) {
         update(requestId, null, null, respCode, respMsg);
     }
 
-
     /**
      * update status and code
      *
-     * @param requestId
-     * @param fromStatus
-     * @param toStatus
-     * @param respCode
-     * @param respMsg
+     * @param requestId  the request id
+     * @param fromStatus the from status
+     * @param toStatus   the to status
+     * @param respCode   the resp code
+     * @param respMsg    the resp msg
      */
     public void updateStatusAndCode(String requestId, RequestEnum fromStatus, RequestEnum toStatus, String respCode, String respMsg) {
         update(requestId, fromStatus, toStatus, respCode, respMsg);
@@ -200,9 +202,10 @@ public class RequestRepository {
     /**
      * batch update
      *
-     * @param rsCoreTxVOS
-     * @param from
-     * @param to
+     * @param rsCoreTxVOS the rs core tx vos
+     * @param from        the from
+     * @param to          the to
+     * @return the boolean
      */
     public boolean batchUpdateStatus(List<RsCoreTxVO> rsCoreTxVOS, RequestEnum from, RequestEnum to) {
         if (rsConfig.isUseMySQL()) {

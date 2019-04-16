@@ -7,12 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Abstract vector element.
+ *
+ * @param <E> the type parameter
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractVectorElement<E extends Element, F extends AbstractFieldOver> extends AbstractElement<F> implements Vector<E> {
 
+    /**
+     * The Coeff.
+     */
     protected List<E> coeff;
 
+    /**
+     * Instantiates a new Abstract vector element.
+     *
+     * @param field the field
+     */
     protected AbstractVectorElement(F field) {
         super(field);
 

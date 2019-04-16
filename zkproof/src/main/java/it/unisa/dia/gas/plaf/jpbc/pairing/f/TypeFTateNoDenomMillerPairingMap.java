@@ -7,10 +7,20 @@ import it.unisa.dia.gas.plaf.jpbc.field.gt.GTFiniteElement;
 import it.unisa.dia.gas.plaf.jpbc.field.gt.GTFiniteField;
 import it.unisa.dia.gas.plaf.jpbc.pairing.map.AbstractMillerPairingMap;
 
+/**
+ * The type Type f tate no denom miller pairing map.
+ */
 public class TypeFTateNoDenomMillerPairingMap extends AbstractMillerPairingMap {
+    /**
+     * The Pairing data.
+     */
     protected TypeFPairing pairingData;
 
-
+    /**
+     * Instantiates a new Type f tate no denom miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeFTateNoDenomMillerPairingMap(TypeFPairing pairing) {
         super(pairing);
 
@@ -38,7 +48,12 @@ public class TypeFTateNoDenomMillerPairingMap extends AbstractMillerPairingMap {
         element.set(tateExp((Polynomial) element));
     }
 
-
+    /**
+     * Tate exp element.
+     *
+     * @param element the element
+     * @return the element
+     */
     public Element tateExp(Polynomial element) {
         Polynomial x = pairingData.Fq12.newElement();
         Polynomial y = pairingData.Fq12.newElement();
@@ -63,6 +78,14 @@ public class TypeFTateNoDenomMillerPairingMap extends AbstractMillerPairingMap {
         e1.getCoefficient(5).set(element.getCoefficient(5).duplicate().mul(epow.mul(e)));
     }
 
+    /**
+     * Pairing element.
+     *
+     * @param P  the p
+     * @param Qx the qx
+     * @param Qy the qy
+     * @return the element
+     */
     protected Element pairing(Point P, Point Qx, Point Qy) {
         Element Px = P.getX();
         Element Py = P.getY();
@@ -102,6 +125,17 @@ public class TypeFTateNoDenomMillerPairingMap extends AbstractMillerPairingMap {
     protected void millerStep(Point out_Renamed, Element a, Element b, Element c, Element Qx, Element Qy) {
     }
 
+    /**
+     * Miller step.
+     *
+     * @param e0 the e 0
+     * @param v  the v
+     * @param a  the a
+     * @param b  the b
+     * @param c  the c
+     * @param Qx the qx
+     * @param Qy the qy
+     */
     protected void millerStep(Polynomial e0, Polynomial v, Element a, Element b, Element c, Element Qx, Element Qy) {
         // a, b, c lie in Fq
         // Qx, Qy lie in Fq^2
@@ -128,6 +162,21 @@ public class TypeFTateNoDenomMillerPairingMap extends AbstractMillerPairingMap {
         v.set(e0);
     }
 
+    /**
+     * Miller step term.
+     *
+     * @param i    the
+     * @param j    the j
+     * @param k    the k
+     * @param flag the flag
+     * @param e0   the e 0
+     * @param v    the v
+     * @param a    the a
+     * @param b    the b
+     * @param c    the c
+     * @param Qx   the qx
+     * @param Qy   the qy
+     */
     protected void millerStepTerm(int i, int j, int k, int flag,
                                   Polynomial e0, Polynomial v,
                                   Element a, Element b, Element c,

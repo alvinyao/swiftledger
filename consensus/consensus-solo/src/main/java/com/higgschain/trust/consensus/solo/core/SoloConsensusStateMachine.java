@@ -4,8 +4,10 @@ import com.higgschain.trust.consensus.core.ConsensusStateMachine;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Solo consensus state machine.
+ *
  * @author suimi
- * @date 2019/2/20
+ * @date 2019 /2/20
  */
 @Component public class SoloConsensusStateMachine implements ConsensusStateMachine {
     @Override public void start() {

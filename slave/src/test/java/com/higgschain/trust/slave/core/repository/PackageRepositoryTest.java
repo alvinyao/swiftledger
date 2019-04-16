@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * The type Package repository test.
+ *
  * @author tangfashuang
  */
 public class PackageRepositoryTest extends BaseTest {
@@ -53,6 +55,11 @@ public class PackageRepositoryTest extends BaseTest {
 
     private Package pack;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @BeforeMethod public void setUp() throws Exception {
 
         SignedTransaction signedTx1 = initTx();
@@ -98,6 +105,11 @@ public class PackageRepositoryTest extends BaseTest {
         return signedTransaction;
     }
 
+    /**
+     * Test save.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testSave() throws Exception {
         pack = new Package();
         pack.setSignedTxList(signedTransactions);
@@ -127,6 +139,11 @@ public class PackageRepositoryTest extends BaseTest {
 
     }
 
+    /**
+     * Test update status.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testUpdateStatus() throws Exception {
         if (initConfig.isUseMySQL()) {
             packageRepository.updateStatus(3L, PackageStatusEnum.RECEIVED, PackageStatusEnum.WAIT_PERSIST_CONSENSUS);
@@ -174,6 +191,11 @@ public class PackageRepositoryTest extends BaseTest {
         }
     }
 
+    /**
+     * Test load.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testLoad() throws Exception {
         Package packa = packageRepository.load(2L);
         Assert.assertEquals(2L, packa.getHeight().longValue());
@@ -181,10 +203,20 @@ public class PackageRepositoryTest extends BaseTest {
         Assert.assertEquals(1, packa.getSignedTxList().size());
     }
 
+    /**
+     * Test load height list.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testLoadHeightList() throws Exception {
         List<Long> heights = packageRepository.loadHeightList(25L);
     }
 
+    /**
+     * Test load and lock.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testLoadAndLock() throws Exception {
         Package packa = packageRepository.loadAndLock(3L);
         Assert.assertEquals(3L, packa.getHeight().longValue());
@@ -192,6 +224,11 @@ public class PackageRepositoryTest extends BaseTest {
         Assert.assertEquals(2, packa.getSignedTxList().size());
     }
 
+    /**
+     * Test get max height.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetMaxHeight() throws Exception {
         if (!initConfig.isUseMySQL()) {
             systemPropertyRepository.add(Constant.MAX_PACK_HEIGHT, String.valueOf(101L), "max package height");
@@ -201,9 +238,19 @@ public class PackageRepositoryTest extends BaseTest {
         Assert.assertEquals(101L, height.longValue());
     }
 
+    /**
+     * Test get min height.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetMinHeight() throws Exception {
     }
 
+    /**
+     * Test count.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testCount() throws Exception {
         Set<String> statusSet = new HashSet<>();
         statusSet.add(PackageStatusEnum.WAIT_PERSIST_CONSENSUS.getCode());
@@ -213,17 +260,32 @@ public class PackageRepositoryTest extends BaseTest {
         Assert.assertEquals(1, count);
     }
 
+    /**
+     * Test get max height by status.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetMaxHeightByStatus() throws Exception {
         List<String> keys = packStatusRocksDao.keys();
         Long height = packageRepository.getMaxHeightByStatus(PackageStatusEnum.WAIT_PERSIST_CONSENSUS);
         Package pack = packageRepository.load(height);
     }
 
+    /**
+     * Test get min height by status.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetMinHeightByStatus() throws Exception {
         List<String> keys = packStatusRocksDao.keys();
         Long height = packageRepository.getMinHeightByStatus(PackageStatusEnum.PERSISTED);
     }
 
+    /**
+     * Test delete less than height and status.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testDeleteLessThanHeightAndStatus() throws Exception {
         List<String> keys = packStatusRocksDao.keys();
         packageRepository.deleteLessThanHeightAndStatus(193L, PackageStatusEnum.RECEIVED);
@@ -231,6 +293,11 @@ public class PackageRepositoryTest extends BaseTest {
         List<String> newPackKeys = packRocksDao.keys();
     }
 
+    /**
+     * Test delete range.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testDeleteRange() throws Exception {
         List<String> keys = packStatusRocksDao.keys();
         System.out.println(keys);
@@ -260,6 +327,9 @@ public class PackageRepositoryTest extends BaseTest {
 
     }
 
+    /**
+     * Test transaction.
+     */
     @Test public void testTransaction() {
         String key = "0000000000000020";
         new Thread(new Runnable() {
@@ -308,6 +378,11 @@ public class PackageRepositoryTest extends BaseTest {
         }).start();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         String index = PackageStatusEnum.RECEIVED.getIndex();
         String format = "00";

@@ -23,15 +23,46 @@ import io.netty.handler.codec.MessageToByteEncoder;
 import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * The type Netty server pipeline factory.
+ */
 public class NettyServerPipelineFactory {
 
+    /**
+     * The Ncs.
+     */
     NettyClientServerCommunicationSystemServerSide ncs;
+    /**
+     * The Session table.
+     */
     HashMap sessionTable;
+    /**
+     * The Mac length.
+     */
     int macLength;
+    /**
+     * The Signature length.
+     */
     int signatureLength;
+    /**
+     * The Controller.
+     */
     ServerViewController controller;
+    /**
+     * The Rl.
+     */
     ReentrantReadWriteLock rl;
 
+    /**
+     * Instantiates a new Netty server pipeline factory.
+     *
+     * @param ncs             the ncs
+     * @param sessionTable    the session table
+     * @param macLength       the mac length
+     * @param controller      the controller
+     * @param rl              the rl
+     * @param signatureLength the signature length
+     */
     public NettyServerPipelineFactory(NettyClientServerCommunicationSystemServerSide ncs, HashMap sessionTable,
         int macLength, ServerViewController controller, ReentrantReadWriteLock rl, int signatureLength) {
         this.ncs = ncs;
@@ -42,16 +73,31 @@ public class NettyServerPipelineFactory {
         this.rl = rl;
     }
 
+    /**
+     * Gets decoder.
+     *
+     * @return the decoder
+     */
     public ByteToMessageDecoder getDecoder() {
         return new NettyTOMMessageDecoder(false, sessionTable, macLength, controller, rl, signatureLength,
             controller.getStaticConf().getUseMACs() == 1 ? true : false);
     }
 
+    /**
+     * Gets encoder.
+     *
+     * @return the encoder
+     */
     public MessageToByteEncoder getEncoder() {
         return new NettyTOMMessageEncoder(false, sessionTable, macLength, rl, signatureLength,
             controller.getStaticConf().getUseMACs() == 1 ? true : false);
     }
 
+    /**
+     * Gets handler.
+     *
+     * @return the handler
+     */
     public SimpleChannelInboundHandler getHandler() {
         return ncs;
     }

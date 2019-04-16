@@ -7,22 +7,38 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Map parameters.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class MapParameters implements MutablePairingParameters {
 
+    /**
+     * The Values.
+     */
     protected Map<String, Object> values;
 
-
+    /**
+     * Instantiates a new Map parameters.
+     */
     public MapParameters() {
         this.values = new LinkedHashMap<String, Object>();
     }
 
+    /**
+     * Instantiates a new Map parameters.
+     *
+     * @param values the values
+     */
     public MapParameters(Map<String, Object> values) {
         this.values = values;
     }
 
-
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public String getType() {
         return (String) values.get("type");
     }

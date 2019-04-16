@@ -20,11 +20,19 @@ package com.higgschain.trust.evmcontract.vm.trace;
 import com.higgschain.trust.evmcontract.vm.DataWord;
 import com.higgschain.trust.evmcontract.vm.program.listener.ProgramListenerAdaptor;
 
+/**
+ * The type Program trace listener.
+ */
 public class ProgramTraceListener extends ProgramListenerAdaptor {
 
     private final boolean enabled;
     private OpActions actions = new OpActions();
 
+    /**
+     * Instantiates a new Program trace listener.
+     *
+     * @param enabled the enabled
+     */
     public ProgramTraceListener(boolean enabled) {
         this.enabled = enabled;
     }
@@ -82,6 +90,11 @@ public class ProgramTraceListener extends ProgramListenerAdaptor {
         }
     }
 
+    /**
+     * Reset actions op actions.
+     *
+     * @return the op actions
+     */
     public OpActions resetActions() {
         OpActions actions = this.actions;
         this.actions = new OpActions();

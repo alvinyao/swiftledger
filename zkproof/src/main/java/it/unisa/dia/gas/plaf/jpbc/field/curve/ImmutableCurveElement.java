@@ -5,10 +5,19 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable curve element.
+ *
+ * @param <E> the type parameter
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ImmutableCurveElement<E extends Element, F extends CurveField> extends CurveElement<E, F> {
 
+    /**
+     * Instantiates a new Immutable curve element.
+     *
+     * @param curveElement the curve element
+     */
     public ImmutableCurveElement(CurveElement<E,F> curveElement) {
         super(curveElement);
         this.x = (E) curveElement.getX().getImmutable();

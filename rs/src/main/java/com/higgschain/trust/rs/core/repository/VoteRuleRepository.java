@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Vote rule repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-06
+ * @date 2018 -06-06
  */
 @Slf4j @Repository public class VoteRuleRepository {
     @Autowired private RsConfig rsConfig;
@@ -32,7 +34,7 @@ import java.util.List;
     /**
      * create new vote-rule for policy
      *
-     * @param voteRule
+     * @param voteRule the vote rule
      */
     public void add(VoteRule voteRule) {
         VoteRulePO voteRulePO = new VoteRulePO();
@@ -54,8 +56,8 @@ import java.util.List;
     /**
      * query vote-rule by policy id
      *
-     * @param policyId
-     * @return
+     * @param policyId the policy id
+     * @return vote rule
      */
     public VoteRule queryByPolicyId(String policyId) {
         VoteRulePO voteRulePO;
@@ -78,7 +80,7 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param voteRules
+     * @param voteRules the vote rules
      */
     public void batchInsert(List<VoteRule> voteRules) {
         List<VoteRulePO> voteRulePOs = new ArrayList<>(voteRules.size());

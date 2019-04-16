@@ -9,9 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 /**
+ * The type Tx callback registor.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-12
+ * @date 2018 -05-12
  */
 @Repository
 @Slf4j
@@ -19,18 +21,38 @@ public class TxCallbackRegistor {
     private TxCallbackHandler coreTxCallback;
     private TxBatchCallbackHandler txBatchCallbackHandler;
 
+    /**
+     * Regist callback.
+     *
+     * @param callback the callback
+     */
     public void registCallback(TxCallbackHandler callback) {
         this.coreTxCallback = callback;
     }
 
+    /**
+     * Regist batch callback.
+     *
+     * @param callback the callback
+     */
     public void registBatchCallback(TxBatchCallbackHandler callback) {
         this.txBatchCallbackHandler = callback;
     }
 
+    /**
+     * Gets core tx callback.
+     *
+     * @return the core tx callback
+     */
     public TxCallbackHandler getCoreTxCallback() {
         return coreTxCallback;
     }
 
+    /**
+     * Gets core tx batch callback.
+     *
+     * @return the core tx batch callback
+     */
     public TxBatchCallbackHandler getCoreTxBatchCallback() {
         return txBatchCallbackHandler;
     }
@@ -38,7 +60,7 @@ public class TxCallbackRegistor {
     /**
      * vote for custom
      *
-     * @param votingRequest
+     * @param votingRequest the voting request
      */
     public void onVote(VotingRequest votingRequest) {
         if (coreTxCallback != null) {

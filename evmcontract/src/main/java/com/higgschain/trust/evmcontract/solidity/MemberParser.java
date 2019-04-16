@@ -7,8 +7,10 @@ package com.higgschain.trust.evmcontract.solidity;
  * generic type  {@code O}, an event, a constructor, or a
  * function.
  *
+ * @param <I> the type parameter
+ * @param <O> the type parameter
  * @author Chen Jiawei
- * @date 2018-12-29
+ * @date 2018 -12-29
  */
 public interface MemberParser<I, O extends Abi.Entry> {
     /**

@@ -4,13 +4,20 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
+ * The type Authentication handler.
+ *
  * @author duhongming
- * @date 2018/8/24
+ * @date 2018 /8/24
  */
 public class AuthenticationHandler extends ChannelInboundHandlerAdapter {
 
     private final boolean isServerSide;
 
+    /**
+     * Instantiates a new Authentication handler.
+     *
+     * @param isServerSide the is server side
+     */
     public AuthenticationHandler(boolean isServerSide) {
         this.isServerSide = isServerSide;
     }

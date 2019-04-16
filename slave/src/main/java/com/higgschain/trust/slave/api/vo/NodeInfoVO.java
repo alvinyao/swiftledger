@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Node info vo.
+ *
  * @author lingchao
- * @date 2018/8/8
+ * @date 2018 /8/8
  */
 @Getter
 @Setter

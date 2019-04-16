@@ -19,6 +19,9 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Transaction execute test.
+ */
 @Slf4j public class TransactionExecuteTest extends InterfaceCommonTest {
     private static String PROVIDER_ROOT_PATH = "java/com/higgs/trust/slave/core/service/transaction/execute/";
 
@@ -37,16 +40,31 @@ import static org.testng.Assert.assertEquals;
         snapshotService.destroy();
     }
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void paramValidate(Map<?, ?> param) {
         log.info("[paramValidate]param:{}", param);
         executeValidate(param);
     }
 
+    /**
+     * Test regular.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void testRegular(Map<?, ?> param) {
         log.info("[testRegular]param:{}", param);
         executeValidate(param);
     }
 
+    /**
+     * Test regular persist.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void testRegularPersist(Map<?, ?> param) {
         log.info("[testRegularPersist]param:{}", param);
         executeBeforeSql(param);
@@ -68,6 +86,11 @@ import static org.testng.Assert.assertEquals;
         executeAfterSql(param);
     }
 
+    /**
+     * Generate sign.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void generateSign(Map<?, ?> param) {
         log.info("[generateSign]param:{}", param);
 
@@ -77,6 +100,11 @@ import static org.testng.Assert.assertEquals;
         System.out.println(signature);
     }
 
+    /**
+     * Test exception.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void testException(Map<?, ?> param) {
         log.info("[testException]param:{}", param);
         executeValidate(param);

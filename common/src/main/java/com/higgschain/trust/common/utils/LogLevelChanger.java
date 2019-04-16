@@ -5,8 +5,10 @@ import ch.qos.logback.classic.LoggerContext;
 import org.slf4j.LoggerFactory;
 
 /**
+ * The type Log level changer.
+ *
  * @author duhongming
- * @date 2018/10/12
+ * @date 2018 /10/12
  */
 public class LogLevelChanger {
 
@@ -14,8 +16,9 @@ public class LogLevelChanger {
 
     /**
      * change log level
-     * @param logName
-     * @param level OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
+     *
+     * @param logName the log name
+     * @param level   OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
      */
     public static void change(String logName, String level) {
         try {

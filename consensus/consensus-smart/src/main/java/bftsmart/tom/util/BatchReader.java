@@ -34,12 +34,21 @@ public final class BatchReader {
 
     /**
      * wrap buffer
+     *
+     * @param batch         the batch
+     * @param useSignatures the use signatures
      */
     public BatchReader(byte[] batch, boolean useSignatures) {
         proposalBuffer = ByteBuffer.wrap(batch);
         this.useSignatures = useSignatures;
     }
 
+    /**
+     * Deserialise requests tom message [ ].
+     *
+     * @param controller the controller
+     * @return the tom message [ ]
+     */
     public TOMMessage[] deserialiseRequests(ServerViewController controller) {
 
         //obtain the timestamps to be delivered to the application

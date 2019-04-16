@@ -12,12 +12,20 @@ import java.util.Map;
 import java.util.Random;
 
 /**
+ * The type Account test.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-03
+ * @date 2018 -09-03
  */
 public class AccountTest extends BasePressTest{
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
 //        init();
           test();
@@ -106,6 +114,8 @@ public class AccountTest extends BasePressTest{
 
     /**
      * 入金
+     *
+     * @return the int
      */
     public int income() {
         int num = 0;
@@ -125,6 +135,8 @@ public class AccountTest extends BasePressTest{
 
     /**
      * 出金
+     *
+     * @return the int
      */
     public int out() {
         int num = 0;
@@ -144,6 +156,8 @@ public class AccountTest extends BasePressTest{
 
     /**
      * 转账
+     *
+     * @return the int
      */
     public int transfer() {
         int num = 0;
@@ -167,6 +181,8 @@ public class AccountTest extends BasePressTest{
 
     /**
      * 冻结
+     *
+     * @return the int
      */
     public int freeze() {
         int num = 0;
@@ -187,6 +203,8 @@ public class AccountTest extends BasePressTest{
 
     /**
      * 解冻
+     *
+     * @return the int
      */
     public int unfreeze() {
         int num = 0;

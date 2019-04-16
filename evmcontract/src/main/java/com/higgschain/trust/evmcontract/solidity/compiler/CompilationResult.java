@@ -30,12 +30,25 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Compilation result.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompilationResult {
 
     @JsonProperty("contracts") private Map<String, ContractMetadata> contracts;
+    /**
+     * The Version.
+     */
     @JsonProperty("version") public String version;
 
+    /**
+     * Parse compilation result.
+     *
+     * @param rawJson the raw json
+     * @return the compilation result
+     * @throws IOException the io exception
+     */
     @JsonIgnore public static CompilationResult parse(String rawJson) throws IOException {
         if(rawJson == null || rawJson.isEmpty()){
             CompilationResult empty = new CompilationResult();
@@ -49,6 +62,8 @@ public class CompilationResult {
     }
 
     /**
+     * Gets contract path.
+     *
      * @return the contract's path given this compilation result contains exactly one contract
      */
     @JsonIgnore public Path getContractPath() {
@@ -61,6 +76,8 @@ public class CompilationResult {
     }
 
     /**
+     * Gets contract name.
+     *
      * @return the contract's name given this compilation result contains exactly one contract
      */
     @JsonIgnore public String getContractName() {
@@ -73,6 +90,8 @@ public class CompilationResult {
     }
 
     /**
+     * Gets contract.
+     *
      * @param contractName The contract name
      * @return the first contract found for a given contract name; use {@link #getContract(Path, String)} if this compilation result contains more than one contract with the same name
      */
@@ -93,6 +112,8 @@ public class CompilationResult {
     }
 
     /**
+     * Gets contract.
+     *
      * @param contractPath The contract path
      * @param contractName The contract name
      * @return the contract with key {@code contractPath:contractName} if it exists; {@code null} otherwise
@@ -102,6 +123,8 @@ public class CompilationResult {
     }
 
     /**
+     * Gets contracts.
+     *
      * @return all contracts from this compilation result
      */
     @JsonIgnore public List<ContractMetadata> getContracts() {
@@ -109,23 +132,50 @@ public class CompilationResult {
     }
 
     /**
+     * Gets contract keys.
+     *
      * @return all keys from this compilation result
      */
     @JsonIgnore public List<String> getContractKeys() {
         return new ArrayList<>(contracts.keySet());
     }
 
+    /**
+     * The type Contract metadata.
+     */
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ContractMetadata {
+        /**
+         * The Abi.
+         */
         public String abi;
+        /**
+         * The Bin.
+         */
         public String bin;
+        /**
+         * The Sol interface.
+         */
         public String solInterface;
+        /**
+         * The Metadata.
+         */
         public String metadata;
 
+        /**
+         * Gets interface.
+         *
+         * @return the interface
+         */
         public String getInterface() {
             return solInterface;
         }
 
+        /**
+         * Sets interface.
+         *
+         * @param solInterface the sol interface
+         */
         public void setInterface(String solInterface) {
             this.solInterface = solInterface;
         }

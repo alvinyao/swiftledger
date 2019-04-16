@@ -21,8 +21,10 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * The type Spring bean atomix registry.
+ *
  * @author suimi
- * @date 2018/8/8
+ * @date 2018 /8/8
  */
 @Slf4j public class SpringBeanAtomixRegistry implements AtomixRegistry, ApplicationContextAware {
 
@@ -34,11 +36,20 @@ import java.util.concurrent.ConcurrentHashMap;
     private Class<? extends NamedType>[] types;
     private ApplicationContext applicationContext;
 
+    /**
+     * Instantiates a new Spring bean atomix registry.
+     *
+     * @param classLoader the class loader
+     * @param types       the types
+     */
     public SpringBeanAtomixRegistry(ClassLoader classLoader, Class<? extends NamedType>... types) {
         this.classLoader = classLoader;
         this.types = types;
     }
 
+    /**
+     * Init.
+     */
     @PostConstruct public void init() {
         final Map<SpringBeanAtomixRegistry.CacheKey, Map<Class<? extends NamedType>, Map<String, NamedType>>> mappings =
             CACHE.computeIfAbsent(classLoader, cl -> new ConcurrentHashMap<>());
@@ -105,6 +116,11 @@ import java.util.concurrent.ConcurrentHashMap;
         // intentionally no reference to ClassLoader to avoid leaks
         private final Class<? extends NamedType>[] types;
 
+        /**
+         * Instantiates a new Cache key.
+         *
+         * @param types the types
+         */
         CacheKey(Class<? extends NamedType>[] types) {
             this.types = types;
         }

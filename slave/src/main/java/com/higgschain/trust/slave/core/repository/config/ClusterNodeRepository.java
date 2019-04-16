@@ -18,9 +18,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * The type Cluster node repository.
+ *
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/6/5 16:11
+ * @date 2018 /6/5 16:11
  */
 @Repository @Slf4j public class ClusterNodeRepository {
 
@@ -29,7 +31,9 @@ import java.util.List;
     @Autowired private InitConfig initConfig;
 
     /**
-     * @param clusterNode
+     * Insert cluster node.
+     *
+     * @param clusterNode the cluster node
      * @return
      * @desc insert clusterNode information into db
      */
@@ -45,8 +49,10 @@ import java.util.List;
     }
 
     /**
-     * @param nodeName
-     * @return ClusterConfigPO
+     * Gets cluster node.
+     *
+     * @param nodeName the node name
+     * @return ClusterConfigPO cluster node
      * @desc get clusterNode by node name
      */
     public ClusterNode getClusterNode(String nodeName) {
@@ -67,8 +73,8 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param clusterNodePOList
-     * @return
+     * @param clusterNodePOList the cluster node po list
+     * @return boolean
      */
     public boolean batchInsert(List<ClusterNodePO> clusterNodePOList) {
         int affectRows;
@@ -89,8 +95,8 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param clusterNodePOList
-     * @return
+     * @param clusterNodePOList the cluster node po list
+     * @return boolean
      */
     public boolean batchUpdate(List<ClusterNodePO> clusterNodePOList) {
         if (initConfig.isUseMySQL()) {
@@ -100,9 +106,11 @@ import java.util.List;
     }
 
     /**
-     * @desc acquire all cluster nodes
+     * Gets all cluster nodes.
+     *
      * @param
-     * @return
+     * @return all cluster nodes
+     * @desc acquire all cluster nodes
      */
     public List<ClusterNode> getAllClusterNodes() {
         List<ClusterNodePO> list;

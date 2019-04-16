@@ -10,6 +10,9 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
+/**
+ * The type Register rs test.
+ */
 @Slf4j
 public class RegisterRSTest extends InterfaceCommonTest {
     private static String PROVIDER_ROOT_PATH = "java/com/higgs/trust/slave/core/service/manage/rs/";
@@ -21,12 +24,22 @@ public class RegisterRSTest extends InterfaceCommonTest {
         return PROVIDER_ROOT_PATH;
     }
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void paramValidate(Map<?, ?> param) {
         log.info("[paramValidate]param:{}", param);
         RegisterRS action = getAction(param, RegisterRS.class, ActionTypeEnum.REGISTER_RS);
         executeActionHandler(param, registerRsHandler, action);
     }
 
+    /**
+     * Test regular.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 2) public void testRegular(Map<?, ?> param) {
         log.info("[testRegular]param:{}", param);
         RegisterRS action = getAction(param, RegisterRS.class, ActionTypeEnum.REGISTER_RS);
@@ -34,6 +47,11 @@ public class RegisterRSTest extends InterfaceCommonTest {
         executeAfterSql(param);
     }
 
+    /**
+     * Test exception.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 3) public void testException(Map<?, ?> param) {
         log.info("[testException]param:{}", param);
         executeBeforeSql(param);

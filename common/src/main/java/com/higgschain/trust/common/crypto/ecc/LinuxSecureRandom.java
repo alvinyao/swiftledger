@@ -34,6 +34,9 @@ public class LinuxSecureRandom extends SecureRandomSpi {
     private static final FileInputStream urandom;
 
     private static class LinuxSecureRandomProvider extends Provider {
+        /**
+         * Instantiates a new Linux secure random provider.
+         */
         public LinuxSecureRandomProvider() {
             super("LinuxSecureRandom", 1.0, "A Linux specific random number provider that uses /dev/urandom");
             put("SecureRandom.LinuxSecureRandom", LinuxSecureRandom.class.getName());
@@ -68,6 +71,9 @@ public class LinuxSecureRandom extends SecureRandomSpi {
 
     private final DataInputStream dis;
 
+    /**
+     * Instantiates a new Linux secure random.
+     */
     public LinuxSecureRandom() {
         // DataInputStream is not thread safe, so each random object has its own.
         dis = new DataInputStream(urandom);

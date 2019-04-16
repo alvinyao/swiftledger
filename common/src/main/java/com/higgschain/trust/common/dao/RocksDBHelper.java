@@ -11,9 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Rocks db helper.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-13
+ * @date 2018 -09-13
  */
 @Component public class RocksDBHelper extends RocksBaseDao<Object> {
     /**
@@ -28,9 +30,9 @@ import java.util.Map;
     /**
      * query
      *
-     * @param tableName
-     * @param key
-     * @return
+     * @param tableName the table name
+     * @param key       the key
+     * @return object
      */
     public Object queryByKey(String tableName, String key) {
         setTableName(tableName);
@@ -40,10 +42,10 @@ import java.util.Map;
     /**
      * query by prefix
      *
-     * @param tableName
-     * @param prefix
-     * @param limit
-     * @return
+     * @param tableName the table name
+     * @param prefix    the prefix
+     * @param limit     the limit
+     * @return list
      */
     public List<Object> queryByPrefix(String tableName, String prefix, int limit) {
         setTableName(tableName);
@@ -53,10 +55,10 @@ import java.util.Map;
     /**
      * query by count and order
      *
-     * @param tableName
-     * @param count
-     * @param order
-     * @return
+     * @param tableName the table name
+     * @param count     the count
+     * @param order     the order
+     * @return list
      */
     public List<Object> queryByCount(String tableName, int count, int order) {
         setTableName(tableName);
@@ -69,9 +71,9 @@ import java.util.Map;
     /**
      * count by
      *
-     * @param tableName
-     * @param prefix
-     * @return
+     * @param tableName the table name
+     * @param prefix    the prefix
+     * @return long
      */
     public long countBy(String tableName, String prefix) {
         setTableName(tableName);
@@ -81,8 +83,8 @@ import java.util.Map;
     /**
      * clear tables
      *
-     * @param tableNames
-     * @return
+     * @param tableNames the table names
+     * @return boolean
      */
     public boolean clear(String[] tableNames) {
         if (ArrayUtils.isEmpty(tableNames)) {
@@ -101,8 +103,8 @@ import java.util.Map;
     /**
      * clear all tables
      *
-     * @param ignoreTables
-     * @return
+     * @param ignoreTables the ignore tables
+     * @return boolean
      */
     public boolean clearAll(String[] ignoreTables) {
         List<String> tableNames = showTables();
@@ -139,6 +141,10 @@ import java.util.Map;
 
     /**
      * put value
+     *
+     * @param tableName the table name
+     * @param key       the key
+     * @param value     the value
      */
     public void put(String tableName, String key, Object value) {
         setTableName(tableName);

@@ -30,9 +30,18 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Byte util.
+ */
 public class ByteUtil {
 
+    /**
+     * The constant EMPTY_BYTE_ARRAY.
+     */
     public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+    /**
+     * The constant ZERO_BYTE_ARRAY.
+     */
     public static final byte[] ZERO_BYTE_ARRAY = new byte[]{0};
 
     /**
@@ -55,10 +64,12 @@ public class ByteUtil {
      */
     public static final int MAX_SIZE_BYTE = 32 ;
 
-
-
     /**
      * Creates a copy of bytes and appends b to the end of it
+     *
+     * @param bytes the bytes
+     * @param b     the b
+     * @return the byte [ ]
      */
     public static byte[] appendByte(byte[] bytes, byte b) {
         byte[] result = Arrays.copyOf(bytes, bytes.length + 1);
@@ -86,6 +97,13 @@ public class ByteUtil {
         return bytes;
     }
 
+    /**
+     * Big integer to bytes signed byte [ ].
+     *
+     * @param b        the b
+     * @param numBytes the num bytes
+     * @return the byte [ ]
+     */
     public static byte[] bigIntegerToBytesSigned(BigInteger b, int numBytes) {
         if (b == null) {
             return null;
@@ -106,8 +124,7 @@ public class ByteUtil {
      * <br>we use this custom method to avoid an empty array in case of BigInteger.ZERO
      *
      * @param value - any big integer number. A <code>null</code>-value will return <code>null</code>
-     * @return A byte array without a leading zero byte if present in the signed encoding.
-     * BigInteger.ZERO will return an array with length 1 and byte-value 0.
+     * @return A byte array without a leading zero byte if present in the signed encoding. BigInteger.ZERO will return an array with length 1 and byte-value 0.
      */
     public static byte[] bigIntegerToBytes(BigInteger value) {
         if (value == null) {
@@ -226,16 +243,14 @@ public class ByteUtil {
         return result;
     }
 
-
     /**
      * Convert a byte-array into a hex String.<br>
      * Works similar to {@link Hex#toHexString}
      * but allows for <code>null</code>
      *
      * @param data - byte-array to convert to a hex-string
-     * @return hex representation of the data.<br>
-     * Returns an empty String if the input is <code>null</code>
-     * @see Hex#toHexString
+     * @return hex representation of the data.<br> Returns an empty String if the input is <code>null</code>
+     * @see Hex#toHexString Hex#toHexString
      */
     public static String toHexString(byte[] data) {
         return data == null ? "" : Hex.toHexString(data);
@@ -245,7 +260,7 @@ public class ByteUtil {
      * Calculate packet length
      *
      * @param msg byte[]
-     * @return byte-array with 4 elements
+     * @return byte -array with 4 elements
      */
     public static byte[] calcPacketLength(byte[] msg) {
         int msgLen = msg.length;
@@ -288,14 +303,12 @@ public class ByteUtil {
         return new BigInteger(1, b).longValue();
     }
 
-
     /**
      * Turn nibbles to a pretty looking output string
      * <p>
      * Example. [ 1, 2, 3, 4, 5 ] becomes '\x11\x23\x45'
      *
-     * @param nibbles - getting byte of data [ 04 ] and turning
-     *                it to a '\x04' representation
+     * @param nibbles - getting byte of data [ 04 ] and turning                it to a '\x04' representation
      * @return pretty string of nibbles
      */
     public static String nibblesToPrettyString(byte[] nibbles) {
@@ -307,6 +320,12 @@ public class ByteUtil {
         return builder.toString();
     }
 
+    /**
+     * One byte to hex string string.
+     *
+     * @param value the value
+     * @return the string
+     */
     public static String oneByteToHexString(byte value) {
         String retVal = Integer.toString(value & 0xFF, 16);
         if (retVal.length() == 1) {
@@ -338,6 +357,8 @@ public class ByteUtil {
     }
 
     /**
+     * Encode val for 32 bits byte [ ].
+     *
      * @param arg - not more that 32 bits
      * @return - bytes of the value pad with complete to 32 zeroes
      */
@@ -375,7 +396,7 @@ public class ByteUtil {
      * encode the values and concatenate together
      *
      * @param args Object
-     * @return byte[]
+     * @return byte[] byte [ ]
      */
     public static byte[] encodeDataList(Object... args) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -390,6 +411,12 @@ public class ByteUtil {
         return baos.toByteArray();
     }
 
+    /**
+     * First non zero byte int.
+     *
+     * @param data the data
+     * @return the int
+     */
     public static int firstNonZeroByte(byte[] data) {
         for (int i = 0; i < data.length; ++i) {
             if (data[i] != 0) {
@@ -399,6 +426,12 @@ public class ByteUtil {
         return -1;
     }
 
+    /**
+     * Strip leading zeroes byte [ ].
+     *
+     * @param data the data
+     * @return the byte [ ]
+     */
     public static byte[] stripLeadingZeroes(byte[] data) {
 
         if (data == null) {
@@ -425,7 +458,7 @@ public class ByteUtil {
      * increment byte array as a number until max is reached
      *
      * @param bytes byte[]
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean increment(byte[] bytes) {
         final int startIndex = 0;
@@ -455,11 +488,24 @@ public class ByteUtil {
         return dest;
     }
 
-
+    /**
+     * Wrap byte array wrapper.
+     *
+     * @param data the data
+     * @return the byte array wrapper
+     */
     public static ByteArrayWrapper wrap(byte[] data) {
         return new ByteArrayWrapper(data);
     }
 
+    /**
+     * Set bit byte [ ].
+     *
+     * @param data the data
+     * @param pos  the pos
+     * @param val  the val
+     * @return the byte [ ]
+     */
     public static byte[] setBit(byte[] data, int pos, int val) {
 
         if ((data.length * 8) - 1 < pos) {
@@ -481,6 +527,13 @@ public class ByteUtil {
         return data;
     }
 
+    /**
+     * Gets bit.
+     *
+     * @param data the data
+     * @param pos  the pos
+     * @return the bit
+     */
     public static int getBit(byte[] data, int pos) {
 
         if ((data.length * 8) - 1 < pos) {
@@ -493,6 +546,13 @@ public class ByteUtil {
         return Math.min(1, (dataByte & (1 << (posBit))));
     }
 
+    /**
+     * And byte [ ].
+     *
+     * @param b1 the b 1
+     * @param b2 the b 2
+     * @return the byte [ ]
+     */
     public static byte[] and(byte[] b1, byte[] b2) {
         if (b1.length != b2.length) {
             throw new RuntimeException("Array sizes differ");
@@ -504,6 +564,13 @@ public class ByteUtil {
         return ret;
     }
 
+    /**
+     * Or byte [ ].
+     *
+     * @param b1 the b 1
+     * @param b2 the b 2
+     * @return the byte [ ]
+     */
     public static byte[] or(byte[] b1, byte[] b2) {
         if (b1.length != b2.length) {
             throw new RuntimeException("Array sizes differ");
@@ -515,6 +582,13 @@ public class ByteUtil {
         return ret;
     }
 
+    /**
+     * Xor byte [ ].
+     *
+     * @param b1 the b 1
+     * @param b2 the b 2
+     * @return the byte [ ]
+     */
     public static byte[] xor(byte[] b1, byte[] b2) {
         if (b1.length != b2.length) {
             throw new RuntimeException("Array sizes differ");
@@ -528,6 +602,10 @@ public class ByteUtil {
 
     /**
      * XORs byte arrays of different lengths by aligning length of the shortest via adding zeros at beginning
+     *
+     * @param b1 the b 1
+     * @param b2 the b 2
+     * @return the byte [ ]
      */
     public static byte[] xorAlignRight(byte[] b1, byte[] b2) {
         if (b1.length > b2.length) {
@@ -544,6 +622,8 @@ public class ByteUtil {
     }
 
     /**
+     * Merge byte [ ].
+     *
      * @param arrays - arrays to merge
      * @return - merged array
      */
@@ -563,15 +643,33 @@ public class ByteUtil {
         return mergedArray;
     }
 
+    /**
+     * Is null or zero array boolean.
+     *
+     * @param array the array
+     * @return the boolean
+     */
     public static boolean isNullOrZeroArray(byte[] array) {
         return (array == null) || (array.length == 0);
     }
 
+    /**
+     * Is single zero boolean.
+     *
+     * @param array the array
+     * @return the boolean
+     */
     public static boolean isSingleZero(byte[] array) {
         return (array.length == 1 && array[0] == 0);
     }
 
-
+    /**
+     * Difference set.
+     *
+     * @param setA the set a
+     * @param setB the set b
+     * @return the set
+     */
     public static Set<byte[]> difference(Set<byte[]> setA, Set<byte[]> setB) {
 
         Set<byte[]> result = new HashSet<>();
@@ -593,6 +691,12 @@ public class ByteUtil {
         return result;
     }
 
+    /**
+     * Length int.
+     *
+     * @param bytes the bytes
+     * @return the int
+     */
     public static int length(byte[]... bytes) {
         int result = 0;
         for (byte[] array : bytes) {
@@ -601,18 +705,39 @@ public class ByteUtil {
         return result;
     }
 
+    /**
+     * Ints to bytes byte [ ].
+     *
+     * @param arr       the arr
+     * @param bigEndian the big endian
+     * @return the byte [ ]
+     */
     public static byte[] intsToBytes(int[] arr, boolean bigEndian) {
         byte[] ret = new byte[arr.length * 4];
         intsToBytes(arr, ret, bigEndian);
         return ret;
     }
 
+    /**
+     * Bytes to ints int [ ].
+     *
+     * @param arr       the arr
+     * @param bigEndian the big endian
+     * @return the int [ ]
+     */
     public static int[] bytesToInts(byte[] arr, boolean bigEndian) {
         int[] ret = new int[arr.length / 4];
         bytesToInts(arr, ret, bigEndian);
         return ret;
     }
 
+    /**
+     * Bytes to ints.
+     *
+     * @param b         the b
+     * @param arr       the arr
+     * @param bigEndian the big endian
+     */
     public static void bytesToInts(byte[] b, int[] arr, boolean bigEndian) {
         if (!bigEndian) {
             int off = 0;
@@ -635,6 +760,13 @@ public class ByteUtil {
         }
     }
 
+    /**
+     * Ints to bytes.
+     *
+     * @param arr       the arr
+     * @param b         the b
+     * @param bigEndian the big endian
+     */
     public static void intsToBytes(int[] arr, byte[] b, boolean bigEndian) {
         if (!bigEndian) {
             int off = 0;
@@ -657,10 +789,23 @@ public class ByteUtil {
         }
     }
 
+    /**
+     * Big endian to short short.
+     *
+     * @param bs the bs
+     * @return the short
+     */
     public static short bigEndianToShort(byte[] bs) {
         return bigEndianToShort(bs, 0);
     }
 
+    /**
+     * Big endian to short short.
+     *
+     * @param bs  the bs
+     * @param off the off
+     * @return the short
+     */
     public static short bigEndianToShort(byte[] bs, int off) {
         int n = bs[off] << 8;
         ++off;
@@ -668,6 +813,12 @@ public class ByteUtil {
         return (short) n;
     }
 
+    /**
+     * Short to bytes byte [ ].
+     *
+     * @param n the n
+     * @return the byte [ ]
+     */
     public static byte[] shortToBytes(short n) {
         return ByteBuffer.allocate(2).putShort(n).array();
     }
@@ -696,6 +847,9 @@ public class ByteUtil {
 
     /**
      * Converts string representation of host/ip to 4-bytes byte[] IPv4
+     *
+     * @param ip the ip
+     * @return the byte [ ]
      */
     public static byte[] hostToBytes(String ip) {
         byte[] bytesIp;
@@ -711,6 +865,9 @@ public class ByteUtil {
 
     /**
      * Converts 4 bytes IPv4 IP to String representation
+     *
+     * @param bytesIp the bytes ip
+     * @return the string
      */
     public static String bytesToIp(byte[] bytesIp) {
 
@@ -730,6 +887,9 @@ public class ByteUtil {
     /**
      * Returns a number of zero bits preceding the highest-order ("leftmost") one-bit
      * interpreting input array as a big-endian integer value
+     *
+     * @param bytes the bytes
+     * @return the int
      */
     public static int numberOfLeadingZeros(byte[] bytes) {
 
@@ -747,6 +907,11 @@ public class ByteUtil {
      * Parses fixed number of bytes starting from {@code offset} in {@code input} array.
      * If {@code input} has not enough bytes return array will be right padded with zero bytes.
      * I.e. if {@code offset} is higher than {@code input.length} then zero byte array of length {@code len} will be returned
+     *
+     * @param input  the input
+     * @param offset the offset
+     * @param len    the len
+     * @return the byte [ ]
      */
     public static byte[] parseBytes(byte[] input, int offset, int len) {
 
@@ -764,7 +929,9 @@ public class ByteUtil {
      * Uses {@link #parseBytes(byte[], int, int)} method,
      * thus, result will be right-padded with zero bytes if there is not enough bytes in {@code input}
      *
-     * @param idx an index of the word starting from {@code 0}
+     * @param input the input
+     * @param idx   an index of the word starting from {@code 0}
+     * @return the byte [ ]
      */
     public static byte[] parseWord(byte[] input, int idx) {
         return parseBytes(input, 32 * idx, 32);
@@ -775,8 +942,10 @@ public class ByteUtil {
      * Uses {@link #parseBytes(byte[], int, int)} method,
      * thus, result will be right-padded with zero bytes if there is not enough bytes in {@code input}
      *
-     * @param idx    an index of the word starting from {@code 0}
+     * @param input  the input
      * @param offset an offset in {@code input} array to start parsing from
+     * @param idx    an index of the word starting from {@code 0}
+     * @return the byte [ ]
      */
     public static byte[] parseWord(byte[] input, int offset, int idx) {
         return parseBytes(input, offset + 32 * idx, 32);

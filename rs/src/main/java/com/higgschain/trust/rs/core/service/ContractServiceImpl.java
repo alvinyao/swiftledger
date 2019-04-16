@@ -39,8 +39,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Contract service.
+ *
  * @author duhongming
- * @date 2018/5/14
+ * @date 2018 /5/14
  */
 @Service @Slf4j public class ContractServiceImpl implements ContractService {
 

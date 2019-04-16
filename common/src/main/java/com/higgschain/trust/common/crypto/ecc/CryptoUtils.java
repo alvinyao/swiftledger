@@ -107,6 +107,13 @@ public class CryptoUtils {
         return dest;
     }
 
+    /**
+     * Uint 32 to byte array be.
+     *
+     * @param val    the val
+     * @param out    the out
+     * @param offset the offset
+     */
     public static void uint32ToByteArrayBE(long val, byte[] out, int offset) {
         out[offset] = (byte)(0xFF & (val >> 24));
         out[offset + 1] = (byte)(0xFF & (val >> 16));
@@ -114,6 +121,13 @@ public class CryptoUtils {
         out[offset + 3] = (byte)(0xFF & val);
     }
 
+    /**
+     * Uint 32 to byte array le.
+     *
+     * @param val    the val
+     * @param out    the out
+     * @param offset the offset
+     */
     public static void uint32ToByteArrayLE(long val, byte[] out, int offset) {
         out[offset] = (byte)(0xFF & val);
         out[offset + 1] = (byte)(0xFF & (val >> 8));
@@ -121,6 +135,13 @@ public class CryptoUtils {
         out[offset + 3] = (byte)(0xFF & (val >> 24));
     }
 
+    /**
+     * Uint 64 to byte array le.
+     *
+     * @param val    the val
+     * @param out    the out
+     * @param offset the offset
+     */
     public static void uint64ToByteArrayLE(long val, byte[] out, int offset) {
         out[offset] = (byte)(0xFF & val);
         out[offset + 1] = (byte)(0xFF & (val >> 8));
@@ -132,6 +153,13 @@ public class CryptoUtils {
         out[offset + 7] = (byte)(0xFF & (val >> 56));
     }
 
+    /**
+     * Uint 32 to byte stream le.
+     *
+     * @param val    the val
+     * @param stream the stream
+     * @throws IOException the io exception
+     */
     public static void uint32ToByteStreamLE(long val, OutputStream stream) throws IOException {
         stream.write((int)(0xFF & val));
         stream.write((int)(0xFF & (val >> 8)));
@@ -139,6 +167,13 @@ public class CryptoUtils {
         stream.write((int)(0xFF & (val >> 24)));
     }
 
+    /**
+     * Int 64 to byte stream le.
+     *
+     * @param val    the val
+     * @param stream the stream
+     * @throws IOException the io exception
+     */
     public static void int64ToByteStreamLE(long val, OutputStream stream) throws IOException {
         stream.write((int)(0xFF & val));
         stream.write((int)(0xFF & (val >> 8)));
@@ -150,6 +185,13 @@ public class CryptoUtils {
         stream.write((int)(0xFF & (val >> 56)));
     }
 
+    /**
+     * Uint 64 to byte stream le.
+     *
+     * @param val    the val
+     * @param stream the stream
+     * @throws IOException the io exception
+     */
     public static void uint64ToByteStreamLE(BigInteger val, OutputStream stream) throws IOException {
         byte[] bytes = val.toByteArray();
         if (bytes.length > 8) {
@@ -165,6 +207,10 @@ public class CryptoUtils {
 
     /**
      * Work around lack of unsigned types in Java.
+     *
+     * @param n1 the n 1
+     * @param n2 the n 2
+     * @return the boolean
      */
     public static boolean isLessThanUnsigned(long n1, long n2) {
         return UnsignedLongs.compare(n1, n2) < 0;
@@ -172,6 +218,10 @@ public class CryptoUtils {
 
     /**
      * Work around lack of unsigned types in Java.
+     *
+     * @param n1 the n 1
+     * @param n2 the n 2
+     * @return the boolean
      */
     public static boolean isLessThanOrEqualToUnsigned(long n1, long n2) {
         return UnsignedLongs.compare(n1, n2) <= 0;
@@ -179,6 +229,9 @@ public class CryptoUtils {
 
     /**
      * Returns a copy of the given byte array in reverse order.
+     *
+     * @param bytes the bytes
+     * @return the byte [ ]
      */
     public static byte[] reverseBytes(byte[] bytes) {
         // We could use the XOR trick here but it's easier to understand if we
@@ -195,8 +248,8 @@ public class CryptoUtils {
      * (4 bytes) reversed.
      *
      * @param bytes      length must be divisible by 4.
-     * @param trimLength trim output to this length. If positive, must be divisible by
-     *                   4.
+     * @param trimLength trim output to this length. If positive, must be divisible by                   4.
+     * @return the byte [ ]
      */
     public static byte[] reverseDwordBytes(byte[] bytes, int trimLength) {
         checkArgument(bytes.length % 4 == 0);
@@ -216,6 +269,10 @@ public class CryptoUtils {
     /**
      * Parse 4 bytes from the byte array (starting at the offset) as unsigned
      * 32-bit integer in little endian format.
+     *
+     * @param bytes  the bytes
+     * @param offset the offset
+     * @return the long
      */
     public static long readUint32(byte[] bytes, int offset) {
         return (bytes[offset] & 0xffl) | ((bytes[offset + 1] & 0xffl) << 8) | ((bytes[offset + 2] & 0xffl) << 16) | (
@@ -225,6 +282,10 @@ public class CryptoUtils {
     /**
      * Parse 8 bytes from the byte array (starting at the offset) as signed
      * 64-bit integer in little endian format.
+     *
+     * @param bytes  the bytes
+     * @param offset the offset
+     * @return the long
      */
     public static long readInt64(byte[] bytes, int offset) {
         return (bytes[offset] & 0xffl) | ((bytes[offset + 1] & 0xffl) << 8) | ((bytes[offset + 2] & 0xffl) << 16) | (
@@ -235,6 +296,10 @@ public class CryptoUtils {
     /**
      * Parse 4 bytes from the byte array (starting at the offset) as unsigned
      * 32-bit integer in big endian format.
+     *
+     * @param bytes  the bytes
+     * @param offset the offset
+     * @return the long
      */
     public static long readUint32BE(byte[] bytes, int offset) {
         return ((bytes[offset] & 0xffl) << 24) | ((bytes[offset + 1] & 0xffl) << 16) | ((bytes[offset + 2] & 0xffl)
@@ -244,6 +309,10 @@ public class CryptoUtils {
     /**
      * Parse 2 bytes from the byte array (starting at the offset) as unsigned
      * 16-bit integer in big endian format.
+     *
+     * @param bytes  the bytes
+     * @param offset the offset
+     * @return the int
      */
     public static int readUint16BE(byte[] bytes, int offset) {
         return ((bytes[offset] & 0xff) << 8) | (bytes[offset + 1] & 0xff);
@@ -252,6 +321,9 @@ public class CryptoUtils {
     /**
      * Calculates RIPEMD160(SHA256(input)). This is used in Address
      * calculations.
+     *
+     * @param input the input
+     * @return the byte [ ]
      */
     public static byte[] sha256hash160(byte[] input) {
         byte[] sha256 = Sha256Hash.hash(input);
@@ -265,6 +337,9 @@ public class CryptoUtils {
     /**
      * Calculates SHA256(input) twice
      * calculations.
+     *
+     * @param input the input
+     * @return the byte [ ]
      */
     public static byte[] sha256hashTwice256(byte[] input) {
         byte[] sha256 = Sha256Hash.hashTwice(input);
@@ -277,8 +352,9 @@ public class CryptoUtils {
      * number of bytes representing the number in big endian format (with a sign
      * bit).
      *
-     * @param hasLength can be set to false if the given array is missing the 4 byte
-     *                  length field
+     * @param mpi       the mpi
+     * @param hasLength can be set to false if the given array is missing the 4 byte                  length field
+     * @return the big integer
      */
     public static BigInteger decodeMPI(byte[] mpi, boolean hasLength) {
         byte[] buf;
@@ -303,7 +379,9 @@ public class CryptoUtils {
      * number of bytes representing the number in big endian format (with a sign
      * bit).
      *
+     * @param value         the value
      * @param includeLength indicates whether the 4 byte length field should be included
+     * @return the byte [ ]
      */
     public static byte[] encodeMPI(BigInteger value, boolean includeLength) {
         if (value.equals(BigInteger.ZERO)) {
@@ -361,6 +439,9 @@ public class CryptoUtils {
      * which are unsigned 256bit quantities. Thus, all the complexities of the
      * sign bit and using base 256 are probably an implementation accident.
      * </p>
+     *
+     * @param compact the compact
+     * @return the big integer
      */
     public static BigInteger decodeCompactBits(long compact) {
         int size = ((int)(compact >> 24)) & 0xFF;
@@ -376,7 +457,11 @@ public class CryptoUtils {
     }
 
     /**
-     * @see CryptoUtils#decodeCompactBits(long)
+     * Encode compact bits long.
+     *
+     * @param value the value
+     * @return the long
+     * @see CryptoUtils#decodeCompactBits(long) CryptoUtils#decodeCompactBits(long)
      */
     public static long encodeCompactBits(BigInteger value) {
         long result;
@@ -399,6 +484,9 @@ public class CryptoUtils {
 
     /**
      * Advances (or rewinds) the mock clock by the given number of seconds.
+     *
+     * @param seconds the seconds
+     * @return the date
      */
     public static Date rollMockClock(int seconds) {
         return rollMockClockMillis(seconds * 1000);
@@ -406,6 +494,9 @@ public class CryptoUtils {
 
     /**
      * Advances (or rewinds) the mock clock by the given number of milliseconds.
+     *
+     * @param millis the millis
+     * @return the date
      */
     public static Date rollMockClockMillis(long millis) {
         if (mockTime == null)
@@ -426,6 +517,8 @@ public class CryptoUtils {
 
     /**
      * Sets the mock clock to the given time (in seconds).
+     *
+     * @param mockClockSeconds the mock clock seconds
      */
     public static void setMockClock(long mockClockSeconds) {
         mockTime = new Date(mockClockSeconds * 1000);
@@ -433,6 +526,8 @@ public class CryptoUtils {
 
     /**
      * Returns the current time, or a mocked out equivalent.
+     *
+     * @return the date
      */
     public static Date now() {
         return mockTime != null ? mockTime : new Date();
@@ -441,11 +536,18 @@ public class CryptoUtils {
     /**
      * Returns the current time in milliseconds since the epoch, or a mocked out
      * equivalent.
+     *
+     * @return the long
      */
     public static long currentTimeMillis() {
         return mockTime != null ? mockTime.getTime() : System.currentTimeMillis();
     }
 
+    /**
+     * Current time seconds long.
+     *
+     * @return the long
+     */
     public static long currentTimeSeconds() {
         return currentTimeMillis() / 1000;
     }
@@ -454,6 +556,7 @@ public class CryptoUtils {
      * Formats a given date+time value to an ISO 8601 string.
      *
      * @param dateTime value to format, as a Date
+     * @return the string
      */
     public static String dateTimeFormat(Date dateTime) {
         DateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
@@ -465,6 +568,7 @@ public class CryptoUtils {
      * Formats a given date+time value to an ISO 8601 string.
      *
      * @param dateTime value to format, unix time (ms)
+     * @return the string
      */
     public static String dateTimeFormat(long dateTime) {
         DateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
@@ -472,6 +576,13 @@ public class CryptoUtils {
         return iso8601.format(dateTime);
     }
 
+    /**
+     * Copy of byte [ ].
+     *
+     * @param in     the in
+     * @param length the length
+     * @return the byte [ ]
+     */
     public static byte[] copyOf(byte[] in, int length) {
         byte[] out = new byte[length];
         System.arraycopy(in, 0, out, 0, Math.min(length, in.length));
@@ -480,6 +591,10 @@ public class CryptoUtils {
 
     /**
      * Creates a copy of bytes and appends b to the end of it
+     *
+     * @param bytes the bytes
+     * @param b     the b
+     * @return the byte [ ]
      */
     public static byte[] appendByte(byte[] bytes, byte b) {
         byte[] result = Arrays.copyOf(bytes, bytes.length + 1);
@@ -529,7 +644,11 @@ public class CryptoUtils {
         }
     }
 
-
+    /**
+     * Is windows boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isWindows() {
         return System.getProperty("os.name").toLowerCase().contains("win");
     }
@@ -540,6 +659,11 @@ public class CryptoUtils {
      * </p>
      * <p>
      * <code>[24] "Bitcoin Signed Message:\n" [message.length as a varint] message</code>
+     *
+     * @param message     the message
+     * @param charset     the charset
+     * @param headerBytes the header bytes
+     * @return the byte [ ]
      */
     public static byte[] formatMessageForSigning(String message, Charset charset, byte[] headerBytes) {
         try {
@@ -563,6 +687,10 @@ public class CryptoUtils {
     /**
      * Checks if the given bit is set in data, using little endian (not the same
      * as Java native big endian)
+     *
+     * @param data  the data
+     * @param index the index
+     * @return the boolean
      */
     public static boolean checkBitLE(byte[] data, int index) {
         return (data[index >>> 3] & bitMask[7 & index]) != 0;
@@ -571,6 +699,9 @@ public class CryptoUtils {
     /**
      * Sets the given bit in data to one, using little endian (not the same as
      * Java native big endian)
+     *
+     * @param data  the data
+     * @param index the index
      */
     public static void setBitLE(byte[] data, int index) {
         data[index >>> 3] |= bitMask[7 & index];
@@ -578,6 +709,8 @@ public class CryptoUtils {
 
     /**
      * Sleep for a span of time, or mock sleep if enabled
+     *
+     * @param millis the millis
      */
     public static void sleep(long millis) {
         if (mockSleepQueue == null) {
@@ -596,6 +729,8 @@ public class CryptoUtils {
 
     /**
      * Enable or disable mock sleep. If enabled, set mock time to current time.
+     *
+     * @param isEnable the is enable
      */
     public static void setMockSleep(boolean isEnable) {
         if (isEnable) {
@@ -623,6 +758,11 @@ public class CryptoUtils {
         }
     }
 
+    /**
+     * Is android runtime boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isAndroidRuntime() {
         if (isAndroid == -1) {
             final String runtime = System.getProperty("java.runtime.name");
@@ -631,6 +771,12 @@ public class CryptoUtils {
         return isAndroid == 1;
     }
 
+    /**
+     * Max of most freq int.
+     *
+     * @param items the items
+     * @return the int
+     */
     public static int maxOfMostFreq(int... items) {
         // Java 6 sucks.
         ArrayList<Integer> list = new ArrayList<>(items.length);
@@ -639,6 +785,12 @@ public class CryptoUtils {
         return maxOfMostFreq(list);
     }
 
+    /**
+     * Max of most freq int.
+     *
+     * @param items the items
+     * @return the int
+     */
     public static int maxOfMostFreq(List<Integer> items) {
         if (items.isEmpty())
             return 0;
@@ -670,6 +822,10 @@ public class CryptoUtils {
     /**
      * Reads and joins together with LF char (\n) all the lines from given file.
      * It's assumed that file is in UTF-8.
+     *
+     * @param url the url
+     * @return the resource as string
+     * @throws IOException the io exception
      */
     public static String getResourceAsString(URL url) throws IOException {
         List<String> lines = Resources.readLines(url, Charsets.UTF_8);
@@ -677,8 +833,20 @@ public class CryptoUtils {
     }
 
     private static class Pair implements Comparable<Pair> {
-        int item, count;
+        /**
+         * The Item.
+         */
+        int item, /**
+         * The Count.
+         */
+        count;
 
+        /**
+         * Instantiates a new Pair.
+         *
+         * @param item  the item
+         * @param count the count
+         */
         public Pair(int item, int count) {
             this.count = count;
             this.item = item;

@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * The type Valid block header cmd.
+ *
  * @author suimi
- * @date 2018/4/17
+ * @date 2018 /4/17
  */
 @Getter @Setter @NoArgsConstructor public class ValidBlockHeaderCmd extends IdValidCommand<Boolean> {
 
@@ -20,6 +22,13 @@ import lombok.Setter;
 
     private BlockHeader header;
 
+    /**
+     * Instantiates a new Valid block header cmd.
+     *
+     * @param requestId the request id
+     * @param header    the header
+     * @param valid     the valid
+     */
     public ValidBlockHeaderCmd(String requestId, BlockHeader header, Boolean valid) {
         super(requestId, valid);
         this.header = header;

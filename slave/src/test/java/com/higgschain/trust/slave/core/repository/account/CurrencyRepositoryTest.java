@@ -10,13 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Currency repository test.
+ *
  * @description: com.higgschain.trust.slave.core.repository.account
  * @author: lingchao
  * @datetime:2018年12月03日11:07
- **/
+ */
 public class CurrencyRepositoryTest extends BaseTest {
     @Autowired
     private CurrencyRepository currencyRepository;
+
+    /**
+     * Batch insert test.
+     */
     @Test
     public void batchInsertTest(){
         List<CurrencyInfo> currencyInfos = new ArrayList<>(4);
@@ -49,6 +55,9 @@ public class CurrencyRepositoryTest extends BaseTest {
         currencyRepository.batchInsert(currencyInfos);
     }
 
+    /**
+     * Query by currency test.
+     */
     @Test
     public void queryByCurrencyTest(){
         System.out.println(currencyRepository.queryByCurrency("BTO"));

@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type Sign service.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-12
+ * @date 2018 -05-12
  */
 @Service
 @Slf4j

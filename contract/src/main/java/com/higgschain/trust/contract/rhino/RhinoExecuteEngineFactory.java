@@ -7,8 +7,10 @@ import com.higgschain.trust.contract.ExecuteEngineFactory;
 import java.util.Map;
 
 /**
+ * The type Rhino execute engine factory.
+ *
  * @author duhongming
- * @date 2018/6/6
+ * @date 2018 /6/6
  */
 public class RhinoExecuteEngineFactory implements ExecuteEngineFactory {
 
@@ -18,6 +20,9 @@ public class RhinoExecuteEngineFactory implements ExecuteEngineFactory {
         TrustContextFactory.install();
     }
 
+    /**
+     * Instantiates a new Rhino execute engine factory.
+     */
     public RhinoExecuteEngineFactory() {
 
     }

@@ -15,8 +15,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Vote receipt rocks dao.
+ *
  * @author tangfashuang
- * @desc key: txId_voter; value : voteReceiptPO
+ * @desc key : txId_voter; value : voteReceiptPO
  */
 @Slf4j
 @Service
@@ -25,6 +27,11 @@ public class VoteReceiptRocksDao extends RocksBaseDao<VoteReceiptPO> {
         return "voteReceipt";
     }
 
+    /**
+     * Save.
+     *
+     * @param voteReceiptPO the vote receipt po
+     */
     public void save(VoteReceiptPO voteReceiptPO) {
         String key = voteReceiptPO.getTxId() + Constant.SPLIT_SLASH + voteReceiptPO.getVoter();
         if (keyMayExist(key) && null != get(key)) {
@@ -35,6 +42,11 @@ public class VoteReceiptRocksDao extends RocksBaseDao<VoteReceiptPO> {
         put(key, voteReceiptPO);
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param list the list
+     */
     public void batchInsert(List<VoteReceiptPO> list) {
         if (CollectionUtils.isEmpty(list)) {
             return;
@@ -53,6 +65,12 @@ public class VoteReceiptRocksDao extends RocksBaseDao<VoteReceiptPO> {
         }
     }
 
+    /**
+     * Query by tx id list.
+     *
+     * @param txId the tx id
+     * @return the list
+     */
     public List<VoteReceiptPO> queryByTxId(String txId) {
         return queryByPrefix(txId);
     }

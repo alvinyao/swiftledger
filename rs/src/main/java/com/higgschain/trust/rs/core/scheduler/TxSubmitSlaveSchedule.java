@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Tx submit slave schedule.
+ */
 @ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true) @Service @Slf4j
 public class TxSubmitSlaveSchedule {
     @Autowired private CoreTransactionService coreTransactionService;
@@ -29,6 +32,9 @@ public class TxSubmitSlaveSchedule {
      */
     private String lastPreKey = null;
 
+    /**
+     * Exe.
+     */
     @Scheduled(fixedDelayString = "${rs.core.schedule.submitSlave:500}") public void exe() {
         List<CoreTransactionProcessPO> list =
             coreTxRepository.queryByStatus(CoreTxStatusEnum.WAIT, (pageNo - 1) * pageSize, pageSize, lastPreKey);

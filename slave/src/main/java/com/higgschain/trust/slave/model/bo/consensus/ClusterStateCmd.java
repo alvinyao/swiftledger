@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * The type Cluster state cmd.
+ *
  * @author liuyu
- * @date 2018/10/12
+ * @date 2018 /10/12
  */
 @NoArgsConstructor @Getter @Setter public class ClusterStateCmd extends ValidCommand<Integer> {
 
@@ -15,6 +17,13 @@ import lombok.Setter;
 
     private String requestId;
 
+    /**
+     * Instantiates a new Cluster state cmd.
+     *
+     * @param requestId the request id
+     * @param value     the value
+     * @param view      the view
+     */
     public ClusterStateCmd(String requestId, Integer value, long view) {
         super(value, view);
         this.requestId = requestId;

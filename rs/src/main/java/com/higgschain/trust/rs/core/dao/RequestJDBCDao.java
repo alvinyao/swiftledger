@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * The type Request jdbc dao.
+ */
 @Component
 @Slf4j
 public class RequestJDBCDao {
@@ -23,9 +26,10 @@ public class RequestJDBCDao {
     /**
      * batch update status
      *
-     * @param rsCoreTxVOS
-     * @param from
-     * @param to
+     * @param rsCoreTxVOS the rs core tx vos
+     * @param from        the from
+     * @param to          the to
+     * @return the int
      */
     public int batchUpdateStatus(List<RsCoreTxVO> rsCoreTxVOS, RequestEnum from, RequestEnum to) {
         String sql = "UPDATE request SET ";

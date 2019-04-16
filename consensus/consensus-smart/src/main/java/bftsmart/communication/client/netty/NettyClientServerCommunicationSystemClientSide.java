@@ -55,12 +55,17 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
 /**
+ * The type Netty client server communication system client side.
+ *
  * @author Paulo
  */
 @Sharable public class NettyClientServerCommunicationSystemClientSide extends SimpleChannelInboundHandler<TOMMessage>
     implements CommunicationSystemClientSide {
 
     private int clientId;
+    /**
+     * The Trr.
+     */
     protected ReplyReceiver trr;
     //******* EDUARDO BEGIN **************//
     private ClientViewController controller;
@@ -76,6 +81,12 @@ import java.util.logging.Level;
 
     private SyncListener listener;
 
+    /**
+     * Instantiates a new Netty client server communication system client side.
+     *
+     * @param clientId   the client id
+     * @param controller the controller
+     */
     public NettyClientServerCommunicationSystemClientSide(int clientId, ClientViewController controller) {
         super();
         this.clientId = clientId;
@@ -254,6 +265,11 @@ import java.util.logging.Level;
         Logger.println("Channel active");
     }
 
+    /**
+     * Reconnect.
+     *
+     * @param ctx the ctx
+     */
     public void reconnect(final ChannelHandlerContext ctx) {
 
         rl.writeLock().lock();
@@ -415,6 +431,13 @@ import java.util.logging.Level;
         sm.serializedMessageSignature = data2;
     }
 
+    /**
+     * Sign message byte [ ].
+     *
+     * @param key     the key
+     * @param message the message
+     * @return the byte [ ]
+     */
     public byte[] signMessage(PrivateKey key, byte[] message) {
         //long startTime = System.nanoTime();
         try {
@@ -506,6 +529,9 @@ import java.util.logging.Level;
         private final Lock futureLock;
         private final Condition enoughCompleted;
 
+        /**
+         * Instantiates a new Sync listener.
+         */
         public SyncListener() {
 
             this.remainingFutures = 0;
@@ -531,6 +557,11 @@ import java.util.logging.Level;
 
         }
 
+        /**
+         * Wait for channels.
+         *
+         * @param n the n
+         */
         public void waitForChannels(int n) {
 
             this.futureLock.lock();

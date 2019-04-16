@@ -33,8 +33,16 @@ public class OkHttpClientManager {
 
 
     private static final String TAG = "OkHttpClientManager";
+    /**
+     * The constant JSON.
+     */
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    /**
+     * Sets certificates.
+     *
+     * @param certificates the certificates
+     */
     public void setCertificates(InputStream... certificates) {
         try {
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
@@ -92,7 +100,11 @@ public class OkHttpClientManager {
                 writeTimeout(timeoutMs, TimeUnit.MILLISECONDS).build();
     }
 
-
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public synchronized static OkHttpClientManager getInstance() {
         if (mInstance == null) {
             mInstance = new OkHttpClientManager();
@@ -100,6 +112,12 @@ public class OkHttpClientManager {
         return mInstance;
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param timeoutMs the timeout ms
+     * @return the instance
+     */
     public synchronized static OkHttpClientManager getInstance(Long timeoutMs) {
         if (mInstanceTimeout == null) {
             mInstanceTimeout = new OkHttpClientManager(timeoutMs);
@@ -160,22 +178,60 @@ public class OkHttpClientManager {
         return response.body().string();
     }
 
+    /**
+     * Gets asyn.
+     *
+     * @param url the url
+     * @return the asyn
+     * @throws IOException the io exception
+     */
     public static Response getAsyn(String url) throws IOException {
         return getInstance()._getAsyn(url);
     }
 
+    /**
+     * Gets as string.
+     *
+     * @param url the url
+     * @return the as string
+     * @throws IOException the io exception
+     */
     public static String getAsString(String url) throws IOException {
         return getInstance()._getAsString(url);
     }
 
+    /**
+     * Gets as string.
+     *
+     * @param url       the url
+     * @param timeoutMs the timeout ms
+     * @return the as string
+     * @throws IOException the io exception
+     */
     public static String getAsString(String url, Long timeoutMs) throws IOException {
         return getInstance(timeoutMs)._getAsString(url);
     }
 
+    /**
+     * Post response.
+     *
+     * @param url  the url
+     * @param json the json
+     * @return the response
+     * @throws IOException the io exception
+     */
     public static Response post(String url, String json) throws IOException {
         return getInstance()._post(url, json);
     }
 
+    /**
+     * Post as string string.
+     *
+     * @param url  the url
+     * @param json the json
+     * @return the string
+     * @throws IOException the io exception
+     */
     public static String postAsString(String url, String json) throws IOException {
         return getInstance()._postAsString(url, json);
     }
@@ -183,11 +239,11 @@ public class OkHttpClientManager {
     /**
      * timeout单位是毫秒（ms）
      *
-     * @param url
-     * @param json
-     * @param timeoutMs
-     * @return
-     * @throws IOException
+     * @param url       the url
+     * @param json      the json
+     * @param timeoutMs the timeout ms
+     * @return string
+     * @throws IOException the io exception
      */
     public static String postAsString(String url, String json, Long timeoutMs) throws IOException {
         return getInstance(timeoutMs)._postAsString(url, json);

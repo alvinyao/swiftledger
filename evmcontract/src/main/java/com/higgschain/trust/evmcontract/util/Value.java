@@ -37,6 +37,12 @@ public class Value {
 
     private boolean decoded = false;
 
+    /**
+     * From rlp encoded value.
+     *
+     * @param data the data
+     * @return the value
+     */
     public static Value fromRlpEncoded(byte[] data) {
 
         if (data != null && data.length != 0) {
@@ -47,13 +53,26 @@ public class Value {
         return null;
     }
 
+    /**
+     * Instantiates a new Value.
+     */
     public Value() {
     }
 
+    /**
+     * Init.
+     *
+     * @param rlp the rlp
+     */
     public void init(byte[] rlp) {
         this.rlp = rlp;
     }
 
+    /**
+     * Instantiates a new Value.
+     *
+     * @param obj the obj
+     */
     public Value(Object obj) {
 
         this.decoded = true;
@@ -68,6 +87,12 @@ public class Value {
         }
     }
 
+    /**
+     * With hash value.
+     *
+     * @param hash the hash
+     * @return the value
+     */
     public Value withHash(byte[] hash) {
         sha3 = hash;
         return this;
@@ -77,17 +102,32 @@ public class Value {
      *      Convert
      * *****************/
 
+    /**
+     * As obj object.
+     *
+     * @return the object
+     */
     public Object asObj() {
         decode();
         return value;
     }
 
+    /**
+     * As list list.
+     *
+     * @return the list
+     */
     public List<Object> asList() {
         decode();
         Object[] valueArray = (Object[]) value;
         return Arrays.asList(valueArray);
     }
 
+    /**
+     * As int int.
+     *
+     * @return the int
+     */
     public int asInt() {
         decode();
         if (isInt()) {
@@ -98,6 +138,11 @@ public class Value {
         return 0;
     }
 
+    /**
+     * As long long.
+     *
+     * @return the long
+     */
     public long asLong() {
         decode();
         if (isLong()) {
@@ -108,11 +153,21 @@ public class Value {
         return 0;
     }
 
+    /**
+     * As big int big integer.
+     *
+     * @return the big integer
+     */
     public BigInteger asBigInt() {
         decode();
         return (BigInteger) value;
     }
 
+    /**
+     * As string string.
+     *
+     * @return the string
+     */
     public String asString() {
         decode();
         if (isBytes()) {
@@ -123,6 +178,11 @@ public class Value {
         return "";
     }
 
+    /**
+     * As bytes byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] asBytes() {
         decode();
         if (isBytes()) {
@@ -133,19 +193,39 @@ public class Value {
         return ByteUtil.EMPTY_BYTE_ARRAY;
     }
 
+    /**
+     * Gets hex.
+     *
+     * @return the hex
+     */
     public String getHex() {
         return Hex.toHexString(this.encode());
     }
 
+    /**
+     * Get data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getData() {
         return this.encode();
     }
 
-
+    /**
+     * As slice int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] asSlice() {
         return (int[]) value;
     }
 
+    /**
+     * Get value.
+     *
+     * @param index the index
+     * @return the value
+     */
     public Value get(int index) {
         if (isList()) {
             // Guard for OutOfBounds
@@ -165,6 +245,9 @@ public class Value {
      *      Utility
      * *****************/
 
+    /**
+     * Decode.
+     */
     public void decode() {
         if (!this.decoded) {
             this.value = RLP.decode(rlp, 0).getDecoded();
@@ -172,6 +255,11 @@ public class Value {
         }
     }
 
+    /**
+     * Encode byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] encode() {
         if (rlp == null) {
             rlp = RLP.encode(value);
@@ -179,6 +267,11 @@ public class Value {
         return rlp;
     }
 
+    /**
+     * Hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] hash() {
         if (sha3 == null) {
             sha3 = HashUtil.sha3(encode());
@@ -186,38 +279,71 @@ public class Value {
         return sha3;
     }
 
-
-
+    /**
+     * Is list boolean.
+     *
+     * @return the boolean
+     */
     public boolean isList() {
         decode();
         return value != null && value.getClass().isArray() && !value.getClass().getComponentType().isPrimitive();
     }
 
+    /**
+     * Is string boolean.
+     *
+     * @return the boolean
+     */
     public boolean isString() {
         decode();
         return value instanceof String;
     }
 
+    /**
+     * Is int boolean.
+     *
+     * @return the boolean
+     */
     public boolean isInt() {
         decode();
         return value instanceof Integer;
     }
 
+    /**
+     * Is long boolean.
+     *
+     * @return the boolean
+     */
     public boolean isLong() {
         decode();
         return value instanceof Long;
     }
 
+    /**
+     * Is big int boolean.
+     *
+     * @return the boolean
+     */
     public boolean isBigInt() {
         decode();
         return value instanceof BigInteger;
     }
 
+    /**
+     * Is bytes boolean.
+     *
+     * @return the boolean
+     */
     public boolean isBytes() {
         decode();
         return value instanceof byte[];
     }
 
+    /**
+     * Is readable string boolean.
+     *
+     * @return the boolean
+     */
     // it's only if the isBytes() = true;
     public boolean isReadableString() {
 
@@ -238,6 +364,11 @@ public class Value {
         return (double) readableChars / (double) data.length > 0.55;
     }
 
+    /**
+     * Is hex string boolean.
+     *
+     * @return the boolean
+     */
     // it's only if the isBytes() = true;
     public boolean isHexString() {
 
@@ -256,16 +387,31 @@ public class Value {
         return (double) hexChars / (double) data.length > 0.9;
     }
 
+    /**
+     * Is hash code boolean.
+     *
+     * @return the boolean
+     */
     public boolean isHashCode() {
         decode();
         return this.asBytes().length == 32;
     }
 
+    /**
+     * Is null boolean.
+     *
+     * @return the boolean
+     */
     public boolean isNull() {
         decode();
         return value == null;
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     public boolean isEmpty() {
         decode();
         if (isNull()) {
@@ -281,6 +427,11 @@ public class Value {
 
     }
 
+    /**
+     * Length int.
+     *
+     * @return the int
+     */
     public int length() {
         decode();
         if (isList()) {
@@ -364,6 +515,11 @@ public class Value {
         return "Unexpected type";
     }
 
+    /**
+     * Count branch nodes int.
+     *
+     * @return the int
+     */
     public int countBranchNodes() {
         decode();
         if (this.isList()) {

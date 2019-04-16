@@ -9,8 +9,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * The type Change master properties.
+ *
  * @author suimi
- * @date 2018/6/14
+ * @date 2018 /6/14
  */
 @Configuration @ConfigurationProperties(prefix = "higgs.trust.master") @Getter @Setter
 public class ChangeMasterProperties {

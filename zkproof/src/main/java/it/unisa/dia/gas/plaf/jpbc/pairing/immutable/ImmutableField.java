@@ -8,14 +8,23 @@ import it.unisa.dia.gas.plaf.jpbc.util.ElementUtils;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable field.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
 public class ImmutableField implements Field {
 
+    /**
+     * The Field.
+     */
     protected Field field;
 
-
+    /**
+     * Instantiates a new Immutable field.
+     *
+     * @param field the field
+     */
     public ImmutableField(Field field) {
         this.field = field;
     }

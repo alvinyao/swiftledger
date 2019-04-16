@@ -19,6 +19,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The type Check tx handler test.
+ */
 /*
  *
  * @desc
@@ -37,8 +40,16 @@ public class CheckTxHandlerTest extends BaseTest {
     private static final String priKey3 =
         "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBANDzTWjIRJ6Y3dKT4Z08/QuUMjj3OFSgt8qD9ZFgT3TXik44olP7O0gVJiL+tBtCuqsW6nU2BWt2S/1/SmGVq1dxco1VSCU/Dk7ReBTMRyZBOxfzdMnaTWMbiO+ETodJl3eQbK1miJyVbg7hLe7s/8xiH7AGsKkppW6GC7Kpb4zJAgMBAAECgYBORbYLuGmsF4uQ5ICxjDUmbz9ZA5MAcKwomsIU0UUyecN/hcuZNhWA7Rs6JLuHMroGeTEe8zuYg9n3fgV5BL4H96z3SBSrY+BsCf1CxYGXEVCHzlt6g8575MqtxIlqPXnpKr9S1663EtsCCJ93t5rZmMA7z8bUbFRTcrUsajYzAQJBAPynP0a6Pk5JlF0TW5vbzusZb3CsEdPTp39NxlHEx9v/2xuREti1CSVMhdm8ZDdC5hDoETZn4DTiBAF0Z5it6pkCQQDTt9uSFv16v+62yJIz0KE9EUZrLua1BlfTIyvgBZQ6Lp5ORS2S9iVzfOS77mufysbfGSpmD6Oc5ElY2coUy8GxAkAlFB5zMM4IC0Bc0IR3QTECy77RGE+deMhyJGXghjKWlNwBFa9gYmEvOiXCqKVEfurovEYaZ/A9kpXn6L9zZsKxAkAuym+IdfRHcKu9Uc6eDPnVmT/K6G6si15Vl2xW8mS0ByGNgtRzqlrUj0GuFx9KDXKuU81/CO3L+tgK/vceaXnBAkEAk+OjzXA0KXZGKm+O8/Vl8yiJQpuvpuO4cxy4E7nEAjevFip88p4tO03DVxjyq2Az7457q/T+C/Ohr1X9uS/v/Q==";
 
+    /**
+     * The Check tx handler.
+     */
     @Autowired TxCheckHandler checkTxHandler;
 
+    /**
+     * Verify signatures.
+     *
+     * @throws Exception the exception
+     */
     @Test public void verifySignatures() throws Exception {
 
         List<String> rsIds = new ArrayList<>();
@@ -76,6 +87,9 @@ public class CheckTxHandlerTest extends BaseTest {
         Assert.assertEquals(true, checkTxHandler.verifySignatures(stx, null));
     }
 
+    /**
+     * Check actions.
+     */
     @Test public void checkActions() {
         List<String> rsIds = new ArrayList<>();
         rsIds.add("rs-test1");

@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Cluster config.
+ *
  * @author WangQuanzhou
  * @desc cluster configuration
- * @date 2018/6/5 10:27
+ * @date 2018 /6/5 10:27
  */
 @Getter @Setter public class ClusterConfig extends BaseBO {
     private String clusterName;

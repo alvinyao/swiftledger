@@ -4,11 +4,13 @@ import com.higgschain.trust.common.crypto.Crypto;
 import com.higgschain.trust.common.crypto.KeyPair;
 import com.higgschain.trust.common.utils.Base64Util;
 
-/**  
- * @desc class for GM crypto and sign
+/**
+ * The type Gm crypto.
+ *
  * @author WangQuanzhou
- * @date 2018/8/20 11:48
- */  
+ * @desc class for GM crypto and sign
+ * @date 2018 /8/20 11:48
+ */
 public class GmCrypto implements Crypto {
 
     /**
@@ -76,7 +78,9 @@ public class GmCrypto implements Crypto {
     }
 
     /**
-     * @return
+     * Gets singleton instance.
+     *
+     * @return singleton instance
      * @desc get singleton instance
      */
     public static final GmCrypto getSingletonInstance() {

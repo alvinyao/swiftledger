@@ -30,6 +30,12 @@ public class ReplicaContext {
     private ServerCommunicationSystem cs; // Server side comunication system
     private ServerViewController SVController;
 
+    /**
+     * Instantiates a new Replica context.
+     *
+     * @param cs           the cs
+     * @param SVController the sv controller
+     */
     public ReplicaContext(ServerCommunicationSystem cs, ServerViewController SVController) {
         this.cs = cs;
         this.SVController = SVController;
@@ -65,10 +71,20 @@ public class ReplicaContext {
         return SVController.getCurrentView();
     }
 
+    /**
+     * Gets server communication system.
+     *
+     * @return the server communication system
+     */
     public ServerCommunicationSystem getServerCommunicationSystem() {
         return cs;
     }
 
+    /**
+     * Sets server communication system.
+     *
+     * @param cs the cs
+     */
     public void setServerCommunicationSystem(ServerCommunicationSystem cs) {
         this.cs = cs;
     }

@@ -10,26 +10,53 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.Executors;
 
 /**
+ * The type Event demo.
+ *
  * @author duhongming
- * @date 2018/9/10
+ * @date 2018 /9/10
  */
 public class EventDemo {
 
     private static Logger log = LoggerFactory.getLogger(EventDemo.class);
 
+    /**
+     * The type Event message.
+     */
     public static class EventMessage {
+        /**
+         * The Event type.
+         */
         final int eventType;
+        /**
+         * The Message.
+         */
         final Object message;
 
+        /**
+         * Instantiates a new Event message.
+         *
+         * @param eventType the event type
+         * @param message   the message
+         */
         public EventMessage(int eventType, Object message) {
             this.eventType = eventType;
             this.message = message;
         }
 
+        /**
+         * Gets event type.
+         *
+         * @return the event type
+         */
         public int getEventType() {
             return eventType;
         }
 
+        /**
+         * Gets message.
+         *
+         * @return the message
+         */
         public Object getMessage() {
             return message;
         }
@@ -42,11 +69,22 @@ public class EventDemo {
      *
      */
     private static class DeadEventsListener {
+        /**
+         * Handle dead event.
+         *
+         * @param deadEvent the dead event
+         */
         @Subscribe
         public void handleDeadEvent(DeadEvent deadEvent) {
             log.error("DEAD EVENT: {}", deadEvent.getEvent());
         }
 
+        /**
+         * Handle event.
+         *
+         * @param message the message
+         * @throws InterruptedException the interrupted exception
+         */
         @Subscribe
         public void handleEvent(EventMessage message) throws InterruptedException {
 //            TimeUnit.MILLISECONDS.sleep(2);
@@ -54,10 +92,18 @@ public class EventDemo {
         }
     }
 
+    /**
+     * The type Listener.
+     */
     class Listener {
 
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         final EventBus eventBus = new AsyncEventBus("network", Executors.newFixedThreadPool(1));
         eventBus.register(new DeadEventsListener());

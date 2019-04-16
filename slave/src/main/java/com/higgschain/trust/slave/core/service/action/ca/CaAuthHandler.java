@@ -16,14 +16,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Ca auth handler.
+ *
  * @author WangQuanzhou
  * @desc auth ca handler
- * @date 2018/6/6 10:25
+ * @date 2018 /6/6 10:25
  */
 @Slf4j @Component public class CaAuthHandler implements ActionHandler {
 
+    /**
+     * The Ca snapshot handler.
+     */
     @Autowired
     CaSnapshotHandler caSnapshotHandler;
+    /**
+     * The Ca helper.
+     */
     @Autowired CaHelper caHelper;
 
     @Override public void verifyParams(Action action) throws SlaveException {

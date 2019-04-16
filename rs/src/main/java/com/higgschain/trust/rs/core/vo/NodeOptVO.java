@@ -7,9 +7,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Node opt vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-05
+ * @date 2018 -09-05
  */
 @Getter
 @Setter

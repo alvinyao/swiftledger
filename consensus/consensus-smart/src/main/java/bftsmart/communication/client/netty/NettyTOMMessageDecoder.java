@@ -35,6 +35,8 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
+ * The type Netty tom message decoder.
+ *
  * @author Paulo Sousa
  */
 public class NettyTOMMessageDecoder extends ByteToMessageDecoder {
@@ -66,6 +68,17 @@ public class NettyTOMMessageDecoder extends ByteToMessageDecoder {
 
     private org.slf4j.Logger logger = LoggerFactory.getLogger(NettyTOMMessageDecoder.class);
 
+    /**
+     * Instantiates a new Netty tom message decoder.
+     *
+     * @param isClient        the is client
+     * @param sessionTable    the session table
+     * @param macLength       the mac length
+     * @param controller      the controller
+     * @param rl              the rl
+     * @param signatureLength the signature length
+     * @param useMAC          the use mac
+     */
     public NettyTOMMessageDecoder(boolean isClient, Map sessionTable, int macLength, ViewController controller,
         ReentrantReadWriteLock rl, int signatureLength, boolean useMAC) {
         this.isClient = isClient;
@@ -204,6 +217,14 @@ public class NettyTOMMessageDecoder extends ByteToMessageDecoder {
         return;
     }
 
+    /**
+     * Verify mac boolean.
+     *
+     * @param id     the id
+     * @param data   the data
+     * @param digest the digest
+     * @return the boolean
+     */
     boolean verifyMAC(int id, byte[] data, byte[] digest) {
         //long startInstant = System.nanoTime();
         rl.readLock().lock();

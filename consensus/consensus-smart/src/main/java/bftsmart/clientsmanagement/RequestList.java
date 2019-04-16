@@ -32,9 +32,17 @@ public class RequestList extends LinkedList<TOMMessage> {
 
     private int maxSize = Integer.MAX_VALUE;
 
+    /**
+     * Instantiates a new Request list.
+     */
     public RequestList() {
     }
 
+    /**
+     * Instantiates a new Request list.
+     *
+     * @param maxSize the max size
+     */
     public RequestList(int maxSize) {
         super();
         this.maxSize = maxSize;
@@ -47,6 +55,12 @@ public class RequestList extends LinkedList<TOMMessage> {
         }
     }
 
+    /**
+     * Remove tom message.
+     *
+     * @param serializedMessage the serialized message
+     * @return the tom message
+     */
     public TOMMessage remove(byte[] serializedMessage) {
         for (ListIterator<TOMMessage> li = listIterator(); li.hasNext(); ) {
             TOMMessage msg = li.next();
@@ -58,6 +72,12 @@ public class RequestList extends LinkedList<TOMMessage> {
         return null;
     }
 
+    /**
+     * Remove by id tom message.
+     *
+     * @param id the id
+     * @return the tom message
+     */
     public TOMMessage removeById(int id) {
         for (ListIterator<TOMMessage> li = listIterator(); li.hasNext(); ) {
             TOMMessage msg = li.next();
@@ -69,6 +89,11 @@ public class RequestList extends LinkedList<TOMMessage> {
         return null;
     }
 
+    /**
+     * Get ids int [ ].
+     *
+     * @return the int [ ]
+     */
     // I think this method can be removed in future versions of JBP
     public int[] getIds() {
         int ids[] = new int[size()];
@@ -79,6 +104,12 @@ public class RequestList extends LinkedList<TOMMessage> {
         return ids;
     }
 
+    /**
+     * Get tom message.
+     *
+     * @param serializedMessage the serialized message
+     * @return the tom message
+     */
     public TOMMessage get(byte[] serializedMessage) {
         for (ListIterator<TOMMessage> li = listIterator(); li.hasNext(); ) {
             TOMMessage msg = li.next();
@@ -89,6 +120,12 @@ public class RequestList extends LinkedList<TOMMessage> {
         return null;
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
     public TOMMessage getById(int id) {
         for (ListIterator<TOMMessage> li = listIterator(); li.hasNext(); ) {
             TOMMessage msg = li.next();
@@ -99,6 +136,12 @@ public class RequestList extends LinkedList<TOMMessage> {
         return null;
     }
 
+    /**
+     * Gets by sequence.
+     *
+     * @param sequence the sequence
+     * @return the by sequence
+     */
     public TOMMessage getBySequence(int sequence) {
         for (ListIterator<TOMMessage> li = listIterator(); li.hasNext(); ) {
             TOMMessage msg = li.next();
@@ -109,6 +152,12 @@ public class RequestList extends LinkedList<TOMMessage> {
         return null;
     }
 
+    /**
+     * Contains boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     public boolean contains(int id) {
         for (ListIterator<TOMMessage> li = listIterator(); li.hasNext(); ) {
             TOMMessage msg = li.next();

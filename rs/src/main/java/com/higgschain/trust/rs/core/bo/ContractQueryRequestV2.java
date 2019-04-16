@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * The type Contract query request v 2.
+ *
  * @author Chen Jiawei
- * @date 2018-12-12
+ * @date 2018 -12-12
  */
 @Data
 @AllArgsConstructor

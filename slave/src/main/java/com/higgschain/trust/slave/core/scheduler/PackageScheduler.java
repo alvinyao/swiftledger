@@ -34,8 +34,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Package scheduler.
+ *
  * @author tangfashuang
- * @date 2018/04/09 15:30
+ * @date 2018 /04/09 15:30
  */
 @ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
 @Service

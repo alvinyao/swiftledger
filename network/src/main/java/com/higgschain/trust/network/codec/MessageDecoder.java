@@ -14,8 +14,10 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
+ * The type Message decoder.
+ *
  * @author duhongming
- * @date 2018/8/21
+ * @date 2018 /8/21
  */
 public class MessageDecoder extends ByteToMessageDecoder {
 
@@ -131,14 +133,40 @@ public class MessageDecoder extends ByteToMessageDecoder {
         decoderStatus = DecoderStatus.READ_VERSION;
     }
 
-    enum  DecoderStatus {
-        READ_VERSION,
+    /**
+     * The enum Decoder status.
+     */
+    enum  DecoderStatus {/**
+     * Read version decoder status.
+     */
+    READ_VERSION,
+        /**
+         * Read ip decoder status.
+         */
         READ_IP,
+        /**
+         * Read port decoder status.
+         */
         READ_PORT,
+        /**
+         * Read message id decoder status.
+         */
         READ_MESSAGE_ID,
+        /**
+         * Read message type decoder status.
+         */
         READ_MESSAGE_TYPE,
+        /**
+         * Read request action decoder status.
+         */
         READ_REQUEST_ACTION,
+        /**
+         * Read content length decoder status.
+         */
         READ_CONTENT_LENGTH,
+        /**
+         * Read content decoder status.
+         */
         READ_CONTENT,
     }
 }

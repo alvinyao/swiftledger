@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * SystemProperty snapshot handler
  *
  * @author lingchao
- * @create 2018年06月29日10:51
+ * @create 2018年06月29日10 :51
  */
 @Slf4j
 @Service
@@ -40,8 +40,8 @@ public class SystemPropertyHandler {
     /**
      * query System Property by key
      *
-     * @param key
-     * @return
+     * @param key the key
+     * @return system property vo
      */
     public SystemPropertyVO querySystemPropertyByKey(String key) {
         if (StringUtils.isBlank(key)) {
@@ -61,12 +61,11 @@ public class SystemPropertyHandler {
         return systemPropertyVO;
     }
 
-
     /**
      * query System Property by key  for command
      *
-     * @param key
-     * @return
+     * @param key the key
+     * @return string
      */
     public String get(String key) {
         if (StringUtils.isBlank(key)) {
@@ -82,10 +81,10 @@ public class SystemPropertyHandler {
     /**
      * set system property ,it may be add or update
      *
-     * @param key
-     * @param value
-     * @param desc
-     * @return
+     * @param key   the key
+     * @param value the value
+     * @param desc  the desc
+     * @return string
      */
     public String set(String key, String value, String desc) {
 

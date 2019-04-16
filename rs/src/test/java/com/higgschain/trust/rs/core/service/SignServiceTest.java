@@ -8,12 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
 /**
+ * The type Sign service test.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-15
+ * @date 2018 -05-15
  */
 public class SignServiceTest extends IntegrateBaseTest {
+    /**
+     * The Sign service.
+     */
     @Autowired SignService signService;
+
+    /**
+     * Test sign.
+     */
     @Test
     public void testSign(){
         CoreTransaction coreTx = new CoreTransaction();

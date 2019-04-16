@@ -16,10 +16,19 @@ import com.higgschain.trust.slave.model.bo.contract.ContractInvokeAction;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * The type Contract invoke handler test.
+ */
 public class ContractInvokeHandlerTest extends IntegrateBaseTest {
 
     @Autowired private ContractInvokeHandler invokeHandler;
+    /**
+     * The Snapshot.
+     */
     @Autowired SnapshotService snapshot;
+    /**
+     * The Package service.
+     */
     @Autowired PackageServiceImpl packageService;
 
     private ContractInvokeAction createContractInvokeAction() {
@@ -31,6 +40,9 @@ public class ContractInvokeHandlerTest extends IntegrateBaseTest {
         return action;
     }
 
+    /**
+     * Test process.
+     */
     @Test
     public void testProcess() {
         Action action = createContractInvokeAction();
@@ -52,6 +64,11 @@ public class ContractInvokeHandlerTest extends IntegrateBaseTest {
 
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);

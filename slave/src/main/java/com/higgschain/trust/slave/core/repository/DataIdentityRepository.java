@@ -17,11 +17,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 /**
+ * The type Data identity repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-10
+ * @date 2018 -04-10
  */
 @Repository
 @Slf4j
@@ -41,8 +42,8 @@ public class DataIdentityRepository {
     /**
      * query identity data by identity
      *
-     * @param identity
-     * @return
+     * @param identity the identity
+     * @return data identity
      */
     public DataIdentity queryDataIdentity(String identity) {
         DataIdentityPO identityPO;
@@ -57,7 +58,8 @@ public class DataIdentityRepository {
     /**
      * batch insert data identity
      *
-     * @param dataIdentityList
+     * @param dataIdentityList the data identity list
+     * @return the boolean
      */
     public boolean batchInsert(List<DataIdentity> dataIdentityList) {
         if(CollectionUtils.isEmpty(dataIdentityList)){
@@ -79,8 +81,8 @@ public class DataIdentityRepository {
     /**
      * check there the identity is existed in the slave
      *
-     * @param identity
-     * @return
+     * @param identity the identity
+     * @return boolean
      */
     public boolean isExist(String identity) {
         DataIdentity dataIdentity = queryDataIdentity(identity);

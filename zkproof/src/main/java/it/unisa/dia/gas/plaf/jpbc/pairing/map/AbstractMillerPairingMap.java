@@ -8,16 +8,38 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 /**
+ * The type Abstract miller pairing map.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractMillerPairingMap<E extends Element> extends AbstractPairingMap {
 
-
+    /**
+     * Instantiates a new Abstract miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     protected AbstractMillerPairingMap(final Pairing pairing) {
         super(pairing);
     }
 
-
+    /**
+     * Line step.
+     *
+     * @param f0  the f 0
+     * @param a   the a
+     * @param b   the b
+     * @param c   the c
+     * @param Vx  the vx
+     * @param Vy  the vy
+     * @param V1x the v 1 x
+     * @param V1y the v 1 y
+     * @param e0  the e 0
+     * @param Qx  the qx
+     * @param Qy  the qy
+     * @param f   the f
+     */
     protected final void lineStep(final Point<E> f0,
                                   final Element a, final Element b, final Element c,
                                   final Element Vx, final Element Vy,
@@ -44,6 +66,19 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         f.mul(f0);
     }
 
+    /**
+     * Line step.
+     *
+     * @param f0  the f 0
+     * @param a   the a
+     * @param b   the b
+     * @param c   the c
+     * @param Vs  the vs
+     * @param V1s the v 1 s
+     * @param e0  the e 0
+     * @param Qs  the qs
+     * @param f   the f
+     */
     protected final void lineStep(final Point<E> f0,
                                   final Element a, final Element b, final Element c,
                                   final Element[] Vs,
@@ -76,6 +111,21 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         }
     }
 
+    /**
+     * Tangent step.
+     *
+     * @param f0     the f 0
+     * @param a      the a
+     * @param b      the b
+     * @param c      the c
+     * @param Vx     the vx
+     * @param Vy     the vy
+     * @param curveA the curve a
+     * @param e0     the e 0
+     * @param Qx     the qx
+     * @param Qy     the qy
+     * @param f      the f
+     */
     protected final void tangentStep(final Point<E> f0,
                                      final Element a, final Element b, final Element c,
                                      final Element Vx, final Element Vy,
@@ -100,6 +150,19 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         f.mul(f0);
     }
 
+    /**
+     * Tangent step.
+     *
+     * @param f0     the f 0
+     * @param a      the a
+     * @param b      the b
+     * @param c      the c
+     * @param Vs     the vs
+     * @param curveA the curve a
+     * @param e0     the e 0
+     * @param Qs     the qs
+     * @param f      the f
+     */
     protected final void tangentStep(final Point<E> f0,
                                      final Element a, final Element b, final Element c,
                                      final Element[] Vs,
@@ -129,6 +192,22 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         }
     }
 
+    /**
+     * Tangent step projective.
+     *
+     * @param f0 the f 0
+     * @param a  the a
+     * @param b  the b
+     * @param c  the c
+     * @param Vx the vx
+     * @param Vy the vy
+     * @param z  the z
+     * @param z2 the z 2
+     * @param e0 the e 0
+     * @param Qx the qx
+     * @param Qy the qy
+     * @param f  the f
+     */
     protected final void tangentStepProjective(final Point<E> f0,
                                                final Element a, final Element b, final Element c,
                                                final Element Vx, final Element Vy, final Element z,
@@ -160,11 +239,31 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         f.mul(f0);
     }
 
+    /**
+     * Miller step.
+     *
+     * @param out the out
+     * @param a   the a
+     * @param b   the b
+     * @param c   the c
+     * @param Qx  the qx
+     * @param Qy  the qy
+     */
     protected abstract void millerStep(Point<E> out,
                                        Element a, Element b, Element c,
                                        E Qx, E Qy);
 
-
+    /**
+     * Compute tangent.
+     *
+     * @param a      the a
+     * @param b      the b
+     * @param c      the c
+     * @param Vx     the vx
+     * @param Vy     the vy
+     * @param curveA the curve a
+     * @param temp   the temp
+     */
     protected final void computeTangent(final Element a, final Element b, final Element c,
                                         final Element Vx, final Element Vy,
                                         final Element curveA,
@@ -182,6 +281,18 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         c.set(a).mul(Vx).add(temp.set(b).mul(Vy)).negate();
     }
 
+    /**
+     * Compute tangent.
+     *
+     * @param info   the info
+     * @param a      the a
+     * @param b      the b
+     * @param c      the c
+     * @param Vx     the vx
+     * @param Vy     the vy
+     * @param curveA the curve a
+     * @param temp   the temp
+     */
     protected final void computeTangent(final MillerPreProcessingInfo info,
                                         final Element a, final Element b, final Element c,
                                         final Element Vx, final Element Vy,
@@ -245,6 +356,19 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         c.set(Vx).mul(V1y).sub(temp.set(Vy).mul(V1x));
     }
 
+    /**
+     * Compute line.
+     *
+     * @param info the info
+     * @param a    the a
+     * @param b    the b
+     * @param c    the c
+     * @param Vx   the vx
+     * @param Vy   the vy
+     * @param V1x  the v 1 x
+     * @param V1y  the v 1 y
+     * @param temp the temp
+     */
     protected final void computeLine(final MillerPreProcessingInfo info,
                                      final Element a, final Element b, final Element c,
                                      final Element Vx, final Element Vy,
@@ -267,7 +391,13 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         info.addRow(a, b, c);
     }
 
-
+    /**
+     * Lucas even element.
+     *
+     * @param in       the in
+     * @param cofactor the cofactor
+     * @return the element
+     */
     protected final Element lucasEven(final Point in, final BigInteger cofactor) {
         //assumes cofactor is even
         //mangles in
@@ -324,6 +454,14 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         return out;
     }
 
+    /**
+     * Lucas odd.
+     *
+     * @param out      the out
+     * @param in       the in
+     * @param temp     the temp
+     * @param cofactor the cofactor
+     */
     protected final void lucasOdd(final Point out, final Point in, final Point temp, final BigInteger cofactor) {
         //assumes cofactor is odd
         //overwrites in and temp, out must not be in
@@ -374,15 +512,35 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         v1.mul(in1);
     }
 
-
+    /**
+     * The type Miller pre processing info.
+     */
     public static class MillerPreProcessingInfo {
+        /**
+         * The Num row.
+         */
         public int numRow = 0;
+        /**
+         * The Table.
+         */
         public final Element[][] table;
 
+        /**
+         * Instantiates a new Miller pre processing info.
+         *
+         * @param size the size
+         */
         public MillerPreProcessingInfo(int size) {
             this.table = new Element[size][3];
         }
 
+        /**
+         * Instantiates a new Miller pre processing info.
+         *
+         * @param pairing the pairing
+         * @param source  the source
+         * @param offset  the offset
+         */
         public MillerPreProcessingInfo(Pairing pairing, byte[] source, int offset) {
             PairingStreamReader in = new PairingStreamReader(pairing, source, offset);
 
@@ -396,6 +554,13 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
             }
         }
 
+        /**
+         * Add row.
+         *
+         * @param a the a
+         * @param b the b
+         * @param c the c
+         */
         public void addRow(Element a, Element b, Element c) {
             table[numRow][0] = a.duplicate();
             table[numRow][1] = b.duplicate();
@@ -404,6 +569,11 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
             numRow++;
         }
 
+        /**
+         * To bytes byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] toBytes() {
             try {
                 PairingStreamWriter out = new PairingStreamWriter(table[0][0].getField().getLengthInBytes() * numRow * 3 + 4);
@@ -420,30 +590,60 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
         }
     }
 
+    /**
+     * The type Jacob point.
+     */
     public static class JacobPoint {
 
         private Element x;
         private Element y;
         private Element z;
 
+        /**
+         * Instantiates a new Jacob point.
+         *
+         * @param x the x
+         * @param y the y
+         * @param z the z
+         */
         public JacobPoint(Element x, Element y, Element z) {
             this.x = x;
             this.y = y;
             this.z = z;
         }
 
+        /**
+         * Gets x.
+         *
+         * @return the x
+         */
         public Element getX() {
             return this.x;
         }
 
+        /**
+         * Gets y.
+         *
+         * @return the y
+         */
         public Element getY() {
             return this.y;
         }
 
+        /**
+         * Gets z.
+         *
+         * @return the z
+         */
         public Element getZ() {
             return this.z;
         }
 
+        /**
+         * Is infinity boolean.
+         *
+         * @return the boolean
+         */
         public boolean isInfinity() {
             //return this.equals(JacobPoint.INFINITY);
             return this.z.isZero();
@@ -491,14 +691,29 @@ public abstract class AbstractMillerPairingMap<E extends Element> extends Abstra
             return "[" + x + "," + y + "," + z + "]";
         }
 
+        /**
+         * Sets x.
+         *
+         * @param newX the new x
+         */
         public void setX(Element newX) {
             this.x = newX;
         }
 
+        /**
+         * Sets y.
+         *
+         * @param newY the new y
+         */
         public void setY(Element newY) {
             this.y = newY;
         }
 
+        /**
+         * Sets z.
+         *
+         * @param newZ the new z
+         */
         public void setZ(Element newZ) {
             this.z = newZ;
         }

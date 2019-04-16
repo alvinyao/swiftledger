@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * The type Contract v 2 query service.
+ *
  * @author: lingchao
- * @datetime:2019-01-05 23:28
- **/
+ * @datetime:2019-01-05 23 :28
+ */
 @ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
 @Slf4j
 @Service

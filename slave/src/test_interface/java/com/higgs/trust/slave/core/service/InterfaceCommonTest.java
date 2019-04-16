@@ -27,12 +27,12 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
-
 /**
+ * The type Interface common test.
  *
  * @author liuyu
  * @description
- * @date 2018-04-26
+ * @date 2018 -04-26
  */
 @Slf4j public abstract class InterfaceCommonTest extends BaseTest {
     /**
@@ -44,10 +44,16 @@ import static org.testng.Assert.assertEquals;
      */
     @Autowired SnapshotService snapshotService;
 
+    /**
+     * Before.
+     */
     @BeforeMethod public void before() {
         snapshotService.startTransaction();
     }
 
+    /**
+     * After.
+     */
     @AfterMethod public void after() {
         snapshotService.destroy();
     }
@@ -55,15 +61,15 @@ import static org.testng.Assert.assertEquals;
     /**
      * 测试数据根路径
      *
-     * @return
+     * @return provider root path
      */
     protected abstract String getProviderRootPath();
 
     /**
      * 默认的测试数据源，路径：测试数据根路径+测试方法名
      *
-     * @param method
-     * @return
+     * @param method the method
+     * @return object [ ] [ ]
      */
     @DataProvider public Object[][] defaultProvider(Method method) {
         String name = method.getName();
@@ -77,9 +83,9 @@ import static org.testng.Assert.assertEquals;
     /**
      * 执行actionHandler, validate、persist都会执行
      *
-     * @param param
-     * @param actionHandler
-     * @param action
+     * @param param         the param
+     * @param actionHandler the action handler
+     * @param action        the action
      */
     protected void executeActionHandler(Map<?, ?> param,ActionHandler actionHandler,Action action){
         String assertData = getAssertData(param);
@@ -94,10 +100,11 @@ import static org.testng.Assert.assertEquals;
 
     /**
      * 获取 测试数据中的 body 对象实体
-     * @param param
-     * @param clazz
-     * @param <T>
-     * @return
+     *
+     * @param <T>   the type parameter
+     * @param param the param
+     * @param clazz the clazz
+     * @return body data
      */
     protected <T> T getBodyData(Map<?, ?> param, Class<T> clazz) {
         String body = String.valueOf(param.get("body"));
@@ -110,10 +117,12 @@ import static org.testng.Assert.assertEquals;
 
     /**
      * 从body中获取action对象实体,同时设置actionType
-
-     * @param param
-     * @param actionTypeEnum
-     * @return
+     *
+     * @param <T>            the type parameter
+     * @param param          the param
+     * @param clazz          the clazz
+     * @param actionTypeEnum the action type enum
+     * @return action
      */
     protected <T> T getAction(Map<?, ?> param, Class<T> clazz,ActionTypeEnum actionTypeEnum) {
         T data = getBodyData(param,clazz);
@@ -129,8 +138,8 @@ import static org.testng.Assert.assertEquals;
     /**
      * 断言
      *
-     * @param param
-     * @return
+     * @param param the param
+     * @return assert data
      */
     protected String getAssertData(Map<?, ?> param) {
         return String.valueOf(param.get("assert"));
@@ -139,10 +148,10 @@ import static org.testng.Assert.assertEquals;
     /**
      * package data 的 封装
      *
-     * @param action
-     * @param blockHeight
-     * @return
-     * @throws Exception
+     * @param action      the action
+     * @param blockHeight the block height
+     * @return pack context
+     * @throws Exception the exception
      */
     protected PackContext makePackContext(Action action, Long blockHeight) throws Exception {
         List<Action> actions = new ArrayList<>();

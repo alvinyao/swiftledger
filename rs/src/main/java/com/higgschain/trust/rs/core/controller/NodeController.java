@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * The type Node controller.
+ *
  * @author WangQuanzhou
- * @date 2018/6/5 17:37
+ * @date 2018 /6/5 17:37
  */
 @RestController
 @Slf4j
@@ -24,8 +26,8 @@ public class NodeController {
     /**
      * auth ca transaction
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/node/join", method = RequestMethod.POST)
     RespData<String> nodeJoin(

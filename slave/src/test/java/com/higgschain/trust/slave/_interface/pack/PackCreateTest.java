@@ -16,6 +16,9 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Pack create test.
+ */
 @Slf4j
 public class PackCreateTest extends InterfaceCommonTest {
     private static String PROVIDER_ROOT_PATH = "java/com/higgs/trust/slave/core/service/pack/create/";
@@ -27,6 +30,11 @@ public class PackCreateTest extends InterfaceCommonTest {
         return PROVIDER_ROOT_PATH;
     }
 
+    /**
+     * Fail.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void fail(Map<?, ?> param) {
         log.info("[fail]param:{}", param);
         executeBeforeSql(param);
@@ -37,12 +45,22 @@ public class PackCreateTest extends InterfaceCommonTest {
         executeAfterSql(param);
     }
 
+    /**
+     * Success.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 2) public void success(Map<?, ?> param) {
         log.info("[success]param:{}", param);
         Package pack = packageService.create(getTxList(param), packageCache.getPackHeight());
         assertEquals(String.valueOf(pack.getHeight()), getAssertData(param));
     }
 
+    /**
+     * Success with condition.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 2) public void successWithCondition(Map<?, ?> param) {
         log.info("[successWithCondition]param:{}", param);
         executeBeforeSql(param);

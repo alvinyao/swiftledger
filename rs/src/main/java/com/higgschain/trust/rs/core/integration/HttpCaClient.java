@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Http ca client.
+ *
  * @author duhongming
- * @date 2018/9/14
+ * @date 2018 /9/14
  */
 @Component
 public class HttpCaClient implements CaClient {

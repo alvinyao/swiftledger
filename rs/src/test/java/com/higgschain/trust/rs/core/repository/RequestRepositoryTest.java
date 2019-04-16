@@ -6,6 +6,9 @@ import com.higgschain.trust.rs.core.dao.rocks.RequestRocksDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
+/**
+ * The type Request repository test.
+ */
 public class RequestRepositoryTest extends IntegrateBaseTest {
 
     @Autowired
@@ -14,6 +17,9 @@ public class RequestRepositoryTest extends IntegrateBaseTest {
     @Autowired
     private RequestRocksDao requestRocksDao;
 
+    /**
+     * Test.
+     */
     @Test
     public void test() {
         String requestId = System.currentTimeMillis() + "";
@@ -29,6 +35,9 @@ public class RequestRepositoryTest extends IntegrateBaseTest {
         System.out.println("query: " + requestRepository.queryByRequestId(requestId));
     }
 
+    /**
+     * Request idempotent.
+     */
     @Test
     public void requestIdempotent(){
         System.out.println("requestIdempotent:" + requestRepository.requestIdempotent("12321"));

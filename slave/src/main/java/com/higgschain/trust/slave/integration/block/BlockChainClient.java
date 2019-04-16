@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * The interface Block chain client.
+ */
 //@FeignClient("${higgs.trust.prefix}")
 public interface BlockChainClient {
     /**
      * get the block headers
      *
      * @param nodeNameReg node name regex
-     * @param startHeight
-     * @param size
-     * @return
+     * @param startHeight the start height
+     * @param size        the size
+     * @return block headers
      */
     @RequestMapping(value = "/block/header/get", method = RequestMethod.GET)
     List<BlockHeader> getBlockHeaders(String nodeNameReg, @RequestParam(value = "startHeight") long startHeight, @RequestParam(value = "size") int size);
@@ -32,9 +35,9 @@ public interface BlockChainClient {
      * get the block headers
      *
      * @param nodeName    node name
-     * @param startHeight
-     * @param size
-     * @return
+     * @param startHeight the start height
+     * @param size        the size
+     * @return block headers from node
      */
     @RequestMapping(value = "/block/header/get", method = RequestMethod.GET)
     List<BlockHeader> getBlockHeadersFromNode(String nodeName,
@@ -44,9 +47,9 @@ public interface BlockChainClient {
      * get the blocks
      *
      * @param nodeNameReg node name regex
-     * @param startHeight
-     * @param size
-     * @return
+     * @param startHeight the start height
+     * @param size        the size
+     * @return blocks
      */
     @RequestMapping(value = "/block/get", method = RequestMethod.GET)
     List<Block> getBlocks(String nodeNameReg,
@@ -56,9 +59,9 @@ public interface BlockChainClient {
      * get the blocks
      *
      * @param nodeName    node name
-     * @param startHeight
-     * @param size
-     * @return
+     * @param startHeight the start height
+     * @param size        the size
+     * @return blocks from node
      */
     @RequestMapping(value = "/block/get", method = RequestMethod.GET)
     List<Block> getBlocksFromNode(String nodeName,
@@ -68,7 +71,7 @@ public interface BlockChainClient {
      * submit transaction
      *
      * @param nodeName     node name
-     * @param transactions
+     * @param transactions the transactions
      * @return submit failed transaction list
      */
     @RequestMapping(value = "/transaction/master/submit", method = RequestMethod.POST)

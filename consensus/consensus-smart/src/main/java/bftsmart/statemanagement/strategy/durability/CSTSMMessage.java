@@ -23,20 +23,43 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+/**
+ * The type Cstsm message.
+ */
 public class CSTSMMessage extends SMMessage {
 
     private CSTRequestF1 cstConfig;
 
+    /**
+     * Instantiates a new Cstsm message.
+     *
+     * @param sender    the sender
+     * @param cid       the cid
+     * @param type      the type
+     * @param cstConfig the cst config
+     * @param state     the state
+     * @param view      the view
+     * @param regency   the regency
+     * @param leader    the leader
+     */
     public CSTSMMessage(int sender, int cid, int type, CSTRequestF1 cstConfig, ApplicationState state, View view,
         int regency, int leader) {
         super(sender, cid, type, state, view, regency, leader);
         this.cstConfig = cstConfig;
     }
 
+    /**
+     * Instantiates a new Cstsm message.
+     */
     public CSTSMMessage() {
         super();
     }
 
+    /**
+     * Gets cst config.
+     *
+     * @return the cst config
+     */
     public CSTRequestF1 getCstConfig() {
         return cstConfig;
     }

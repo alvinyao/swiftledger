@@ -38,18 +38,38 @@ public class CSTRequestFGT1 extends CSTRequest {
      */
     private int logSize;
 
+    /**
+     * Instantiates a new Cst request fgt 1.
+     *
+     * @param cid the cid
+     */
     public CSTRequestFGT1(int cid) {
         super(cid);
     }
 
+    /**
+     * Gets hashes replica.
+     *
+     * @return the hashes replica
+     */
     public int getHashesReplica() {
         return hashesReplica;
     }
 
+    /**
+     * Gets nbr hashes before ckp.
+     *
+     * @return the nbr hashes before ckp
+     */
     public int getNbrHashesBeforeCkp() {
         return nbrHashesBeforeCkp;
     }
 
+    /**
+     * Gets log size.
+     *
+     * @return the log size
+     */
     public int getLogSize() {
         return logSize;
     }

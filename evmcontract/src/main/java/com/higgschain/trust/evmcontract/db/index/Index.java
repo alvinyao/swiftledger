@@ -20,30 +20,86 @@ package com.higgschain.trust.evmcontract.db.index;
 import java.util.Collection;
 
 /**
+ * The interface Index.
+ *
  * @author Mikhail Kalinin
  * @since 28.01.2016
  */
 public interface Index extends Iterable<Long> {
 
+    /**
+     * Add all.
+     *
+     * @param nums the nums
+     */
     void addAll(Collection<Long> nums);
 
+    /**
+     * Add.
+     *
+     * @param num the num
+     */
     void add(Long num);
 
+    /**
+     * Peek long.
+     *
+     * @return the long
+     */
     Long peek();
 
+    /**
+     * Poll long.
+     *
+     * @return the long
+     */
     Long poll();
 
+    /**
+     * Contains boolean.
+     *
+     * @param num the num
+     * @return the boolean
+     */
     boolean contains(Long num);
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     boolean isEmpty();
 
+    /**
+     * Size int.
+     *
+     * @return the int
+     */
     int size();
 
+    /**
+     * Clear.
+     */
     void clear();
 
+    /**
+     * Remove all.
+     *
+     * @param indexes the indexes
+     */
     void removeAll(Collection<Long> indexes);
 
+    /**
+     * Peek last long.
+     *
+     * @return the long
+     */
     Long peekLast();
 
+    /**
+     * Remove.
+     *
+     * @param num the num
+     */
     void remove(Long num);
 }

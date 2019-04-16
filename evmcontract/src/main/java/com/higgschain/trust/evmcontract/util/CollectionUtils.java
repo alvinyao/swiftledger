@@ -21,10 +21,20 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * The type Collection utils.
+ *
  * @author Mikhail Kalinin
  * @since 14.07.2015
  */
 public class CollectionUtils {
+    /**
+     * Truncate list.
+     *
+     * @param <T>   the type parameter
+     * @param items the items
+     * @param limit the limit
+     * @return the list
+     */
     public static <T> List<T> truncate(final List<T> items, int limit) {
         if (limit > items.size()) {
             return new ArrayList<>(items);
@@ -39,6 +49,14 @@ public class CollectionUtils {
         return truncated;
     }
 
+    /**
+     * Truncate rand list.
+     *
+     * @param <T>   the type parameter
+     * @param items the items
+     * @param limit the limit
+     * @return the list
+     */
     public static <T> List<T> truncateRand(final List<T> items, int limit) {
         if (limit > items.size()) {
             return new ArrayList<>(items);

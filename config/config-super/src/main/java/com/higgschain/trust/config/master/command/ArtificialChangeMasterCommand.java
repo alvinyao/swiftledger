@@ -12,8 +12,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * The type Artificial change master command.
+ *
  * @author suimi
- * @date 2018/6/5
+ * @date 2018 /6/5
  */
 @ToString(callSuper = true, exclude = {"sign"}) @Getter public class ArtificialChangeMasterCommand
     extends AbstractConsensusCommand<Long> implements SignatureCommand {
@@ -44,6 +46,14 @@ import lombok.ToString;
      */
     @Setter private String sign;
 
+    /**
+     * Instantiates a new Artificial change master command.
+     *
+     * @param term        the term
+     * @param view        the view
+     * @param masterName  the master name
+     * @param startHeight the start height
+     */
     public ArtificialChangeMasterCommand(long term, long view, String masterName, long startHeight) {
         super(term);
         this.term = term;

@@ -8,13 +8,17 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- *node state  status file service
+ * node state  status file service
+ *
  * @author lingchao
- * @create 2018年09月21日14:27
+ * @create 2018年09月21日14 :27
  */
 @Slf4j
 public abstract class NodeStatefulService {
-    
+
+    /**
+     * The constant STATUS_FILE_PREFIX.
+     */
     public static final String STATUS_FILE_PREFIX = ".trust" + File.separator + "enable_";
 
     private volatile boolean isStop = true;
@@ -22,18 +26,39 @@ public abstract class NodeStatefulService {
     @Autowired
     private NodeProperties nodeProperties;
 
+    /**
+     * Gets stateful service name.
+     *
+     * @return the stateful service name
+     */
     public abstract String getStatefulServiceName();
 
-
+    /**
+     * Do start.
+     */
     protected abstract void doStart();
 
+    /**
+     * Do pause.
+     */
     protected abstract void doPause();
 
+    /**
+     * Do resume.
+     */
     protected abstract void doResume();
 
+    /**
+     * Do after init.
+     *
+     * @param isStart the is start
+     */
     protected void doAfterInit(boolean isStart) {
     }
 
+    /**
+     * Init.
+     */
     public final synchronized void init() {
         log.info("{} [INIT开始]", getStatefulServiceName());
         boolean isStart;
@@ -49,6 +74,9 @@ public abstract class NodeStatefulService {
         log.info("{} [INIT完成]", getStatefulServiceName());
     }
 
+    /**
+     * Start.
+     */
     public final synchronized void start() {
         log.info("{} [Starting]", getStatefulServiceName());
 
@@ -63,6 +91,9 @@ public abstract class NodeStatefulService {
         log.info("{} [OK]", getStatefulServiceName());
     }
 
+    /**
+     * Start or resume.
+     */
     public final synchronized void startOrResume() {
         log.info("{} startOrResume - 开始", getStatefulServiceName());
         if (isStop) {
@@ -74,6 +105,9 @@ public abstract class NodeStatefulService {
         log.info("{} startOrResumeIf - 结束, 执行成功", getStatefulServiceName());
     }
 
+    /**
+     * Pause.
+     */
     public final synchronized void pause() {
         log.info("{} [Pausing]", getStatefulServiceName());
         doPause();
@@ -82,6 +116,9 @@ public abstract class NodeStatefulService {
 
     }
 
+    /**
+     * Resume.
+     */
     public final synchronized void resume() {
         log.info("{} [Resuming]", getStatefulServiceName());
         doResume();

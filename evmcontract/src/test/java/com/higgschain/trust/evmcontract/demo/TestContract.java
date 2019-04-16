@@ -22,24 +22,37 @@ import java.util.*;
 import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompiler.Options.*;
 
 /**
+ * The type Test contract.
+ *
  * @author duhongming
- * @date 2018/11/19
+ * @date 2018 /11/19
  */
 public class TestContract {
     private static final String ERROR_SIGNATURE = "08c379a0";
 
     private ContractService contractService;
 
+    /**
+     * On before.
+     */
     @Before
     public void onBefore() {
         contractService = new ContractService(null);
     }
 
+    /**
+     * On after.
+     */
     @After
     public void onAfter() {
         contractService.destroy();
     }
 
+    /**
+     * Test create contract.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void testCreateContract() throws IOException {
 //        String targetContract = "test/resources/contract/MultiSign.sol";
@@ -76,6 +89,9 @@ public class TestContract {
         contractService.commit();
     }
 
+    /**
+     * Test invoke.
+     */
     @Test
     public void testInvoke() {
 //        //代币合约地址
@@ -111,17 +127,33 @@ public class TestContract {
 //        balanceOf(contractAddress, toAddress);
     }
 
+    /**
+     * One test.
+     */
     @Test
     public void OneTest() {
         DataWord one = DataWord.of((byte) 1);
         System.out.println(one);
     }
 
+    /**
+     * Balance of.
+     *
+     * @param contractAddress the contract address
+     * @param address         the address
+     */
     public void balanceOf(byte[] contractAddress, String address) {
         Abi.Function func = Abi.Function.of("(uint, uint) balanceOf(address)");
         runContractTest(contractAddress, func, func.encode(address));
     }
 
+    /**
+     * Run contract test.
+     *
+     * @param contractAddress the contract address
+     * @param fun             the fun
+     * @param paramData       the param data
+     */
     public void runContractTest(byte[] contractAddress, Abi.Function fun, byte[] paramData) {
         byte[] value = Hex.decode("");
         byte[] nonce = BigIntegers.asUnsignedByteArray(BigInteger.ZERO);
@@ -145,6 +177,16 @@ public class TestContract {
         return (byte[]) result.get(0);
     }
 
+    /**
+     * Get sinature byte [ ].
+     *
+     * @param priKey          the pri key
+     * @param contractAddress the contract address
+     * @param fromAddr        the from addr
+     * @param toAddr          the to addr
+     * @param value           the value
+     * @return the byte [ ]
+     */
     public byte[] getSinature(String priKey, byte[] contractAddress, String fromAddr, String toAddr, BigInteger value) {
         ECKey ecKey = ECKey.fromPrivate(Hex.decode(priKey));
         byte[] sourceHash = getSourceHash(contractAddress, fromAddr, toAddr, value);
@@ -154,6 +196,15 @@ public class TestContract {
         return signedStrs;
     }
 
+    /**
+     * Multi sign test byte [ ].
+     *
+     * @param contractAddr the contract addr
+     * @param from         the from
+     * @param to           the to
+     * @param value        the value
+     * @return the byte [ ]
+     */
     public byte[] multiSignTest(byte[] contractAddr, String from, String to, BigInteger value) {
         String[] pris = {
                 "87385e10d018f971f66cf2c065663d4aa427286f259f85bb8b2438130f4f1ee7",
@@ -179,6 +230,11 @@ public class TestContract {
         return Hex.decode(builder.toString());
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         List<Abi.Entry.Param> inputs = new ArrayList<>();
         List<Abi.Entry.Param> outputs = new ArrayList<>();

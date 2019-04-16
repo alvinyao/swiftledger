@@ -31,8 +31,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Blockchain.
+ *
  * @author duhongming
- * @date 2018/11/30
+ * @date 2018 /11/30
  */
 @Component
 @Slf4j
@@ -55,6 +57,9 @@ public class Blockchain implements TrustListener, InitializingBean {
 
     private CompositeTrustListener listeners;
 
+    /**
+     * Instantiates a new Blockchain.
+     */
     public Blockchain() {
         this.blockStore = createBlockStore();
         this.listeners = new CompositeTrustListener();
@@ -74,6 +79,9 @@ public class Blockchain implements TrustListener, InitializingBean {
         return blockStore;
     }
 
+    /**
+     * Init.
+     */
     @PostConstruct
     public void init() {
         if (initialized) {
@@ -100,6 +108,11 @@ public class Blockchain implements TrustListener, InitializingBean {
         registerListener();
     }
 
+    /**
+     * Add listener.
+     *
+     * @param listener the listener
+     */
     public void addListener(TrustListener listener) {
         if (listener instanceof Blockchain || listener instanceof CompositeTrustListener) {
             return;
@@ -107,10 +120,18 @@ public class Blockchain implements TrustListener, InitializingBean {
         listeners.addListener(listener);
     }
 
+    /**
+     * Remove listener.
+     *
+     * @param listener the listener
+     */
     public void removeListener(TrustListener listener) {
         listeners.removeListener(listener);
     }
 
+    /**
+     * Start execute block.
+     */
     public synchronized void startExecuteBlock() {
         String root = lastBlockHeader.getStateRootHash().getStateRoot();
         receipts = new ArrayList<>();
@@ -121,6 +142,11 @@ public class Blockchain implements TrustListener, InitializingBean {
         }
     }
 
+    /**
+     * Finish execute block.
+     *
+     * @param blockHeader the block header
+     */
     public synchronized void finishExecuteBlock(BlockHeader blockHeader) {
         Bloom logBloom = new Bloom();
         for (TransactionResultInfo result : receipts) {
@@ -151,14 +177,29 @@ public class Blockchain implements TrustListener, InitializingBean {
         receipts = null;
     }
 
+    /**
+     * Put result info.
+     *
+     * @param result the result
+     */
     public void putResultInfo(TransactionResultInfo result) {
         receipts.add(result);
     }
 
+    /**
+     * Gets last block header.
+     *
+     * @return the last block header
+     */
     public BlockHeader getLastBlockHeader() {
         return lastBlockHeader;
     }
 
+    /**
+     * Sets last block header.
+     *
+     * @param blockHeader the block header
+     */
     public synchronized void setLastBlockHeader(BlockHeader blockHeader) {
         lastBlockHeader = blockHeader;
         if (blockHeader != null && blockHeader.getStateRootHash().getStateRoot() != null) {
@@ -166,18 +207,40 @@ public class Blockchain implements TrustListener, InitializingBean {
         }
     }
 
+    /**
+     * Gets repository.
+     *
+     * @return the repository
+     */
     public Repository getRepository() {
         return repository;
     }
 
+    /**
+     * Gets repository snapshot.
+     *
+     * @return the repository snapshot
+     */
     public Repository getRepositorySnapshot() {
         return repositorySnapshot;
     }
 
+    /**
+     * Gets repository snapshot.
+     *
+     * @param root the root
+     * @return the repository snapshot
+     */
     public Repository getRepositorySnapshot(byte[] root) {
         return repository.getSnapshotTo(root);
     }
 
+    /**
+     * Gets repository snapshot.
+     *
+     * @param blockHeight the block height
+     * @return the repository snapshot
+     */
     public Repository getRepositorySnapshot(long blockHeight) {
         if (blockHeight > lastBlockHeader.getHeight()) {
             log.warn("Target blockHeight mast less than last block height");
@@ -187,10 +250,21 @@ public class Blockchain implements TrustListener, InitializingBean {
         return repository.getSnapshotTo(Hex.decode(blockHeader.getStateRootHash().getStateRoot()));
     }
 
+    /**
+     * Gets block store.
+     *
+     * @return the block store
+     */
     public BlockStore getBlockStore() {
         return blockStore;
     }
 
+    /**
+     * Gets transaction result info.
+     *
+     * @param txId the tx id
+     * @return the transaction result info
+     */
     public TransactionResultInfo getTransactionResultInfo(String txId) {
         if (transactionStore == null) {
             return null;
@@ -222,12 +296,24 @@ public class Blockchain implements TrustListener, InitializingBean {
 
         private byte[] rlpEncoded;
 
+        /**
+         * Instantiates a new Mini block.
+         *
+         * @param height       the height
+         * @param logsBloom    the logs bloom
+         * @param receiptsRoot the receipts root
+         */
         public MiniBlock(long height, byte[] logsBloom, byte[] receiptsRoot) {
             this.height = height;
             this.logsBloom = logsBloom;
             this.receiptsRoot = receiptsRoot;
         }
 
+        /**
+         * Instantiates a new Mini block.
+         *
+         * @param rlp the rlp
+         */
         public MiniBlock(byte[] rlp) {
             this.rlpEncoded = rlp;
             RLPList rlpList = RLP.decode2(rlp);
@@ -238,6 +324,11 @@ public class Blockchain implements TrustListener, InitializingBean {
             this.receiptsRoot = rlpList.get(2).getRLPData();
         }
 
+        /**
+         * Get encoded byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] getEncoded() {
             if (rlpEncoded != null) {
                 return rlpEncoded;
@@ -252,14 +343,29 @@ public class Blockchain implements TrustListener, InitializingBean {
             return rlpEncoded;
         }
 
+        /**
+         * Gets height.
+         *
+         * @return the height
+         */
         public long getHeight() {
             return height;
         }
 
+        /**
+         * Get logs bloom byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] getLogsBloom() {
             return logsBloom;
         }
 
+        /**
+         * Get receipts root byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] getReceiptsRoot() {
             return receiptsRoot;
         }

@@ -26,15 +26,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Merkle tree snapshot agent.
+ *
  * @author liuyu
  * @description an agent for merkle tree snapshot
- * @date 2018-04-11
+ * @date 2018 -04-11
  */
 @Slf4j
 @Component
 public class MerkleTreeSnapshotAgent implements CacheLoader {
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Merkle service.
+     */
     @Autowired
     MerkleService merkleService;
 
@@ -48,11 +56,12 @@ public class MerkleTreeSnapshotAgent implements CacheLoader {
     private void update(Object key, Object object) {
         snapshot.update(SnapshotBizKeyEnum.MERKLE_TREE, key, object);
     }
+
     /**
      * get merkle tree from snapshot,if is not exist,should build
      *
-     * @param typeEnum
-     * @return
+     * @param typeEnum the type enum
+     * @return merkle tree
      */
     public MerkleTree getMerkleTree(MerkleTypeEnum typeEnum) {
         return get(new MerkleTreeCacheKey(typeEnum));
@@ -61,9 +70,9 @@ public class MerkleTreeSnapshotAgent implements CacheLoader {
     /**
      * is exist node
      *
-     * @param typeEnum
-     * @param node
-     * @return
+     * @param typeEnum the type enum
+     * @param node     the node
+     * @return boolean
      */
     public boolean isExist(MerkleTypeEnum typeEnum, MerkleDataNode node) {
         NodesCacheKey nodesCacheKey = new NodesCacheKey(typeEnum);
@@ -79,8 +88,8 @@ public class MerkleTreeSnapshotAgent implements CacheLoader {
     /**
      * add node to tmp node list
      *
-     * @param merkleType
-     * @param _new
+     * @param merkleType the merkle type
+     * @param _new       the new
      * @return
      */
     public void addNode(MerkleTypeEnum merkleType, MerkleDataNode _new) {
@@ -96,9 +105,9 @@ public class MerkleTreeSnapshotAgent implements CacheLoader {
     /**
      * update the obj in the merkle tree
      *
-     * @param merkleType
-     * @param _old
-     * @param _new
+     * @param merkleType the merkle type
+     * @param _old       the old
+     * @param _new       the new
      */
     public void updateNode(MerkleTypeEnum merkleType, MerkleDataNode _old, MerkleDataNode _new) {
         Map<String, Object> nodes = get(new NodesCacheKey(merkleType));
@@ -113,12 +122,11 @@ public class MerkleTreeSnapshotAgent implements CacheLoader {
         nodes.put(_new.getUniqKey(), _new);
     }
 
-
     /**
      * build an new merkle tree for obj and save to snapshot
      *
-     * @param typeEnum
-     * @return
+     * @param typeEnum the type enum
+     * @return merkle tree
      */
     public MerkleTree buildMerkleTree(MerkleTypeEnum typeEnum) {
         LinkedHashMap<String, MerkleDataNode> nodes = get(new NodesCacheKey(typeEnum));
@@ -159,11 +167,15 @@ public class MerkleTreeSnapshotAgent implements CacheLoader {
         return true;
     }
 
-
     /**
      * cache node
      */
     public interface MerkleDataNode {
+        /**
+         * Gets uniq key.
+         *
+         * @return the uniq key
+         */
         String getUniqKey();
     }
 
@@ -173,6 +185,7 @@ public class MerkleTreeSnapshotAgent implements CacheLoader {
     @Getter @Setter @NoArgsConstructor @AllArgsConstructor public static class MerkleTreeCacheKey extends BaseBO {
         private MerkleTypeEnum merkleTypeEnum;
     }
+
     /**
      * the cache node list of merkle tree
      */

@@ -6,8 +6,10 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
 /**
+ * The type Safe eval function.
+ *
  * @author duhongming
- * @date 2018/6/8
+ * @date 2018 /6/8
  */
 public class SafeEvalFunction extends BaseFunction {
 

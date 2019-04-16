@@ -28,10 +28,21 @@ package com.higgschain.trust.common.crypto.ecc;
 public class KeyCrypterException extends RuntimeException {
     private static final long serialVersionUID = -4441989608332681377L;
 
+    /**
+     * Instantiates a new Key crypter exception.
+     *
+     * @param s the s
+     */
     public KeyCrypterException(String s) {
         super(s);
     }
 
+    /**
+     * Instantiates a new Key crypter exception.
+     *
+     * @param s         the s
+     * @param throwable the throwable
+     */
     public KeyCrypterException(String s, Throwable throwable) {
         super(s, throwable);
     }

@@ -27,5 +27,10 @@ import java.io.Serializable;
  */
 public interface RLPElement extends Serializable {
 
+    /**
+     * Get rlp data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getRLPData();
 }

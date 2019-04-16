@@ -24,12 +24,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * The type Build info.
+ */
 public class BuildInfo {
 
     private static final Logger logger = LoggerFactory.getLogger("general");
 
+    /**
+     * The constant buildHash.
+     */
     public static String buildHash;
+    /**
+     * The constant buildTime.
+     */
     public static String buildTime;
+    /**
+     * The constant buildBranch.
+     */
     public static String buildBranch;
 
     static {
@@ -51,6 +63,9 @@ public class BuildInfo {
         }
     }
 
+    /**
+     * Print info.
+     */
     public static void printInfo() {
         logger.info("git.hash: [{}]", buildHash);
         logger.info("build.time: {}", buildTime);

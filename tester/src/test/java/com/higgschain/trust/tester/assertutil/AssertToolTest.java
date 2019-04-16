@@ -11,9 +11,18 @@ import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
+
+/**
+ * The type Assert tool test.
+ */
 @Log
 public class AssertToolTest extends Assert{
 
+    /**
+     * Test is totally equal 1.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //json相同-断言成功
     public void testIsTotallyEqual1() throws Exception {
@@ -24,6 +33,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isTotallyEqual(a,b);
     }
 
+    /**
+     * Test is totally equal 2.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json相同-断言失败-不相等
     public void testIsTotallyEqual2() throws Exception {
@@ -33,6 +47,12 @@ public class AssertToolTest extends Assert{
         JSONObject b = JSON.parseObject(BB);
         AssertTool.isTotallyEqual(a,b);
     }
+
+    /**
+     * Test is totally equal 3.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json相同-断言失败，expect为空
     public void testIsTotallyEqual3() throws Exception{
@@ -41,6 +61,12 @@ public class AssertToolTest extends Assert{
         JSONObject b = JSON.parseObject(BB);
         AssertTool.isTotallyEqual(a,b);
     }
+
+    /**
+     * Test is totally equal 4.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSON相同-断言失败，actual为空
     public void testIsTotallyEqual4()throws Exception{
@@ -50,6 +76,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isTotallyEqual(a,b);
     }
 
+    /**
+     * Test is contains expect 1.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //json包含-断言成功-json相同
     public void testIsContainsExpect1() throws Exception {
@@ -60,6 +91,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(b,a);
     }
 
+    /**
+     * Test is contains expect 2.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //json包含-断言成功-actual包含expect
     public void testIsContainsExpect2() throws Exception{
@@ -70,6 +106,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(b,a);
     }
 
+    /**
+     * Test is contains expect 3.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含-断言失败-actual不包含expect
     public void testIsContainsExpect3() throws Exception{
@@ -80,6 +121,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(b,a);
     }
 
+    /**
+     * Test is contains expect 4.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSON包含-断言失败，actual为空
     public void testIsContainsExpect4() throws Exception{
@@ -89,6 +135,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(a,b);
     }
 
+    /**
+     * Test is contains expect 5.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含-断言失败，expect为空
     public void testIsContainsExpect5() throws Exception{
@@ -98,6 +149,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(a,b);
     }
 
+    /**
+     * Test is contains expect 6.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //JSONArray包含-断言成功
     public void testIsContainsExpect6() throws Exception{
@@ -108,6 +164,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(expectJson,actualArray);
     }
 
+    /**
+     * Test is contains expect 7.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSONArray包含-断言失败-array不包含
     public void testIsContainsExpect7() throws Exception{
@@ -118,6 +179,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(expectJson,actualArray);
     }
 
+    /**
+     * Test is contains expect 8.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSONArray包含-断言失败-expect为空
     public void testIsContainsExpect8(){
@@ -127,6 +191,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(expectJson,actualArray);
     }
 
+    /**
+     * Test is contains expect 9.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSONArray包含-断言失败-actual为空
     public void testIsContainsExpect9(){
@@ -136,6 +203,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(expectJson,actual);
     }
 
+    /**
+     * Test is contains expect 10.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //数据库包含-断言成功
     public void testIsContainsExpect10() throws Exception {
@@ -150,6 +222,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(c,array);
     }
 
+    /**
+     * Testis contains expect 11.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //数据库包含-断言失败-array不包含
     public void testisContainsExpect11() throws Exception{
@@ -165,6 +242,9 @@ public class AssertToolTest extends Assert{
 
     }
 
+    /**
+     * Test is contains expect 12.
+     */
     @Test(expectedExceptions = NullPointerException.class)
     //数据库包含-断言失败-数据库无法连接
     public void testIsContainsExpect12(){
@@ -179,6 +259,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(c,array);
     }
 
+    /**
+     * Test is contains expect 13.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //数据库包含-断言失败-数据库查询结果为空
     public void testIsContainsExpect13(){
@@ -193,6 +276,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(c,array);
     }
 
+    /**
+     * Testi is contains expect json node 1.
+     */
     @Test
     //json包含-断言成功-actual包含expect的所有键值对
     public void testiIsContainsExpectJsonNode1(){
@@ -203,6 +289,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(b,a);
     }
 
+    /**
+     * Testi is contains expect json node 2.
+     */
     @Test(expectedExceptions = AssertionError.class)
     ///json包含-断言失败-actual不包含expect的所有的键值对
     public void testiIsContainsExpectJsonNode2(){
@@ -213,6 +302,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(b,a);
     }
 
+    /**
+     * Testi is contains expect json node 3.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含--断言失败-actual为空
     public void testiIsContainsExpectJsonNode3(){
@@ -221,6 +313,10 @@ public class AssertToolTest extends Assert{
         JSONObject b = null;
         AssertTool.isContainsExpectJsonNode(a,b);
     }
+
+    /**
+     * Testi is contains expect json node 4.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含--断言失败-actual为空
     public void testiIsContainsExpectJsonNode4(){
@@ -230,6 +326,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(b,a);
     }
 
+    /**
+     * Testi is contains expect json node 5.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //jsonarray包含node-断言失败-actual不包含expect的所有键值对
     public void testiIsContainsExpectJsonNode5(){
@@ -240,6 +339,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(expectJson,actualArray);
     }
 
+    /**
+     * Testi is contains expect json node 6.
+     */
     @Test
     ///jsonarray包含node-断言成功-actual包含expect的所有的键值对
     public void testiIsContainsExpectJsonNode6(){
@@ -250,6 +352,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(expectJson,actualArray);
     }
 
+    /**
+     * Testi is contains expect json node 7.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //jsonarray包含node--断言失败-expect为空
     public void testiIsContainsExpectJsonNode7(){
@@ -258,6 +363,10 @@ public class AssertToolTest extends Assert{
         JSONObject expect = null;
         AssertTool.isContainsExpectJsonNode(expect,actualobj);
     }
+
+    /**
+     * Testi is contains expect json node 8.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //jsonarray包含node--断言失败-actual为空
     public void testiIsContainsExpectJsonNode8(){
@@ -267,6 +376,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(a,b);
     }
 
+    /**
+     * Test is contains expect json node 10.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //数据库包含-断言成功
     public void testIsContainsExpectJsonNode10() throws Exception {
@@ -281,6 +395,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(c,array);
     }
 
+    /**
+     * Testis contains expect json node 11.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //数据库包含-断言失败-array不包含
     public void testisContainsExpectJsonNode11() throws Exception{
@@ -296,6 +415,9 @@ public class AssertToolTest extends Assert{
 
     }
 
+    /**
+     * Test is contains expect json node 12.
+     */
     @Test(expectedExceptions = NullPointerException.class)
     //数据库包含-断言失败-数据库无法连接
     public void testIsContainsExpectJsonNode12(){
@@ -310,6 +432,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(c,array);
     }
 
+    /**
+     * Test is contains expect json node 13.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //数据库包含-断言失败-数据库查询结果为空
     public void testIsContainsExpectJsonNode13(){
@@ -324,6 +449,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpectJsonNode(c,array);
     }
 
+    /**
+     * Test is not contains expect 1.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含-断言失败-json相同
     public void testIsNotContainsExpect1() throws Exception {
@@ -334,6 +464,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(b,a);
     }
 
+    /**
+     * Test is not contains expect 2.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含-断言成功-actual包含expect
     public void testIsNotContainsExpect2() throws Exception{
@@ -344,6 +479,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(b,a);
     }
 
+    /**
+     * Test is not contains expect 3.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //json包含-断言失败-actual不包含expect
     public void testIsNotContainsExpect3() throws Exception{
@@ -354,6 +494,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(b,a);
     }
 
+    /**
+     * Test is not contains expect 4.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSON包含-断言失败，actual为空
     public void testIsNotContainsExpect4() throws Exception{
@@ -363,6 +508,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(a,b);
     }
 
+    /**
+     * Test is not contains expect 5.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含-断言失败，expect为空
     public void testIsNotContainsExpect5() throws Exception{
@@ -372,6 +522,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(a,b);
     }
 
+    /**
+     * Test is not contains expect 6.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSONArray包含-断言失败-array包含
     public void testIsNotContainsExpect6() throws Exception{
@@ -382,6 +537,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(expectJson,actualArray);
     }
 
+    /**
+     * Test is not contains expect 7.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //JSONArray包含-断言失败-array不包含
     public void testIsNotContainsExpect7() throws Exception{
@@ -392,6 +552,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(expectJson,actualArray);
     }
 
+    /**
+     * Test is not contains expect 8.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSONArray包含-断言失败-expect为空
     public void testIsNotContainsExpect8(){
@@ -401,6 +564,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(expectJson,actualArray);
     }
 
+    /**
+     * Test is not contains expect 9.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //JSONArray包含-断言失败-actual为空
     public void testIsNotContainsExpect9(){
@@ -410,6 +576,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(expectJson,actual);
     }
 
+    /**
+     * Test is not contains expect 10.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //数据库包含-断言失败-包含
     public void testIsNotContainsExpect10() throws Exception {
@@ -424,6 +595,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(c,array);
     }
 
+    /**
+     * Testis not contains expect 11.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //数据库包含-断言失败-array不包含
     public void testisNotContainsExpect11() throws Exception{
@@ -439,6 +615,9 @@ public class AssertToolTest extends Assert{
 
     }
 
+    /**
+     * Test is not contains expect 12.
+     */
     @Test(expectedExceptions = NullPointerException.class)
     //数据库包含-断言失败-数据库无法连接
     public void testIsNotContainsExpect12(){
@@ -453,6 +632,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(c,array);
     }
 
+    /**
+     * Test is not contains expect 13.
+     */
     @Test
     //数据库包含-断言失败-数据库查询结果为空
     public void testIsNotContainsExpect13(){
@@ -467,6 +649,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpect(c,array);
     }
 
+    /**
+     * Test is not contains expect json node 1.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含-断言失败-actual包含expect的所有键值对
     public void testIsNotContainsExpectJsonNode1(){
@@ -477,6 +662,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(b,a);
     }
 
+    /**
+     * Testi is not contains expect json node 2.
+     */
     @Test
     ///json包含-断言失败-actual不包含expect的所有的键值对
     public void testiIsNotContainsExpectJsonNode2(){
@@ -487,6 +675,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(b,a);
     }
 
+    /**
+     * Testi is not contains expect json node 3.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含--断言失败-actual为空
     public void testiIsNotContainsExpectJsonNode3(){
@@ -495,6 +686,10 @@ public class AssertToolTest extends Assert{
         JSONObject b = null;
         AssertTool.isNotContainsExpectJsonNode(a,b);
     }
+
+    /**
+     * Testi is not contains expect json node 4.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //json包含--断言失败-actual为空
     public void testiIsNotContainsExpectJsonNode4(){
@@ -504,6 +699,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(b,a);
     }
 
+    /**
+     * Testi is not contains expect json node 5.
+     */
     @Test
     //jsonarray包含node-断言成功-actual不包含expect的所有键值对
     public void testiIsNotContainsExpectJsonNode5(){
@@ -514,6 +712,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(expectJson,actualArray);
     }
 
+    /**
+     * Testi is not contains expect json node 6.
+     */
     @Test(expectedExceptions = AssertionError.class)
     ///jsonarray包含node-断言成功-actual包含expect的所有的键值对
     public void testiIsNotContainsExpectJsonNode6(){
@@ -524,6 +725,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(expectJson,actualArray);
     }
 
+    /**
+     * Testi is not contains expect json node 7.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //jsonarray包含node--断言失败-expect为空
     public void testiIsNotContainsExpectJsonNode7(){
@@ -532,6 +736,10 @@ public class AssertToolTest extends Assert{
         JSONObject expect = null;
         AssertTool.isNotContainsExpectJsonNode(expect,actualobj);
     }
+
+    /**
+     * Testi is not contains expect json node 8.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //jsonarray包含node--断言失败-actual为空
     public void testiIsNotContainsExpectJsonNode8(){
@@ -541,6 +749,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(a,b);
     }
 
+    /**
+     * Test is not contains expect json node 10.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //数据库包含-断言失败-包含
     public void testIsNotContainsExpectJsonNode10() throws Exception {
@@ -555,6 +768,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(c,array);
     }
 
+    /**
+     * Testis not contains expect json node 11.
+     *
+     * @throws Exception the exception
+     */
     @Test
     //数据库包含-断言失败-array不包含
     public void testisNotContainsExpectJsonNode11() throws Exception{
@@ -570,6 +788,9 @@ public class AssertToolTest extends Assert{
 
     }
 
+    /**
+     * Test is not contains expect json node 12.
+     */
     @Test(expectedExceptions = NullPointerException.class)
     //数据库包含-断言失败-数据库无法连接
     public void testIsNotContainsExpectJsonNode12(){
@@ -584,6 +805,9 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(c,array);
     }
 
+    /**
+     * Test is not contains expect json node 13.
+     */
     @Test(expectedExceptions = AssertionError.class)
     //数据库包含-断言失败-数据库查询结果为空
     public void testIsNotContainsExpectJsonNode13(){
@@ -598,6 +822,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isNotContainsExpectJsonNode(c,array);
     }
 
+    /**
+     * Test is contains expect 14.
+     *
+     * @throws Exception the exception
+     */
     @Test(expectedExceptions = AssertionError.class)
     //封装了数据库操作的断言，数据库查询失败
     public void testIsContainsExpect14()throws Exception{
@@ -607,6 +836,11 @@ public class AssertToolTest extends Assert{
         AssertTool.isContainsExpect(CC, dburl,sql);
     }
 
+    /**
+     * Test is contains expect 15.
+     *
+     * @throws Exception the exception
+     */
     @Test(testName = "testname1111")
     //封装了数据库操作的断言，数据库包含
     public void testIsContainsExpect15()throws Exception{

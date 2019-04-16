@@ -16,6 +16,9 @@ import org.springframework.beans.factory.BeanFactory
  * @date 2018/09/13 16:16
  */
 
+/**
+ *  The type Rocksdb.
+ */
 @Slf4j
 @Usage("rocksdb tools")
 class rocksdb {

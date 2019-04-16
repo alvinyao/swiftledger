@@ -10,8 +10,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * The type Master heartbeat command.
+ *
  * @author suimi
- * @date 2018/6/5
+ * @date 2018 /6/5
  */
 @ToString(callSuper = true, exclude = {"sign"}) public class MasterHeartbeatCommand
     extends AbstractConsensusCommand<Long> implements SignatureCommand {
@@ -33,6 +35,13 @@ import lombok.ToString;
      */
     @Setter private String sign;
 
+    /**
+     * Instantiates a new Master heartbeat command.
+     *
+     * @param term       the term
+     * @param view       the view
+     * @param masterName the master name
+     */
     public MasterHeartbeatCommand(long term, long view, String masterName) {
         super(term);
         this.view = view;

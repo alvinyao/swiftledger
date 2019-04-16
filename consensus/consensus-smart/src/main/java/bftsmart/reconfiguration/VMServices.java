@@ -18,10 +18,17 @@ package bftsmart.reconfiguration;
 import bftsmart.tom.util.Logger;
 
 /**
+ * The type Vm services.
+ *
  * @author Andre Nogueira
  */
-
 public class VMServices {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws InterruptedException the interrupted exception
+     */
     public static void main(String[] args) throws InterruptedException {
 
         ViewManager viewManager = new ViewManager();

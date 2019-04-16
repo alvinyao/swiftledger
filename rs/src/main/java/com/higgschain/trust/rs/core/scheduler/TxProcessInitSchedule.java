@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type Tx process init schedule.
+ */
 @ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
 @Service
 @Slf4j
@@ -30,6 +33,9 @@ public class TxProcessInitSchedule {
      */
     private String lastPreKey = null;
 
+    /**
+     * Exe.
+     */
     @Scheduled(fixedDelayString = "${rs.core.schedule.processInit:500}") public void exe() {
         List<CoreTransactionProcessPO> list =
             coreTxRepository.queryByStatus(CoreTxStatusEnum.INIT, (pageNo - 1) * pageSize, pageSize, lastPreKey);

@@ -21,7 +21,7 @@ import bftsmart.reconfiguration.ServerViewController;
 
 /**
  * This class represents the proposer role in the consensus protocol.
- **/
+ */
 public class Proposer {
 
     private MessageFactory factory; // Factory for PaW messages
@@ -33,8 +33,7 @@ public class Proposer {
      *
      * @param communication Replicas communication system
      * @param factory       Factory for PaW messages
-     * @param verifier      Proof verifier
-     * @param conf          TOM configuration
+     * @param controller    the controller
      */
     public Proposer(ServerCommunicationSystem communication, MessageFactory factory, ServerViewController controller) {
         this.communication = communication;

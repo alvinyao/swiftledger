@@ -20,8 +20,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * The type Register policy handler.
+ *
  * @author tangfashuang
- * @date 2018/03/28
+ * @date 2018 /03/28
  * @desc register policy handler
  */
 @Slf4j @Component public class RegisterPolicyHandler implements ActionHandler {

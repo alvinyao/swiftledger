@@ -8,14 +8,27 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Abstract field.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractField<E extends Element> implements Field<E> {
 
+    /**
+     * The Order is odd.
+     */
     protected boolean orderIsOdd = false;
+    /**
+     * The Random.
+     */
     protected SecureRandom random;
 
-
+    /**
+     * Instantiates a new Abstract field.
+     *
+     * @param random the random
+     */
     protected AbstractField(SecureRandom random) {
         this.random = random;
     }
@@ -120,6 +133,11 @@ public abstract class AbstractField<E extends Element> implements Field<E> {
         return new AbstractElementPowPreProcessing(this, AbstractElementPowPreProcessing.DEFAULT_K, source, offset);
     }
 
+    /**
+     * Gets random.
+     *
+     * @return the random
+     */
     public SecureRandom getRandom() {
         return random;
     }

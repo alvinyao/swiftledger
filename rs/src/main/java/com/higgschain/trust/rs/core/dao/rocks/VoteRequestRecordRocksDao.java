@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
+ * The type Vote request record rocks dao.
+ *
  * @author tangfashuang
- * @desc key: txId, value: voteRequestRecordPO
+ * @desc key : txId, value: voteRequestRecordPO
  */
 @Service
 @Slf4j
@@ -22,6 +24,11 @@ public class VoteRequestRecordRocksDao extends RocksBaseDao<VoteRequestRecordPO>
         return "voteRequestRecord";
     }
 
+    /**
+     * Save with transaction.
+     *
+     * @param voteRequestRecordPO the vote request record po
+     */
     public void saveWithTransaction(VoteRequestRecordPO voteRequestRecordPO) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -39,6 +46,13 @@ public class VoteRequestRecordRocksDao extends RocksBaseDao<VoteRequestRecordPO>
         txPut(tx, key, voteRequestRecordPO);
     }
 
+    /**
+     * Sets vote result.
+     *
+     * @param txId the tx id
+     * @param sign the sign
+     * @param code the code
+     */
     public void setVoteResult(String txId, String sign, String code) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {

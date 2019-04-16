@@ -26,13 +26,29 @@ import java.util.List;
  * On flush all Sources in chain are flushed in reverse order
  * <p>
  * Created by Anton Nashatyrev on 07.12.2016.
+ *
+ * @param <Key>         the type parameter
+ * @param <Value>       the type parameter
+ * @param <SourceKey>   the type parameter
+ * @param <SourceValue> the type parameter
  */
 public class SourceChainBox<Key, Value, SourceKey, SourceValue>
         extends AbstractChainedSource<Key, Value, SourceKey, SourceValue> {
 
+    /**
+     * The Chain.
+     */
     List<Source> chain = new ArrayList<>();
+    /**
+     * The Last source.
+     */
     Source<Key, Value> lastSource;
 
+    /**
+     * Instantiates a new Source chain box.
+     *
+     * @param source the source
+     */
     public SourceChainBox(Source<SourceKey, SourceValue> source) {
         super(source);
     }
@@ -42,6 +58,8 @@ public class SourceChainBox<Key, Value, SourceKey, SourceValue>
      * Sources should be added from most bottom (connected to the backing Source)
      * All calls to the SourceChainBox will be delegated to the last added
      * Source
+     *
+     * @param src the src
      */
     public void add(Source src) {
         chain.add(src);

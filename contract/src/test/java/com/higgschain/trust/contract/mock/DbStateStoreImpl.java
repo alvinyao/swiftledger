@@ -7,6 +7,9 @@ import com.higgschain.trust.contract.ContractStateStore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Db state store.
+ */
 public class DbStateStoreImpl implements ContractStateStore {
 
     private static Map<String, Object> db = new HashMap<>();

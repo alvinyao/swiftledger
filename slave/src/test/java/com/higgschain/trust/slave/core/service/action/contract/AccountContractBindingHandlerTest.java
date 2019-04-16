@@ -10,8 +10,14 @@ import com.higgschain.trust.slave.model.bo.context.PackContext;
 import com.higgschain.trust.slave.model.bo.contract.AccountContractBindingAction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * The type Account contract binding handler test.
+ */
 public class AccountContractBindingHandlerTest extends IntegrateBaseTest {
 
+    /**
+     * The Snapshot.
+     */
     @Autowired SnapshotService snapshot;
     @Autowired private AccountContractBindingHandler actionHandler;
     @Autowired private AccountContractBindingSnapshotAgent agent;
@@ -27,6 +33,9 @@ public class AccountContractBindingHandlerTest extends IntegrateBaseTest {
         return action;
     }
 
+    /**
+     * Test validate.
+     */
     @org.junit.Test
     public void testValidate() {
         Action action = createAction();
@@ -45,6 +54,9 @@ public class AccountContractBindingHandlerTest extends IntegrateBaseTest {
         snapshot.commit();
     }
 
+    /**
+     * Test persist.
+     */
     @org.junit.Test
     public void testPersist() {
         Action action = createAction();

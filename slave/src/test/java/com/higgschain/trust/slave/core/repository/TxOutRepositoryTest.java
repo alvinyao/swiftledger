@@ -10,14 +10,28 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Tx out repository test.
+ */
 public class TxOutRepositoryTest extends BaseTest {
     @Autowired
     private TxOutRepository txOutRepository;
+
+    /**
+     * Test query tx out.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testQueryTxOut() throws Exception {
         System.out.println("queryTxOut :" + txOutRepository.queryTxOut("123123", 0, 0));
     }
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testBatchInsert() throws Exception {
         List<TxOutPO> txOutPOList = new ArrayList<>();
@@ -57,6 +71,11 @@ public class TxOutRepositoryTest extends BaseTest {
         System.out.println("testBatchInsert:"+txOutRepository.batchInsert(txOutPOList));
     }
 
+    /**
+     * Test batch update.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testBatchUpdate() throws Exception {
 

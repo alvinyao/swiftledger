@@ -14,8 +14,10 @@ import java.security.SecureRandom;
 import java.util.*;
 
 /**
+ * The type Transaction sender.
+ *
  * @author Chen Jiawei
- * @date 2019-01-03
+ * @date 2019 -01-03
  */
 @Slf4j
 public class TransactionSender {
@@ -28,7 +30,13 @@ public class TransactionSender {
         private String consensusPrivateKey;
     }
 
+    /**
+     * The constant ENTITIES.
+     */
     public static final List<Entity> ENTITIES = new ArrayList<>();
+    /**
+     * The constant SENDER_ADDRESS.
+     */
     public static final String SENDER_ADDRESS;
     private static final File file = Paths.get("rs/src/test/resources/tmp/deployedContracts.dat").toFile();
     private static final Properties properties = new Properties();
@@ -61,6 +69,12 @@ public class TransactionSender {
         return DEPLOYED_CONTRACTS.get(random.nextInt(DEPLOYED_CONTRACTS.size()));
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
         loadDeployedContracts();
         Entity entity = getRandomEntity();

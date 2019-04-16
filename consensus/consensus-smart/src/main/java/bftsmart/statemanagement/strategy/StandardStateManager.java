@@ -33,6 +33,8 @@ import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * The type Standard state manager.
+ *
  * @author Marcel Santos
  */
 public class StandardStateManager extends BaseStateManager {

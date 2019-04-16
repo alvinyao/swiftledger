@@ -8,9 +8,11 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Issue currency.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-19
+ * @date 2018 -04-19
  */
 @Getter @Setter public class IssueCurrency extends Action {
 

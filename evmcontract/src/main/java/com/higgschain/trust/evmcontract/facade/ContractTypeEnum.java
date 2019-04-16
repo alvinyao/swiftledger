@@ -5,13 +5,12 @@ package com.higgschain.trust.evmcontract.facade;
  * is considered as a contract for simple processing.
  *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
-public enum ContractTypeEnum {
-    /**
-     * Contract creation.
-     */
-    CONTRACT_CREATION,
+public enum ContractTypeEnum {/**
+ * Contract creation.
+ */
+CONTRACT_CREATION,
 
     /**
      * Customer contract invocation.

@@ -8,11 +8,18 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
+ * The type Vector element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class VectorElement<E extends Element> extends AbstractVectorElement<E, VectorField> {
 
-
+    /**
+     * Instantiates a new Vector element.
+     *
+     * @param field the field
+     */
     public VectorElement(VectorField field) {
         super(field);
 
@@ -20,6 +27,11 @@ public class VectorElement<E extends Element> extends AbstractVectorElement<E, V
             coeff.add((E) field.getTargetField().newElement());
     }
 
+    /**
+     * Instantiates a new Vector element.
+     *
+     * @param element the element
+     */
     public VectorElement(VectorElement element) {
         super(element.getField());
 
@@ -27,7 +39,12 @@ public class VectorElement<E extends Element> extends AbstractVectorElement<E, V
             coeff.add((E) element.getAt(i).duplicate());
     }
 
-
+    /**
+     * Instantiates a new Vector element.
+     *
+     * @param field the field
+     * @param coeff the coeff
+     */
     public VectorElement(VectorField field, List<E> coeff) {
         super(field);
         this.field = field;
@@ -132,6 +149,12 @@ public class VectorElement<E extends Element> extends AbstractVectorElement<E, V
         return true;
     }
 
+    /**
+     * Map vector element.
+     *
+     * @param e the e
+     * @return the vector element
+     */
     public VectorElement<E> map(Element e) {
         coeff.get(0).set(e);
         for (int i = 1; i < field.n; i++) {

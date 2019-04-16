@@ -15,12 +15,20 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * The type Batch test.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-19
+ * @date 2018 -09-19
  */
 public class BatchTest extends BasePressTest{
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
         //JSON不做循环引用检测
@@ -51,6 +59,9 @@ public class BatchTest extends BasePressTest{
         System.in.read();
     }
 
+    /**
+     * The type My task.
+     */
     static class MyTask implements Runnable{
         @Override public void run() {
             while (true) {
@@ -63,6 +74,11 @@ public class BatchTest extends BasePressTest{
         }
     }
 
+    /**
+     * Exe.
+     *
+     * @throws Exception the exception
+     */
     public void exe() throws Exception {
         AccountingService.SENDER = "TRUST-NODEB";
         List<CoreTransaction> txs = BatchTest.getOpenAccountTxs();
@@ -74,6 +90,11 @@ public class BatchTest extends BasePressTest{
         send("press/batch", JSON.toJSONString(txs));
     }
 
+    /**
+     * Get open account txs list.
+     *
+     * @return the list
+     */
     //构建创建账户的交易
     public static List<CoreTransaction> getOpenAccountTxs(){
         List<CoreTransaction> txs = new ArrayList<>();
@@ -89,6 +110,12 @@ public class BatchTest extends BasePressTest{
         return txs;
     }
 
+    /**
+     * Gets in come txs.
+     *
+     * @return the in come txs
+     * @throws Exception the exception
+     */
     //构建账户入金的交易
     public static List<CoreTransaction> getInComeTxs() throws Exception {
         List<CoreTransaction> txs = new ArrayList<>();
@@ -98,6 +125,12 @@ public class BatchTest extends BasePressTest{
         return txs;
     }
 
+    /**
+     * Gets out txs.
+     *
+     * @return the out txs
+     * @throws Exception the exception
+     */
     //构建账户出金的交易
     public static List<CoreTransaction> getOutTxs() throws Exception {
         List<CoreTransaction> txs = new ArrayList<>();
@@ -107,6 +140,12 @@ public class BatchTest extends BasePressTest{
         return txs;
     }
 
+    /**
+     * Gets transfer txs.
+     *
+     * @return the transfer txs
+     * @throws Exception the exception
+     */
     //构建账户互转的交易
     public static List<CoreTransaction> getTransferTxs() throws Exception {
         List<CoreTransaction> txs = new ArrayList<>();
@@ -116,6 +155,12 @@ public class BatchTest extends BasePressTest{
         return txs;
     }
 
+    /**
+     * Gets freeze txs.
+     *
+     * @return the freeze txs
+     * @throws Exception the exception
+     */
     //构建账户冻结的交易
     public static List<CoreTransaction> getFreezeTxs() throws Exception {
         List<CoreTransaction> txs = new ArrayList<>();
@@ -125,6 +170,12 @@ public class BatchTest extends BasePressTest{
         return txs;
     }
 
+    /**
+     * Gets un freeze txs.
+     *
+     * @return the un freeze txs
+     * @throws Exception the exception
+     */
     //构建账户解冻的交易
     public static List<CoreTransaction> getUnFreezeTxs() throws Exception {
         List<CoreTransaction> txs = new ArrayList<>();

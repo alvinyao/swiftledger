@@ -3,6 +3,9 @@
  */
 package com.higgschain.trust.consensus.core;
 
+/**
+ * The type Default consensus snapshot.
+ */
 public class DefaultConsensusSnapshot implements IConsensusSnapshot {
 
     @Override public byte[] getSnapshot() {

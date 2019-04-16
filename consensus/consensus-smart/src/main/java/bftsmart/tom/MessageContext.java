@@ -57,6 +57,9 @@ public class MessageContext implements Serializable {
     private boolean lastInBatch; // indicates that the command is the last in the batch. Used for logging
     private final boolean noOp;
 
+    /**
+     * The Read only.
+     */
     public boolean readOnly = false;
 
     private byte[] nonces;
@@ -64,23 +67,23 @@ public class MessageContext implements Serializable {
     /**
      * Constructor
      *
-     * @param sender
-     * @param viewID
-     * @param type
-     * @param session
-     * @param sequence
-     * @param operationId
-     * @param replyServer
-     * @param signature
-     * @param timestamp
-     * @param numOfNonces
-     * @param seed
-     * @param regency
-     * @param leader
-     * @param consensusId
-     * @param proof
-     * @param firstInBatch
-     * @param noOp
+     * @param sender       the sender
+     * @param viewID       the view id
+     * @param type         the type
+     * @param session      the session
+     * @param sequence     the sequence
+     * @param operationId  the operation id
+     * @param replyServer  the reply server
+     * @param signature    the signature
+     * @param timestamp    the timestamp
+     * @param numOfNonces  the num of nonces
+     * @param seed         the seed
+     * @param regency      the regency
+     * @param leader       the leader
+     * @param consensusId  the consensus id
+     * @param proof        the proof
+     * @param firstInBatch the first in batch
+     * @param noOp         the no op
      */
     public MessageContext(int sender, int viewID, TOMMessageType type, int session, int sequence, int operationId,
         int replyServer, byte[] signature, long timestamp, int numOfNonces, long seed, int regency, int leader,
@@ -109,34 +112,74 @@ public class MessageContext implements Serializable {
         this.noOp = noOp;
     }
 
+    /**
+     * Gets serial version uid.
+     *
+     * @return the serial version uid
+     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
+    /**
+     * Gets view id.
+     *
+     * @return the view id
+     */
     public int getViewID() {
         return viewID;
     }
 
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public TOMMessageType getType() {
         return type;
     }
 
+    /**
+     * Gets session.
+     *
+     * @return the session
+     */
     public int getSession() {
         return session;
     }
 
+    /**
+     * Gets sequence.
+     *
+     * @return the sequence
+     */
     public int getSequence() {
         return sequence;
     }
 
+    /**
+     * Gets operation id.
+     *
+     * @return the operation id
+     */
     public int getOperationId() {
         return operationId;
     }
 
+    /**
+     * Gets reply server.
+     *
+     * @return the reply server
+     */
     public int getReplyServer() {
         return replyServer;
     }
 
+    /**
+     * Get signature byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getSignature() {
         return signature;
     }
@@ -151,6 +194,8 @@ public class MessageContext implements Serializable {
     }
 
     /**
+     * Gets timestamp.
+     *
      * @return the timestamp
      */
     public long getTimestamp() {
@@ -158,6 +203,8 @@ public class MessageContext implements Serializable {
     }
 
     /**
+     * Get nonces byte [ ].
+     *
      * @return the nonces
      */
     public byte[] getNonces() {
@@ -175,15 +222,27 @@ public class MessageContext implements Serializable {
         return nonces;
     }
 
+    /**
+     * Gets num of nonces.
+     *
+     * @return the num of nonces
+     */
     public int getNumOfNonces() {
         return numOfNonces;
     }
 
+    /**
+     * Gets seed.
+     *
+     * @return the seed
+     */
     public long getSeed() {
         return seed;
     }
 
     /**
+     * Gets consensus id.
+     *
      * @return the consensusId
      */
     public int getConsensusId() {
@@ -191,6 +250,8 @@ public class MessageContext implements Serializable {
     }
 
     /**
+     * Gets leader.
+     *
      * @return the leader with which the batch was decided
      */
     public int getLeader() {
@@ -198,6 +259,8 @@ public class MessageContext implements Serializable {
     }
 
     /**
+     * Gets proof.
+     *
      * @return the proof for the consensus
      */
     public Set<ConsensusMessage> getProof() {
@@ -205,6 +268,8 @@ public class MessageContext implements Serializable {
     }
 
     /**
+     * Gets regency.
+     *
      * @return the regency
      */
     public int getRegency() {
@@ -212,20 +277,35 @@ public class MessageContext implements Serializable {
     }
 
     /**
+     * Gets first in batch.
+     *
      * @return the first message in the ordered batch
      */
     public TOMMessage getFirstInBatch() {
         return firstInBatch;
     }
 
+    /**
+     * Sets last in batch.
+     */
     public void setLastInBatch() {
         lastInBatch = true;
     }
 
+    /**
+     * Is last in batch boolean.
+     *
+     * @return the boolean
+     */
     public boolean isLastInBatch() {
         return lastInBatch;
     }
 
+    /**
+     * Is no op boolean.
+     *
+     * @return the boolean
+     */
     public boolean isNoOp() {
         return noOp;
     }

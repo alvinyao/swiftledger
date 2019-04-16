@@ -13,30 +13,79 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Type a pairing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeAPairing extends AbstractPairing {
+    /**
+     * The constant NAF_MILLER_PROJECTTIVE_METHOD.
+     */
     public static final String NAF_MILLER_PROJECTTIVE_METHOD = "naf-miller-projective";
+    /**
+     * The constant MILLER_PROJECTTIVE_METHOD.
+     */
     public static final String MILLER_PROJECTTIVE_METHOD = "miller-projective";
+    /**
+     * The constant MILLER_AFFINE_METHOD.
+     */
     public static final String MILLER_AFFINE_METHOD = "miller-affine";
 
+    /**
+     * The Exp 2.
+     */
     protected int exp2;
+    /**
+     * The Exp 1.
+     */
     protected int exp1;
+    /**
+     * The Sign 1.
+     */
     protected int sign1;
 
+    /**
+     * The R.
+     */
     protected BigInteger r;
-    protected BigInteger q; 
+    /**
+     * The Q.
+     */
+    protected BigInteger q;
+    /**
+     * The H.
+     */
     protected BigInteger h;
 
+    /**
+     * The Phik onr.
+     */
     protected BigInteger phikOnr;
 
+    /**
+     * The Gen no cofac.
+     */
     protected byte[] genNoCofac;
 
+    /**
+     * The Fq.
+     */
     protected Field Fq;
+    /**
+     * The Fq 2.
+     */
     protected Field<? extends Point> Fq2;
+    /**
+     * The Eq.
+     */
     protected Field<? extends Point> Eq;
 
-
+    /**
+     * Instantiates a new Type a pairing.
+     *
+     * @param random the random
+     * @param params the params
+     */
     public TypeAPairing(SecureRandom random, PairingParameters params) {
         super(random);
 
@@ -45,11 +94,20 @@ public class TypeAPairing extends AbstractPairing {
         initFields();
     }
 
+    /**
+     * Instantiates a new Type a pairing.
+     *
+     * @param params the params
+     */
     public TypeAPairing(PairingParameters params) {
         this(new SecureRandom(), params);
     }
 
-
+    /**
+     * Init params.
+     *
+     * @param curveParams the curve params
+     */
     protected void initParams(PairingParameters curveParams) {
         // validate the type
         String type = curveParams.getString("type");
@@ -68,7 +126,9 @@ public class TypeAPairing extends AbstractPairing {
         genNoCofac = curveParams.getBytes("genNoCofac", null);
     }
 
-
+    /**
+     * Init fields.
+     */
     protected void initFields() {
         // Init Zr
         Zr = initFp(r);
@@ -91,11 +151,21 @@ public class TypeAPairing extends AbstractPairing {
         GT = initGT();
     }
 
-
+    /**
+     * Init fp field.
+     *
+     * @param order the order
+     * @return the field
+     */
     protected Field initFp(BigInteger order) {
         return new ZrField(random, order);
     }
 
+    /**
+     * Init eq field.
+     *
+     * @return the field
+     */
     protected Field<? extends Point> initEq() {
         // Remember the curve is: y^2 = x^3 + ax
         return new CurveField<Field>(random,
@@ -106,15 +176,29 @@ public class TypeAPairing extends AbstractPairing {
                                      genNoCofac);
     }
 
+    /**
+     * Init fi field.
+     *
+     * @return the field
+     */
     protected Field<? extends Point> initFi() {
         return new DegreeTwoExtensionQuadraticField<Field>(random, Fq);
     }
 
+    /**
+     * Init gt field.
+     *
+     * @return the field
+     */
     protected Field initGT() {
         return new GTFiniteField(random, r, pairingMap, Fq2);
     }
 
-
+    /**
+     * Init map.
+     *
+     * @param curveParams the curve params
+     */
     protected void initMap(PairingParameters curveParams) {
         String method = curveParams.getString("method", NAF_MILLER_PROJECTTIVE_METHOD);
 

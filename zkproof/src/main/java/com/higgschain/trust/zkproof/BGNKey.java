@@ -12,7 +12,9 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Random;
 
-
+/**
+ * The type Bgn key.
+ */
 public class BGNKey {
 	private TypeA1Pairing map;
 	private Element P, Q;
@@ -28,8 +30,15 @@ public class BGNKey {
 	static private final int MIN_KEY_NODE_NUM = 4;
 	static private final int MIN_SUB_KEY_BIT = 32;
 
-
-	public BGNKey(TypeA1Pairing pairing, Element gen, Element point,
+    /**
+     * Instantiates a new Bgn key.
+     *
+     * @param pairing the pairing
+     * @param gen     the gen
+     * @param point   the point
+     * @param order   the order
+     */
+    public BGNKey(TypeA1Pairing pairing, Element gen, Element point,
 				  BigInteger order) {
 		map = pairing;
 		P = gen.set(gen);
@@ -38,7 +47,12 @@ public class BGNKey {
 		f = pairing.getG1();
 	}
 
-	BGNKey(int bits){
+    /**
+     * Instantiates a new Bgn key.
+     *
+     * @param bits the bits
+     */
+    BGNKey(int bits){
 		SecureRandom rng = new SecureRandom();
 		TypeA1CurveGenerator a1 = new TypeA1CurveGenerator(rng, 2, bits); // Requires
 		// 2
@@ -60,7 +74,12 @@ public class BGNKey {
 		Q = Q.mul(param.getBigInteger("n0"));//random r
 	}
 
-	BGNKey(String key){
+    /**
+     * Instantiates a new Bgn key.
+     *
+     * @param key the key
+     */
+    BGNKey(String key){
 		JSONObject pubKey = JSONObject.parseObject(key);
 
 		String p1 = pubKey.getString("param");
@@ -113,32 +132,68 @@ public class BGNKey {
 		}
 	}
 
-
-	Element doPairing(Element A, Element B) {
+    /**
+     * Do pairing element.
+     *
+     * @param A the a
+     * @param B the b
+     * @return the element
+     */
+    Element doPairing(Element A, Element B) {
 		return map.pairing(A, B);
 	}
 
-	Element getP() {
+    /**
+     * Gets p.
+     *
+     * @return the p
+     */
+    Element getP() {
 		return this.P;
 	}
 
-	Element getQ() {
+    /**
+     * Gets q.
+     *
+     * @return the q
+     */
+    Element getQ() {
 		return this.Q;
 	}
 
-	BigInteger getN() {
+    /**
+     * Gets n.
+     *
+     * @return the n
+     */
+    BigInteger getN() {
 		return this.n;
 	}
 
-	Field getField() {
+    /**
+     * Gets field.
+     *
+     * @return the field
+     */
+    Field getField() {
 		return this.f;
 	}
 
-	PropertiesParameters getParam(){
+    /**
+     * Get param properties parameters.
+     *
+     * @return the properties parameters
+     */
+    PropertiesParameters getParam(){
 		return  this.param;
 	}
 
-	String exportPubKeyMod(){
+    /**
+     * Export pub key mod string.
+     *
+     * @return the string
+     */
+    String exportPubKeyMod(){
 
 		try {
 			PairingParameters param1 = (PairingParameters) SerializerUtil.deserialize(SerializerUtil.serialize(param));
@@ -161,7 +216,12 @@ public class BGNKey {
 
 	}
 
-	String exportPubKey(){
+    /**
+     * Export pub key string.
+     *
+     * @return the string
+     */
+    String exportPubKey(){
 
 		try {
 			PairingParameters param1 = (PairingParameters) SerializerUtil.deserialize(SerializerUtil.serialize(param));
@@ -186,7 +246,15 @@ public class BGNKey {
 
 	}
 
-	static String GenSubKey(String key, int seqno, int nodeNum){
+    /**
+     * Gen sub key string.
+     *
+     * @param key     the key
+     * @param seqno   the seqno
+     * @param nodeNum the node num
+     * @return the string
+     */
+    static String GenSubKey(String key, int seqno, int nodeNum){
 		Element T;
 		JSONObject ob = JSONObject.parseObject(key);
 		int oldNodeNum = Integer.valueOf(ob.getString("nodeNum") == null ? "-1":ob.getString("nodeNum"));
@@ -220,7 +288,14 @@ public class BGNKey {
 		return null;
 	}
 
-	public static String MergeKey(String key1, String key2) {
+    /**
+     * Merge key string.
+     *
+     * @param key1 the key 1
+     * @param key2 the key 2
+     * @return the string
+     */
+    public static String MergeKey(String key1, String key2) {
 		JSONObject ob1 = JSONObject.parseObject(key1);
 		JSONObject ob2 = JSONObject.parseObject(key2);
 
@@ -245,7 +320,14 @@ public class BGNKey {
 		return null;
 	}
 
-	public static boolean ContainKey(String fullKey, String subKey){
+    /**
+     * Contain key boolean.
+     *
+     * @param fullKey the full key
+     * @param subKey  the sub key
+     * @return the boolean
+     */
+    public static boolean ContainKey(String fullKey, String subKey){
 		JSONObject ob1 = JSONObject.parseObject(fullKey);
 		JSONObject ob2 = JSONObject.parseObject(subKey);
 
@@ -277,8 +359,12 @@ public class BGNKey {
 		return false;
 	}
 
-
-	String exportFullKey(){
+    /**
+     * Export full key string.
+     *
+     * @return the string
+     */
+    String exportFullKey(){
 		try {
 			String p1 = SerializerUtil.serialize(param);
 			JSONObject fullKey = new JSONObject();
@@ -298,7 +384,12 @@ public class BGNKey {
 
 	}
 
-	boolean hasFullKey(){
+    /**
+     * Has full key boolean.
+     *
+     * @return the boolean
+     */
+    boolean hasFullKey(){
 		if (param != null){
 			return (param.getBigInteger("n1") != null
 					&& param.getBigInteger("n0") != null);
@@ -307,7 +398,12 @@ public class BGNKey {
 		return false;
 	}
 
-	boolean hasPubKey(){
+    /**
+     * Has pub key boolean.
+     *
+     * @return the boolean
+     */
+    boolean hasPubKey(){
 		return (P != null && Q != null && n != null && param != null);
 	}
 

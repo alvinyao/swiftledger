@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Account dc record rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -24,6 +26,11 @@ public class AccountDcRecordRocksDao extends RocksBaseDao<AccountDcRecordPO>{
         return "accountDcRecord";
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param pos the pos
+     */
     public void batchInsert(List<AccountDcRecordPO> pos) {
         if (CollectionUtils.isEmpty(pos)) {
             return;

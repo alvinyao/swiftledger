@@ -18,8 +18,10 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
+ * The type Node info service.
+ *
  * @author suimi
- * @date 2018/6/12
+ * @date 2018 /6/12
  */
 @Service public class NodeInfoService implements INodeInfoService {
     @Autowired private NodeState nodeState;

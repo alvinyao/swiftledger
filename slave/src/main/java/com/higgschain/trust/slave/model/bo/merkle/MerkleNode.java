@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Merkle node.
+ *
  * @author WangQuanzhou
  * @desc Merkle Node BO
- * @date 2018/4/10 14:27
+ * @date 2018 /4/10 14:27
  */
 @Getter @Setter
 public class MerkleNode extends BaseBO {
@@ -35,10 +37,24 @@ public class MerkleNode extends BaseBO {
     // can be NO_CHANGE or ADD or MODIFY, default NO_CHANGE
     private MerkleStatusEnum status = MerkleStatusEnum.NO_CHANGE;
 
+    /**
+     * Instantiates a new Merkle node.
+     */
     // default constructor
     public MerkleNode() {
     }
 
+    /**
+     * Instantiates a new Merkle node.
+     *
+     * @param nodeHash the node hash
+     * @param uuid     the uuid
+     * @param index    the index
+     * @param level    the level
+     * @param parent   the parent
+     * @param treeType the tree type
+     * @param status   the status
+     */
     // constructor
     public MerkleNode(String nodeHash, String uuid, long index, int level, String parent, MerkleTypeEnum treeType,
         MerkleStatusEnum status) {

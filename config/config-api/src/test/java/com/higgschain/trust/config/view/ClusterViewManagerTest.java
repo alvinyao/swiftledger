@@ -23,6 +23,9 @@ import java.util.List;
 
 import static org.mockito.Matchers.anyString;
 
+/**
+ * The type Cluster view manager test.
+ */
 /*
  * Copyright (c) 2013-2017, suimi
  */
@@ -30,10 +33,16 @@ import static org.mockito.Matchers.anyString;
 
     private ClusterViewManager viewManager;
 
+    /**
+     * Before.
+     */
     @BeforeMethod public void before() {
         viewManager = new ClusterViewManager();
     }
 
+    /**
+     * Test reset views.
+     */
     @Test public void testResetViews() {
         Assert.assertEquals(0, viewManager.getViews().size());
         Assert.assertNull(viewManager.getCurrentView());
@@ -63,6 +72,9 @@ import static org.mockito.Matchers.anyString;
 
     }
 
+    /**
+     * Test get views.
+     */
     @Test public void testGetViews() {
         ClusterView view = new ClusterView(1, 1, new HashMap<>());
         ClusterView view2 = new ClusterView(2, 31, new HashMap<>());
@@ -83,6 +95,9 @@ import static org.mockito.Matchers.anyString;
         Assert.assertNotSame(views, gotViews);
     }
 
+    /**
+     * Test get view with height.
+     */
     @Test public void testGetViewWithHeight() {
         ClusterView view = new ClusterView(1, 0, 1, 10, new HashMap<>());
         ClusterView view2 = new ClusterView(2, 0, 11, 20, new HashMap<>());
@@ -108,6 +123,9 @@ import static org.mockito.Matchers.anyString;
         Assert.assertNotSame(viewManager.getViewWithHeight(23), view3);
     }
 
+    /**
+     * Test get view.
+     */
     @Test public void testGetView() {
         ClusterView view = new ClusterView(1, 0, 1, 10, new HashMap<>());
         ClusterView view2 = new ClusterView(2, 0, 11, 20, new HashMap<>());
@@ -130,6 +148,9 @@ import static org.mockito.Matchers.anyString;
         Assert.assertNotSame(viewManager.getView(3), view3);
     }
 
+    /**
+     * Test change view null.
+     */
     @PrepareForTest({CryptoUtil.class}) @Test public void testChangeViewNull() {
         RsaCrypto mock = PowerMockito.mock(RsaCrypto.class);
         PowerMockito.mockStatic(CryptoUtil.class);
@@ -161,6 +182,9 @@ import static org.mockito.Matchers.anyString;
         Assert.assertEquals(viewManager.getCurrentView(), view);
     }
 
+    /**
+     * Test change view sign failed.
+     */
     @PrepareForTest({CryptoUtil.class}) @Test public void testChangeViewSignFailed() {
         RsaCrypto mock = PowerMockito.mock(RsaCrypto.class);
         PowerMockito.mockStatic(CryptoUtil.class);
@@ -209,6 +233,9 @@ import static org.mockito.Matchers.anyString;
         Assert.assertEquals(viewManager.getCurrentView(), view);
     }
 
+    /**
+     * Test change view unsupport opt.
+     */
     @PrepareForTest({CryptoUtil.class}) @Test public void testChangeViewUnsupportOpt() {
         RsaCrypto mock = PowerMockito.mock(RsaCrypto.class);
         PowerMockito.mockStatic(CryptoUtil.class);
@@ -230,6 +257,9 @@ import static org.mockito.Matchers.anyString;
         Assert.expectThrows(ConfigException.class, () -> viewManager.changeView(viewCommand));
     }
 
+    /**
+     * Test change view join.
+     */
     @PrepareForTest({CryptoUtil.class}) @Test public void testChangeViewJoin() {
         RsaCrypto mock = PowerMockito.mock(RsaCrypto.class);
         PowerMockito.mockStatic(CryptoUtil.class);
@@ -279,6 +309,9 @@ import static org.mockito.Matchers.anyString;
         Assert.assertEquals(currentView.getNodes().get("C"), "Cpk");
     }
 
+    /**
+     * Test change view leave.
+     */
     @PrepareForTest({CryptoUtil.class}) @Test public void testChangeViewLeave() {
         RsaCrypto mock = PowerMockito.mock(RsaCrypto.class);
         PowerMockito.mockStatic(CryptoUtil.class);
@@ -354,6 +387,9 @@ import static org.mockito.Matchers.anyString;
         };
     }
 
+    /**
+     * Test reset end height.
+     */
     @Test public void testResetEndHeight() {
         ClusterView view = new ClusterView(1, 0, 1, 10, new HashMap<>());
         ClusterView view2 = new ClusterView(2, 0, 11, 20, new HashMap<>());

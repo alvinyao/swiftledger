@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * The type Voting controller.
+ *
  * @author liuyu
- * @date 2018/5/12
+ * @date 2018 /5/12
  */
-
 @RestController
 @Slf4j
 public class VotingController {
@@ -28,8 +29,8 @@ public class VotingController {
     /**
      * request voting
      *
-     * @param votingRequest
-     * @return
+     * @param votingRequest the voting request
+     * @return vote receipt
      */
     @RequestMapping(value = "/voting")
     VoteReceipt acceptVoting(@RequestBody VotingRequest votingRequest) {
@@ -39,20 +40,19 @@ public class VotingController {
     /**
      * request receipting
      *
-     * @param receiptRequest
-     * @return
+     * @param receiptRequest the receipt request
+     * @return resp data
      */
     @RequestMapping(value = "/receipting")
     RespData<String> receiptVote(@RequestBody ReceiptRequest receiptRequest) {
         return voteService.acceptReceipt(receiptRequest);
     }
 
-
     /**
      * receipt vote for test
      *
-     * @param txId
-     * @param agree
+     * @param txId  the tx id
+     * @param agree the agree
      * @return
      */
     @RequestMapping(value = "/receiptVote")

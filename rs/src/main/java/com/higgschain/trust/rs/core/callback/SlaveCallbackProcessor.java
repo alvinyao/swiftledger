@@ -29,9 +29,11 @@ import org.testng.collections.Lists;
 import java.util.List;
 
 /**
+ * The type Slave callback processor.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-13
+ * @date 2018 -05-13
  */
 @Component @Slf4j public class SlaveCallbackProcessor implements SlaveCallbackHandler, InitializingBean {
     @Autowired private SlaveCallbackRegistor slaveCallbackRegistor;

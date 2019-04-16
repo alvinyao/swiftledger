@@ -21,6 +21,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * The type Utxo smart contract interface test.
+ */
 public class UTXOSmartContractInterfaceTest extends BaseTest {
 
     @Autowired private UTXOSmartContractImpl utxoSmartContract;
@@ -39,6 +42,12 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         return code;
     }
 
+    /**
+     * Execute file boolean.
+     *
+     * @param codeFile the code file
+     * @return the boolean
+     */
     public boolean executeFile(String codeFile) {
         String address = createContract(codeFile);
         UTXOExecuteContextData contextData = new UTXOExecuteContextData();
@@ -48,6 +57,13 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         return utxoSmartContract.execute(address, contextData);
     }
 
+    /**
+     * Execute file with exception.
+     *
+     * @param codeFile                 the code file
+     * @param expectedException        the expected exception
+     * @param expectedExceptionMessage the expected exception message
+     */
     public void executeFileWithException(String codeFile, Class expectedException, String expectedExceptionMessage) {
         String address = createContract(codeFile);
         UTXOExecuteContextData contextData = new UTXOExecuteContextData();
@@ -79,6 +95,9 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         return contract.getAddress();
     }
 
+    /**
+     * Clear db.
+     */
     @AfterClass
     public void clearDb() {
         DataBaseManager dataBaseManager = new DataBaseManager();
@@ -86,6 +105,9 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         dataBaseManager.executeDelete("TRUNCATE TABLE contract;TRUNCATE TABLE contract_state", conn);
     }
 
+    /**
+     * Test execute code empty.
+     */
     @Test
     public void testExecute_code_empty() {
         ExecuteContextData contextData = new UTXOExecuteContextData();
@@ -96,6 +118,9 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         }
     }
 
+    /**
+     * Test execute context data null.
+     */
     @Test
     public void testExecute_contextData_null() {
         ExecuteContextData contextData = new UTXOExecuteContextData();
@@ -106,6 +131,9 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         }
     }
 
+    /**
+     * Test execute process type null.
+     */
     @Test
     public void testExecute_processType_null() {
         ExecuteContextData contextData = new UTXOExecuteContextData();
@@ -116,6 +144,9 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         }
     }
 
+    /**
+     * Test execute validate.
+     */
     @Test
     public void testExecute_Validate() {
         snapshotService.startTransaction();
@@ -130,6 +161,9 @@ public class UTXOSmartContractInterfaceTest extends BaseTest {
         snapshotService.commit();
     }
 
+    /**
+     * Test execute persist.
+     */
     @Test
     public void testExecute_Persist() {
         boolean result = executeFile("utxo_normal_return_true.js");

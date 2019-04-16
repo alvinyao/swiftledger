@@ -77,7 +77,7 @@ public final class ExecutionManager {
     /**
      * Creates a new instance of ExecutionManager
      *
-     * @param controller
+     * @param controller the controller
      * @param acceptor   Acceptor role of the PaW algorithm
      * @param proposer   Proposer role of the PaW algorithm
      * @param me         This process ID
@@ -149,22 +149,45 @@ public final class ExecutionManager {
         return acceptor;
     }
 
+    /**
+     * Gets proposer.
+     *
+     * @return the proposer
+     */
     public Proposer getProposer() {
         return proposer;
     }
 
+    /**
+     * Stopped boolean.
+     *
+     * @return the boolean
+     */
     public boolean stopped() {
         return stopped;
     }
 
+    /**
+     * Has msgs boolean.
+     *
+     * @return the boolean
+     */
     public boolean hasMsgs() {
         return !stoppedMsgs.isEmpty();
     }
 
+    /**
+     * Gets stopped msgs.
+     *
+     * @return the stopped msgs
+     */
     public Queue<ConsensusMessage> getStoppedMsgs() {
         return stoppedMsgs;
     }
 
+    /**
+     * Clear stopped.
+     */
     public void clearStopped() {
         stoppedMsgs.clear();
     }
@@ -348,6 +371,8 @@ public final class ExecutionManager {
 
     /**
      * THIS IS JOAO'S CODE, FOR HANDLING THE STATE TRANSFER
+     *
+     * @param id the id
      */
     public void removeOutOfContexts(int id) {
 
@@ -402,6 +427,12 @@ public final class ExecutionManager {
         return consensus;
     }
 
+    /**
+     * Is decidable boolean.
+     *
+     * @param cid the cid
+     * @return the boolean
+     */
     public boolean isDecidable(int cid) {
         if (receivedOutOfContextPropose(cid)) {
             Consensus cons = getConsensus(cid);
@@ -434,6 +465,11 @@ public final class ExecutionManager {
         return false;
     }
 
+    /**
+     * Process out of context propose.
+     *
+     * @param consensus the consensus
+     */
     public void processOutOfContextPropose(Consensus consensus) {
         outOfContextLock.lock();
         /******* BEGIN OUTOFCONTEXT CRITICAL SECTION *******/
@@ -449,6 +485,11 @@ public final class ExecutionManager {
         outOfContextLock.unlock();
     }
 
+    /**
+     * Process out of context.
+     *
+     * @param consensus the consensus
+     */
     public void processOutOfContext(Consensus consensus) {
         outOfContextLock.lock();
         /******* BEGIN OUTOFCONTEXT CRITICAL SECTION *******/

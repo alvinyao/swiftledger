@@ -5,6 +5,9 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * The type Node properties.
+ */
 @Configuration @ConfigurationProperties(prefix = "higgs.trust") @Getter @Setter public class NodeProperties {
 
     /**

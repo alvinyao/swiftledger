@@ -23,14 +23,37 @@ import bftsmart.tom.core.messages.TOMMessage;
  * @author Paulo
  */
 public interface CommunicationSystemClientSide {
+    /**
+     * Send.
+     *
+     * @param sign    the sign
+     * @param targets the targets
+     * @param sm      the sm
+     */
     public void send(boolean sign, int[] targets, TOMMessage sm);
 
+    /**
+     * Sets reply receiver.
+     *
+     * @param trr the trr
+     */
     public void setReplyReceiver(ReplyReceiver trr);
 
+    /**
+     * Sign.
+     *
+     * @param sm the sm
+     */
     public void sign(TOMMessage sm);
 
+    /**
+     * Close.
+     */
     public void close();
 
+    /**
+     * Update connections.
+     */
     //******* EDUARDO BEGIN **************//
     public void updateConnections();
     //******* EDUARDO END **************//

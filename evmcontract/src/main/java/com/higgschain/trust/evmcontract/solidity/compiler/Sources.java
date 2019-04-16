@@ -21,17 +21,28 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Sources.
+ */
 public class Sources {
 
     private final Map<String, SourceArtifact> artifacts = new HashMap<>();
     private String targetArtifact;
 
+    /**
+     * Instantiates a new Sources.
+     *
+     * @param files the files
+     */
     public Sources(File[] files) {
         for (File file : files) {
             artifacts.put(file.getName(), new SourceArtifact(file));
         }
     }
 
+    /**
+     * Resolve dependencies.
+     */
     public void resolveDependencies() {
         for (String srcName : artifacts.keySet()) {
             SourceArtifact src = artifacts.get(srcName);
@@ -50,7 +61,12 @@ public class Sources {
             }
         }
     }
-    
+
+    /**
+     * Plain source string.
+     *
+     * @return the string
+     */
     public String plainSource() {
         return artifacts.get(targetArtifact).plainSource();
     }

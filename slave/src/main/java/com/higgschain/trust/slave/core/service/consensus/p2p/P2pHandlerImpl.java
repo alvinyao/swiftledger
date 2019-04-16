@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type P 2 p handler.
+ *
  * @Description: handle p2p message sending and p2p message receiving
  * @author: pengdi
- **/
+ */
 @Slf4j @Service public class P2pHandlerImpl implements P2pHandler {
 
     @Autowired private ValidConsensus validConsensus;

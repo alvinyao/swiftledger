@@ -28,9 +28,9 @@ public interface BatchExecutable extends Executable {
     /**
      * Execute a batch of requests.
      *
-     * @param command
-     * @param msgCtx
-     * @return
+     * @param command the command
+     * @param msgCtx  the msg ctx
+     * @return byte [ ] [ ]
      */
     public byte[][] executeBatch(byte[][] command, MessageContext[] msgCtx);
 

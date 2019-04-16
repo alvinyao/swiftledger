@@ -39,6 +39,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Durable state manager.
+ */
 public class DurableStateManager extends BaseStateManager {
 
     //private LCManager lcManager;

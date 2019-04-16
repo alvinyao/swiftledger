@@ -34,9 +34,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * The type Rs core callback processor.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-07
+ * @date 2018 -06-07
  */
 @Component
 @Slf4j

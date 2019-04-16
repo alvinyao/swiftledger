@@ -9,18 +9,45 @@ import java.security.SecureRandom;
 import java.util.List;
 
 /**
+ * The type Poly mod field.
+ *
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class PolyModField<F extends Field> extends AbstractFieldOver<F, PolyModElement> {
+    /**
+     * The Irreducible poly.
+     */
     protected PolyElement irreduciblePoly;
+    /**
+     * The Nqr.
+     */
     protected PolyModElement nqr;
+    /**
+     * The Order.
+     */
     protected BigInteger order;
+    /**
+     * The N.
+     */
     protected int n;
+    /**
+     * The Fixed length in bytes.
+     */
     protected int fixedLengthInBytes;
 
+    /**
+     * The Xpwr.
+     */
     protected PolyModElement[] xpwr;
 
-
+    /**
+     * Instantiates a new Poly mod field.
+     *
+     * @param random               the random
+     * @param targetField          the target field
+     * @param cyclotomicPolyDegree the cyclotomic poly degree
+     */
     public PolyModField(SecureRandom random, F targetField, int cyclotomicPolyDegree) {
         super(random, targetField);
 
@@ -37,10 +64,23 @@ public class PolyModField<F extends Field> extends AbstractFieldOver<F, PolyModE
         init(null);
     }
 
+    /**
+     * Instantiates a new Poly mod field.
+     *
+     * @param random          the random
+     * @param irreduciblePoly the irreducible poly
+     */
     public PolyModField(SecureRandom random, PolyElement irreduciblePoly) {
         this(random, irreduciblePoly, null);
     }
 
+    /**
+     * Instantiates a new Poly mod field.
+     *
+     * @param random          the random
+     * @param irreduciblePoly the irreducible poly
+     * @param nqr             the nqr
+     */
     public PolyModField(SecureRandom random, PolyElement irreduciblePoly, BigInteger nqr) {
         super(random, (F) irreduciblePoly.getField().getTargetField());
 
@@ -48,7 +88,11 @@ public class PolyModField<F extends Field> extends AbstractFieldOver<F, PolyModE
         init(nqr);
     }
 
-    
+    /**
+     * Init.
+     *
+     * @param nqr the nqr
+     */
     protected void init(BigInteger nqr) {
         this.n = irreduciblePoly.getDegree();
 
@@ -90,10 +134,14 @@ public class PolyModField<F extends Field> extends AbstractFieldOver<F, PolyModE
         throw new IllegalStateException("Not Implemented yet!");
     }
 
+    /**
+     * Gets n.
+     *
+     * @return the n
+     */
     public int getN() {
         return n;
     }
-
 
     /**
      * compute x^n,...,x^{2n-2} mod poly

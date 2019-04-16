@@ -28,9 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Manage snapshot agent.
+ *
  * @author tangfashuang
  * @description an agent for policy and rs snapshot
- * @date 2018-04-12 17:28
+ * @date 2018 -04-12 17:28
  */
 @Service
 @Slf4j
@@ -132,6 +134,12 @@ public class ManageSnapshotAgent implements CacheLoader {
         return true;
     }
 
+    /**
+     * Gets policy.
+     *
+     * @param policyId the policy id
+     * @return the policy
+     */
     public Policy getPolicy(String policyId) {
         PolicyPO po = get(new PolicyCacheKey(policyId));
         if (null == po) {
@@ -140,6 +148,12 @@ public class ManageSnapshotAgent implements CacheLoader {
         return policyRepository.convertPolicyPOToPolicy(po);
     }
 
+    /**
+     * Gets rs node.
+     *
+     * @param rsId the rs id
+     * @return the rs node
+     */
     public RsNode getRsNode(String rsId) {
         RsNodePO po = get(new RsNodeCacheKey(rsId));
         if (null == po) {
@@ -148,6 +162,12 @@ public class ManageSnapshotAgent implements CacheLoader {
         return rsNodeRepository.convertRsNodePOtoRsNode(po);
     }
 
+    /**
+     * Register policy policy.
+     *
+     * @param registerPolicy the register policy
+     * @return the policy
+     */
     public Policy registerPolicy(RegisterPolicy registerPolicy) {
         Policy policy = policyRepository.convertActionToPolicy(registerPolicy);
 
@@ -156,6 +176,12 @@ public class ManageSnapshotAgent implements CacheLoader {
         return policy;
     }
 
+    /**
+     * Register rs rs node.
+     *
+     * @param registerRS the register rs
+     * @return the rs node
+     */
     public RsNode registerRs(RegisterRS registerRS) {
         RsNode rsNode = rsNodeRepository.convertActionToRsNode(registerRS);
         insert(new RsNodeCacheKey(rsNode.getRsId()),
@@ -163,6 +189,11 @@ public class ManageSnapshotAgent implements CacheLoader {
         return rsNode;
     }
 
+    /**
+     * Update rs.
+     *
+     * @param rsNode the rs node
+     */
     public void updateRs(RsNode rsNode) {
         update(new RsNodeCacheKey(rsNode.getRsId()),
             rsNodeRepository.convertRsNodeToRsNodePO(rsNode));

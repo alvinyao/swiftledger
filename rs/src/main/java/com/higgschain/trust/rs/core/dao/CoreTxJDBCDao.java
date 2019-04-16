@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * The type Core tx jdbc dao.
+ */
 @Component
 @Slf4j
 public class CoreTxJDBCDao {
@@ -24,8 +27,8 @@ public class CoreTxJDBCDao {
     /**
      * batch insert
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     public int batchInsert(List<CoreTransactionPO> list) {
         StringBuilder sql = new StringBuilder("INSERT INTO core_transaction " + " (tx_id,policy_id,lock_time,sender,version,biz_model,action_datas,sign_datas,execute_result,error_code,error_msg,send_time,block_height,tx_type,create_time)" + "  VALUES");
@@ -41,8 +44,9 @@ public class CoreTxJDBCDao {
     /**
      * batch update
      *
-     * @param list
-     * @return
+     * @param list        the list
+     * @param blockHeight the block height
+     * @return int
      */
     public int batchUpdate(List<CoreTransactionPO> list, Long blockHeight) {
         StringBuilder sql = new StringBuilder("UPDATE core_transaction SET ");

@@ -22,7 +22,7 @@ package com.higgschain.trust.evmcontract.crypto.cryptohash;
 /**
  * <p>This interface documents the API for a hash function. This
  * interface somewhat mimics the standard {@code
- * java.security.MessageDigest} class. We do not extend that class in
+ * java.security.MessageDigest}* class. We do not extend that class in
  * order to provide compatibility with reduced Java implementations such
  * as J2ME. Implementing a {@code java.security.Provider} compatible
  * with Sun's JCA ought to be easy.</p>
@@ -69,9 +69,8 @@ package com.higgschain.trust.evmcontract.crypto.cryptohash;
  * </pre>
  *
  * @author Thomas Pornin &lt;thomas.pornin@cryptolog.com&gt;
- * @version $Revision: 232 $
+ * @version $Revision : 232 $
  */
-
 public interface Digest {
 
     /**

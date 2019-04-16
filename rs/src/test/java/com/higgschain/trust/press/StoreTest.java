@@ -7,12 +7,20 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
+ * The type Store test.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-03
+ * @date 2018 -09-03
  */
 public class StoreTest extends BasePressTest{
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
           test();
     }
@@ -40,6 +48,7 @@ public class StoreTest extends BasePressTest{
             }
         }
     }
+
     /**
      * 存证
      */

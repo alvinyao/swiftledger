@@ -10,10 +10,17 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Objects;
 
 /**
+ * The type Precompiled contract invocation executor.
+ *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 public class PrecompiledContractInvocationExecutor extends BaseContractExecutor {
+    /**
+     * Instantiates a new Precompiled contract invocation executor.
+     *
+     * @param contractExecutionContext the contract execution context
+     */
     PrecompiledContractInvocationExecutor(ContractExecutionContext contractExecutionContext) {
         super(contractExecutionContext);
     }

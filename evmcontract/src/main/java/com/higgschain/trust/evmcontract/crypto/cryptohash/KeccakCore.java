@@ -51,11 +51,15 @@ package com.higgschain.trust.evmcontract.crypto.cryptohash;
  * </pre>
  *
  * @author Thomas Pornin &lt;thomas.pornin@cryptolog.com&gt;
- * @version $Revision: 258 $
+ * @version $Revision : 258 $
  */
-
 abstract class KeccakCore extends DigestEngine {
 
+    /**
+     * Instantiates a new Keccak core.
+     *
+     * @param alg the alg
+     */
     KeccakCore(String alg) {
         super(alg);
     }
@@ -599,6 +603,10 @@ abstract class KeccakCore extends DigestEngine {
     }
 
     /**
+     * Copy state digest.
+     *
+     * @param dst the dst
+     * @return the digest
      * @see org.ethereum.crypto.cryptohash.DigestEngine
      */
     protected Digest copyState(KeccakCore dst) {

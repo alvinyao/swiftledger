@@ -24,10 +24,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
+/**
+ * The type Test serialization.
+ */
 public class TestSerialization {
 
     /**
+     * The entry point of application.
+     *
      * @param args the command line arguments
+     * @throws Exception the exception
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here

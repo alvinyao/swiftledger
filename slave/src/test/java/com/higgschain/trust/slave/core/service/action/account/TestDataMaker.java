@@ -19,9 +19,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Test data maker.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-17
+ * @date 2018 -04-17
  */
 public class TestDataMaker {
 
@@ -33,6 +35,11 @@ public class TestDataMaker {
     private static final String priKey3 =
         "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBANDzTWjIRJ6Y3dKT4Z08/QuUMjj3OFSgt8qD9ZFgT3TXik44olP7O0gVJiL+tBtCuqsW6nU2BWt2S/1/SmGVq1dxco1VSCU/Dk7ReBTMRyZBOxfzdMnaTWMbiO+ETodJl3eQbK1miJyVbg7hLe7s/8xiH7AGsKkppW6GC7Kpb4zJAgMBAAECgYBORbYLuGmsF4uQ5ICxjDUmbz9ZA5MAcKwomsIU0UUyecN/hcuZNhWA7Rs6JLuHMroGeTEe8zuYg9n3fgV5BL4H96z3SBSrY+BsCf1CxYGXEVCHzlt6g8575MqtxIlqPXnpKr9S1663EtsCCJ93t5rZmMA7z8bUbFRTcrUsajYzAQJBAPynP0a6Pk5JlF0TW5vbzusZb3CsEdPTp39NxlHEx9v/2xuREti1CSVMhdm8ZDdC5hDoETZn4DTiBAF0Z5it6pkCQQDTt9uSFv16v+62yJIz0KE9EUZrLua1BlfTIyvgBZQ6Lp5ORS2S9iVzfOS77mufysbfGSpmD6Oc5ElY2coUy8GxAkAlFB5zMM4IC0Bc0IR3QTECy77RGE+deMhyJGXghjKWlNwBFa9gYmEvOiXCqKVEfurovEYaZ/A9kpXn6L9zZsKxAkAuym+IdfRHcKu9Uc6eDPnVmT/K6G6si15Vl2xW8mS0ByGNgtRzqlrUj0GuFx9KDXKuU81/CO3L+tgK/vceaXnBAkEAk+OjzXA0KXZGKm+O8/Vl8yiJQpuvpuO4cxy4E7nEAjevFip88p4tO03DVxjyq2Az7457q/T+C/Ohr1X9uS/v/Q==";
 
+    /**
+     * Create register policy action action.
+     *
+     * @return the action
+     */
     public static Action createRegisterPolicyAction() {
         RegisterPolicy registerPolicy = new RegisterPolicy();
         registerPolicy.setIndex(0);
@@ -46,6 +53,13 @@ public class TestDataMaker {
         return registerPolicy;
     }
 
+    /**
+     * Make open account action action.
+     *
+     * @param accountNo         the account no
+     * @param fundDirectionEnum the fund direction enum
+     * @return the action
+     */
     public static Action makeOpenAccountAction(String accountNo, FundDirectionEnum fundDirectionEnum) {
         OpenAccount action = new OpenAccount();
         action.setType(ActionTypeEnum.OPEN_ACCOUNT);
@@ -58,6 +72,14 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make opertion action action.
+     *
+     * @param debitAccountNo  the debit account no
+     * @param creditAccountNo the credit account no
+     * @param happenAmount    the happen amount
+     * @return the action
+     */
     public static Action makeOpertionAction(String debitAccountNo, String creditAccountNo, BigDecimal happenAmount) {
         AccountOperation action = new AccountOperation();
         action.setType(ActionTypeEnum.ACCOUNTING);
@@ -76,6 +98,13 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make freeze action action.
+     *
+     * @param accountNo the account no
+     * @param index     the index
+     * @return the action
+     */
     public static Action makeFreezeAction(String accountNo, int index) {
         AccountFreeze action = new AccountFreeze();
         action.setType(ActionTypeEnum.FREEZE);
@@ -86,6 +115,13 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make un freeze action action.
+     *
+     * @param accountNo the account no
+     * @param bizFlowNo the biz flow no
+     * @return the action
+     */
     public static Action makeUnFreezeAction(String accountNo, String bizFlowNo) {
         AccountUnFreeze action = new AccountUnFreeze();
         action.setType(ActionTypeEnum.UNFREEZE);
@@ -96,6 +132,12 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make currency action action.
+     *
+     * @param currencyName the currency name
+     * @return the action
+     */
     public static Action makeCurrencyAction(String currencyName) {
         IssueCurrency action = new IssueCurrency();
         action.setType(ActionTypeEnum.ISSUE_CURRENCY);
@@ -105,6 +147,14 @@ public class TestDataMaker {
         return action;
     }
 
+    /**
+     * Make core tx core transaction.
+     *
+     * @param actions    the actions
+     * @param index      the index
+     * @param policyEnum the policy enum
+     * @return the core transaction
+     */
     public static CoreTransaction makeCoreTx(List<Action> actions, int index, InitPolicyEnum policyEnum) {
         CoreTransaction coreTx = new CoreTransaction();
         coreTx.setPolicyId(policyEnum.getPolicyId());
@@ -118,6 +168,15 @@ public class TestDataMaker {
         return coreTx;
     }
 
+    /**
+     * Make core tx core transaction.
+     *
+     * @param actions  the actions
+     * @param index    the index
+     * @param policyId the policy id
+     * @param bizModel the biz model
+     * @return the core transaction
+     */
     public static CoreTransaction makeCoreTx(List<Action> actions, int index, String policyId, JSONObject bizModel) {
         CoreTransaction coreTx = new CoreTransaction();
         coreTx.setPolicyId(policyId);
@@ -131,6 +190,13 @@ public class TestDataMaker {
         return coreTx;
     }
 
+    /**
+     * Make signed tx signed transaction.
+     *
+     * @param coreTransaction the core transaction
+     * @return the signed transaction
+     * @throws Exception the exception
+     */
     public static SignedTransaction makeSignedTx(CoreTransaction coreTransaction) throws Exception {
         SignedTransaction signedTransaction = new SignedTransaction();
         signedTransaction.setCoreTx(coreTransaction);
@@ -150,6 +216,11 @@ public class TestDataMaker {
         return signedTransaction;
     }
 
+    /**
+     * Make block header block header.
+     *
+     * @return the block header
+     */
     public static BlockHeader makeBlockHeader() {
         BlockHeader blockHeader = new BlockHeader();
         blockHeader.setHeight(1L);

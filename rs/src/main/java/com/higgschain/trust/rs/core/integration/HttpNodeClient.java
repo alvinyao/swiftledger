@@ -7,8 +7,10 @@ import com.higgschain.trust.common.vo.RespData;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Http node client.
+ *
  * @author duhongming
- * @date 2018/9/14
+ * @date 2018 /9/14
  */
 @Component
 public class HttpNodeClient implements NodeClient {

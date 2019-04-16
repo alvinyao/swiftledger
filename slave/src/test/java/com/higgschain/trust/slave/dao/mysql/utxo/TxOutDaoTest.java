@@ -15,12 +15,15 @@ import java.util.Random;
  * TxOutDao test
  *
  * @author lingchao
- * @create 2018年03月29日15:51
+ * @create 2018年03月29日15 :51
  */
 public class TxOutDaoTest extends BaseTest {
 
     @Autowired private TxOutDao txOutDao;
 
+    /**
+     * Batch insert test.
+     */
     @Test
     public void batchInsertTest() {
         long count = 0L;
@@ -53,6 +56,9 @@ public class TxOutDaoTest extends BaseTest {
         }while (count!=1L);
     }
 
+    /**
+     * Batch update test.
+     */
     @Test public void batchUpdateTest() {
 
         List<TxOutPO> txOutPOList = new ArrayList<>();
@@ -77,6 +83,9 @@ public class TxOutDaoTest extends BaseTest {
         System.out.println("batchUpdate :" + txOutDao.batchUpdate(txOutPOList));
     }
 
+    /**
+     * Query tx out test.
+     */
     @Test public void queryTxOutTest() {
         System.out.println("queryTxOut :" + txOutDao.queryTxOut("123123", 0, 0));
     }
