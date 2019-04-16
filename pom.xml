@@ -8,6 +8,12 @@
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Swiftledger</name>
+    <description>Swiftledger provides a solid foundation of trust for industry users, and provides a high level of
+        consensus for business synergies
+    </description>
+    <url>https://github.com/Aurorasic/swiftledger</url>
+
     <modules>
         <module>slave</module>
         <module>common</module>
@@ -554,12 +560,6 @@
     <profiles>
         <profile>
             <id>release</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <gpg.executable>gpg2</gpg.executable>
-            </properties>
             <build>
                 <pluginManagement>
                     <plugins>
