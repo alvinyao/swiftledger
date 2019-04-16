@@ -15,6 +15,9 @@ import org.springframework.beans.factory.BeanFactory
  * @author lingchao
  * @create 2018年10月09日10:24
  */
+/**
+ *  The type Standby.
+ */
 @Slf4j
 @Usage("set standby")
 class standby {

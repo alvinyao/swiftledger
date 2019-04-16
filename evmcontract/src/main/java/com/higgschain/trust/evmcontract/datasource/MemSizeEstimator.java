@@ -21,9 +21,17 @@ package com.higgschain.trust.evmcontract.datasource;
  * Interface for estimating size of a specific Java type
  * <p>
  * Created by Anton Nashatyrev on 01.12.2016.
+ *
+ * @param <E> the type parameter
  */
 public interface MemSizeEstimator<E> {
 
+    /**
+     * Estimate size long.
+     *
+     * @param e the e
+     * @return the long
+     */
     long estimateSize(E e);
 
     /**

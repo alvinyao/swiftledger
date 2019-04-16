@@ -4,16 +4,37 @@ import java.math.BigInteger;
 import java.util.concurrent.RecursiveTask;
 
 /**
+ * The type Recursive big integer multiplier.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
 public class RecursiveBigIntegerMultiplier extends RecursiveTask<BigInteger> {
+    /**
+     * The Sequential threshold.
+     */
     static final int SEQUENTIAL_THRESHOLD = 2;
 
+    /**
+     * The Values.
+     */
     BigInteger[] values;
+    /**
+     * The Low.
+     */
     int low;
+    /**
+     * The High.
+     */
     int high;
 
+    /**
+     * Instantiates a new Recursive big integer multiplier.
+     *
+     * @param values the values
+     * @param lo     the lo
+     * @param hi     the hi
+     */
     public RecursiveBigIntegerMultiplier(BigInteger[] values, int lo, int hi) {
         this.values = values;
         this.low = lo;

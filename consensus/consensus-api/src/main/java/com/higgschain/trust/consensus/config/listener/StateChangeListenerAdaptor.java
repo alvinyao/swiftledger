@@ -14,8 +14,10 @@ import org.springframework.core.annotation.Order;
 import java.lang.reflect.Method;
 
 /**
+ * The type State change listener adaptor.
+ *
  * @author suimi
- * @date 2018/6/13
+ * @date 2018 /6/13
  */
 @Slf4j public class StateChangeListenerAdaptor implements Ordered {
 
@@ -27,6 +29,12 @@ import java.lang.reflect.Method;
 
     @Getter private boolean before;
 
+    /**
+     * Instantiates a new State change listener adaptor.
+     *
+     * @param bean   the bean
+     * @param method the method
+     */
     public StateChangeListenerAdaptor(Object bean, Method method) {
         this.bean = bean;
         this.method = method;
@@ -36,6 +44,9 @@ import java.lang.reflect.Method;
         before = listener.before();
     }
 
+    /**
+     * Invoke.
+     */
     public void invoke() {
         try {
             log.debug("invoke the listener method:{}.{}", bean.getClass().getSimpleName(), method.getName());

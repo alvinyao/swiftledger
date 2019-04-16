@@ -25,8 +25,14 @@ import java.security.SignatureException;
 import java.util.Iterator;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Client data.
+ */
 public class ClientData {
 
+    /**
+     * The Client lock.
+     */
     ReentrantLock clientLock = new ReentrantLock();
 
     private int clientId;
@@ -65,50 +71,112 @@ public class ClientData {
         }
     }
 
+    /**
+     * Gets client id.
+     *
+     * @return the client id
+     */
     public int getClientId() {
         return clientId;
     }
 
+    /**
+     * Gets session.
+     *
+     * @return the session
+     */
     public int getSession() {
         return session;
     }
 
+    /**
+     * Sets session.
+     *
+     * @param session the session
+     */
     public void setSession(int session) {
         this.session = session;
     }
 
+    /**
+     * Gets pending requests.
+     *
+     * @return the pending requests
+     */
     public RequestList getPendingRequests() {
         return pendingRequests;
     }
 
+    /**
+     * Gets ordered requests.
+     *
+     * @return the ordered requests
+     */
     public RequestList getOrderedRequests() {
         return orderedRequests;
     }
 
+    /**
+     * Sets last message executed.
+     *
+     * @param lastMessageExecuted the last message executed
+     */
     public void setLastMessageExecuted(int lastMessageExecuted) {
         this.lastMessageExecuted = lastMessageExecuted;
     }
 
+    /**
+     * Gets last message executed.
+     *
+     * @return the last message executed
+     */
     public int getLastMessageExecuted() {
         return lastMessageExecuted;
     }
 
+    /**
+     * Sets last message received.
+     *
+     * @param lastMessageReceived the last message received
+     */
     public void setLastMessageReceived(int lastMessageReceived) {
         this.lastMessageReceived = lastMessageReceived;
     }
 
+    /**
+     * Gets last message received.
+     *
+     * @return the last message received
+     */
     public int getLastMessageReceived() {
         return lastMessageReceived;
     }
 
+    /**
+     * Sets last message received time.
+     *
+     * @param lastMessageReceivedTime the last message received time
+     */
     public void setLastMessageReceivedTime(long lastMessageReceivedTime) {
         this.lastMessageReceivedTime = lastMessageReceivedTime;
     }
 
+    /**
+     * Gets last message received time.
+     *
+     * @return the last message received time
+     */
     public long getLastMessageReceivedTime() {
         return lastMessageReceivedTime;
     }
 
+    /**
+     * Verify signature boolean.
+     *
+     * @param message   the message
+     * @param signature the signature
+     * @return the boolean
+     */
     public boolean verifySignature(byte[] message, byte[] signature) {
         if (signatureVerificator != null) {
             try {
@@ -120,6 +188,12 @@ public class ClientData {
         return false;
     }
 
+    /**
+     * Remove ordered request boolean.
+     *
+     * @param request the request
+     * @return the boolean
+     */
     public boolean removeOrderedRequest(TOMMessage request) {
         if (pendingRequests.remove(request)) {
             //anb: new code to deal with client requests that arrive after their execution
@@ -129,6 +203,12 @@ public class ClientData {
         return false;
     }
 
+    /**
+     * Remove request boolean.
+     *
+     * @param request the request
+     * @return the boolean
+     */
     public boolean removeRequest(TOMMessage request) {
         lastMessageExecuted = request.getSequence();
         boolean result = pendingRequests.remove(request);
@@ -145,6 +225,12 @@ public class ClientData {
         return result;
     }
 
+    /**
+     * Gets reply.
+     *
+     * @param reqSequence the req sequence
+     * @return the reply
+     */
     public TOMMessage getReply(int reqSequence) {
         TOMMessage request = orderedRequests.getBySequence(reqSequence);
         if (request != null) {

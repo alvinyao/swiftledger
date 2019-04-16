@@ -14,15 +14,29 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Crypto util.
+ *
  * @author WangQuanzhou
  * @desc crypto selector class
- * @date 2018/8/15 15:25
+ * @date 2018 /8/15 15:25
  */
 @Order(1) @Component @Slf4j public class CryptoUtil {
 
+    /**
+     * The constant bizCryptoType.
+     */
     public static String bizCryptoType;
+    /**
+     * The constant consensusCryptoType.
+     */
     public static String consensusCryptoType;
 
+    /**
+     * Gets biz crypto.
+     *
+     * @param cryptoType the crypto type
+     * @return the biz crypto
+     */
     public static Crypto getBizCrypto(String cryptoType) {
         if (log.isDebugEnabled()) {
             log.trace("crypto type for biz layer is {}", bizCryptoType);
@@ -31,6 +45,11 @@ import javax.validation.constraints.NotNull;
         return crypto;
     }
 
+    /**
+     * Gets protocol crypto.
+     *
+     * @return the protocol crypto
+     */
     public static Crypto getProtocolCrypto() {
         if (log.isDebugEnabled()) {
             log.trace("crypto type for consensus layer is {}", consensusCryptoType);
@@ -52,11 +71,21 @@ import javax.validation.constraints.NotNull;
         return null;
     }
 
+    /**
+     * Sets biz.
+     *
+     * @param newBiz the new biz
+     */
     @NotNull @Value("${higgs.trust.crypto.biz:RSA}") public void setBiz(String newBiz) {
         log.info("set biz,newBiz={}", newBiz);
         bizCryptoType = newBiz;
     }
 
+    /**
+     * Sets consensus.
+     *
+     * @param newConsensus the new consensus
+     */
     @NotNull @Value("${higgs.trust.crypto.consensus:RSA}") public void setConsensus(String newConsensus) {
         log.info("set biz,newConsensus={}", newConsensus);
         consensusCryptoType = newConsensus;

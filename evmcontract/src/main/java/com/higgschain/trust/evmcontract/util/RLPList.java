@@ -20,13 +20,23 @@ package com.higgschain.trust.evmcontract.util;
 import java.util.ArrayList;
 
 /**
+ * The type Rlp list.
+ *
  * @author Roman Mandeleil
  * @since 21.04.14
  */
 public class RLPList extends ArrayList<RLPElement> implements RLPElement {
 
+    /**
+     * The Rlp data.
+     */
     byte[] rlpData;
 
+    /**
+     * Sets rlp data.
+     *
+     * @param rlpData the rlp data
+     */
     public void setRLPData(byte[] rlpData) {
         this.rlpData = rlpData;
     }
@@ -36,6 +46,11 @@ public class RLPList extends ArrayList<RLPElement> implements RLPElement {
         return rlpData;
     }
 
+    /**
+     * Recursive print.
+     *
+     * @param element the element
+     */
     public static void recursivePrint(RLPElement element) {
 
         if (element == null) {

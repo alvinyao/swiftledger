@@ -7,7 +7,7 @@ import java.math.BigInteger;
  * simple, some parameters should be set as constants.
  *
  * @author Chen Jiawei
- * @date 2018-11-19
+ * @date 2018 -11-19
  */
 public class Constant {
     /**

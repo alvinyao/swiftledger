@@ -8,10 +8,11 @@ import org.rocksdb.TransactionDB;
 import java.util.Map;
 
 /**
+ * The type Rocks db wrapper.
+ *
  * @author zhao xiaogang
- * @create 2018-05-21
+ * @create 2018 -05-21
  */
-
 @Data @AllArgsConstructor public class RocksDBWrapper {
     private TransactionDB rocksDB;
     private Map<String, ColumnFamilyHandle> columnFamilyHandleMap;

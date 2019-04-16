@@ -6,14 +6,24 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Z field.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ZField extends AbstractField<ZElement> {
 
+    /**
+     * Instantiates a new Z field.
+     */
     public ZField() {
         this(new SecureRandom());
     }
 
+    /**
+     * Instantiates a new Z field.
+     *
+     * @param random the random
+     */
     public ZField(SecureRandom random) {
         super(random);
     }

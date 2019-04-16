@@ -18,6 +18,9 @@ import org.springframework.beans.factory.BeanFactory
  * Copyright (c) 2013-2017, suimi
  */
 
+/**
+ *  The type Failover.
+ */
 @Slf4j
 @Usage("get the node info")
 class failover {

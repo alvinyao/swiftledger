@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Cancel rs handler.
+ *
  * @author tangfashuang
- * @date 2018/06/07 20:38
+ * @date 2018 /06/07 20:38
  * @desc cancel rs handler
  */
 @Slf4j

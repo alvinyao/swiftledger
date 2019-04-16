@@ -8,9 +8,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
+ * The type Account info vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-09
+ * @date 2018 -05-09
  */
 @Getter @Setter public class AccountInfoVO extends BaseBO {
     /**

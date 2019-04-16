@@ -24,17 +24,30 @@ import java.util.Date;
 
 /**
  * the account contract binding action handler
+ *
  * @author duhongming
- * @date 2018-04-18
+ * @date 2018 -04-18
  */
 @Slf4j @Component public class AccountContractBindingHandler implements ActionHandler {
 
+    /**
+     * The Snapshot agent.
+     */
     @Autowired
     AccountContractBindingSnapshotAgent snapshotAgent;
+    /**
+     * The Repository.
+     */
     @Autowired
     AccountContractBindingRepository repository;
+    /**
+     * The Contract repository.
+     */
     @Autowired
     ContractRepository contractRepository;
+    /**
+     * The Contract snapshot agent.
+     */
     @Autowired
     ContractSnapshotAgent contractSnapshotAgent;
 
@@ -124,10 +137,11 @@ import java.util.Date;
 
     /**
      * process account contract binding
-     * @param action
-     * @param blockHeight
-     * @param txId
-     * @return
+     *
+     * @param action      the action
+     * @param blockHeight the block height
+     * @param txId        the tx id
+     * @return account contract binding
      */
     public AccountContractBinding process(final AccountContractBindingAction action, long blockHeight, String txId) {
         if (action == null) {

@@ -29,6 +29,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * The type Solidity compiler.
+ */
 @Component
 public class SolidityCompiler {
 
@@ -36,11 +39,25 @@ public class SolidityCompiler {
 
     private static SolidityCompiler INSTANCE;
 
+    /**
+     * Instantiates a new Solidity compiler.
+     *
+     * @param config the config
+     */
     @Autowired
     public SolidityCompiler(SystemProperties config) {
         solc = new Solc(config);
     }
 
+    /**
+     * Compile result.
+     *
+     * @param sourceDirectory the source directory
+     * @param combinedJson    the combined json
+     * @param options         the options
+     * @return the result
+     * @throws IOException the io exception
+     */
     public static Result compile(File sourceDirectory, boolean combinedJson, Option... options) throws IOException {
         return getInstance().compileSrc(sourceDirectory, false, combinedJson, options);
     }
@@ -50,11 +67,29 @@ public class SolidityCompiler {
      * interface listing all the supported options.
      */
     public static final class Options {
+        /**
+         * The constant AST.
+         */
         public static final OutputOption AST = OutputOption.AST;
+        /**
+         * The constant BIN.
+         */
         public static final OutputOption BIN = OutputOption.BIN;
+        /**
+         * The constant INTERFACE.
+         */
         public static final OutputOption INTERFACE = OutputOption.INTERFACE;
+        /**
+         * The constant ABI.
+         */
         public static final OutputOption ABI = OutputOption.ABI;
+        /**
+         * The constant METADATA.
+         */
         public static final OutputOption METADATA = OutputOption.METADATA;
+        /**
+         * The constant ASTJSON.
+         */
         public static final OutputOption ASTJSON = OutputOption.ASTJSON;
 
         private static final NameOnlyOption OPTIMIZE = NameOnlyOption.OPTIMIZE;
@@ -65,15 +100,38 @@ public class SolidityCompiler {
                 super("combined-json", values);
             }
         }
+
+        /**
+         * The type Allow paths.
+         */
         public static class AllowPaths extends ListOption {
+            /**
+             * Instantiates a new Allow paths.
+             *
+             * @param values the values
+             */
             public AllowPaths(List values) {
                 super("allow-paths", values);
             }
         }
     }
 
+    /**
+     * The interface Option.
+     */
     public interface Option extends Serializable {
+        /**
+         * Gets value.
+         *
+         * @return the value
+         */
         String getValue();
+
+        /**
+         * Gets name.
+         *
+         * @return the name
+         */
         String getName();
     }
 
@@ -108,7 +166,13 @@ public class SolidityCompiler {
     }
 
     private enum NameOnlyOption implements Option {
+        /**
+         * Optimize name only option.
+         */
         OPTIMIZE("optimize"),
+        /**
+         * Version name only option.
+         */
         VERSION("version");
 
         private String name;
@@ -125,11 +189,29 @@ public class SolidityCompiler {
     }
 
     private enum OutputOption implements Option {
+        /**
+         * Ast output option.
+         */
         AST("ast"),
+        /**
+         * Bin output option.
+         */
         BIN("bin"),
+        /**
+         * Interface output option.
+         */
         INTERFACE("interface"),
+        /**
+         * Abi output option.
+         */
         ABI("abi"),
+        /**
+         * Metadata output option.
+         */
         METADATA("metadata"),
+        /**
+         * Astjson output option.
+         */
         ASTJSON("ast-json");
 
         private String name;
@@ -145,10 +227,18 @@ public class SolidityCompiler {
         }
     }
 
+    /**
+     * The type Custom option.
+     */
     public static class CustomOption implements Option {
         private String name;
         private String value;
 
+        /**
+         * Instantiates a new Custom option.
+         *
+         * @param name the name
+         */
         public CustomOption(String name) {
             if (name.startsWith("--")) {
                 this.name = name.substring(2);
@@ -157,6 +247,12 @@ public class SolidityCompiler {
             }
         }
 
+        /**
+         * Instantiates a new Custom option.
+         *
+         * @param name  the name
+         * @param value the value
+         */
         public CustomOption(String name, String value) {
             this(name);
             this.value = value;
@@ -173,17 +269,38 @@ public class SolidityCompiler {
         }
     }
 
+    /**
+     * The type Result.
+     */
     public static class Result {
+        /**
+         * The Errors.
+         */
         public String errors;
+        /**
+         * The Output.
+         */
         public String output;
         private boolean success;
 
+        /**
+         * Instantiates a new Result.
+         *
+         * @param errors  the errors
+         * @param output  the output
+         * @param success the success
+         */
         public Result(String errors, String output, boolean success) {
             this.errors = errors;
             this.output = output;
             this.success = success;
         }
 
+        /**
+         * Is failed boolean.
+         *
+         * @return the boolean
+         */
         public boolean isFailed() {
             return !success;
         }
@@ -194,14 +311,30 @@ public class SolidityCompiler {
         private InputStream stream;
         private StringBuilder content = new StringBuilder();
 
+        /**
+         * Instantiates a new Parallel reader.
+         *
+         * @param stream the stream
+         */
         ParallelReader(InputStream stream) {
             this.stream = stream;
         }
 
+        /**
+         * Gets content.
+         *
+         * @return the content
+         */
         public String getContent() {
             return getContent(true);
         }
 
+        /**
+         * Gets content.
+         *
+         * @param waitForComplete the wait for complete
+         * @return the content
+         */
         public synchronized String getContent(boolean waitForComplete) {
             if (waitForComplete) {
                 while(stream != null) {
@@ -233,10 +366,29 @@ public class SolidityCompiler {
         }
     }
 
+    /**
+     * Compile result.
+     *
+     * @param source       the source
+     * @param combinedJson the combined json
+     * @param options      the options
+     * @return the result
+     * @throws IOException the io exception
+     */
     public static Result compile(byte[] source, boolean combinedJson, Option... options) throws IOException {
         return getInstance().compileSrc(source, false, combinedJson, options);
     }
 
+    /**
+     * Compile src result.
+     *
+     * @param source       the source
+     * @param optimize     the optimize
+     * @param combinedJson the combined json
+     * @param options      the options
+     * @return the result
+     * @throws IOException the io exception
+     */
     public Result compileSrc(File source, boolean optimize, boolean combinedJson, Option... options) throws IOException {
         List<String> commandParts = prepareCommandOptions(optimize, combinedJson, options);
 
@@ -298,6 +450,16 @@ public class SolidityCompiler {
         return Arrays.stream(options).filter(clazz::isInstance).map(clazz::cast).collect(toList());
     }
 
+    /**
+     * Compile src result.
+     *
+     * @param source       the source
+     * @param optimize     the optimize
+     * @param combinedJson the combined json
+     * @param options      the options
+     * @return the result
+     * @throws IOException the io exception
+     */
     public Result compileSrc(byte[] source, boolean optimize, boolean combinedJson, Option... options) throws IOException {
         List<String> commandParts = prepareCommandOptions(optimize, combinedJson, options);
 
@@ -327,6 +489,12 @@ public class SolidityCompiler {
         return new Result(error.getContent(), output.getContent(), success);
     }
 
+    /**
+     * Run get version output string.
+     *
+     * @return the string
+     * @throws IOException the io exception
+     */
     public static String runGetVersionOutput() throws IOException {
         List<String> commandParts = new ArrayList<>();
         commandParts.add(getInstance().solc.getExecutable().getCanonicalPath());
@@ -356,6 +524,11 @@ public class SolidityCompiler {
         throw new RuntimeException("Problem getting solc version: " + error.getContent());
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static SolidityCompiler getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new SolidityCompiler(SystemProperties.getDefault());

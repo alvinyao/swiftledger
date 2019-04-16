@@ -55,9 +55,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * The type Package service.
+ *
  * @Description: package service
  * @author: pengdi
- **/
+ */
 @Service @Slf4j public class PackageServiceImpl implements PackageService {
     @Autowired private TransactionTemplate txRequired;
     @Autowired private PackageRepository packageRepository;

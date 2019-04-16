@@ -26,16 +26,28 @@ import java.util.AbstractList;
  * Stores List structure in Source structure
  * <p>
  * Created by Anton Nashatyrev on 17.03.2016.
+ *
+ * @param <V> the type parameter
  */
 public class DataSourceArray<V> extends AbstractList<V> {
     private ObjectDataSource<V> src;
     private static final byte[] SIZE_KEY = Hex.decode("FFFFFFFFFFFFFFFF");
     private int size = -1;
 
+    /**
+     * Instantiates a new Data source array.
+     *
+     * @param src the src
+     */
     public DataSourceArray(ObjectDataSource<V> src) {
         this.src = src;
     }
 
+    /**
+     * Flush boolean.
+     *
+     * @return the boolean
+     */
     public synchronized boolean flush() {
         return src.flush();
     }

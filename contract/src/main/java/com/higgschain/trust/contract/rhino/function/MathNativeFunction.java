@@ -10,19 +10,44 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
+ * The type Math native function.
+ *
  * @author duhongming
- * @date 2018/9/10
+ * @date 2018 /9/10
  */
 public class MathNativeFunction {
 
+    /**
+     * The constant ADD_FUNCTION.
+     */
     protected static AddFunction ADD_FUNCTION = new AddFunction();
+    /**
+     * The constant SUBTRACT_FUNCTION.
+     */
     protected static SubtractFunction SUBTRACT_FUNCTION = new SubtractFunction();
+    /**
+     * The constant MULTIPLY_FUNCTION.
+     */
     protected static MultiplyFunction MULTIPLY_FUNCTION = new MultiplyFunction();
+    /**
+     * The constant DIVIDE_FUNCTION.
+     */
     protected static DivideFunction DIVIDE_FUNCTION = new DivideFunction();
+    /**
+     * The constant EQUALS_FUNCTION.
+     */
     protected static EqualsFunction EQUALS_FUNCTION = new EqualsFunction();
+    /**
+     * The constant COMPARE_FUNCTION.
+     */
     protected static CompareFunction COMPARE_FUNCTION = new CompareFunction();
 
-
+    /**
+     * To big decimal big decimal.
+     *
+     * @param obj the obj
+     * @return the big decimal
+     */
     public static BigDecimal toBigDecimal(Object obj) {
         if (obj instanceof SafeNativeJavaObject) {
             obj = ((SafeNativeJavaObject) obj).unwrap();

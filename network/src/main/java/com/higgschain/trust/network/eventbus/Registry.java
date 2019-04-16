@@ -11,12 +11,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * The type Registry.
+ *
  * @author duhongming
- * @date 2018/8/16
+ * @date 2018 /8/16
  */
 class Registry {
     private final ConcurrentHashMap<String, ConcurrentLinkedQueue<Subscriber>> subscribeContainer = new ConcurrentHashMap<>();
 
+    /**
+     * Bind.
+     *
+     * @param subscriber the subscriber
+     */
     public void bind(Object subscriber) {
         List<Method> subscribeMethods = getSubscribeMethods(subscriber);
         for(Method m : subscribeMethods) {
@@ -24,6 +31,11 @@ class Registry {
         }
     }
 
+    /**
+     * Unbind.
+     *
+     * @param subscriber the subscriber
+     */
     public void unbind(Object subscriber) {
         subscribeContainer.forEach((key, queue) -> {
             queue.forEach(s -> {
@@ -34,6 +46,12 @@ class Registry {
         });
     }
 
+    /**
+     * Scan subscriber concurrent linked queue.
+     *
+     * @param topic the topic
+     * @return the concurrent linked queue
+     */
     public ConcurrentLinkedQueue<Subscriber> scanSubscriber(final String topic) {
         return subscribeContainer.get(topic);
     }

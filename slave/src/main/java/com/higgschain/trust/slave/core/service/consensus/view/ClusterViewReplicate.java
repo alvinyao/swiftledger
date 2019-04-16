@@ -15,14 +15,21 @@ import com.higgschain.trust.consensus.p2pvalid.core.ValidSyncCommit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Cluster view replicate.
+ */
 @P2pvalidReplicator @Component public class ClusterViewReplicate {
 
+    /**
+     * The View manager.
+     */
     @Autowired IClusterViewManager viewManager;
 
     /**
      * handle the cluster info command
      *
-     * @param commit
+     * @param commit the commit
+     * @return the valid cluster view cmd
      */
     public ValidClusterViewCmd handleClusterView(ValidSyncCommit<ClusterViewCmd> commit) {
         ClusterViewCmd cmd = commit.operation();

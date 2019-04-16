@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Contract creation v 2 action.
+ *
  * @author tangkun
  * @description smart contract create action v2
- * @date 2018-11-29
+ * @date 2018 -11-29
  */
 @Getter
 @Setter

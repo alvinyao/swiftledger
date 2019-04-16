@@ -21,12 +21,17 @@ import com.higgschain.trust.consensus.bftsmartcustom.started.custom.config.Smart
 import java.io.*;
 
 /**
+ * The type Default view storage.
+ *
  * @author eduardo
  */
 public class DefaultViewStorage implements ViewStorage {
 
     private String path = "";
 
+    /**
+     * Instantiates a new Default view storage.
+     */
     public DefaultViewStorage() {
         String sep = System.getProperty("file.separator");
         SmartConfig smartConfig = SpringUtil.getBean(SmartConfig.class);
@@ -70,6 +75,12 @@ public class DefaultViewStorage implements ViewStorage {
         }
     }
 
+    /**
+     * Get bytes byte [ ].
+     *
+     * @param view the view
+     * @return the byte [ ]
+     */
     public byte[] getBytes(View view) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream(4);
@@ -81,6 +92,12 @@ public class DefaultViewStorage implements ViewStorage {
         }
     }
 
+    /**
+     * Gets view.
+     *
+     * @param bytes the bytes
+     * @return the view
+     */
     public View getView(byte[] bytes) {
         try {
             ByteArrayInputStream bais = new ByteArrayInputStream(bytes);

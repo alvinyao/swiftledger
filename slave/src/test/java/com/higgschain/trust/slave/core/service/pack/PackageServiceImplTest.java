@@ -26,6 +26,9 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Package service impl test.
+ */
 /*
  *
  * @desc
@@ -51,6 +54,9 @@ public class PackageServiceImplTest extends BaseTest {
 
     //    private Package pack;
 
+    /**
+     * Sets up.
+     */
     @BeforeMethod public void setUp() {
 
         SignedTransaction signedTx2 = new SignedTransaction();
@@ -124,6 +130,9 @@ public class PackageServiceImplTest extends BaseTest {
         return signList;
     }
 
+    /**
+     * Create.
+     */
     @Test public void create() {
         Package pack;
         //test signedTxList is null
@@ -136,6 +145,9 @@ public class PackageServiceImplTest extends BaseTest {
         //        System.out.println(pack);
     }
 
+    /**
+     * Receive.
+     */
     @Test public void receive() {
         //        Package pack = packageService.create(signedTxList, null);
         Package pack = packageRepository.load(2L);
@@ -145,20 +157,32 @@ public class PackageServiceImplTest extends BaseTest {
         //        packageService.receive(pack);
     }
 
+    /**
+     * Persisted.
+     */
     @Test public void persisted() {
 
     }
 
+    /**
+     * Create pack context.
+     */
     @Test public void createPackContext() {
         Package pack = packageRepository.load(2L);
         PackContext packContext = packageService.createPackContext(pack);
         assertEquals(packContext.getRsPubKeyMap().size(), 2);
     }
 
+    /**
+     * Process.
+     */
     @Test public void process() {
 
     }
 
+    /**
+     * Gets sign.
+     */
     @Test public void getSign() {
 
     }

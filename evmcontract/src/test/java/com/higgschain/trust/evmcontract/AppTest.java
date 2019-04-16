@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest
 {
     /**
      * Rigorous Test :-)
@@ -24,6 +24,9 @@ public class AppTest
         assertTrue( true );
     }
 
+    /**
+     * Test list.
+     */
     @Test
     public void testList() {
 
@@ -38,6 +41,12 @@ public class AppTest
 
     }
 
+    /**
+     * Method.
+     *
+     * @param str the str
+     * @param sb  the sb
+     */
     public void method(String str,StringBuilder sb){
         str += "xxxxxxxxxxx";
         sb = new StringBuilder();
@@ -45,6 +54,9 @@ public class AppTest
 
     }
 
+    /**
+     * Pass by value.
+     */
     @Test
     public void passByValue(){
         String str = null;
@@ -73,6 +85,9 @@ public class AppTest
         pool.shutdown();
     }
 
+    /**
+     * Test sub string.
+     */
     @Test
     public void testSubString(){
         String str = "1.8.0_111";
@@ -81,6 +96,9 @@ public class AppTest
         System.out.println(str.substring(0,second));
     }
 
+    /**
+     * Test.
+     */
     @Test
     public void test(){
         {

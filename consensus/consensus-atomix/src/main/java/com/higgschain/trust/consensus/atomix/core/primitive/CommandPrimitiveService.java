@@ -14,8 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.function.Function;
 
 /**
+ * The type Command primitive service.
+ *
  * @author suimi
- * @date 2018/7/6
+ * @date 2018 /7/6
  */
 @Slf4j public class CommandPrimitiveService extends AbstractPrimitiveService implements ICommandPrimitiveService {
 
@@ -23,6 +25,13 @@ import java.util.function.Function;
 
     private IConsensusSnapshot snapshot;
 
+    /**
+     * Instantiates a new Command primitive service.
+     *
+     * @param type               the type
+     * @param replicateComposite the replicate composite
+     * @param snapshot           the snapshot
+     */
     public CommandPrimitiveService(CommandPrimitiveType type, AbstractCommitReplicateComposite replicateComposite,
         IConsensusSnapshot snapshot) {
         super(type, ICommandPrimitive.class);

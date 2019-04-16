@@ -18,8 +18,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Multi sign test.
+ *
  * @author Su Jiulong
- * @date 2019/3/27
+ * @date 2019 /3/27
  */
 public class MultiSignTest {
     private static final String CREATE_MULTI_CONTRACT = "http://localhost:7073/multiSign/create";
@@ -46,6 +48,9 @@ public class MultiSignTest {
         mustAddress.add("4a4375e93a728c7d68c04d3a4fe89cca1ddc6e4d");
     }
 
+    /**
+     * Create multi sign contract test.
+     */
     @Test
     public void createMultiSignContractTest() {
         MultiSignRuleVO vo = new MultiSignRuleVO();
@@ -57,6 +62,9 @@ public class MultiSignTest {
         System.out.println(result);
     }
 
+    /**
+     * Create token test.
+     */
     @Test
     public void createTokenTest() {
         CreateCurrencyVO vo = new CreateCurrencyVO();
@@ -68,6 +76,9 @@ public class MultiSignTest {
         System.out.println(result);
     }
 
+    /**
+     * Transfer test.
+     */
     @Test
     public void transferTest() {
         MultiSignTxVO vo = new MultiSignTxVO();
@@ -155,6 +166,9 @@ public class MultiSignTest {
         System.out.println(data);
     }
 
+    /**
+     * Gets balance test.
+     */
     @Test
     public void getBalanceTest() {
         queryBalance(multiContractAddr);

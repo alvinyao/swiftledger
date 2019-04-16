@@ -3,11 +3,21 @@ package com.higgschain.trust.consensus.zk.adapter;
 import com.higgschain.trust.consensus.core.ConsensusCommit;
 import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
 
+/**
+ * The type Zk commit adapter.
+ *
+ * @param <T> the type parameter
+ */
 public class ZkCommitAdapter<T extends AbstractConsensusCommand> implements ConsensusCommit<T> {
 
     private T command;
     private boolean isClosed;
 
+    /**
+     * Instantiates a new Zk commit adapter.
+     *
+     * @param object the object
+     */
     public ZkCommitAdapter(Object object) {
         if (object instanceof AbstractConsensusCommand) {
             this.command = (T)object;

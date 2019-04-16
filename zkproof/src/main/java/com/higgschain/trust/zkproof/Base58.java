@@ -3,7 +3,9 @@ package com.higgschain.trust.zkproof;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 
-
+/**
+ * The type Base 58.
+ */
 class Base58 {
 
     private static final char[] ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
@@ -20,6 +22,9 @@ class Base58 {
 
     /**
      * Encodes the given bytes in base58. No checksum is appended.
+     *
+     * @param input the input
+     * @return the string
      */
     static String encode(byte[] input) {
         if (input.length == 0) {
@@ -61,6 +66,13 @@ class Base58 {
         }
     }
 
+    /**
+     * Decode byte [ ].
+     *
+     * @param input the input
+     * @return the byte [ ]
+     * @throws IllegalArgumentException the illegal argument exception
+     */
     static byte[] decode(String input) throws IllegalArgumentException {
         if (input.length() == 0) {
             return new byte[0];
@@ -106,6 +118,13 @@ class Base58 {
         return copyOfRange(temp, j - zeroCount, temp.length);
     }
 
+    /**
+     * Decode to big integer big integer.
+     *
+     * @param input the input
+     * @return the big integer
+     * @throws IllegalArgumentException the illegal argument exception
+     */
     static BigInteger decodeToBigInteger(String input) throws IllegalArgumentException {
         return new BigInteger(1, decode(input));
     }

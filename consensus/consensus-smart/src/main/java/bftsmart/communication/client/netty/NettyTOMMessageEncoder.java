@@ -25,6 +25,9 @@ import javax.crypto.Mac;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * The type Netty tom message encoder.
+ */
 public class NettyTOMMessageEncoder extends MessageToByteEncoder<TOMMessage> {
 
     private boolean isClient;
@@ -34,6 +37,16 @@ public class NettyTOMMessageEncoder extends MessageToByteEncoder<TOMMessage> {
     private ReentrantReadWriteLock rl;
     private boolean useMAC;
 
+    /**
+     * Instantiates a new Netty tom message encoder.
+     *
+     * @param isClient        the is client
+     * @param sessionTable    the session table
+     * @param macLength       the mac length
+     * @param rl              the rl
+     * @param signatureLength the signature length
+     * @param useMAC          the use mac
+     */
     public NettyTOMMessageEncoder(boolean isClient, Map sessionTable, int macLength, ReentrantReadWriteLock rl,
         int signatureLength, boolean useMAC) {
         this.isClient = isClient;
@@ -86,6 +99,14 @@ public class NettyTOMMessageEncoder extends MessageToByteEncoder<TOMMessage> {
         context.flush();
     }
 
+    /**
+     * Produce mac byte [ ].
+     *
+     * @param id   the id
+     * @param data the data
+     * @param me   the me
+     * @return the byte [ ]
+     */
     byte[] produceMAC(int id, byte[] data, int me) {
         NettyClientServerSession session = (NettyClientServerSession)sessionTable.get(id);
         if (session == null) {

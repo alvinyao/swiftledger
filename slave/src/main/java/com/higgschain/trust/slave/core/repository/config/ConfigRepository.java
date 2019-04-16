@@ -20,9 +20,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * The type Config repository.
+ *
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/6/5 16:11
+ * @date 2018 /6/5 16:11
  */
 @Repository @Slf4j public class ConfigRepository {
 
@@ -32,7 +34,9 @@ import java.util.List;
     @Autowired private ConfigJDBCDao configJDBCDao;
 
     /**
-     * @param config
+     * Insert config.
+     *
+     * @param config the config
      * @return
      * @desc insert config into db
      */
@@ -47,7 +51,9 @@ import java.util.List;
     }
 
     /**
-     * @param config
+     * Update config.
+     *
+     * @param config the config
      * @return
      * @desc update config information
      */
@@ -62,8 +68,10 @@ import java.util.List;
     }
 
     /**
-     * @param config
-     * @return List<ConfigPO>
+     * Gets config.
+     *
+     * @param config the config
+     * @return List<ConfigPO> config
      * @desc get config information by nodeName and usage(if needed)
      */
     public List<Config> getConfig(Config config) {
@@ -89,17 +97,22 @@ import java.util.List;
         return configList;
     }
 
+    /**
+     * Gets biz config.
+     *
+     * @param user the user
+     * @return the biz config
+     */
     public Config getBizConfig(String user) {
         return getConfig(user, UsageEnum.BIZ);
     }
 
-
     /**
      * get config by nodeName and usage
      *
-     * @param user
-     * @param usageEnum
-     * @return
+     * @param user      the user
+     * @param usageEnum the usage enum
+     * @return config
      */
     public Config getConfig(String user,UsageEnum usageEnum) {
         ConfigPO configPO = new ConfigPO();
@@ -121,12 +134,11 @@ import java.util.List;
         return config;
     }
 
-
     /**
      * batch insert
      *
-     * @param configPOList
-     * @return
+     * @param configPOList the config po list
+     * @return boolean
      */
     public boolean batchInsert(List<ConfigPO> configPOList) {
         int affectRows;
@@ -146,8 +158,8 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param configPOList
-     * @return
+     * @param configPOList the config po list
+     * @return boolean
      */
     public boolean batchUpdate(List<ConfigPO> configPOList) {
         if (initConfig.isUseMySQL()) {
@@ -156,6 +168,11 @@ import java.util.List;
         return configPOList.size() == configRocksDao.batchInsert(configPOList);
     }
 
+    /**
+     * Batch cancel.
+     *
+     * @param nodes the nodes
+     */
     public void batchCancel(List<String> nodes) {
         if (initConfig.isUseMySQL()) {
             configJDBCDao.batchCancel(nodes);
@@ -164,6 +181,11 @@ import java.util.List;
         }
     }
 
+    /**
+     * Batch enable.
+     *
+     * @param nodes the nodes
+     */
     public void batchEnable(List<String> nodes) {
         if (initConfig.isUseMySQL()) {
             configJDBCDao.batchEnable(nodes);

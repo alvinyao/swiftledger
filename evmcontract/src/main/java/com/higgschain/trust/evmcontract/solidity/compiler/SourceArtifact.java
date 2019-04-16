@@ -27,6 +27,9 @@ import static org.apache.commons.collections4.CollectionUtils.disjunction;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.substringsBetween;
 
+/**
+ * The type Source artifact.
+ */
 public class SourceArtifact {
 
     private String name;
@@ -36,12 +39,23 @@ public class SourceArtifact {
     private final Set<SourceArtifact> injectedDependencies = new HashSet<>();
     private final Set<SourceArtifact> dependentArtifacts = new HashSet<>();
 
+    /**
+     * Instantiates a new Source artifact.
+     *
+     * @param name   the name
+     * @param source the source
+     */
     public SourceArtifact(String name, String source) {
         this.name = name;
         this.dependencies = extractDependencies(source);
         this.source = source.replaceAll("import\\s\"\\.*?\\.sol\";", "");
     }
 
+    /**
+     * Instantiates a new Source artifact.
+     *
+     * @param f the f
+     */
     public SourceArtifact(File f) {
 
     }
@@ -55,6 +69,11 @@ public class SourceArtifact {
 //        this(srcFile.getOriginalFilename(), new String(srcFile.getBytes(), "UTF-8"));
 //    }
 
+    /**
+     * Inject dependency.
+     *
+     * @param srcArtifact the src artifact
+     */
     public void injectDependency(SourceArtifact srcArtifact) {
         injectedDependencies.add(srcArtifact);
         srcArtifact.addDependentArtifact(this);
@@ -64,6 +83,11 @@ public class SourceArtifact {
         dependentArtifacts.add(srcArtifact);
     }
 
+    /**
+     * Has dependent artifacts boolean.
+     *
+     * @return the boolean
+     */
     public boolean hasDependentArtifacts() {
         return !dependentArtifacts.isEmpty();
     }
@@ -77,6 +101,11 @@ public class SourceArtifact {
         return disjunction(dependencies, ret);
     }
 
+    /**
+     * Plain source string.
+     *
+     * @return the string
+     */
     public String plainSource() {
         Collection<String> unresolvedDeps = getUnresolvedDependencies();
         if (isNotEmpty(unresolvedDeps)) {
@@ -94,10 +123,20 @@ public class SourceArtifact {
         return result;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets dependencies.
+     *
+     * @return the dependencies
+     */
     public List<String> getDependencies() {
         return dependencies;
     }

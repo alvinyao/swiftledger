@@ -9,8 +9,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * The type Master config.
+ *
  * @author suimi
- * @date 2018/6/13
+ * @date 2018 /6/13
  */
 @Getter
 @Setter

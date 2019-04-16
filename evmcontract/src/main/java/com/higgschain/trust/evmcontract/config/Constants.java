@@ -41,60 +41,127 @@ public class Constants {
 
     private static final BigInteger SECP256K1N = new BigInteger("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", 16);
 
+    /**
+     * Gets duration limit.
+     *
+     * @return the duration limit
+     */
     public int getDURATION_LIMIT() {
         return 8;
     }
 
+    /**
+     * Gets initial nonce.
+     *
+     * @return the initial nonce
+     */
     public BigInteger getInitialNonce() {
         return BigInteger.ZERO;
     }
 
+    /**
+     * Gets maximum extra data size.
+     *
+     * @return the maximum extra data size
+     */
     public int getMAXIMUM_EXTRA_DATA_SIZE() {
         return MAXIMUM_EXTRA_DATA_SIZE;
     }
 
+    /**
+     * Gets min gas limit.
+     *
+     * @return the min gas limit
+     */
     public int getMIN_GAS_LIMIT() {
         return MIN_GAS_LIMIT;
     }
 
+    /**
+     * Gets gas limit bound divisor.
+     *
+     * @return the gas limit bound divisor
+     */
     public int getGAS_LIMIT_BOUND_DIVISOR() {
         return GAS_LIMIT_BOUND_DIVISOR;
     }
 
+    /**
+     * Gets minimum difficulty.
+     *
+     * @return the minimum difficulty
+     */
     public BigInteger getMINIMUM_DIFFICULTY() {
         return MINIMUM_DIFFICULTY;
     }
 
+    /**
+     * Gets difficulty bound divisor.
+     *
+     * @return the difficulty bound divisor
+     */
     public BigInteger getDIFFICULTY_BOUND_DIVISOR() {
         return DIFFICULTY_BOUND_DIVISOR;
     }
 
+    /**
+     * Gets exp difficulty period.
+     *
+     * @return the exp difficulty period
+     */
     public int getEXP_DIFFICULTY_PERIOD() {
         return EXP_DIFFICULTY_PERIOD;
     }
 
+    /**
+     * Gets uncle generation limit.
+     *
+     * @return the uncle generation limit
+     */
     public int getUNCLE_GENERATION_LIMIT() {
         return UNCLE_GENERATION_LIMIT;
     }
 
+    /**
+     * Gets uncle list limit.
+     *
+     * @return the uncle list limit
+     */
     public int getUNCLE_LIST_LIMIT() {
         return UNCLE_LIST_LIMIT;
     }
 
+    /**
+     * Gets best number diff limit.
+     *
+     * @return the best number diff limit
+     */
     public int getBEST_NUMBER_DIFF_LIMIT() {
         return BEST_NUMBER_DIFF_LIMIT;
     }
 
+    /**
+     * Gets block reward.
+     *
+     * @return the block reward
+     */
     public BigInteger getBLOCK_REWARD() {
         return BLOCK_REWARD;
     }
 
+    /**
+     * Gets max contract szie.
+     *
+     * @return the max contract szie
+     */
     public int getMAX_CONTRACT_SZIE() {
         return Integer.MAX_VALUE;
     }
 
     /**
      * Introduced in the Homestead release
+     *
+     * @return the boolean
      */
     public boolean createEmptyContractOnOOG() {
         return true;
@@ -103,6 +170,8 @@ public class Constants {
     /**
      * New DELEGATECALL opcode introduced in the Homestead release. Before Homestead this opcode should generate
      * exception
+     *
+     * @return the boolean
      */
     public boolean hasDelegateCallOpcode() {
         return false;
@@ -110,6 +179,8 @@ public class Constants {
 
     /**
      * Introduced in the Homestead release
+     *
+     * @return the secp 256 k 1 n
      */
     public static BigInteger getSECP256K1N() {
         return SECP256K1N;

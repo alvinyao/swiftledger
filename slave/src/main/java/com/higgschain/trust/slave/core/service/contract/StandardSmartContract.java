@@ -14,8 +14,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * SmartContract
+ *
  * @author duhongming
- * @date 2018-04-20
+ * @date 2018 -04-20
  */
 @Slf4j @Service public class StandardSmartContract {
 
@@ -88,6 +89,14 @@ import org.springframework.stereotype.Service;
         return result;
     }
 
+    /**
+     * Execute object.
+     *
+     * @param address the address
+     * @param data    the data
+     * @param args    the args
+     * @return the object
+     */
     public Object execute(String address, ExecuteContextData data, Object... args) {
         try {
             Profiler.enter(String.format("execute contract at %s", address));
@@ -98,6 +107,14 @@ import org.springframework.stereotype.Service;
         }
     }
 
+    /**
+     * Execute query object.
+     *
+     * @param address    the address
+     * @param methodName the method name
+     * @param args       the args
+     * @return the object
+     */
     public Object executeQuery(String address, String methodName, Object... args) {
         try {
             Profiler.enter(String.format("query contract at %s", address));
@@ -116,6 +133,13 @@ import org.springframework.stereotype.Service;
         }
     }
 
+    /**
+     * Execute object.
+     *
+     * @param binding the binding
+     * @param data    the data
+     * @return the object
+     */
     public Object execute(AccountContractBinding binding, ExecuteContextData data) {
         Profiler.enter(String.format("execute contract at %s", binding.getContractAddress()));
         try {
@@ -131,6 +155,12 @@ import org.springframework.stereotype.Service;
         }
     }
 
+    /**
+     * Init.
+     *
+     * @param address the address
+     * @param args    the args
+     */
     public void init(String address, Object... args) {
         Contract contract = getContract(address);
         ExecuteContext context = ExecuteContext.newContext();

@@ -7,11 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
-/**  
- * @desc class for RSA crypto and sign
+/**
+ * The type Rsa crypto.
+ *
  * @author WangQuanzhou
- * @date 2018/8/20 11:50
- */  
+ * @desc class for RSA crypto and sign
+ * @date 2018 /8/20 11:50
+ */
 @Slf4j public class RsaCrypto implements Crypto {
 
     /**
@@ -83,7 +85,9 @@ import java.util.Map;
     }
 
     /**
-     * @return
+     * Gets singleton instance.
+     *
+     * @return singleton instance
      * @desc get singleton instance
      */
     public static final RsaCrypto getSingletonInstance() {

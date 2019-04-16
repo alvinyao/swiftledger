@@ -31,8 +31,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
+ * The type Atomix server.
+ *
  * @author suimi
- * @date 2018/7/5
+ * @date 2018 /7/5
  */
 @StateListener
 @Slf4j @Service public class AtomixServer implements ConsensusStateMachine, ConsensusClient {

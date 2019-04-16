@@ -8,10 +8,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Element utils.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ElementUtils {
 
+    /**
+     * Duplicate element [ ].
+     *
+     * @param source the source
+     * @return the element [ ]
+     */
     public static Element[] duplicate(Element[] source) {
         Element[] target = new Element[source.length];
         for (int i = 0; i < target.length; i++)
@@ -20,6 +28,12 @@ public class ElementUtils {
         return target;
     }
 
+    /**
+     * Clone immutable element [ ].
+     *
+     * @param source the source
+     * @return the element [ ]
+     */
     public static Element[] cloneImmutable(Element[] source) {
         Element[] target = Arrays.copyOf(source, source.length);
 
@@ -32,6 +46,13 @@ public class ElementUtils {
         return target;
     }
 
+    /**
+     * Clone immutable map.
+     *
+     * @param <K>    the type parameter
+     * @param source the source
+     * @return the map
+     */
     public static <K> Map<K, Element[]> cloneImmutable(Map<K, Element[]> source) {
         Map<K, Element[]> dest = new HashMap<K, Element[]>(source.size());
 
@@ -41,6 +62,13 @@ public class ElementUtils {
         return dest;
     }
 
+    /**
+     * Clone immutable 2 map.
+     *
+     * @param <K>    the type parameter
+     * @param source the source
+     * @return the map
+     */
     public static <K> Map<K, Element> cloneImmutable2(Map<K, Element> source) {
         Map<K, Element> dest = new HashMap<K, Element>(source.size());
 
@@ -50,6 +78,12 @@ public class ElementUtils {
         return dest;
     }
 
+    /**
+     * Clone to element pow element pow [ ].
+     *
+     * @param source the source
+     * @return the element pow [ ]
+     */
     public static ElementPow[] cloneToElementPow(Element[] source) {
         ElementPow[] target = new ElementPow[source.length];
 
@@ -60,10 +94,27 @@ public class ElementUtils {
         return target;
     }
 
+    /**
+     * Random in element.
+     *
+     * @param pairing   the pairing
+     * @param generator the generator
+     * @return the element
+     */
     public static Element randomIn(Pairing pairing, Element generator) {
         return generator.duplicate().powZn(pairing.getZr().newRandomElement());
     }
 
+    /**
+     * Gets generator.
+     *
+     * @param pairing       the pairing
+     * @param generator     the generator
+     * @param parameters    the parameters
+     * @param subgroupIndex the subgroup index
+     * @param numPrimes     the num primes
+     * @return the generator
+     */
     public static Element getGenerator(Pairing pairing, Element generator, PairingParameters parameters, int subgroupIndex, int numPrimes) {
         BigInteger prod = BigInteger.ONE;
         for (int j = 0; j < numPrimes; j++) {
@@ -74,6 +125,11 @@ public class ElementUtils {
         return generator.pow(prod);
     }
 
+    /**
+     * Print.
+     *
+     * @param matrix the matrix
+     */
     public static void print(Element[][] matrix) {
         int n = matrix.length;
         int m = matrix[0].length;
@@ -88,7 +144,12 @@ public class ElementUtils {
         System.out.println();
     }
 
-
+    /**
+     * Transpose element [ ] [ ].
+     *
+     * @param matrix the matrix
+     * @return the element [ ] [ ]
+     */
     public static Element[][] transpose(Element[][] matrix) {
         int n = matrix.length;
         for (int i = 0; i < n; i++) {
@@ -104,6 +165,13 @@ public class ElementUtils {
         return matrix;
     }
 
+    /**
+     * Multiply element [ ] [ ].
+     *
+     * @param a the a
+     * @param b the b
+     * @return the element [ ] [ ]
+     */
     public static Element[][] multiply(Element[][] a, Element[][] b) {
         int n = a.length;
         Field field = a[0][0].getField();
@@ -122,6 +190,16 @@ public class ElementUtils {
         return res;
     }
 
+    /**
+     * Copy array.
+     *
+     * @param target the target
+     * @param source the source
+     * @param sizeY  the size y
+     * @param sizeX  the size x
+     * @param y      the y
+     * @param x      the x
+     */
     public static void copyArray(Element[][] target, Element[][] source, int sizeY, int sizeX, int y, int x) {
         for (int i = y; i < sizeY; i++) {
             for (int j = x; j < sizeX; j++) {

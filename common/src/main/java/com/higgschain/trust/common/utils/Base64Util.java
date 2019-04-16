@@ -2,13 +2,16 @@ package com.higgschain.trust.common.utils;
 
 import org.springframework.util.Base64Utils;
 
+/**
+ * The type Base 64 util.
+ */
 public class Base64Util {
 
     /**
      * BASE64解码
      *
-     * @param key
-     * @return
+     * @param key the key
+     * @return byte [ ]
      * @throws Exception
      */
     public static byte[] decryptBASE64(String key) {
@@ -18,8 +21,8 @@ public class Base64Util {
     /**
      * BASE64编码
      *
-     * @param key
-     * @return
+     * @param key the key
+     * @return string
      * @throws Exception
      */
     public static String encryptBASE64(byte[] key) {
@@ -27,8 +30,10 @@ public class Base64Util {
     }
 
     /**
-     * @param byteArray
-     * @return String
+     * Byte array to hex str string.
+     *
+     * @param byteArray the byte array
+     * @return String string
      * @desc byte[] to  String(HEX formart)
      */
     public static String byteArrayToHexStr(byte[] byteArray) {
@@ -46,8 +51,10 @@ public class Base64Util {
     }
 
     /**
-     * @param str
-     * @return byte[]
+     * Hex str to byte array byte [ ].
+     *
+     * @param str the str
+     * @return byte[] byte [ ]
      * @desc String(HEX formart) to byte[]
      */
     public static byte[] hexStrToByteArray(String str) {
@@ -66,8 +73,10 @@ public class Base64Util {
     }
 
     /**
-     * @param
-     * @return
+     * Str to byte array byte [ ].
+     *
+     * @param str the str
+     * @return byte [ ]
      * @desc String to byte[]
      */
     public static byte[] strToByteArray(String str) {
@@ -79,8 +88,10 @@ public class Base64Util {
     }
 
     /**
-     * @param
-     * @return
+     * Byte array to str string.
+     *
+     * @param byteArray the byte array
+     * @return string
      * @desc byte[] to String
      */
     public static String byteArrayToStr(byte[] byteArray) {

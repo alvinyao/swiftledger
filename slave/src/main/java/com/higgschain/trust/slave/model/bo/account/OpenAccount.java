@@ -10,9 +10,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Open account.
+ *
  * @author liuyu
  * @description BO of open account action
- * @date 2018-03-27
+ * @date 2018 -03-27
  */
 @Getter @Setter public class OpenAccount extends Action {
     /**

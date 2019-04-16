@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * data identity action
  *
  * @author lingchao
- * @create 2018年03月30日18:15
+ * @create 2018年03月30日18 :15
  */
 @Getter @Setter public class DataIdentityAction extends Action {
     /**

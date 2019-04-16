@@ -14,18 +14,23 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.*;
+
 /**
  * JsonFileUtil
  *
  * @author shenqingyan
- * @create 2018年04月10日16:53
+ * @create 2018年04月10日16 :53
  */
 @Log
 public class JsonFileUtil {
     /**
+     * Read json file list.
+     *
+     * @param list     the list
+     * @param filepath the filepath
+     * @return the list
      * @desc 将文件内容返回为list
-     * @param
-     **/
+     */
     public static List<String> readJsonFile(List<String> list, String filepath) {
         File file = new File(filepath);
         if (file.exists() && file.isDirectory()) {
@@ -49,9 +54,12 @@ public class JsonFileUtil {
     }
 
     /**
+     * Buffered reader string.
+     *
+     * @param file the file
+     * @return the string
      * @desc 读取文件内容并返回string
-     * @param
-     **/
+     */
     public static String bufferedReader(String file) {
         String laststr = "";
         try {
@@ -69,10 +77,14 @@ public class JsonFileUtil {
         }
         return laststr;
     }
+
     /**
+     * String to json object json object.
+     *
+     * @param str the str
+     * @return the json object
      * @desc 将string转换为json对象
-     * @param
-     **/
+     */
     public static JSONObject stringToJsonObject(String str) {
         JSONObject json = new JSONObject();
         try {
@@ -82,10 +94,14 @@ public class JsonFileUtil {
         }
         return json;
     }
+
     /**
-     * @desc 将List<String>转为List<JSONObject>
-     * @param
-     **/
+     * List string to json list.
+     *
+     * @param list the list
+     * @return the list
+     * @desc 将List<String>  转为List<JSONObject>
+     */
     public static List<JSONObject> listStringToJson(List<String> list) {
         Iterator it = list.iterator();
         List<JSONObject> listobj = new LinkedList<>();
@@ -95,11 +111,15 @@ public class JsonFileUtil {
         return listobj;
     }
 
-
     /**
+     * Result set to json json array.
+     *
+     * @param set the set
+     * @return the json array
+     * @throws SQLException  the sql exception
+     * @throws JSONException the json exception
      * @desc 将ResultSet转为jsonobj
-     * @param
-     **/
+     */
     public static JSONArray resultSetToJson(ResultSet set) throws SQLException,JSONException{
 
         JSONArray array = new JSONArray();
@@ -120,9 +140,13 @@ public class JsonFileUtil {
     }
 
     /**
-     * @desc 递归遍历json，将所有的key-value放入map,包括根节点
+     * Json to map hash map.
+     *
      * @param json JSONObject
-     **/
+     * @param map  the map
+     * @return the hash map
+     * @desc 递归遍历json ，将所有的key-value放入map,包括根节点
+     */
     public static HashMap<String, Object> jsonToMap(JSONObject json, HashMap<String, Object> map){
 
         for (Map.Entry<String, Object> entry : json.entrySet()){
@@ -150,9 +174,13 @@ public class JsonFileUtil {
     }
 
     /**
-     * @desc 递归遍历json，将json node节点的key-value放入map,不包括根节点
+     * Json node to map hash map.
+     *
      * @param json JSONObject
-     **/
+     * @param map  the map
+     * @return the hash map
+     * @desc 递归遍历json ，将json node节点的key-value放入map,不包括根节点
+     */
     public static HashMap<String, Object> jsonNodeToMap(JSONObject json, HashMap<String, Object> map){
 
         for (Map.Entry<String, Object> entry : json.entrySet()){
@@ -177,10 +205,14 @@ public class JsonFileUtil {
         log.info("jsonobj translate to map successfully");
         return map;
     }
+
     /**
+     * Json file to arry object [ ] [ ].
+     *
+     * @param filepath the filepath
+     * @return the object [ ] [ ]
      * @desc Json文件转为Object[][]
-     * @param
-     **/
+     */
     public static Object[][] jsonFileToArry(String filepath) {
         List parList = new ArrayList();
         List<String> list = new LinkedList<>();

@@ -20,32 +20,101 @@ import java.security.SecureRandom;
 import java.util.List;
 
 /**
+ * The type Type f pairing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeFPairing extends AbstractPairing {
+    /**
+     * The Curve params.
+     */
     protected PairingParameters curveParams;
 
+    /**
+     * The Q.
+     */
     protected BigInteger q;
+    /**
+     * The R.
+     */
     protected BigInteger r;
+    /**
+     * The B.
+     */
     protected BigInteger b;
+    /**
+     * The Beta.
+     */
     protected BigInteger beta;
+    /**
+     * The Alpha 0.
+     */
     protected BigInteger alpha0;
+    /**
+     * The Alpha 1.
+     */
     protected BigInteger alpha1;
 
-    protected Element xPowq2, xPowq6, xPowq8;
-    protected Element negAlpha, negAlphaInv;
+    /**
+     * The X powq 2.
+     */
+    protected Element xPowq2, /**
+     * The X powq 6.
+     */
+    xPowq6, /**
+     * The X powq 8.
+     */
+    xPowq8;
+    /**
+     * The Neg alpha.
+     */
+    protected Element negAlpha, /**
+     * The Neg alpha inv.
+     */
+    negAlphaInv;
+    /**
+     * The Tate exp.
+     */
     protected BigInteger tateExp;
 
-    protected Field Fq, Fq2x;
+    /**
+     * The Fq.
+     */
+    protected Field Fq, /**
+     * The Fq 2 x.
+     */
+    Fq2x;
+    /**
+     * The Fq 2.
+     */
     protected Field Fq2;
+    /**
+     * The Fq 12.
+     */
     protected PolyModField Fq12;
-    protected CurveField Eq, etwist;
+    /**
+     * The Eq.
+     */
+    protected CurveField Eq, /**
+     * The Etwist.
+     */
+    etwist;
 
-
+    /**
+     * Instantiates a new Type f pairing.
+     *
+     * @param curveParams the curve params
+     */
     public TypeFPairing(PairingParameters curveParams) {
         this(new SecureRandom(), curveParams);
     }
 
+    /**
+     * Instantiates a new Type f pairing.
+     *
+     * @param random      the random
+     * @param curveParams the curve params
+     */
     public TypeFPairing(SecureRandom random, PairingParameters curveParams) {
         super(random);
 
@@ -60,7 +129,9 @@ public class TypeFPairing extends AbstractPairing {
         return false;
     }
 
-
+    /**
+     * Init params.
+     */
     protected void initParams() {
         // validate the type
         String type = curveParams.getString("type");
@@ -76,7 +147,9 @@ public class TypeFPairing extends AbstractPairing {
         alpha1 = curveParams.getBigInteger("alpha1");
     }
 
-
+    /**
+     * Init fields.
+     */
     protected void initFields() {
         // Init Zr
         Zr = initFp(r, null);
@@ -150,14 +223,31 @@ public class TypeFPairing extends AbstractPairing {
         GT = initGT();
     }
 
+    /**
+     * Init fp field.
+     *
+     * @param order the order
+     * @param nqr   the nqr
+     * @return the field
+     */
     protected Field initFp(BigInteger order, BigInteger nqr) {
         return new ZrField(random, order, nqr);
     }
 
+    /**
+     * Init eq curve field.
+     *
+     * @return the curve field
+     */
     protected CurveField initEq() {
         return new CurveField(random, Fq.newElement(), Fq.newElement().set(b), r);
     }
 
+    /**
+     * Init eq map curve field.
+     *
+     * @return the curve field
+     */
     protected CurveField initEqMap() {
         Point tmp = (Point) Fq2.newElement();
         tmp.getX().set(Fq.newElement().set(alpha0).negate().mul(b));
@@ -165,22 +255,46 @@ public class TypeFPairing extends AbstractPairing {
         return new CurveField(random, Fq2.newElement(), tmp, r);
     }
 
+    /**
+     * Init poly poly field.
+     *
+     * @return the poly field
+     */
     protected PolyField initPoly() {
         return new PolyField(random, Fq2);
     }
 
+    /**
+     * Init poly mod poly mod field.
+     *
+     * @param irred the irred
+     * @return the poly mod field
+     */
     protected PolyModField initPolyMod(PolyElement irred) {
         return new PolyModField(random, irred);
     }
 
+    /**
+     * Init quadratic quadratic field.
+     *
+     * @return the quadratic field
+     */
     protected QuadraticField initQuadratic() {
         return new QuadraticField(random, Fq);
     }
 
+    /**
+     * Init gt field.
+     *
+     * @return the field
+     */
     protected Field initGT() {
         return new GTFiniteField(random, r, pairingMap, Fq12);
     }
 
+    /**
+     * Init map.
+     */
     protected void initMap() {
         pairingMap = new TypeFTateNoDenomMillerPairingMap(this);
     }

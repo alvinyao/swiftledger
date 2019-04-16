@@ -7,8 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import javax.script.*;
 
 /**
+ * The type Javascript execute engine.
+ *
  * @author duhongming
- * @date 2018/04/25
+ * @date 2018 /04/25
  */
 @Slf4j public class JavascriptExecuteEngine implements ExecuteEngine {
 
@@ -17,6 +19,12 @@ import javax.script.*;
     private ScriptEngine scriptEngine;
     private String code;
 
+    /**
+     * Instantiates a new Javascript execute engine.
+     *
+     * @param scriptEngine the script engine
+     * @param code         the code
+     */
     public JavascriptExecuteEngine(ScriptEngine scriptEngine, String code) {
         this.scriptEngine = scriptEngine;
         this.code = code;

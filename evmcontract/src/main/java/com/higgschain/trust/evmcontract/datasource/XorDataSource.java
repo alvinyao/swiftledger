@@ -26,12 +26,17 @@ import com.higgschain.trust.evmcontract.util.ByteUtil;
  * May be useful for merging several Sources into a single
  * <p>
  * Created by Anton Nashatyrev on 18.02.2016.
+ *
+ * @param <V> the type parameter
  */
 public class XorDataSource<V> extends AbstractChainedSource<byte[], V, byte[], V> {
     private byte[] subKey;
 
     /**
      * Creates instance with a value all keys are XORed with
+     *
+     * @param source the source
+     * @param subKey the sub key
      */
     public XorDataSource(Source<byte[], V> source, byte[] subKey) {
         super(source);

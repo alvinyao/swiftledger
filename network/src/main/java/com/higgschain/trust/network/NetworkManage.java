@@ -18,29 +18,48 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
+ * The type Network manage.
+ *
  * @author duhongming
- * @date 2018/8/30
+ * @date 2018 /8/30
  */
 public class NetworkManage {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final AtomicBoolean started = new AtomicBoolean(false);
 
+    /**
+     * The constant instance.
+     */
     protected static NetworkManage instance;
     private static TrafficReporter trafficReporter = TrafficReporter.Default;
 
     private final Peers peers = new Peers();
     private final NetworkConfig config;
     private final Address localAddress;
+    /**
+     * The Messaging service.
+     */
     protected final MessagingService messagingService;
     private final DiscoveryPeersService discoveryPeersService;
     private final ExecutorService executor = Executors.newFixedThreadPool(4);
+    /**
+     * The Connected peers.
+     */
     final Set<Peer> connectedPeers = Sets.newCopyOnWriteArraySet();
+    /**
+     * The Unconnected peers.
+     */
     final Set<Peer> unconnectedPeers = Sets.newCopyOnWriteArraySet();
     private List<NetworkListener> listeners;
     private HttpClient httpClient;
     private RpcClient rpcClient;
 
+    /**
+     * Instantiates a new Network manage.
+     *
+     * @param config the config
+     */
     public NetworkManage(final NetworkConfig config) {
         if (config.isSingleton()) {
             instance = this;
@@ -63,16 +82,27 @@ public class NetworkManage {
 
     /**
      * Get the instance of NetworkManage if config singleton is true
-     * @return
+     *
+     * @return instance
      */
     public static NetworkManage getInstance() {
         return instance;
     }
 
+    /**
+     * Install traffic reporter.
+     *
+     * @param trafficReporter the traffic reporter
+     */
     public static void installTrafficReporter(TrafficReporter trafficReporter) {
         NetworkManage.trafficReporter = trafficReporter;
     }
 
+    /**
+     * Gets traffic reporter.
+     *
+     * @return the traffic reporter
+     */
     public static TrafficReporter getTrafficReporter() {
         return trafficReporter;
     }
@@ -92,40 +122,90 @@ public class NetworkManage {
         }));
     }
 
+    /**
+     * Gets peers.
+     *
+     * @return the peers
+     */
     public Set<Peer> getPeers() {
         return peers.getPeers();
     }
 
+    /**
+     * Update peer connected.
+     *
+     * @param address   the address
+     * @param connected the connected
+     */
     public void updatePeerConnected(Address address, boolean connected) {
         this.peers.updatePeerConnected(address, connected);
     }
 
+    /**
+     * Gets address.
+     *
+     * @param nodeName the node name
+     * @return the address
+     */
     public Address getAddress(String nodeName) {
         return peers.getAddress(nodeName);
     }
 
+    /**
+     * Http client http client.
+     *
+     * @return the http client
+     */
     public HttpClient httpClient() {
         return httpClient;
     }
 
+    /**
+     * Rpc client rpc client.
+     *
+     * @return the rpc client
+     */
     public RpcClient rpcClient() {
         return rpcClient;
     }
 
+    /**
+     * Gets peer by name.
+     *
+     * @param nodeName the node name
+     * @return the peer by name
+     */
     public Peer getPeerByName(String nodeName) {
         return peers.getPeer(nodeName);
     }
 
+    /**
+     * Gets backup peer by name.
+     *
+     * @param nodeName the node name
+     * @return the backup peer by name
+     */
     public Peer getBackupPeerByName(String nodeName) {
         return peers.getBackupPeer(nodeName);
     }
 
+    /**
+     * Add listener.
+     *
+     * @param listener the listener
+     */
     public void addListener(NetworkListener listener) {
         synchronized (listeners) {
             listeners.add(listener);
         }
     }
 
+    /**
+     * Notify listeners.
+     *
+     * @param event   the event
+     * @param message the message
+     */
     protected void notifyListeners(NetworkListener.Event event, Object message) {
         synchronized (listeners) {
             if (listeners.size() == 0) {
@@ -137,6 +217,9 @@ public class NetworkManage {
         }
     }
 
+    /**
+     * Start.
+     */
     public void start() {
 
         if (started.get()) {
@@ -156,6 +239,9 @@ public class NetworkManage {
         });
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
         if (!started.get()) {
             log.warn("Network can't shutdown, it's not started ...");
@@ -167,18 +253,42 @@ public class NetworkManage {
         started.set(false);
     }
 
+    /**
+     * Config network config.
+     *
+     * @return the network config
+     */
     public NetworkConfig config() {
         return this.config;
     }
 
+    /**
+     * Add peer.
+     *
+     * @param peer the peer
+     */
     protected void addPeer(Peer peer) {
         this.discoveryPeersService.addPeer(peer);
     }
 
+    /**
+     * Local peer peer.
+     *
+     * @return the peer
+     */
     public Peer localPeer() {
         return peers.localPeer;
     }
 
+    /**
+     * Send completable future.
+     *
+     * @param <T>     the type parameter
+     * @param to      the to
+     * @param action  the action
+     * @param request the request
+     * @return the completable future
+     */
     public <T> CompletableFuture<T> send(Address to, String action, Object request) {
         CompletableFuture<T> future = new CompletableFuture<>();
         messagingService.sendAndReceive(to, action, Hessian.serialize(request)).whenComplete((data, error) -> {
@@ -192,12 +302,29 @@ public class NetworkManage {
         return future;
     }
 
+    /**
+     * Register handler.
+     *
+     * @param <T>      the type parameter
+     * @param type     the type
+     * @param handler  the handler
+     * @param executor the executor
+     */
     public <T> void registerHandler(String type, Consumer<T> handler, Executor executor) {
         messagingService.registerHandler(type, (address, payload) -> {
             handler.accept(Hessian.parse(payload));
         }, executor);
     }
 
+    /**
+     * Register handler.
+     *
+     * @param <T>      the type parameter
+     * @param <R>      the type parameter
+     * @param type     the type
+     * @param handler  the handler
+     * @param executor the executor
+     */
     public <T, R> void registerHandler(String type, Function<T, R> handler, Executor executor) {
         messagingService.registerHandler(type, (address, payload) -> {
              R ret = handler.apply((T)Hessian.parse(payload));
@@ -205,6 +332,14 @@ public class NetworkManage {
         }, executor);
     }
 
+    /**
+     * Register handler.
+     *
+     * @param <T>     the type parameter
+     * @param <R>     the type parameter
+     * @param type    the type
+     * @param handler the handler
+     */
     public <T, R> void registerHandler(String type, Function<T, R> handler) {
         messagingService.registerHandler(type, (address, payload) -> {
             R ret = handler.apply((T)Hessian.parse(payload));
@@ -212,6 +347,14 @@ public class NetworkManage {
         }, executor);
     }
 
+    /**
+     * Register completable future handler.
+     *
+     * @param <T>     the type parameter
+     * @param <R>     the type parameter
+     * @param type    the type
+     * @param handler the handler
+     */
     public <T, R> void registerCompletableFutureHandler(String type, Function<T, CompletableFuture<R>> handler) {
         messagingService.registerHandler(type, (address, payload) -> {
             CompletableFuture<R> resultFuture = handler.apply(Hessian.parse(payload));

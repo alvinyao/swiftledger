@@ -6,13 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
 /**
+ * The type Biz type service test.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-13
+ * @date 2018 -06-13
  */
 public class BizTypeServiceTest extends IntegrateBaseTest {
+    /**
+     * The Biz type service.
+     */
     @Autowired BizTypeService bizTypeService;
 
+    /**
+     * Test.
+     */
     @Test
     public void test(){
         String a = bizTypeService.getByPolicyId("abc");

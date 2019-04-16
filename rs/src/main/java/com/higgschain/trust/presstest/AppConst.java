@@ -1,9 +1,11 @@
 package com.higgschain.trust.presstest;
 
 /**
+ * The type App const.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-30
+ * @date 2018 -08-30
  */
 public class AppConst {
     /**

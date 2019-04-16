@@ -6,12 +6,20 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 /**
+ * The type Deflate util.
+ *
  * @author hanson
- * @Date 2018/9/30
+ * @Date 2018 /9/30
  * @Description:
  */
 public class DeflateUtil {
 
+    /**
+     * Compress byte [ ].
+     *
+     * @param input the input
+     * @return the byte [ ]
+     */
     public static byte[] compress(byte input[]) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         Deflater compressor = new Deflater(1);
@@ -29,6 +37,13 @@ public class DeflateUtil {
         return bos.toByteArray();
     }
 
+    /**
+     * Uncompress byte [ ].
+     *
+     * @param input the input
+     * @return the byte [ ]
+     * @throws DataFormatException the data format exception
+     */
     public static byte[] uncompress(byte[] input) throws DataFormatException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         Inflater decompressor = new Inflater();

@@ -10,9 +10,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * The type Sign info.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-06
+ * @date 2018 -06-06
  */
 @Getter @Setter public class SignInfo extends BaseBO {
     /**
@@ -33,8 +35,8 @@ import java.util.stream.Collectors;
      * key:owner
      * value:sign
      *
-     * @param signInfos
-     * @return
+     * @param signInfos the sign infos
+     * @return map
      */
     public static Map<String, SignInfo> makeSignMap(List<SignInfo> signInfos) {
         if (CollectionUtils.isEmpty(signInfos)) {
@@ -43,10 +45,25 @@ import java.util.stream.Collectors;
         return signInfos.stream().collect(Collectors.toMap(SignInfo::getOwner, v -> v));
     }
 
-    public enum SignTypeEnum {
-        BIZ("BIZ", "for business"), CONSENSUS("CONSENSUS", "for consensus"),
+    /**
+     * The enum Sign type enum.
+     */
+    public enum SignTypeEnum {/**
+     * The Biz.
+     */
+    BIZ("BIZ", "for business"),
+        /**
+         * The Consensus.
+         */
+        CONSENSUS("CONSENSUS", "for consensus"),
         ;
+        /**
+         * The Code.
+         */
         String code;
+        /**
+         * The Msg.
+         */
         String msg;
 
         SignTypeEnum(String code, String msg) {
@@ -54,6 +71,12 @@ import java.util.stream.Collectors;
             this.msg = msg;
         }
 
+        /**
+         * Gets by code.
+         *
+         * @param code the code
+         * @return the by code
+         */
         public static SignTypeEnum getByCode(String code) {
             for (SignTypeEnum signType : SignTypeEnum.values()) {
                 if (signType.getCode().equals(code)) {
@@ -63,10 +86,20 @@ import java.util.stream.Collectors;
             return null;
         }
 
+        /**
+         * Gets code.
+         *
+         * @return the code
+         */
         public String getCode() {
             return code;
         }
 
+        /**
+         * Gets msg.
+         *
+         * @return the msg
+         */
         public String getMsg() {
             return msg;
         }

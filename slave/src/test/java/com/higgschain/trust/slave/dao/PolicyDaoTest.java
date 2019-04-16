@@ -14,21 +14,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Policy dao test.
+ *
  * @author tangfashuang
- * @date 2018/04/13 18:25
+ * @date 2018 /04/13 18:25
  * @desc policy dao test
  */
 public class PolicyDaoTest extends IntegrateBaseTest {
 
+    /**
+     * The Policy dao.
+     */
     @Autowired PolicyDao policyDao;
 
+    /**
+     * The Policy repository.
+     */
     @Autowired PolicyRepository policyRepository;
 
+    /**
+     * Query by policy id.
+     */
     @Test public void queryByPolicyId() {
         Policy policy = policyRepository.getPolicyById("000000");
         Assert.assertEquals("[ALL]", JSON.toJSONString(policy.getRsIds()));
     }
 
+    /**
+     * Test add 1.
+     */
     @Test public void testAdd1() {
         PolicyPO policy = new PolicyPO();
         policy.setPolicyId("000000");
@@ -38,6 +52,9 @@ public class PolicyDaoTest extends IntegrateBaseTest {
         policyDao.add(policy);
     }
 
+    /**
+     * Test add 2.
+     */
     @Test public void testAdd2() {
         PolicyPO policy = new PolicyPO();
         policy.setPolicyId("policy-1hsdh6310-23hhs");

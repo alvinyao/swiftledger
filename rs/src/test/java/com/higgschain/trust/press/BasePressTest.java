@@ -5,9 +5,11 @@ import com.higgschain.trust.common.utils.OkHttpClientManager;
 import com.higgschain.trust.common.vo.RespData;
 
 /**
+ * The type Base press test.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-11
+ * @date 2018 -09-11
  */
 public class BasePressTest {
 //    private static String BASE_URL = "http://10.200.173.194:7071/";
@@ -23,8 +25,8 @@ public class BasePressTest {
     /**
      * send by http post
      *
-     * @param api
-     * @param params
+     * @param api    the api
+     * @param params the params
      */
     public void send(String api, String params) {
 //            System.out.println(("[send]req:" + params));
@@ -41,6 +43,12 @@ public class BasePressTest {
         }
     }
 
+    /**
+     * Get.
+     *
+     * @param api    the api
+     * @param params the params
+     */
     public void get(String api, String params) {
         //        System.out.println(("[send]req:" + params));
         try {

@@ -110,11 +110,20 @@ public class SnowflakeIdWorker {
         this.datacenterId = datacenterId;
     }
 
+    /**
+     * Instantiates a new Snowflake id worker.
+     */
     public SnowflakeIdWorker() {
         this.workerId = 0;
         this.datacenterId = 0;
     }
 
+    /**
+     * Gets time from id.
+     *
+     * @param snowflakeId the snowflake id
+     * @return the time from id
+     */
     public String getTimeFromId(long snowflakeId) {
         long snowflakeTimestamp = snowflakeId >> timestampLeftShift;
         long idGeneratorTimestamp = snowflakeTimestamp + twepoch;
@@ -128,7 +137,7 @@ public class SnowflakeIdWorker {
     /**
      * 获得下一个ID (该方法是线程安全的)
      *
-     * @return SnowflakeId
+     * @return SnowflakeId long
      */
     public synchronized long nextId() {
         long timestamp = timeGen();
@@ -167,7 +176,7 @@ public class SnowflakeIdWorker {
      * 阻塞到下一个毫秒，直到获得新的时间戳
      *
      * @param lastTimestamp 上次生成ID的时间截
-     * @return 当前时间戳
+     * @return 当前时间戳 long
      */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
@@ -180,7 +189,7 @@ public class SnowflakeIdWorker {
     /**
      * 返回以毫秒为单位的当前时间
      *
-     * @return 当前时间(毫秒)
+     * @return 当前时间(毫秒) long
      */
     protected long timeGen() {
         return System.currentTimeMillis();
@@ -190,6 +199,8 @@ public class SnowflakeIdWorker {
 
     /**
      * 测试
+     *
+     * @param args the input arguments
      */
     public static void main(String[] args) {
         SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);

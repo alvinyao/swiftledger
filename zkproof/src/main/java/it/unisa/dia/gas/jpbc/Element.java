@@ -25,7 +25,7 @@ public interface Element extends ElementPow {
      * Returns the length in bytes necessary to represent this element.
      *
      * @return the length in bytes necessary to represent this element.
-     * @see it.unisa.dia.gas.jpbc.Field#getLengthInBytes()
+     * @see it.unisa.dia.gas.jpbc.Field#getLengthInBytes() it.unisa.dia.gas.jpbc.Field#getLengthInBytes()
      * @since 1.0.0
      */
     int getLengthInBytes();
@@ -34,7 +34,7 @@ public interface Element extends ElementPow {
      * Returns <tt>true</tt> if this element is immutable, <tt>false</tt> otherwise.
      *
      * @return <tt>true</tt> if this element is immutable, <tt>false</tt> otherwise.
-     * @see #getImmutable() 
+     * @see #getImmutable() #getImmutable()
      */
     boolean isImmutable();
 
@@ -46,9 +46,8 @@ public interface Element extends ElementPow {
      * any method designed to modify the internal state of the element will return
      * a new element whose internal value represents the computation executed.
      *
-     * @return an immutable copy of this element if the
-     * element is not already immutable.
-     * @see #isImmutable()
+     * @return an immutable copy of this element if the element is not already immutable.
+     * @see #isImmutable() #isImmutable()
      */
     Element getImmutable();
 
@@ -99,7 +98,7 @@ public interface Element extends ElementPow {
     /**
      * If this element lies in a finite algebraic structure, assigns a uniformly random element to it.
      *
-     * @return this.
+     * @return this. to random
      * @since 1.0.0
      */
     Element setToRandom();
@@ -204,7 +203,7 @@ public interface Element extends ElementPow {
     /**
      * Se this = this^2.
      *
-     * @return this^2.
+     * @return this ^2.
      * @since 1.0.0
      */
     Element square();

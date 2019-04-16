@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * The type Block header cmd.
+ *
  * @author suimi
- * @date 2018/4/17
+ * @date 2018 /4/17
  */
 @NoArgsConstructor @Setter @Getter public class BlockHeaderCmd extends ValidCommand<BlockHeader> {
 
@@ -22,6 +24,12 @@ import lombok.Setter;
 
     private String requestId;
 
+    /**
+     * Instantiates a new Block header cmd.
+     *
+     * @param value the value
+     * @param view  the view
+     */
     public BlockHeaderCmd(BlockHeader value, long view) {
         super(value, view);
         this.requestId = VALID_HEADER_ID + Constant.SPLIT_SLASH + value.getHeight() + Constant.SPLIT_SLASH + System

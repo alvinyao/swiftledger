@@ -19,9 +19,11 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Tx id consumer.
+ *
  * @author liuyu
  * @description
- * @date 2018-07-04
+ * @date 2018 -07-04
  */
 @Component @Slf4j public class TxIdConsumer implements InitializingBean {
     @Autowired private TxIdProducer txIdProducer;
@@ -61,6 +63,11 @@ import java.util.concurrent.TimeUnit;
         private CoreTxStatusEnum statusEnum;
         private int maxSize;
 
+        /**
+         * Instantiates a new Rs task handler.
+         *
+         * @param statusEnum the status enum
+         */
         public RsTaskHandler(CoreTxStatusEnum statusEnum) {
             this.statusEnum = statusEnum;
             this.maxSize = statusEnum == CoreTxStatusEnum.INIT ? 50 : 200;

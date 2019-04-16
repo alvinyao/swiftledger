@@ -33,33 +33,63 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * The type Account repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-10
+ * @date 2018 -04-10
  */
 @Repository @Slf4j public class AccountRepository {
+    /**
+     * The Account info dao.
+     */
     @Autowired
     AccountInfoDao accountInfoDao;
+    /**
+     * The Account info rocks dao.
+     */
     @Autowired
     AccountInfoRocksDao accountInfoRocksDao;
+    /**
+     * The Account detail dao.
+     */
     @Autowired AccountDetailDao accountDetailDao;
+    /**
+     * The Account detail rocks dao.
+     */
     @Autowired AccountDetailRocksDao accountDetailRocksDao;
+    /**
+     * The Account dc record dao.
+     */
     @Autowired
     AccountDcRecordDao accountDcRecordDao;
+    /**
+     * The Account dc record rocks dao.
+     */
     @Autowired
     AccountDcRecordRocksDao accountDcRecordRocksDao;
+    /**
+     * The Data identity repository.
+     */
     @Autowired
     DataIdentityRepository dataIdentityRepository;
+    /**
+     * The Account jdbc dao.
+     */
     @Autowired
     AccountJDBCDao accountJDBCDao;
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
+
     /**
      * query account info by account no
      *
-     * @param accountNo
-     * @param forUpdate
-     * @return
+     * @param accountNo the account no
+     * @param forUpdate the for update
+     * @return account info
      */
     public AccountInfo queryAccountInfo(String accountNo, boolean forUpdate) {
         AccountInfoPO accountInfo;
@@ -75,8 +105,8 @@ import java.util.List;
     /**
      * batch query the account info
      *
-     * @param accountNos
-     * @return
+     * @param accountNos the account nos
+     * @return list
      */
     public List<AccountInfoVO> queryByAccountNos(List<String> accountNos) {
         List<AccountInfoPO> list;
@@ -91,8 +121,8 @@ import java.util.List;
     /**
      * build an new account info
      *
-     * @param openAccount
-     * @return
+     * @param openAccount the open account
+     * @return account info
      */
     public AccountInfo buildAccountInfo(OpenAccount openAccount) {
         AccountInfo accountInfo = new AccountInfo();
@@ -109,11 +139,12 @@ import java.util.List;
 
     /**
      * for explorer
-     * @param accountNo
-     * @param dataOwner
-     * @param pageNo
-     * @param pageSize
-     * @return
+     *
+     * @param accountNo the account no
+     * @param dataOwner the data owner
+     * @param pageNo    the page no
+     * @param pageSize  the page size
+     * @return list
      */
     public List<AccountInfoVO> queryAccountInfoWithOwner(String accountNo, String dataOwner, Integer pageNo,
         Integer pageSize) {
@@ -132,9 +163,10 @@ import java.util.List;
 
     /**
      * for explorer
-     * @param accountNo
-     * @param dataOwner
-     * @return
+     *
+     * @param accountNo the account no
+     * @param dataOwner the data owner
+     * @return long
      */
     public long countAccountInfoWithOwner(String accountNo, String dataOwner) {
         if (null != accountNo) {
@@ -151,7 +183,7 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param accountInfos
+     * @param accountInfos the account infos
      */
     public void batchInsert(List<AccountInfo> accountInfos) {
         if (CollectionUtils.isEmpty(accountInfos)) {
@@ -180,7 +212,7 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param accountInfos
+     * @param accountInfos the account infos
      */
     public void batchUpdate(List<AccountInfo> accountInfos) {
         if (CollectionUtils.isEmpty(accountInfos)) {
@@ -206,7 +238,7 @@ import java.util.List;
     /**
      * batch insert account detail
      *
-     * @param accountDetails
+     * @param accountDetails the account details
      */
     public void batchInsertAccountDetail(List<AccountDetail> accountDetails) {
         if (CollectionUtils.isEmpty(accountDetails)) {
@@ -235,7 +267,7 @@ import java.util.List;
     /**
      * batch insert DC record
      *
-     * @param dcRecords
+     * @param dcRecords the dc records
      */
     public void batchInsertDcRecords(List<AccountDcRecord> dcRecords) {
         if (CollectionUtils.isEmpty(dcRecords)) {

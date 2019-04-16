@@ -28,24 +28,49 @@ public abstract class CSTRequest implements Serializable {
 
     private static final long serialVersionUID = 7463498141366035002L;
 
+    /**
+     * The Cid.
+     */
     protected int cid;
     /**
      * id of the replica responsible for sending the checkpoint;
      */
     protected int checkpointReplica;
 
+    /**
+     * Instantiates a new Cst request.
+     *
+     * @param cid the cid
+     */
     public CSTRequest(int cid) {
         this.cid = cid;
     }
 
+    /**
+     * Gets cid.
+     *
+     * @return the cid
+     */
     public int getCID() {
         return cid;
     }
 
+    /**
+     * Gets checkpoint replica.
+     *
+     * @return the checkpoint replica
+     */
     public int getCheckpointReplica() {
         return checkpointReplica;
     }
 
+    /**
+     * Define replicas.
+     *
+     * @param processes       the processes
+     * @param globalCkpPeriod the global ckp period
+     * @param replicaId       the replica id
+     */
     public abstract void defineReplicas(int[] processes, int globalCkpPeriod, int replicaId);
 
 }

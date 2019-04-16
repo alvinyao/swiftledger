@@ -23,23 +23,74 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.StringTokenizer;
 
+/**
+ * The type Tom configuration.
+ */
 public class TOMConfiguration extends Configuration {
 
+    /**
+     * The N.
+     */
     protected int n;
+    /**
+     * The F.
+     */
     protected int f;
+    /**
+     * The Request timeout.
+     */
     protected int requestTimeout;
+    /**
+     * The Tom period.
+     */
     protected int tomPeriod;
+    /**
+     * The Paxos high mark.
+     */
     protected int paxosHighMark;
+    /**
+     * The Revival high mark.
+     */
     protected int revivalHighMark;
+    /**
+     * The Timeout high mark.
+     */
     protected int timeoutHighMark;
+    /**
+     * The Reply verification time.
+     */
     protected int replyVerificationTime;
+    /**
+     * The Max batch size.
+     */
     protected int maxBatchSize;
+    /**
+     * The Number of nonces.
+     */
     protected int numberOfNonces;
+    /**
+     * The In queue size.
+     */
     protected int inQueueSize;
+    /**
+     * The Out queue size.
+     */
     protected int outQueueSize;
+    /**
+     * The Apply queue size.
+     */
     protected int applyQueueSize;
+    /**
+     * The Shutdown hook enabled.
+     */
     protected boolean shutdownHookEnabled;
+    /**
+     * The Use sender thread.
+     */
     protected boolean useSenderThread;
+    /**
+     * The Rsa loader.
+     */
     protected RSAKeyLoader rsaLoader;
     private int debug;
     private int numNIOThreads;
@@ -63,6 +114,8 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Creates a new instance of TOMConfiguration
+     *
+     * @param processId the process id
      */
     public TOMConfiguration(int processId) {
         super(processId);
@@ -70,6 +123,9 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Creates a new instance of TOMConfiguration
+     *
+     * @param processId  the process id
+     * @param configHome the config home
      */
     public TOMConfiguration(int processId, String configHome) {
         super(processId, configHome);
@@ -77,6 +133,10 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Creates a new instance of TOMConfiguration
+     *
+     * @param processId     the process id
+     * @param configHome    the config home
+     * @param hostsFileName the hosts file name
      */
     public TOMConfiguration(int processId, String configHome, String hostsFileName) {
         super(processId, configHome, hostsFileName);
@@ -352,6 +412,11 @@ public class TOMConfiguration extends Configuration {
 
     }
 
+    /**
+     * Gets view store class.
+     *
+     * @return the view store class
+     */
     public String getViewStoreClass() {
         String s = (String)configs.remove("view.storage.handler");
         if (s == null) {
@@ -362,82 +427,171 @@ public class TOMConfiguration extends Configuration {
 
     }
 
+    /**
+     * Is the ttp boolean.
+     *
+     * @return the boolean
+     */
     public boolean isTheTTP() {
         return (this.getTTPId() == this.getProcessId());
     }
 
+    /**
+     * Get initial view int [ ].
+     *
+     * @return the int [ ]
+     */
     public final int[] getInitialView() {
         return this.initialView;
     }
 
+    /**
+     * Gets ttp id.
+     *
+     * @return the ttp id
+     */
     public int getTTPId() {
         return ttpId;
     }
 
+    /**
+     * Gets request timeout.
+     *
+     * @return the request timeout
+     */
     public int getRequestTimeout() {
         return requestTimeout;
     }
 
+    /**
+     * Gets reply verification time.
+     *
+     * @return the reply verification time
+     */
     public int getReplyVerificationTime() {
         return replyVerificationTime;
     }
 
+    /**
+     * Gets n.
+     *
+     * @return the n
+     */
     public int getN() {
         return n;
     }
 
+    /**
+     * Gets f.
+     *
+     * @return the f
+     */
     public int getF() {
         return f;
     }
 
+    /**
+     * Gets paxos high mark.
+     *
+     * @return the paxos high mark
+     */
     public int getPaxosHighMark() {
         return paxosHighMark;
     }
 
+    /**
+     * Gets revival high mark.
+     *
+     * @return the revival high mark
+     */
     public int getRevivalHighMark() {
         return revivalHighMark;
     }
 
+    /**
+     * Gets timeout high mark.
+     *
+     * @return the timeout high mark
+     */
     public int getTimeoutHighMark() {
         return timeoutHighMark;
     }
 
+    /**
+     * Gets max batch size.
+     *
+     * @return the max batch size
+     */
     public int getMaxBatchSize() {
         return maxBatchSize;
     }
 
+    /**
+     * Is shutdown hook enabled boolean.
+     *
+     * @return the boolean
+     */
     public boolean isShutdownHookEnabled() {
         return shutdownHookEnabled;
     }
 
+    /**
+     * Is state transfer enabled boolean.
+     *
+     * @return the boolean
+     */
     public boolean isStateTransferEnabled() {
         return stateTransferEnabled;
     }
 
+    /**
+     * Gets in queue size.
+     *
+     * @return the in queue size
+     */
     public int getInQueueSize() {
         return inQueueSize;
     }
 
+    /**
+     * Gets out queue size.
+     *
+     * @return the out queue size
+     */
     public int getOutQueueSize() {
         return outQueueSize;
     }
 
+    /**
+     * Gets apply queue size.
+     *
+     * @return the apply queue size
+     */
     public int getApplyQueueSize() {
         return applyQueueSize;
     }
 
+    /**
+     * Is use sender thread boolean.
+     *
+     * @return the boolean
+     */
     public boolean isUseSenderThread() {
         return useSenderThread;
     }
 
     /**
      * *
+     *
+     * @return the number of nio threads
      */
     public int getNumberOfNIOThreads() {
         return numNIOThreads;
     }
 
     /**
+     * Gets number of nonces.
+     *
      * @return the numberOfNonces
      */
     public int getNumberOfNonces() {
@@ -446,6 +600,8 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Indicates if signatures should be used (1) or not (0) to authenticate client requests
+     *
+     * @return the use signatures
      */
     public int getUseSignatures() {
         return useSignatures;
@@ -453,6 +609,8 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Indicates if MACs should be used (1) or not (0) to authenticate client-server and server-server messages
+     *
+     * @return the use ma cs
      */
     public int getUseMACs() {
         return useMACs;
@@ -460,31 +618,63 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Indicates the checkpoint period used when fetching the state from the application
+     *
+     * @return the checkpoint period
      */
     public int getCheckpointPeriod() {
         return checkpointPeriod;
     }
 
+    /**
+     * Is to write ckps to disk boolean.
+     *
+     * @return the boolean
+     */
     public boolean isToWriteCkpsToDisk() {
         return isToWriteCkpsToDisk;
     }
 
+    /**
+     * Is to write sync ckp boolean.
+     *
+     * @return the boolean
+     */
     public boolean isToWriteSyncCkp() {
         return syncCkp;
     }
 
+    /**
+     * Is to log boolean.
+     *
+     * @return the boolean
+     */
     public boolean isToLog() {
         return isToLog;
     }
 
+    /**
+     * Is to write sync log boolean.
+     *
+     * @return the boolean
+     */
     public boolean isToWriteSyncLog() {
         return syncLog;
     }
 
+    /**
+     * Log to disk boolean.
+     *
+     * @return the boolean
+     */
     public boolean logToDisk() {
         return logToDisk;
     }
 
+    /**
+     * Is to log parallel boolean.
+     *
+     * @return the boolean
+     */
     public boolean isToLogParallel() {
         // TODO Auto-generated method stub
         return parallelLog;
@@ -492,6 +682,8 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Indicates the checkpoint period used when fetching the state from the application
+     *
+     * @return the global checkpoint period
      */
     public int getGlobalCheckpointPeriod() {
         return globalCheckpointPeriod;
@@ -499,11 +691,18 @@ public class TOMConfiguration extends Configuration {
 
     /**
      * Indicates if a simple control flow mechanism should be used to avoid an overflow of client requests
+     *
+     * @return the use control flow
      */
     public int getUseControlFlow() {
         return useControlFlow;
     }
 
+    /**
+     * Gets rsa public key.
+     *
+     * @return the rsa public key
+     */
     public PublicKey getRSAPublicKey() {
         try {
             return rsaLoader.loadPublicKey();
@@ -514,6 +713,12 @@ public class TOMConfiguration extends Configuration {
 
     }
 
+    /**
+     * Gets rsa public key.
+     *
+     * @param id the id
+     * @return the rsa public key
+     */
     public PublicKey getRSAPublicKey(int id) {
         try {
             return rsaLoader.loadPublicKey(id);
@@ -524,6 +729,12 @@ public class TOMConfiguration extends Configuration {
 
     }
 
+    /**
+     * Gets rsa public key.
+     *
+     * @param pubKeyStr the pub key str
+     * @return the rsa public key
+     */
     //TODO zyf add
     public PublicKey getRSAPublicKey(String pubKeyStr) {
         try {
@@ -535,6 +746,11 @@ public class TOMConfiguration extends Configuration {
 
     }
 
+    /**
+     * Gets rsa private key.
+     *
+     * @return the rsa private key
+     */
     public PrivateKey getRSAPrivateKey() {
         try {
             return rsaLoader.loadPrivateKey();
@@ -544,15 +760,30 @@ public class TOMConfiguration extends Configuration {
         }
     }
 
+    /**
+     * Is bft boolean.
+     *
+     * @return the boolean
+     */
     public boolean isBFT() {
 
         return this.isBFT;
     }
 
+    /**
+     * Gets num repliers.
+     *
+     * @return the num repliers
+     */
     public int getNumRepliers() {
         return numRepliers;
     }
 
+    /**
+     * Gets num netty workers.
+     *
+     * @return the num netty workers
+     */
     public int getNumNettyWorkers() {
         return numNettyWorkers;
     }

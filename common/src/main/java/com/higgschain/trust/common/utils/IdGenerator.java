@@ -12,6 +12,11 @@ import java.util.UUID;
  */
 public class IdGenerator {
 
+    /**
+     * Generate random req id string.
+     *
+     * @return the string
+     */
     @SuppressWarnings("deprecation")
     public static final String generateRandomReqId() {
         String requestId = null;
@@ -24,6 +29,13 @@ public class IdGenerator {
         return requestId;
     }
 
+    /**
+     * Generate pp id string.
+     *
+     * @param requestBiz the request biz
+     * @param identity   the identity
+     * @return the string
+     */
     @SuppressWarnings("deprecation")
     public static final String generatePPId(String requestBiz, String identity) {
         String ppIdString = "unipassport_ppid_generator" + requestBiz + identity;
@@ -32,6 +44,11 @@ public class IdGenerator {
         return ppIdHashCode.toString();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         System.out.println(generateRandomReqId());
     }

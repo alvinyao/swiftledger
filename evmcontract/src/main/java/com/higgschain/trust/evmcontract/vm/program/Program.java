@@ -59,6 +59,8 @@ import static java.math.BigInteger.ZERO;
 import static org.apache.commons.lang3.ArrayUtils.*;
 
 /**
+ * The type Program.
+ *
  * @author Roman Mandeleil
  * @since 01.06.2014
  */
@@ -113,18 +115,48 @@ public class Program {
 
     private final BlockChainConfig blockchainConfig;
 
+    /**
+     * Instantiates a new Program.
+     *
+     * @param ops           the ops
+     * @param programInvoke the program invoke
+     */
     public Program(byte[] ops, ProgramInvoke programInvoke) {
         this(ops, programInvoke, null);
     }
 
+    /**
+     * Instantiates a new Program.
+     *
+     * @param ops           the ops
+     * @param programInvoke the program invoke
+     * @param transaction   the transaction
+     */
     public Program(byte[] ops, ProgramInvoke programInvoke, Transaction transaction) {
         this(ops, programInvoke, transaction, SystemProperties.getDefault());
     }
 
+    /**
+     * Instantiates a new Program.
+     *
+     * @param ops           the ops
+     * @param programInvoke the program invoke
+     * @param transaction   the transaction
+     * @param config        the config
+     */
     public Program(byte[] ops, ProgramInvoke programInvoke, Transaction transaction, SystemProperties config) {
         this(null, ops, programInvoke, transaction, config);
     }
 
+    /**
+     * Instantiates a new Program.
+     *
+     * @param codeHash      the code hash
+     * @param ops           the ops
+     * @param programInvoke the program invoke
+     * @param transaction   the transaction
+     * @param config        the config
+     */
     public Program(byte[] codeHash, byte[] ops, ProgramInvoke programInvoke, Transaction transaction, SystemProperties config) {
         this.config = config;
         this.invoke = programInvoke;
@@ -141,6 +173,11 @@ public class Program {
         this.blockchainConfig = config.getBlockchainConfig();
     }
 
+    /**
+     * Gets program precompile.
+     *
+     * @return the program precompile
+     */
     public ProgramPrecompile getProgramPrecompile() {
         if (programPrecompile == null) {
 //            if (codeHash != null && commonConfig.precompileSource() != null) {
@@ -162,6 +199,11 @@ public class Program {
 //        return this;
 //    }
 
+    /**
+     * Gets call deep.
+     *
+     * @return the call deep
+     */
     public int getCallDeep() {
         return invoke.getCallDeep();
     }
@@ -192,20 +234,38 @@ public class Program {
         return programListenerAware;
     }
 
+    /**
+     * Gets storage diff.
+     *
+     * @return the storage diff
+     */
     public Map<DataWord, DataWord> getStorageDiff() {
         return storageDiffListener.getDiff();
     }
 
+    /**
+     * Gets op.
+     *
+     * @param pc the pc
+     * @return the op
+     */
     public byte getOp(int pc) {
         return (getLength(ops) <= pc) ? 0 : ops[pc];
     }
 
+    /**
+     * Gets current op.
+     *
+     * @return the current op
+     */
     public byte getCurrentOp() {
         return isEmpty(ops) ? 0 : ops[pc];
     }
 
     /**
      * Last Op can only be set publicly (no getLastOp method), is used for logging.
+     *
+     * @param op the op
      */
     public void setLastOp(byte op) {
         this.lastOp = op;
@@ -213,6 +273,8 @@ public class Program {
 
     /**
      * Should be set only after the OP is fully executed.
+     *
+     * @param op the op
      */
     public void setPreviouslyExecutedOp(byte op) {
         this.previouslyExecutedOp = op;
@@ -220,42 +282,80 @@ public class Program {
 
     /**
      * Returns the last fully executed OP.
+     *
+     * @return the previously executed op
      */
     public byte getPreviouslyExecutedOp() {
         return this.previouslyExecutedOp;
     }
 
+    /**
+     * Stack push.
+     *
+     * @param data the data
+     */
     public void stackPush(byte[] data) {
         stackPush(new DataWord(data));
     }
 
+    /**
+     * Stack push zero.
+     */
     public void stackPushZero() {
         stackPush(new DataWord(0));
     }
 
+    /**
+     * Stack push one.
+     */
     public void stackPushOne() {
         DataWord stackWord = new DataWord(1);
         stackPush(stackWord);
     }
 
+    /**
+     * Stack push.
+     *
+     * @param stackWord the stack word
+     */
     public void stackPush(DataWord stackWord) {
         //Sanity Check
         verifyStackOverflow(0, 1);
         stack.push(stackWord);
     }
 
+    /**
+     * Gets stack.
+     *
+     * @return the stack
+     */
     public com.higgschain.trust.evmcontract.vm.program.Stack getStack() {
         return this.stack;
     }
 
+    /**
+     * Gets pc.
+     *
+     * @return the pc
+     */
     public int getPC() {
         return pc;
     }
 
+    /**
+     * Sets pc.
+     *
+     * @param pc the pc
+     */
     public void setPC(DataWord pc) {
         this.setPC(pc.intValue());
     }
 
+    /**
+     * Sets pc.
+     *
+     * @param pc the pc
+     */
     public void setPC(int pc) {
         this.pc = pc;
 
@@ -264,22 +364,44 @@ public class Program {
         }
     }
 
+    /**
+     * Is stopped boolean.
+     *
+     * @return the boolean
+     */
     public boolean isStopped() {
         return stopped;
     }
 
+    /**
+     * Stop.
+     */
     public void stop() {
         stopped = true;
     }
 
+    /**
+     * Sets h return.
+     *
+     * @param buff the buff
+     */
     public void setHReturn(byte[] buff) {
         getResult().setHReturn(buff);
     }
 
+    /**
+     * Step.
+     */
     public void step() {
         setPC(pc + 1);
     }
 
+    /**
+     * Sweep byte [ ].
+     *
+     * @param n the n
+     * @return the byte [ ]
+     */
     public byte[] sweep(int n) {
 
         if (pc + n > ops.length) {
@@ -295,6 +417,11 @@ public class Program {
         return data;
     }
 
+    /**
+     * Stack pop data word.
+     *
+     * @return the data word
+     */
     public DataWord stackPop() {
         return stack.pop();
     }
@@ -303,8 +430,7 @@ public class Program {
      * Verifies that the stack is at least <code>stackSize</code>
      *
      * @param stackSize int
-     * @throws StackTooSmallException If the stack is
-     *                                smaller than <code>stackSize</code>
+     * @throws StackTooSmallException If the stack is                                smaller than <code>stackSize</code>
      */
     public void verifyStackSize(int stackSize) {
         if (stack.size() < stackSize) {
@@ -312,28 +438,64 @@ public class Program {
         }
     }
 
+    /**
+     * Verify stack overflow.
+     *
+     * @param argsReqs   the args reqs
+     * @param returnReqs the return reqs
+     */
     public void verifyStackOverflow(int argsReqs, int returnReqs) {
         if ((stack.size() - argsReqs + returnReqs) > MAX_STACKSIZE) {
             throw new StackTooLargeException("Expected: overflow " + MAX_STACKSIZE + " elements stack limit");
         }
     }
 
+    /**
+     * Gets mem size.
+     *
+     * @return the mem size
+     */
     public int getMemSize() {
         return memory.size();
     }
 
+    /**
+     * Memory save.
+     *
+     * @param addrB the addr b
+     * @param value the value
+     */
     public void memorySave(DataWord addrB, DataWord value) {
         memory.write(addrB.intValue(), value.getData(), value.getData().length, false);
     }
 
+    /**
+     * Memory save limited.
+     *
+     * @param addr     the addr
+     * @param data     the data
+     * @param dataSize the data size
+     */
     public void memorySaveLimited(int addr, byte[] data, int dataSize) {
         memory.write(addr, data, dataSize, true);
     }
 
+    /**
+     * Memory save.
+     *
+     * @param addr  the addr
+     * @param value the value
+     */
     public void memorySave(int addr, byte[] value) {
         memory.write(addr, value, value.length, false);
     }
 
+    /**
+     * Memory expand.
+     *
+     * @param outDataOffs the out data offs
+     * @param outDataSize the out data size
+     */
     public void memoryExpand(DataWord outDataOffs, DataWord outDataSize) {
         if (!outDataSize.isZero()) {
             memory.extend(outDataOffs.intValue(), outDataSize.intValue());
@@ -351,15 +513,33 @@ public class Program {
         memory.extendAndWrite(addr, allocSize, value);
     }
 
-
+    /**
+     * Memory load data word.
+     *
+     * @param addr the addr
+     * @return the data word
+     */
     public DataWord memoryLoad(DataWord addr) {
         return memory.readWord(addr.intValue());
     }
 
+    /**
+     * Memory load data word.
+     *
+     * @param address the address
+     * @return the data word
+     */
     public DataWord memoryLoad(int address) {
         return memory.readWord(address);
     }
 
+    /**
+     * Memory chunk byte [ ].
+     *
+     * @param offset the offset
+     * @param size   the size
+     * @return the byte [ ]
+     */
     public byte[] memoryChunk(int offset, int size) {
         return memory.read(offset, size);
     }
@@ -375,7 +555,11 @@ public class Program {
         memory.extend(offset, size);
     }
 
-
+    /**
+     * Suicide.
+     *
+     * @param obtainerAddress the obtainer address
+     */
     public void suicide(DataWord obtainerAddress) {
 
         byte[] owner = getOwnerAddress().getLast20Bytes();
@@ -400,10 +584,22 @@ public class Program {
         getResult().addDeleteAccount(this.getOwnerAddress());
     }
 
+    /**
+     * Gets storage.
+     *
+     * @return the storage
+     */
     public Repository getStorage() {
         return this.storage;
     }
 
+    /**
+     * Create contract.
+     *
+     * @param value    the value
+     * @param memStart the mem start
+     * @param memSize  the mem size
+     */
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     public void createContract(DataWord value, DataWord memStart, DataWord memSize) {
         // reset return buffer right before the call
@@ -682,6 +878,12 @@ public class Program {
         }
     }
 
+    /**
+     * Spend gas.
+     *
+     * @param gasValue the gas value
+     * @param cause    the cause
+     */
     public void spendGas(long gasValue, String cause) {
         if ( logger.isDebugEnabled()) {
             logger.debug("[{}] Spent for cause: [{}], gas: [{}]", invoke.hashCode(), cause, gasValue);
@@ -693,94 +895,204 @@ public class Program {
         getResult().spendGas(gasValue);
     }
 
+    /**
+     * Spend all gas.
+     */
     public void spendAllGas() {
         spendGas(getGas().longValue(), "Spending all remaining");
     }
 
+    /**
+     * Refund gas.
+     *
+     * @param gasValue the gas value
+     * @param cause    the cause
+     */
     public void refundGas(long gasValue, String cause) {
         logger.info("[{}] Refund for cause: [{}], gas: [{}]", invoke.hashCode(), cause, gasValue);
         getResult().refundGas(gasValue);
     }
 
+    /**
+     * Future refund gas.
+     *
+     * @param gasValue the gas value
+     */
     public void futureRefundGas(long gasValue) {
         logger.info("Future refund added: [{}]", gasValue);
         getResult().addFutureRefund(gasValue);
     }
 
+    /**
+     * Reset future refund.
+     */
     public void resetFutureRefund() {
         getResult().resetFutureRefund();
     }
 
+    /**
+     * Storage save.
+     *
+     * @param word1 the word 1
+     * @param word2 the word 2
+     */
     public void storageSave(DataWord word1, DataWord word2) {
         storageSave(word1.getData(), word2.getData());
     }
 
+    /**
+     * Storage save.
+     *
+     * @param key the key
+     * @param val the val
+     */
     public void storageSave(byte[] key, byte[] val) {
         DataWord keyWord = new DataWord(key);
         DataWord valWord = new DataWord(val);
         getStorage().addStorageRow(getOwnerAddress().getLast20Bytes(), keyWord, valWord);
     }
 
+    /**
+     * Get code byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getCode() {
         return ops;
     }
 
+    /**
+     * Get code at byte [ ].
+     *
+     * @param address the address
+     * @return the byte [ ]
+     */
     public byte[] getCodeAt(DataWord address) {
         byte[] code = invoke.getRepository().getCode(address.getLast20Bytes());
         return nullToEmpty(code);
     }
 
+    /**
+     * Gets owner address.
+     *
+     * @return the owner address
+     */
     public DataWord getOwnerAddress() {
         return invoke.getOwnerAddress().clone();
     }
 
+    /**
+     * Gets block hash.
+     *
+     * @param index the index
+     * @return the block hash
+     */
     public DataWord getBlockHash(int index) {
         return index < this.getNumber().longValue() && index >= Math.max(256, this.getNumber().intValue()) - 256 ?
                 new DataWord(this.invoke.getBlockStore().getBlockHashByNumber(index, getPrevHash().getData())).clone() :
                 DataWord.ZERO.clone();
     }
 
+    /**
+     * Gets balance.
+     *
+     * @param address the address
+     * @return the balance
+     */
     public DataWord getBalance(DataWord address) {
         BigInteger balance = getStorage().getBalance(address.getLast20Bytes());
         return new DataWord(balance.toByteArray());
     }
 
+    /**
+     * Gets origin address.
+     *
+     * @return the origin address
+     */
     public DataWord getOriginAddress() {
         return invoke.getOriginAddress().clone();
     }
 
+    /**
+     * Gets caller address.
+     *
+     * @return the caller address
+     */
     public DataWord getCallerAddress() {
         return invoke.getCallerAddress().clone();
     }
 
+    /**
+     * Gets gas price.
+     *
+     * @return the gas price
+     */
     public DataWord getGasPrice() {
         return invoke.getMinGasPrice().clone();
     }
 
+    /**
+     * Gets gas long.
+     *
+     * @return the gas long
+     */
     public long getGasLong() {
         return invoke.getGasLong() - getResult().getGasUsed();
     }
 
+    /**
+     * Gets gas.
+     *
+     * @return the gas
+     */
     public DataWord getGas() {
         return new DataWord(invoke.getGasLong() - getResult().getGasUsed());
     }
 
+    /**
+     * Gets call value.
+     *
+     * @return the call value
+     */
     public DataWord getCallValue() {
         return invoke.getCallValue().clone();
     }
 
+    /**
+     * Gets data size.
+     *
+     * @return the data size
+     */
     public DataWord getDataSize() {
         return invoke.getDataSize().clone();
     }
 
+    /**
+     * Gets data value.
+     *
+     * @param index the index
+     * @return the data value
+     */
     public DataWord getDataValue(DataWord index) {
         return invoke.getDataValue(index);
     }
 
+    /**
+     * Get data copy byte [ ].
+     *
+     * @param offset the offset
+     * @param length the length
+     * @return the byte [ ]
+     */
     public byte[] getDataCopy(DataWord offset, DataWord length) {
         return invoke.getDataCopy(offset, length);
     }
 
+    /**
+     * Gets return data buffer size.
+     *
+     * @return the return data buffer size
+     */
     public DataWord getReturnDataBufferSize() {
         return new DataWord(getReturnDataBufferSizeI());
     }
@@ -789,6 +1101,13 @@ public class Program {
         return returnDataBuffer == null ? 0 : returnDataBuffer.length;
     }
 
+    /**
+     * Get return data buffer data byte [ ].
+     *
+     * @param off  the off
+     * @param size the size
+     * @return the byte [ ]
+     */
     public byte[] getReturnDataBufferData(DataWord off, DataWord size) {
         if ((long) off.intValueSafe() + size.intValueSafe() > getReturnDataBufferSizeI()) {
             return null;
@@ -797,55 +1116,119 @@ public class Program {
                 Arrays.copyOfRange(returnDataBuffer, off.intValueSafe(), off.intValueSafe() + size.intValueSafe());
     }
 
+    /**
+     * Storage load data word.
+     *
+     * @param key the key
+     * @return the data word
+     */
     public DataWord storageLoad(DataWord key) {
         DataWord ret = getStorage().getStorageValue(getOwnerAddress().getLast20Bytes(), key.clone());
         return ret == null ? null : ret.clone();
     }
 
+    /**
+     * Gets prev hash.
+     *
+     * @return the prev hash
+     */
     public DataWord getPrevHash() {
         return invoke.getPrevHash().clone();
     }
 
+    /**
+     * Gets coinbase.
+     *
+     * @return the coinbase
+     */
     public DataWord getCoinbase() {
         return invoke.getCoinbase().clone();
     }
 
+    /**
+     * Gets timestamp.
+     *
+     * @return the timestamp
+     */
     public DataWord getTimestamp() {
         return invoke.getTimestamp().clone();
     }
 
+    /**
+     * Gets number.
+     *
+     * @return the number
+     */
     public DataWord getNumber() {
         return invoke.getNumber().clone();
     }
 
+    /**
+     * Gets blockchain config.
+     *
+     * @return the blockchain config
+     */
     public BlockChainConfig getBlockchainConfig() {
         return blockchainConfig;
     }
 
+    /**
+     * Gets difficulty.
+     *
+     * @return the difficulty
+     */
     public DataWord getDifficulty() {
         return invoke.getDifficulty().clone();
     }
 
+    /**
+     * Gets gas limit.
+     *
+     * @return the gas limit
+     */
     public DataWord getGasLimit() {
         return invoke.getGaslimit().clone();
     }
 
+    /**
+     * Is static call boolean.
+     *
+     * @return the boolean
+     */
     public boolean isStaticCall() {
         return invoke.isStaticCall();
     }
 
+    /**
+     * Gets result.
+     *
+     * @return the result
+     */
     public ProgramResult getResult() {
         return result;
     }
 
+    /**
+     * Sets runtime failure.
+     *
+     * @param e the e
+     */
     public void setRuntimeFailure(RuntimeException e) {
         getResult().setException(e);
     }
 
+    /**
+     * Memory to string string.
+     *
+     * @return the string
+     */
     public String memoryToString() {
         return memory.toString();
     }
 
+    /**
+     * Full trace.
+     */
     public void fullTrace() {
 
         if (logger.isTraceEnabled() || listener != null) {
@@ -972,16 +1355,31 @@ public class Program {
         }
     }
 
+    /**
+     * Save op trace.
+     */
     public void saveOpTrace() {
         if (this.pc < ops.length) {
             trace.addOp(ops[pc], pc, getCallDeep(), getGas(), traceListener.resetActions());
         }
     }
 
+    /**
+     * Gets trace.
+     *
+     * @return the trace
+     */
     public ProgramTrace getTrace() {
         return trace;
     }
 
+    /**
+     * Format bin data string.
+     *
+     * @param binData the bin data
+     * @param startPC the start pc
+     * @return the string
+     */
     static String formatBinData(byte[] binData, int startPC) {
         StringBuilder ret = new StringBuilder();
         for (int i = 0; i < binData.length; i += 16) {
@@ -991,6 +1389,12 @@ public class Program {
         return ret.toString();
     }
 
+    /**
+     * Stringify multiline string.
+     *
+     * @param code the code
+     * @return the string
+     */
     public static String stringifyMultiline(byte[] code) {
         int index = 0;
         StringBuilder sb = new StringBuilder();
@@ -1052,30 +1456,69 @@ public class Program {
         return sb.toString();
     }
 
+    /**
+     * The type Byte code iterator.
+     */
     static class ByteCodeIterator {
+        /**
+         * The Code.
+         */
         byte[] code;
+        /**
+         * The Pc.
+         */
         int pc;
 
+        /**
+         * Instantiates a new Byte code iterator.
+         *
+         * @param code the code
+         */
         public ByteCodeIterator(byte[] code) {
             this.code = code;
         }
 
+        /**
+         * Sets pc.
+         *
+         * @param pc the pc
+         */
         public void setPC(int pc) {
             this.pc = pc;
         }
 
+        /**
+         * Gets pc.
+         *
+         * @return the pc
+         */
         public int getPC() {
             return pc;
         }
 
+        /**
+         * Gets cur opcode.
+         *
+         * @return the cur opcode
+         */
         public OpCode getCurOpcode() {
             return pc < code.length ? OpCode.code(code[pc]) : null;
         }
 
+        /**
+         * Is push boolean.
+         *
+         * @return the boolean
+         */
         public boolean isPush() {
             return getCurOpcode() != null ? getCurOpcode().name().startsWith("PUSH") : false;
         }
 
+        /**
+         * Get cur opcode arg byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] getCurOpcodeArg() {
             if (isPush()) {
                 int nPush = getCurOpcode().val() - OpCode.PUSH1.val() + 1;
@@ -1086,12 +1529,23 @@ public class Program {
             }
         }
 
+        /**
+         * Next boolean.
+         *
+         * @return the boolean
+         */
         public boolean next() {
             pc += 1 + getCurOpcodeArg().length;
             return pc < code.length;
         }
     }
 
+    /**
+     * Build reachable bytecodes mask bit set.
+     *
+     * @param code the code
+     * @return the bit set
+     */
     static BitSet buildReachableBytecodesMask(byte[] code) {
         NavigableSet<Integer> gotos = new TreeSet<>();
         ByteCodeIterator it = new ByteCodeIterator(code);
@@ -1129,6 +1583,12 @@ public class Program {
         return ret;
     }
 
+    /**
+     * Stringify string.
+     *
+     * @param code the code
+     * @return the string
+     */
     public static String stringify(byte[] code) {
         int index = 0;
         StringBuilder sb = new StringBuilder();
@@ -1163,11 +1623,21 @@ public class Program {
         return sb.toString();
     }
 
-
+    /**
+     * Add listener.
+     *
+     * @param listener the listener
+     */
     public void addListener(ProgramOutListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Verify jump dest int.
+     *
+     * @param nextPC the next pc
+     * @return the int
+     */
     public int verifyJumpDest(DataWord nextPC) {
         if (nextPC.bytesOccupied() > 4) {
             throw Program.Exception.badJumpDestination(-1);
@@ -1179,6 +1649,12 @@ public class Program {
         return ret;
     }
 
+    /**
+     * Call to precompiled address.
+     *
+     * @param msg      the msg
+     * @param contract the contract
+     */
     public void callToPrecompiledAddress(MessageCall msg, PrecompiledContracts.PrecompiledContract contract) {
         // reset return buffer right before the call
         returnDataBuffer = null;
@@ -1250,11 +1726,24 @@ public class Program {
         }
     }
 
+    /**
+     * By testing suite boolean.
+     *
+     * @return the boolean
+     */
     public boolean byTestingSuite() {
         return invoke.byTestingSuite();
     }
 
+    /**
+     * The interface Program out listener.
+     */
     public interface ProgramOutListener {
+        /**
+         * Output.
+         *
+         * @param out the out
+         */
         void output(String out);
     }
 
@@ -1265,96 +1754,221 @@ public class Program {
      */
     @SuppressWarnings("serial")
     public static class BytecodeExecutionException extends RuntimeException {
+        /**
+         * Instantiates a new Bytecode execution exception.
+         *
+         * @param message the message
+         */
         public BytecodeExecutionException(String message) {
             super(message);
         }
     }
 
+    /**
+     * The type Out of gas exception.
+     */
     @SuppressWarnings("serial")
     public static class OutOfGasException extends BytecodeExecutionException {
 
+        /**
+         * Instantiates a new Out of gas exception.
+         *
+         * @param message the message
+         * @param args    the args
+         */
         public OutOfGasException(String message, Object... args) {
             super(format(message, args));
         }
     }
 
+    /**
+     * The type Illegal operation exception.
+     */
     @SuppressWarnings("serial")
     public static class IllegalOperationException extends BytecodeExecutionException {
 
+        /**
+         * Instantiates a new Illegal operation exception.
+         *
+         * @param message the message
+         * @param args    the args
+         */
         public IllegalOperationException(String message, Object... args) {
             super(format(message, args));
         }
     }
 
+    /**
+     * The type Bad jump destination exception.
+     */
     @SuppressWarnings("serial")
     public static class BadJumpDestinationException extends BytecodeExecutionException {
 
+        /**
+         * Instantiates a new Bad jump destination exception.
+         *
+         * @param message the message
+         * @param args    the args
+         */
         public BadJumpDestinationException(String message, Object... args) {
             super(format(message, args));
         }
     }
 
+    /**
+     * The type Stack too small exception.
+     */
     @SuppressWarnings("serial")
     public static class StackTooSmallException extends BytecodeExecutionException {
 
+        /**
+         * Instantiates a new Stack too small exception.
+         *
+         * @param message the message
+         * @param args    the args
+         */
         public StackTooSmallException(String message, Object... args) {
             super(format(message, args));
         }
     }
 
+    /**
+     * The type Return data copy illegal bounds exception.
+     */
     @SuppressWarnings("serial")
     public static class ReturnDataCopyIllegalBoundsException extends BytecodeExecutionException {
+        /**
+         * Instantiates a new Return data copy illegal bounds exception.
+         *
+         * @param off            the off
+         * @param size           the size
+         * @param returnDataSize the return data size
+         */
         public ReturnDataCopyIllegalBoundsException(DataWord off, DataWord size, long returnDataSize) {
             super(String.format("Illegal RETURNDATACOPY arguments: offset (%s) + size (%s) > RETURNDATASIZE (%d)", off, size, returnDataSize));
         }
     }
 
+    /**
+     * The type Static call modification exception.
+     */
     @SuppressWarnings("serial")
     public static class StaticCallModificationException extends BytecodeExecutionException {
+        /**
+         * Instantiates a new Static call modification exception.
+         */
         public StaticCallModificationException() {
             super("Attempt to call a state modifying opcode inside STATICCALL");
         }
     }
 
-
+    /**
+     * The type Exception.
+     */
     public static class Exception {
 
+        /**
+         * Not enough op gas out of gas exception.
+         *
+         * @param op         the op
+         * @param opGas      the op gas
+         * @param programGas the program gas
+         * @return the out of gas exception
+         */
         public static OutOfGasException notEnoughOpGas(OpCode op, long opGas, long programGas) {
             return new OutOfGasException("Not enough gas for '%s' operation executing: opGas[%d], programGas[%d];", op, opGas, programGas);
         }
 
+        /**
+         * Not enough op gas out of gas exception.
+         *
+         * @param op         the op
+         * @param opGas      the op gas
+         * @param programGas the program gas
+         * @return the out of gas exception
+         */
         public static OutOfGasException notEnoughOpGas(OpCode op, DataWord opGas, DataWord programGas) {
             return notEnoughOpGas(op, opGas.longValue(), programGas.longValue());
         }
 
+        /**
+         * Not enough op gas out of gas exception.
+         *
+         * @param op         the op
+         * @param opGas      the op gas
+         * @param programGas the program gas
+         * @return the out of gas exception
+         */
         public static OutOfGasException notEnoughOpGas(OpCode op, BigInteger opGas, BigInteger programGas) {
             return notEnoughOpGas(op, opGas.longValue(), programGas.longValue());
         }
 
+        /**
+         * Not enough spending gas out of gas exception.
+         *
+         * @param cause    the cause
+         * @param gasValue the gas value
+         * @param program  the program
+         * @return the out of gas exception
+         */
         public static OutOfGasException notEnoughSpendingGas(String cause, long gasValue, Program program) {
             return new OutOfGasException("Not enough gas for '%s' cause spending: invokeGas[%d], gas[%d], usedGas[%d];",
                     cause, program.invoke.getGas().longValue(), gasValue, program.getResult().getGasUsed());
         }
 
+        /**
+         * Gas overflow out of gas exception.
+         *
+         * @param actualGas the actual gas
+         * @param gasLimit  the gas limit
+         * @return the out of gas exception
+         */
         public static OutOfGasException gasOverflow(BigInteger actualGas, BigInteger gasLimit) {
             return new OutOfGasException("Gas value overflow: actualGas[%d], gasLimit[%d];", actualGas.longValue(), gasLimit.longValue());
         }
 
+        /**
+         * Invalid op code illegal operation exception.
+         *
+         * @param opCode the op code
+         * @return the illegal operation exception
+         */
         public static IllegalOperationException invalidOpCode(byte... opCode) {
             return new IllegalOperationException("Invalid operation code: opCode[%s];", Hex.toHexString(opCode, 0, 1));
         }
 
+        /**
+         * Bad jump destination bad jump destination exception.
+         *
+         * @param pc the pc
+         * @return the bad jump destination exception
+         */
         public static BadJumpDestinationException badJumpDestination(int pc) {
             return new BadJumpDestinationException("Operation with pc isn't 'JUMPDEST': PC[%d];", pc);
         }
 
+        /**
+         * Too small stack stack too small exception.
+         *
+         * @param expectedSize the expected size
+         * @param actualSize   the actual size
+         * @return the stack too small exception
+         */
         public static StackTooSmallException tooSmallStack(int expectedSize, int actualSize) {
             return new StackTooSmallException("Expected stack size %d but actual %d;", expectedSize, actualSize);
         }
     }
 
+    /**
+     * The type Stack too large exception.
+     */
     @SuppressWarnings("serial")
     public class StackTooLargeException extends BytecodeExecutionException {
+        /**
+         * Instantiates a new Stack too large exception.
+         *
+         * @param message the message
+         */
         public StackTooLargeException(String message) {
             super(message);
         }
@@ -1362,6 +1976,8 @@ public class Program {
 
     /**
      * used mostly for testing reasons
+     *
+     * @return the byte [ ]
      */
     public byte[] getMemory() {
         return memory.read(0, memory.size());
@@ -1369,6 +1985,8 @@ public class Program {
 
     /**
      * used mostly for testing reasons
+     *
+     * @param data the data
      */
     public void initMem(byte[] data) {
         this.memory.write(0, data, data.length, false);

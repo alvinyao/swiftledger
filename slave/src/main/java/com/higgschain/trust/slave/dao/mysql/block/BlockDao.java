@@ -7,12 +7,15 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * The interface Block dao.
+ */
 @Mapper public interface BlockDao extends BaseDao<BlockPO> {
     /**
      * query block by block height
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return block po
      */
     BlockPO queryByHeight(@Param("height") Long height);
 
@@ -20,42 +23,44 @@ import java.util.List;
      * query blocks by block height
      *
      * @param startHeight start height
-     * @param size size of blocks
-     * @return
+     * @param size        size of blocks
+     * @return list
      */
     List<BlockPO> queryBlocks(@Param("startHeight") Long startHeight, @Param("limit") int size);
 
     /**
      * get max height of block
      *
-     * @return
+     * @return max height
      */
     Long getMaxHeight();
 
     /**
      * get max height of block
      *
-     * @param limit
-     * @return
+     * @param limit the limit
+     * @return limit height
      */
     List<Long> getLimitHeight(@Param("limit") int limit);
 
     /**
      * query blocks with condition
-     * @param height
-     * @param blockHash
-     * @param start
-     * @param end
-     * @return
+     *
+     * @param height    the height
+     * @param blockHash the block hash
+     * @param start     the start
+     * @param end       the end
+     * @return list
      */
     List<BlockPO> queryBlocksWithCondition(@Param("height") Long height, @Param("blockHash") String blockHash,
         @Param("start") int start, @Param("end") int end);
 
     /**
      * count blocks with condition
-     * @param height
-     * @param blockHash
-     * @return
+     *
+     * @param height    the height
+     * @param blockHash the block hash
+     * @return long
      */
     long countBlockWithCondition(@Param("height") Long height,
         @Param("blockHash") String blockHash);

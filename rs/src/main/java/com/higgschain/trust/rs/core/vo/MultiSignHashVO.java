@@ -9,9 +9,11 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
+ * The type Multi sign hash vo.
+ *
  * @author liuyu
  * @description
- * @date 2019-03-20
+ * @date 2019 -03-20
  */
 @Getter
 @Setter

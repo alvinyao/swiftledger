@@ -6,9 +6,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Block header.
+ *
  * @Description: block p2p information
  * @author: pengdi
- **/
+ */
 @Setter @Getter public class BlockHeader extends BaseBO {
     private String version;
 

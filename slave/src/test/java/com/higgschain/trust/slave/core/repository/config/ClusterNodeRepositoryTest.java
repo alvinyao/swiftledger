@@ -14,10 +14,18 @@ import org.testng.annotations.Test;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Cluster node repository test.
+ */
 public class ClusterNodeRepositoryTest extends BaseTest{
     @Autowired private ClusterNodeRepository clusterNodeRepository;
     @Autowired private InitConfig initConfig;
 
+    /**
+     * Test insert cluster node.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testInsertClusterNode() throws Exception {
         ClusterNode clusterNode = new ClusterNode();
         clusterNode.setNodeName("TRUST-TEST-TEST");
@@ -35,11 +43,21 @@ public class ClusterNodeRepositoryTest extends BaseTest{
 
     }
 
+    /**
+     * Test get cluster node.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetClusterNode() throws Exception {
         ClusterNode clusterNode = clusterNodeRepository.getClusterNode("TRUST-TEST-TEST");
         System.out.println(clusterNode);
     }
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsert() throws Exception {
         List list = new LinkedList();
         for (int i =0;i<5;i++){
@@ -67,6 +85,11 @@ public class ClusterNodeRepositoryTest extends BaseTest{
         System.out.println(clusterNodes);
     }
 
+    /**
+     * Test batch update.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchUpdate() throws Exception {
         List list = new LinkedList();
         for (int i =0;i<2;i++){

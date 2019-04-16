@@ -10,10 +10,14 @@ import org.testng.annotations.Test;
  * CoreTransactionProcessDao test
  *
  * @author lingchao
- * @create 2018年08月25日16:40
+ * @create 2018年08月25日16 :40
  */
 public class CoreTransactionProcessDaoTest extends IntegrateBaseTest {
     @Autowired private CoreTransactionProcessDao coreTransactionProcessDao;
+
+    /**
+     * Add.
+     */
     @Test
     public void add(){
         CoreTransactionProcessPO coreTransactionProcessPO = new CoreTransactionProcessPO();
@@ -22,19 +26,26 @@ public class CoreTransactionProcessDaoTest extends IntegrateBaseTest {
         System.out.println("add:"+coreTransactionProcessDao.add(coreTransactionProcessPO));
     }
 
+    /**
+     * Query by tx id.
+     */
     @Test
     public void queryByTxId(){
         System.out.println("queryByTxId with for update :"+coreTransactionProcessDao.queryByTxId("123", CoreTxStatusEnum.NEED_VOTE.getCode()));
         System.out.println("queryByTxId with not for update :"+coreTransactionProcessDao.queryByTxId("123", CoreTxStatusEnum.NEED_VOTE.getCode()));
     }
 
-
+    /**
+     * Query by status.
+     */
     @Test
     public void queryByStatus(){
         System.out.println("queryByStatus:"+coreTransactionProcessDao.queryByStatus(CoreTxStatusEnum.INIT.getCode(),0, 10));
     }
 
-
+    /**
+     * Update status.
+     */
     @Test
     public void updateStatus(){
         System.out.println("updateStatus  to WAIT:"+coreTransactionProcessDao.updateStatus("123", CoreTxStatusEnum.INIT.getCode(),CoreTxStatusEnum.WAIT.getCode()));
@@ -42,6 +53,9 @@ public class CoreTransactionProcessDaoTest extends IntegrateBaseTest {
 
     }
 
+    /**
+     * Delete end.
+     */
     @Test
     public void deleteEnd(){
         System.out.println("deleteEnd:"+coreTransactionProcessDao.deleteEnd());

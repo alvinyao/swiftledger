@@ -7,10 +7,17 @@ import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
 import io.atomix.primitive.operation.Command;
 
 /**
+ * The interface Command primitive service.
+ *
  * @author suimi
- * @date 2018/7/6
+ * @date 2018 /7/6
  */
 public interface ICommandPrimitiveService {
 
+    /**
+     * Submit.
+     *
+     * @param command the command
+     */
     @Command void submit(AbstractConsensusCommand command);
 }

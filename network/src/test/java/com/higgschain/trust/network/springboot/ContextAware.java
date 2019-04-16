@@ -7,14 +7,22 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Context aware.
+ *
  * @author duhongming
- * @date 2018/9/12
+ * @date 2018 /9/12
  */
 @Component
 public class ContextAware implements ApplicationContextAware {
+    /**
+     * The Person bean.
+     */
     @Autowired
     PersonBean personBean;
 
+    /**
+     * The constant port.
+     */
     public static int port = 1;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

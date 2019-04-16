@@ -3,6 +3,9 @@ package com.higgschain.trust.slave.core.service.datahandler.manage;
 import com.higgschain.trust.slave.BaseTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * The type System property handler test.
+ */
 public class SystemPropertyHandlerTest extends BaseTest {
     @Autowired
     private SystemPropertyHandler systemPropertyHandler;

@@ -10,13 +10,18 @@ import org.testng.annotations.Test;
 import java.util.Random;
 
 /**
- *
+ * The type P 2 p consensus controller test.
  */
 @Slf4j
 public class P2pConsensusControllerTest extends p2pBaseTest {
 
     private StringValidConsensus stringValidConsensus;
 
+    /**
+     * Test receive command.
+     *
+     * @throws Exception the exception
+     */
     @Test()
     public void testReceiveCommand() throws Exception {
         BlockHeader header = new BlockHeader();

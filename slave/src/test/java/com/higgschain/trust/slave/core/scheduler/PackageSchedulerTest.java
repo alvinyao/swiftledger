@@ -28,6 +28,9 @@ import java.util.Deque;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * The type Package scheduler test.
+ */
 /*
  *
  * @desc
@@ -63,6 +66,9 @@ public class PackageSchedulerTest extends BaseTest {
     private String priKey4 =
         "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIiVJuf1C5CXeDl/g7mcZ4daNsMkdO33OU4LU5CWtXcIMXONRM0/jcHw171TM9PaV+c31TRfZKkhurm5cbzN7+wOT+745AX0BxM2oGXKKNIuyt9gtO91d1O87K39q3Vjf65vzjjIUjT9tLzTDotCGSAs3MHolZqZuyTMNbvRQ2RFAgMBAAECgYBpCMKtuP2WyVU0aoKDV+sp5M+eTEf7xJZ2FTHDTJLqogtdgHM7oDdEwRE30GdX8V6OOpqkNwPzKTQupZT5DCoHaLlKSNRCpQMfANmb84//0B6sLj8nTwcL+Ap51l/XOkhlJ/Pe/uElDaBYP05/SV7yD25xYJTMa7KUxn0JGsW3IQJBAOni5qrZ2/Xfl7VMbq3eGqDYkB+fJPpAXcfMg94+mKYoyZEptr/b78a3yvGXo4Fu8He3KXVmEjPMGL8JTXgURN0CQQCVfxCDPUA6s+D5BcH7x0ivMwaJedk4k0uaGW9Tfxl9SMFxmLQaRRdg/Pc/FJBV7cWDrjLUfK4CVJ0Zr2whLxKJAkAH8MUmDcly+olbBWJIkt7SkSereyq1OFQ2wVHEzNk/4uic/g6PSvdEBt9j/mL1tP+DAPvuWW3KxmYcrkMsDXwdAkADcTKLIwzojR2//h7yUitdRVqALdsPj2ytNqq2jHWkydkSaYa0GCUqqYhz3mBYaiojFw66j8hd617WqZBezzupAkEAjIkafm75nhYx9ObTkZU3WDyeSACr7NH/bkaKtWibDRhfuELgdW9LUrXXnqImLgFu8VvbqF/zBhkaFWAcfy9mSA==";
 
+    /**
+     * Sets up.
+     */
     @BeforeMethod public void setUp() {
         //        createPolicyTx();
         createRegisterRsTx();
@@ -152,6 +158,9 @@ public class PackageSchedulerTest extends BaseTest {
         //        signedTxList.add(signedTx2);
     }
 
+    /**
+     * Create policy tx.
+     */
     public void createPolicyTx() {
         SignedTransaction signedTx1 = new SignedTransaction();
         CoreTransaction coreTx1 = new CoreTransaction();
@@ -265,11 +274,17 @@ public class PackageSchedulerTest extends BaseTest {
         return registerPolicies;
     }
 
+    /**
+     * Create package.
+     */
     @Test public void createPackage() {
         packageScheduler.createPackage();
         //        packageService.receive(pendingPack.poll());
     }
 
+    /**
+     * Submit package.
+     */
     @Test public void submitPackage() {
         packageScheduler.createPackage();
         packageScheduler.submitPackage();
@@ -280,6 +295,9 @@ public class PackageSchedulerTest extends BaseTest {
         }
     }
 
+    /**
+     * Process package.
+     */
     @Test public void processPackage() {
         packageScheduler.processPackage();
     }

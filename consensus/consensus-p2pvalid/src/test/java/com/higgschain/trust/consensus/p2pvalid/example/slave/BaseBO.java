@@ -10,7 +10,7 @@ import java.io.Serializable;
  * the base object create all BO object
  *
  * @author baizhengwen
- * @create 2017-03-07 21:01
+ * @create 2017 -03-07 21:01
  */
 public abstract class BaseBO implements Serializable {
 

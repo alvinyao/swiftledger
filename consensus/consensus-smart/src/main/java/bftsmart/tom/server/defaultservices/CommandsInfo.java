@@ -21,20 +21,37 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
+ * The type Commands info.
+ *
  * @author Joao Sousa
  */
 public class CommandsInfo implements Serializable {
 
     private static final long serialVersionUID = 342711292879899682L;
 
+    /**
+     * The Commands.
+     */
     public byte[][] commands;
+    /**
+     * The Msg ctx.
+     */
     public MessageContext[] msgCtx;
 
+    /**
+     * Instantiates a new Commands info.
+     */
     public CommandsInfo() {
         this.commands = null;
         this.msgCtx = null;
     }
 
+    /**
+     * Instantiates a new Commands info.
+     *
+     * @param commands the commands
+     * @param msgCtx   the msg ctx
+     */
     public CommandsInfo(byte[][] commands, MessageContext[] msgCtx) {
         this.commands = commands;
         MessageContext[] onlyNeeded = null;

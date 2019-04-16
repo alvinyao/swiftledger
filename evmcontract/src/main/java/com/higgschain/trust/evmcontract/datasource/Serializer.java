@@ -21,17 +21,26 @@ package com.higgschain.trust.evmcontract.datasource;
  * Converter from one type to another and vice versa
  * <p>
  * Created by Anton Nashatyrev on 17.03.2016.
+ *
+ * @param <T> the type parameter
+ * @param <S> the type parameter
  */
 public interface Serializer<T, S> {
     /**
      * Converts T ==> S
      * Should correctly handle null parameter
+     *
+     * @param object the object
+     * @return the s
      */
     S serialize(T object);
 
     /**
      * Converts S ==> T
      * Should correctly handle null parameter
+     *
+     * @param stream the stream
+     * @return the t
      */
     T deserialize(S stream);
 }

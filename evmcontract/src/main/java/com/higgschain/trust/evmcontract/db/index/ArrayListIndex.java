@@ -20,12 +20,19 @@ package com.higgschain.trust.evmcontract.db.index;
 import java.util.*;
 
 /**
+ * The type Array list index.
+ *
  * @author Mikhail Kalinin
  * @since 28.01.2016
  */
 public class ArrayListIndex implements Index {
     private List<Long> index;
 
+    /**
+     * Instantiates a new Array list index.
+     *
+     * @param numbers the numbers
+     */
     public ArrayListIndex(Collection<Long> numbers) {
         index = new ArrayList<>(numbers);
         sort();

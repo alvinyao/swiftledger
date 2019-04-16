@@ -9,6 +9,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 //import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 /**
+ * The type P 2 p test application.
+ *
  * @author cwy
  */
 @Slf4j

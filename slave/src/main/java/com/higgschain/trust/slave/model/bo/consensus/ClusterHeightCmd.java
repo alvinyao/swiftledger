@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * The type Cluster height cmd.
+ *
  * @author suimi
- * @date 2018/4/17
+ * @date 2018 /4/17
  */
 @NoArgsConstructor @Getter @Setter public class ClusterHeightCmd extends ValidCommand<Integer> {
 
@@ -18,6 +20,13 @@ import lombok.Setter;
 
     private String requestId;
 
+    /**
+     * Instantiates a new Cluster height cmd.
+     *
+     * @param requestId the request id
+     * @param value     the value
+     * @param view      the view
+     */
     public ClusterHeightCmd(String requestId, Integer value, long view) {
         super(value, view);
         this.requestId = requestId;

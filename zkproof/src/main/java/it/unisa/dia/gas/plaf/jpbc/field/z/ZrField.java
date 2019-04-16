@@ -7,27 +7,64 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Zr field.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ZrField extends AbstractField<ZrElement> {
+    /**
+     * The Order.
+     */
     protected BigInteger order;
+    /**
+     * The Nqr.
+     */
     protected ZrElement nqr;
+    /**
+     * The Fixed length in bytes.
+     */
     protected int fixedLengthInBytes;
+    /**
+     * The Two inverse.
+     */
     protected BigInteger twoInverse;
 
-
+    /**
+     * Instantiates a new Zr field.
+     *
+     * @param order the order
+     */
     public ZrField(BigInteger order) {
         this(new SecureRandom(), order, null);
     }
 
+    /**
+     * Instantiates a new Zr field.
+     *
+     * @param random the random
+     * @param order  the order
+     */
     public ZrField(SecureRandom random, BigInteger order) {
         this(random, order, null);
     }
 
+    /**
+     * Instantiates a new Zr field.
+     *
+     * @param order the order
+     * @param nqr   the nqr
+     */
     public ZrField(BigInteger order, BigInteger nqr) {
         this(new SecureRandom(), order, nqr);
     }
 
+    /**
+     * Instantiates a new Zr field.
+     *
+     * @param random the random
+     * @param order  the order
+     * @param nqr    the nqr
+     */
     public ZrField(SecureRandom random, BigInteger order, BigInteger nqr) {
         super(random);
         this.order = order;

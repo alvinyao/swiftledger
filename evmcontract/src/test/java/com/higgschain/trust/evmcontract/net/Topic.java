@@ -25,8 +25,9 @@ import java.util.Arrays;
 import static com.higgschain.trust.evmcontract.crypto.HashUtil.sha3;
 import static com.higgschain.trust.evmcontract.util.ByteUtil.toHexString;
 
-
 /**
+ * The type Topic.
+ *
  * @author by Konstantin Shabalin
  */
 public class Topic {
@@ -34,16 +35,32 @@ public class Topic {
     private byte[] fullTopic;
     private byte[] abrigedTopic = new byte[4];
 
+    /**
+     * Instantiates a new Topic.
+     *
+     * @param data the data
+     */
     public Topic(byte[] data) {
         this.abrigedTopic = data;
     }
 
+    /**
+     * Instantiates a new Topic.
+     *
+     * @param data the data
+     */
     public Topic(String data) {
         originalTopic = data;
         fullTopic = sha3(RLP.encode(originalTopic));
         this.abrigedTopic = buildAbrigedTopic(fullTopic);
     }
 
+    /**
+     * Create topics topic [ ].
+     *
+     * @param topicsString the topics string
+     * @return the topic [ ]
+     */
     public static Topic[] createTopics(String... topicsString) {
         if (topicsString == null) return new Topic[0];
         Topic[] topics = new Topic[topicsString.length];
@@ -53,6 +70,11 @@ public class Topic {
         return topics;
     }
 
+    /**
+     * Get bytes byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getBytes() {
         return abrigedTopic;
     }
@@ -64,14 +86,29 @@ public class Topic {
         return topic;
     }
 
+    /**
+     * Get abriged topic byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getAbrigedTopic() {
         return abrigedTopic;
     }
 
+    /**
+     * Get full topic byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getFullTopic() {
         return fullTopic;
     }
 
+    /**
+     * Gets original topic.
+     *
+     * @return the original topic
+     */
     public String getOriginalTopic() {
         return originalTopic;
     }

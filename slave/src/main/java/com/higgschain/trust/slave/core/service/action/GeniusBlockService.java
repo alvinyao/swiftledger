@@ -34,20 +34,49 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.*;
 
+/**
+ * The type Genius block service.
+ */
 @Slf4j @Service public class GeniusBlockService {
 
+    /**
+     * The Cluster config repository.
+     */
     @Autowired
     ClusterConfigRepository clusterConfigRepository;
+    /**
+     * The Cluster node repository.
+     */
     @Autowired
     ClusterNodeRepository clusterNodeRepository;
+    /**
+     * The Block repository.
+     */
     @Autowired BlockRepository blockRepository;
+    /**
+     * The Tx required.
+     */
     @Autowired TransactionTemplate txRequired;
+    /**
+     * The Ca repository.
+     */
     @Autowired
     CaRepository caRepository;
+    /**
+     * The System property repository.
+     */
     @Autowired SystemPropertyRepository systemPropertyRepository;
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
 
+    /**
+     * Generate genius block.
+     *
+     * @param block the block
+     */
     public void generateGeniusBlock(Block block) {
         try {
             Map<String, TransactionReceipt> txReceiptMap = new HashMap<>(1);

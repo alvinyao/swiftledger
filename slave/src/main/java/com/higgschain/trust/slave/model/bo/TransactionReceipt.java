@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Transaction receipt.
+ *
  * @author liuyu
  * @description the execution result of the transaction
- * @date 2018-04-09
+ * @date 2018 -04-09
  */
 @Getter @Setter public class TransactionReceipt extends BaseBO {
     /**

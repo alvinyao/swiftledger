@@ -18,6 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+/**
+ * The type Integrate base test.
+ */
 @RunWith(PowerMockRunner.class) @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @PowerMockIgnore({"javax.management.*", "okhttp3.*", "javax.crypto.*", "javax.net.ssl.*"})
@@ -25,10 +28,19 @@ public abstract class IntegrateBaseTest {
 
     @Autowired private ApplicationContext springContext;
 
+    /**
+     * The Bean factory.
+     */
     @Autowired DefaultListableBeanFactory beanFactory;
 
+    /**
+     * The Snapshot service.
+     */
     @Autowired SnapshotService snapshotService;
 
+    /**
+     * Before class.
+     */
     @BeforeClass public static void beforeClass() {
         System.setProperty("spring.config.location", "classpath:test-application.json");
         //JSON auto detect class type
@@ -45,10 +57,16 @@ public abstract class IntegrateBaseTest {
         JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.WriteClassName.getMask();
     }
 
+    /**
+     * Run before.
+     */
     @Before public void runBefore() {
         initMock();
     }
 
+    /**
+     * Run after.
+     */
     @After public void runAfter() {
         runLast();
     }
@@ -57,6 +75,9 @@ public abstract class IntegrateBaseTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Run last.
+     */
     protected void runLast() {
     }
 }

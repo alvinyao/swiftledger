@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Rs core tx vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-26
+ * @date 2018 -06-26
  */
 @Setter @Getter public class RsCoreTxVO extends CoreTxBO {
     /**

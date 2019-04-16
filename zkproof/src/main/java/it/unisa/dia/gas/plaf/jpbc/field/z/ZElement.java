@@ -6,23 +6,40 @@ import it.unisa.dia.gas.plaf.jpbc.util.Arrays;
 import java.math.BigInteger;
 
 /**
+ * The type Z element.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ZElement extends AbstractZElement<ZField> {
 
-
+    /**
+     * Instantiates a new Z element.
+     *
+     * @param field the field
+     */
     public ZElement(ZField field) {
         super(field);
 
         this.value = BigInteger.ZERO;
     }
 
+    /**
+     * Instantiates a new Z element.
+     *
+     * @param field the field
+     * @param value the value
+     */
     public ZElement(ZField field, BigInteger value) {
         super(field);
 
         this.value = value;
     }
 
+    /**
+     * Instantiates a new Z element.
+     *
+     * @param zrElement the zr element
+     */
     public ZElement(ZElement zrElement) {
         super(zrElement.getField());
 

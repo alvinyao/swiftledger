@@ -34,8 +34,14 @@ public class Decision {
     private byte[] value = null; // decided value
     private TOMMessage[] deserializedValue = null; // decided value (deserialized)
 
+    /**
+     * The First message proposed.
+     */
     //for benchmarking
     public TOMMessage firstMessageProposed = null;
+    /**
+     * The Batch size.
+     */
     public int batchSize = 0;
 
     /**
@@ -114,6 +120,11 @@ public class Decision {
         return value;
     }
 
+    /**
+     * Get deserialized value tom message [ ].
+     *
+     * @return the tom message [ ]
+     */
     public TOMMessage[] getDeserializedValue() {
         while (deserializedValue == null) {
             waitForPropose();

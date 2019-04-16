@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * This element represents a polynomial through its coefficients.
  *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 1.0.0
  */
@@ -22,8 +23,7 @@ public interface Polynomial<E extends Element> extends Element, Vector {
      * Returns the list of coefficients representing
      * this polynomial.
      *
-     * @return the list of coefficients representing
-     * this polynomial.
+     * @return the list of coefficients representing this polynomial.
      * @since 1.0.0
      */
     List<E> getCoefficients();

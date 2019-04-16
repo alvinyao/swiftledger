@@ -7,9 +7,11 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * The type Register rs.
+ *
  * @author tangfashuang
  * @desc register rs action
- * @date 2018-03-27
+ * @date 2018 -03-27
  */
 @Getter @Setter public class RegisterRS extends Action {
     /**

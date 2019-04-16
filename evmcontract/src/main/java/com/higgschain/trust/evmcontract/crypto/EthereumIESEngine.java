@@ -38,20 +38,53 @@ import java.math.BigInteger;
  */
 public class EthereumIESEngine {
     private final Digest hash;
+    /**
+     * The Agree.
+     */
     BasicAgreement agree;
+    /**
+     * The Kdf.
+     */
     DerivationFunction kdf;
+    /**
+     * The Mac.
+     */
     Mac mac;
+    /**
+     * The Cipher.
+     */
     BufferedBlockCipher cipher;
+    /**
+     * The Mac buf.
+     */
     byte[] macBuf;
 
+    /**
+     * The For encryption.
+     */
     boolean forEncryption;
-    CipherParameters privParam, pubParam;
+    /**
+     * The Priv param.
+     */
+    CipherParameters privParam, /**
+     * The Pub param.
+     */
+    pubParam;
+    /**
+     * The Param.
+     */
     IESParameters param;
 
+    /**
+     * The V.
+     */
     byte[] V;
     private EphemeralKeyPairGenerator keyPairGenerator;
     private KeyParser keyParser;
     private byte[] IV;
+    /**
+     * The Hash k 2.
+     */
     boolean hashK2 = true;
 
     /**
@@ -76,7 +109,11 @@ public class EthereumIESEngine {
         this.cipher = cipher;
     }
 
-
+    /**
+     * Sets hash mac key.
+     *
+     * @param hashK2 the hash k 2
+     */
     public void setHashMacKey(boolean hashK2) {
         this.hashK2 = hashK2;
     }
@@ -101,7 +138,6 @@ public class EthereumIESEngine {
 
         extractParams(params);
     }
-
 
     /**
      * Initialise the encryptor.
@@ -143,10 +179,20 @@ public class EthereumIESEngine {
         }
     }
 
+    /**
+     * Gets cipher.
+     *
+     * @return the cipher
+     */
     public BufferedBlockCipher getCipher() {
         return cipher;
     }
 
+    /**
+     * Gets mac.
+     *
+     * @return the mac
+     */
     public Mac getMac() {
         return mac;
     }
@@ -343,10 +389,29 @@ public class EthereumIESEngine {
         return Arrays.copyOfRange(M, 0, len);
     }
 
+    /**
+     * Process block byte [ ].
+     *
+     * @param in    the in
+     * @param inOff the in off
+     * @param inLen the in len
+     * @return the byte [ ]
+     * @throws InvalidCipherTextException the invalid cipher text exception
+     */
     public byte[] processBlock(byte[] in, int inOff, int inLen) throws InvalidCipherTextException {
         return processBlock(in, inOff, inLen, null);
     }
 
+    /**
+     * Process block byte [ ].
+     *
+     * @param in      the in
+     * @param inOff   the in off
+     * @param inLen   the in len
+     * @param macData the mac data
+     * @return the byte [ ]
+     * @throws InvalidCipherTextException the invalid cipher text exception
+     */
     public byte[] processBlock(
             byte[] in,
             int inOff,

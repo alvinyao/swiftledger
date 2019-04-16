@@ -11,8 +11,10 @@ import java.lang.management.ManagementFactory;
 import java.util.Set;
 
 /**
+ * The type Jmx attribute gauge.
+ *
  * @author duhongming
- * @date 2018/12/28
+ * @date 2018 /12/28
  */
 public class JmxAttributeGauge implements Gauge<Object> {
     private final MBeanServerConnection mBeanServerConn;
@@ -61,6 +63,12 @@ public class JmxAttributeGauge implements Gauge<Object> {
         return objectName;
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws MalformedObjectNameException the malformed object name exception
+     */
     public static void main(String[] args) throws MalformedObjectNameException {
         JmxAttributeGauge gauge = new JmxAttributeGauge(new ObjectName("java.nio:type=BufferPool,name=direct"), "MemoryUsed");
         System.out.println(gauge.getValue());

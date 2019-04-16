@@ -17,8 +17,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Request rocks dao.
+ *
  * @author tangfashuang
- * @desc key: requestId, value: requestPO
+ * @desc key : requestId, value: requestPO
  */
 @Service
 @Slf4j
@@ -28,6 +30,11 @@ public class RequestRocksDao extends RocksBaseDao<RequestPO> {
         return "request";
     }
 
+    /**
+     * Save.
+     *
+     * @param requestPO the request po
+     */
     public void save(RequestPO requestPO) {
         String key = requestPO.getRequestId();
         if (keyMayExist(key) && null != get(key)) {
@@ -41,7 +48,7 @@ public class RequestRocksDao extends RocksBaseDao<RequestPO> {
     /**
      * batchInsert
      *
-     * @param requestPOList
+     * @param requestPOList the request po list
      */
     public void batchInsert(List<RequestPO> requestPOList) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
@@ -63,11 +70,11 @@ public class RequestRocksDao extends RocksBaseDao<RequestPO> {
     /**
      * slave-callback update
      *
-     * @param requestId
-     * @param fromStatus
-     * @param toStatus
-     * @param respCode
-     * @param respMsg
+     * @param requestId  the request id
+     * @param fromStatus the from status
+     * @param toStatus   the to status
+     * @param respCode   the resp code
+     * @param respMsg    the resp msg
      */
     public void updateStatus(String requestId, String fromStatus, String toStatus, String respCode, String respMsg) {
 
@@ -97,7 +104,13 @@ public class RequestRocksDao extends RocksBaseDao<RequestPO> {
         txPut(tx, requestId, requestPO);
     }
 
-
+    /**
+     * Batch update status.
+     *
+     * @param rsCoreTxVOS the rs core tx vos
+     * @param from        the from
+     * @param to          the to
+     */
     public void batchUpdateStatus(List<RsCoreTxVO> rsCoreTxVOS, RequestEnum from, RequestEnum to) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {

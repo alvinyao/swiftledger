@@ -6,16 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type Person bean.
+ *
  * @author duhongming
- * @date 2018/9/12
+ * @date 2018 /9/12
  */
 @Service
 public class PersonBean implements InitializingBean {
+    /**
+     * The Network manage.
+     */
     @Autowired
     NetworkManage networkManage;
+    /**
+     * The Context aware.
+     */
     @Autowired
     ContextAware contextAware;
 
+    /**
+     * The Port.
+     */
     public int port;
 
     @Override

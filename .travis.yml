@@ -3,16 +3,17 @@ language: java
 jdk:
   - oraclejdk8
 
-
+cache:
+  directories:
+    - .autoconf
+    - $HOME/.m2
 addons:
   sonarcloud:
     organization: "aurorasic-github"
 
-
-#install:
- # - mvn clean package --batch-mode -V -DskipTests=true -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
-script: mvn package -DskipTests=true -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
+script: mvn package -DskipTests=true -Dmaven.javadoc.skip=true
 
 after_success:
+  - mvn -s $TRAVIS_BUILD_DIR/bin/setting.xml deploy -DskipTests -Dmaven.javadoc.skip=true
   - mvn jacoco:report  sonar:sonar
   

@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Consensus snapshot.
+ *
  * @author suimi
- * @date 2018/6/4
+ * @date 2018 /6/4
  */
 @Slf4j @Component public class ConsensusSnapshot implements IConsensusSnapshot {
 
@@ -26,6 +28,9 @@ import org.springframework.stereotype.Component;
 
     private Serializer serializer;
 
+    /**
+     * Instantiates a new Consensus snapshot.
+     */
     public ConsensusSnapshot() {
         //@formatter:off
         Namespace namespace = Namespace.builder()

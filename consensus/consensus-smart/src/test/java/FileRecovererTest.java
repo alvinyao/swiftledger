@@ -11,11 +11,16 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 /**
+ * The type File recoverer test.
+ *
  * @author suimi
- * @date 2018/7/19
+ * @date 2018 /7/19
  */
 public class FileRecovererTest {
 
+    /**
+     * Test.
+     */
     @Test public void test() {
         FileRecoverer recoverer = new FileRecoverer(2, "e:/tmp");
         //        CommandsInfo[] logState = recoverer.getLogState(3, "e:/tmp/0.1531970509932.log");
@@ -33,6 +38,9 @@ public class FileRecovererTest {
         System.out.print(Arrays.toString(logState));
     }
 
+    /**
+     * Test 2.
+     */
     @Test public void test2() {
         FileRecoverer recoverer = new FileRecoverer(0, "e:/tmp");
         //        CommandsInfo[] logState = recoverer.getLogState(3, "e:/tmp/0.1531970509932.log");
@@ -48,6 +56,9 @@ public class FileRecovererTest {
         System.out.println(logState[logState.length - 1].msgCtx[0].getConsensusId());
     }
 
+    /**
+     * Test 3.
+     */
     @Test
     public void test3() {
         byte[] bytes = {9, 106, -48, 32, -15, 1, 82, 28, 56, 74, -47, -81, -48, 6, -28, 107};

@@ -52,8 +52,10 @@ public final class DeliveryThread extends Thread {
     /**
      * Creates a new instance of DeliveryThread
      *
-     * @param tomLayer TOM layer
-     * @param receiver Object that receives requests from clients
+     * @param tomLayer   TOM layer
+     * @param receiver   Object that receives requests from clients
+     * @param recoverer  the recoverer
+     * @param controller the controller
      */
     public DeliveryThread(TOMLayer tomLayer, ServiceReplica receiver, Recoverable recoverer,
         ServerViewController controller) {
@@ -68,6 +70,11 @@ public final class DeliveryThread extends Thread {
         this.decided = new LinkedBlockingQueue<>(controller.getStaticConf().getApplyQueueSize());
     }
 
+    /**
+     * Gets recoverer.
+     *
+     * @return the recoverer
+     */
     public Recoverable getRecoverer() {
         return recoverer;
     }
@@ -123,6 +130,9 @@ public final class DeliveryThread extends Thread {
     private ReentrantLock deliverLock = new ReentrantLock();
     private Condition canDeliver = deliverLock.newCondition();
 
+    /**
+     * Deliver lock.
+     */
     public void deliverLock() {
         // release the delivery lock to avoid blocking on state transfer
         decidedLock.lock();
@@ -133,14 +143,25 @@ public final class DeliveryThread extends Thread {
         deliverLock.lock();
     }
 
+    /**
+     * Deliver unlock.
+     */
     public void deliverUnlock() {
         deliverLock.unlock();
     }
 
+    /**
+     * Can deliver.
+     */
     public void canDeliver() {
         canDeliver.signalAll();
     }
 
+    /**
+     * Update.
+     *
+     * @param state the state
+     */
     public void update(ApplicationState state) {
 
         int lastCID = recoverer.setState(state);
@@ -286,6 +307,12 @@ public final class DeliveryThread extends Thread {
         return requests;
     }
 
+    /**
+     * Deliver unordered.
+     *
+     * @param request the request
+     * @param regency the regency
+     */
     protected void deliverUnordered(TOMMessage request, int regency) {
 
         MessageContext msgCtx =
@@ -322,6 +349,9 @@ public final class DeliveryThread extends Thread {
         }
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
         this.doWork = false;
 

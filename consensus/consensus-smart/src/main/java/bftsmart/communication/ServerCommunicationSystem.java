@@ -31,13 +31,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 /**
+ * The type Server communication system.
+ *
  * @author alysson
  */
 public class ServerCommunicationSystem extends Thread {
 
     private boolean doWork = true;
+    /**
+     * The Message wait time.
+     */
     public final long MESSAGE_WAIT_TIME = 100;
     private LinkedBlockingQueue<SystemMessage> inQueue = null;//new LinkedBlockingQueue<SystemMessage>(IN_QUEUE_SIZE);
+    /**
+     * The Message handler.
+     */
     protected MessageHandler messageHandler = new MessageHandler();
     private ServersCommunicationLayer serversConn;
     private CommunicationSystemServerSide clientsConn;
@@ -45,6 +53,10 @@ public class ServerCommunicationSystem extends Thread {
 
     /**
      * Creates a new instance of ServerCommunicationSystem
+     *
+     * @param controller the controller
+     * @param replica    the replica
+     * @throws Exception the exception
      */
     public ServerCommunicationSystem(ServerViewController controller, ServiceReplica replica) throws Exception {
         super("Server CS");
@@ -69,11 +81,17 @@ public class ServerCommunicationSystem extends Thread {
         //start();
     }
 
+    /**
+     * Join view received.
+     */
     //******* EDUARDO BEGIN **************//
     public void joinViewReceived() {
         serversConn.joinViewReceived();
     }
 
+    /**
+     * Update servers connections.
+     */
     public void updateServersConnections() {
         this.serversConn.updateConnections();
         if (clientsConn == null) {
@@ -82,15 +100,30 @@ public class ServerCommunicationSystem extends Thread {
 
     }
 
+    /**
+     * Sets acceptor.
+     *
+     * @param acceptor the acceptor
+     */
     //******* EDUARDO END **************//
     public void setAcceptor(Acceptor acceptor) {
         messageHandler.setAcceptor(acceptor);
     }
 
+    /**
+     * Sets tom layer.
+     *
+     * @param tomLayer the tom layer
+     */
     public void setTOMLayer(TOMLayer tomLayer) {
         messageHandler.setTOMLayer(tomLayer);
     }
 
+    /**
+     * Sets request receiver.
+     *
+     * @param requestReceiver the request receiver
+     */
     public void setRequestReceiver(RequestReceiver requestReceiver) {
         if (clientsConn == null) {
             clientsConn = CommunicationSystemServerSideFactory.getCommunicationSystemServerSide(controller);
@@ -148,10 +181,20 @@ public class ServerCommunicationSystem extends Thread {
         }
     }
 
+    /**
+     * Gets servers conn.
+     *
+     * @return the servers conn
+     */
     public ServersCommunicationLayer getServersConn() {
         return serversConn;
     }
 
+    /**
+     * Gets clients conn.
+     *
+     * @return the clients conn
+     */
     public CommunicationSystemServerSide getClientsConn() {
         return clientsConn;
     }
@@ -160,6 +203,9 @@ public class ServerCommunicationSystem extends Thread {
         return serversConn.toString();
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
 
         Logger.println("Shutting down communication layer");

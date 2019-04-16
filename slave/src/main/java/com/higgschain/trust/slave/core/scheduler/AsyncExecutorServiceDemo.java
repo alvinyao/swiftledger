@@ -16,7 +16,7 @@ import java.util.concurrent.*;
  * 线程池执行异步任务时需要构造TraceableExecutorService对象以支持traceid功能
  *
  * @author yuguojia
- * @create 2018-01-04 10:55
+ * @create 2018 -01-04 10:55
  */
 @Service @Profile("scheduler") @Slf4j public class AsyncExecutorServiceDemo {
 
@@ -39,6 +39,8 @@ import java.util.concurrent.*;
 
     /**
      * 使用Executors方式创建的线程池，使用execute或submit等方式
+     *
+     * @throws Exception the exception
      */
     @Scheduled(cron = "0/5 * *  * * ? ") protected void execute1() throws Exception {
         TraceableExecutorService executor = new TraceableExecutorService(beanFactory, executorService);
@@ -50,6 +52,8 @@ import java.util.concurrent.*;
 
     /**
      * 需要使用spring线程池，并使用future方式的
+     *
+     * @throws Exception the exception
      */
     @Scheduled(cron = "0/5 * *  * * ? ")   //每5秒执行一次
     protected void execute2() throws Exception {

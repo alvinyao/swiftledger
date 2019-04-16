@@ -7,9 +7,12 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Node action.
+ *
+ * @param <T> the type parameter
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/6/5 16:15
+ * @date 2018 /6/5 16:15
  */
 @Getter @Setter public class NodeAction<T> extends Action {
     /**

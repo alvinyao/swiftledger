@@ -9,8 +9,10 @@ import org.hibernate.validator.constraints.NotBlank;
 import java.math.BigDecimal;
 
 /**
+ * The type Contract invoke v 2 request.
+ *
  * @author kongyu
- * @date 2018/12/10
+ * @date 2018 /12/10
  */
 @Getter
 @Setter

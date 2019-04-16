@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Pattern;
 
 /**
+ * The type Diagnosis service.
+ *
  * @author Chen Jiawei
- * @date 2019-01-21
+ * @date 2019 -01-21
  */
 @Slf4j
 @Service
@@ -26,8 +28,7 @@ public class DiagnosisService {
      * Query contract code with the specified address and the block height.
      *
      * @param address contract address, a hex string with 40 characters
-     * @param height  height of block in which contract exists, if
-     *                null, query is on the latest block
+     * @param height  height of block in which contract exists, if                null, query is on the latest block
      * @return the contract code
      */
     public ContractCodeVO queryContractCode(String address, Long height) {

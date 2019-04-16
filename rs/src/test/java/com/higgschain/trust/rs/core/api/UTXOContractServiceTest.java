@@ -21,11 +21,16 @@ import org.testng.annotations.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
-
+/**
+ * The type Utxo contract service test.
+ */
 public class UTXOContractServiceTest extends IntegrateBaseTest {
     @Autowired
     private RsBlockChainService rsBlockChainService;
 
+    /**
+     * Process test.
+     */
     @Test
     public void processTest() {
         UTXOAction utxoAction = new UTXOAction();
@@ -75,7 +80,9 @@ public class UTXOContractServiceTest extends IntegrateBaseTest {
         System.out.println("contract resault:" + rsBlockChainService.processContract(coreTransaction));
     }
 
-
+    /**
+     * Test.
+     */
     @Test
     public void Test() {
         UTXOAction utxoAction = new UTXOAction();

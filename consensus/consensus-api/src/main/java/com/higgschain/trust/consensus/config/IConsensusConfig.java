@@ -1,8 +1,10 @@
 package com.higgschain.trust.consensus.config;
 
 /**
+ * The interface Consensus config.
+ *
  * @author: zhouyafeng
- * @create: 2018/06/15 16:42
+ * @create: 2018 /06/15 16:42
  * @description:
  */
 public interface IConsensusConfig {
@@ -10,15 +12,15 @@ public interface IConsensusConfig {
     /**
      * get public key create the given nodeName
      *
-     * @param nodeName
-     * @return
+     * @param nodeName the node name
+     * @return string
      */
     String pubKey(String nodeName);
 
     /**
      * get the self private key
      *
-     * @return
+     * @return string
      */
     String privateKey();
 }

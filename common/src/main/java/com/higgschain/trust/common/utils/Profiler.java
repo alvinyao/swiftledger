@@ -12,7 +12,7 @@ import java.util.List;
  * 用来测试并统计线程执行时间的工具。
  *
  * @author pengdi
- * @version $Id: Profiler.java 1291 2005-03-04 03:23:30Z baobao $
+ * @version $Id : Profiler.java 1291 2005-03-04 03:23:30Z baobao $
  */
 @Slf4j public final class Profiler {
     private static final ThreadLocal ENTRY_STACK = new ThreadLocal();
@@ -93,7 +93,7 @@ import java.util.List;
     /**
      * 取得耗费的总时间。
      *
-     * @return 耗费的总时间，如果未开始计时，则返回<code>-1</code>
+     * @return 耗费的总时间 ，如果未开始计时，则返回<code>-1</code>
      */
     public static long getDuration() {
         Entry entry = (Entry)ENTRY_STACK.get();
@@ -115,7 +115,7 @@ import java.util.List;
     /**
      * 列出所有的entry。
      *
-     * @return 列出所有entry，并统计各自所占用的时间
+     * @return 列出所有entry ，并统计各自所占用的时间
      */
     public static String dump() {
         return dump("", "");
@@ -125,7 +125,7 @@ import java.util.List;
      * 列出所有的entry。
      *
      * @param prefix 前缀
-     * @return 列出所有entry，并统计各自所占用的时间
+     * @return 列出所有entry ，并统计各自所占用的时间
      */
     public static String dump(String prefix) {
         return dump(prefix, prefix);
@@ -136,7 +136,7 @@ import java.util.List;
      *
      * @param prefix1 首行前缀
      * @param prefix2 后续行前缀
-     * @return 列出所有entry，并统计各自所占用的时间
+     * @return 列出所有entry ，并统计各自所占用的时间
      */
     public static String dump(String prefix1, String prefix2) {
         Entry entry = (Entry)ENTRY_STACK.get();
@@ -151,7 +151,7 @@ import java.util.List;
     /**
      * 取得第一个entry。
      *
-     * @return 第一个entry，如果不存在，则返回<code>null</code>
+     * @return 第一个entry ，如果不存在，则返回<code>null</code>
      */
     public static Entry getEntry() {
         return (Entry)ENTRY_STACK.get();
@@ -205,6 +205,8 @@ import java.util.List;
 
         /**
          * 取得entry的信息。
+         *
+         * @return the message
          */
         public String getMessage() {
             String messageString = null;
@@ -232,7 +234,7 @@ import java.util.List;
         /**
          * 取得entry相对于第一个entry的起始时间。
          *
-         * @return 相对起始时间
+         * @return 相对起始时间 start time
          */
         public long getStartTime() {
             return (baseTime > 0) ? (startTime - baseTime) / 1000 : 0;
@@ -241,7 +243,7 @@ import java.util.List;
         /**
          * 取得entry相对于第一个entry的结束时间。
          *
-         * @return 相对结束时间，如果entry还未结束，则返回<code>-1</code>
+         * @return 相对结束时间 ，如果entry还未结束，则返回<code>-1</code>
          */
         public long getEndTime() {
             if (endTime < baseTime) {
@@ -254,7 +256,7 @@ import java.util.List;
         /**
          * 取得entry持续的时间。
          *
-         * @return entry持续的时间，如果entry还未结束，则返回<code>-1</code>
+         * @return entry持续的时间 ，如果entry还未结束，则返回<code>-1</code>
          */
         public long getDuration() {
             if (endTime < startTime) {
@@ -267,7 +269,7 @@ import java.util.List;
         /**
          * 取得entry自身所用的时间，即总时间减去所有子entry所用的时间。
          *
-         * @return entry自身所用的时间，如果entry还未结束，则返回<code>-1</code>
+         * @return entry自身所用的时间 ，如果entry还未结束，则返回<code>-1</code>
          */
         public long getDurationOfSelf() {
             long duration = getDuration();
@@ -294,7 +296,7 @@ import java.util.List;
         /**
          * 取得当前entry在父entry中所占的时间百分比。
          *
-         * @return 百分比
+         * @return 百分比 pecentage
          */
         public double getPecentage() {
             double parentDuration = 0;
@@ -314,7 +316,7 @@ import java.util.List;
         /**
          * 取得当前entry在第一个entry中所占的时间百分比。
          *
-         * @return 百分比
+         * @return 百分比 pecentage of all
          */
         public double getPecentageOfAll() {
             double firstDuration = 0;
@@ -334,7 +336,7 @@ import java.util.List;
         /**
          * 取得所有子entries。
          *
-         * @return 所有子entries的列表（不可更改）
+         * @return 所有子entries的列表 （不可更改）
          */
         public List getSubEntries() {
             return Collections.unmodifiableList(subEntries);
@@ -482,18 +484,44 @@ import java.util.List;
     /**
      * 显示消息的级别。
      */
-    public enum MessageLevel {
-        NO_MESSAGE, BRIEF_MESSAGE, DETAILED_MESSAGE;
+    public enum MessageLevel {/**
+     * No message message level.
+     */
+    NO_MESSAGE,
+        /**
+         * Brief message message level.
+         */
+        BRIEF_MESSAGE,
+        /**
+         * Detailed message message level.
+         */
+        DETAILED_MESSAGE;
     }
 
     /**
      * 代表一个profiler entry的详细信息。
      */
     public interface Message {
+        /**
+         * Gets message level.
+         *
+         * @param entry the entry
+         * @return the message level
+         */
         MessageLevel getMessageLevel(Entry entry);
 
+        /**
+         * Gets brief message.
+         *
+         * @return the brief message
+         */
         String getBriefMessage();
 
+        /**
+         * Gets detailed message.
+         *
+         * @return the detailed message
+         */
         String getDetailedMessage();
     }
 }

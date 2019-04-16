@@ -15,6 +15,9 @@ import org.springframework.beans.factory.BeanFactory
  * @date 2018/09/07 16:54
  */
 
+/**
+ *  The type Vote.
+ */
 @Slf4j
 @Usage("cluster config")
 class vote {

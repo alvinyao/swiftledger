@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * The type Rs node.
+ *
  * @author tangfashuang
- * @date 2018/04/12 18:24
+ * @date 2018 /04/12 18:24
  * @desc rs pubKey BO
  */
 @Getter

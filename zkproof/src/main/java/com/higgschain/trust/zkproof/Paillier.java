@@ -20,7 +20,6 @@ import com.alibaba.fastjson.JSONObject;
 import java.math.BigInteger;
 import java.util.Random;
 
-
 /**
  * Paillier Cryptosystem <br>
  * <br>
@@ -30,7 +29,7 @@ import java.util.Random;
  * EUROCRYPT'99. URL:
  * <a href="http://www.gemplus.com/smart/rd/publications/pdf/Pai99pai.pdf">http:
  * //www.gemplus.com/smart/rd/publications/pdf/Pai99pai.pdf</a><br>
- *
+ * <p>
  * [2] Paillier cryptosystem from Wikipedia. URL:
  * <a href="http://en.wikipedia.org/wiki/Paillier_cryptosystem">http://en.
  * wikipedia.org/wiki/Paillier_cryptosystem</a>
@@ -64,16 +63,11 @@ public class Paillier  implements HomomorphicEncryption {
 
     private String keyStat;
 
-
-
     /**
      * Constructs an instance of the Paillier cryptosystem.
      *
      * @param bitLengthVal number of bits of modulus
-     * @param certainty    The probability that the new BigInteger represents a prime
-     *                     number will exceed (1 - 2^(-certainty)). The execution time of
-     *                     this constructor is proportional to the value of this
-     *                     parameter.
+     * @param certainty    The probability that the new BigInteger represents a prime                     number will exceed (1 - 2^(-certainty)). The execution time of                     this constructor is proportional to the value of this                     parameter.
      */
     public Paillier(int bitLengthVal, int certainty) {
          KeyGeneration(bitLengthVal, certainty);
@@ -82,11 +76,18 @@ public class Paillier  implements HomomorphicEncryption {
     /**
      * Constructs an instance of the Paillier cryptosystem with 512 bits of
      * modulus and at least 1-2^(-64) certainty of primes generation.
+     *
+     * @param bits the bits
      */
     protected Paillier(int bits) {
           KeyGeneration(bits, 512);
     }
 
+    /**
+     * Instantiates a new Paillier.
+     *
+     * @param key the key
+     */
     protected Paillier(String key){
         JSONObject key_value = JSONObject.parseObject(key);
 
@@ -232,7 +233,7 @@ public class Paillier  implements HomomorphicEncryption {
      *
      * @param em1 add1
      * @param em2 add2
-     * @return sum
+     * @return sum big integer
      */
     public BigInteger cipherAdd(BigInteger em1, BigInteger em2) {
         if (hasPubKey()){
@@ -263,6 +264,12 @@ public class Paillier  implements HomomorphicEncryption {
         return BigInteger.ZERO;
     }
 
+    /**
+     * Encryption string.
+     *
+     * @param str_value the str value
+     * @return the string
+     */
     public String Encryption(String str_value) {
         BigInteger m = new BigInteger(str_value);
         BigInteger r = BigInteger.ONE;
@@ -272,7 +279,13 @@ public class Paillier  implements HomomorphicEncryption {
         return Base58.encode(BigInteger.ZERO.toByteArray());
     }
 
-
+    /**
+     * Compare boolean.
+     *
+     * @param em1 the em 1
+     * @param em2 the em 2
+     * @return the boolean
+     */
     public boolean Compare(String em1, String em2)
     {
         if(hasFullKey())
@@ -294,6 +307,11 @@ public class Paillier  implements HomomorphicEncryption {
         return false;
     }
 
+    /**
+     * Gets bit length.
+     *
+     * @return the bit length
+     */
     public int getBitLength() {
         return bitLength;
     }

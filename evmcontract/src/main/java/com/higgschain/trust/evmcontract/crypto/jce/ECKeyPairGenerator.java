@@ -20,9 +20,18 @@ package com.higgschain.trust.evmcontract.crypto.jce;
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
 
+/**
+ * The type Ec key pair generator.
+ */
 public final class ECKeyPairGenerator {
 
+    /**
+     * The constant ALGORITHM.
+     */
     public static final String ALGORITHM = "EC";
+    /**
+     * The constant CURVE_NAME.
+     */
     public static final String CURVE_NAME = "secp256k1";
 
     private static final String ALGORITHM_ASSERTION_MSG =
@@ -52,10 +61,23 @@ public final class ECKeyPairGenerator {
         }
     }
 
+    /**
+     * Generate key pair key pair.
+     *
+     * @return the key pair
+     */
     public static KeyPair generateKeyPair() {
         return Holder.INSTANCE.generateKeyPair();
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param provider the provider
+     * @param random   the random
+     * @return the instance
+     * @throws NoSuchProviderException the no such provider exception
+     */
     public static KeyPairGenerator getInstance(final String provider, final SecureRandom random) throws NoSuchProviderException {
         try {
             final KeyPairGenerator gen = KeyPairGenerator.getInstance(ALGORITHM, provider);
@@ -68,6 +90,13 @@ public final class ECKeyPairGenerator {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param provider the provider
+     * @param random   the random
+     * @return the instance
+     */
     public static KeyPairGenerator getInstance(final Provider provider, final SecureRandom random) {
         try {
             final KeyPairGenerator gen = KeyPairGenerator.getInstance(ALGORITHM, provider);

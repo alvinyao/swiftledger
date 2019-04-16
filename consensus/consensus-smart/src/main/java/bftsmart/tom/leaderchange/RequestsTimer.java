@@ -52,7 +52,9 @@ public class RequestsTimer {
     /**
      * Creates a new instance of RequestsTimer
      *
-     * @param tomLayer TOM layer
+     * @param tomLayer      TOM layer
+     * @param communication the communication
+     * @param controller    the controller
      */
     public RequestsTimer(TOMLayer tomLayer, ServerCommunicationSystem communication, ServerViewController controller) {
         this.tomLayer = tomLayer;
@@ -64,18 +66,36 @@ public class RequestsTimer {
         this.shortTimeout = -1;
     }
 
+    /**
+     * Sets short timeout.
+     *
+     * @param shortTimeout the short timeout
+     */
     public void setShortTimeout(long shortTimeout) {
         this.shortTimeout = shortTimeout;
     }
 
+    /**
+     * Sets timeout.
+     *
+     * @param timeout the timeout
+     */
     public void setTimeout(long timeout) {
         this.timeout = timeout;
     }
 
+    /**
+     * Gets timeout.
+     *
+     * @return the timeout
+     */
     public long getTimeout() {
         return timeout;
     }
 
+    /**
+     * Start timer.
+     */
     public void startTimer() {
         if (rtTask == null) {
             long t = (shortTimeout > -1 ? shortTimeout : timeout);
@@ -86,6 +106,9 @@ public class RequestsTimer {
         }
     }
 
+    /**
+     * Stop timer.
+     */
     public void stopTimer() {
         if (rtTask != null) {
             rtTask.cancel();
@@ -93,11 +116,21 @@ public class RequestsTimer {
         }
     }
 
+    /**
+     * Enabled.
+     *
+     * @param phase the phase
+     */
     public void Enabled(boolean phase) {
 
         enabled = phase;
     }
 
+    /**
+     * Is enabled boolean.
+     *
+     * @return the boolean
+     */
     public boolean isEnabled() {
         return enabled;
     }
@@ -147,6 +180,9 @@ public class RequestsTimer {
         rwLock.writeLock().unlock();
     }
 
+    /**
+     * Run lc protocol.
+     */
     public void run_lc_protocol() {
 
         long t = (shortTimeout > -1 ? shortTimeout : timeout);
@@ -197,6 +233,12 @@ public class RequestsTimer {
 
     }
 
+    /**
+     * Sets stop.
+     *
+     * @param regency the regency
+     * @param stop    the stop
+     */
     public void setSTOP(int regency, LCMessage stop) {
 
         stopSTOP(regency);
@@ -210,6 +252,9 @@ public class RequestsTimer {
 
     }
 
+    /**
+     * Stop all sto ps.
+     */
     public void stopAllSTOPs() {
         Iterator stops = getTimers().iterator();
         while (stops.hasNext()) {
@@ -217,6 +262,11 @@ public class RequestsTimer {
         }
     }
 
+    /**
+     * Stop stop.
+     *
+     * @param regency the regency
+     */
     public void stopSTOP(int regency) {
 
         Timer stopTimer = stopTimers.remove(regency);
@@ -225,12 +275,20 @@ public class RequestsTimer {
 
     }
 
+    /**
+     * Gets timers.
+     *
+     * @return the timers
+     */
     public Set<Integer> getTimers() {
 
         return ((Hashtable<Integer, Timer>)stopTimers.clone()).keySet();
 
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
         timer.cancel();
         stopAllSTOPs();
@@ -238,6 +296,9 @@ public class RequestsTimer {
 
     }
 
+    /**
+     * The type Request timer task.
+     */
     class RequestTimerTask extends TimerTask {
 
         @Override
@@ -254,10 +315,18 @@ public class RequestsTimer {
         }
     }
 
+    /**
+     * The type Send stop task.
+     */
     class SendStopTask extends TimerTask {
 
         private LCMessage stop;
 
+        /**
+         * Instantiates a new Send stop task.
+         *
+         * @param stop the stop
+         */
         public SendStopTask(LCMessage stop) {
             this.stop = stop;
         }

@@ -5,11 +5,13 @@ import com.higgschain.trust.common.crypto.KeyPair;
 import lombok.extern.slf4j.Slf4j;
 import org.spongycastle.util.encoders.Hex;
 
-/**  
- * @desc class for ecc crypto and sign
+/**
+ * The type Ecc crypto.
+ *
  * @author WangQuanzhou
- * @date 2018/8/20 11:50
- */  
+ * @desc class for ecc crypto and sign
+ * @date 2018 /8/20 11:50
+ */
 @Slf4j public class EccCrypto implements Crypto {
 
     /**
@@ -81,7 +83,9 @@ import org.spongycastle.util.encoders.Hex;
     }
 
     /**
-     * @return
+     * Gets singleton instance.
+     *
+     * @return singleton instance
      * @desc get singleton instance
      */
     public static final EccCrypto getSingletonInstance() {

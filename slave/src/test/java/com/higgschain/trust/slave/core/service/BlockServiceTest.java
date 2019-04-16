@@ -18,22 +18,40 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Block service test.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-17
+ * @date 2018 -04-17
  */
 public class BlockServiceTest extends IntegrateBaseTest {
 
+    /**
+     * The Block service.
+     */
     @Autowired BlockService blockService;
+    /**
+     * The Transaction repository.
+     */
     @Autowired TransactionRepository transactionRepository;
+    /**
+     * The Tx root hash builder.
+     */
     @Autowired TxRootHashBuilder txRootHashBuilder;
 
-
+    /**
+     * Gets max height.
+     */
     @Test public void getMaxHeight() {
         Long height = blockService.getMaxHeight();
         System.out.println("max.height:" + height);
     }
 
+    /**
+     * Persist block.
+     *
+     * @throws Exception the exception
+     */
     @Test public void persistBlock() throws Exception {
         List<SignedTransaction> txs = new ArrayList<>();
         for (int k = 0; k < 2; k++) {
@@ -61,6 +79,9 @@ public class BlockServiceTest extends IntegrateBaseTest {
         blockService.persistBlock(block,txReceiptMap);
     }
 
+    /**
+     * Test query block.
+     */
     @Test public void testQueryBlock() {
         Block block = blockService.queryBlock(1L);
         System.out.println(block);
@@ -74,6 +95,9 @@ public class BlockServiceTest extends IntegrateBaseTest {
         }
     }
 
+    /**
+     * Test query transaction.
+     */
     @Test public void testQueryTransaction() {
         List<SignedTransaction> txs = transactionRepository.queryTransactions(4L);
         String rootHash  = txRootHashBuilder.buildTxs(txs);

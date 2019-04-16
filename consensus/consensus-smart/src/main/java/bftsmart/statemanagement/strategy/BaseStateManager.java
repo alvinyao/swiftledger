@@ -36,30 +36,72 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * The type Base state manager.
  *
  * @author Marcel Santos
- *
  */
 @Slf4j public abstract class BaseStateManager implements StateManager {
 
+    /**
+     * The Tom layer.
+     */
     protected TOMLayer tomLayer;
+    /**
+     * The Sv controller.
+     */
     protected ServerViewController SVController;
+    /**
+     * The Dt.
+     */
     protected DeliveryThread dt;
 
+    /**
+     * The Sender states.
+     */
     protected HashMap<Integer, ApplicationState> senderStates = null;
+    /**
+     * The Sender views.
+     */
     protected HashMap<Integer, View> senderViews = null;
+    /**
+     * The Sender regencies.
+     */
     protected HashMap<Integer, Integer> senderRegencies = null;
+    /**
+     * The Sender leaders.
+     */
     protected HashMap<Integer, Integer> senderLeaders = null;
+    /**
+     * The Sender proofs.
+     */
     protected HashMap<Integer, CertifiedDecision> senderProofs = null;
 
+    /**
+     * The App state only.
+     */
     protected boolean appStateOnly;
+    /**
+     * The Waiting cid.
+     */
     protected int waitingCID = -1;
+    /**
+     * The Last cid.
+     */
     protected int lastCID;
+    /**
+     * The State.
+     */
     protected ApplicationState state;
 
+    /**
+     * The Is initializing.
+     */
     protected boolean isInitializing = true;
     private HashMap<Integer, Integer> senderCIDs = null;
 
+    /**
+     * Instantiates a new Base state manager.
+     */
     public BaseStateManager() {
         senderStates = new HashMap<>();
         senderViews = new HashMap<>();
@@ -68,22 +110,50 @@ import java.util.Set;
         senderProofs = new HashMap<>();
     }
 
+    /**
+     * Gets replies.
+     *
+     * @return the replies
+     */
     protected int getReplies() {
         return senderStates.size();
     }
 
+    /**
+     * Enough replies boolean.
+     *
+     * @return the boolean
+     */
     protected boolean enoughReplies() {
         return senderStates.size() > SVController.getCurrentViewF();
     }
 
+    /**
+     * Enough regencies boolean.
+     *
+     * @param regency the regency
+     * @return the boolean
+     */
     protected boolean enoughRegencies(int regency) {
         return senderRegencies.size() > SVController.getQuorum();
     }
 
+    /**
+     * Enough leaders boolean.
+     *
+     * @param leader the leader
+     * @return the boolean
+     */
     protected boolean enoughLeaders(int leader) {
         return senderLeaders.size() > SVController.getQuorum();
     }
 
+    /**
+     * Enough views boolean.
+     *
+     * @param view the view
+     * @return the boolean
+     */
     protected boolean enoughViews(View view) {
         Collection<View> views = senderViews.values();
         int counter = 0;
@@ -119,7 +189,14 @@ import java.util.Set;
         
         return id;
     }
-        
+
+    /**
+     * Enough proofs boolean.
+     *
+     * @param cid the cid
+     * @param lc  the lc
+     * @return the boolean
+     */
     protected boolean enoughProofs(int cid, LCManager lc) {
         
         int counter = 0;
@@ -133,7 +210,7 @@ import java.util.Set;
         boolean result = counter > SVController.getQuorum();
         return result;
     }
-    
+
     /**
      * Clear the collections and state hold by this object. Calls clear() in the
      * States, Leaders, regencies and Views collections. Sets the state to
@@ -148,6 +225,11 @@ import java.util.Set;
         state = null;
     }
 
+    /**
+     * Received states collection.
+     *
+     * @return the collection
+     */
     public Collection<ApplicationState> receivedStates() {
         return senderStates.values();
     }
@@ -273,6 +355,9 @@ import java.util.Set;
         }
     }
 
+    /**
+     * Request state.
+     */
     protected abstract void requestState();
 
     @Override

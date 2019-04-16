@@ -26,15 +26,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * The type Ca init service.
+ *
  * @author WangQuanzhou
  * @desc ca init service
- * @date 2018/6/5 15:48
+ * @date 2018 /6/5 15:48
  */
 @Service @Slf4j public class CaInitServiceImpl implements CaInitService {
 
     @Autowired private NodeState nodeState;
     @Autowired private ClusterInitHandler clusterInitHandler;
 
+    /**
+     * The Genius path.
+     */
     @Value("${higgs.trust.geniusPath:#{null}}") String geniusPath;
 
     /**

@@ -16,8 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Transaction result info.
+ *
  * @author duhongming
- * @date 2018/12/4
+ * @date 2018 /12/4
  */
 public class TransactionResultInfo {
     private long blockHeight;
@@ -31,7 +33,16 @@ public class TransactionResultInfo {
     private String invokeMethod = "";
     private byte[] rlpEncoded;
 
-
+    /**
+     * Instantiates a new Transaction result info.
+     *
+     * @param blockHeight the block height
+     * @param txHash      the tx hash
+     * @param index       the index
+     * @param bloomFilter the bloom filter
+     * @param logInfoList the log info list
+     * @param result      the result
+     */
     public TransactionResultInfo(long blockHeight, byte[] txHash, int index, Bloom bloomFilter,
                                  List<LogInfo> logInfoList, byte[] result) {
         this.blockHeight = blockHeight;
@@ -42,6 +53,11 @@ public class TransactionResultInfo {
         this.result = result == null ? ByteUtil.EMPTY_BYTE_ARRAY : result;
     }
 
+    /**
+     * Instantiates a new Transaction result info.
+     *
+     * @param rlp the rlp
+     */
     public TransactionResultInfo(final byte[] rlp) {
         if (rlp.length == 0) {
             return;
@@ -76,6 +92,11 @@ public class TransactionResultInfo {
         return new String(data);
     }
 
+    /**
+     * Get encoded byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getEncoded() {
         if (rlpEncoded != null) {
             return rlpEncoded;
@@ -110,78 +131,173 @@ public class TransactionResultInfo {
         return rlpEncoded;
     }
 
+    /**
+     * Gets block height.
+     *
+     * @return the block height
+     */
     public long getBlockHeight() {
         return blockHeight;
     }
 
+    /**
+     * Sets block height.
+     *
+     * @param blockHeight the block height
+     */
     public void setBlockHeight(int blockHeight) {
         this.blockHeight = blockHeight;
     }
 
+    /**
+     * Get tx hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getTxHash() {
         return txHash;
     }
 
+    /**
+     * Sets tx hash.
+     *
+     * @param txHash the tx hash
+     */
     public void setTxHash(byte[] txHash) {
         this.txHash = txHash;
     }
 
+    /**
+     * Gets index.
+     *
+     * @return the index
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * Sets index.
+     *
+     * @param index the index
+     */
     public void setIndex(int index) {
         this.index = index;
     }
 
+    /**
+     * Gets bloom filter.
+     *
+     * @return the bloom filter
+     */
     public Bloom getBloomFilter() {
         return bloomFilter;
     }
 
+    /**
+     * Sets bloom filter.
+     *
+     * @param bloomFilter the bloom filter
+     */
     public void setBloomFilter(Bloom bloomFilter) {
         this.bloomFilter = bloomFilter;
     }
 
+    /**
+     * Gets log info list.
+     *
+     * @return the log info list
+     */
     public List<LogInfo> getLogInfoList() {
         return logInfoList;
     }
 
+    /**
+     * Sets log info list.
+     *
+     * @param logInfoList the log info list
+     */
     public void setLogInfoList(List<LogInfo> logInfoList) {
         this.logInfoList = logInfoList;
     }
 
+    /**
+     * Get result byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getResult() {
         return result;
     }
 
+    /**
+     * Sets result.
+     *
+     * @param result the result
+     */
     public void setResult(byte[] result) {
         this.result = result;
     }
 
+    /**
+     * Gets error.
+     *
+     * @return the error
+     */
     public String getError() {
         return error;
     }
 
+    /**
+     * Sets error.
+     *
+     * @param error the error
+     */
     public void setError(String error) {
         this.error = error;
     }
 
+    /**
+     * Get created address byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getCreatedAddress() {
         return createdAddress;
     }
 
+    /**
+     * Sets created address.
+     *
+     * @param createdAddress the created address
+     */
     public void setCreatedAddress(byte[] createdAddress) {
         this.createdAddress = createdAddress;
     }
 
+    /**
+     * Gets invoke method.
+     *
+     * @return the invoke method
+     */
     public String getInvokeMethod() {
         return invokeMethod;
     }
 
+    /**
+     * Sets invoke method.
+     *
+     * @param invokeMethod the invoke method
+     */
     public void setInvokeMethod(String invokeMethod) {
         this.invokeMethod = invokeMethod;
     }
 
+    /**
+     * To map map.
+     *
+     * @return the map
+     */
     public Map<String, Object> toMap() {
         Map<String, Object> map = new HashMap<>(9);
         map.put("txId", new String(txHash));

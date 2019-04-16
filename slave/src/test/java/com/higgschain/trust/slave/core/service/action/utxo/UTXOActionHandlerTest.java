@@ -25,12 +25,15 @@ import java.util.List;
  * UTXOActionHandler
  *
  * @author lingchao
- * @create 2018年06月11日21:46
+ * @create 2018年06月11日21 :46
  */
 public class UTXOActionHandlerTest extends BaseTest {
     @Autowired
     private SnapshotService snapshotService;
 
+    /**
+     * The Utxo action handler.
+     */
     @Autowired
     UTXOActionHandler utxoActionHandler;
 

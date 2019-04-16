@@ -1,8 +1,10 @@
 package com.higgschain.trust.slave.metrics;
 
 /**
+ * The interface Window counter.
+ *
  * @author duhongming
- * @date 2018/12/28
+ * @date 2018 /12/28
  */
 public interface WindowCounter {
     /**

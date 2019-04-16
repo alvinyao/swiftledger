@@ -7,13 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
 /**
+ * The type Rs node dao test.
+ *
  * @author tangfashuang
- * @date 2018/04/13 22:19
+ * @date 2018 /04/13 22:19
  * @desc rs node dao test
  */
 public class RsNodeDaoTest extends BaseTest {
+    /**
+     * The Rs node dao.
+     */
     @Autowired RsNodeDao rsNodeDao;
 
+    /**
+     * Test add 1.
+     */
     @Test public void testAdd1() {
         RsNodePO rsNodePO = new RsNodePO();
         rsNodePO.setRsId("rs-test1");
@@ -22,6 +30,9 @@ public class RsNodeDaoTest extends BaseTest {
         rsNodeDao.add(rsNodePO);
     }
 
+    /**
+     * Test add 2.
+     */
     @Test public void testAdd2() {
         RsNodePO rsNodePO = new RsNodePO();
         rsNodePO.setRsId("rs-test2");
@@ -30,6 +41,9 @@ public class RsNodeDaoTest extends BaseTest {
         rsNodeDao.add(rsNodePO);
     }
 
+    /**
+     * Test add 3.
+     */
     @Test public void testAdd3() {
         RsNodePO rsNodePO = new RsNodePO();
         rsNodePO.setRsId("rs-test3");

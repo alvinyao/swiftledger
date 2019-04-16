@@ -15,16 +15,16 @@ import java.util.List;
  * Convetor
  *
  * @author lingchao
- * @create 2018年04月03日15:01
+ * @create 2018年04月03日15 :01
  */
 public class UTXOConvert {
 
     /**
      * UTXO builder
      *
-     * @param txOut
-     * @param actionData
-     * @return
+     * @param txOut      the tx out
+     * @param actionData the action data
+     * @return tx out po
      */
     public static TxOutPO UTXOBuilder(TxOut txOut, ActionData actionData) {
         UTXOAction utxoAction = (UTXOAction)actionData.getCurrentAction();
@@ -41,9 +41,9 @@ public class UTXOConvert {
     /**
      * STXO
      *
-     * @param txIn
-     * @param actionData
-     * @return
+     * @param txIn       the tx in
+     * @param actionData the action data
+     * @return tx out po
      */
     public static TxOutPO STXOBuilder(TxIn txIn, ActionData actionData) {
         TxOutPO txOutPO = new TxOutPO();
@@ -53,6 +53,12 @@ public class UTXOConvert {
         return txOutPO;
     }
 
+    /**
+     * To tx in string string.
+     *
+     * @param listTxIn the list tx in
+     * @return the string
+     */
     public static String toTxInString(List<TxIn> listTxIn){
         Collections.sort(listTxIn,(a,b)->{
             if(!a.getActionIndex().equals(b.getActionIndex())){

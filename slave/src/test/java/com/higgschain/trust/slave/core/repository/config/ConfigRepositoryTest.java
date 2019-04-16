@@ -19,11 +19,19 @@ import org.testng.annotations.Test;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Config repository test.
+ */
 public class ConfigRepositoryTest extends BaseTest {
 
     @Autowired private ConfigRepository configRepository;
     @Autowired private ConfigRocksDao configRocksDao;
 
+    /**
+     * Test insert config.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testInsertConfig() throws Exception {
         Config config = new Config();
         config.setNodeName("node-1");
@@ -40,6 +48,11 @@ public class ConfigRepositoryTest extends BaseTest {
         System.out.println(c);
     }
 
+    /**
+     * Test update config.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testUpdateConfig() throws Exception {
         Config config = new Config();
         ConfigPO po = configRocksDao.get("node-1" + Constant.SPLIT_SLASH + UsageEnum.BIZ.getCode());
@@ -51,10 +64,20 @@ public class ConfigRepositoryTest extends BaseTest {
         Assert.assertEquals(c.isValid(), false);
     }
 
+    /**
+     * Test get config.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetConfig() throws Exception {
         System.out.println(configRepository.getBizConfig("node-1"));
     }
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsert() throws Exception {
         List list = new LinkedList();
         for (int i = 0; i < 5; i++) {
@@ -72,6 +95,11 @@ public class ConfigRepositoryTest extends BaseTest {
         configRepository.batchInsert(list);
     }
 
+    /**
+     * Test batch update.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchUpdate() throws Exception {
         List list = new LinkedList();
         for (int i = 1; i < 2; i++) {

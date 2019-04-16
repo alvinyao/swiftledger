@@ -15,9 +15,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * The type Core tx process jdbc dao.
+ *
  * @author lingchao
  * @description
- * @date 2018-08-21
+ * @date 2018 -08-21
  */
 @Component
 @Slf4j
@@ -31,8 +33,8 @@ public class CoreTxProcessJDBCDao {
     /**
      * batch insert
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     public int batchInsert(List<CoreTransactionProcessPO> list) {
         StringBuilder sql = new StringBuilder("INSERT INTO core_transaction_process " + " (tx_id,status,create_time)" + "  VALUES");
@@ -48,8 +50,10 @@ public class CoreTxProcessJDBCDao {
     /**
      * batch update
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @param from the from
+     * @param to   the to
+     * @return int
      */
     public int batchUpdate(List<CoreTransactionProcessPO> list, CoreTxStatusEnum from, CoreTxStatusEnum to) {
         StringBuilder sql = new StringBuilder("UPDATE core_transaction_process SET ");
@@ -71,9 +75,9 @@ public class CoreTxProcessJDBCDao {
     /**
      * batch delete
      *
-     * @param list
-     * @param statusEnum
-     * @return
+     * @param list       the list
+     * @param statusEnum the status enum
+     * @return int
      */
     public int batchDelete(List<RsCoreTxVO> list,CoreTxStatusEnum statusEnum) {
         StringBuilder sql = new StringBuilder("DELETE FROM core_transaction_process");

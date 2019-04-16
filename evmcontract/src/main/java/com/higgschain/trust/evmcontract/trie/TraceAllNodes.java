@@ -20,11 +20,16 @@ package com.higgschain.trust.evmcontract.trie;
 import org.spongycastle.util.encoders.Hex;
 
 /**
+ * The type Trace all nodes.
+ *
  * @author Roman Mandeleil
  * @since 29.08.2014
  */
 public class TraceAllNodes implements TrieImpl.ScanAction {
 
+    /**
+     * The Output.
+     */
     StringBuilder output = new StringBuilder();
 
     @Override
@@ -37,6 +42,11 @@ public class TraceAllNodes implements TrieImpl.ScanAction {
     public void doOnValue(byte[] nodeHash, TrieImpl.Node node, byte[] key, byte[] value) {
     }
 
+    /**
+     * Gets output.
+     *
+     * @return the output
+     */
     public String getOutput() {
         return output.toString();
     }

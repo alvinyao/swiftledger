@@ -15,6 +15,9 @@ import java.util.Map;
  */
 public class CountingQuotientFilter extends QuotientFilter {
 
+    /**
+     * The Fingerprint mask.
+     */
     long FINGERPRINT_MASK;
 
     private Map<Long, Counter> counters = new HashMap<>();
@@ -24,6 +27,13 @@ public class CountingQuotientFilter extends QuotientFilter {
         this.FINGERPRINT_MASK = LOW_MASK(QUOTIENT_BITS + REMAINDER_BITS);
     }
 
+    /**
+     * Create counting quotient filter.
+     *
+     * @param largestNumberOfElements the largest number of elements
+     * @param startingElements        the starting elements
+     * @return the counting quotient filter
+     */
     public static CountingQuotientFilter create(long largestNumberOfElements, long startingElements) {
         QuotientFilter filter = QuotientFilter.create(largestNumberOfElements, startingElements);
         return new CountingQuotientFilter(filter.QUOTIENT_BITS, filter.REMAINDER_BITS);
@@ -54,14 +64,29 @@ public class CountingQuotientFilter extends QuotientFilter {
         return hash;
     }
 
+    /**
+     * Gets collision number.
+     *
+     * @return the collision number
+     */
     public synchronized int getCollisionNumber() {
         return counters.size();
     }
 
+    /**
+     * Gets entry number.
+     *
+     * @return the entry number
+     */
     public long getEntryNumber() {
         return entries;
     }
 
+    /**
+     * Gets max insertions.
+     *
+     * @return the max insertions
+     */
     public long getMaxInsertions() {
         return MAX_INSERTIONS;
     }
@@ -93,6 +118,9 @@ public class CountingQuotientFilter extends QuotientFilter {
     }
 
     private static class Counter {
+        /**
+         * The Refs.
+         */
         int refs = 1;
     }
 }

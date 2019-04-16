@@ -6,6 +6,9 @@ import javax.script.Bindings;
 import javax.script.SimpleBindings;
 import java.util.*;
 
+/**
+ * The type Script bindings.
+ */
 public class ScriptBindings implements Bindings {
     /**
      * This list contains the keywords for Javascript.
@@ -13,10 +16,25 @@ public class ScriptBindings implements Bindings {
     protected static final Set<String> UNSTORED_KEYS = new HashSet<String>(
         Arrays.asList("out", "out:print", "lang:import", "context", "elcontext", "print", "println", "nashorn.global"));
 
+    /**
+     * The Script resolvers.
+     */
     protected List<Resolver> scriptResolvers;
+    /**
+     * The Default bindings.
+     */
     protected Bindings defaultBindings;
+    /**
+     * The Context.
+     */
     protected ExecuteContext context;
 
+    /**
+     * Instantiates a new Script bindings.
+     *
+     * @param scriptResolvers the script resolvers
+     * @param context         the context
+     */
     public ScriptBindings(List<Resolver> scriptResolvers, ExecuteContext context) {
         this.scriptResolvers = scriptResolvers;
         this.context = context;

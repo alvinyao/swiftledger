@@ -10,8 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * The type Command primitive.
+ *
  * @author suimi
- * @date 2018/7/6
+ * @date 2018 /7/6
  */
 @Slf4j
 public class CommandPrimitive extends Synchronous<IAsyncCommandPrimitive> implements ICommandPrimitive {
@@ -20,6 +22,12 @@ public class CommandPrimitive extends Synchronous<IAsyncCommandPrimitive> implem
 
     private final long operationTimeoutMillis;
 
+    /**
+     * Instantiates a new Command primitive.
+     *
+     * @param primitive              the primitive
+     * @param operationTimeoutMillis the operation timeout millis
+     */
     public CommandPrimitive(IAsyncCommandPrimitive primitive, long operationTimeoutMillis) {
         super(primitive);
         this.asyncCommandPrimitive = primitive;

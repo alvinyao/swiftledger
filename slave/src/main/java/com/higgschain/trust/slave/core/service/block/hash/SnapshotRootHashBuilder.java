@@ -17,22 +17,33 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
+ * The type Snapshot root hash builder.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-13
+ * @date 2018 -04-13
  */
 @Component @Slf4j public class SnapshotRootHashBuilder {
+    /**
+     * The Merkle tree snapshot agent.
+     */
     @Autowired
     MerkleTreeSnapshotAgent merkleTreeSnapshotAgent;
+    /**
+     * The Tx root hash builder.
+     */
     @Autowired TxRootHashBuilder txRootHashBuilder;
+    /**
+     * The Blockchain.
+     */
     @Autowired Blockchain blockchain;
 
     /**
      * build root hash for block header
      *
-     * @param packageData
-     * @param txReceiptMap
-     * @return
+     * @param packageData  the package data
+     * @param txReceiptMap the tx receipt map
+     * @return state root hash
      */
     public StateRootHash build(PackageData packageData, Map<String, TransactionReceipt> txReceiptMap) {
         //hash for transactions

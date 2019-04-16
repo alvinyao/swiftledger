@@ -23,30 +23,67 @@ import com.higgschain.trust.evmcontract.util.ByteUtil;
  * Created by Anton Nashatyrev on 13.02.2017.
  */
 public final class TrieKey {
+    /**
+     * The constant ODD_OFFSET_FLAG.
+     */
     public static final int ODD_OFFSET_FLAG = 0x1;
+    /**
+     * The constant TERMINATOR_FLAG.
+     */
     public static final int TERMINATOR_FLAG = 0x2;
     private final byte[] key;
     private final int off;
     private final boolean terminal;
 
+    /**
+     * From normal trie key.
+     *
+     * @param key the key
+     * @return the trie key
+     */
     public static TrieKey fromNormal(byte[] key) {
         return new TrieKey(key);
     }
 
+    /**
+     * From packed trie key.
+     *
+     * @param key the key
+     * @return the trie key
+     */
     public static TrieKey fromPacked(byte[] key) {
         return new TrieKey(key, ((key[0] >> 4) & ODD_OFFSET_FLAG) != 0 ? 1 : 2, ((key[0] >> 4) & TERMINATOR_FLAG) != 0);
     }
 
+    /**
+     * Empty trie key.
+     *
+     * @param terminal the terminal
+     * @return the trie key
+     */
     public static TrieKey empty(boolean terminal) {
         return new TrieKey(ByteUtil.EMPTY_BYTE_ARRAY, 0, terminal);
     }
 
+    /**
+     * Single hex trie key.
+     *
+     * @param hex the hex
+     * @return the trie key
+     */
     public static TrieKey singleHex(int hex) {
         TrieKey ret = new TrieKey(new byte[1], 1, false);
         ret.setHex(0, hex);
         return ret;
     }
 
+    /**
+     * Instantiates a new Trie key.
+     *
+     * @param key      the key
+     * @param off      the off
+     * @param terminal the terminal
+     */
     public TrieKey(byte[] key, int off, boolean terminal) {
         this.terminal = terminal;
         this.off = off;
@@ -57,6 +94,11 @@ public final class TrieKey {
         this(key, 0, true);
     }
 
+    /**
+     * To packed byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] toPacked() {
         int flags = ((off & 1) != 0 ? ODD_OFFSET_FLAG : 0) | (terminal ? TERMINATOR_FLAG : 0);
         byte[] ret = new byte[getLength() / 2 + 1];
@@ -67,6 +109,11 @@ public final class TrieKey {
         return ret;
     }
 
+    /**
+     * To normal byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] toNormal() {
         if ((off & 1) != 0) {
             throw new RuntimeException("Can't convert a key with odd number of hexes to normal: " + this);
@@ -77,18 +124,40 @@ public final class TrieKey {
         return ret;
     }
 
+    /**
+     * Is terminal boolean.
+     *
+     * @return the boolean
+     */
     public boolean isTerminal() {
         return terminal;
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     public boolean isEmpty() {
         return getLength() == 0;
     }
 
+    /**
+     * Shift trie key.
+     *
+     * @param hexCnt the hex cnt
+     * @return the trie key
+     */
     public TrieKey shift(int hexCnt) {
         return new TrieKey(this.key, off + hexCnt, terminal);
     }
 
+    /**
+     * Gets common prefix.
+     *
+     * @param k the k
+     * @return the common prefix
+     */
     public TrieKey getCommonPrefix(TrieKey k) {
         // TODO can be optimized
         int prefixLen = 0;
@@ -106,6 +175,12 @@ public final class TrieKey {
         return ret;
     }
 
+    /**
+     * Match and shift trie key.
+     *
+     * @param k the k
+     * @return the trie key
+     */
     public TrieKey matchAndShift(TrieKey k) {
         int len = getLength();
         int kLen = k.getLength();
@@ -138,6 +213,11 @@ public final class TrieKey {
         return shift(kLen);
     }
 
+    /**
+     * Gets length.
+     *
+     * @return the length
+     */
     public int getLength() {
         return (key.length << 1) - off;
     }
@@ -153,11 +233,23 @@ public final class TrieKey {
         }
     }
 
+    /**
+     * Gets hex.
+     *
+     * @param idx the idx
+     * @return the hex
+     */
     public int getHex(int idx) {
         byte b = key[(off + idx) >> 1];
         return (((off + idx) & 1) == 0 ? (b >> 4) : b) & 0xF;
     }
 
+    /**
+     * Concat trie key.
+     *
+     * @param k the k
+     * @return the trie key
+     */
     public TrieKey concat(TrieKey k) {
         if (isTerminal()) {
             throw new RuntimeException("Can' append to terminal key: " + this + " + " + k);

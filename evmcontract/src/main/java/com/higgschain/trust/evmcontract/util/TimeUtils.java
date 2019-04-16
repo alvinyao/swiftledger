@@ -18,6 +18,8 @@
 package com.higgschain.trust.evmcontract.util;
 
 /**
+ * The type Time utils.
+ *
  * @author Mikhail Kalinin
  * @since 10.08.2015
  */

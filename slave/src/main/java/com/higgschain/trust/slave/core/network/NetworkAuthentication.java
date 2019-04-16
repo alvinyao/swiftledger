@@ -6,8 +6,10 @@ import com.higgschain.trust.network.Peer;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Network authentication.
+ *
  * @author duhongming
- * @date 2018/9/13
+ * @date 2018 /9/13
  */
 @Component
 public class NetworkAuthentication implements Authentication {

@@ -42,10 +42,20 @@ public class CSTRequestF1 extends CSTRequest {
     private int logLowerSize;
     private InetSocketAddress address;
 
+    /**
+     * Instantiates a new Cst request f 1.
+     *
+     * @param cid the cid
+     */
     public CSTRequestF1(int cid) {
         super(cid);
     }
 
+    /**
+     * Gets log upper.
+     *
+     * @return the log upper
+     */
     //	public int getCkpPeriod() {
     //		return this.ckpPeriod;
     //	}
@@ -54,18 +64,38 @@ public class CSTRequestF1 extends CSTRequest {
         return logUpper;
     }
 
+    /**
+     * Sets log upper.
+     *
+     * @param logUpper the log upper
+     */
     public void setLogUpper(int logUpper) {
         this.logUpper = logUpper;
     }
 
+    /**
+     * Gets log lower.
+     *
+     * @return the log lower
+     */
     public int getLogLower() {
         return logLower;
     }
 
+    /**
+     * Sets log lower.
+     *
+     * @param logLower the log lower
+     */
     public void setLogLower(int logLower) {
         this.logLower = logLower;
     }
 
+    /**
+     * Gets log upper size.
+     *
+     * @return the log upper size
+     */
     public int getLogUpperSize() {
         return logUpperSize;
     }
@@ -127,10 +157,20 @@ public class CSTRequestF1 extends CSTRequest {
         return -1;
     }
 
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
     public InetSocketAddress getAddress() {
         return address;
     }
 
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
     public void setAddress(InetSocketAddress address) {
         this.address = address;
     }
@@ -139,6 +179,11 @@ public class CSTRequestF1 extends CSTRequest {
     //		return logLowerSkip;
     //	}
 
+    /**
+     * Gets log lower size.
+     *
+     * @return the log lower size
+     */
     public int getLogLowerSize() {
         return logLowerSize;
     }

@@ -26,25 +26,42 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
+ * The type Block repository.
+ *
  * @author tangfashuang
  * @desc block repository
- * @date 2018/04/10 16:26
+ * @date 2018 /04/10 16:26
  */
 @Repository @Slf4j public class BlockRepository {
+    /**
+     * The Block dao.
+     */
     @Autowired
     BlockDao blockDao;
+    /**
+     * The Block rocks dao.
+     */
     @Autowired
     BlockRocksDao blockRocksDao;
+    /**
+     * The Transaction repository.
+     */
     @Autowired TransactionRepository transactionRepository;
+    /**
+     * The System property repository.
+     */
     @Autowired
     SystemPropertyRepository systemPropertyRepository;
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
 
     /**
      * get max height of block
      *
-     * @return
+     * @return max height
      */
     public Long getMaxHeight() {
         if (initConfig.isUseMySQL()) {
@@ -58,7 +75,8 @@ import java.util.*;
     /**
      * get max height of block
      *
-     * @return
+     * @param size the size
+     * @return limit height
      */
     public List<Long> getLimitHeight(int size) {
         if (initConfig.isUseMySQL()) {
@@ -80,8 +98,8 @@ import java.util.*;
     /**
      * get block info by block height
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return block
      */
     public Block getBlock(Long height) {
         BlockPO blockPO;
@@ -133,7 +151,7 @@ import java.util.*;
      *
      * @param startHeight start height
      * @param size        size
-     * @return
+     * @return list
      */
     public List<Block> listBlocks(long startHeight, int size) {
         List<BlockPO> blockPOs;
@@ -160,7 +178,7 @@ import java.util.*;
      *
      * @param startHeight start height
      * @param size        size
-     * @return
+     * @return list
      */
     public List<BlockHeader> listBlockHeaders(long startHeight, int size) {
         List<BlockPO> blockPOs;
@@ -201,8 +219,8 @@ import java.util.*;
     /**
      * get block header data from db
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return block header
      */
     public BlockHeader getBlockHeader(Long height) {
         BlockPO blockPO;
@@ -218,8 +236,8 @@ import java.util.*;
     /**
      * save to db
      *
-     * @param block
-     * @param txReceiptMap
+     * @param block        the block
+     * @param txReceiptMap the tx receipt map
      */
     public void saveBlock(Block block, Map<String, TransactionReceipt> txReceiptMap) {
         if (log.isDebugEnabled()) {
@@ -296,11 +314,11 @@ import java.util.*;
     /**
      * query by condition、page
      *
-     * @param height
-     * @param blockHash
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param height    the height
+     * @param blockHash the block hash
+     * @param pageNum   the page num
+     * @param pageSize  the page size
+     * @return list
      */
     public List<BlockVO> queryBlocksWithCondition(Long height, String blockHash, Integer pageNum, Integer pageSize) {
         if (null != blockHash) {
@@ -310,6 +328,13 @@ import java.util.*;
         return BeanConvertor.convertList(list, BlockVO.class);
     }
 
+    /**
+     * Count blocks with condition long.
+     *
+     * @param height    the height
+     * @param blockHash the block hash
+     * @return the long
+     */
     @Deprecated public long countBlocksWithCondition(Long height, String blockHash) {
         return blockDao.countBlockWithCondition(height, blockHash);
     }
@@ -317,8 +342,8 @@ import java.util.*;
     /**
      * query block by height
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return block vo
      */
     public BlockVO queryBlockByHeight(Long height) {
         BlockPO blockPO = blockDao.queryByHeight(height);

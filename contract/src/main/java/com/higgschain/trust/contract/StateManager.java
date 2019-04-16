@@ -9,25 +9,45 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *  contract state manager
- *  @author duhongming
+ * contract state manager
+ *
+ * @author duhongming
  */
 public class StateManager {
     private ExecuteContext executeContext;
     private ContractStateStore contractStateStore;
     private Map<String, Object> state;
 
+    /**
+     * Instantiates a new State manager.
+     *
+     * @param executeContext     the execute context
+     * @param contractStateStore the contract state store
+     */
     public StateManager(ExecuteContext executeContext,ContractStateStore contractStateStore) {
         state = new HashMap<>(8);
         this.executeContext = executeContext;
         this.contractStateStore = contractStateStore;
     }
 
+    /**
+     * Put state manager.
+     *
+     * @param name  the name
+     * @param value the value
+     * @return the state manager
+     */
     public StateManager put(String name, Object value) {
         this.state.put(name, JsonHelper.clone(value));
         return this;
     }
 
+    /**
+     * Get object.
+     *
+     * @param name the name
+     * @return the object
+     */
     public Object get(String name) {
         Object obj = this.state.get(name);
         //from external store
@@ -45,6 +65,11 @@ public class StateManager {
         return obj;
     }
 
+    /**
+     * Gets state.
+     *
+     * @return the state
+     */
     public Map<String, Object> getState() {
         return this.state;
     }
@@ -71,12 +96,13 @@ public class StateManager {
         //save contract state`s all keys
         contractStateStore.put(executeContext.getStateInstanceKey(),keys);
     }
+
     /**
      * make key by contract address
      *
-     * @param address
-     * @param keyName
-     * @return
+     * @param address the address
+     * @param keyName the key name
+     * @return string
      */
     public static String makeStateKey(String address,String keyName){
         if(StringUtils.isEmpty(address)){

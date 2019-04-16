@@ -2,6 +2,9 @@ package com.higgschain.trust.rs.common.exception;
 
 import com.higgschain.trust.rs.common.enums.RsCoreErrorEnum;
 
+/**
+ * The type Rs core exception.
+ */
 public class RsCoreException extends RuntimeException {
     /**
      * 异常错误代码
@@ -83,6 +86,8 @@ public class RsCoreException extends RuntimeException {
     // ~~~ bean方法
 
     /**
+     * Gets code.
+     *
      * @return Returns the code.
      */
     public RsCoreErrorEnum getCode() {
@@ -90,6 +95,8 @@ public class RsCoreException extends RuntimeException {
     }
 
     /**
+     * Sets code.
+     *
      * @param code The code to set.
      */
     public void setCode(RsCoreErrorEnum code) {

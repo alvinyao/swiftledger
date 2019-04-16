@@ -29,6 +29,12 @@ public class IpUtil {
         return n;
     }
 
+    /**
+     * Ip 2 int int.
+     *
+     * @param strIp the str ip
+     * @return the int
+     */
     public static int ip2Int(String strIp) {
         String[] ss = strIp.split("\\.");
         if (ss.length != 4) {
@@ -44,8 +50,8 @@ public class IpUtil {
     /**
      * 将int型ip转成String型ip
      *
-     * @param intIp
-     * @return
+     * @param intIp the int ip
+     * @return string
      */
     public static String int2Ip(int intIp) {
         byte[] bytes = int2byte(intIp);
@@ -59,6 +65,12 @@ public class IpUtil {
         return sb.toString();
     }
 
+    /**
+     * Gets host ip.
+     *
+     * @return the host ip
+     * @throws UnknownHostException the unknown host exception
+     */
     public static String getHostIp() throws UnknownHostException {
         InetAddress netAddress = null;
         try {
@@ -78,11 +90,22 @@ public class IpUtil {
         return ip;
     }
 
+    /**
+     * Gets host ip int.
+     *
+     * @return the host ip int
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int getHostIpInt() throws UnknownHostException {
         String ip = getHostIp();
         return ip2Int(ip);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         System.out.println(int2Ip(16777343));
         System.out.println(int2Ip(1510291438));

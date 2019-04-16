@@ -27,12 +27,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Action json deserializer.
+ *
  * @author duhongming
- * @date 2018/8/2
+ * @date 2018 /8/2
  */
 @Slf4j public class ActionJsonDeserializer implements ObjectDeserializer {
 
+    /**
+     * The Convert map.
+     */
     static Map<String, Mapper<JSONObject, Action>> convertMap = new HashMap<>(20);
+    /**
+     * The Action map.
+     */
     static Map<ActionTypeEnum, Type> actionMap = new HashMap<>(20);
 
     static {

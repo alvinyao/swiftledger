@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * The type Ca key loader.
+ */
 @Component @Slf4j public class CaKeyLoaderImpl implements CaKeyLoader {
 
     @Autowired private CaRepository caRepository;

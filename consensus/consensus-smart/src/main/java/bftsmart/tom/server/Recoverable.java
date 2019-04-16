@@ -28,14 +28,18 @@ import bftsmart.tom.ReplicaContext;
  */
 public interface Recoverable {
 
+    /**
+     * Sets replica context.
+     *
+     * @param replicaContext the replica context
+     */
     public void setReplicaContext(ReplicaContext replicaContext);
 
     /**
      * This  method should return a representation of the application state
      *
      * @param cid       Consensus up to which the application should return an Application state
-     * @param sendState true if the replica should send a complete
-     *                  representation of the state instead of only the hash. False otherwise
+     * @param sendState true if the replica should send a complete                  representation of the state instead of only the hash. False otherwise
      * @return A representation of the application state
      */
     public ApplicationState getState(int cid, boolean sendState);
@@ -44,10 +48,16 @@ public interface Recoverable {
      * Sets the state to the representation obtained in the state transfer protocol
      *
      * @param state State obtained in the state transfer protocol
-     * @return
+     * @return state
      */
     public int setState(ApplicationState state);
 
+    /**
+     * Recover state int.
+     *
+     * @param state the state
+     * @return the int
+     */
     public int recoverState(ApplicationState state);
 
     /**
@@ -70,8 +80,7 @@ public interface Recoverable {
      *
      * @param CID      the consensus instance ID associated with the request
      * @param requests A request decided in CID
-     * @param msgCtx   Message context associated with the client request and the consensus instance
-     *                 where it was ordered. msgCtx.getConsensusId() will be equal to CID.
+     * @param msgCtx   Message context associated with the client request and the consensus instance                 where it was ordered. msgCtx.getConsensusId() will be equal to CID.
      */
     public void Op(int CID, byte[] requests, MessageContext msgCtx);
 
@@ -86,8 +95,7 @@ public interface Recoverable {
      *
      * @param CID        the consensus instance where the aforementioned condition occurred
      * @param operations Operations decided in CID
-     * @param msgCtx     Message context associated with the consensus instance. furthermore
-     *                   msgCtx.getConsensusId() will be equal to CID.
+     * @param msgCtx     Message context associated with the consensus instance. furthermore                   msgCtx.getConsensusId() will be equal to CID.
      */
     public void noOp(int CID, byte[][] operations, MessageContext msgCtx[]);
 

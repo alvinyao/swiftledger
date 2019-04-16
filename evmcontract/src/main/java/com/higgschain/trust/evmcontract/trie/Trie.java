@@ -21,11 +21,23 @@ import com.higgschain.trust.evmcontract.datasource.Source;
 
 /**
  * Created by Anton Nashatyrev on 05.10.2016.
+ *
+ * @param <V> the type parameter
  */
 public interface Trie<V> extends Source<byte[], V> {
 
+    /**
+     * Get root hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getRootHash();
 
+    /**
+     * Sets root.
+     *
+     * @param root the root
+     */
     void setRoot(byte[] root);
 
     /**

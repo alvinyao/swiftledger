@@ -80,9 +80,11 @@ import org.springframework.stereotype.Repository;
     protected static final String TIME_UNIT = "ms";
 
     /**
-     * @param pj
-     * @return
-     * @throws Throwable
+     * Invoke object.
+     *
+     * @param pj the pj
+     * @return object
+     * @throws Throwable the throwable
      */
     @Around("execution(* com.higgschain.trust.slave.dao.*.*.*Dao.*(..)))") public Object invoke(ProceedingJoinPoint pj)
         throws Throwable {

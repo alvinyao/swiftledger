@@ -38,6 +38,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
+ * The type Message handler.
+ *
  * @author edualchieri
  */
 public class MessageHandler {
@@ -47,6 +49,9 @@ public class MessageHandler {
     //private Cipher cipher;
     private Mac mac;
 
+    /**
+     * Instantiates a new Message handler.
+     */
     public MessageHandler() {
         try {
             //this.cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
@@ -56,14 +61,29 @@ public class MessageHandler {
         }
     }
 
+    /**
+     * Sets acceptor.
+     *
+     * @param acceptor the acceptor
+     */
     public void setAcceptor(Acceptor acceptor) {
         this.acceptor = acceptor;
     }
 
+    /**
+     * Sets tom layer.
+     *
+     * @param tomLayer the tom layer
+     */
     public void setTOMLayer(TOMLayer tomLayer) {
         this.tomLayer = tomLayer;
     }
 
+    /**
+     * Process data.
+     *
+     * @param sm the sm
+     */
     @SuppressWarnings("unchecked") protected void processData(SystemMessage sm) {
         if (sm instanceof ConsensusMessage) {
 
@@ -192,6 +212,9 @@ public class MessageHandler {
         }
     }
 
+    /**
+     * Verify pending.
+     */
     protected void verifyPending() {
         tomLayer.processOutOfContext();
     }

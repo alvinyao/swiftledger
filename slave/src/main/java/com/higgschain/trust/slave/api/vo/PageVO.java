@@ -7,8 +7,9 @@ import lombok.Setter;
 import java.util.List;
 
 /**
+ * The type Page vo.
  *
- * @param <T>
+ * @param <T> the type parameter
  */
 @Setter
 @Getter

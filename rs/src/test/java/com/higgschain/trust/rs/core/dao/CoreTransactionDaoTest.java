@@ -13,23 +13,32 @@ import java.util.List;
  * CoreTransaction Dao test
  *
  * @author lingchao
- * @create 2018年08月24日17:26
+ * @create 2018年08月24日17 :26
  */
 public class CoreTransactionDaoTest extends IntegrateBaseTest {
     @Autowired
     private CoreTransactionDao coreTransactionDao;
 
+    /**
+     * Query by tx ids.
+     */
     @Test
     public void queryByTxIds() {
         List<String> txIdList = Lists.newArrayList("123");
         System.out.println(coreTransactionDao.queryByTxIds(txIdList));
     }
 
+    /**
+     * Save execute result and height.
+     */
     @Test
     public void saveExecuteResultAndHeight() {
         System.out.println(coreTransactionDao.saveExecuteResultAndHeight("123", "OK", "KO", "chengggongn", 19999L));
     }
 
+    /**
+     * Add.
+     */
     @Test
     public void add() {
 

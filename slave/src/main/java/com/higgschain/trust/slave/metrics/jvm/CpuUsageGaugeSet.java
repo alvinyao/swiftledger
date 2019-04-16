@@ -11,18 +11,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Cpu usage gauge set.
+ *
  * @author duhongming
- * @date 2018/12/28
+ * @date 2018 /12/28
  */
 public class CpuUsageGaugeSet implements MetricSet {
 
 
     private final OperatingSystemMXBean  mxBean;
 
+    /**
+     * Instantiates a new Cpu usage gauge set.
+     */
     public CpuUsageGaugeSet() {
         this((OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean());
     }
 
+    /**
+     * Instantiates a new Cpu usage gauge set.
+     *
+     * @param mxBean the mx bean
+     */
     public CpuUsageGaugeSet(OperatingSystemMXBean mxBean) {
         this.mxBean = mxBean;
     }

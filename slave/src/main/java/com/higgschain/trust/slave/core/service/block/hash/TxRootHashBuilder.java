@@ -16,9 +16,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * The type Tx root hash builder.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-18
+ * @date 2018 -04-18
  */
 @Component @Slf4j public class TxRootHashBuilder {
     /**
@@ -26,13 +28,16 @@ import java.util.stream.Collectors;
      */
     public final static String DEFAULT_HASH_FLAG = "NO_TREE";
 
+    /**
+     * The Merkle service.
+     */
     @Autowired MerkleService merkleService;
 
     /**
      * build root has for transactions
      *
-     * @param txs
-     * @return
+     * @param txs the txs
+     * @return string
      */
     public String buildTxs(List<SignedTransaction> txs) {
         if (CollectionUtils.isEmpty(txs)) {
@@ -65,8 +70,8 @@ import java.util.stream.Collectors;
     /**
      * build root has for transaction receipt
      *
-     * @param receipts
-     * @return
+     * @param receipts the receipts
+     * @return string
      */
     public String buildReceipts(Map<String, TransactionReceipt> receipts) {
         if (MapUtils.isEmpty(receipts)) {
@@ -86,8 +91,8 @@ import java.util.stream.Collectors;
     /**
      * get root hash from merkle tree,if is null return NO_TREE
      *
-     * @param merkleTree
-     * @return
+     * @param merkleTree the merkle tree
+     * @return root hash
      */
     public String getRootHash(MerkleTree merkleTree) {
         if (merkleTree == null) {

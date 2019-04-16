@@ -19,10 +19,13 @@ import java.util.List;
  * utxo tx test
  *
  * @author lingchao
- * @create 2018年06月23日11:05
+ * @create 2018年06月23日11 :05
  */
 public class UTXOTxTest{
 
+    /**
+     * Test.
+     */
     @Test
     public void test() {
 
@@ -74,7 +77,6 @@ public class UTXOTxTest{
         CoreTxHelper.post(rsCoreTxVO);
 
     }
-
 
     /**
      * UTXO销毁

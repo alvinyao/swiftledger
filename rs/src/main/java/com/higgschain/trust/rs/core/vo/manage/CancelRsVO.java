@@ -6,6 +6,9 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+/**
+ * The type Cancel rs vo.
+ */
 @Getter
 @Setter
 public class CancelRsVO extends BaseVO {

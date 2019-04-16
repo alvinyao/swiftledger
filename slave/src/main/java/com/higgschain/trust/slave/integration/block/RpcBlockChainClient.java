@@ -19,8 +19,10 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
+ * The type Rpc block chain client.
+ *
  * @author duhongming
- * @date 2018/9/18
+ * @date 2018 /9/18
  */
 @ConditionalOnProperty(name = "network.rpc", havingValue = "netty", matchIfMissing = true)
 @Component
@@ -52,6 +54,9 @@ public class RpcBlockChainClient implements BlockChainClient {
         }
     }
 
+    /**
+     * Instantiates a new Rpc block chain client.
+     */
     public RpcBlockChainClient() {
         log.info("Use RpcBlockChainClient");
     }

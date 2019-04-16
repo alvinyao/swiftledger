@@ -82,8 +82,7 @@ public class Sha256Hash implements Serializable, Comparable<Sha256Hash> {
      *
      * @param hexString a hash value represented as a hex string
      * @return a new instance
-     * @throws IllegalArgumentException if the given string is not a valid hex string, or if it does
-     *                                  not represent exactly 32 bytes
+     * @throws IllegalArgumentException if the given string is not a valid hex string, or if it does                                  not represent exactly 32 bytes
      */
     public static Sha256Hash wrap(String hexString) {
         return wrap(CryptoUtils.HEX.decode(hexString));

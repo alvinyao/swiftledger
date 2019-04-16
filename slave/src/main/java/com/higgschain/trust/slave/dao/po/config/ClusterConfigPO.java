@@ -7,9 +7,11 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * The type Cluster config po.
+ *
  * @author WangQuanzhou
  * @desc cluster configuration
- * @date 2018/6/5 10:27
+ * @date 2018 /6/5 10:27
  */
 @Getter @Setter public class ClusterConfigPO extends BaseEntity {
     private String clusterName;

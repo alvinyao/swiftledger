@@ -6,19 +6,35 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorCompletionService;
 
 /**
+ * The type Pool executor.
+ *
+ * @param <T> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
 public class PoolExecutor<T> implements Pool<T> {
 
+    /**
+     * The Pool.
+     */
     protected CompletionService<T> pool;
+    /**
+     * The Counter.
+     */
     protected int counter;
 
-
+    /**
+     * Instantiates a new Pool executor.
+     */
     public PoolExecutor() {
         this(ExecutorServiceUtils.getFixedThreadPool());
     }
 
+    /**
+     * Instantiates a new Pool executor.
+     *
+     * @param executor the executor
+     */
     public PoolExecutor(Executor executor) {
         this.pool = new ExecutorCompletionService<T>(executor);
         this.counter = 0;

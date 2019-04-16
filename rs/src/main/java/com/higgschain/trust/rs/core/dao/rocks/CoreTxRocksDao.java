@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Core tx rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -28,7 +30,8 @@ public class CoreTxRocksDao extends RocksBaseDao<CoreTransactionPO>{
 
     /**
      * db transaction
-     * @param po
+     *
+     * @param po the po
      */
     public void saveWithTransaction(CoreTransactionPO po) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
@@ -46,6 +49,12 @@ public class CoreTxRocksDao extends RocksBaseDao<CoreTransactionPO>{
         txPut(tx, key, po);
     }
 
+    /**
+     * Query by tx ids list.
+     *
+     * @param txIdList the tx id list
+     * @return the list
+     */
     public List<CoreTransactionPO> queryByTxIds(List<String> txIdList) {
         if (CollectionUtils.isEmpty(txIdList)) {
             return null;
@@ -63,6 +72,12 @@ public class CoreTxRocksDao extends RocksBaseDao<CoreTransactionPO>{
         return pos;
     }
 
+    /**
+     * Update sign datas.
+     *
+     * @param txId     the tx id
+     * @param signJSON the sign json
+     */
     public void updateSignDatas(String txId, String signJSON) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -80,6 +95,15 @@ public class CoreTxRocksDao extends RocksBaseDao<CoreTransactionPO>{
         txPut(tx, txId, po);
     }
 
+    /**
+     * Save execute result and height.
+     *
+     * @param txId        the tx id
+     * @param result      the result
+     * @param respCode    the resp code
+     * @param respMsg     the resp msg
+     * @param blockHeight the block height
+     */
     public void saveExecuteResultAndHeight(String txId, String result, String respCode, String respMsg,
         Long blockHeight) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
@@ -101,6 +125,11 @@ public class CoreTxRocksDao extends RocksBaseDao<CoreTransactionPO>{
         txPut(tx, txId, po);
     }
 
+    /**
+     * Update with transaction.
+     *
+     * @param po the po
+     */
     public void updateWithTransaction(CoreTransactionPO po) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -110,6 +139,11 @@ public class CoreTxRocksDao extends RocksBaseDao<CoreTransactionPO>{
         txPut(tx, po.getTxId(), po);
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param coreTransactionPOList the core transaction po list
+     */
     public void batchInsert(List<CoreTransactionPO> coreTransactionPOList) {
         if (CollectionUtils.isEmpty(coreTransactionPOList)) {
             return;
@@ -127,6 +161,11 @@ public class CoreTxRocksDao extends RocksBaseDao<CoreTransactionPO>{
         }
     }
 
+    /**
+     * Failover batch insert.
+     *
+     * @param coreTransactionPOList the core transaction po list
+     */
     public void failoverBatchInsert(List<CoreTransactionPO> coreTransactionPOList) {
         if (CollectionUtils.isEmpty(coreTransactionPOList)) {
             return;

@@ -14,9 +14,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
+ * The type Explorer controller.
+ *
  * @author liuyu
  * @description 区块链浏览器接口
- * @date 2018-07-13
+ * @date 2018 -07-13
  */
 @CrossOrigin
 @RequestMapping(value = "/explorer")
@@ -30,11 +32,11 @@ public class ExplorerController {
     @Autowired
     private ContractService contractService;
 
-
     /**
      * query block info by page
      *
-     * @return
+     * @param req the req
+     * @return resp data
      */
     @RequestMapping(value = "/queryBlocksByPage", method = RequestMethod.POST)
     public RespData<List<BlockVO>> queryBlocksByPage(@RequestBody @Valid QueryBlockVO req) {
@@ -56,8 +58,8 @@ public class ExplorerController {
     /**
      * query transaction by condition and page
      *
-     * @param req
-     * @return
+     * @param req the req
+     * @return resp data
      */
     @RequestMapping(value = "/queryTxsByPage", method = RequestMethod.POST)
     public RespData<List<CoreTransactionVO>> queryTxsByPage(@RequestBody @Valid QueryTransactionVO req) {
@@ -80,8 +82,8 @@ public class ExplorerController {
     /**
      * query block info by height
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/queryBlockByHeight", method = RequestMethod.POST)
     public RespData<BlockVO> queryBlockByHeight(@RequestBody @Valid QueryBlockByHeightVO vo) {
@@ -104,8 +106,8 @@ public class ExplorerController {
     /**
      * query tx info by tx_id
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/queryTxById", method = RequestMethod.POST)
     public RespData<CoreTransactionVO> queryTxById(@RequestBody @Valid  QueryTxVO vo) {
@@ -124,12 +126,11 @@ public class ExplorerController {
         return respData;
     }
 
-
     /**
      * query UTXO s
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/queryUTXO", method = RequestMethod.POST)
     public RespData<List<UTXOVO>> queryUTXO(@RequestBody @Valid QueryTxVO vo) {
@@ -148,12 +149,11 @@ public class ExplorerController {
         return respData;
     }
 
-
     /**
      * query account by page
      *
-     * @param req
-     * @return
+     * @param req the req
+     * @return resp data
      */
     @RequestMapping(value = "/queryAccountsByPage", method = RequestMethod.POST)
     public RespData<List<AccountInfoVO>> queryAccountsByPage(@RequestBody @Valid QueryAccountVO req) {
@@ -176,8 +176,8 @@ public class ExplorerController {
     /**
      * query contract by page
      *
-     * @param req
-     * @return
+     * @param req the req
+     * @return resp data
      */
     @RequestMapping(value = "/queryContractsByPage", method = RequestMethod.POST)
     public RespData<List<ContractVO>> queryContractsByPage(@RequestBody @Valid QueryContractVO req) {
@@ -197,6 +197,11 @@ public class ExplorerController {
         return respData;
     }
 
+    /**
+     * Query peers info resp data.
+     *
+     * @return the resp data
+     */
     @RequestMapping(value = "/queryPeersInfo", method = RequestMethod.POST)
     public RespData<List<NodeInfoVO>> queryPeersInfo() {
         ExplorerCache.CacheKey key = new ExplorerCache.CacheKey("queryPeersInfo", null);

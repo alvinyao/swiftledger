@@ -25,40 +25,68 @@ import java.util.List;
  * the snapshot agent of AccountContractBinding
  *
  * @author duhongming
- * @date 2018-04-19
+ * @date 2018 -04-19
  */
 @Slf4j
 @Component
 public class AccountContractBindingSnapshotAgent implements CacheLoader {
 
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Repository.
+     */
     @Autowired
     AccountContractBindingRepository repository;
 
     /**
      * check exist binging relationship
      *
-     * @param hash
-     * @return
+     * @param hash the hash
+     * @return binding
      */
     public AccountContractBinding getBinding(String hash) {
         AccountContractBinding binding = (AccountContractBinding) snapshot.get(SnapshotBizKeyEnum.ACCOUNT_CONTRACT_BIND, new BindingItemCacheKey(hash));
         return binding;
     }
 
+    /**
+     * Put binding.
+     *
+     * @param binding the binding
+     */
     public void putBinding(AccountContractBinding binding) {
          snapshot.insert(SnapshotBizKeyEnum.ACCOUNT_CONTRACT_BIND, new BindingItemCacheKey(binding.getHash()), binding);
     }
 
+    /**
+     * Gets list by account.
+     *
+     * @param accountNo the account no
+     * @return the list by account
+     */
     public List<AccountContractBinding> getListByAccount(String accountNo) {
         return (List<AccountContractBinding>) snapshot.get(SnapshotBizKeyEnum.ACCOUNT_CONTRACT_BIND, new AccountContractBindingCacheKey(accountNo));
     }
 
+    /**
+     * Put.
+     *
+     * @param accountNo the account no
+     * @param bindings  the bindings
+     */
     public void put(String accountNo, List<AccountContractBinding> bindings) {
           snapshot.insert(SnapshotBizKeyEnum.ACCOUNT_CONTRACT_BIND, new AccountContractBindingCacheKey(accountNo), bindings);
     }
 
+    /**
+     * Put.
+     *
+     * @param binding the binding
+     */
     public void put(AccountContractBinding binding) {
         this.putBinding(binding);
     }
@@ -107,7 +135,9 @@ public class AccountContractBindingSnapshotAgent implements CacheLoader {
         throw new NotImplementedException();
     }
 
-
+    /**
+     * The type Account contract binding cache key.
+     */
     @Getter
     @Setter
     @NoArgsConstructor
@@ -116,6 +146,9 @@ public class AccountContractBindingSnapshotAgent implements CacheLoader {
         private String accountNo;
     }
 
+    /**
+     * The type Binding item cache key.
+     */
     @Getter
     @Setter
     @NoArgsConstructor

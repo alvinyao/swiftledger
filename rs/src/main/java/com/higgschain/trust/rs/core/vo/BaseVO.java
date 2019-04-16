@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * basevo
- *
+ * <p>
  * Created by liuyu on 18/2/9.
  */
 public abstract class BaseVO implements Serializable {

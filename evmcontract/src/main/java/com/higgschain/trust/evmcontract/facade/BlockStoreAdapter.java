@@ -7,8 +7,10 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
+ * The type Block store adapter.
+ *
  * @author Chen Jiawei
- * @date 2018-11-21
+ * @date 2018 -11-21
  */
 public class BlockStoreAdapter implements BlockStore {
     @Override

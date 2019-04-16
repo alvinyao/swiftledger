@@ -16,10 +16,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * The type Request service.
+ *
  * @description: com.higgschain.trust.rs.core.service
  * @author: lingchao
  * @datetime:2018年11月28日19:47
- **/
+ */
 @Slf4j
 @Service
 public class RequestServiceImpl implements RequestService {

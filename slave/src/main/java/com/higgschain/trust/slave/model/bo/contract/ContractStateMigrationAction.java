@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Contract state migration action.
+ *
  * @author duhongming
- * @date 2018/6/21
+ * @date 2018 /6/21
  */
 @Getter
 @Setter

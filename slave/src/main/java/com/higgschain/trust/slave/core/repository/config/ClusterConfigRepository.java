@@ -16,9 +16,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * The type Cluster config repository.
+ *
  * @author WangQuanzhou
  * @desc TODO
- * @date 2018/6/5 16:11
+ * @date 2018 /6/5 16:11
  */
 @Repository @Slf4j public class ClusterConfigRepository {
 
@@ -27,7 +29,9 @@ import java.util.List;
     @Autowired private InitConfig initConfig;
 
     /**
-     * @param clusterConfig
+     * Insert cluster config.
+     *
+     * @param clusterConfig the cluster config
      * @return
      * @desc insert clusterConfig into db
      */
@@ -42,8 +46,10 @@ import java.util.List;
     }
 
     /**
-     * @param clusterName
-     * @return ClusterConfig
+     * Gets cluster config.
+     *
+     * @param clusterName the cluster name
+     * @return ClusterConfig cluster config
      * @desc get ClusterConfig by cluster name
      */
     public ClusterConfig getClusterConfig(String clusterName) {
@@ -65,8 +71,8 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param clusterConfigPOList
-     * @return
+     * @param clusterConfigPOList the cluster config po list
+     * @return boolean
      */
     public boolean batchInsert(List<ClusterConfigPO> clusterConfigPOList) {
         int affectRows;
@@ -88,8 +94,8 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param clusterConfigPOList
-     * @return
+     * @param clusterConfigPOList the cluster config po list
+     * @return boolean
      */
     public boolean batchUpdate(List<ClusterConfigPO> clusterConfigPOList) {
         if (initConfig.isUseMySQL()) {

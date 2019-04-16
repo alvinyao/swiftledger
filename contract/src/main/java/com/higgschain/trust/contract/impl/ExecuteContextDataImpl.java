@@ -13,10 +13,18 @@ public class ExecuteContextDataImpl implements ExecuteContextData {
 
     private HashMap<String, Object> data;
 
+    /**
+     * Instantiates a new Execute context data.
+     */
     public ExecuteContextDataImpl() {
         data = new HashMap<>();
     }
 
+    /**
+     * Instantiates a new Execute context data.
+     *
+     * @param data the data
+     */
     public ExecuteContextDataImpl(Map<String, Object> data) {
         this();
         if (null != data) {
@@ -39,11 +47,22 @@ public class ExecuteContextDataImpl implements ExecuteContextData {
         return data.keySet();
     }
 
+    /**
+     * New context data execute context data.
+     *
+     * @param data the data
+     * @return the execute context data
+     */
     public static ExecuteContextDataImpl newContextData(Map<String, Object> data) {
         ExecuteContextDataImpl contextData = new ExecuteContextDataImpl(data);
         return contextData;
     }
 
+    /**
+     * New context data execute context data.
+     *
+     * @return the execute context data
+     */
     public static ExecuteContextDataImpl newContextData() {
         return newContextData(null);
     }

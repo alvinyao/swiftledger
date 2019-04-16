@@ -5,10 +5,18 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable poly mod element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ImmutablePolyModElement<E extends Element> extends PolyModElement<E> {
 
+    /**
+     * Instantiates a new Immutable poly mod element.
+     *
+     * @param element the element
+     */
     public ImmutablePolyModElement(PolyModElement<E> element) {
         super(element.getField());
 

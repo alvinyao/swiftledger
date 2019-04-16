@@ -15,12 +15,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * The type Utxo snapshot agent test.
+ */
 public class UTXOSnapshotAgentTest extends  BaseTest{
     @Autowired
     private UTXOSnapshotAgent utxoSnapshotAgent;
     @Autowired
     private SnapshotService snapshotService;
+
+    /**
+     * Test query tx out.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testQueryTxOut() throws Exception {
         System.out.println("queryTxOut :" + utxoSnapshotAgent.queryUTXO("123", 0, 0));
@@ -28,6 +36,9 @@ public class UTXOSnapshotAgentTest extends  BaseTest{
 
     }
 
+    /**
+     * Test json.
+     */
     @Test
     public  void  testJson(){
       //  System.setProperty("spring.config.location", "classpath:test-application.json");
@@ -48,6 +59,11 @@ public class UTXOSnapshotAgentTest extends  BaseTest{
         System.out.println();
     }
 
+    /**
+     * Test batch insert tx out.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testBatchInsertTxOut() throws Exception {
         JSONObject state = new JSONObject();
@@ -100,6 +116,11 @@ public class UTXOSnapshotAgentTest extends  BaseTest{
         snapshotService.destroy();
     }
 
+    /**
+     * Test bach update tx out.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testBachUpdateTxOut() throws Exception {
         List<TxOutPO> txOutPOList = new ArrayList<>();
@@ -144,6 +165,11 @@ public class UTXOSnapshotAgentTest extends  BaseTest{
         snapshotService.destroy();
     }
 
+    /**
+     * Test query.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testQuery() throws Exception {
     }

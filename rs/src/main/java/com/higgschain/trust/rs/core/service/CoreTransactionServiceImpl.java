@@ -63,6 +63,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The type Core transaction service.
+ */
 @Service
 @Slf4j
 public class CoreTransactionServiceImpl implements CoreTransactionService, InitializingBean {

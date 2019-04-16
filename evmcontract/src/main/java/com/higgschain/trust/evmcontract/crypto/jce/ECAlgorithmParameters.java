@@ -24,9 +24,18 @@ import java.security.spec.ECGenParameterSpec;
 import java.security.spec.ECParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 
+/**
+ * The type Ec algorithm parameters.
+ */
 public final class ECAlgorithmParameters {
 
+    /**
+     * The constant ALGORITHM.
+     */
     public static final String ALGORITHM = "EC";
+    /**
+     * The constant CURVE_NAME.
+     */
     public static final String CURVE_NAME = "secp256k1";
 
     private ECAlgorithmParameters() {
@@ -52,6 +61,11 @@ public final class ECAlgorithmParameters {
         }
     }
 
+    /**
+     * Gets parameter spec.
+     *
+     * @return the parameter spec
+     */
     public static ECParameterSpec getParameterSpec() {
         try {
             return Holder.INSTANCE.getParameterSpec(ECParameterSpec.class);
@@ -61,6 +75,11 @@ public final class ECAlgorithmParameters {
         }
     }
 
+    /**
+     * Get asn 1 encoding byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public static byte[] getASN1Encoding() {
         try {
             return Holder.INSTANCE.getEncoded();

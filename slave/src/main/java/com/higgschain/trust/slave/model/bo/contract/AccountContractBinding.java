@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.Date;
 
+/**
+ * The type Account contract binding.
+ */
 @Getter @Setter public class AccountContractBinding extends BaseBO {
     private Long id;
     private Long blockHeight;

@@ -15,9 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Biz type repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-13
+ * @date 2018 -06-13
  */
 @Slf4j @Repository public class BizTypeRepository implements InitializingBean {
     @Autowired private RsConfig rsConfig;
@@ -44,8 +46,8 @@ import java.util.Map;
     /***
      * get bizType by policyId
      *
-     * @param policyId
-     * @return
+     * @param policyId the policy id
+     * @return by policy id
      */
     public String getByPolicyId(String policyId) {
         if (bizTypeMap.containsKey(policyId)) {
@@ -65,6 +67,13 @@ import java.util.Map;
         return bizTypePO.getBizType();
     }
 
+    /**
+     * Add string.
+     *
+     * @param policyId the policy id
+     * @param bizType  the biz type
+     * @return the string
+     */
     public String add(String policyId, String bizType) {
         if (bizTypeMap.containsKey(policyId)) {
             return "biz type already exist";
@@ -91,6 +100,13 @@ import java.util.Map;
         return "add biz type success";
     }
 
+    /**
+     * Update string.
+     *
+     * @param policyId the policy id
+     * @param bizType  the biz type
+     * @return the string
+     */
     public String update(String policyId, String bizType) {
         if (!bizTypeMap.containsKey(policyId)) {
             return "biz type is not exist";

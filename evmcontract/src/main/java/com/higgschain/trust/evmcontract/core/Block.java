@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 /**
  * The block in Ethereum is the collection of relevant pieces of information
  * (known as the blockheader), H, together with information corresponding to
@@ -54,40 +53,81 @@ public class Block {
 
     /* Constructors */
 
+    /**
+     * Instantiates a new Block.
+     */
     public Block() {
     }
 
+    /**
+     * Instantiates a new Block.
+     *
+     * @param rawData the raw data
+     */
     public Block(byte[] rawData) {
         logger.debug("new from [" + ByteUtil.toHexString(rawData) + "]");
         this.rlpEncoded = rawData;
     }
 
-
+    /**
+     * Get hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getHash() {
         return "ox12".getBytes();
     }
 
+    /**
+     * Get parent hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getParentHash() {
         return "ox11".getBytes();
     }
 
-
+    /**
+     * Get coinbase byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getCoinbase() {
         return "ox14".getBytes();
     }
 
+    /**
+     * Gets timestamp.
+     *
+     * @return the timestamp
+     */
     public long getTimestamp() {
         return System.currentTimeMillis();
     }
 
+    /**
+     * Gets number.
+     *
+     * @return the number
+     */
     public long getNumber() {
         return 2L;
     }
 
+    /**
+     * Get gas limit byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getGasLimit() {
         return "90".getBytes();
     }
 
+    /**
+     * Get difficulty byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getDifficulty() {
         return "90".getBytes();
     }

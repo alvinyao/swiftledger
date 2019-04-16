@@ -8,16 +8,18 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * The interface Account dc record dao.
+ *
  * @author liuyu
  * @description account DC record DAO
- * @date 2018-03-27
+ * @date 2018 -03-27
  */
 @Mapper public interface AccountDcRecordDao extends BaseDao<AccountDcRecordPO> {
     /**
      * batch insert
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     int batchInsert(@Param("list") List<AccountDcRecordPO> list);
 }

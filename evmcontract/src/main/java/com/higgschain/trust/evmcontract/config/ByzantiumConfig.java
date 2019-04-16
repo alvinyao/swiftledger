@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * The interface Contract repository.
  *
  * @author zhao xiaogang
- * @date 2018-09-08
+ * @date 2018 -09-08
  */
 @Component
 public class ByzantiumConfig implements BlockChainConfig {

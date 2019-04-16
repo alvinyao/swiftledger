@@ -21,8 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Rs node repository.
+ *
  * @author tangfashuang
- * @date 2018/04/012
+ * @date 2018 /04/012
  * @desc rs node repository for business
  */
 @Service @Slf4j public class RsNodeRepository {
@@ -34,10 +36,11 @@ import java.util.List;
     @Autowired private CaRepository caRepository;
 
     @Autowired private InitConfig initConfig;
+
     /**
      * query all rs and public key
      *
-     * @return
+     * @return list
      */
     public List<RsNode> queryAll() {
         List<RsNodePO> rsNodePOList;
@@ -63,7 +66,7 @@ import java.util.List;
     /**
      * query all rs id
      *
-     * @return
+     * @return list
      */
     public List<String> queryAllRsId() {
         List<RsNodePO> rsNodePOList = rsNodeDao.queryAll();
@@ -83,8 +86,8 @@ import java.util.List;
     /**
      * query rsNode by rs id
      *
-     * @param rsId
-     * @return
+     * @param rsId the rs id
+     * @return rs node
      */
     public RsNode queryByRsId(String rsId) {
 
@@ -98,6 +101,11 @@ import java.util.List;
         return null == rsNodePO ? null : convertRsNodePOtoRsNode(rsNodePO);
     }
 
+    /**
+     * Query rs and pub key list.
+     *
+     * @return the list
+     */
     public List<RsPubKey> queryRsAndPubKey() {
         if (initConfig.isUseMySQL()) {
             return rsNodeDao.queryRsAndPubKey();
@@ -133,6 +141,12 @@ import java.util.List;
         return rsPubKeys;
     }
 
+    /**
+     * Convert action to rs node rs node.
+     *
+     * @param registerRS the register rs
+     * @return the rs node
+     */
     public RsNode convertActionToRsNode(RegisterRS registerRS) {
         RsNode rsNode = new RsNode();
         rsNode.setRsId(registerRS.getRsId());
@@ -141,6 +155,12 @@ import java.util.List;
         return rsNode;
     }
 
+    /**
+     * Convert rs node p oto rs node rs node.
+     *
+     * @param rsNodePO the rs node po
+     * @return the rs node
+     */
     public RsNode convertRsNodePOtoRsNode(RsNodePO rsNodePO) {
         RsNode rsNode = new RsNode();
         BeanUtils.copyProperties(rsNodePO, rsNode);
@@ -148,6 +168,12 @@ import java.util.List;
         return rsNode;
     }
 
+    /**
+     * Convert rs node to rs node po rs node po.
+     *
+     * @param rsNode the rs node
+     * @return the rs node po
+     */
     public RsNodePO convertRsNodeToRsNodePO(RsNode rsNode) {
         if (null == rsNode) {
             return null;
@@ -158,6 +184,12 @@ import java.util.List;
         return rsNodePO;
     }
 
+    /**
+     * Batch update int.
+     *
+     * @param rsNodePOList the rs node po list
+     * @return the int
+     */
     public int batchUpdate(List<RsNodePO> rsNodePOList) {
         if (initConfig.isUseMySQL()) {
             return rsNodeDao.batchUpdate(rsNodePOList);
@@ -165,6 +197,12 @@ import java.util.List;
         return rsNodeRocksDao.batchUpdate(rsNodePOList);
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param rsNodePOList the rs node po list
+     * @return the int
+     */
     public int batchInsert(List<RsNodePO> rsNodePOList) {
         if (initConfig.isUseMySQL()) {
             return rsNodeDao.batchInsert(rsNodePOList);

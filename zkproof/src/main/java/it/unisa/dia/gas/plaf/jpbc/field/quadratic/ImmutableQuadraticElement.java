@@ -5,10 +5,18 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable quadratic element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ImmutableQuadraticElement<E extends Element> extends QuadraticElement<E> {
 
+    /**
+     * Instantiates a new Immutable quadratic element.
+     *
+     * @param element the element
+     */
     public ImmutableQuadraticElement(QuadraticElement<E> element) {
         super(element.getField());
 

@@ -7,9 +7,11 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 /**
+ * The type Freeze vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-31
+ * @date 2018 -08-31
  */
 @Getter
 @Setter

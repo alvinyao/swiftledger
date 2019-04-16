@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * TxOutPO BO
  *
  * @author lingchao
- * @create 2018年03月27日21:22
+ * @create 2018年03月27日21 :22
  */
 @Getter @Setter public class TxOut extends BaseBO {
     /**

@@ -42,6 +42,9 @@ import java.util.logging.Level;
  */
 public abstract class DefaultSingleRecoverable implements Recoverable, SingleExecutable {
 
+    /**
+     * The Replica context.
+     */
     protected ReplicaContext replicaContext;
     private TOMConfiguration config;
     private ServerViewController controller;
@@ -59,6 +62,9 @@ public abstract class DefaultSingleRecoverable implements Recoverable, SingleExe
 
     private StateManager stateManager;
 
+    /**
+     * Instantiates a new Default single recoverable.
+     */
     public DefaultSingleRecoverable() {
 
         try {
@@ -106,6 +112,12 @@ public abstract class DefaultSingleRecoverable implements Recoverable, SingleExe
         return reply;
     }
 
+    /**
+     * Compute hash byte [ ].
+     *
+     * @param data the data
+     * @return the byte [ ]
+     */
     public final byte[] computeHash(byte[] data) {
         byte[] ret = null;
         hashLock.lock();
@@ -317,11 +329,35 @@ public abstract class DefaultSingleRecoverable implements Recoverable, SingleExe
         }
     }
 
+    /**
+     * Install snapshot.
+     *
+     * @param state the state
+     */
     public abstract void installSnapshot(byte[] state);
 
+    /**
+     * Get snapshot byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public abstract byte[] getSnapshot();
 
+    /**
+     * App execute ordered byte [ ].
+     *
+     * @param command the command
+     * @param msgCtx  the msg ctx
+     * @return the byte [ ]
+     */
     public abstract byte[] appExecuteOrdered(byte[] command, MessageContext msgCtx);
 
+    /**
+     * App execute unordered byte [ ].
+     *
+     * @param command the command
+     * @param msgCtx  the msg ctx
+     * @return the byte [ ]
+     */
     public abstract byte[] appExecuteUnordered(byte[] command, MessageContext msgCtx);
 }

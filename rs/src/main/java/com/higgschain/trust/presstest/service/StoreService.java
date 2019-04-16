@@ -14,20 +14,29 @@ import org.springframework.stereotype.Service;
 import org.testng.collections.Lists;
 
 /**
+ * The type Store service.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-11
+ * @date 2018 -09-11
  */
 @Service @Slf4j public class StoreService {
+    /**
+     * The Rs core facade.
+     */
     @Autowired
     RsCoreFacade rsCoreFacade;
+    /**
+     * The Rs config.
+     */
     @Autowired
     RsConfig rsConfig;
 
     /**
      * 存正交易
      *
-     * @param vo
+     * @param vo the vo
+     * @return the resp data
      */
     public RespData store(StoreVO vo) {
         CoreTransaction coreTransaction = new CoreTransaction();

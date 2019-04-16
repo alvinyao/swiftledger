@@ -34,6 +34,12 @@ public class MGF1BytesGeneratorExt implements DerivationFunction {
     private int hLen;
     private int counterStart;
 
+    /**
+     * Instantiates a new Mgf 1 bytes generator ext.
+     *
+     * @param digest       the digest
+     * @param counterStart the counter start
+     */
     public MGF1BytesGeneratorExt(Digest digest, int counterStart) {
         this.digest = digest;
         this.hLen = digest.getDigestSize();
@@ -50,6 +56,11 @@ public class MGF1BytesGeneratorExt implements DerivationFunction {
         }
     }
 
+    /**
+     * Gets digest.
+     *
+     * @return the digest
+     */
     public Digest getDigest() {
         return this.digest;
     }

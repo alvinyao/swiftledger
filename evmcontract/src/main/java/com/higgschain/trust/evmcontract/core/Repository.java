@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * The interface Repository.
+ *
  * @author Roman Mandeleil
  * @since 08.09.2014
  */
@@ -98,6 +100,12 @@ public interface Repository extends com.higgschain.trust.evmcontract.facade.Repo
      */
     ContractDetails getContractDetails(byte[] addr);
 
+    /**
+     * Has contract details boolean.
+     *
+     * @param addr the addr
+     * @return the boolean
+     */
     boolean hasContractDetails(byte[] addr);
 
     /**
@@ -165,6 +173,8 @@ public interface Repository extends com.higgschain.trust.evmcontract.facade.Repo
     BigInteger addBalance(byte[] addr, BigInteger value);
 
     /**
+     * Gets accounts keys.
+     *
      * @return Returns set of all the account addresses
      */
     Set<byte[]> getAccountsKeys();
@@ -189,10 +199,15 @@ public interface Repository extends com.higgschain.trust.evmcontract.facade.Repo
      */
     Repository startTracking();
 
+    /**
+     * Flush.
+     */
     void flush();
 
+    /**
+     * Flush no reconnect.
+     */
     void flushNoReconnect();
-
 
     /**
      * Store all the temporary changes made
@@ -231,14 +246,37 @@ public interface Repository extends com.higgschain.trust.evmcontract.facade.Repo
      */
     void reset();
 
+    /**
+     * Update batch.
+     *
+     * @param accountStates    the account states
+     * @param contractDetailes the contract detailes
+     */
     void updateBatch(HashMap<ByteArrayWrapper, AccountState> accountStates,
                      HashMap<ByteArrayWrapper, ContractDetails> contractDetailes);
 
-
+    /**
+     * Get root byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getRoot();
 
+    /**
+     * Load account.
+     *
+     * @param addr          the addr
+     * @param cacheAccounts the cache accounts
+     * @param cacheDetails  the cache details
+     */
     void loadAccount(byte[] addr, HashMap<ByteArrayWrapper, AccountState> cacheAccounts,
                      HashMap<ByteArrayWrapper, ContractDetails> cacheDetails);
 
+    /**
+     * Gets snapshot to.
+     *
+     * @param root the root
+     * @return the snapshot to
+     */
     Repository getSnapshotTo(byte[] root);
 }

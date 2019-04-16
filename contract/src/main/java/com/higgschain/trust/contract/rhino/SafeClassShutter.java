@@ -11,11 +11,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * The type Safe class shutter.
+ *
  * @author duhongming
- * @date 2018/6/8
+ * @date 2018 /6/8
  */
 public class SafeClassShutter implements ClassShutter {
 
+    /**
+     * The Allowed classes.
+     */
     public final Set<String> allowedClasses;
     private static final Set<String> buildInClasses;
 
@@ -43,6 +48,11 @@ public class SafeClassShutter implements ClassShutter {
 
     }
 
+    /**
+     * Instantiates a new Safe class shutter.
+     *
+     * @param allowedClasses the allowed classes
+     */
     public SafeClassShutter(final Set<String> allowedClasses) {
         this.allowedClasses = allowedClasses == null ? new HashSet<>() : allowedClasses;
     }

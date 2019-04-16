@@ -23,19 +23,38 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * The type Master command replicate.
+ *
  * @author suimi
- * @date 2018/6/5
+ * @date 2018 /6/5
  */
 @Slf4j @Component @Replicator public class MasterCommandReplicate {
 
+    /**
+     * The Node state.
+     */
     @Autowired NodeState nodeState;
 
+    /**
+     * The Term manager.
+     */
     @Autowired TermManager termManager;
 
+    /**
+     * The View manager.
+     */
     @Autowired IClusterViewManager viewManager;
 
+    /**
+     * The Change master service.
+     */
     @Autowired ChangeMasterService changeMasterService;
 
+    /**
+     * Change master.
+     *
+     * @param commit the commit
+     */
     public void changeMaster(ConsensusCommit<ChangeMasterCommand> commit) {
         log.debug("received change master commit");
         ChangeMasterCommand operation = commit.operation();
@@ -67,6 +86,11 @@ import java.util.stream.Collectors;
         commit.close();
     }
 
+    /**
+     * Artificial change master.
+     *
+     * @param commit the commit
+     */
     public void artificialChangeMaster(ConsensusCommit<ArtificialChangeMasterCommand> commit) {
         log.debug("received change master commit");
         ArtificialChangeMasterCommand operation = commit.operation();
@@ -81,6 +105,11 @@ import java.util.stream.Collectors;
         commit.close();
     }
 
+    /**
+     * Master heartbeat.
+     *
+     * @param commit the commit
+     */
     public void masterHeartbeat(ConsensusCommit<MasterHeartbeatCommand> commit) {
         MasterHeartbeatCommand operation = commit.operation();
         if (nodeState.getCurrentTerm() == operation.get() && viewManager.getCurrentViewId() == operation.getView()

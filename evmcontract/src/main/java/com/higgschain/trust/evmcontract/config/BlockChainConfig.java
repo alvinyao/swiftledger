@@ -31,12 +31,15 @@ public interface BlockChainConfig {
 
     /**
      * Get blockchain constants
+     *
+     * @return the constants
      */
     Constants getConstants();
 
-
     /**
      * EVM operations costs
+     *
+     * @return the gas cost
      */
     GasCost getGasCost();
 
@@ -47,59 +50,81 @@ public interface BlockChainConfig {
      * @param op           Opcode
      * @param requestedGas amount of gas requested by the program
      * @param availableGas available gas
-     * @throws Program.OutOfGasException If passed args doesn't conform to limitations
+     * @return the call gas
+     * @throws OutOfGasException the out of gas exception
      */
     DataWord getCallGas(OpCode op, DataWord requestedGas, DataWord availableGas) throws Program.OutOfGasException;
 
     /**
      * Calculates available gas to be passed for contract constructor
      * Since EIP150
+     *
+     * @param availableGas the available gas
+     * @return the create gas
      */
     DataWord getCreateGas(DataWord availableGas);
 
     /**
      * EIP161: https://github.com/ethereum/EIPs/issues/161
+     *
+     * @return the boolean
      */
     boolean eip161();
 
     /**
      * EIP155: https://github.com/ethereum/EIPs/issues/155
+     *
+     * @return the chain id
      */
     Integer getChainId();
 
     /**
      * EIP198: https://github.com/ethereum/EIPs/pull/198
+     *
+     * @return the boolean
      */
     boolean eip198();
 
     /**
      * EIP206: https://github.com/ethereum/EIPs/pull/206
+     *
+     * @return the boolean
      */
     boolean eip206();
 
     /**
      * EIP211: https://github.com/ethereum/EIPs/pull/211
+     *
+     * @return the boolean
      */
     boolean eip211();
 
     /**
      * EIP212: https://github.com/ethereum/EIPs/pull/212
+     *
+     * @return the boolean
      */
     boolean eip212();
 
     /**
      * EIP213: https://github.com/ethereum/EIPs/pull/213
+     *
+     * @return the boolean
      */
     boolean eip213();
 
     /**
      * EIP214: https://github.com/ethereum/EIPs/pull/214
+     *
+     * @return the boolean
      */
     boolean eip214();
 
     /**
      * EIP658: https://github.com/ethereum/EIPs/pull/658
      * Replaces the intermediate state root field of the receipt with the status
+     *
+     * @return the boolean
      */
     boolean eip658();
 }

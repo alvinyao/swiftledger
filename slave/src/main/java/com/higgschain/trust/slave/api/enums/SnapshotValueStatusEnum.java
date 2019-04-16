@@ -6,14 +6,25 @@ import lombok.Getter;
  * Snapshot value status enum
  *
  * @author lingchao
- * @create 2018年04月09日16:28
+ * @create 2018年04月09日16 :28
  */
 @Getter
-public enum SnapshotValueStatusEnum {
-    INSERT("INSERT", "insert data for Snapshot"),
+public enum SnapshotValueStatusEnum {/**
+ * The Insert.
+ */
+INSERT("INSERT", "insert data for Snapshot"),
+    /**
+     * The Update.
+     */
     UPDATE("UPDATE", "update data for Snapshot");
 
+    /**
+     * The Code.
+     */
     String code;
+    /**
+     * The Desc.
+     */
     String desc;
 
     SnapshotValueStatusEnum(String code, String desc) {

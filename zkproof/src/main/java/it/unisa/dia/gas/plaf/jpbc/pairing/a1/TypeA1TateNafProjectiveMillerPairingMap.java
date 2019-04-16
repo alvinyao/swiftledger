@@ -10,16 +10,34 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.AbstractMillerPairingPreProcessing
 import it.unisa.dia.gas.plaf.jpbc.util.math.BigIntegerUtils;
 
 /**
+ * The type Type a 1 tate naf projective miller pairing map.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeA1TateNafProjectiveMillerPairingMap extends AbstractMillerPairingMap {
+    /**
+     * The Pairing.
+     */
     protected final TypeA1Pairing pairing;
+    /**
+     * The R.
+     */
     protected final byte[] r;
 
+    /**
+     * The Pairing pre processing table length.
+     */
     protected int pairingPreProcessingTableLength = -1;
+    /**
+     * The Pairing pre processing length in bytes.
+     */
     protected int pairingPreProcessingLengthInBytes = -1;
 
-
+    /**
+     * Instantiates a new Type a 1 tate naf projective miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeA1TateNafProjectiveMillerPairingMap(TypeA1Pairing pairing) {
         super(pairing);
 
@@ -96,6 +114,12 @@ public class TypeA1TateNafProjectiveMillerPairingMap extends AbstractMillerPairi
         return new TypeA1TateNafProjectiveMillerPairingPreProcessing(source, offset);
     }
 
+    /**
+     * Tate pow.
+     *
+     * @param out the out
+     * @param in  the in
+     */
     final void tatePow(Point out, Point in) {
         out.set(in).invert();
         in.getY().negate();
@@ -105,6 +129,11 @@ public class TypeA1TateNafProjectiveMillerPairingMap extends AbstractMillerPairi
 
     /**
      * used by tate pairing, point doubling in Jacobian coordinates, and return the value of f
+     *
+     * @param V the v
+     * @param a the a
+     * @param b the b
+     * @param c the c
      */
     final void twice(JacobPoint V, Element a, Element b, Element c) {
         //if(V.isInfinity())
@@ -154,6 +183,12 @@ public class TypeA1TateNafProjectiveMillerPairingMap extends AbstractMillerPairi
 
     /**
      * used by Tate paring, add two point, save result in the first argument, return the value of f
+     *
+     * @param V the v
+     * @param P the p
+     * @param a the a
+     * @param b the b
+     * @param c the c
      */
     final void add(JacobPoint V, Point P, Element a, Element b, Element c) {
         Element x1 = V.getX();
@@ -204,18 +239,36 @@ public class TypeA1TateNafProjectiveMillerPairingMap extends AbstractMillerPairi
 //        u.getY().set(z3.duplicate().mul(Q.getY()));
     }
 
-
+    /**
+     * Gets pairing pre processing table length.
+     *
+     * @return the pairing pre processing table length
+     */
     public int getPairingPreProcessingTableLength() {
        getPairingPreProcessingLengthInBytes();
        return pairingPreProcessingTableLength;
     }
 
+    /**
+     * The type Type a 1 tate naf projective miller pairing pre processing.
+     */
     public class TypeA1TateNafProjectiveMillerPairingPreProcessing extends AbstractMillerPairingPreProcessing {
 
+        /**
+         * Instantiates a new Type a 1 tate naf projective miller pairing pre processing.
+         *
+         * @param source the source
+         * @param offset the offset
+         */
         public TypeA1TateNafProjectiveMillerPairingPreProcessing(byte[] source, int offset) {
             super(pairing, source, offset);
         }
 
+        /**
+         * Instantiates a new Type a 1 tate naf projective miller pairing pre processing.
+         *
+         * @param in1 the in 1
+         */
         public TypeA1TateNafProjectiveMillerPairingPreProcessing(Point in1) {
             super(in1, getPairingPreProcessingTableLength());
 

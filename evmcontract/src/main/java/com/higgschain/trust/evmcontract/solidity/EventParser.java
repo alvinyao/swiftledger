@@ -8,8 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * The type Event parser.
+ *
  * @author Chen Jiawei
- * @date 2019-01-02
+ * @date 2019 -01-02
  */
 public class EventParser implements MemberParser<String, Abi.Event> {
     private static final EventParser INSTANCE = new EventParser();
@@ -17,6 +19,11 @@ public class EventParser implements MemberParser<String, Abi.Event> {
     private EventParser() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static EventParser getInstance() {
         return INSTANCE;
     }

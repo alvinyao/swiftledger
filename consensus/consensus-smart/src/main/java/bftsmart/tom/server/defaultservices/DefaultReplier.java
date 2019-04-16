@@ -27,6 +27,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * The type Default replier.
+ *
  * @author miguel
  */
 public class DefaultReplier implements Replier {

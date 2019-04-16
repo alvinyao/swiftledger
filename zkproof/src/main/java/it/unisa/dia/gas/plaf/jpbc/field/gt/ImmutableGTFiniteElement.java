@@ -5,10 +5,17 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable gt finite element.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ImmutableGTFiniteElement extends GTFiniteElement {
 
+    /**
+     * Instantiates a new Immutable gt finite element.
+     *
+     * @param gtFiniteElement the gt finite element
+     */
     public ImmutableGTFiniteElement(GTFiniteElement gtFiniteElement) {
         super(gtFiniteElement);
 

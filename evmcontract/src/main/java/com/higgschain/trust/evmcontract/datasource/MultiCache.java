@@ -29,9 +29,16 @@ package com.higgschain.trust.evmcontract.datasource;
  * The primary goal if for caching contract storages in the child repositories (tracks)
  * <p>
  * Created by Anton Nashatyrev on 07.10.2016.
+ *
+ * @param <V> the type parameter
  */
 public abstract class MultiCache<V extends CachedSource> extends ReadWriteCache.BytesKey<V> {
 
+    /**
+     * Instantiates a new Multi cache.
+     *
+     * @param src the src
+     */
     public MultiCache(Source<byte[], V> src) {
         super(src, WriteCache.CacheType.SIMPLE);
     }
@@ -81,6 +88,10 @@ public abstract class MultiCache<V extends CachedSource> extends ReadWriteCache.
     /**
      * Is invoked to flush child cache if it has backing Source
      * Some additional tasks may be performed by subclasses here
+     *
+     * @param key        the key
+     * @param childCache the child cache
+     * @return the boolean
      */
     protected boolean flushChild(byte[] key, V childCache) {
         return childCache != null ? childCache.flush() : true;
@@ -89,6 +100,10 @@ public abstract class MultiCache<V extends CachedSource> extends ReadWriteCache.
     /**
      * Creates a local child cache instance based on the child cache instance
      * (or null) from the MultiCache backing Source
+     *
+     * @param key      the key
+     * @param srcCache the src cache
+     * @return the v
      */
     protected abstract V create(byte[] key, V srcCache);
 }

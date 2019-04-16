@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
+ * The type Change master verify.
+ *
  * @author suimi
- * @date 2018/6/5
+ * @date 2018 /6/5
  */
 @Data @Builder @AllArgsConstructor @NoArgsConstructor public class ChangeMasterVerify implements Serializable {
 

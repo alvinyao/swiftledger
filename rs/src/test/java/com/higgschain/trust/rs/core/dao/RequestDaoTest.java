@@ -11,15 +11,20 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * The type Request dao test.
+ *
  * @description: com.higgschain.trust.rs.core.dao
  * @author: lingchao
  * @datetime:2018年12月03日14:32
- **/
+ */
 public class RequestDaoTest extends IntegrateBaseTest {
     private String requestId = System.currentTimeMillis() + "";
     @Autowired
     private RequestDao requestDao;
 
+    /**
+     * Add.
+     */
     @Test
     public void add() {
         RequestPO requestPO = new RequestPO();
@@ -34,6 +39,9 @@ public class RequestDaoTest extends IntegrateBaseTest {
 
     }
 
+    /**
+     * Batch insert.
+     */
     @Test
     public void batchInsert() {
         List<RequestPO> requestPOList = Lists.newArrayList();
@@ -49,12 +57,17 @@ public class RequestDaoTest extends IntegrateBaseTest {
 
     }
 
-
+    /**
+     * Test query by request id.
+     */
     @Test
     public void testQueryByRequestId() {
         System.out.println(requestDao.queryByRequestId(requestId));
     }
 
+    /**
+     * Test update status by request id.
+     */
     @Test
     public void testUpdateStatusByRequestId() {
         System.out.println(requestDao.updateStatusByRequestId(requestId, RequestEnum.PROCESS.getCode(), RequestEnum.DONE.getCode(), "000000", "OK"));

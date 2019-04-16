@@ -12,9 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Account operation.
+ *
  * @author liuyu
  * @description BO of account operation
- * @date 2018-03-28
+ * @date 2018 -03-28
  */
 @Getter @Setter public class AccountOperation extends Action {
     /**

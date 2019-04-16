@@ -14,6 +14,9 @@ import com.higgschain.trust.slave.model.bo.context.ActionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
+/**
+ * The type Data identity action handler test.
+ */
 public class DataIdentityActionHandlerTest extends BaseTest {
     @Autowired
     private DataIdentityActionHandler dataIdentityActionHandler;
@@ -22,6 +25,11 @@ public class DataIdentityActionHandlerTest extends BaseTest {
     @Autowired
     private DataIdentitySnapshotAgent dataIdentitySnapshotAgent;
 
+    /**
+     * Test validate.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testValidate() throws Exception {
        snapshotService.clear();
@@ -110,6 +118,11 @@ public class DataIdentityActionHandlerTest extends BaseTest {
 
     }
 
+    /**
+     * Test persist.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testPersist() throws Exception {
         DataIdentityAction dataIdentityAction = new DataIdentityAction();

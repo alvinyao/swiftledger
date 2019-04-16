@@ -16,6 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Self checking service.
+ */
 @StateListener
 @Service @Slf4j public class SelfCheckingService {
 
@@ -24,6 +27,9 @@ import org.springframework.stereotype.Service;
     @Autowired private BlockRepository blockRepository;
     @Autowired private NodeProperties properties;
 
+    /**
+     * Auto check.
+     */
     @StateChangeListener(NodeStateEnum.SelfChecking) public void autoCheck() {
         boolean selfChecked = selfCheck(properties.getStartupRetryTime());
         log.info("self checked result:{}", selfChecked);
@@ -37,7 +43,7 @@ import org.springframework.stereotype.Service;
      * 检查自身最高区块是否正确
      *
      * @param tryTimes bft validating retry times
-     * @return
+     * @return boolean
      */
     public boolean selfCheck(int tryTimes) {
         log.info("Starting self checking ...");

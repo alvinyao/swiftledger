@@ -7,21 +7,24 @@ import com.higgschain.trust.slave.model.bo.BlockHeader;
 
 import java.util.Map;
 
+/**
+ * The interface Cluster service.
+ */
 public interface IClusterService {
 
     /**
      * get the block height of cluster
      *
      * @param size the size of height will be consensus
-     * @return
+     * @return cluster height
      */
     Long getClusterHeight(int size);
 
     /**
      * get the safe block height of cluster
      *
-     * @return
-    */
+     * @return safe height
+     */
     Long getSafeHeight();
 
     /**
@@ -29,7 +32,7 @@ public interface IClusterService {
      *
      * @param requestId the id of request
      * @param size      the size of height will be consensus
-     * @return
+     * @return cluster height
      */
     Long getClusterHeight(String requestId, int size);
 
@@ -37,19 +40,21 @@ public interface IClusterService {
      * cluster validates the block header
      *
      * @param header block header
-     * @return
+     * @return boolean
      */
     Boolean validatingHeader(BlockHeader header);
 
     /**
      * Get the height of all node
+     *
+     * @return the all cluster height
      */
     Map<String, Long> getAllClusterHeight();
 
     /**
      * Get the status of all node
      *
-     * @return
+     * @return all cluster state
      */
     Map<String, String> getAllClusterState();
 }

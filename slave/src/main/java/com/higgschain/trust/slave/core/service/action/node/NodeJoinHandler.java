@@ -17,6 +17,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Node join handler.
+ */
 @Slf4j @Component public class NodeJoinHandler implements ActionHandler {
 
     @Autowired private NodeSnapshotHandler nodeSnapshotHandler;

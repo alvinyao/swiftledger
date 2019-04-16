@@ -14,6 +14,9 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Policy repository test.
+ */
 /*
  *
  * @desc
@@ -28,6 +31,11 @@ public class PolicyRepositoryTest extends BaseTest {
 
     private Policy policy;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @BeforeMethod public void setUp() throws Exception {
         List<String> rsIds = new ArrayList<>();
         rsIds.add("rs-test1");
@@ -41,12 +49,18 @@ public class PolicyRepositoryTest extends BaseTest {
         policy.setRsIds(rsIds);
     }
 
+    /**
+     * Gets policy by id.
+     */
     @Test public void getPolicyById() {
         Policy policy = policyRepository.getPolicyById("policy-test-1");
 //        assertEquals(null, policy);
         System.out.println(policy);
     }
 
+    /**
+     * Convert action to policy.
+     */
     @Test public void convertActionToPolicy() {
         RegisterPolicy registerPolicy = new RegisterPolicy();
         registerPolicy.setPolicyId("test-0000");
@@ -64,12 +78,18 @@ public class PolicyRepositoryTest extends BaseTest {
         assertEquals(policy.getRsIds(), registerPolicy.getRsIds());
     }
 
+    /**
+     * Gets policy type.
+     */
     @Test
     public void getPolicyType() {
         String type = policyRepository.getPolicyType("000001");
         assertEquals("REGISTER_POLICY", type);
     }
 
+    /**
+     * Batch insert.
+     */
     @Test
     public void batchInsert() {
         List<PolicyPO> policyPOList = new ArrayList<>();

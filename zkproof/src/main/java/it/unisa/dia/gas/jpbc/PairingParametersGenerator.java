@@ -4,6 +4,7 @@ package it.unisa.dia.gas.jpbc;
  * This interface lets the user to generate all the necessary parameters
  * to initialize a pairing.
  *
+ * @param <P> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */

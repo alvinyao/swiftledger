@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Transaction processor v 2.
+ *
  * @author WangQuanzhou
  * @desc transaction processor V2
- * @date 2018/3/28 18:01
+ * @date 2018 /3/28 18:01
  */
 @Component public class TransactionProcessorV2Impl implements TransactionProcessor, InitializingBean {
 
+    /**
+     * The Tx processor holder.
+     */
     @Autowired TxProcessorHolder txProcessorHolder;
 
     @Override public void afterPropertiesSet() throws Exception {

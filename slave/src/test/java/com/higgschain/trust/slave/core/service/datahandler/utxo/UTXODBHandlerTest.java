@@ -8,9 +8,18 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Utxodb handler test.
+ */
 public class UTXODBHandlerTest extends BaseTest{
     @Autowired
     private UTXODBHandler utxodbHandler;
+
+    /**
+     * Test query tx out list.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testQueryTxOutList() throws Exception {
         List<TxIn> inputList = new ArrayList<>();

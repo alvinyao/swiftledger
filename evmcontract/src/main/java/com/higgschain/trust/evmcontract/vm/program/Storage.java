@@ -36,7 +36,7 @@ import java.util.Set;
  * store the data of the contract  execution process
  *
  * @author tangkun
- * @date 2018-12-05
+ * @date 2018 -12-05
  */
 public class Storage implements Repository, ProgramListenerAware {
 
@@ -44,6 +44,11 @@ public class Storage implements Repository, ProgramListenerAware {
     private final DataWord address;
     private ProgramListener programListener;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param programInvoke the program invoke
+     */
     public Storage(ProgramInvoke programInvoke) {
         this.address = programInvoke.getOwnerAddress();
         this.repository = programInvoke.getRepository();

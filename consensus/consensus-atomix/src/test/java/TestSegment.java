@@ -10,11 +10,16 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 /**
+ * The type Test segment.
+ *
  * @author suimi
- * @date 2018/8/23
+ * @date 2018 /8/23
  */
 public class TestSegment {
 
+    /**
+     * Test load segment.
+     */
     @Test public void testLoadSegment() {
 
         Serializer se = Serializer.using(RaftNamespaces.RAFT_STORAGE);
@@ -23,6 +28,9 @@ public class TestSegment {
                 1024*1024, 1024 * 256, 0, 0);
     }
 
+    /**
+     * Test kryo compatibility.
+     */
     @Test public void testKryoCompatibility() {
         Serializer se = Serializer.using(
             Namespace.builder().register(Namespaces.BASIC).register(TestA.class).setRegistrationRequired(false).setCompatible(true)

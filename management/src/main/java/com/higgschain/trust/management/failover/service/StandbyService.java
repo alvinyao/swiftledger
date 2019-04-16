@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * standby service
  *
  * @author lingchao
- * @create 2018年10月08日19:53
+ * @create 2018年10月08日19 :53
  */
 @Service
 public class StandbyService extends NodeStatefulService {
@@ -38,7 +38,6 @@ public class StandbyService extends NodeStatefulService {
     protected void doResume() {
         nodeProperties.setStandby(false);
     }
-
 
     /**
      * restart net work

@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.StandardToStringStyle;
 /**
  * response data model
  *
- * @param <T>
+ * @param <T> the type parameter
  * @author liuyu
  */
 public class RespData<T> implements java.io.Serializable {
@@ -26,14 +26,30 @@ public class RespData<T> implements java.io.Serializable {
      */
     private T data;
 
+    /**
+     * Instantiates a new Resp data.
+     */
     public RespData() {
     }
 
+    /**
+     * Instantiates a new Resp data.
+     *
+     * @param respCode the resp code
+     * @param msg      the msg
+     */
     public RespData(String respCode, String msg) {
         this.respCode = respCode;
         this.msg = msg;
     }
 
+    /**
+     * Success resp data.
+     *
+     * @param <T>  the type parameter
+     * @param data the data
+     * @return the resp data
+     */
     public static <T> RespData<T> success(T data) {
         RespData<T> respData = new RespData<T>();
         respData.setCode("000000");
@@ -41,6 +57,15 @@ public class RespData<T> implements java.io.Serializable {
         return respData;
     }
 
+    /**
+     * Error resp data.
+     *
+     * @param <T>      the type parameter
+     * @param respCode the resp code
+     * @param message  the message
+     * @param data     the data
+     * @return the resp data
+     */
     public static <T> RespData<T> error(String respCode, String message, T data) {
         RespData<T> respData = new RespData<T>();
         respData.setData(data);
@@ -49,26 +74,56 @@ public class RespData<T> implements java.io.Serializable {
         return respData;
     }
 
+    /**
+     * Gets data.
+     *
+     * @return the data
+     */
     public T getData() {
         return data;
     }
 
+    /**
+     * Sets data.
+     *
+     * @param data the data
+     */
     public void setData(T data) {
         this.data = data;
     }
 
+    /**
+     * Gets resp code.
+     *
+     * @return the resp code
+     */
     public String getRespCode() {
         return respCode;
     }
 
+    /**
+     * Sets code.
+     *
+     * @param respCode the resp code
+     */
     public void setCode(String respCode) {
         this.respCode = respCode;
     }
 
+    /**
+     * Sets resp code.
+     *
+     * @param respCode the resp code
+     */
     public void setRespCode(String respCode) {
         this.respCode = respCode;
     }
 
+    /**
+     * Gets msg.
+     *
+     * @return the msg
+     */
     public String getMsg() {
         if (msg == null || msg.length() == 0) {
             msg = "unknow error";
@@ -76,10 +131,20 @@ public class RespData<T> implements java.io.Serializable {
         return msg;
     }
 
+    /**
+     * Sets msg.
+     *
+     * @param msg the msg
+     */
     public void setMsg(String msg) {
         this.msg = msg;
     }
 
+    /**
+     * Is success boolean.
+     *
+     * @return the boolean
+     */
     public boolean isSuccess() {
         return StringUtils.equals(respCode, "000000");
     }

@@ -23,6 +23,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 /**
+ * The type Reconfigure reply.
+ *
  * @author eduardo
  */
 public class ReconfigureReply implements Externalizable {
@@ -37,9 +39,20 @@ public class ReconfigureReply implements Externalizable {
 
     private int execLeader = -1;
 
+    /**
+     * Instantiates a new Reconfigure reply.
+     */
     public ReconfigureReply() {
     }
 
+    /**
+     * Instantiates a new Reconfigure reply.
+     *
+     * @param newView            the new view
+     * @param joinSet            the join set
+     * @param lastExectConsensus the last exect consensus
+     * @param leader             the leader
+     */
     public ReconfigureReply(View newView, String[] joinSet, int lastExectConsensus, int leader) {
         this.newView = newView;
         this.lastExecConsId = lastExectConsensus;
@@ -52,19 +65,39 @@ public class ReconfigureReply implements Externalizable {
         }
     }
 
+    /**
+     * Gets view.
+     *
+     * @return the view
+     */
     public View getView() {
         return newView;
     }
 
+    /**
+     * Get join set string [ ].
+     *
+     * @return the string [ ]
+     */
     public String[] getJoinSet() {
         return joinSet;
 
     }
 
+    /**
+     * Gets exec leader.
+     *
+     * @return the exec leader
+     */
     public int getExecLeader() {
         return execLeader;
     }
 
+    /**
+     * Gets last exec cons id.
+     *
+     * @return the last exec cons id
+     */
     public int getLastExecConsId() {
         return lastExecConsId;
     }

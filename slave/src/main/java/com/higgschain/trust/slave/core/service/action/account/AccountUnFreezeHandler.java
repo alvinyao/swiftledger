@@ -19,11 +19,16 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
+ * The type Account un freeze handler.
+ *
  * @author liuyu
  * @description unfreeze account balance
- * @date 2018-03-29
+ * @date 2018 -03-29
  */
 @Slf4j @Component public class AccountUnFreezeHandler implements ActionHandler {
+    /**
+     * The Account snapshot handler.
+     */
     @Autowired
     AccountSnapshotHandler accountSnapshotHandler;
 
@@ -49,6 +54,12 @@ import java.math.BigDecimal;
         unFreeze(bo,actionData.getCurrentBlock().getBlockHeader().getHeight());
     }
 
+    /**
+     * Un freeze.
+     *
+     * @param bo          the bo
+     * @param blockHeight the block height
+     */
     public void unFreeze(AccountUnFreeze bo,Long blockHeight){
         //validate business
         //check record is exists

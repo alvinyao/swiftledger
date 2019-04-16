@@ -8,10 +8,18 @@ import it.unisa.dia.gas.plaf.jpbc.util.math.BigIntegerUtils;
 import java.math.BigInteger;
 
 /**
+ * The type Poly element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyField> {
 
+    /**
+     * Instantiates a new Poly element.
+     *
+     * @param field the field
+     */
     public PolyElement(PolyField<Field> field) {
         super(field);
     }
@@ -324,6 +332,11 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         return buffer.toString();
     }
 
+    /**
+     * Ensure size.
+     *
+     * @param size the size
+     */
     public void ensureSize(int size) {
         int k = coefficients.size();
         while (k < size) {
@@ -336,6 +349,11 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         }
     }
 
+    /**
+     * Sets coefficient 1.
+     *
+     * @param n the n
+     */
     public void setCoefficient1(int n) {
         if (this.coefficients.size() < n + 1) {
             ensureSize(n + 1);
@@ -343,7 +361,9 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         this.coefficients.get(n).setToOne();
     }
 
-
+    /**
+     * Remove leading zeroes.
+     */
     public void removeLeadingZeroes() {
         int n = coefficients.size() - 1;
         while (n >= 0) {
@@ -356,6 +376,12 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         }
     }
 
+    /**
+     * Sets from poly mod.
+     *
+     * @param polyModElement the poly mod element
+     * @return the from poly mod
+     */
     public PolyElement<E> setFromPolyMod(PolyModElement polyModElement) {
         int i, n = polyModElement.getField().getN();
 
@@ -368,6 +394,12 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         return this;
     }
 
+    /**
+     * Sets to random monic.
+     *
+     * @param degree the degree
+     * @return the to random monic
+     */
     public PolyElement<E> setToRandomMonic(int degree) {
         ensureSize(degree + 1);
 
@@ -380,6 +412,12 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         return this;
     }
 
+    /**
+     * Sets from coefficient monic.
+     *
+     * @param coefficients the coefficients
+     * @return the from coefficient monic
+     */
     public PolyElement<E> setFromCoefficientMonic(BigInteger[] coefficients) {
         setCoefficient1(coefficients.length - 1);
         for (int i = 0; i < coefficients.length; i++) {
@@ -389,6 +427,11 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         return this;
     }
 
+    /**
+     * Make monic poly element.
+     *
+     * @return the poly element
+     */
     public PolyElement<E> makeMonic() {
         int n = this.coefficients.size();
         if (n == 0)
@@ -413,7 +456,7 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
      * (2) gcd(f(x), x^{q^{n/d}} - x) = 1 for all primes d | n.
      * (Recall GF(p) is the splitting field for x^p - x.)
      *
-     * @return
+     * @return boolean
      */
     public boolean isIrriducible() {
         // 0, units are not irreducibles.
@@ -464,6 +507,12 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
         return false;
     }
 
+    /**
+     * Gcd poly element.
+     *
+     * @param g the g
+     * @return the poly element
+     */
     public PolyElement<E> gcd(PolyElement g) {
         PolyElement a = this.duplicate();
         PolyElement b = g.duplicate();
@@ -487,7 +536,7 @@ public class PolyElement<E extends Element> extends AbstractPolyElement<E, PolyF
      * Returns 0 if a root exists and sets root to one of the roots
      * otherwise return value is nonzero
      *
-     * @return
+     * @return e
      */
     public E findRoot() {
         // Compute gcd(x^q - x, poly)

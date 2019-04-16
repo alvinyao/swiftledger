@@ -11,8 +11,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * The type Rpc client.
+ *
  * @author duhongming
- * @date 2018/9/19
+ * @date 2018 /9/19
  */
 public class RpcClient {
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -21,15 +23,39 @@ public class RpcClient {
 
     private NetworkManage networkManage;
 
+    /**
+     * Instantiates a new Rpc client.
+     *
+     * @param networkManage the network manage
+     */
     public RpcClient(NetworkManage networkManage) {
         this.random = new Random();
         this.networkManage = networkManage;
     }
 
+    /**
+     * Send and receive async completable future.
+     *
+     * @param <T>     the type parameter
+     * @param to      the to
+     * @param action  the action
+     * @param message the message
+     * @return the completable future
+     */
     public <T> CompletableFuture<T> sendAndReceiveAsync(Address to, String action, Object message) {
         return sendAndReceiveAsync(to, action, message, null);
     }
 
+    /**
+     * Send and receive async completable future.
+     *
+     * @param <T>     the type parameter
+     * @param to      the to
+     * @param action  the action
+     * @param message the message
+     * @param timeout the timeout
+     * @return the completable future
+     */
     public <T> CompletableFuture<T> sendAndReceiveAsync(Address to, String action, Object message, Duration timeout) {
         log.debug("Send to {}, {}", action, to);
         CompletableFuture<T> future = new CompletableFuture<>();
@@ -44,18 +70,56 @@ public class RpcClient {
         return future;
     }
 
+    /**
+     * Send and receive async completable future.
+     *
+     * @param <T>        the type parameter
+     * @param toNodeName the to node name
+     * @param action     the action
+     * @param message    the message
+     * @return the completable future
+     */
     public <T> CompletableFuture<T> sendAndReceiveAsync(String toNodeName, String action, Object message) {
         return sendAndReceiveAsync(getAddressByName(toNodeName), action, message, null);
     }
 
+    /**
+     * Send and receive async completable future.
+     *
+     * @param <T>        the type parameter
+     * @param toNodeName the to node name
+     * @param action     the action
+     * @param message    the message
+     * @param timeout    the timeout
+     * @return the completable future
+     */
     public <T> CompletableFuture<T> sendAndReceiveAsync(String toNodeName, String action, Object message, Duration timeout) {
         return sendAndReceiveAsync(getAddressByName(toNodeName), action, message, timeout);
     }
 
+    /**
+     * Send and receive t.
+     *
+     * @param <T>        the type parameter
+     * @param toNodeName the to node name
+     * @param action     the action
+     * @param message    the message
+     * @return the t
+     */
     public <T> T sendAndReceive(String toNodeName, String action, Object message) {
         return sendAndReceive(toNodeName, action, message, null);
     }
 
+    /**
+     * Send and receive t.
+     *
+     * @param <T>        the type parameter
+     * @param toNodeName the to node name
+     * @param action     the action
+     * @param message    the message
+     * @param timeout    the timeout
+     * @return the t
+     */
     public <T> T sendAndReceive(String toNodeName, String action, Object message, Duration timeout) {
         CompletableFuture<T> future = sendAndReceiveAsync(toNodeName, action, message, timeout);
         try {
@@ -67,11 +131,30 @@ public class RpcClient {
         }
     }
 
+    /**
+     * Random send and receive t.
+     *
+     * @param <T>     the type parameter
+     * @param nodes   the nodes
+     * @param action  the action
+     * @param message the message
+     * @return the t
+     */
     public <T> T randomSendAndReceive(List<String> nodes, String action, Object message) {
         String nodeName = getRandomNodeName(nodes);
         return sendAndReceive(nodeName, action, message, null);
     }
 
+    /**
+     * Random send and receive t.
+     *
+     * @param <T>     the type parameter
+     * @param nodes   the nodes
+     * @param action  the action
+     * @param message the message
+     * @param timeout the timeout
+     * @return the t
+     */
     public <T> T randomSendAndReceive(List<String> nodes, String action, Object message, Duration timeout) {
         String nodeName = getRandomNodeName(nodes);
         return sendAndReceive(nodeName, action, message, timeout);

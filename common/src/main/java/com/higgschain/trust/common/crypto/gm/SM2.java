@@ -84,7 +84,8 @@ import java.util.Arrays;
      *
      * @param input  加密原文
      * @param pubKey 公钥
-     * @return
+     * @return byte [ ]
+     * @throws Exception the exception
      */
     public static byte[] encrypt(String input, String pubKey) throws Exception {
 
@@ -157,7 +158,8 @@ import java.util.Arrays;
      *
      * @param input  密文数据
      * @param priKey 解密私钥
-     * @return
+     * @return string
+     * @throws Exception the exception
      */
     public static String decrypt(String input, String priKey) throws Exception {
 
@@ -280,7 +282,7 @@ import java.util.Arrays;
     /**
      * 生成密钥对
      *
-     * @return
+     * @return sm 2 key pair
      */
     public static SM2KeyPair generateKeyPair() {
 
@@ -303,6 +305,11 @@ import java.util.Arrays;
         }
     }
 
+    /**
+     * Generate encoded key pair key pair.
+     *
+     * @return the key pair
+     */
     public static KeyPair generateEncodedKeyPair() {
         SM2KeyPair sm2KeyPair = generateKeyPair();
         ECPoint publicKey = sm2KeyPair.getPublicKey();
@@ -323,8 +330,8 @@ import java.util.Arrays;
     /**
      * 导出公钥到本地
      *
-     * @param publicKey
-     * @param path
+     * @param publicKey the public key
+     * @param path      the path
      */
     public void exportPublicKey(ECPoint publicKey, String path) {
         File file = new File(path);
@@ -343,8 +350,8 @@ import java.util.Arrays;
     /**
      * 从本地导入公钥
      *
-     * @param path
-     * @return
+     * @param path the path
+     * @return ec point
      */
     public ECPoint importPublicKey(String path) {
         File file = new File(path);
@@ -370,8 +377,8 @@ import java.util.Arrays;
     /**
      * 导出私钥到本地
      *
-     * @param privateKey
-     * @param path
+     * @param privateKey the private key
+     * @param path       the path
      */
     public void exportPrivateKey(BigInteger privateKey, String path) {
         File file = new File(path);
@@ -389,8 +396,8 @@ import java.util.Arrays;
     /**
      * 从本地导入私钥
      *
-     * @param path
-     * @return
+     * @param path the path
+     * @return big integer
      */
     public BigInteger importPrivateKey(String path) {
         File file = new File(path);
@@ -466,7 +473,7 @@ import java.util.Arrays;
      *
      * @param M      签名信息
      * @param priKey 签名方密钥对
-     * @return 签名
+     * @return 签名 signature
      */
     public static Signature sign(String M, String priKey) {
         BigInteger privateKey = null;
@@ -559,11 +566,31 @@ import java.util.Arrays;
      * @author Potato
      */
     private static class TransportEntity implements Serializable {
+        /**
+         * The R.
+         */
         final byte[] R; //R点
+        /**
+         * The S.
+         */
         final byte[] S; //验证S
+        /**
+         * The Z.
+         */
         final byte[] Z; //用户标识
+        /**
+         * The K.
+         */
         final byte[] K; //公钥
 
+        /**
+         * Instantiates a new Transport entity.
+         *
+         * @param r    the r
+         * @param s    the s
+         * @param z    the z
+         * @param pKey the p key
+         */
         public TransportEntity(byte[] r, byte[] s, byte[] z, ECPoint pKey) {
             R = r;
             S = s;
@@ -578,15 +605,42 @@ import java.util.Arrays;
      * @author Potato
      */
     public static class KeyExchange {
+        /**
+         * The R a.
+         */
         BigInteger rA;
+        /**
+         * The Ra.
+         */
         ECPoint RA;
+        /**
+         * The V.
+         */
         ECPoint V;
+        /**
+         * The Z.
+         */
         byte[] Z;
+        /**
+         * The Key.
+         */
         byte[] key;
 
+        /**
+         * The Id.
+         */
         String ID;
+        /**
+         * The Key pair.
+         */
         SM2KeyPair keyPair;
 
+        /**
+         * Instantiates a new Key exchange.
+         *
+         * @param ID      the id
+         * @param keyPair the key pair
+         */
         public KeyExchange(String ID, SM2KeyPair keyPair) {
             this.ID = ID;
             this.keyPair = keyPair;
@@ -596,7 +650,7 @@ import java.util.Arrays;
         /**
          * 密钥协商发起第一步
          *
-         * @return
+         * @return transport entity
          */
         public TransportEntity keyExchange_1() {
             rA = random(n);
@@ -610,7 +664,7 @@ import java.util.Arrays;
          * 密钥协商响应方
          *
          * @param entity 传输实体
-         * @return
+         * @return transport entity
          */
         public TransportEntity keyExchange_2(TransportEntity entity) {
             BigInteger rB = random(n);
@@ -652,6 +706,7 @@ import java.util.Arrays;
          * 密钥协商发起方第二步
          *
          * @param entity 传输实体
+         * @return the transport entity
          */
         public TransportEntity keyExchange_3(TransportEntity entity) {
             BigInteger x1 = RA.getXCoord().toBigInteger();
@@ -712,6 +767,12 @@ import java.util.Arrays;
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
 
         SM2KeyPair keyPair = SM2.generateKeyPair();
@@ -748,10 +809,25 @@ import java.util.Arrays;
         //        bKeyExchange.keyExchange_4(entity3);
     }
 
+    /**
+     * The type Signature.
+     */
     public static class Signature {
+        /**
+         * The R.
+         */
         BigInteger r;
+        /**
+         * The S.
+         */
         BigInteger s;
 
+        /**
+         * Instantiates a new Signature.
+         *
+         * @param r the r
+         * @param s the s
+         */
         public Signature(BigInteger r, BigInteger s) {
             this.r = r;
             this.s = s;
@@ -761,6 +837,12 @@ import java.util.Arrays;
             return r.toString(RADIX) + DELIMITER + s.toString(RADIX);
         }
 
+        /**
+         * String to signature signature.
+         *
+         * @param str the str
+         * @return the signature
+         */
         public static Signature StringToSignature(String str) {
             if (StringUtils.isEmpty(str)) {
                 return null;

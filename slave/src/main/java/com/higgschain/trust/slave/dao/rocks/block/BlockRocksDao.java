@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
+ * The type Block rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -24,6 +26,11 @@ public class BlockRocksDao extends RocksBaseDao <BlockPO> {
         return "block";
     }
 
+    /**
+     * Save.
+     *
+     * @param blockPO the block po
+     */
     public void save(BlockPO blockPO) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -34,6 +41,12 @@ public class BlockRocksDao extends RocksBaseDao <BlockPO> {
         txPut(tx, String.valueOf(blockPO.getHeight()), blockPO);
     }
 
+    /**
+     * Gets limit height.
+     *
+     * @param blockHeights the block heights
+     * @return the limit height
+     */
     public List<Long> getLimitHeight(List<String> blockHeights) {
         if (CollectionUtils.isEmpty(blockHeights)) {
             log.error("[BlockRocksDao.getLimitHeight] blockHeights is empty");
@@ -54,6 +67,13 @@ public class BlockRocksDao extends RocksBaseDao <BlockPO> {
         return heights;
     }
 
+    /**
+     * Query blocks list.
+     *
+     * @param startHeight the start height
+     * @param size        the size
+     * @return the list
+     */
     public List<BlockPO> queryBlocks(long startHeight, int size) {
         if (startHeight < 1 || size < 0) {
             log.error("[BlockRocksDao.queryBlocks] startHeight or size is invalid, startHeight={}, size={}", startHeight, size);

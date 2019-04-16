@@ -24,6 +24,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
+ * The type Byte array wrapper.
+ *
  * @author Roman Mandeleil
  * @since 11.06.2014
  */
@@ -32,6 +34,11 @@ public class ByteArrayWrapper implements Comparable<ByteArrayWrapper>, Serializa
     private final byte[] data;
     private int hashCode = 0;
 
+    /**
+     * Instantiates a new Byte array wrapper.
+     *
+     * @param data the data
+     */
     public ByteArrayWrapper(byte[] data) {
         if (data == null) {
             throw new NullPointerException("Data must not be null");
@@ -63,6 +70,11 @@ public class ByteArrayWrapper implements Comparable<ByteArrayWrapper>, Serializa
                 o.getData(), 0, o.getData().length);
     }
 
+    /**
+     * Get data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getData() {
         return data;
     }

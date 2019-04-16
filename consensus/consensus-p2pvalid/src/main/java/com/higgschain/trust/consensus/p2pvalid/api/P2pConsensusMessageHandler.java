@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type P 2 p consensus message handler.
+ *
  * @author duhongming
- * @date 2018/9/17
+ * @date 2018 /9/17
  */
 @Service
 @Slf4j
@@ -26,6 +28,12 @@ public class P2pConsensusMessageHandler implements InitializingBean {
 
     @Autowired private SyncReceiveService syncReceiveService;
 
+    /**
+     * Receive command valid response wrap.
+     *
+     * @param validCommandWrap the valid command wrap
+     * @return the valid response wrap
+     */
     public ValidResponseWrap<? extends ResponseCommand> receiveCommand(ValidCommandWrap validCommandWrap) {
         try {
             receiveService.receive(validCommandWrap);
@@ -36,6 +44,12 @@ public class P2pConsensusMessageHandler implements InitializingBean {
         return ValidResponseWrap.successResponse(null);
     }
 
+    /**
+     * Receive command sync valid response wrap.
+     *
+     * @param validCommandWrap the valid command wrap
+     * @return the valid response wrap
+     */
     public ValidResponseWrap<? extends ResponseCommand> receiveCommandSync(ValidCommandWrap validCommandWrap) {
         try {
             return syncReceiveService.receive(validCommandWrap);

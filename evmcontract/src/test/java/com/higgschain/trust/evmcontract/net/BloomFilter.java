@@ -26,26 +26,52 @@ public class BloomFilter implements Cloneable {
     private static final int BITS_PER_BLOOM = 3;
     private static final int BLOOM_BYTES = 64;
 
+    /**
+     * The Mask.
+     */
     BitSet mask = new BitSet(BLOOM_BYTES * 8);
+    /**
+     * The Counters.
+     */
     int[] counters = new int[BLOOM_BYTES * 8];
 
     private BloomFilter() {
     }
 
+    /**
+     * Instantiates a new Bloom filter.
+     *
+     * @param topic the topic
+     */
     public BloomFilter(Topic topic) {
         addTopic(topic);
     }
 
+    /**
+     * Instantiates a new Bloom filter.
+     *
+     * @param bloomMask the bloom mask
+     */
     public BloomFilter(byte[] bloomMask) {
         if (bloomMask.length != BLOOM_BYTES)
             throw new RuntimeException("Invalid bloom filter array length: " + bloomMask.length);
         mask = BitSet.valueOf(bloomMask);
     }
 
+    /**
+     * Create none bloom filter.
+     *
+     * @return the bloom filter
+     */
     public static BloomFilter createNone() {
         return new BloomFilter();
     }
 
+    /**
+     * Create all bloom filter.
+     *
+     * @return the bloom filter
+     */
     public static BloomFilter createAll() {
         BloomFilter bloomFilter = new BloomFilter();
         bloomFilter.mask.set(0, bloomFilter.mask.length());
@@ -82,12 +108,22 @@ public class BloomFilter implements Cloneable {
         return topicMask;
     }
 
+    /**
+     * Add topic.
+     *
+     * @param topic the topic
+     */
     public void addTopic(Topic topic) {
         BitSet topicMask = getTopicMask(topic);
         incCounters(topicMask);
         mask.or(topicMask);
     }
 
+    /**
+     * Remove topic.
+     *
+     * @param topic the topic
+     */
     public void removeTopic(Topic topic) {
         BitSet topicMask = getTopicMask(topic);
         decCounters(topicMask);
@@ -99,7 +135,12 @@ public class BloomFilter implements Cloneable {
         }
     }
 
-
+    /**
+     * Has topic boolean.
+     *
+     * @param topic the topic
+     * @return the boolean
+     */
     public boolean hasTopic(Topic topic) {
         BitSet m = new BloomFilter(topic).mask;
         BitSet m1 = (BitSet) m.clone();
@@ -107,6 +148,11 @@ public class BloomFilter implements Cloneable {
         return m1.equals(m);
     }
 
+    /**
+     * To bytes byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] toBytes() {
         byte[] ret = new byte[BLOOM_BYTES];
         byte[] bytes = mask.toByteArray();

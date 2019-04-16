@@ -9,9 +9,11 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
+ * The type Account trade info.
+ *
  * @author liuyu
  * @description Account transaction information
- * @date 2018-03-28
+ * @date 2018 -03-28
  */
 @Getter @Setter public class AccountTradeInfo extends BaseBO {
     /**
@@ -23,9 +25,18 @@ import java.math.BigDecimal;
      */
     @NotNull private BigDecimal amount;
 
+    /**
+     * Instantiates a new Account trade info.
+     */
     public AccountTradeInfo() {
     }
 
+    /**
+     * Instantiates a new Account trade info.
+     *
+     * @param accountNo the account no
+     * @param amount    the amount
+     */
     public AccountTradeInfo(String accountNo, BigDecimal amount) {
         this.accountNo = accountNo;
         this.amount = amount;

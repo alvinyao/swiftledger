@@ -12,12 +12,26 @@ import org.testng.annotations.Test;
 
 import java.util.Date;
 
+/**
+ * The type Register rs handler test.
+ */
 public class RegisterRsHandlerTest extends BaseTest {
+    /**
+     * The Block service.
+     */
     @Autowired BlockService blockService;
 
+    /**
+     * The Register rs handler.
+     */
     @Autowired
     RegisterRsHandler registerRsHandler;
 
+    /**
+     * Test process.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testProcess() throws Exception {
         Package pack = new Package();
         pack.setHeight(2L);

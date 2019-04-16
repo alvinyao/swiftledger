@@ -25,17 +25,31 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
+ * The type Transaction executor.
+ *
  * @author WangQuanzhou
  * @desc the class that handle SignedTransaction and CoreTransaction
- * @date 2018/3/27 14:54
+ * @date 2018 /3/27 14:54
  */
 @Slf4j @Component public class TransactionExecutorImpl implements TransactionExecutor {
 
+    /**
+     * The Processor holder.
+     */
     @Autowired
     TxProcessorHolder processorHolder;
+    /**
+     * The Tx check handler.
+     */
     @Autowired TxCheckHandler txCheckHandler;
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
     @Autowired private Blockchain blockchain;

@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type Block sync service.
+ */
 @Service @Slf4j public class BlockSyncService {
     @Autowired private BlockService blockService;
     @Autowired private BlockChainClient blockChainClient;
@@ -26,7 +29,7 @@ import java.util.List;
      *
      * @param startHeight 开始高度
      * @param size        数量
-     * @return blockheader列表
+     * @return blockheader列表 headers
      */
     public List<BlockHeader> getHeaders(long startHeight, int size) {
         return blockChainClient.getBlockHeaders(nodeState.notMeNodeNameReg(), startHeight, size);
@@ -37,7 +40,8 @@ import java.util.List;
      *
      * @param startHeight 开始高度
      * @param size        数量
-     * @return blockheader列表
+     * @param nodeName    the node name
+     * @return blockheader列表 headers from node
      */
     public List<BlockHeader> getHeadersFromNode(long startHeight, int size, String nodeName) {
         return blockChainClient.getBlockHeadersFromNode(nodeName, startHeight, size);
@@ -48,7 +52,7 @@ import java.util.List;
      *
      * @param startHeight 开始高度
      * @param size        数量
-     * @return blockheader列表
+     * @return blockheader列表 blocks
      */
     public List<Block> getBlocks(long startHeight, int size) {
         return blockChainClient.getBlocks(nodeState.notMeNodeNameReg(), startHeight, size);
@@ -59,7 +63,8 @@ import java.util.List;
      *
      * @param startHeight 开始高度
      * @param size        数量
-     * @return blockheader列表
+     * @param nodeName    the node name
+     * @return blockheader列表 blocks from node
      */
     public List<Block> getBlocksFromNode(long startHeight, int size, String nodeName) {
         return blockChainClient.getBlocksFromNode(nodeName, startHeight, size);
@@ -82,20 +87,21 @@ import java.util.List;
     /**
      * get the cluster height
      *
-     * @return
+     * @param size the size
+     * @return cluster height
      */
     public Long getClusterHeight(int size) {
         Long clusterHeight = clusterService.getClusterHeight(size);
         log.info("get the cluster height:{}", clusterHeight);
         return clusterHeight;
     }
-    
+
     /**
      * 获取集群安全高度
      *
-     * @return 高度
-     * @param tryTimes
-    */
+     * @param tryTimes the try times
+     * @return 高度 safe height
+     */
     public Long getSafeHeight(int tryTimes) {
         Long safeHeight;
         int times = 0;
@@ -119,7 +125,7 @@ import java.util.List;
      *
      * @param previousHash previous block hash
      * @param blocks       block列表
-     * @return 验证结果
+     * @return 验证结果 boolean
      */
     public boolean validatingBlocks(String previousHash, List<Block> blocks) {
         if (blocks == null || blocks.isEmpty() || StringUtils.isBlank(previousHash)) {
@@ -143,7 +149,7 @@ import java.util.List;
      *
      * @param previousHash previous block hash
      * @param block        block
-     * @return 验证结果
+     * @return 验证结果 boolean
      */
     public boolean validating(String previousHash, Block block) {
         if (block == null || StringUtils.isBlank(previousHash)) {
@@ -163,7 +169,7 @@ import java.util.List;
      * 本地验证block transactions hash
      *
      * @param block block
-     * @return 验证结果
+     * @return 验证结果 boolean
      */
     public boolean validating(Block block) {
         if (block == null) {
@@ -188,7 +194,7 @@ import java.util.List;
      * 本地验证区块链hash
      *
      * @param blockHeaders 要验证的blockheader列表
-     * @return 验证结果
+     * @return 验证结果 boolean
      */
     public boolean validating(List<BlockHeader> blockHeaders) {
         if (blockHeaders == null || blockHeaders.isEmpty()) {
@@ -203,7 +209,7 @@ import java.util.List;
      *
      * @param previousHash 前一区块hash
      * @param blockHeaders 要验证的blockheader列表
-     * @return 验证结果
+     * @return 验证结果 boolean
      */
     public boolean validating(String previousHash, List<BlockHeader> blockHeaders) {
         if (blockHeaders == null || blockHeaders.isEmpty() || StringUtils.isBlank(previousHash)) {
@@ -225,9 +231,9 @@ import java.util.List;
     /**
      * validating block header with previous hash
      *
-     * @param previousHash
-     * @param blockHeader
-     * @return
+     * @param previousHash the previous hash
+     * @param blockHeader  the block header
+     * @return boolean
      */
     public boolean validating(String previousHash, BlockHeader blockHeader) {
         if (blockHeader == null || StringUtils.isBlank(previousHash)) {
@@ -243,8 +249,8 @@ import java.util.List;
     /**
      * validating block header
      *
-     * @param blockHeader
-     * @return
+     * @param blockHeader the block header
+     * @return boolean
      */
     public boolean validating(BlockHeader blockHeader) {
         if (blockHeader == null) {

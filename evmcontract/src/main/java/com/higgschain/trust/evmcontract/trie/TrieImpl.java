@@ -52,23 +52,47 @@ public class TrieImpl implements Trie<byte[]> {
     private Node root;
     private boolean async = true;
 
+    /**
+     * Instantiates a new Trie.
+     */
     public TrieImpl() {
         this((byte[]) null);
     }
 
+    /**
+     * Instantiates a new Trie.
+     *
+     * @param root the root
+     */
     public TrieImpl(byte[] root) {
         this(new HashMapDB<byte[]>(), root);
     }
 
+    /**
+     * Instantiates a new Trie.
+     *
+     * @param cache the cache
+     */
     public TrieImpl(Source<byte[], byte[]> cache) {
         this(cache, null);
     }
 
+    /**
+     * Instantiates a new Trie.
+     *
+     * @param cache the cache
+     * @param root  the root
+     */
     public TrieImpl(Source<byte[], byte[]> cache, byte[] root) {
         this.cache = cache;
         setRoot(root);
     }
 
+    /**
+     * Gets executor.
+     *
+     * @return the executor
+     */
     public static ExecutorService getExecutor() {
         if (executor == null) {
             executor = Executors.newFixedThreadPool(4,
@@ -90,6 +114,11 @@ public class TrieImpl implements Trie<byte[]> {
         return "\"" + ret + "\"";
     }
 
+    /**
+     * Sets async.
+     *
+     * @param async the async
+     */
     public void setAsync(boolean async) {
         this.async = async;
     }
@@ -114,6 +143,11 @@ public class TrieImpl implements Trie<byte[]> {
         return root != null && root.resolveCheck();
     }
 
+    /**
+     * Gets cache.
+     *
+     * @return the cache
+     */
     public Source<byte[], byte[]> getCache() {
         return cache;
     }
@@ -351,14 +385,30 @@ public class TrieImpl implements Trie<byte[]> {
 
     }
 
+    /**
+     * Dump structure string.
+     *
+     * @return the string
+     */
     public String dumpStructure() {
         return root == null ? "<empty>" : root.dumpStruct("", "");
     }
 
+    /**
+     * Dump trie string.
+     *
+     * @return the string
+     */
     public String dumpTrie() {
         return dumpTrie(true);
     }
 
+    /**
+     * Dump trie string.
+     *
+     * @param compact the compact
+     * @return the string
+     */
     public String dumpTrie(boolean compact) {
         if (root == null) {
             return "<empty>";
@@ -373,10 +423,22 @@ public class TrieImpl implements Trie<byte[]> {
         return ret.toString();
     }
 
+    /**
+     * Scan tree.
+     *
+     * @param scanAction the scan action
+     */
     public void scanTree(ScanAction scanAction) {
         scanTree(root, TrieKey.empty(false), scanAction);
     }
 
+    /**
+     * Scan tree.
+     *
+     * @param node       the node
+     * @param k          the k
+     * @param scanAction the scan action
+     */
     public void scanTree(Node node, TrieKey k, ScanAction scanAction) {
         if (node == null) {
             return;
@@ -398,20 +460,50 @@ public class TrieImpl implements Trie<byte[]> {
         }
     }
 
-    public enum NodeType {
-        BranchNode,
+    /**
+     * The enum Node type.
+     */
+    public enum NodeType {/**
+     * Branch node node type.
+     */
+    BranchNode,
+        /**
+         * Kv node value node type.
+         */
         KVNodeValue,
+        /**
+         * Kv node node node type.
+         */
         KVNodeNode
     }
 
-
+    /**
+     * The interface Scan action.
+     */
     public interface ScanAction {
 
+        /**
+         * Do on node.
+         *
+         * @param hash the hash
+         * @param node the node
+         */
         void doOnNode(byte[] hash, Node node);
 
+        /**
+         * Do on value.
+         *
+         * @param nodeHash the node hash
+         * @param node     the node
+         * @param key      the key
+         * @param value    the value
+         */
         void doOnValue(byte[] nodeHash, Node node, byte[] key, byte[] value);
     }
 
+    /**
+     * The type Node.
+     */
     public final class Node {
         private byte[] hash = null;
         private byte[] rlp = null;
@@ -420,18 +512,32 @@ public class TrieImpl implements Trie<byte[]> {
 
         private Object[] children = null;
 
+        /**
+         * Instantiates a new Node.
+         */
         // new empty BranchNode
         public Node() {
             children = new Object[17];
             dirty = true;
         }
 
+        /**
+         * Instantiates a new Node.
+         *
+         * @param key         the key
+         * @param valueOrNode the value or node
+         */
         // new KVNode with key and (value or node)
         public Node(TrieKey key, Object valueOrNode) {
             this(new Object[]{key, valueOrNode});
             dirty = true;
         }
 
+        /**
+         * Instantiates a new Node.
+         *
+         * @param hashOrRlp the hash or rlp
+         */
         // new Node with hash or RLP
         public Node(byte[] hashOrRlp) {
             if (hashOrRlp.length == 32) {
@@ -450,6 +556,11 @@ public class TrieImpl implements Trie<byte[]> {
             this.children = children;
         }
 
+        /**
+         * Resolve check boolean.
+         *
+         * @return the boolean
+         */
         public boolean resolveCheck() {
             if (rlp != null || parsedRlp != null || hash == null) {
                 return true;
@@ -465,6 +576,11 @@ public class TrieImpl implements Trie<byte[]> {
             }
         }
 
+        /**
+         * Encode byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] encode() {
             return encode(1, true);
         }
@@ -580,6 +696,12 @@ public class TrieImpl implements Trie<byte[]> {
             }
         }
 
+        /**
+         * Branch node get child node.
+         *
+         * @param hex the hex
+         * @return the node
+         */
         public Node branchNodeGetChild(int hex) {
             parse();
             assert getType() == NodeType.BranchNode;
@@ -600,6 +722,13 @@ public class TrieImpl implements Trie<byte[]> {
             return n == NULL_NODE ? null : (Node) n;
         }
 
+        /**
+         * Branch node set child node.
+         *
+         * @param hex  the hex
+         * @param node the node
+         * @return the node
+         */
         public Node branchNodeSetChild(int hex, Node node) {
             parse();
             assert getType() == NodeType.BranchNode;
@@ -608,6 +737,11 @@ public class TrieImpl implements Trie<byte[]> {
             return this;
         }
 
+        /**
+         * Branch node get value byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] branchNodeGetValue() {
             parse();
             assert getType() == NodeType.BranchNode;
@@ -624,6 +758,12 @@ public class TrieImpl implements Trie<byte[]> {
             return n == NULL_NODE ? null : (byte[]) n;
         }
 
+        /**
+         * Branch node set value node.
+         *
+         * @param val the val
+         * @return the node
+         */
         public Node branchNodeSetValue(byte[] val) {
             parse();
             assert getType() == NodeType.BranchNode;
@@ -632,6 +772,11 @@ public class TrieImpl implements Trie<byte[]> {
             return this;
         }
 
+        /**
+         * Branch node compact idx int.
+         *
+         * @return the int
+         */
         public int branchNodeCompactIdx() {
             parse();
             assert getType() == NodeType.BranchNode;
@@ -649,6 +794,11 @@ public class TrieImpl implements Trie<byte[]> {
             return cnt > 0 ? idx : (branchNodeGetValue() == null ? -1 : 16);
         }
 
+        /**
+         * Branch node can compact boolean.
+         *
+         * @return the boolean
+         */
         public boolean branchNodeCanCompact() {
             parse();
             assert getType() == NodeType.BranchNode;
@@ -662,24 +812,45 @@ public class TrieImpl implements Trie<byte[]> {
             return cnt == 0 || branchNodeGetValue() == null;
         }
 
+        /**
+         * Kv node get key trie key.
+         *
+         * @return the trie key
+         */
         public TrieKey kvNodeGetKey() {
             parse();
             assert getType() != NodeType.BranchNode;
             return (TrieKey) children[0];
         }
 
+        /**
+         * Kv node get child node node.
+         *
+         * @return the node
+         */
         public Node kvNodeGetChildNode() {
             parse();
             assert getType() == NodeType.KVNodeNode;
             return (Node) children[1];
         }
 
+        /**
+         * Kv node get value byte [ ].
+         *
+         * @return the byte [ ]
+         */
         public byte[] kvNodeGetValue() {
             parse();
             assert getType() == NodeType.KVNodeValue;
             return (byte[]) children[1];
         }
 
+        /**
+         * Kv node set value node.
+         *
+         * @param value the value
+         * @return the node
+         */
         public Node kvNodeSetValue(byte[] value) {
             parse();
             assert getType() == NodeType.KVNodeValue;
@@ -688,12 +859,23 @@ public class TrieImpl implements Trie<byte[]> {
             return this;
         }
 
+        /**
+         * Kv node get value or node object.
+         *
+         * @return the object
+         */
         public Object kvNodeGetValueOrNode() {
             parse();
             assert getType() != NodeType.BranchNode;
             return children[1];
         }
 
+        /**
+         * Kv node set value or node node.
+         *
+         * @param valueOrNode the value or node
+         * @return the node
+         */
         public Node kvNodeSetValueOrNode(Object valueOrNode) {
             parse();
             assert getType() != NodeType.BranchNode;
@@ -702,6 +884,11 @@ public class TrieImpl implements Trie<byte[]> {
             return this;
         }
 
+        /**
+         * Gets type.
+         *
+         * @return the type
+         */
         public NodeType getType() {
             parse();
 
@@ -709,12 +896,20 @@ public class TrieImpl implements Trie<byte[]> {
                     (children[1] instanceof Node ? NodeType.KVNodeNode : NodeType.KVNodeValue);
         }
 
+        /**
+         * Dispose.
+         */
         public void dispose() {
             if (hash != null) {
                 deleteHash(hash);
             }
         }
 
+        /**
+         * Invalidate node.
+         *
+         * @return the node
+         */
         public Node invalidate() {
             dirty = true;
             return this;
@@ -722,8 +917,10 @@ public class TrieImpl implements Trie<byte[]> {
 
         /***********
          * Dump methods
-         ************/
-
+         * @param indent the indent
+         * @param prefix the prefix
+         * @return the string
+         */
         public String dumpStruct(String indent, String prefix) {
             String ret = indent + prefix + getType() + (dirty ? " *" : "") +
                     (hash == null ? "" : "(hash: " + Hex.toHexString(hash) + ")");
@@ -746,6 +943,12 @@ public class TrieImpl implements Trie<byte[]> {
             return ret;
         }
 
+        /**
+         * Dump trie node list.
+         *
+         * @param compact the compact
+         * @return the list
+         */
         public List<String> dumpTrieNode(boolean compact) {
             List<String> ret = new ArrayList<>();
             if (hash != null) {

@@ -16,8 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 /**
+ * The type Command primitive type.
+ *
  * @author suimi
- * @date 2018/7/6
+ * @date 2018 /7/6
  */
 @Slf4j public class CommandPrimitiveType
     implements PrimitiveType<CommandPrimitiveBuilder, CommandPrimitiveConfig, ICommandPrimitive> {
@@ -26,6 +28,12 @@ import java.util.*;
 
     private IConsensusSnapshot snapshot;
 
+    /**
+     * Instantiates a new Command primitive type.
+     *
+     * @param replicateComposite the replicate composite
+     * @param snapshot           the snapshot
+     */
     public CommandPrimitiveType(AbstractCommitReplicateComposite replicateComposite, IConsensusSnapshot snapshot) {
         this.replicateComposite = replicateComposite;
         this.snapshot = snapshot;

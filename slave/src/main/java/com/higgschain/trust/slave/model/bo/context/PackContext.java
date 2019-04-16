@@ -13,9 +13,11 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
+ * The type Pack context.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 @Slf4j public class PackContext implements PackageData, TransactionData, ActionData, CommonData {
 
     /**
@@ -46,8 +48,8 @@ import java.util.Map;
     /**
      * package context constructor only
      *
-     * @param pack
-     * @param block
+     * @param pack  the pack
+     * @param block the block
      */
     public PackContext(Package pack, Block block) {
         this.pack = pack;

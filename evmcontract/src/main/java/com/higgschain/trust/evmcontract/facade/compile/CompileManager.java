@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
+ * The type Compile manager.
+ *
  * @author Chen Jiawei
- * @date 2018-11-29
+ * @date 2018 -11-29
  */
 public class CompileManager {
     private static Cache<String, Entity> cacheWithFilepath = CacheBuilder.newBuilder().maximumSize(5000).build();
@@ -29,6 +31,13 @@ public class CompileManager {
         private byte[] bytes;
         private CompilationResult compilationResult;
 
+        /**
+         * Instantiates a new Entity.
+         *
+         * @param fingerprint       the fingerprint
+         * @param bytes             the bytes
+         * @param compilationResult the compilation result
+         */
         Entity(ByteArrayWrapper fingerprint, byte[] bytes, CompilationResult compilationResult) {
             this.fingerprint = fingerprint;
             this.bytes = bytes;
@@ -41,6 +50,7 @@ public class CompileManager {
      *
      * @param filePath the file path
      * @return the compilation result
+     * @throws IOException the io exception
      */
     public static CompilationResult getCompilationResultByFile(String filePath) throws IOException {
         Entity entity = cacheWithFilepath.getIfPresent(filePath);
@@ -64,6 +74,7 @@ public class CompileManager {
      *
      * @param bytes the bytes of source content
      * @return the compilation result
+     * @throws IOException the io exception
      */
     public static CompilationResult getCompilationResultByBytes(byte[] bytes) throws IOException {
         Entity entity = getEntityByBytes(bytes, cacheWithFingerprint);

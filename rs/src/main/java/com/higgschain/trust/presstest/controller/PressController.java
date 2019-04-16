@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * The type Press controller.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-30
+ * @date 2018 -08-30
  */
 @RequestMapping(value = "/press") @RestController @Slf4j public class PressController {
     @Autowired private AccountService accountService;
@@ -31,8 +33,8 @@ import java.util.List;
     /**
      * 交易批量接口
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return resp data
      */
     @RequestMapping(value = "/batch") RespData batch(@RequestBody List<CoreTransaction> list) {
         list.forEach(entry->{
@@ -45,11 +47,12 @@ import java.util.List;
         });
         return new RespData();
     }
+
     /**
      * 创建币种
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/createCurrency") RespData createCurrency(@RequestBody CurrencyVO vo) {
         RespData respData = new RespData();
@@ -77,8 +80,8 @@ import java.util.List;
     /**
      * 开户
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/openAccount") RespData openAccount(@RequestBody OpenAccountVO vo) {
         RespData respData = new RespData();
@@ -106,8 +109,8 @@ import java.util.List;
     /**
      * 账务操作
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/accounting") RespData accounting(@RequestBody AccountingVO vo) {
         RespData respData = new RespData();
@@ -135,8 +138,8 @@ import java.util.List;
     /**
      * 冻结
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/freeze") RespData freeze(@RequestBody FreezeVO vo) {
         RespData respData = new RespData();
@@ -164,8 +167,8 @@ import java.util.List;
     /**
      * 解冻
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/unfreeze") RespData unfreeze(@RequestBody UnFreezeVO vo) {
         RespData respData = new RespData();
@@ -193,8 +196,8 @@ import java.util.List;
     /**
      * 存证
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     @RequestMapping(value = "/store") RespData store(@RequestBody StoreVO vo) {
         RespData respData = new RespData();

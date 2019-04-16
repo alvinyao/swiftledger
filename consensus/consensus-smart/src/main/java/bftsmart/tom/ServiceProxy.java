@@ -38,8 +38,14 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ServiceProxy extends TOMSender {
 
+    /**
+     * The Can receive lock.
+     */
     // Locks for send requests and receive replies
     protected ReentrantLock canReceiveLock = new ReentrantLock();
+    /**
+     * The Can send lock.
+     */
     protected ReentrantLock canSendLock = new ReentrantLock();
     private Semaphore sm = new Semaphore(0);
     private int reqId = -1; // request id
@@ -59,6 +65,8 @@ public class ServiceProxy extends TOMSender {
 
     /**
      * Constructor
+     *
+     * @param processId the process id
      */
     public ServiceProxy(int processId) {
         this(processId, null, null, null);
@@ -66,6 +74,9 @@ public class ServiceProxy extends TOMSender {
 
     /**
      * Constructor
+     *
+     * @param processId  the process id
+     * @param configHome the config home
      */
     public ServiceProxy(int processId, String configHome) {
         this(processId, configHome, null, null);
@@ -76,10 +87,8 @@ public class ServiceProxy extends TOMSender {
      *
      * @param processId       Process id for this client (should be different from replicas)
      * @param configHome      Configuration directory for BFT-SMART
-     * @param replyComparator used for comparing replies from different servers
-     *                        to extract one returned by f+1
-     * @param replyExtractor  used for extracting the response from the matching
-     *                        quorum of replies
+     * @param replyComparator used for comparing replies from different servers                        to extract one returned by f+1
+     * @param replyExtractor  used for extracting the response from the matching                        quorum of replies
      */
     public ServiceProxy(int processId, String configHome, Comparator<byte[]> replyComparator,
         Extractor replyExtractor) {
@@ -115,6 +124,11 @@ public class ServiceProxy extends TOMSender {
         return invokeTimeout;
     }
 
+    /**
+     * Gets invoke unordered hashed timeout.
+     *
+     * @return the invoke unordered hashed timeout
+     */
     public int getInvokeUnorderedHashedTimeout() {
         return invokeUnorderedHashedTimeout;
     }
@@ -129,18 +143,41 @@ public class ServiceProxy extends TOMSender {
         this.invokeTimeout = invokeTimeout;
     }
 
+    /**
+     * Sets invoke unordered hashed timeout.
+     *
+     * @param timeout the timeout
+     */
     public void setInvokeUnorderedHashedTimeout(int timeout) {
         this.invokeUnorderedHashedTimeout = timeout;
     }
 
+    /**
+     * Invoke ordered byte [ ].
+     *
+     * @param request the request
+     * @return the byte [ ]
+     */
     public byte[] invokeOrdered(byte[] request) {
         return invoke(request, TOMMessageType.ORDERED_REQUEST);
     }
 
+    /**
+     * Invoke unordered byte [ ].
+     *
+     * @param request the request
+     * @return the byte [ ]
+     */
     public byte[] invokeUnordered(byte[] request) {
         return invoke(request, TOMMessageType.UNORDERED_REQUEST);
     }
 
+    /**
+     * Invoke unordered hashed byte [ ].
+     *
+     * @param request the request
+     * @return the byte [ ]
+     */
     public byte[] invokeUnorderedHashed(byte[] request) {
         return invoke(request, TOMMessageType.UNORDERED_HASHED_REQUEST);
     }
@@ -151,8 +188,7 @@ public class ServiceProxy extends TOMSender {
      * This method is thread-safe.
      *
      * @param request Request to be sent
-     * @param reqType TOM_NORMAL_REQUESTS for service requests, and other for
-     *                reconfig requests.
+     * @param reqType TOM_NORMAL_REQUESTS for service requests, and other for                reconfig requests.
      * @return The reply from the replicas related to request
      */
     public byte[] invoke(byte[] request, TOMMessageType reqType) {
@@ -283,6 +319,11 @@ public class ServiceProxy extends TOMSender {
         }
     }
 
+    /**
+     * Reconfigure to.
+     *
+     * @param v the v
+     */
     //******* EDUARDO BEGIN **************//
     protected void reconfigureTo(View v) {
         Logger.println("Installing a most up-to-date view with id=" + v.getId());
@@ -385,6 +426,11 @@ public class ServiceProxy extends TOMSender {
         }
     }
 
+    /**
+     * Gets reply quorum.
+     *
+     * @return the reply quorum
+     */
     protected int getReplyQuorum() {
         if (getViewManager().getStaticConf().isBFT()) {
             return (int)Math.ceil((getViewManager().getCurrentViewN() + getViewManager().getCurrentViewF()) / 2) + 1;
@@ -406,6 +452,12 @@ public class ServiceProxy extends TOMSender {
         private int replyServerPos;
         private int countHashReplies;
 
+        /**
+         * Instantiates a new Hash response controller.
+         *
+         * @param replyServerPos the reply server pos
+         * @param length         the length
+         */
         public HashResponseController(int replyServerPos, int length) {
             this.replyServerPos = replyServerPos;
             this.hashReplies = new byte[length][];
@@ -413,6 +465,13 @@ public class ServiceProxy extends TOMSender {
             this.countHashReplies = 0;
         }
 
+        /**
+         * Gets response.
+         *
+         * @param pos        the pos
+         * @param tomMessage the tom message
+         * @return the response
+         */
         public TOMMessage getResponse(int pos, TOMMessage tomMessage) {
 
             if (hashReplies[pos] == null) {
@@ -443,6 +502,11 @@ public class ServiceProxy extends TOMSender {
             return null;
         }
 
+        /**
+         * Gets number replies.
+         *
+         * @return the number replies
+         */
         public int getNumberReplies() {
             return countHashReplies;
         }

@@ -21,21 +21,40 @@ import org.spongycastle.util.encoders.Hex;
 
 import java.io.Serializable;
 
+/**
+ * The type Decode result.
+ */
 @SuppressWarnings("serial")
 public class DecodeResult implements Serializable {
 
     private int pos;
     private Object decoded;
 
+    /**
+     * Instantiates a new Decode result.
+     *
+     * @param pos     the pos
+     * @param decoded the decoded
+     */
     public DecodeResult(int pos, Object decoded) {
         this.pos = pos;
         this.decoded = decoded;
     }
 
+    /**
+     * Gets pos.
+     *
+     * @return the pos
+     */
     public int getPos() {
         return pos;
     }
 
+    /**
+     * Gets decoded.
+     *
+     * @return the decoded
+     */
     public Object getDecoded() {
         return decoded;
     }

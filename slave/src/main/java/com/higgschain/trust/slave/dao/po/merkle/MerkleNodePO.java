@@ -7,9 +7,11 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * The type Merkle node po.
+ *
  * @author WangQuanzhou
  * @desc merkle node po
- * @date 2018/4/8 17:11
+ * @date 2018 /4/8 17:11
  */
 @Getter @Setter public class MerkleNodePO extends BaseEntity {
 
@@ -38,9 +40,22 @@ import java.util.Date;
     // update time
     private Date updateTime;
 
+    /**
+     * Instantiates a new Merkle node po.
+     */
     public MerkleNodePO() {
     }
 
+    /**
+     * Instantiates a new Merkle node po.
+     *
+     * @param nodeHash the node hash
+     * @param uuid     the uuid
+     * @param index    the index
+     * @param level    the level
+     * @param parent   the parent
+     * @param treeType the tree type
+     */
     public MerkleNodePO(String nodeHash, String uuid, long index, int level, String parent, String treeType) {
         this.nodeHash = nodeHash;
         this.uuid = uuid;

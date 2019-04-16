@@ -7,8 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type Zkproof test.
+ */
 public class zkproofTest {
 
+    /**
+     * Cipher add test.
+     */
     @Test
     public void cipherAddTest() {
         EncryptAmount.initHomomorphicEncryption("BGN",512);
@@ -27,6 +33,9 @@ public class zkproofTest {
 
     }
 
+    /**
+     * Batch gen pub key.
+     */
     @Test
     public void batchGenPubKey(){
 
@@ -47,6 +56,9 @@ public class zkproofTest {
 
     }
 
+    /**
+     * Sub key.
+     */
     @Test
     public void SubKey(){
         EncryptAmount.initHomomorphicEncryption("BGN",512);

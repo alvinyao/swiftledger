@@ -5,6 +5,8 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.parameters.MutablePairingParameters;
 import java.math.BigInteger;
 
 /**
+ * The type Context runnable.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
@@ -13,19 +15,35 @@ public abstract class ContextRunnable implements Runnable, MutablePairingParamet
     private String name;
     private ContextExecutor executor;
 
-
+    /**
+     * Instantiates a new Context runnable.
+     */
     public ContextRunnable() {
     }
 
+    /**
+     * Instantiates a new Context runnable.
+     *
+     * @param name the name
+     */
     public ContextRunnable(String name) {
         this.name = name;
     }
 
-
+    /**
+     * Gets executor.
+     *
+     * @return the executor
+     */
     public ContextExecutor getExecutor() {
         return executor;
     }
 
+    /**
+     * Sets executor.
+     *
+     * @param executor the executor
+     */
     public void setExecutor(ContextExecutor executor) {
         this.executor = executor;
     }

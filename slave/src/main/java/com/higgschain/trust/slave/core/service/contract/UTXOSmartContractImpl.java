@@ -17,6 +17,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Utxo smart contract.
+ */
 @Slf4j @Service public class UTXOSmartContractImpl implements UTXOSmartContract {
 
     @Autowired private UTXOContextService contextService;

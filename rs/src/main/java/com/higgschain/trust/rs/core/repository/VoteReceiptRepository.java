@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Vote receipt repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-06
+ * @date 2018 -06-06
  */
 @Slf4j @Repository public class VoteReceiptRepository {
     @Autowired private RsConfig rsConfig;
@@ -31,7 +33,7 @@ import java.util.List;
     /**
      * create new vote-receipt
      *
-     * @param voteReceipt
+     * @param voteReceipt the vote receipt
      */
     public void add(VoteReceipt voteReceipt) {
         VoteReceiptPO voteReceiptPO = BeanConvertor.convertBean(voteReceipt, VoteReceiptPO.class);
@@ -51,7 +53,7 @@ import java.util.List;
     /**
      * batch create new vote-receipt
      *
-     * @param voteReceipts
+     * @param voteReceipts the vote receipts
      */
     public void batchAdd(List<VoteReceipt> voteReceipts) {
         if(CollectionUtils.isEmpty(voteReceipts)){
@@ -82,8 +84,8 @@ import java.util.List;
     /**
      * query vote-receipts by transaction id
      *
-     * @param txId
-     * @return
+     * @param txId the tx id
+     * @return list
      */
     public List<VoteReceipt> queryByTxId(String txId) {
         List<VoteReceiptPO> list;
@@ -108,8 +110,9 @@ import java.util.List;
     /**
      * query vote-receipt by transaction-id and voter rs-name
      *
-     * @param txId
-     * @return
+     * @param txId  the tx id
+     * @param voter the voter
+     * @return vote receipt
      */
     public VoteReceipt queryForVoter(String txId, String voter) {
         VoteReceiptPO po;

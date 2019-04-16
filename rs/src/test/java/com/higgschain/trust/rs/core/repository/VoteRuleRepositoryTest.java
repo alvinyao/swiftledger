@@ -16,6 +16,9 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Vote rule repository test.
+ */
 public class VoteRuleRepositoryTest extends IntegrateBaseTest {
     @Autowired
     private VoteRuleRepository voteRuleRepository;
@@ -23,6 +26,11 @@ public class VoteRuleRepositoryTest extends IntegrateBaseTest {
     @Autowired
     private VoteRuleRocksDao voteRuleRocksDao;
 
+    /**
+     * Test add.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testAdd() throws Exception {
         VoteRule voteRule = new VoteRule();
         voteRule.setPolicyId("test-policy-id");
@@ -36,11 +44,21 @@ public class VoteRuleRepositoryTest extends IntegrateBaseTest {
         ThreadLocalUtils.clearRocksTx();
     }
 
+    /**
+     * Test query by policy id.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryByPolicyId() throws Exception {
         VoteRule voteRule = voteRuleRepository.queryByPolicyId("test-policy-id");
         System.out.println(voteRule);
     }
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsert() throws Exception {
         List<VoteRule> voteRuleList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {

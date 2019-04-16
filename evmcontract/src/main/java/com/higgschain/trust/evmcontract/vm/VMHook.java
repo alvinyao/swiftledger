@@ -23,9 +23,25 @@ import com.higgschain.trust.evmcontract.vm.program.Program;
  * Created by Anton Nashatyrev on 15.02.2016.
  */
 public interface VMHook {
+    /**
+     * Start play.
+     *
+     * @param program the program
+     */
     void startPlay(Program program);
 
+    /**
+     * Step.
+     *
+     * @param program the program
+     * @param opcode  the opcode
+     */
     void step(Program program, OpCode opcode);
 
+    /**
+     * Stop play.
+     *
+     * @param program the program
+     */
     void stopPlay(Program program);
 }

@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type State root hash.
+ *
  * @author Tangfashuang
  * @desc state root hash object
- * @date 2018/4/8 20:40
+ * @date 2018 /4/8 20:40
  */
 @Getter @Setter public class StateRootHash extends BaseBO {
     /**

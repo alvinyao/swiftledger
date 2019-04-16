@@ -21,19 +21,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Package validator test.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-19
+ * @date 2018 -04-19
  */
 public class PackageValidatorTest extends IntegrateBaseTest {
+    /**
+     * The Package service.
+     */
     @Autowired
     PackageService packageService;
     @Autowired private TransactionTemplate txRequired;
 
+    /**
+     * Before.
+     */
     @BeforeTest
     public void before(){
 
     }
+
+    /**
+     * Test validating.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testValidating() throws Exception {
         test(2L);

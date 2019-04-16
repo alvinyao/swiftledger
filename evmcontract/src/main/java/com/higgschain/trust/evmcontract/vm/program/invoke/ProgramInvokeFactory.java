@@ -27,14 +27,41 @@ import com.higgschain.trust.evmcontract.vm.program.Program;
 import java.math.BigInteger;
 
 /**
+ * The interface Program invoke factory.
+ *
  * @author Roman Mandeleil
  * @since 19.12.2014
  */
 public interface ProgramInvokeFactory {
 
+    /**
+     * Create program invoke program invoke.
+     *
+     * @param tx         the tx
+     * @param block      the block
+     * @param repository the repository
+     * @param blockStore the block store
+     * @return the program invoke
+     */
     ProgramInvoke createProgramInvoke(Transaction tx, Block block,
                                       Repository repository, BlockStore blockStore);
 
+    /**
+     * Create program invoke program invoke.
+     *
+     * @param program        the program
+     * @param toAddress      the to address
+     * @param callerAddress  the caller address
+     * @param inValue        the in value
+     * @param inGas          the in gas
+     * @param balanceInt     the balance int
+     * @param dataIn         the data in
+     * @param repository     the repository
+     * @param blockStore     the block store
+     * @param staticCall     the static call
+     * @param byTestingSuite the by testing suite
+     * @return the program invoke
+     */
     ProgramInvoke createProgramInvoke(Program program, DataWord toAddress, DataWord callerAddress,
                                       DataWord inValue, DataWord inGas,
                                       BigInteger balanceInt, byte[] dataIn,

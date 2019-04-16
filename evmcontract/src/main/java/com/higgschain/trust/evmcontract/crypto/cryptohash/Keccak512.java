@@ -51,9 +51,8 @@ package com.higgschain.trust.evmcontract.crypto.cryptohash;
  * </pre>
  *
  * @author Thomas Pornin &lt;thomas.pornin@cryptolog.com&gt;
- * @version $Revision: 189 $
+ * @version $Revision : 189 $
  */
-
 public class Keccak512 extends KeccakCore {
 
     /**

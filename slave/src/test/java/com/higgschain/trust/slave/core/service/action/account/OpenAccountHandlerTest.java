@@ -10,14 +10,19 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 /**
+ * The type Open account handler test.
+ *
  * @author hanson
- * @Date 2018/4/26
+ * @Date 2018 /4/26
  * @Description:
  */
 public class OpenAccountHandlerTest extends InterfaceCommonTest {
 
     private final static String rootPath = "java/com/higgs/trust/slave/core/service/accounting/openAccount/";
 
+    /**
+     * The Open account handler.
+     */
     @Autowired
     OpenAccountHandler openAccountHandler;
 
@@ -38,6 +43,12 @@ public class OpenAccountHandlerTest extends InterfaceCommonTest {
         return rootPath;
     }
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     * @throws Exception the exception
+     */
     // TODO 搞明白开户的逻辑
     @Test(dataProvider = "defaultProvider", priority = 0)
     public void paramValidate(Map<?, ?> param) throws Exception {
@@ -46,6 +57,13 @@ public class OpenAccountHandlerTest extends InterfaceCommonTest {
         executeActionHandler(param,openAccountHandler,openAccount);
 
     }
+
+    /**
+     * Test exception.
+     *
+     * @param param the param
+     * @throws Exception the exception
+     */
     @Test(dataProvider = "defaultProvider", priority = 1)
     public void testException(Map<?, ?> param) throws Exception {
         executeBeforeSql(param);
@@ -57,7 +75,12 @@ public class OpenAccountHandlerTest extends InterfaceCommonTest {
 
     }
 
-
+    /**
+     * Test regular.
+     *
+     * @param param the param
+     * @throws Exception the exception
+     */
     @Test(dataProvider = "defaultProvider", priority = 2)
     public void testRegular(Map<?, ?> param) throws Exception {
 //        if (param.get("beforeSql") != null) {

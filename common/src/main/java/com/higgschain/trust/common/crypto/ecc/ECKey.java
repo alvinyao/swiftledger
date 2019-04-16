@@ -141,16 +141,31 @@ import static com.google.common.base.Preconditions.*;
         secureRandom = new SecureRandom();
     }
 
+    /**
+     * The Priv.
+     */
     // The two parts of the key. If "priv" is set, "pub" can always be
     // calculated. If "pub" is set but not "priv", we
     // can only verify signatures not make them.
     protected BigInteger priv; // A field element.
+    /**
+     * The Pub.
+     */
     protected LazyECPoint pub;
+    /**
+     * The Creation time seconds.
+     */
     // Creation time of the key in seconds since the epoch, or zero if the key
     // was deserialized from a version that did
     // not have this field.
     protected long creationTimeSeconds;
+    /**
+     * The Key crypter.
+     */
     protected KeyCrypter keyCrypter;
+    /**
+     * The Encrypted private key.
+     */
     protected EncryptedData encryptedPrivateKey;
 
     /**
@@ -166,6 +181,8 @@ import static com.google.common.base.Preconditions.*;
      * Generates an entirely new keypair with the given {@link SecureRandom}
      * object. Point compression is used so the resulting public key will be 33
      * bytes (32 for the co-ordinate and 1 byte to represent the y bit).
+     *
+     * @param secureRandom the secure random
      */
     public ECKey(SecureRandom secureRandom) {
         ECKeyPairGenerator generator = new ECKeyPairGenerator();
@@ -180,8 +197,10 @@ import static com.google.common.base.Preconditions.*;
     }
 
     /**
+     * Generate encoded key pair key pair.
+     *
      * @param
-     * @return
+     * @return key pair
      * @desc generate pub/priKey pair, HEX encoded
      */
     public static KeyPair generateEncodedKeyPair() {
@@ -192,10 +211,22 @@ import static com.google.common.base.Preconditions.*;
         return new KeyPair(pubKey, priKey);
     }
 
+    /**
+     * Instantiates a new Ec key.
+     *
+     * @param priv the priv
+     * @param pub  the pub
+     */
     protected ECKey(BigInteger priv, ECPoint pub) {
         this(priv, new LazyECPoint(checkNotNull(pub)));
     }
 
+    /**
+     * Instantiates a new Ec key.
+     *
+     * @param priv the priv
+     * @param pub  the pub
+     */
     protected ECKey(BigInteger priv, LazyECPoint pub) {
         if (priv != null) {
             checkArgument(priv.bitLength() <= 32 * 8, "private key exceeds 32 bytes: %s bits", priv.bitLength());
@@ -217,6 +248,9 @@ import static com.google.common.base.Preconditions.*;
      * using the BigInteger constructor, but is more convenient if you are
      * importing a key from elsewhere. The public key will be automatically
      * derived from the private key.
+     *
+     * @param privKeyBytes the priv key bytes
+     * @param pubKey       the pub key
      */
     @Deprecated public ECKey(byte[] privKeyBytes, byte[] pubKey) {
         this(privKeyBytes == null ? null : new BigInteger(1, privKeyBytes), pubKey);
@@ -228,8 +262,7 @@ import static com.google.common.base.Preconditions.*;
      *
      * @param encryptedPrivateKey The private key, encrypted,
      * @param pubKey              The keys public key
-     * @param keyCrypter          The KeyCrypter that will be used, with an AES key, to encrypt
-     *                            and decrypt the private key
+     * @param keyCrypter          The KeyCrypter that will be used, with an AES key, to encrypt                            and decrypt the private key
      */
     @Deprecated public ECKey(EncryptedData encryptedPrivateKey, byte[] pubKey, KeyCrypter keyCrypter) {
         this((byte[])null, pubKey);
@@ -245,8 +278,9 @@ import static com.google.common.base.Preconditions.*;
      * public key already correctly matches the private key. If only the public
      * key is supplied, this ECKey cannot be used for signing.
      *
-     * @param compressed If set to true and pubKey is null, the derived public key will
-     *                   be in compressed form.
+     * @param privKey    the priv key
+     * @param pubKey     the pub key
+     * @param compressed If set to true and pubKey is null, the derived public key will                   be in compressed form.
      */
     @Deprecated public ECKey(BigInteger privKey, byte[] pubKey, boolean compressed) {
         if (privKey == null && pubKey == null)
@@ -281,6 +315,9 @@ import static com.google.common.base.Preconditions.*;
      * Utility for compressing an elliptic curve point. Returns the same point
      * if it's already compressed. See the ECKey class docs for a discussion of
      * point compression.
+     *
+     * @param point the point
+     * @return the ec point
      */
     public static ECPoint compressPoint(ECPoint point) {
         return getPointWithCompression(point, true);
@@ -290,11 +327,20 @@ import static com.google.common.base.Preconditions.*;
      * Utility for decompressing an elliptic curve point. Returns the same point
      * if it's already compressed. See the ECKey class docs for a discussion of
      * point compression.
+     *
+     * @param point the point
+     * @return the ec point
      */
     public static ECPoint decompressPoint(ECPoint point) {
         return getPointWithCompression(point, false);
     }
 
+    /**
+     * Decompress point lazy ec point.
+     *
+     * @param point the point
+     * @return the lazy ec point
+     */
     public static LazyECPoint decompressPoint(LazyECPoint point) {
         return !point.isCompressed() ? point : new LazyECPoint(decompressPoint(point.get()));
     }
@@ -311,6 +357,9 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Creates an ECKey given the private key only. The public key is calculated
      * from it (this is slow). The resulting public key is compressed.
+     *
+     * @param privKey the priv key
+     * @return the ec key
      */
     public static ECKey fromPrivate(BigInteger privKey) {
         return fromPrivate(privKey, true);
@@ -319,6 +368,10 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Creates an ECKey given the private key only. The public key is calculated
      * from it (this is slow), either compressed or not.
+     *
+     * @param privKey    the priv key
+     * @param compressed the compressed
+     * @return the ec key
      */
     public static ECKey fromPrivate(BigInteger privKey, boolean compressed) {
         ECPoint point = publicPointFromPrivate(privKey);
@@ -328,6 +381,9 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Creates an ECKey given the private key only. The public key is calculated
      * from it (this is slow). The resulting public key is compressed.
+     *
+     * @param privKeyBytes the priv key bytes
+     * @return the ec key
      */
     public static ECKey fromPrivate(byte[] privKeyBytes) {
         return fromPrivate(new BigInteger(1, privKeyBytes));
@@ -336,6 +392,10 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Creates an ECKey given the private key only. The public key is calculated
      * from it (this is slow), either compressed or not.
+     *
+     * @param privKeyBytes the priv key bytes
+     * @param compressed   the compressed
+     * @return the ec key
      */
     public static ECKey fromPrivate(byte[] privKeyBytes, boolean compressed) {
         return fromPrivate(new BigInteger(1, privKeyBytes), compressed);
@@ -345,6 +405,9 @@ import static com.google.common.base.Preconditions.*;
      * Creates an ECKey that cannot be used for signing, only verifying
      * signatures, from the given encoded point. The compression state of pub
      * will be preserved.
+     *
+     * @param pub the pub
+     * @return the ec key
      */
     public static ECKey fromPublicOnly(byte[] pub) {
         return new ECKey(null, CURVE.getCurve().decodePoint(pub));
@@ -355,6 +418,11 @@ import static com.google.common.base.Preconditions.*;
      * object wraps encrypted bytes and an initialization vector. Note that the
      * key will not be decrypted during this call: the returned ECKey is
      * unusable for signing unless a decryption key is supplied.
+     *
+     * @param encryptedPrivateKey the encrypted private key
+     * @param crypter             the crypter
+     * @param pubKey              the pub key
+     * @return the ec key
      */
     public static ECKey fromEncrypted(EncryptedData encryptedPrivateKey, KeyCrypter crypter, byte[] pubKey) {
         ECKey key = fromPublicOnly(pubKey);
@@ -367,6 +435,9 @@ import static com.google.common.base.Preconditions.*;
      * Returns public key point from the given private key. To convert a byte
      * array into a BigInteger, use <tt>
      * new BigInteger(1, bytes);</tt>
+     *
+     * @param privKey the priv key
+     * @return the ec point
      */
     public static ECPoint publicPointFromPrivate(BigInteger privKey) {
         /*
@@ -394,6 +465,7 @@ import static com.google.common.base.Preconditions.*;
      * @param data      Hash of the data to verify.
      * @param signature ASN.1 encoded signature.
      * @param pub       The public key bytes to use.
+     * @return the boolean
      */
     public static boolean verify(byte[] data, ECDSASignature signature, byte[] pub) {
         if (FAKE_SIGNATURES)
@@ -430,6 +502,7 @@ import static com.google.common.base.Preconditions.*;
      * @param data      Hash of the data to verify.
      * @param signature ASN.1 encoded signature.
      * @param pub       The public key bytes to use.
+     * @return the boolean
      */
     public static boolean verify(byte[] data, byte[] signature, byte[] pub) {
         if (Secp256k1Context.isEnabled()) {
@@ -455,8 +528,8 @@ import static com.google.common.base.Preconditions.*;
      *
      * @param message         Some piece of human readable text.
      * @param signatureBase64 The Bitcoin-format message signature in base64
-     * @throws SignatureException If the public key could not be recovered or if there was a
-     *                            signature format error.
+     * @return the ec key
+     * @throws SignatureException If the public key could not be recovered or if there was a                            signature format error.
      */
     public static ECKey signedMessageToKey(String message, String signatureBase64) throws SignatureException {
         byte[] signatureEncoded;
@@ -526,8 +599,7 @@ import static com.google.common.base.Preconditions.*;
      * @param sig        the R and S components of the signature, wrapped.
      * @param message    Hash of the data that was signed.
      * @param compressed Whether or not the original pubkey was compressed.
-     * @return An ECKey containing only the public part, or null if recovery
-     * wasn't possible.
+     * @return An ECKey containing only the public part, or null if recovery wasn't possible.
      */
     public static ECKey recoverFromSignature(int recId, ECDSASignature sig, Sha256Hash message,
         boolean compressed) {
@@ -608,10 +680,10 @@ import static com.google.common.base.Preconditions.*;
     /**
      * by yuanjiantao
      *
-     * @param message
-     * @param signature
-     * @param pubkey
-     * @return
+     * @param message   the message
+     * @param signature the signature
+     * @param pubkey    the pubkey
+     * @return boolean
      */
     public static boolean verify(String message, String signature, String pubkey) {
         ECKey ecKey = ECKey.fromPublicOnly(Hex.decode(pubkey));
@@ -628,6 +700,8 @@ import static com.google.common.base.Preconditions.*;
      * uncompressed form. Normally you would never need this: it's for
      * specialised scenarios or when backwards compatibility in encoded form is
      * necessary.
+     *
+     * @return the ec key
      */
     public ECKey decompress() {
         if (!pub.isCompressed())
@@ -639,6 +713,8 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Gets the raw public key value. This appears in trade scriptSigs.
      * Note that this is <b>not</b> the same as the pubKeyHash/address.
+     *
+     * @return the byte [ ]
      */
     public byte[] getPubKey() {
         return pub.getEncoded();
@@ -649,6 +725,7 @@ import static com.google.common.base.Preconditions.*;
      * key is derived by performing EC point addition this number of times (i.e.
      * point multiplying).
      *
+     * @return the priv key
      * @throws IllegalStateException if the private key bytes are not available.
      */
     public BigInteger getPrivKey() {
@@ -660,6 +737,8 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Returns whether this key is using the compressed form or not. Compressed
      * pubkeys are only 33 bytes, not 64.
+     *
+     * @return the boolean
      */
     public boolean isCompressed() {
         return pub.isCompressed();
@@ -672,6 +751,8 @@ import static com.google.common.base.Preconditions.*;
      * instead. However sometimes the independent components can be useful, for
      * instance, if you're going to do further EC maths on them.
      *
+     * @param input the input
+     * @return the ecdsa signature
      * @throws KeyCrypterException if this ECKey doesn't have a private part.
      */
     public ECDSASignature sign(Sha256Hash input) throws KeyCrypterException {
@@ -686,10 +767,10 @@ import static com.google.common.base.Preconditions.*;
      * instead. However sometimes the independent components can be useful, for
      * instance, if you're doing to do further EC maths on them.
      *
-     * @param aesKey The AES key to use for decryption of the private key. If null
-     *               then no decryption is required.
-     * @throws KeyCrypterException              if there's something wrong with aesKey.
-     * @throws ECKey.MissingPrivateKeyException if this key cannot sign because it's pubkey only.
+     * @param input  the input
+     * @param aesKey The AES key to use for decryption of the private key. If null               then no decryption is required.
+     * @return the ecdsa signature
+     * @throws KeyCrypterException if there's something wrong with aesKey.
      */
     public ECDSASignature sign(Sha256Hash input, KeyParameter aesKey) throws KeyCrypterException {
         KeyCrypter crypter = getKeyCrypter();
@@ -705,6 +786,13 @@ import static com.google.common.base.Preconditions.*;
         return doSign(input, priv);
     }
 
+    /**
+     * Do sign ecdsa signature.
+     *
+     * @param input                the input
+     * @param privateKeyForSigning the private key for signing
+     * @return the ecdsa signature
+     */
     protected ECDSASignature doSign(Sha256Hash input, BigInteger privateKeyForSigning) {
         if (Secp256k1Context.isEnabled()) {
             try {
@@ -733,10 +821,13 @@ import static com.google.common.base.Preconditions.*;
      * Some blockchains require additional header bytes infront of the message.
      * <code>[24] "Bitcoin Signed Message:\n" [message.length as a varint] message</code>
      *
+     * @param message     the message
+     * @param charset     the charset
+     * @param aesKey      the aes key
      * @param headerBytes the additional header bytes required by the blockchain.
+     * @return the string
      * @throws IllegalStateException if this ECKey does not have the private part.
-     * @throws KeyCrypterException   if this ECKey is encrypted and no AESKey is provided or it
-     *                               does not decrypt the ECKey.
+     * @throws KeyCrypterException   if this ECKey is encrypted and no AESKey is provided or it                               does not decrypt the ECKey.
      */
     public String signMessage(String message, Charset charset, KeyParameter aesKey,
         byte[] headerBytes) {
@@ -764,12 +855,25 @@ import static com.google.common.base.Preconditions.*;
         return new String(Base64.encode(sigData), Charset.forName("UTF-8"));
     }
 
+    /**
+     * Sign message string.
+     *
+     * @param message the message
+     * @return the string
+     */
     public String signMessage(String message) {
         byte[] data = CryptoUtils.formatMessageForSigning(message, Charset.forName("UTF-8"), null);
         Sha256Hash hash = Sha256Hash.twiceOf(data);
         return signMessage(hash, null);
     }
 
+    /**
+     * Sign message string.
+     *
+     * @param messageHash the message hash
+     * @param aesKey      the aes key
+     * @return the string
+     */
     public String signMessage(Sha256Hash messageHash, KeyParameter aesKey) {
         ECDSASignature sig = sign(messageHash, aesKey);
         // Now we have to work backwards to figure out the recId needed to
@@ -797,6 +901,10 @@ import static com.google.common.base.Preconditions.*;
      * Convenience wrapper around
      * {@link ECKey#signedMessageToKey(String, String)}. If the key derived from
      * the signature is not the same as this one, throws a SignatureException.
+     *
+     * @param message         the message
+     * @param signatureBase64 the signature base 64
+     * @throws SignatureException the signature exception
      */
     public void verifyMessage(String message, String signatureBase64) throws SignatureException {
         ECKey key = ECKey.signedMessageToKey(message, signatureBase64);
@@ -807,6 +915,7 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Returns a 32 byte array containing the private key.
      *
+     * @return the byte [ ]
      * @throws ECKey.MissingPrivateKeyException if the private key bytes are missing/encrypted.
      */
     public byte[] getPrivKeyBytes() {
@@ -817,6 +926,8 @@ import static com.google.common.base.Preconditions.*;
      * Sets the creation time of this key. Zero is a convention to mean
      * "unavailable". This method can be useful when you have a raw key you are
      * importing from somewhere else.
+     *
+     * @param newCreationTimeSeconds the new creation time seconds
      */
     public void setCreationTimeSeconds(long newCreationTimeSeconds) {
         if (newCreationTimeSeconds < 0)
@@ -830,10 +941,10 @@ import static com.google.common.base.Preconditions.*;
      * KeyCrypterException due to the corrupted padding that will result, but it
      * can also just yield a garbage key.
      *
-     * @param keyCrypter The keyCrypter that specifies exactly how the decrypted bytes
-     *                   are created.
-     * @param aesKey     The KeyParameter with the AES encryption key (usually
-     *                   constructed with keyCrypter#deriveKey and cached).
+     * @param keyCrypter The keyCrypter that specifies exactly how the decrypted bytes                   are created.
+     * @param aesKey     The KeyParameter with the AES encryption key (usually                   constructed with keyCrypter#deriveKey and cached).
+     * @return the ec key
+     * @throws KeyCrypterException the key crypter exception
      */
     public ECKey decrypt(KeyCrypter keyCrypter, KeyParameter aesKey) throws KeyCrypterException {
         checkNotNull(keyCrypter);
@@ -859,8 +970,9 @@ import static com.google.common.base.Preconditions.*;
      * corrupted padding that will result, but it can also just yield a garbage
      * key.
      *
-     * @param aesKey The KeyParameter with the AES encryption key (usually
-     *               constructed with keyCrypter#deriveKey and cached).
+     * @param aesKey The KeyParameter with the AES encryption key (usually               constructed with keyCrypter#deriveKey and cached).
+     * @return the ec key
+     * @throws KeyCrypterException the key crypter exception
      */
     public ECKey decrypt(KeyParameter aesKey) throws KeyCrypterException {
         final KeyCrypter crypter = getKeyCrypter();
@@ -872,6 +984,8 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Returns the the encrypted private key bytes and initialisation vector for
      * this ECKey, or null if the ECKey is not encrypted.
+     *
+     * @return the encrypted private key
      */
     public EncryptedData getEncryptedPrivateKey() {
         return encryptedPrivateKey;
@@ -880,6 +994,8 @@ import static com.google.common.base.Preconditions.*;
     /**
      * Returns the KeyCrypter that was used to encrypt to encrypt this ECKey.
      * You need this to decrypt the ECKey.
+     *
+     * @return the key crypter
      */
     public KeyCrypter getKeyCrypter() {
         return keyCrypter;
@@ -902,8 +1018,10 @@ import static com.google.common.base.Preconditions.*;
     }
 
     /**
-     * @param data1
-     * @param data2
+     * Add bytes byte [ ].
+     *
+     * @param data1 the data 1
+     * @param data2 the data 2
      * @return data1 与 data2拼接的结果
      */
     public static byte[] addBytes(byte[] data1, byte[] data2) {
@@ -923,17 +1041,30 @@ import static com.google.common.base.Preconditions.*;
         /**
          * The two components of the signature.
          */
-        public final BigInteger r, s;
+        public final BigInteger r, /**
+         * The S.
+         */
+        s;
 
         /**
          * Constructs a signature with the given components. Does NOT
          * automatically canonicalise the signature.
+         *
+         * @param r the r
+         * @param s the s
          */
         public ECDSASignature(BigInteger r, BigInteger s) {
             this.r = r;
             this.s = s;
         }
 
+        /**
+         * Decode from der ecdsa signature.
+         *
+         * @param bytes the bytes
+         * @return the ecdsa signature
+         * @throws IllegalArgumentException the illegal argument exception
+         */
         public static ECDSASignature decodeFromDER(byte[] bytes) throws IllegalArgumentException {
             ASN1InputStream decoder = null;
             try {
@@ -971,6 +1102,8 @@ import static com.google.common.base.Preconditions.*;
          * Returns true if the S component is "low", that means it is below
          * {@link ECKey#HALF_CURVE_ORDER}. See <a href=
          * "https://github.com/bitcoin/bips/blob/master/bip-0062.mediawiki#Low_S_values_in_signatures">BIP62</a>.
+         *
+         * @return the boolean
          */
         public boolean isCanonical() {
             return s.compareTo(HALF_CURVE_ORDER) <= 0;
@@ -984,6 +1117,8 @@ import static com.google.common.base.Preconditions.*;
          * modify the bits of a Bitcoin trade after it's been signed, as
          * that violates various assumed invariants. Thus in future only one of
          * those forms will be considered legal and the other will be banned.
+         *
+         * @return the ecdsa signature
          */
         public ECDSASignature toCanonicalised() {
             if (!isCanonical()) {
@@ -1008,6 +1143,8 @@ import static com.google.common.base.Preconditions.*;
          * buffers but less convenient. This method returns a standard DER
          * encoding of the signature, as recognized by OpenSSL and other
          * libraries.
+         *
+         * @return the byte [ ]
          */
         public byte[] encodeToDER() {
             try {
@@ -1017,6 +1154,12 @@ import static com.google.common.base.Preconditions.*;
             }
         }
 
+        /**
+         * Der byte stream byte array output stream.
+         *
+         * @return the byte array output stream
+         * @throws IOException the io exception
+         */
         protected ByteArrayOutputStream derByteStream() throws IOException {
             // Usually 70-72 bytes.
             ByteArrayOutputStream bos = new ByteArrayOutputStream(72);
@@ -1041,12 +1184,24 @@ import static com.google.common.base.Preconditions.*;
         }
     }
 
+    /**
+     * The type Missing private key exception.
+     */
     public static class MissingPrivateKeyException extends RuntimeException {
     }
 
+    /**
+     * The type Key is encrypted exception.
+     */
     public static class KeyIsEncryptedException extends MissingPrivateKeyException {
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
 
         KeyPair keyPair = ECKey.generateEncodedKeyPair();

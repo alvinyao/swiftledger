@@ -8,11 +8,16 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 
 /**
+ * The type Cluster view test.
+ *
  * @author Zhu_Yuanxiang
- * @create 2018-09-21
+ * @create 2018 -09-21
  */
 public class ClusterViewTest extends PowerMockTestCase {
 
+    /**
+     * Test get applied quorum.
+     */
     @Test
     public void testGetAppliedQuorum(){
         ClusterView view;
@@ -46,6 +51,9 @@ public class ClusterViewTest extends PowerMockTestCase {
         }
     }
 
+    /**
+     * Test get verified quorum.
+     */
     @Test
     public void testGetVerifiedQuorum(){
         ClusterView view;

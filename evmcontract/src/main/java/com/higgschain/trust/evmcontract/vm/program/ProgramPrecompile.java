@@ -33,6 +33,11 @@ public class ProgramPrecompile {
 
     private Set<Integer> jumpdest = new HashSet<>();
 
+    /**
+     * Serialize byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] serialize() {
         byte[][] jdBytes = new byte[jumpdest.size() + 1][];
         int cnt = 0;
@@ -44,6 +49,12 @@ public class ProgramPrecompile {
         return RLP.encodeList(jdBytes);
     }
 
+    /**
+     * Deserialize program precompile.
+     *
+     * @param stream the stream
+     * @return the program precompile
+     */
     public static ProgramPrecompile deserialize(byte[] stream) {
         RLPList l = (RLPList) RLP.decode2(stream).get(0);
         int ver = ByteUtil.byteArrayToInt(l.get(0).getRLPData());
@@ -57,6 +68,12 @@ public class ProgramPrecompile {
         return ret;
     }
 
+    /**
+     * Compile program precompile.
+     *
+     * @param ops the ops
+     * @return the program precompile
+     */
     public static ProgramPrecompile compile(byte[] ops) {
         ProgramPrecompile ret = new ProgramPrecompile();
         for (int i = 0; i < ops.length; ++i) {
@@ -77,10 +94,22 @@ public class ProgramPrecompile {
         return ret;
     }
 
+    /**
+     * Has jump dest boolean.
+     *
+     * @param pc the pc
+     * @return the boolean
+     */
     public boolean hasJumpDest(int pc) {
         return jumpdest.contains(pc);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
         ProgramPrecompile pp = new ProgramPrecompile();
         pp.jumpdest.add(100);

@@ -19,10 +19,18 @@ import bftsmart.communication.client.netty.NettyClientServerCommunicationSystemS
 import bftsmart.reconfiguration.ServerViewController;
 
 /**
+ * The type Communication system server side factory.
+ *
  * @author Paulo
  */
 public class CommunicationSystemServerSideFactory {
 
+    /**
+     * Gets communication system server side.
+     *
+     * @param controller the controller
+     * @return the communication system server side
+     */
     public static CommunicationSystemServerSide getCommunicationSystemServerSide(ServerViewController controller) {
         return new NettyClientServerCommunicationSystemServerSide(controller);
     }

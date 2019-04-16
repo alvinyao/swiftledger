@@ -29,14 +29,28 @@ public final class ForwardedMessage extends SystemMessage {
 
     private TOMMessage request;
 
+    /**
+     * Instantiates a new Forwarded message.
+     */
     public ForwardedMessage() {
     }
 
+    /**
+     * Instantiates a new Forwarded message.
+     *
+     * @param senderId the sender id
+     * @param request  the request
+     */
     public ForwardedMessage(int senderId, TOMMessage request) {
         super(senderId);
         this.request = request;
     }
 
+    /**
+     * Gets request.
+     *
+     * @return the request
+     */
     public TOMMessage getRequest() {
         return request;
     }

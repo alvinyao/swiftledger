@@ -16,11 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Open account handler.
+ *
  * @author liuyu
  * @description open account datahandler
- * @date 2018-03-27
+ * @date 2018 -03-27
  */
 @Slf4j @Component public class OpenAccountHandler implements ActionHandler {
+    /**
+     * The Account snapshot handler.
+     */
     @Autowired
     AccountSnapshotHandler accountSnapshotHandler;
 

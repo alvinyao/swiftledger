@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Contract invoke request.
+ *
  * @author duhongming
- * @date 2018/5/18
+ * @date 2018 /5/18
  */
 @Getter
 @Setter

@@ -35,11 +35,23 @@ public class LogFilter {
     private byte[][] contractAddresses = new byte[0][];
     private Bloom[][] filterBlooms;
 
+    /**
+     * With contract address log filter.
+     *
+     * @param orAddress the or address
+     * @return the log filter
+     */
     public LogFilter withContractAddress(byte[]... orAddress) {
         contractAddresses = orAddress;
         return this;
     }
 
+    /**
+     * With topic log filter.
+     *
+     * @param orTopic the or topic
+     * @return the log filter
+     */
     public LogFilter withTopic(byte[]... orTopic) {
         topics.add(orTopic);
         return this;
@@ -68,6 +80,12 @@ public class LogFilter {
         }
     }
 
+    /**
+     * Match bloom boolean.
+     *
+     * @param blockBloom the block bloom
+     * @return the boolean
+     */
     public boolean matchBloom(Bloom blockBloom) {
         initBlooms();
         for (Bloom[] andBloom : filterBlooms) {
@@ -85,6 +103,12 @@ public class LogFilter {
         return true;
     }
 
+    /**
+     * Matches contract address boolean.
+     *
+     * @param toAddr the to addr
+     * @return the boolean
+     */
     public boolean matchesContractAddress(byte[] toAddr) {
         initBlooms();
         for (byte[] address : contractAddresses) {
@@ -95,6 +119,12 @@ public class LogFilter {
         return contractAddresses.length == 0;
     }
 
+    /**
+     * Matches exactly boolean.
+     *
+     * @param logInfo the log info
+     * @return the boolean
+     */
     public boolean matchesExactly(LogInfo logInfo) {
         initBlooms();
         if (!matchesContractAddress(logInfo.getAddress())) {

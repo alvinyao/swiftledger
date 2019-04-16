@@ -17,8 +17,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Config rocks dao.
+ *
  * @author tangfashuang
- * @desc key: nodeName_usage, value: ConfigPO
+ * @desc key : nodeName_usage, value: ConfigPO
  */
 @Service
 @Slf4j
@@ -27,6 +29,11 @@ public class ConfigRocksDao extends RocksBaseDao<ConfigPO>{
         return "config";
     }
 
+    /**
+     * Save.
+     *
+     * @param configPO the config po
+     */
     public void save(ConfigPO configPO) {
         String key = configPO.getNodeName() + Constant.SPLIT_SLASH + configPO.getUsage();
         if (keyMayExist(key) && null != get(key)) {
@@ -37,6 +44,11 @@ public class ConfigRocksDao extends RocksBaseDao<ConfigPO>{
         put(key, configPO);
     }
 
+    /**
+     * Update.
+     *
+     * @param configPO the config po
+     */
     public void update(ConfigPO configPO) {
         String key = configPO.getNodeName() + Constant.SPLIT_SLASH + configPO.getUsage();
         if (null == get(key)) {
@@ -53,6 +65,12 @@ public class ConfigRocksDao extends RocksBaseDao<ConfigPO>{
         }
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param configPOList the config po list
+     * @return the int
+     */
     public int batchInsert(List<ConfigPO> configPOList) {
         if (CollectionUtils.isEmpty(configPOList)) {
             return 0;
@@ -75,6 +93,13 @@ public class ConfigRocksDao extends RocksBaseDao<ConfigPO>{
         return configPOList.size();
     }
 
+    /**
+     * Gets config.
+     *
+     * @param nodeName the node name
+     * @param usage    the usage
+     * @return the config
+     */
     public List<ConfigPO> getConfig(String nodeName, String usage) {
         if (StringUtils.isEmpty(usage)) {
             return queryByPrefix(nodeName);
@@ -87,6 +112,11 @@ public class ConfigRocksDao extends RocksBaseDao<ConfigPO>{
         return Lists.newArrayList(po);
     }
 
+    /**
+     * Batch cancel.
+     *
+     * @param nodes the nodes
+     */
     public void batchCancel(List<String> nodes) {
         if (CollectionUtils.isEmpty(nodes)) {
             return;
@@ -112,6 +142,11 @@ public class ConfigRocksDao extends RocksBaseDao<ConfigPO>{
         }
     }
 
+    /**
+     * Batch enable.
+     *
+     * @param nodes the nodes
+     */
     public void batchEnable(List<String> nodes) {
         if (CollectionUtils.isEmpty(nodes)) {
             return;

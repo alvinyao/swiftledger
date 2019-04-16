@@ -53,9 +53,11 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 /**
+ * The type Vote service.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-06
+ * @date 2018 -06-06
  */
 @Slf4j @Service public class VoteServiceImpl implements VoteService {
     @Autowired private TransactionTemplate txRequired;
@@ -373,6 +375,13 @@ import java.util.concurrent.Future;
         private CoreTransaction coreTx;
         private VotePatternEnum votePattern;
 
+        /**
+         * Instantiates a new Voting executor.
+         *
+         * @param voter       the voter
+         * @param coreTx      the core tx
+         * @param votePattern the vote pattern
+         */
         public VotingExecutor(String voter, CoreTransaction coreTx, VotePatternEnum votePattern) {
             this.voter = voter;
             this.coreTx = coreTx;

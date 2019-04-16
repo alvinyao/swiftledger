@@ -52,6 +52,8 @@ public class NativeSecp256k1 {
      * @param data      The data which was signed, must be exactly 32 bytes
      * @param signature The signature
      * @param pub       The public key which did the signing
+     * @return the boolean
+     * @throws AssertFailException the assert fail exception
      */
     public static boolean verify(byte[] data, byte[] signature, byte[] pub)
         throws NativeSecp256k1Util.AssertFailException {
@@ -82,6 +84,8 @@ public class NativeSecp256k1 {
      * @param data Message hash, 32 bytes
      * @param sec  Secret key, 32 bytes
      * @return sig byte array of signature
+     * @throws AssertFailException the assert fail exception
+     * @throws AssertFailException the assert fail exception
      */
     public static byte[] sign(byte[] data, byte[] sec)
         throws NativeSecp256k1Util.AssertFailException, NativeSecp256k1Util.AssertFailException {
@@ -119,6 +123,7 @@ public class NativeSecp256k1 {
      * libsecp256k1 Seckey Verify - returns 1 if valid, 0 if invalid
      *
      * @param seckey ECDSA Secret key, 32 bytes
+     * @return the boolean
      */
     public static boolean secKeyVerify(byte[] seckey) {
         Preconditions.checkArgument(seckey.length == 32);
@@ -145,6 +150,7 @@ public class NativeSecp256k1 {
      *
      * @param seckey ECDSA Secret key, 32 bytes
      * @return pubkey ECDSA Public key, 33 or 65 bytes
+     * @throws AssertFailException the assert fail exception
      */
     // TODO add a 'compressed' arg
     public static byte[] computePubkey(byte[] seckey) throws NativeSecp256k1Util.AssertFailException {
@@ -190,6 +196,11 @@ public class NativeSecp256k1 {
         }
     }
 
+    /**
+     * Clone context long.
+     *
+     * @return the long
+     */
     public static long cloneContext() {
         r.lock();
         try {
@@ -202,8 +213,10 @@ public class NativeSecp256k1 {
     /**
      * libsecp256k1 PrivKey Tweak-Mul - Tweak privkey by multiplying to it
      *
-     * @param tweak   some bytes to tweak with
      * @param privkey 32-byte seckey
+     * @param tweak   some bytes to tweak with
+     * @return the byte [ ]
+     * @throws AssertFailException the assert fail exception
      */
     public static byte[] privKeyTweakMul(byte[] privkey, byte[] tweak) throws NativeSecp256k1Util.AssertFailException {
         Preconditions.checkArgument(privkey.length == 32);
@@ -241,8 +254,10 @@ public class NativeSecp256k1 {
     /**
      * libsecp256k1 PrivKey Tweak-Add - Tweak privkey by adding to it
      *
-     * @param tweak   some bytes to tweak with
      * @param privkey 32-byte seckey
+     * @param tweak   some bytes to tweak with
+     * @return the byte [ ]
+     * @throws AssertFailException the assert fail exception
      */
     public static byte[] privKeyTweakAdd(byte[] privkey, byte[] tweak) throws NativeSecp256k1Util.AssertFailException {
         Preconditions.checkArgument(privkey.length == 32);
@@ -280,8 +295,11 @@ public class NativeSecp256k1 {
     /**
      * libsecp256k1 PubKey Tweak-Add - Tweak pubkey by adding to it
      *
-     * @param tweak  some bytes to tweak with
      * @param pubkey 32-byte seckey
+     * @param tweak  some bytes to tweak with
+     * @return the byte [ ]
+     * @throws AssertFailException the assert fail exception
+     * @throws AssertFailException the assert fail exception
      */
     public static byte[] pubKeyTweakAdd(byte[] pubkey, byte[] tweak)
         throws NativeSecp256k1Util.AssertFailException, NativeSecp256k1Util.AssertFailException {
@@ -320,8 +338,10 @@ public class NativeSecp256k1 {
     /**
      * libsecp256k1 PubKey Tweak-Mul - Tweak pubkey by multiplying to it
      *
-     * @param tweak  some bytes to tweak with
      * @param pubkey 32-byte seckey
+     * @param tweak  some bytes to tweak with
+     * @return the byte [ ]
+     * @throws AssertFailException the assert fail exception
      */
     public static byte[] pubKeyTweakMul(byte[] pubkey, byte[] tweak) throws NativeSecp256k1Util.AssertFailException {
         Preconditions.checkArgument(pubkey.length == 33 || pubkey.length == 65);
@@ -361,6 +381,8 @@ public class NativeSecp256k1 {
      *
      * @param seckey byte array of secret key used in exponentiaion
      * @param pubkey byte array of public key used in exponentiaion
+     * @return the byte [ ]
+     * @throws AssertFailException the assert fail exception
      */
     public static byte[] createECDHSecret(byte[] seckey, byte[] pubkey) throws NativeSecp256k1Util.AssertFailException {
         Preconditions.checkArgument(seckey.length <= 32 && pubkey.length <= 65);
@@ -396,6 +418,8 @@ public class NativeSecp256k1 {
      * libsecp256k1 randomize - updates the context randomization
      *
      * @param seed 32-byte random seed
+     * @return the boolean
+     * @throws AssertFailException the assert fail exception
      */
     public static synchronized boolean randomize(byte[] seed) throws NativeSecp256k1Util.AssertFailException {
         Preconditions.checkArgument(seed.length == 32 || seed == null);
@@ -417,6 +441,14 @@ public class NativeSecp256k1 {
         }
     }
 
+    /**
+     * Schnorr sign byte [ ].
+     *
+     * @param data the data
+     * @param sec  the sec
+     * @return the byte [ ]
+     * @throws AssertFailException the assert fail exception
+     */
     public static byte[] schnorrSign(byte[] data, byte[] sec) throws NativeSecp256k1Util.AssertFailException {
         Preconditions.checkArgument(data.length == 32 && sec.length <= 32);
 

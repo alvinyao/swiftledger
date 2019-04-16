@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Javascript execute engine factory.
+ *
  * @author duhongming
  */
 @Slf4j public class JavascriptExecuteEngineFactory implements ExecuteEngineFactory {
@@ -30,6 +32,9 @@ import java.util.Map;
 
     private ScriptEngine scriptEngine;
 
+    /**
+     * Instantiates a new Javascript execute engine factory.
+     */
     public JavascriptExecuteEngineFactory() {
 
     }

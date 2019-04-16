@@ -10,8 +10,10 @@ import java.math.BigInteger;
 import static org.junit.Assert.*;
 
 /**
+ * The type Ec key test.
+ *
  * @author tangkun
- * @date 2019-03-29
+ * @date 2019 -03-29
  */
 @Slf4j
 public class ECKeyTest {
@@ -25,6 +27,9 @@ public class ECKeyTest {
     private String compressedPubString = "030947751e3022ecf3016be03ec77ab0ce3c2662b4843898cb068d74f698ccc8ad";
     private byte[] pubKey = Hex.decode(pubString);
 
+    /**
+     * The Keys.
+     */
     public static  String[] keys= {
             "32ebb02074747d99729ab54aaf79404a3ccea71036804d839838a06f01839dc",
             "ae807f850cb8d49d4cc5ef9dda6819d8975a98b6e7b2c4d77c13f27aaa5ab60",
@@ -590,6 +595,9 @@ public class ECKeyTest {
 
     };
 
+    /**
+     * Verify test.
+     */
     @Test
     public void verifyTest() {
         String pri = "87385e10d018f971f66cf2c065663d4aa427286f259f85bb8b2438130f4f1ee7";
@@ -601,7 +609,9 @@ public class ECKeyTest {
         System.out.println(sign.length);
     }
 
-
+    /**
+     * Test from private key.
+     */
     @Test
     public void testFromPrivateKey() {
         ECKey ecKey = ECKey.fromPrivate(privateKey);
@@ -613,6 +623,9 @@ public class ECKeyTest {
 //        assertArrayEquals(pubKey, key.getPubKey());
     }
 
+    /**
+     * Test ec key.
+     */
     @Test
     public void testECKey() {
 

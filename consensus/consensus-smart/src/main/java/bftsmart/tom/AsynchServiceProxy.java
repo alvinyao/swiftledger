@@ -28,6 +28,8 @@ public class AsynchServiceProxy extends ServiceProxy {
     private HashMap<Integer, Integer> requestsAlias;
 
     /**
+     * Instantiates a new Asynch service proxy.
+     *
      * @param processId Replica id
      */
     public AsynchServiceProxy(int processId) {
@@ -36,6 +38,8 @@ public class AsynchServiceProxy extends ServiceProxy {
     }
 
     /**
+     * Instantiates a new Asynch service proxy.
+     *
      * @param processId  Replica id
      * @param configHome Configuration folder
      */
@@ -44,6 +48,14 @@ public class AsynchServiceProxy extends ServiceProxy {
         init();
     }
 
+    /**
+     * Instantiates a new Asynch service proxy.
+     *
+     * @param processId       the process id
+     * @param configHome      the config home
+     * @param replyComparator the reply comparator
+     * @param replyExtractor  the reply extractor
+     */
     public AsynchServiceProxy(int processId, String configHome, Comparator<byte[]> replyComparator,
         Extractor replyExtractor) {
         super(processId, configHome, replyComparator, replyExtractor);
@@ -63,27 +75,33 @@ public class AsynchServiceProxy extends ServiceProxy {
     }
 
     /**
-     * @param request
-     * @param replyListener
+     * Invoke asynch request int.
+     *
+     * @param request       the request
+     * @param replyListener the reply listener
      * @param reqType       Request type
-     * @return
+     * @return int
      */
     public int invokeAsynchRequest(byte[] request, ReplyListener replyListener, TOMMessageType reqType) {
         return invokeAsynchRequest(request, super.getViewManager().getCurrentViewProcesses(), replyListener, reqType);
     }
 
     /**
-     * @param request
-     * @param targets
-     * @param replyListener
+     * Invoke asynch request int.
+     *
+     * @param request       the request
+     * @param targets       the targets
+     * @param replyListener the reply listener
      * @param reqType       Request type
-     * @return
+     * @return int
      */
     public int invokeAsynchRequest(byte[] request, int[] targets, ReplyListener replyListener, TOMMessageType reqType) {
         return invokeAsynch(request, targets, replyListener, reqType);
     }
 
     /**
+     * Clean asynch request.
+     *
      * @param requestId Request
      */
     public void cleanAsynchRequest(int requestId) {

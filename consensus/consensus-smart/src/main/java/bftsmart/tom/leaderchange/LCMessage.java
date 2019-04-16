@@ -35,6 +35,9 @@ public class LCMessage extends SystemMessage {
     private int type;
     private int ts;
     private byte[] payload;
+    /**
+     * The Trigger lc locally.
+     */
     public final boolean TRIGGER_LC_LOCALLY; // indicates that the replica should
     // initiate the LC protocol locally
 

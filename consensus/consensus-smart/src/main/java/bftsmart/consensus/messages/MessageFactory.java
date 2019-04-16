@@ -20,9 +20,18 @@ package bftsmart.consensus.messages;
  */
 public class MessageFactory {
 
+    /**
+     * The constant PROPOSE.
+     */
     // constants for messages types
     public static final int PROPOSE = 44781;
+    /**
+     * The constant WRITE.
+     */
     public static final int WRITE = 44782;
+    /**
+     * The constant ACCEPT.
+     */
     public static final int ACCEPT = 44783;
 
     private int from; // Replica ID of the process which sent this message
@@ -44,7 +53,6 @@ public class MessageFactory {
      * @param id    Consensus's execution ID
      * @param epoch Epoch number
      * @param value Proposed value
-     * @param proof Proofs from other replicas
      * @return A paxos message of the PROPOSE type, with the specified id, epoch, value, and proof
      */
     public ConsensusMessage createPropose(int id, int epoch, byte[] value) {

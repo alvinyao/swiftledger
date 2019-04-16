@@ -25,48 +25,155 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * The interface Contract details.
+ *
  * @author tank
  */
 public interface ContractDetails {
 
+    /**
+     * Put.
+     *
+     * @param key   the key
+     * @param value the value
+     */
     void put(DataWord key, DataWord value);
 
+    /**
+     * Get data word.
+     *
+     * @param key the key
+     * @return the data word
+     */
     DataWord get(DataWord key);
 
+    /**
+     * Get code byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getCode();
 
+    /**
+     * Get code byte [ ].
+     *
+     * @param codeHash the code hash
+     * @return the byte [ ]
+     */
     byte[] getCode(byte[] codeHash);
 
+    /**
+     * Sets code.
+     *
+     * @param code the code
+     */
     void setCode(byte[] code);
 
+    /**
+     * Get storage hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getStorageHash();
 
+    /**
+     * Decode.
+     *
+     * @param rlpCode the rlp code
+     */
     void decode(byte[] rlpCode);
 
+    /**
+     * Sets dirty.
+     *
+     * @param dirty the dirty
+     */
     void setDirty(boolean dirty);
 
+    /**
+     * Sets deleted.
+     *
+     * @param deleted the deleted
+     */
     void setDeleted(boolean deleted);
 
+    /**
+     * Is dirty boolean.
+     *
+     * @return the boolean
+     */
     boolean isDirty();
 
+    /**
+     * Is deleted boolean.
+     *
+     * @return the boolean
+     */
     boolean isDeleted();
 
+    /**
+     * Get encoded byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getEncoded();
 
+    /**
+     * Gets storage size.
+     *
+     * @return the storage size
+     */
     int getStorageSize();
 
+    /**
+     * Gets storage keys.
+     *
+     * @return the storage keys
+     */
     Set<DataWord> getStorageKeys();
 
+    /**
+     * Gets storage.
+     *
+     * @param keys the keys
+     * @return the storage
+     */
     Map<DataWord, DataWord> getStorage(Collection<DataWord> keys);
 
+    /**
+     * Gets storage.
+     *
+     * @return the storage
+     */
     Map<DataWord, DataWord> getStorage();
 
+    /**
+     * Sets storage.
+     *
+     * @param storageKeys   the storage keys
+     * @param storageValues the storage values
+     */
     void setStorage(List<DataWord> storageKeys, List<DataWord> storageValues);
 
+    /**
+     * Sets storage.
+     *
+     * @param storage the storage
+     */
     void setStorage(Map<DataWord, DataWord> storage);
 
+    /**
+     * Get address byte [ ].
+     *
+     * @return the byte [ ]
+     */
     byte[] getAddress();
 
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
     void setAddress(byte[] address);
 
     ContractDetails clone();
@@ -74,7 +181,16 @@ public interface ContractDetails {
     @Override
     String toString();
 
+    /**
+     * Sync storage.
+     */
     void syncStorage();
 
+    /**
+     * Gets snapshot to.
+     *
+     * @param hash the hash
+     * @return the snapshot to
+     */
     ContractDetails getSnapshotTo(byte[] hash);
 }

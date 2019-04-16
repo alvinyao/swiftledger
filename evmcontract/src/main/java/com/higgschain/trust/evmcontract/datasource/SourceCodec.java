@@ -23,11 +23,22 @@ package com.higgschain.trust.evmcontract.datasource;
  * to the backing Source with key/value conversion
  * <p>
  * Created by Anton Nashatyrev on 03.11.2016.
+ *
+ * @param <Key>         the type parameter
+ * @param <Value>       the type parameter
+ * @param <SourceKey>   the type parameter
+ * @param <SourceValue> the type parameter
  */
 public class SourceCodec<Key, Value, SourceKey, SourceValue>
         extends AbstractChainedSource<Key, Value, SourceKey, SourceValue> {
 
+    /**
+     * The Key serializer.
+     */
     protected Serializer<Key, SourceKey> keySerializer;
+    /**
+     * The Val serializer.
+     */
     protected Serializer<Value, SourceValue> valSerializer;
 
     /**
@@ -66,8 +77,18 @@ public class SourceCodec<Key, Value, SourceKey, SourceValue>
 
     /**
      * Shortcut class when only value conversion is required
+     *
+     * @param <Key>         the type parameter
+     * @param <Value>       the type parameter
+     * @param <SourceValue> the type parameter
      */
     public static class ValueOnly<Key, Value, SourceValue> extends SourceCodec<Key, Value, Key, SourceValue> {
+        /**
+         * Instantiates a new Value only.
+         *
+         * @param src           the src
+         * @param valSerializer the val serializer
+         */
         public ValueOnly(Source<Key, SourceValue> src, Serializer<Value, SourceValue> valSerializer) {
             super(src, new Serializers.Identity<Key>(), valSerializer);
         }
@@ -75,8 +96,18 @@ public class SourceCodec<Key, Value, SourceKey, SourceValue>
 
     /**
      * Shortcut class when only key conversion is required
+     *
+     * @param <Key>       the type parameter
+     * @param <Value>     the type parameter
+     * @param <SourceKey> the type parameter
      */
     public static class KeyOnly<Key, Value, SourceKey> extends SourceCodec<Key, Value, SourceKey, Value> {
+        /**
+         * Instantiates a new Key only.
+         *
+         * @param src           the src
+         * @param keySerializer the key serializer
+         */
         public KeyOnly(Source<SourceKey, Value> src, Serializer<Key, SourceKey> keySerializer) {
             super(src, keySerializer, new Serializers.Identity<Value>());
         }
@@ -84,8 +115,17 @@ public class SourceCodec<Key, Value, SourceKey, SourceValue>
 
     /**
      * Shortcut class when only value conversion is required and keys are of byte[] type
+     *
+     * @param <Value>       the type parameter
+     * @param <SourceValue> the type parameter
      */
     public static class BytesKey<Value, SourceValue> extends ValueOnly<byte[], Value, SourceValue> {
+        /**
+         * Instantiates a new Bytes key.
+         *
+         * @param src           the src
+         * @param valSerializer the val serializer
+         */
         public BytesKey(Source<byte[], SourceValue> src, Serializer<Value, SourceValue> valSerializer) {
             super(src, valSerializer);
         }

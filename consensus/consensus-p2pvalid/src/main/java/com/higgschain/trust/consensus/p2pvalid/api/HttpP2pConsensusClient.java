@@ -14,8 +14,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * The type Http p 2 p consensus client.
+ *
  * @author duhongming
- * @date 2018/9/13
+ * @date 2018 /9/13
  */
 @ConditionalOnProperty(name = "network.rpc", havingValue = "http")
 @Component
@@ -28,6 +30,9 @@ public class HttpP2pConsensusClient implements P2pConsensusClient {
     @Autowired
     private IClusterViewManager viewManager;
 
+    /**
+     * Instantiates a new Http p 2 p consensus client.
+     */
     public HttpP2pConsensusClient() {
         log.info("Use HttpP2pConsensusClient");
     }

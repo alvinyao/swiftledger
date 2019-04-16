@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * The type Block chain message handler.
+ *
  * @author duhongming
- * @date 2018/9/18
+ * @date 2018 /9/18
  */
 @Component
 @Slf4j
@@ -28,8 +30,9 @@ public class BlockChainMessageHandler implements InitializingBean {
 
     /**
      * get the block headers
-     * @param request
-     * @return
+     *
+     * @param request the request
+     * @return block headers
      */
     public List<BlockHeader> getBlockHeaders(BlockRequest request) {
         return blockChainService.listBlockHeaders(request.getStartHeight(), request.getSize());
@@ -37,8 +40,9 @@ public class BlockChainMessageHandler implements InitializingBean {
 
     /**
      * get the blocks
-     * @param request
-     * @return
+     *
+     * @param request the request
+     * @return blocks
      */
     public List<Block> getBlocks(BlockRequest request) {
         return blockChainService.listBlocks(request.getStartHeight(), request.getSize());

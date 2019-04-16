@@ -44,7 +44,7 @@ import java.util.List;
  * UTXO repository
  *
  * @author lingchao
- * @create 2018年03月28日19:17
+ * @create 2018年03月28日19 :17
  */
 @Slf4j
 @Service
@@ -65,7 +65,8 @@ public class UTXOActionService {
 
     /**
      * verify UTXO action
-     * @param action
+     *
+     * @param action the action
      */
     public void verifyUTXOAction(Action action) {
         UTXOAction utxoAction = (UTXOAction) action;
@@ -151,7 +152,7 @@ public class UTXOActionService {
     /**
      * deal action with different TxProcessTypeEnum (data from db of snapshot)
      *
-     * @param actionData
+     * @param actionData the action data
      */
     public void process(ActionData actionData) {
         // convert action and validate it

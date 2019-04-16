@@ -26,9 +26,11 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * The type Block repository test.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-18
+ * @date 2018 -04-18
  */
 public class BlockRepositoryTest  extends BaseTest {
     @Autowired
@@ -47,6 +49,11 @@ public class BlockRepositoryTest  extends BaseTest {
     @Autowired
     private TxRocksDao txRocksDao;
 
+    /**
+     * Test get max height.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetMaxHeight() throws Exception {
         if (!initConfig.isUseMySQL()) {
             systemPropertyRepository.add(Constant.MAX_BLOCK_HEIGHT, "100", "max block height");
@@ -55,23 +62,53 @@ public class BlockRepositoryTest  extends BaseTest {
         Assert.assertEquals(height.longValue(), 100L);
     }
 
+    /**
+     * Test get limit height.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetLimitHeight() throws Exception {
         blockRepository.getLimitHeight(10);
     }
 
+    /**
+     * Test get block.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetBlock() throws Exception {
     }
 
+    /**
+     * Test list blocks.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testListBlocks() throws Exception {
         System.out.println(blockRepository.listBlocks(3, 2));
     }
 
+    /**
+     * Test list block headers.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testListBlockHeaders() throws Exception {
     }
 
+    /**
+     * Test get block header.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetBlockHeader() throws Exception {
     }
 
+    /**
+     * Test save block.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testSaveBlock() throws Exception {
 //        BlockPO blockPO = new BlockPO();
 //        blockPO.setBlockTime(new Date());
@@ -138,12 +175,27 @@ public class BlockRepositoryTest  extends BaseTest {
 
     }
 
+    /**
+     * Test query blocks with condition.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryBlocksWithCondition() throws Exception {
     }
 
+    /**
+     * Test count blocks with condition.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testCountBlocksWithCondition() throws Exception {
     }
 
+    /**
+     * Test query block by height.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryBlockByHeight() throws Exception {
     }
 

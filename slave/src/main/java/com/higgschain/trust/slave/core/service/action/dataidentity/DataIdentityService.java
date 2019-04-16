@@ -24,7 +24,7 @@ import java.util.Set;
  * dataidentity repository
  *
  * @author lingchao
- * @create 2018年03月28日13:09
+ * @create 2018年03月28日13 :09
  */
 @Slf4j
 @Service
@@ -35,7 +35,7 @@ public class DataIdentityService {
     /**
      * deal action with different TxProcessTypeEnum (data from db of snapshot)
      *
-     * @param actionData
+     * @param actionData the action data
      */
     public void process(ActionData actionData) {
         // convert action and validate it
@@ -63,9 +63,9 @@ public class DataIdentityService {
     /**
      * validate dataIdentityPOList weather data owner and chain owner are legal
      *
-     * @param rsList
-     * @param dataIdentityList
-     * @return
+     * @param rsList           the rs list
+     * @param dataIdentityList the data identity list
+     * @return boolean
      */
     public boolean validate(List<String> rsList, List<DataIdentity> dataIdentityList) {
         if (log.isDebugEnabled()) {

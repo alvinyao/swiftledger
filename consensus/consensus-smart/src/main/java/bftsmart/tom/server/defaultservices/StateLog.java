@@ -39,10 +39,10 @@ public class StateLog {
     /**
      * Constructs a State log
      *
-     * @param id
+     * @param id           the id
      * @param k            The checkpoint period
-     * @param initialState
-     * @param initialHash
+     * @param initialState the initial state
+     * @param initialHash  the initial hash
      */
     public StateLog(int id, int k, byte[] initialState, byte[] initialHash) {
 
@@ -58,7 +58,7 @@ public class StateLog {
     /**
      * Constructs a State log
      *
-     * @param id
+     * @param id the id
      * @param k  The checkpoint period
      */
     public StateLog(int id, int k) {
@@ -72,6 +72,13 @@ public class StateLog {
         this.id = id;
     }
 
+    /**
+     * Instantiates a new State log.
+     *
+     * @param id           the id
+     * @param initialState the initial state
+     * @param initialHash  the initial hash
+     */
     public StateLog(int id, byte[] initialState, byte[] initialHash) {
         this.lastCheckpointCID = -1;
         this.state = initialState;
@@ -84,8 +91,8 @@ public class StateLog {
      * Sets the state associated with the last checkpoint, and updates the consensus ID associated with it
      *
      * @param state           State associated with the last checkpoint
-     * @param stateHash
-     * @param lastConsensusId
+     * @param stateHash       the state hash
+     * @param lastConsensusId the last consensus id
      */
     public void newCheckpoint(byte[] state, byte[] stateHash, int lastConsensusId) {
 
@@ -163,7 +170,7 @@ public class StateLog {
      *
      * @param commands        The batch of messages to be kept.
      * @param msgCtx          The message contexts related to the commands
-     * @param lastConsensusId
+     * @param lastConsensusId the last consensus id
      */
     public void addMessageBatch(byte[][] commands, MessageContext[] msgCtx, int lastConsensusId) {
         if (position < messageBatches.length) {
@@ -208,7 +215,7 @@ public class StateLog {
      * Constructs a TransferableState using this log information
      *
      * @param cid      Consensus ID correspondent to desired state
-     * @param setState
+     * @param setState the set state
      * @return TransferableState Object containing this log information
      */
     public DefaultApplicationState getApplicationState(int cid, boolean setState) {

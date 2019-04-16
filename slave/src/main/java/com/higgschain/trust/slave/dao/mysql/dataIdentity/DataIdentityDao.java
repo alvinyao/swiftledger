@@ -8,24 +8,26 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * The interface Data identity dao.
+ *
  * @author liuyu
  * @description data identity DAO
- * @date 2018-03-27
+ * @date 2018 -03-27
  */
 @Mapper public interface DataIdentityDao extends BaseDao<DataIdentityPO> {
     /**
      * query by identity
      *
-     * @param identity
-     * @return
+     * @param identity the identity
+     * @return data identity po
      */
     DataIdentityPO queryByIdentity(@Param("identity") String identity);
 
     /**
      * batch insert
      *
-     * @param dataIdentityList
-     * @return
+     * @param dataIdentityList the data identity list
+     * @return int
      */
     int batchInsert(List<DataIdentityPO> dataIdentityList);
 }

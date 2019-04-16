@@ -11,18 +11,29 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
+/**
+ * The type Base test.
+ */
 @SpringBootTest
 public abstract class BaseTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private SnapshotService snapshotService;
 
+    /**
+     * Before class.
+     *
+     * @throws Exception the exception
+     */
     @BeforeSuite
     public void beforeClass() throws Exception {
         System.setProperty("spring.config.location", "classpath:test-application.json");
 
     }
 
+    /**
+     * Run before.
+     */
     @BeforeClass
     public void runBefore() {
         System.setProperty("spring.config.location", "classpath:test-application.json");
@@ -38,11 +49,17 @@ public abstract class BaseTest extends AbstractTestNGSpringContextTests {
         JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.MapSortField.getMask();
     }
 
+    /**
+     * Run after.
+     */
     @AfterClass
     public void runAfter() {
         runLast();
     }
 
+    /**
+     * Run last.
+     */
     protected void runLast() {
     }
 }

@@ -4,22 +4,30 @@
 package com.higgschain.trust.common.exception;
 
 /**
+ * The interface Error info.
+ *
  * @author suimi
- * @date 2018/6/12
+ * @date 2018 /6/12
  */
 public interface ErrorInfo {
     /**
+     * Gets code.
+     *
      * @return Returns the code.
      */
     String getCode();
 
     /**
+     * Gets description.
+     *
      * @return Returns the description.
      */
     String getDescription();
 
     /**
-     * @return
+     * Is need retry boolean.
+     *
+     * @return boolean
      */
     boolean isNeedRetry();
 }

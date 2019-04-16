@@ -23,23 +23,47 @@ import bftsmart.reconfiguration.views.ViewStorage;
 import java.net.SocketAddress;
 
 /**
+ * The type View controller.
+ *
  * @author eduardo
  */
 public class ViewController {
 
+    /**
+     * The Last view.
+     */
     protected View lastView = null;
+    /**
+     * The Current view.
+     */
     protected View currentView = null;
     private TOMConfiguration staticConf;
     private ViewStorage viewStore;
 
+    /**
+     * Instantiates a new View controller.
+     *
+     * @param procId the proc id
+     */
     public ViewController(int procId) {
         this.staticConf = new TOMConfiguration(procId);
     }
 
+    /**
+     * Instantiates a new View controller.
+     *
+     * @param procId     the proc id
+     * @param configHome the config home
+     */
     public ViewController(int procId, String configHome) {
         this.staticConf = new TOMConfiguration(procId, configHome);
     }
 
+    /**
+     * Gets view store.
+     *
+     * @return the view store
+     */
     public final ViewStorage getViewStore() {
         if (this.viewStore == null) {
             String className = staticConf.getViewStoreClass();
@@ -53,6 +77,11 @@ public class ViewController {
         return this.viewStore;
     }
 
+    /**
+     * Gets current view.
+     *
+     * @return the current view
+     */
     public View getCurrentView() {
         if (this.currentView == null) {
             this.currentView = getViewStore().readView();
@@ -60,43 +89,96 @@ public class ViewController {
         return this.currentView;
     }
 
+    /**
+     * Gets last view.
+     *
+     * @return the last view
+     */
     public View getLastView() {
         return this.lastView;
     }
 
+    /**
+     * Gets remote address.
+     *
+     * @param id the id
+     * @return the remote address
+     */
     public SocketAddress getRemoteAddress(int id) {
         return getCurrentView().getAddress(id);
     }
 
+    /**
+     * Reconfigure to.
+     *
+     * @param newView the new view
+     */
     public void reconfigureTo(View newView) {
         this.lastView = this.currentView;
         this.currentView = newView;
     }
 
+    /**
+     * Gets static conf.
+     *
+     * @return the static conf
+     */
     public TOMConfiguration getStaticConf() {
         return staticConf;
     }
 
+    /**
+     * Is current view member boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     public boolean isCurrentViewMember(int id) {
         return getCurrentView().isMember(id);
     }
 
+    /**
+     * Gets current view id.
+     *
+     * @return the current view id
+     */
     public int getCurrentViewId() {
         return getCurrentView().getId();
     }
 
+    /**
+     * Gets current view f.
+     *
+     * @return the current view f
+     */
     public int getCurrentViewF() {
         return getCurrentView().getF();
     }
 
+    /**
+     * Gets current view n.
+     *
+     * @return the current view n
+     */
     public int getCurrentViewN() {
         return getCurrentView().getN();
     }
 
+    /**
+     * Gets current view pos.
+     *
+     * @param id the id
+     * @return the current view pos
+     */
     public int getCurrentViewPos(int id) {
         return getCurrentView().getPos(id);
     }
 
+    /**
+     * Get current view processes int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getCurrentViewProcesses() {
         return getCurrentView().getProcesses();
     }

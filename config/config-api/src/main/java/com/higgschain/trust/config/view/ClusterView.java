@@ -16,12 +16,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Cluster view.
+ *
  * @author suimi
- * @date 2018/8/31
+ * @date 2018 /8/31
  */
 @Slf4j @Data @Builder @NoArgsConstructor @AllArgsConstructor public class ClusterView
     implements Cloneable, Serializable {
 
+    /**
+     * The constant INIT_END_HEIGHT.
+     */
     public static final long INIT_END_HEIGHT = -1;
 
     /**
@@ -37,6 +42,13 @@ import java.util.Map;
 
     private Map<String, String> nodes = new HashMap<>();
 
+    /**
+     * Instantiates a new Cluster view.
+     *
+     * @param id          the id
+     * @param startHeight the start height
+     * @param nodes       the nodes
+     */
     public ClusterView(long id, long startHeight, Map<String, String> nodes) {
         this.id = id;
         this.startHeight = startHeight;
@@ -44,6 +56,11 @@ import java.util.Map;
         this.faultNum = (nodes.size() - 1) / 3;
     }
 
+    /**
+     * Gets node names.
+     *
+     * @return the node names
+     */
     public List<String> getNodeNames() {
         ArrayList<String> nodeNames = new ArrayList<>();
         nodeNames.addAll(nodes.keySet());
@@ -56,7 +73,7 @@ import java.util.Map;
      *
      * @param
      * @return quorum size
-    */
+     */
     public int getAppliedQuorum(){
         int appliedQuprum = (nodes.size()+ faultNum) / 2 + 1;
         return appliedQuprum <= nodes.size() ? appliedQuprum : nodes.size();
@@ -70,7 +87,7 @@ import java.util.Map;
      *
      * @param
      * @return quorum size
-    */
+     */
     public int getVerifiedQuorum(){
         int verifiedQuorum = faultNum + 1;
         return verifiedQuorum <= nodes.size() ? verifiedQuorum : nodes.size();
@@ -82,12 +99,18 @@ import java.util.Map;
      *
      * @param
      * @return quorum size
-    */
+     */
     public int getMajorityQuorum() {
         int majorityQuorum = (nodes.size() + 2) / 2;
         return majorityQuorum <= nodes.size() ? majorityQuorum : nodes.size();
     }
 
+    /**
+     * Gets pub key.
+     *
+     * @param nodeName the node name
+     * @return the pub key
+     */
     public String getPubKey(String nodeName) {
         return nodes.get(nodeName);
     }

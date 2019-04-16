@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Account detail rocks dao.
  *
  * @author tangfashuang
  */
@@ -26,6 +27,11 @@ public class AccountDetailRocksDao extends RocksBaseDao<AccountDetailPO> {
         return "accountDetail";
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param pos the pos
+     */
     public void batchInsert(List<AccountDetailPO> pos) {
         if (CollectionUtils.isEmpty(pos)) {
             return;

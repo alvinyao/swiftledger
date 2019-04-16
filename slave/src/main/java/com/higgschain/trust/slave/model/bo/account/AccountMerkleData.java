@@ -9,9 +9,11 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 /**
+ * The type Account merkle data.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-16
+ * @date 2018 -04-16
  */
 @Getter @Setter public class AccountMerkleData extends BaseBO implements MerkleTreeSnapshotAgent.MerkleDataNode {
     /**
@@ -38,10 +40,11 @@ import java.math.BigDecimal;
      * status,NORMAL,DESTROY
      */
     private String status;
+
     /**
      * override get method,ensure the same amount by formatter
      *
-     * @return
+     * @return balance
      */
     public BigDecimal getBalance() {
         String amount = AmountUtil.formatAmount(balance);
@@ -52,7 +55,7 @@ import java.math.BigDecimal;
     /**
      * override get method,ensure the same amount by formatter
      *
-     * @return
+     * @return freeze amount
      */
     public BigDecimal getFreezeAmount() {
         String amount = AmountUtil.formatAmount(freezeAmount);

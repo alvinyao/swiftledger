@@ -43,15 +43,19 @@ public interface KeyCrypter extends Serializable {
 
     /**
      * Create a KeyParameter (which typically contains an AES key)
-     * @param password
+     *
+     * @param password the password
      * @return KeyParameter The KeyParameter which typically contains the AES key to use for encrypting and decrypting
-     * @throws KeyCrypterException
+     * @throws KeyCrypterException the key crypter exception
      */
     KeyParameter deriveKey(CharSequence password) throws KeyCrypterException;
 
     /**
      * Decrypt the provided encrypted bytes, converting them into unencrypted bytes.
      *
+     * @param encryptedBytesToDecode the encrypted bytes to decode
+     * @param aesKey                 the aes key
+     * @return the byte [ ]
      * @throws KeyCrypterException if decryption was unsuccessful.
      */
     byte[] decrypt(EncryptedData encryptedBytesToDecode, KeyParameter aesKey) throws KeyCrypterException;
@@ -59,6 +63,8 @@ public interface KeyCrypter extends Serializable {
     /**
      * Encrypt the supplied bytes, converting them into ciphertext.
      *
+     * @param plainBytes the plain bytes
+     * @param aesKey     the aes key
      * @return encryptedPrivateKey An encryptedPrivateKey containing the encrypted bytes and an initialisation vector.
      * @throws KeyCrypterException if encryption was unsuccessful
      */

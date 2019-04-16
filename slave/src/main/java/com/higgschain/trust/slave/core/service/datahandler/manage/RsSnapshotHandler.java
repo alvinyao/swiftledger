@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type Rs snapshot handler.
+ *
  * @author tangfashuang
- * @date 2018/04/17 19:25
+ * @date 2018 /04/17 19:25
  * @desc rs snapshot handler
  */
 @Service

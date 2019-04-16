@@ -90,6 +90,13 @@ public class SM3 {
         return bytes;
     }
 
+    /**
+     * Hash byte [ ].
+     *
+     * @param source the source
+     * @return the byte [ ]
+     * @throws IOException the io exception
+     */
     public static byte[] hash(byte[] source) throws IOException {
         byte[] m1 = padding(source);
         int n = m1.length / (512 / 8);
@@ -172,6 +179,12 @@ public class SM3 {
         return baos.toByteArray();
     }
 
+    /**
+     * To byte array byte [ ].
+     *
+     * @param i the
+     * @return the byte [ ]
+     */
     public static byte[] toByteArray(int i) {
         byte[] byteArray = new byte[4];
         byteArray[0] = (byte)(i >>> 24);
@@ -190,6 +203,12 @@ public class SM3 {
         return "" + hexDigits[d1] + hexDigits[d2];
     }
 
+    /**
+     * Byte array to hex string string.
+     *
+     * @param b the b
+     * @return the string
+     */
     public static String byteArrayToHexString(byte[] b) {
         StringBuffer resultSb = new StringBuffer();
         for (int i = 0; i < b.length; i++) {
@@ -198,6 +217,12 @@ public class SM3 {
         return resultSb.toString();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
         System.out.println(SM3.byteArrayToHexString(SM3.hash("test sm3 hash".getBytes())));
     }

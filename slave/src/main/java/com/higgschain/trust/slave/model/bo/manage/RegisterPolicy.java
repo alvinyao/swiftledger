@@ -12,9 +12,11 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
+ * The type Register policy.
+ *
  * @author tangfashuang
  * @desc register policy action
- * @date 2018-03-27
+ * @date 2018 -03-27
  */
 @Getter @Setter public class RegisterPolicy extends Action {
     /**

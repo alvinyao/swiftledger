@@ -18,8 +18,10 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.*;
 
 /**
+ * The type Master heartbeat service.
+ *
  * @author suimi
- * @date 2018/6/4
+ * @date 2018 /6/4
  */
 @Slf4j @Service public class MasterHeartbeatService implements MasterChangeListener {
     @Autowired private NodeProperties nodeProperties;
@@ -41,11 +43,17 @@ import java.util.concurrent.*;
         return thread;
     });
 
+    /**
+     * Start master heartbeat.
+     */
     public void startMasterHeartbeat() {
         log.info("start master heartbeat timeout");
         resetMasterHeartbeat();
     }
 
+    /**
+     * Reset master heartbeat.
+     */
     public void resetMasterHeartbeat() {
         log.debug("reset master heartbeat timeout");
         if (masterHeartbeatTimer != null) {
@@ -70,6 +78,9 @@ import java.util.concurrent.*;
         }
     }
 
+    /**
+     * Master heartbeat.
+     */
     public void masterHeartbeat() {
         MasterHeartbeatCommand command =
             new MasterHeartbeatCommand(nodeState.getCurrentTerm(), viewManager.getCurrentViewId(),

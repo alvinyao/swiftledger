@@ -9,14 +9,27 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
+ * The type Abstract element.
+ *
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public abstract class AbstractElement<F extends AbstractField> implements Element {
 
+    /**
+     * The Field.
+     */
     protected F field;
+    /**
+     * The Immutable.
+     */
     protected boolean immutable = false;
 
-
+    /**
+     * Instantiates a new Abstract element.
+     *
+     * @param field the field
+     */
     public AbstractElement(F field) {
         this.field = field;
     }
@@ -113,7 +126,12 @@ public abstract class AbstractElement<F extends AbstractField> implements Elemen
         return obj instanceof Element && isEqual((Element) obj);
     }
 
-
+    /**
+     * Optimal pow window size int.
+     *
+     * @param n the n
+     * @return the int
+     */
     protected int optimalPowWindowSize(BigInteger n) {
         int expBits;
 
@@ -138,8 +156,8 @@ public abstract class AbstractElement<F extends AbstractField> implements Elemen
     /**
      * Builds k-bit lookup window for base a
      *
-     * @param k
-     * @return
+     * @param k the k
+     * @return list
      */
     protected List<Element> buildPowWindow(int k) {
         int s;
@@ -169,7 +187,7 @@ public abstract class AbstractElement<F extends AbstractField> implements Elemen
      * left-to-right exponentiation with k-bit window.
      * NB. must have k >= 1.
      *
-     * @param n
+     * @param n the n
      */
     protected void elementPowWind(BigInteger n) {
         /* early abort if raising to power 0 */
@@ -209,7 +227,12 @@ public abstract class AbstractElement<F extends AbstractField> implements Elemen
         set(result);
     }
 
-
+    /**
+     * Tokenize string [ ].
+     *
+     * @param value the value
+     * @return the string [ ]
+     */
     protected String[] tokenize(String value) {
         StringTokenizer tokenizer = new StringTokenizer(value,",");
         int n = tokenizer.countTokens();

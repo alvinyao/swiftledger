@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Cluster node rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -23,6 +25,11 @@ public class ClusterNodeRocksDao extends RocksBaseDao<ClusterNodePO>{
         return "clusterNode";
     }
 
+    /**
+     * Save with transaction.
+     *
+     * @param clusterNodePO the cluster node po
+     */
     public void saveWithTransaction(ClusterNodePO clusterNodePO) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -40,6 +47,12 @@ public class ClusterNodeRocksDao extends RocksBaseDao<ClusterNodePO>{
         txPut(tx, key, clusterNodePO);
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param clusterNodePOList the cluster node po list
+     * @return the int
+     */
     public int batchInsert(List<ClusterNodePO> clusterNodePOList) {
         if (CollectionUtils.isEmpty(clusterNodePOList)) {
             return 0;

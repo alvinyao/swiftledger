@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 /**
+ * The type Byte buffer data output.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 2.0.0
  */
@@ -12,6 +14,11 @@ public class ByteBufferDataOutput implements DataOutput {
 
     private ByteBuffer buffer;
 
+    /**
+     * Instantiates a new Byte buffer data output.
+     *
+     * @param buffer the buffer
+     */
     public ByteBufferDataOutput(ByteBuffer buffer) {
         this.buffer = buffer;
     }

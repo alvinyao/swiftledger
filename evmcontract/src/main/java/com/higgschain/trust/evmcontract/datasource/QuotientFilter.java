@@ -74,22 +74,67 @@ import static java.util.Arrays.copyOfRange;
 
 //import net.jpountz.xxhash.XXHashFactory;
 
+/**
+ * The type Quotient filter.
+ */
 public class QuotientFilter implements Iterable<Long> {
+    /**
+     * The constant QUOTIENT_BITS.
+     */
     //    static final XXHashFactory hashFactory = XXHashFactory.fastestInstance();
     byte QUOTIENT_BITS;
+    /**
+     * The Remainder bits.
+     */
     byte REMAINDER_BITS;
+    /**
+     * The Element bits.
+     */
     byte ELEMENT_BITS;
+    /**
+     * The Index mask.
+     */
     long INDEX_MASK;
+    /**
+     * The Remainder mask.
+     */
     long REMAINDER_MASK;
+    /**
+     * The Element mask.
+     */
     long ELEMENT_MASK;
+    /**
+     * The Max size.
+     */
     long MAX_SIZE;
+    /**
+     * The Max insertions.
+     */
     long MAX_INSERTIONS;
+    /**
+     * The Max duplicates.
+     */
     int MAX_DUPLICATES = 2;
+    /**
+     * The Table.
+     */
     long[] table;
 
+    /**
+     * The Overflowed.
+     */
     boolean overflowed = false;
+    /**
+     * The Entries.
+     */
     long entries;
 
+    /**
+     * Deserialize quotient filter.
+     *
+     * @param bytes the bytes
+     * @return the quotient filter
+     */
     public static QuotientFilter deserialize(byte[] bytes) {
         QuotientFilter ret = new QuotientFilter();
         ret.QUOTIENT_BITS = bytes[0];
@@ -109,6 +154,11 @@ public class QuotientFilter implements Iterable<Long> {
         return ret;
     }
 
+    /**
+     * Serialize byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public synchronized byte[] serialize() {
         byte[] ret = new byte[1 + 1 + 1 + 8 + 8 + 8 + 8 + 8 + 1 + 8 + table.length * 8];
         ret[0] = QUOTIENT_BITS;
@@ -127,16 +177,35 @@ public class QuotientFilter implements Iterable<Long> {
         return ret;
     }
 
+    /**
+     * Low mask long.
+     *
+     * @param n the n
+     * @return the long
+     */
     static long LOW_MASK(long n) {
         return (1L << n) - 1L;
     }
 
+    /**
+     * Table size int.
+     *
+     * @param quotientBits  the quotient bits
+     * @param remainderBits the remainder bits
+     * @return the int
+     */
     static int TABLE_SIZE(int quotientBits, int remainderBits) {
         long bits = (1L << quotientBits) * (remainderBits + 3);
         long longs = bits / 64;
         return Ints.checkedCast((bits % 64) > 0 ? (longs + 1) : longs);
     }
 
+    /**
+     * Bits for num elements with load factor int.
+     *
+     * @param numElements the num elements
+     * @return the int
+     */
     static int bitsForNumElementsWithLoadFactor(long numElements) {
         if (numElements == 0) {
             return 1;
@@ -154,6 +223,13 @@ public class QuotientFilter implements Iterable<Long> {
         return candidateBits;
     }
 
+    /**
+     * Create quotient filter.
+     *
+     * @param largestNumberOfElements the largest number of elements
+     * @param startingElements        the starting elements
+     * @return the quotient filter
+     */
     public static QuotientFilter create(long largestNumberOfElements, long startingElements) {
         Preconditions.checkArgument(largestNumberOfElements >= startingElements);
         Preconditions.checkArgument(startingElements > 0);
@@ -179,6 +255,12 @@ public class QuotientFilter implements Iterable<Long> {
     private QuotientFilter() {
     }
 
+    /**
+     * Instantiates a new Quotient filter.
+     *
+     * @param quotientBits  the quotient bits
+     * @param remainderBits the remainder bits
+     */
     public QuotientFilter(int quotientBits, int remainderBits) {
         Preconditions.checkArgument(quotientBits > 0);
         Preconditions.checkArgument(remainderBits > 0);
@@ -196,11 +278,23 @@ public class QuotientFilter implements Iterable<Long> {
         entries = 0;
     }
 
+    /**
+     * With max duplicates quotient filter.
+     *
+     * @param maxDuplicates the max duplicates
+     * @return the quotient filter
+     */
     public QuotientFilter withMaxDuplicates(int maxDuplicates) {
         MAX_DUPLICATES = maxDuplicates;
         return this;
     }
 
+    /**
+     * Gets element.
+     *
+     * @param idx the idx
+     * @return the element
+     */
     /* Return QF[idx] in the lower bits. */
     long getElement(long idx) {
         long elt = 0;
@@ -217,6 +311,12 @@ public class QuotientFilter implements Iterable<Long> {
         return elt;
     }
 
+    /**
+     * Sets element.
+     *
+     * @param idx the idx
+     * @param elt the elt
+     */
     /* Store the lower bits of elt into QF[idx]. */
     void setElement(long idx, long elt) {
         long bitpos = ELEMENT_BITS * idx;
@@ -233,74 +333,182 @@ public class QuotientFilter implements Iterable<Long> {
         }
     }
 
+    /**
+     * Increment index long.
+     *
+     * @param idx the idx
+     * @return the long
+     */
     long incrementIndex(long idx) {
         return (idx + 1) & INDEX_MASK;
     }
 
+    /**
+     * Decrement index long.
+     *
+     * @param idx the idx
+     * @return the long
+     */
     long decrementIndex(long idx) {
         return (idx - 1) & INDEX_MASK;
     }
 
+    /**
+     * Is element occupied boolean.
+     *
+     * @param elt the elt
+     * @return the boolean
+     */
     static boolean isElementOccupied(long elt) {
         return (elt & 1) != 0;
     }
 
+    /**
+     * Sets element occupied.
+     *
+     * @param elt the elt
+     * @return the element occupied
+     */
     static long setElementOccupied(long elt) {
         return elt | 1;
     }
 
+    /**
+     * Clear element occupied long.
+     *
+     * @param elt the elt
+     * @return the long
+     */
     static long clearElementOccupied(long elt) {
         return elt & ~1;
     }
 
+    /**
+     * Is element continuation boolean.
+     *
+     * @param elt the elt
+     * @return the boolean
+     */
     static boolean isElementContinuation(long elt) {
         return (elt & 2) != 0;
     }
 
+    /**
+     * Sets element continuation.
+     *
+     * @param elt the elt
+     * @return the element continuation
+     */
     static long setElementContinuation(long elt) {
         return elt | 2;
     }
 
+    /**
+     * Clear element continuation long.
+     *
+     * @param elt the elt
+     * @return the long
+     */
     static long clearElementContinuation(long elt) {
         return elt & ~2;
     }
 
+    /**
+     * Is element shifted boolean.
+     *
+     * @param elt the elt
+     * @return the boolean
+     */
     static boolean isElementShifted(long elt) {
         return (elt & 4) != 0;
     }
 
+    /**
+     * Sets element shifted.
+     *
+     * @param elt the elt
+     * @return the element shifted
+     */
     static long setElementShifted(long elt) {
         return elt | 4;
     }
 
+    /**
+     * Clear element shifted long.
+     *
+     * @param elt the elt
+     * @return the long
+     */
     static long clearElementShifted(long elt) {
         return elt & ~4;
     }
 
+    /**
+     * Gets element remainder.
+     *
+     * @param elt the elt
+     * @return the element remainder
+     */
     static long getElementRemainder(long elt) {
         return elt >>> 3;
     }
 
+    /**
+     * Is element empty boolean.
+     *
+     * @param elt the elt
+     * @return the boolean
+     */
     static boolean isElementEmpty(long elt) {
         return (elt & 7) == 0;
     }
 
+    /**
+     * Is element cluster start boolean.
+     *
+     * @param elt the elt
+     * @return the boolean
+     */
     static boolean isElementClusterStart(long elt) {
         return isElementOccupied(elt) & !isElementContinuation(elt) & !isElementShifted(elt);
     }
 
+    /**
+     * Is element run start boolean.
+     *
+     * @param elt the elt
+     * @return the boolean
+     */
     static boolean isElementRunStart(long elt) {
         return !isElementContinuation(elt) & (isElementOccupied(elt) | isElementShifted(elt));
     }
 
+    /**
+     * Hash to quotient long.
+     *
+     * @param hash the hash
+     * @return the long
+     */
     long hashToQuotient(long hash) {
         return (hash >>> REMAINDER_BITS) & INDEX_MASK;
     }
 
+    /**
+     * Hash to remainder long.
+     *
+     * @param hash the hash
+     * @return the long
+     */
     long hashToRemainder(long hash) {
         return hash & REMAINDER_MASK;
     }
 
+    /**
+     * Find run index long.
+     *
+     * @param fq the fq
+     * @return the long
+     */
     /* Find the start index of the executeContract for fq (given that the executeContract exists). */
     long findRunIndex(long fq) {
         /* Find the start of the cluster. */
@@ -325,6 +533,12 @@ public class QuotientFilter implements Iterable<Long> {
         return s;
     }
 
+    /**
+     * Insert into.
+     *
+     * @param s   the s
+     * @param elt the elt
+     */
     /* Insert elt into QF[s], shifting over elements as necessary. */
     void insertInto(long s, long elt) {
         long prev;
@@ -349,6 +563,11 @@ public class QuotientFilter implements Iterable<Long> {
         while (!empty);
     }
 
+    /**
+     * Overflowed boolean.
+     *
+     * @return the boolean
+     */
     public boolean overflowed() {
         return overflowed;
     }
@@ -362,6 +581,12 @@ public class QuotientFilter implements Iterable<Long> {
 //        insert(hashFactory.hash64().hash(data, offset, length, 0));
 //    }
 
+    /**
+     * Hash long.
+     *
+     * @param bytes the bytes
+     * @return the long
+     */
     protected long hash(byte[] bytes) {
         return (bytes[0] & 0xFFL) << 56 |
                 (bytes[1] & 0xFFL) << 48 |
@@ -373,10 +598,20 @@ public class QuotientFilter implements Iterable<Long> {
                 (bytes[7] & 0xFFL);
     }
 
+    /**
+     * Insert.
+     *
+     * @param hash the hash
+     */
     public synchronized void insert(byte[] hash) {
         insert(hash(hash));
     }
 
+    /**
+     * Insert.
+     *
+     * @param hash the hash
+     */
     public synchronized void insert(long hash) {
         if (maybeContainsXTimes(hash, MAX_DUPLICATES)) {
             return;
@@ -464,10 +699,22 @@ public class QuotientFilter implements Iterable<Long> {
         }
     }
 
+    /**
+     * Maybe contains boolean.
+     *
+     * @param hash the hash
+     * @return the boolean
+     */
     public boolean maybeContains(byte[] hash) {
         return maybeContains(hash(hash));
     }
 
+    /**
+     * Maybe contains boolean.
+     *
+     * @param hash the hash
+     * @return the boolean
+     */
     public synchronized boolean maybeContains(long hash) {
         if (overflowed) {
             //Can't check for existence after overflow occurred
@@ -499,6 +746,13 @@ public class QuotientFilter implements Iterable<Long> {
         return false;
     }
 
+    /**
+     * Maybe contains x times boolean.
+     *
+     * @param hash the hash
+     * @param num  the num
+     * @return the boolean
+     */
     public synchronized boolean maybeContainsXTimes(long hash, int num) {
         if (overflowed) {
             //Can't check for existence after overflow occurred
@@ -531,6 +785,12 @@ public class QuotientFilter implements Iterable<Long> {
         return counter >= num;
     }
 
+    /**
+     * Delete entry.
+     *
+     * @param s    the s
+     * @param quot the quot
+     */
     /* Remove the entry in QF[s] and slide the rest of the cluster forward. */
     void deleteEntry(long s, long quot) {
         long next;
@@ -572,10 +832,20 @@ public class QuotientFilter implements Iterable<Long> {
         }
     }
 
+    /**
+     * Remove.
+     *
+     * @param hash the hash
+     */
     public void remove(byte[] hash) {
         remove(hash(hash));
     }
 
+    /**
+     * Remove.
+     *
+     * @param hash the hash
+     */
     public synchronized void remove(long hash) {
         if (maybeContainsXTimes(hash, MAX_DUPLICATES)) {
             return;
@@ -681,6 +951,12 @@ public class QuotientFilter implements Iterable<Long> {
 //        return merge(Arrays.asList(filters));
 //    }
 
+    /**
+     * Resize quotient filter.
+     *
+     * @param minimumEntries the minimum entries
+     * @return the quotient filter
+     */
     /*
      * Resizes the filter return a filter with the same contents and space for the minimum specified number
      * of entries. This may allocate a new filter or return the existing filter.
@@ -705,10 +981,18 @@ public class QuotientFilter implements Iterable<Long> {
         return qf;
     }
 
+    /**
+     * Gets allocated bytes.
+     *
+     * @return the allocated bytes
+     */
     public int getAllocatedBytes() {
         return table.length << 3;
     }
 
+    /**
+     * Clear.
+     */
     public void clear() {
         entries = 0;
         Arrays.fill(table, 0L);
@@ -719,11 +1003,26 @@ public class QuotientFilter implements Iterable<Long> {
         return new QFIterator();
     }
 
+    /**
+     * The type Qf iterator.
+     */
     class QFIterator implements LongIterator {
+        /**
+         * The Index.
+         */
         long index;
+        /**
+         * The Quotient.
+         */
         long quotient;
+        /**
+         * The Visited.
+         */
         long visited;
 
+        /**
+         * Instantiates a new Qf iterator.
+         */
         QFIterator() {
             /* Mark the iterator as done. */
             visited = entries;
@@ -825,17 +1124,30 @@ public class QuotientFilter implements Iterable<Long> {
 //        return sb.toString();
 //    }
 
+    /**
+     * The type Overflowed exception.
+     */
     public class OverflowedException extends AssertionError {
 
     }
 
+    /**
+     * The type No such element exception.
+     */
     public class NoSuchElementException extends AssertionError {
 
     }
 
+    /**
+     * The interface Long iterator.
+     */
     public interface LongIterator extends Iterator<Long> {
 
-
+        /**
+         * Next primitive long.
+         *
+         * @return the long
+         */
         long nextPrimitive();
 
         @Override

@@ -12,12 +12,13 @@ import java.util.HashMap;
 
 import static org.testng.internal.EclipseInterface.*;
 
-
 /**
+ * The type Assert tool.
+ *
  * @author shenqingyan
- * @create 2018/4/17 20:30
+ * @create 2018 /4/17 20:30
  * @desc assert different json
- **/
+ */
 @Log
 public class AssertTool extends Assert{
     /**
@@ -37,10 +38,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is totally equal.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 比较两个JSONObject是否完全相等的方断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isTotallyEqual(JSONObject expect, JSONObject actual){
         if (AssertTool.totallyEqual(expect,actual)){
             log.info("assert true");
@@ -77,10 +80,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is contains expect.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际json 包含期望json值断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isContainsExpect(JSONObject expect, JSONObject actual){
         if(null == expect) {
             fail("expected a null JsonObject, but not null found. " );
@@ -115,10 +120,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is contains expect.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际JSONArray 是否包含 某个json断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isContainsExpect(JSONObject expect, JSONArray actual){
         if(null == expect) {
             fail("expected a null JsonObject, but not null found. ");
@@ -160,10 +167,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is contains expect json node.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际json 包含期望json NODE节点的键值对断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isContainsExpectJsonNode(JSONObject expect, JSONObject actual){
         if(null == expect) {
             fail("expected a null JsonObject, but not null found. ");
@@ -200,10 +209,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is contains expect json node.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际jsonarray 包含期望json NODE节点的键值对断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isContainsExpectJsonNode(JSONObject expect, JSONArray actual){
         if(null == expect) {
             fail("expected a null JsonObject, but not null found. ");
@@ -236,12 +247,15 @@ public class AssertTool extends Assert{
         JSONObject expjson = JSON.parseObject(expect);
         return containsExpectJsonNode(expjson,array);
     }
+
     /**
+     * Is contains expect json node.
+     *
+     * @param expect the expect
+     * @param dburl  the dburl
+     * @param sql    the sql
      * @desc 判断数据库结果是否包含预期json子键值对断言
-     * @param expect
-     * @param dburl
-     * @param sql
-     **/
+     */
     public static void isContainsExpectJsonNode(String expect, String dburl, String sql){
 
         if (AssertTool.containsExpectJsonNode(expect,dburl,sql)){
@@ -260,10 +274,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is contains expect.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际string包含期望string值断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isContainsExpect(String expect, String actual){
         if(null == expect) {
             fail("expected a null JsonObject, but not null found. ");
@@ -297,13 +313,14 @@ public class AssertTool extends Assert{
         return containsExpect(expjson,array);
         }
 
-
     /**
+     * Is contains expect.
+     *
+     * @param expect the expect
+     * @param dburl  the dburl
+     * @param sql    the sql
      * @desc 判断数据库结果是否包含预期json断言
-     * @param expect
-     * @param dburl
-     * @param sql
-     **/
+     */
     public static void isContainsExpect(String expect, String dburl, String sql){
 
         if (AssertTool.containsExpect(expect,dburl,sql)){
@@ -357,12 +374,13 @@ public class AssertTool extends Assert{
         }
     }
 
-
     /**
+     * Is not contains expect.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际json不包含期望json断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isNotContainsExpect(JSONObject expect, JSONObject actual){
         if(null == expect) {
             fail("expected is a null JsonObject ");
@@ -378,10 +396,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is not contains expect json node.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际json不包含期望jsonNODE断言
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isNotContainsExpectJsonNode(JSONObject expect, JSONObject actual){
         if(null == expect) {
             fail("expected is a null JsonObject ");
@@ -442,10 +462,12 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is not contains expect.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际jsonarry不包含期望json
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isNotContainsExpect(JSONObject expect, JSONArray actual){
         if(null == expect) {
             fail("expected is a null JsonObject ");
@@ -460,12 +482,13 @@ public class AssertTool extends Assert{
         }
     }
 
-
     /**
+     * Is not contains expect json node.
+     *
+     * @param expect the expect
+     * @param actual the actual
      * @desc 判断实际jsonarry不包含期望json
-     * @param expect
-     * @param actual
-     **/
+     */
     public static void isNotContainsExpectJsonNode(JSONObject expect, JSONArray actual){
         if(null == expect) {
             fail("expected is a null JsonObject ");
@@ -519,11 +542,13 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is not contains expect.
+     *
+     * @param expect the expect
+     * @param dburl  the dburl
+     * @param sql    the sql
      * @desc 判断数据库中是否不包含预期json断言
-     * @param expect
-     * @param dburl
-     * @param sql
-     **/
+     */
     public static void isNotContainsExpect(String expect,String dburl, String sql){
 
         if (AssertTool.notContainsExpect(expect,dburl,sql)){
@@ -534,11 +559,13 @@ public class AssertTool extends Assert{
     }
 
     /**
+     * Is not contains expect json node.
+     *
+     * @param expect the expect
+     * @param dburl  the dburl
+     * @param sql    the sql
      * @desc 判断数据库中是否不包含预期jsonnode断言
-     * @param expect
-     * @param dburl
-     * @param sql
-     **/
+     */
     public static void isNotContainsExpectJsonNode(String expect,String dburl, String sql){
         if (AssertTool.notContainsExpectNode(expect,dburl,sql)){
             log.info("assert true");

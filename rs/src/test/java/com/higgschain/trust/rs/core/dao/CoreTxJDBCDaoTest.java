@@ -10,14 +10,22 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Core tx jdbc dao test.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-01
+ * @date 2018 -08-01
  */
 public class CoreTxJDBCDaoTest extends IntegrateBaseTest {
+    /**
+     * The Core tx jdbc dao.
+     */
     @Autowired
     CoreTxJDBCDao coreTxJDBCDao;
 
+    /**
+     * Test insert.
+     */
     @Test
     public void testInsert(){
         List<CoreTransactionPO> list = new ArrayList<>();
@@ -42,6 +50,9 @@ public class CoreTxJDBCDaoTest extends IntegrateBaseTest {
         coreTxJDBCDao.batchInsert(list);
     }
 
+    /**
+     * Test update.
+     */
     @Test
     public void testUpdate(){
         List<CoreTransactionPO> list = new ArrayList<>();

@@ -14,8 +14,10 @@ import java.util.concurrent.*;
 import static com.higgschain.trust.network.utils.Threads.namedThreads;
 
 /**
+ * The type Discovery peers service.
+ *
  * @author duhongming
- * @date 2018/9/12
+ * @date 2018 /9/12
  */
 public class DiscoveryPeersService {
 
@@ -33,6 +35,13 @@ public class DiscoveryPeersService {
 
     private ScheduledFuture<?> timeoutFuture;
 
+    /**
+     * Instantiates a new Discovery peers service.
+     *
+     * @param networkManage   the network manage
+     * @param peers           the peers
+     * @param executorService the executor service
+     */
     public DiscoveryPeersService(final NetworkManage networkManage, final Peers peers, final ExecutorService executorService) {
         this.networkManage = networkManage;
         this.peers = peers;
@@ -43,6 +52,9 @@ public class DiscoveryPeersService {
         networkManage.messagingService.registerHandler(DISCOVERY_NODES_ACTION, this::discoveryPeersHandler);
     }
 
+    /**
+     * Start.
+     */
     public void start() {
         timeoutFuture = scheduledExecutor.scheduleAtFixedRate(() -> {
             Set<Peer> allPeers = networkManage.getPeers();
@@ -56,11 +68,19 @@ public class DiscoveryPeersService {
         }, 0, 3, TimeUnit.SECONDS);
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
         timeoutFuture.cancel(false);
         scheduledExecutor.shutdown();
     }
 
+    /**
+     * Add peer.
+     *
+     * @param peer the peer
+     */
     protected void addPeer(Peer peer) {
         if (peer.getAddress().equals(localAddress)) {
             return;

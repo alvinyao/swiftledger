@@ -24,6 +24,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Cluster command replicate.
+ */
 @Slf4j @P2pvalidReplicator @Component public class ClusterCommandReplicate {
 
     @Autowired private BlockRepository blockRepository;
@@ -35,7 +38,8 @@ import java.util.List;
     /**
      * handle the consensus result of cluster height
      *
-     * @param commit
+     * @param commit the commit
+     * @return the list
      */
     public List<ValidClusterHeightCmd> handleClusterHeight(ValidSyncCommit<ClusterHeightCmd> commit) {
         ClusterHeightCmd operation = commit.operation();
@@ -49,18 +53,19 @@ import java.util.List;
     /**
      * handle the node state
      *
-     * @param commit
+     * @param commit the commit
+     * @return the valid cluster state cmd
      */
     public ValidClusterStateCmd handleNodeState(ValidSyncCommit<ClusterStateCmd> commit) {
         ClusterStateCmd operation = commit.operation();
         return new ValidClusterStateCmd(operation.getRequestId(), nodeState.getState());
     }
 
-
     /**
      * handle the consensus result of validating block header
      *
-     * @param commit
+     * @param commit the commit
+     * @return the valid block header cmd
      */
     public ValidBlockHeaderCmd handleValidHeader(ValidSyncCommit<BlockHeaderCmd> commit) {
         BlockHeaderCmd operation = commit.operation();

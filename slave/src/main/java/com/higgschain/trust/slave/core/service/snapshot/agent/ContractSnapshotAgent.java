@@ -22,22 +22,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Contract snapshot agent.
+ *
  * @author duhongming
- * @date 2018-04-12
+ * @date 2018 -04-12
  */
 @Slf4j
 @Component
 public class ContractSnapshotAgent implements CacheLoader {
 
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
     @Autowired
     private ContractRepository contractRepository;
 
+    /**
+     * Get contract.
+     *
+     * @param key the key
+     * @return the contract
+     */
     public Contract get(String key) {
         return (Contract) snapshot.get(SnapshotBizKeyEnum.CONTRACT, new ContractCacheKey(key));
     }
 
+    /**
+     * Insert.
+     *
+     * @param key      the key
+     * @param contract the contract
+     */
     public void insert(String key, Contract contract) {
         snapshot.insert(SnapshotBizKeyEnum.CONTRACT, new ContractCacheKey(key), contract);
     }
@@ -75,6 +92,9 @@ public class ContractSnapshotAgent implements CacheLoader {
         throw new NotImplementedException();
     }
 
+    /**
+     * The type Contract cache key.
+     */
     @Getter
     @Setter
     @NoArgsConstructor

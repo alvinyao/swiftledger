@@ -9,9 +9,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Voting request.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-07
+ * @date 2018 -06-07
  */
 @Setter @Getter @AllArgsConstructor public class VotingRequest extends BaseBO {
     /**

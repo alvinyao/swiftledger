@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Rs node rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -23,6 +25,12 @@ public class RsNodeRocksDao extends RocksBaseDao<RsNodePO> {
         return "rsNode";
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param rsNodePOList the rs node po list
+     * @return the int
+     */
     public int batchInsert(List<RsNodePO> rsNodePOList) {
         if (CollectionUtils.isEmpty(rsNodePOList)) {
             return 0;
@@ -42,6 +50,12 @@ public class RsNodeRocksDao extends RocksBaseDao<RsNodePO> {
         return rsNodePOList.size();
     }
 
+    /**
+     * Batch update int.
+     *
+     * @param rsNodePOList the rs node po list
+     * @return the int
+     */
     public int batchUpdate(List<RsNodePO> rsNodePOList) {
         if (CollectionUtils.isEmpty(rsNodePOList)) {
             return 0;

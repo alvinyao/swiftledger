@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
+ * The type Hessian.
+ *
  * @author duhongming
- * @date 2018/9/5
+ * @date 2018 /9/5
  */
 public final class Hessian {
 
@@ -21,6 +23,12 @@ public final class Hessian {
         extFactory.addDeserializer(BigDecimal.class, new BigDecimalDeserializer());
     }
 
+    /**
+     * Serialize byte [ ].
+     *
+     * @param obj the obj
+     * @return the byte [ ]
+     */
     public static byte[] serialize(Object obj) {
         try {
             Deflation envelope = new Deflation();
@@ -42,6 +50,13 @@ public final class Hessian {
         }
     }
 
+    /**
+     * Parse t.
+     *
+     * @param <T>  the type parameter
+     * @param data the data
+     * @return the t
+     */
     public static <T> T parse(byte[] data) {
         Deflation envelope = new Deflation();
         ByteArrayInputStream bin = new ByteArrayInputStream(data);
@@ -66,6 +81,12 @@ public final class Hessian {
         return null;
     }
 
+    /**
+     * Clone object.
+     *
+     * @param obj the obj
+     * @return the object
+     */
     public static Object clone(Object obj) {
         byte[] data = serialize(obj);
         return parse(data);

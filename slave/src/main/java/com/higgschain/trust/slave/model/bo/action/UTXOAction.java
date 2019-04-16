@@ -17,7 +17,7 @@ import java.util.List;
  * UTXO action
  *
  * @author lingchao
- * @create 2018年03月27日21:09
+ * @create 2018年03月27日21 :09
  */
 @Getter @Setter public class UTXOAction extends Action {
 

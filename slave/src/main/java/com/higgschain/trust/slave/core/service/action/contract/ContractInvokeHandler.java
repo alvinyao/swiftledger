@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
+ * The type Contract invoke handler.
+ *
  * @author duhongming
- * @date 2018/05/07
+ * @date 2018 /05/07
  */
 @Slf4j @Component public class ContractInvokeHandler implements ActionHandler {
 

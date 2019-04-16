@@ -30,16 +30,28 @@ import java.util.List;
 
 import static com.higgschain.trust.evmcontract.util.ByteUtil.toHexString;
 
-
+/**
+ * The type Solidity type.
+ */
 public abstract class SolidityType {
+    /**
+     * The Name.
+     */
     protected String name;
 
+    /**
+     * Instantiates a new Solidity type.
+     *
+     * @param name the name
+     */
     public SolidityType(String name) {
         this.name = name;
     }
 
     /**
      * The type name as it was specified in the interface description
+     *
+     * @return the name
      */
     public String getName() {
         return name;
@@ -48,12 +60,20 @@ public abstract class SolidityType {
     /**
      * The canonical type name (used for the method signature creation)
      * E.g. 'int' - canonical 'int256'
+     *
+     * @return the canonical name
      */
     @JsonValue
     public String getCanonicalName() {
         return getName();
     }
 
+    /**
+     * Gets type.
+     *
+     * @param typeName the type name
+     * @return the type
+     */
     @JsonCreator
     public static SolidityType getType(String typeName) {
         if (typeName.contains("[")) {
@@ -89,24 +109,44 @@ public abstract class SolidityType {
     /**
      * Encodes the value according to specific type rules
      *
-     * @param value
+     * @param value the value
+     * @return the byte [ ]
      */
     public abstract byte[] encode(Object value);
 
+    /**
+     * Decode object.
+     *
+     * @param encoded the encoded
+     * @param offset  the offset
+     * @return the object
+     */
     public abstract Object decode(byte[] encoded, int offset);
 
+    /**
+     * Decode object.
+     *
+     * @param encoded the encoded
+     * @return the object
+     */
     public Object decode(byte[] encoded) {
         return decode(encoded, 0);
     }
 
     /**
-     * @return fixed size in bytes. For the dynamic types returns IntType.getFixedSize()
-     * which is effectively the int offset to dynamic data
+     * Gets fixed size.
+     *
+     * @return fixed size in bytes. For the dynamic types returns IntType.getFixedSize() which is effectively the int offset to dynamic data
      */
     public int getFixedSize() {
         return 32;
     }
 
+    /**
+     * Is dynamic type boolean.
+     *
+     * @return the boolean
+     */
     public boolean isDynamicType() {
         return false;
     }
@@ -116,8 +156,16 @@ public abstract class SolidityType {
         return getName();
     }
 
-
+    /**
+     * The type Array type.
+     */
     public static abstract class ArrayType extends SolidityType {
+        /**
+         * Gets type.
+         *
+         * @param typeName the type name
+         * @return the type
+         */
         public static ArrayType getType(String typeName) {
             int idx1 = typeName.indexOf("[");
             int idx2 = typeName.indexOf("]", idx1);
@@ -128,8 +176,16 @@ public abstract class SolidityType {
             }
         }
 
+        /**
+         * The Element type.
+         */
         SolidityType elementType;
 
+        /**
+         * Instantiates a new Array type.
+         *
+         * @param name the name
+         */
         public ArrayType(String name) {
             super(name);
             int idx = name.indexOf("[");
@@ -159,6 +215,12 @@ public abstract class SolidityType {
             return getArrayCanonicalName("");
         }
 
+        /**
+         * Gets array canonical name.
+         *
+         * @param parentDimStr the parent dim str
+         * @return the array canonical name
+         */
         String getArrayCanonicalName(String parentDimStr) {
             String myDimStr = parentDimStr + getCanonicalDimension();
             if (getElementType() instanceof ArrayType) {
@@ -169,18 +231,45 @@ public abstract class SolidityType {
             }
         }
 
+        /**
+         * Gets canonical dimension.
+         *
+         * @return the canonical dimension
+         */
         protected abstract String getCanonicalDimension();
 
+        /**
+         * Gets element type.
+         *
+         * @return the element type
+         */
         public SolidityType getElementType() {
             return elementType;
         }
 
+        /**
+         * Encode list byte [ ].
+         *
+         * @param l the l
+         * @return the byte [ ]
+         */
         public abstract byte[] encodeList(List l);
     }
 
+    /**
+     * The type Static array type.
+     */
     public static class StaticArrayType extends ArrayType {
+        /**
+         * The Size.
+         */
         int size;
 
+        /**
+         * Instantiates a new Static array type.
+         *
+         * @param name the name
+         */
         public StaticArrayType(String name) {
             super(name);
             int idx1 = name.indexOf("[");
@@ -234,7 +323,15 @@ public abstract class SolidityType {
         }
     }
 
+    /**
+     * The type Dynamic array type.
+     */
     public static class DynamicArrayType extends ArrayType {
+        /**
+         * Instantiates a new Dynamic array type.
+         *
+         * @param name the name
+         */
         public DynamicArrayType(String name) {
             super(name);
         }
@@ -303,11 +400,22 @@ public abstract class SolidityType {
         }
     }
 
+    /**
+     * The type Bytes type.
+     */
     public static class BytesType extends SolidityType {
+        /**
+         * Instantiates a new Bytes type.
+         *
+         * @param name the name
+         */
         protected BytesType(String name) {
             super(name);
         }
 
+        /**
+         * Instantiates a new Bytes type.
+         */
         public BytesType() {
             super("bytes");
         }
@@ -346,7 +454,13 @@ public abstract class SolidityType {
         }
     }
 
+    /**
+     * The type String type.
+     */
     public static class StringType extends BytesType {
+        /**
+         * Instantiates a new String type.
+         */
         public StringType() {
             super("string");
         }
@@ -365,7 +479,15 @@ public abstract class SolidityType {
         }
     }
 
+    /**
+     * The type Bytes 32 type.
+     */
     public static class Bytes32Type extends SolidityType {
+        /**
+         * Instantiates a new Bytes 32 type.
+         *
+         * @param s the s
+         */
         public Bytes32Type(String s) {
             super(s);
         }
@@ -395,12 +517,25 @@ public abstract class SolidityType {
             return decodeBytes32(encoded, offset);
         }
 
+        /**
+         * Decode bytes 32 byte [ ].
+         *
+         * @param encoded the encoded
+         * @param offset  the offset
+         * @return the byte [ ]
+         */
         public static byte[] decodeBytes32(byte[] encoded, int offset) {
             return Arrays.copyOfRange(encoded, offset, offset + 32);
         }
     }
 
+    /**
+     * The type Address type.
+     */
     public static class AddressType extends IntType {
+        /**
+         * Instantiates a new Address type.
+         */
         public AddressType() {
             super("address");
         }
@@ -426,12 +561,26 @@ public abstract class SolidityType {
             return ByteUtil.bigIntegerToBytes(bi, 20);
         }
     }
-    
+
+    /**
+     * The type Numeric type.
+     */
     public static abstract class NumericType extends SolidityType {
+        /**
+         * Instantiates a new Numeric type.
+         *
+         * @param name the name
+         */
         public NumericType(String name) {
             super(name);
         }
 
+        /**
+         * Encode internal big integer.
+         *
+         * @param value the value
+         * @return the big integer
+         */
         BigInteger encodeInternal(Object value) {
             BigInteger bigInt;
             if (value instanceof String) {
@@ -458,7 +607,15 @@ public abstract class SolidityType {
         }
     }
 
+    /**
+     * The type Int type.
+     */
     public static class IntType extends NumericType {
+        /**
+         * Instantiates a new Int type.
+         *
+         * @param name the name
+         */
         public IntType(String name) {
             super(name);
         }
@@ -470,12 +627,34 @@ public abstract class SolidityType {
             }
             return super.getCanonicalName();
         }
+
+        /**
+         * Decode int big integer.
+         *
+         * @param encoded the encoded
+         * @param offset  the offset
+         * @return the big integer
+         */
         public static BigInteger decodeInt(byte[] encoded, int offset) {
             return new BigInteger(Arrays.copyOfRange(encoded, offset, offset + 32));
         }
+
+        /**
+         * Encode int byte [ ].
+         *
+         * @param i the
+         * @return the byte [ ]
+         */
         public static byte[] encodeInt(int i) {
             return encodeInt(new BigInteger("" + i));
         }
+
+        /**
+         * Encode int byte [ ].
+         *
+         * @param bigInt the big int
+         * @return the byte [ ]
+         */
         public static byte[] encodeInt(BigInteger bigInt) {
             return ByteUtil.bigIntegerToBytesSigned(bigInt, 32);
         }
@@ -489,8 +668,16 @@ public abstract class SolidityType {
             return encodeInt(bigInt);
         }
     }
-    
+
+    /**
+     * The type Unsigned int type.
+     */
     public static class UnsignedIntType extends NumericType {
+        /**
+         * Instantiates a new Unsigned int type.
+         *
+         * @param name the name
+         */
         public UnsignedIntType(String name) {
             super(name);
         }
@@ -502,12 +689,34 @@ public abstract class SolidityType {
             }
             return super.getCanonicalName();
         }
+
+        /**
+         * Decode int big integer.
+         *
+         * @param encoded the encoded
+         * @param offset  the offset
+         * @return the big integer
+         */
         public static BigInteger decodeInt(byte[] encoded, int offset) {
             return new BigInteger(1, Arrays.copyOfRange(encoded, offset, offset + 32));
         }
+
+        /**
+         * Encode int byte [ ].
+         *
+         * @param i the
+         * @return the byte [ ]
+         */
         public static byte[] encodeInt(int i) {
             return encodeInt(new BigInteger("" + i));
         }
+
+        /**
+         * Encode int byte [ ].
+         *
+         * @param bigInt the big int
+         * @return the byte [ ]
+         */
         public static byte[] encodeInt(BigInteger bigInt) {
             if (bigInt.signum() == -1) {
                 throw new RuntimeException("Wrong value for uint type: " + bigInt);
@@ -525,7 +734,13 @@ public abstract class SolidityType {
         }
     }
 
+    /**
+     * The type Bool type.
+     */
     public static class BoolType extends IntType {
+        /**
+         * Instantiates a new Bool type.
+         */
         public BoolType() {
             super("bool");
         }
@@ -544,7 +759,13 @@ public abstract class SolidityType {
         }
     }
 
+    /**
+     * The type Function type.
+     */
     public static class FunctionType extends Bytes32Type {
+        /**
+         * Instantiates a new Function type.
+         */
         public FunctionType() {
             super("function");
         }

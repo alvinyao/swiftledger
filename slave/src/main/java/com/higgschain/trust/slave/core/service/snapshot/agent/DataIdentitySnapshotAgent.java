@@ -22,15 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Data identity snapshot agent.
+ *
  * @author liuyu
  * @description an agent for data identity snapshot
- * @date 2018-04-09
+ * @date 2018 -04-09
  */
 @Slf4j
 @Component
 public class DataIdentitySnapshotAgent implements CacheLoader {
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Data identity repository.
+     */
     @Autowired
     DataIdentityRepository dataIdentityRepository;
 
@@ -51,8 +59,8 @@ public class DataIdentitySnapshotAgent implements CacheLoader {
     /**
      * query data identity
      *
-     * @param identity
-     * @return
+     * @param identity the identity
+     * @return data identity
      */
     public DataIdentity getDataIdentity(String identity) {
         return get(new DataIdentityCacheKey(identity));
@@ -61,7 +69,7 @@ public class DataIdentitySnapshotAgent implements CacheLoader {
     /**
      * save data identity
      *
-     * @param dataIdentity
+     * @param dataIdentity the data identity
      */
     public void saveDataIdentity(DataIdentity dataIdentity) {
         insert(new DataIdentityCacheKey(dataIdentity.getIdentity()), dataIdentity);

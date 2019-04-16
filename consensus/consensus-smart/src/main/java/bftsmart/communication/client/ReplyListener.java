@@ -18,6 +18,9 @@ package bftsmart.communication.client;
 import bftsmart.tom.RequestContext;
 import bftsmart.tom.core.messages.TOMMessage;
 
+/**
+ * The interface Reply listener.
+ */
 public interface ReplyListener {
 
     /**

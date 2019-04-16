@@ -23,18 +23,38 @@ import java.util.Collection;
  * Facade class which encapsulates both Read and Write caches
  * <p>
  * Created by Anton Nashatyrev on 29.11.2016.
+ *
+ * @param <Key>   the type parameter
+ * @param <Value> the type parameter
  */
 public class ReadWriteCache<Key, Value>
         extends SourceChainBox<Key, Value, Key, Value>
         implements CachedSource<Key, Value> {
 
+    /**
+     * The Read cache.
+     */
     protected ReadCache<Key, Value> readCache;
+    /**
+     * The Write cache.
+     */
     protected WriteCache<Key, Value> writeCache;
 
+    /**
+     * Instantiates a new Read write cache.
+     *
+     * @param source the source
+     */
     protected ReadWriteCache(Source<Key, Value> source) {
         super(source);
     }
 
+    /**
+     * Instantiates a new Read write cache.
+     *
+     * @param src       the src
+     * @param cacheType the cache type
+     */
     public ReadWriteCache(Source<Key, Value> src, WriteCache.CacheType cacheType) {
         super(src);
         add(writeCache = new WriteCache<>(src, cacheType));
@@ -52,6 +72,12 @@ public class ReadWriteCache<Key, Value>
         return writeCache.hasModified();
     }
 
+    /**
+     * Gets cached.
+     *
+     * @param key the key
+     * @return the cached
+     */
     protected synchronized AbstractCachedSource.Entry<Value> getCached(Key key) {
         AbstractCachedSource.Entry<Value> v = readCache.getCached(key);
         if (v == null) {
@@ -65,7 +91,18 @@ public class ReadWriteCache<Key, Value>
         return readCache.estimateCacheSize() + writeCache.estimateCacheSize();
     }
 
+    /**
+     * The type Bytes key.
+     *
+     * @param <V> the type parameter
+     */
     public static class BytesKey<V> extends ReadWriteCache<byte[], V> {
+        /**
+         * Instantiates a new Bytes key.
+         *
+         * @param src       the src
+         * @param cacheType the cache type
+         */
         public BytesKey(Source<byte[], V> src, WriteCache.CacheType cacheType) {
             super(src);
             add(this.writeCache = new WriteCache.BytesKey<>(src, cacheType));

@@ -76,6 +76,11 @@ public class ThreadStatesGaugeSet implements MetricSet {
         return count;
     }
 
+    /**
+     * Get thread info thread info [ ].
+     *
+     * @return the thread info [ ]
+     */
     ThreadInfo[] getThreadInfo() {
         return threads.getThreadInfo(threads.getAllThreadIds(), STACK_TRACE_DEPTH);
     }

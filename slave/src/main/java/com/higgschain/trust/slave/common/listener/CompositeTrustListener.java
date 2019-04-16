@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+ * The type Composite trust listener.
+ *
  * @author duhongming
- * @date 2018/12/17
+ * @date 2018 /12/17
  */
 public class CompositeTrustListener implements TrustListener {
 
@@ -17,6 +19,12 @@ public class CompositeTrustListener implements TrustListener {
         private TrustListener listener;
         private String info;
 
+        /**
+         * Instantiates a new Runnable info.
+         *
+         * @param listener the listener
+         * @param info     the info
+         */
         public RunnableInfo(TrustListener listener, String info) {
             this.listener = listener;
             this.info = info;
@@ -28,15 +36,31 @@ public class CompositeTrustListener implements TrustListener {
         }
     }
 
+    /**
+     * The Event dispatch thread.
+     */
     @Autowired
     EventDispatchThread eventDispatchThread = EventDispatchThread.getDefault();
 
+    /**
+     * The Listeners.
+     */
     protected List<TrustListener> listeners = new CopyOnWriteArrayList<>();
 
+    /**
+     * Add listener.
+     *
+     * @param listener the listener
+     */
     public void addListener(TrustListener listener) {
         listeners.add(listener);
     }
 
+    /**
+     * Remove listener.
+     *
+     * @param listener the listener
+     */
     public void removeListener(TrustListener listener) {
         listeners.remove(listener);
     }

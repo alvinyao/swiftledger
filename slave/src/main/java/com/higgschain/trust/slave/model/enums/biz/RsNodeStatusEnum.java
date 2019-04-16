@@ -1,7 +1,15 @@
 package com.higgschain.trust.slave.model.enums.biz;
 
-public enum RsNodeStatusEnum {
-    COMMON("COMMON","rs node register"),
+/**
+ * The enum Rs node status enum.
+ */
+public enum RsNodeStatusEnum {/**
+ * The Common.
+ */
+COMMON("COMMON","rs node register"),
+    /**
+     * The Canceled.
+     */
     CANCELED("CANCELED", "rs node canceled");
 
     RsNodeStatusEnum(String code, String desc) {
@@ -13,22 +21,48 @@ public enum RsNodeStatusEnum {
 
     private String desc;
 
+    /**
+     * Gets code.
+     *
+     * @return the code
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * Sets code.
+     *
+     * @param code the code
+     */
     public void setCode(String code) {
         this.code = code;
     }
 
+    /**
+     * Gets desc.
+     *
+     * @return the desc
+     */
     public String getDesc() {
         return desc;
     }
 
+    /**
+     * Sets desc.
+     *
+     * @param desc the desc
+     */
     public void setDesc(String desc) {
         this.desc = desc;
     }
 
+    /**
+     * Gets by code.
+     *
+     * @param code the code
+     * @return the by code
+     */
     public static RsNodeStatusEnum getByCode(String code) {
         for (RsNodeStatusEnum enumeration : values()) {
             if (enumeration.getCode().equals(code)) {

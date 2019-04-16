@@ -6,9 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Tx id bo.
+ *
  * @author liuyu
  * @description
- * @date 2018-09-18
+ * @date 2018 -09-18
  */
 @Getter
 @Setter

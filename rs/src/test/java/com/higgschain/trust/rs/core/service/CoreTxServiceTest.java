@@ -17,13 +17,18 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Core tx service test.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-13
+ * @date 2018 -05-13
  */
 public class CoreTxServiceTest extends IntegrateBaseTest {
     @Autowired private CoreTransactionService coreTransactionService;
 
+    /**
+     * Test submit tx.
+     */
     @Test
     public void testSubmitTx(){
         CoreTransaction coreTx = new CoreTransaction();
@@ -52,7 +57,9 @@ public class CoreTxServiceTest extends IntegrateBaseTest {
         return registerPolicies;
     }
 
-
+    /**
+     * Test process init tx.
+     */
     @Test
     public void testProcessInitTx(){
         String txId = "";

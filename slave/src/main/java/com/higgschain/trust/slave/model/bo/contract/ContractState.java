@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Contract state.
+ *
  * @author duhongming
- * @date 2018/6/12
+ * @date 2018 /6/12
  */
 @Getter
 @Setter

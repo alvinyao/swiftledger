@@ -16,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Account freeze record rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -26,6 +28,11 @@ public class AccountFreezeRecordRocksDao extends RocksBaseDao<AccountFreezeRecor
         return "accountFreezeRecord";
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param pos the pos
+     */
     public void batchInsert(List<AccountFreezeRecordPO> pos) {
         if (CollectionUtils.isEmpty(pos)) {
             return;
@@ -48,6 +55,13 @@ public class AccountFreezeRecordRocksDao extends RocksBaseDao<AccountFreezeRecor
         }
     }
 
+    /**
+     * Decrease amount.
+     *
+     * @param bizFlowNo the biz flow no
+     * @param accountNo the account no
+     * @param amount    the amount
+     */
     public void decreaseAmount(String bizFlowNo, String accountNo, BigDecimal amount) {
         String key = bizFlowNo + Constant.SPLIT_SLASH + accountNo;
         AccountFreezeRecordPO po = get(key);

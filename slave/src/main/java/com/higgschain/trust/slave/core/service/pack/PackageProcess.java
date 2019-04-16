@@ -22,8 +22,10 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
+ * The type Package process.
+ *
  * @author tangfashuang
- * @date 2018/04/17 11:43
+ * @date 2018 /04/17 11:43
  */
 @Service
 @Slf4j
@@ -61,7 +63,7 @@ public class PackageProcess implements InitializingBean {
     /**
      * package process logic
      *
-     * @param height
+     * @param height the height
      */
     public void process(final Long height) {
         boolean result = false;
@@ -128,6 +130,11 @@ public class PackageProcess implements InitializingBean {
         }
     }
 
+    /**
+     * Process.
+     *
+     * @param pack the pack
+     */
     public void process(final Package pack) {
         process(pack.getHeight());
     }
@@ -151,7 +158,7 @@ public class PackageProcess implements InitializingBean {
     /**
      * get max block height of processed
      *
-     * @return
+     * @return max height
      */
     public Long getMaxHeight() {
         return processedHeight.get();
@@ -168,7 +175,7 @@ public class PackageProcess implements InitializingBean {
     /**
      * update processed block height
      *
-     * @param height
+     * @param height the height
      */
     public void updateProcessedHeight(Long height) {
         processedHeight.set(height);

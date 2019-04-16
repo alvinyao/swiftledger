@@ -37,7 +37,7 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
  * CoreTransaction Convertor
  *
  * @author lingchao
- * @create 2018年06月27日22:58
+ * @create 2018年06月27日22 :58
  */
 @Slf4j @Service public class CoreTransactionConvertor {
     @Autowired private NodeState nodeState;
@@ -46,9 +46,11 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build core transaction
      *
-     * @param txId
-     * @param actionList
-     * @return
+     * @param txId       the tx id
+     * @param bizModel   the biz model
+     * @param actionList the action list
+     * @param policyId   the policy id
+     * @return core transaction
      */
     public CoreTransaction buildCoreTransaction(String txId, JSONObject bizModel, List<Action> actionList,
         String policyId) {
@@ -58,9 +60,12 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build core transaction
      *
-     * @param txId
-     * @param actionList
-     * @return
+     * @param txId       the tx id
+     * @param bizModel   the biz model
+     * @param actionList the action list
+     * @param policyId   the policy id
+     * @param txType     the tx type
+     * @return core transaction
      */
     public CoreTransaction buildCoreTransaction(String txId, JSONObject bizModel, List<Action> actionList,
         String policyId, String txType) {
@@ -79,10 +84,10 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build txIn
      *
-     * @param txId
-     * @param actionIndex
-     * @param index
-     * @return
+     * @param txId        the tx id
+     * @param actionIndex the action index
+     * @param index       the index
+     * @return tx in
      */
     public TxIn buildTxIn(String txId, Integer actionIndex, Integer index) {
         TxIn txIn = new TxIn();
@@ -95,11 +100,11 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build txOut
      *
-     * @param identity
-     * @param actionIndex
-     * @param index
-     * @param state
-     * @return
+     * @param identity    the identity
+     * @param actionIndex the action index
+     * @param index       the index
+     * @param state       the state
+     * @return tx out
      */
     public TxOut buildTxOut(String identity, Integer actionIndex, Integer index, JSONObject state) {
         TxOut txOut = new TxOut();
@@ -113,9 +118,9 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build dataIdentityAction
      *
-     * @param identity
-     * @param index
-     * @return
+     * @param identity the identity
+     * @param index    the index
+     * @return data identity action
      */
     public DataIdentityAction buildDataIdentityAction(String identity, int index) {
         DataIdentityAction dataIdentityAction = new DataIdentityAction();
@@ -130,13 +135,13 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build UTXOAction
      *
-     * @param utxoActionTypeEnum
-     * @param contractAddress
-     * @param stateClass
-     * @param index
-     * @param inputList
-     * @param txOutList
-     * @return
+     * @param utxoActionTypeEnum the utxo action type enum
+     * @param contractAddress    the contract address
+     * @param stateClass         the state class
+     * @param index              the index
+     * @param inputList          the input list
+     * @param txOutList          the tx out list
+     * @return utxo action
      */
     public UTXOAction buildUTXOAction(UTXOActionTypeEnum utxoActionTypeEnum, String contractAddress, String stateClass,
         int index, List<TxIn> inputList, List<TxOut> txOutList) {
@@ -154,10 +159,12 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build currency action
      *
-     * @param currency
-     * @param index
-     * @param remark
-     * @return
+     * @param currency        the currency
+     * @param index           the index
+     * @param contractAddress the contract address
+     * @param homomorphicPk   the homomorphic pk
+     * @param remark          the remark
+     * @return issue currency
      */
     public IssueCurrency buildIssueCurrencyAction(String currency, int index, String contractAddress,
         String homomorphicPk, String remark) {
@@ -174,10 +181,10 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build currency action
      *
-     * @param currency
-     * @param index
-     * @param remark
-     * @return
+     * @param currency the currency
+     * @param index    the index
+     * @param remark   the remark
+     * @return issue currency
      */
     public IssueCurrency buildIssueCurrencyAction(String currency, int index, String remark) {
         IssueCurrency currencyAction = new IssueCurrency();
@@ -191,11 +198,11 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     /**
      * build contract create v2 action
      *
-     * @param fromAddress
-     * @param contractAddress
-     * @param contractHexCode
-     * @param actionIndex
-     * @return
+     * @param fromAddress     the from address
+     * @param contractAddress the contract address
+     * @param contractHexCode the contract hex code
+     * @param actionIndex     the action index
+     * @return contract creation v 2 action
      */
     public ContractCreationV2Action buildContractCreationV2Action(String fromAddress, String contractAddress,
         String contractHexCode, int actionIndex) {
@@ -209,6 +216,14 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
         return contractCreationV2Action;
     }
 
+    /**
+     * Build contract code string.
+     *
+     * @param in               the in
+     * @param contractor       the contractor
+     * @param contractInitArgs the contract init args
+     * @return the string
+     */
     public String buildContractCode(InputStream in, String contractor, Object... contractInitArgs) {
         try {
             String sourceCode = IOUtils.toString(in, Charsets.UTF_8);
@@ -218,6 +233,14 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
         }
     }
 
+    /**
+     * Build contract code string.
+     *
+     * @param sourceCode       the source code
+     * @param contractor       the contractor
+     * @param contractInitArgs the contract init args
+     * @return the string
+     */
     public String buildContractCode(String sourceCode, String contractor, Object... contractInitArgs) {
         try {
             SolidityCompiler.Result res =

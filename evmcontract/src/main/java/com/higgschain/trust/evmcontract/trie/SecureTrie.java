@@ -21,16 +21,35 @@ import com.higgschain.trust.evmcontract.crypto.HashUtil;
 import com.higgschain.trust.evmcontract.datasource.Source;
 import com.higgschain.trust.evmcontract.util.ByteUtil;
 
+/**
+ * The type Secure trie.
+ */
 public class SecureTrie extends TrieImpl {
 
+    /**
+     * Instantiates a new Secure trie.
+     *
+     * @param root the root
+     */
     public SecureTrie(byte[] root) {
         super(root);
     }
 
+    /**
+     * Instantiates a new Secure trie.
+     *
+     * @param cache the cache
+     */
     public SecureTrie(Source<byte[], byte[]> cache) {
         super(cache, null);
     }
 
+    /**
+     * Instantiates a new Secure trie.
+     *
+     * @param cache the cache
+     * @param root  the root
+     */
     public SecureTrie(Source<byte[], byte[]> cache, byte[] root) {
         super(cache, root);
     }

@@ -8,6 +8,8 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
+ * The type Valid command wrap.
+ *
  * @author cwy
  */
 @Getter

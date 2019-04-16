@@ -27,6 +27,9 @@ import java.math.BigInteger;
 
 import static com.higgschain.trust.evmcontract.util.ByteUtil.toHexString;
 
+/**
+ * The type Account state.
+ */
 public class AccountState {
 
     private byte[] rlpEncoded;
@@ -59,11 +62,24 @@ public class AccountState {
      * retrieval */
     private final byte[] codeHash;
 
-
+    /**
+     * Instantiates a new Account state.
+     *
+     * @param nonce   the nonce
+     * @param balance the balance
+     */
     public AccountState(BigInteger nonce, BigInteger balance) {
         this(nonce, balance, HashUtil.EMPTY_TRIE_HASH, HashUtil.EMPTY_DATA_HASH);
     }
 
+    /**
+     * Instantiates a new Account state.
+     *
+     * @param nonce     the nonce
+     * @param balance   the balance
+     * @param stateRoot the state root
+     * @param codeHash  the code hash
+     */
     public AccountState(BigInteger nonce, BigInteger balance, byte[] stateRoot, byte[] codeHash) {
         this.nonce = nonce;
         this.balance = balance;
@@ -71,6 +87,11 @@ public class AccountState {
         this.codeHash = codeHash == HashUtil.EMPTY_DATA_HASH || FastByteComparisons.equal(codeHash, HashUtil.EMPTY_DATA_HASH) ? HashUtil.EMPTY_DATA_HASH : codeHash;
     }
 
+    /**
+     * Instantiates a new Account state.
+     *
+     * @param rlpData the rlp data
+     */
     public AccountState(byte[] rlpData) {
         this.rlpEncoded = rlpData;
 
@@ -81,42 +102,96 @@ public class AccountState {
         this.codeHash = items.get(3).getRLPData();
     }
 
+    /**
+     * Gets nonce.
+     *
+     * @return the nonce
+     */
     public BigInteger getNonce() {
         return nonce;
     }
 
+    /**
+     * With nonce account state.
+     *
+     * @param nonce the nonce
+     * @return the account state
+     */
     public AccountState withNonce(BigInteger nonce) {
         return new AccountState(nonce, balance, stateRoot, codeHash);
     }
 
+    /**
+     * Get state root byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getStateRoot() {
         return stateRoot;
     }
 
+    /**
+     * With state root account state.
+     *
+     * @param stateRoot the state root
+     * @return the account state
+     */
     public AccountState withStateRoot(byte[] stateRoot) {
         return new AccountState(nonce, balance, stateRoot, codeHash);
     }
 
+    /**
+     * With incremented nonce account state.
+     *
+     * @return the account state
+     */
     public AccountState withIncrementedNonce() {
         return new AccountState(nonce.add(BigInteger.ONE), balance, stateRoot, codeHash);
     }
 
+    /**
+     * Get code hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getCodeHash() {
         return codeHash;
     }
 
+    /**
+     * With code hash account state.
+     *
+     * @param codeHash the code hash
+     * @return the account state
+     */
     public AccountState withCodeHash(byte[] codeHash) {
         return new AccountState(nonce, balance, stateRoot, codeHash);
     }
 
+    /**
+     * Gets balance.
+     *
+     * @return the balance
+     */
     public BigInteger getBalance() {
         return balance;
     }
 
+    /**
+     * With balance increment account state.
+     *
+     * @param value the value
+     * @return the account state
+     */
     public AccountState withBalanceIncrement(BigInteger value) {
         return new AccountState(nonce, balance.add(value), stateRoot, codeHash);
     }
 
+    /**
+     * Get encoded byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getEncoded() {
         if (rlpEncoded == null) {
             byte[] nonce = RLP.encodeBigInteger(this.nonce);
@@ -133,6 +208,11 @@ public class AccountState {
 //                !blockchainConfig.getConstants().getInitialNonce().equals(nonce);
 //    }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     public boolean isEmpty() {
         return FastByteComparisons.equal(codeHash, HashUtil.EMPTY_DATA_HASH) &&
                 BigInteger.ZERO.equals(balance) &&

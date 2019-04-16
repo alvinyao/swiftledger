@@ -14,13 +14,16 @@ import java.util.List;
  * UTXOContextService test
  *
  * @author lingchao
- * @create 2018年09月03日14:50
+ * @create 2018年09月03日14 :50
  */
 public class UTXOContextServiceTest extends BaseTest {
 
     @Autowired
     private UTXOContextService utxoContextService;
 
+    /**
+     * Verify signature.
+     */
     @Test
     public void verifySignature() {
         String masssage = "lingchao";

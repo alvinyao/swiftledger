@@ -23,10 +23,18 @@ package com.higgschain.trust.evmcontract.datasource;
  * in 'cascade' manner
  * <p>
  * Created by Anton Nashatyrev on 06.12.2016.
+ *
+ * @param <Key>         the type parameter
+ * @param <Value>       the type parameter
+ * @param <SourceKey>   the type parameter
+ * @param <SourceValue> the type parameter
  */
 public abstract class AbstractChainedSource<Key, Value, SourceKey, SourceValue> implements Source<Key, Value> {
 
     private Source<SourceKey, SourceValue> source;
+    /**
+     * The Flush source.
+     */
     protected boolean flushSource;
 
     /**
@@ -36,21 +44,38 @@ public abstract class AbstractChainedSource<Key, Value, SourceKey, SourceValue> 
     protected AbstractChainedSource() {
     }
 
+    /**
+     * Instantiates a new Abstract chained source.
+     *
+     * @param source the source
+     */
     public AbstractChainedSource(Source<SourceKey, SourceValue> source) {
         this.source = source;
     }
 
     /**
      * Intended for subclasses which wishes to initialize the source later
+     *
+     * @param src the src
      */
     protected void setSource(Source<SourceKey, SourceValue> src) {
         source = src;
     }
 
+    /**
+     * Gets source.
+     *
+     * @return the source
+     */
     public Source<SourceKey, SourceValue> getSource() {
         return source;
     }
 
+    /**
+     * Sets flush source.
+     *
+     * @param flushSource the flush source
+     */
     public void setFlushSource(boolean flushSource) {
         this.flushSource = flushSource;
     }
@@ -71,6 +96,8 @@ public abstract class AbstractChainedSource<Key, Value, SourceKey, SourceValue> 
 
     /**
      * Should be overridden to do actual source flush
+     *
+     * @return the boolean
      */
     protected abstract boolean flushImpl();
 }

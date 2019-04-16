@@ -68,6 +68,7 @@ public interface Pairing {
      * For bilinear maps, Zr has index 0, G1 has index 1,
      * G2 has index 2 and GT has index 3.
      *
+     * @param index the index
      * @return Returns the field at level <tt>index</tt>
      * @since 2.0.0
      */
@@ -78,9 +79,8 @@ public interface Pairing {
      * to this pairing, otherwise it returns -1.
      *
      * @param field the field whose index has to be determine.
-     * @return the index of the field if it belongs
-     * to this pairing, otherwise it returns Unknown.
-     * @see #getFieldAt(int)
+     * @return the index of the field if it belongs to this pairing, otherwise it returns Unknown.
+     * @see #getFieldAt(int) #getFieldAt(int)
      * @since 2.0.0
      */
     int getFieldIndex(Field field);
@@ -99,16 +99,14 @@ public interface Pairing {
      * Returns <tt>true</tt> if optimized
      * product of pairing is supported,
      * <tt>false</tt> otherwise.
-     *
+     * <p>
      * If optimized product of pairing is supported then
      * invoking the #pairing(Element[], Element[]) method should
      * guarantee better performance.
      *
-     * @return <tt>true</tt> if optimized
-     * product of pairing is supported,
-     * <tt>false</tt> otherwise.
+     * @return <tt>true</tt> if optimized product of pairing is supported, <tt>false</tt> otherwise.
+     * @see #pairing(Element[], Element[]) #pairing(Element[], Element[])
      * @since 2.0.0
-     * @see #pairing(Element[], Element[])
      */
     boolean isProductPairingSupported();
 
@@ -118,7 +116,7 @@ public interface Pairing {
      *
      * @param in1 must have at least 'n' elements belonging to the groups G1
      * @param in2 must have at least 'n' elements belonging to the groups G2
-     * @return the product of pairings, that is 'e'('in1'[0], 'in2'[0]) ... 'e'('in1'[n-1], 'in2'[n-1]). 
+     * @return the product of pairings, that is 'e'('in1'[0], 'in2'[0]) ... 'e'('in1'[n-1], 'in2'[n-1]).
      * @since 1.1.0
      */
     Element pairing(Element[] in1, Element[] in2);
@@ -127,10 +125,10 @@ public interface Pairing {
      * Returns the length in bytes needed to represent a PairingPreProcessing structure.
      *
      * @return the length in bytes needed to represent a PairingPreProcessing structure.
-     * @since 1.2.0
-     * @see #getPairingPreProcessingFromBytes(byte[])
-     * @see #getPairingPreProcessingFromElement(Element)
+     * @see #getPairingPreProcessingFromBytes(byte[]) #getPairingPreProcessingFromBytes(byte[])
+     * @see #getPairingPreProcessingFromElement(Element) #getPairingPreProcessingFromElement(Element)
      * @see PairingPreProcessing
+     * @since 1.2.0
      */
     int getPairingPreProcessingLengthInBytes();
 

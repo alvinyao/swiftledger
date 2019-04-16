@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 /**
+ * The type Pairing data input.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class PairingDataInput implements DataInput {
@@ -14,11 +16,21 @@ public class PairingDataInput implements DataInput {
     private DataInput dataInput;
     private Pairing pairing;
 
-
+    /**
+     * Instantiates a new Pairing data input.
+     *
+     * @param dataInput the data input
+     */
     public PairingDataInput(DataInput dataInput) {
         this.dataInput = dataInput;
     }
 
+    /**
+     * Instantiates a new Pairing data input.
+     *
+     * @param dataInput the data input
+     * @param pairing   the pairing
+     */
     public PairingDataInput(DataInput dataInput, Pairing pairing) {
         this.dataInput = dataInput;
         this.pairing = pairing;
@@ -85,16 +97,33 @@ public class PairingDataInput implements DataInput {
         return dataInput.readUTF();
     }
 
+    /**
+     * Gets pairing.
+     *
+     * @return the pairing
+     */
     public Pairing getPairing() {
         return pairing;
     }
 
+    /**
+     * Read field field.
+     *
+     * @return the field
+     * @throws IOException the io exception
+     */
     public Field readField() throws IOException {
         int identifier = readInt();
         return pairing.getFieldAt(identifier);
     }
 
-
+    /**
+     * Read element element.
+     *
+     * @param fieldIdentifier the field identifier
+     * @return the element
+     * @throws IOException the io exception
+     */
     public Element readElement(int fieldIdentifier) throws IOException {
         byte[] buffer = new byte[readInt()];
         readFully(buffer);
@@ -102,6 +131,13 @@ public class PairingDataInput implements DataInput {
         return pairing.getFieldAt(fieldIdentifier).newElementFromBytes(buffer);
     }
 
+    /**
+     * Read elements element [ ].
+     *
+     * @param identifier the identifier
+     * @return the element [ ]
+     * @throws IOException the io exception
+     */
     public Element[] readElements(int identifier) throws IOException{
         int num = readInt();
         Element[] elements = new Element[num];
@@ -112,6 +148,12 @@ public class PairingDataInput implements DataInput {
         return elements;
     }
 
+    /**
+     * Read pairing pre processing pairing pre processing.
+     *
+     * @return the pairing pre processing
+     * @throws IOException the io exception
+     */
     public PairingPreProcessing readPairingPreProcessing() throws IOException {
         int size = readInt();
         byte[] buffer = new byte[size];
@@ -120,6 +162,12 @@ public class PairingDataInput implements DataInput {
         return getPairing().getPairingPreProcessingFromBytes(buffer, 0);
     }
 
+    /**
+     * Read element pow pre processing element pow pre processing.
+     *
+     * @return the element pow pre processing
+     * @throws IOException the io exception
+     */
     public ElementPowPreProcessing readElementPowPreProcessing() throws IOException {
         // Read field identifier
         Field field = readField();
@@ -132,6 +180,12 @@ public class PairingDataInput implements DataInput {
         return field.getElementPowPreProcessingFromBytes(buffer, 0);
     }
 
+    /**
+     * Read ints int [ ].
+     *
+     * @return the int [ ]
+     * @throws IOException the io exception
+     */
     public int[] readInts() throws IOException {
         int num = readInt();
         int[] elements = new int[num];
@@ -142,6 +196,12 @@ public class PairingDataInput implements DataInput {
         return elements;
     }
 
+    /**
+     * Read bytes byte [ ].
+     *
+     * @return the byte [ ]
+     * @throws IOException the io exception
+     */
     public byte[] readBytes() throws IOException {
         int length = readInt();
         byte[] buffer = new byte[length];
@@ -150,10 +210,22 @@ public class PairingDataInput implements DataInput {
         return buffer;
     }
 
+    /**
+     * Read big integer big integer.
+     *
+     * @return the big integer
+     * @throws IOException the io exception
+     */
     public BigInteger readBigInteger() throws IOException {
         return new BigInteger(readBytes());
     }
 
+    /**
+     * Read big integers big integer [ ].
+     *
+     * @return the big integer [ ]
+     * @throws IOException the io exception
+     */
     public BigInteger[] readBigIntegers() throws IOException {
         int num = readInt();
         BigInteger[] bigIntegers = new BigInteger[num];

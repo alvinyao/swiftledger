@@ -32,6 +32,8 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.size;
 
 /**
+ * The type Program result.
+ *
  * @author Roman Mandeleil
  * @since 07.06.2014
  */
@@ -55,49 +57,102 @@ public class ProgramResult {
      */
     private List<CallCreate> callCreateList;
 
+    /**
+     * Create empty program result.
+     *
+     * @return the program result
+     */
     public static ProgramResult createEmpty() {
         ProgramResult result = new ProgramResult();
         result.setHReturn(EMPTY_BYTE_ARRAY);
         return result;
     }
 
+    /**
+     * Spend gas.
+     *
+     * @param gas the gas
+     */
     public void spendGas(long gas) {
         gasUsed += gas;
     }
 
+    /**
+     * Sets revert.
+     */
     public void setRevert() {
         this.revert = true;
     }
 
+    /**
+     * Is revert boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRevert() {
         return revert;
     }
 
+    /**
+     * Refund gas.
+     *
+     * @param gas the gas
+     */
     public void refundGas(long gas) {
         gasUsed -= gas;
     }
 
+    /**
+     * Get h return byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getHReturn() {
         return hReturn;
     }
 
+    /**
+     * Sets h return.
+     *
+     * @param hReturn the h return
+     */
     public void setHReturn(byte[] hReturn) {
         this.hReturn = hReturn;
 
     }
 
+    /**
+     * Gets exception.
+     *
+     * @return the exception
+     */
     public RuntimeException getException() {
         return exception;
     }
 
+    /**
+     * Sets exception.
+     *
+     * @param exception the exception
+     */
     public void setException(RuntimeException exception) {
         this.exception = exception;
     }
 
+    /**
+     * Gets gas used.
+     *
+     * @return the gas used
+     */
     public long getGasUsed() {
         return gasUsed;
     }
 
+    /**
+     * Gets delete accounts.
+     *
+     * @return the delete accounts
+     */
     public Set<DataWord> getDeleteAccounts() {
         if (deleteAccounts == null) {
             deleteAccounts = new HashSet<>();
@@ -105,30 +160,60 @@ public class ProgramResult {
         return deleteAccounts;
     }
 
+    /**
+     * Add delete account.
+     *
+     * @param address the address
+     */
     public void addDeleteAccount(DataWord address) {
         getDeleteAccounts().add(address);
     }
 
+    /**
+     * Add delete accounts.
+     *
+     * @param accounts the accounts
+     */
     public void addDeleteAccounts(Set<DataWord> accounts) {
         if (!isEmpty(accounts)) {
             getDeleteAccounts().addAll(accounts);
         }
     }
 
+    /**
+     * Add touch account.
+     *
+     * @param addr the addr
+     */
     public void addTouchAccount(byte[] addr) {
         touchedAccounts.add(addr);
     }
 
+    /**
+     * Gets touched accounts.
+     *
+     * @return the touched accounts
+     */
     public Set<byte[]> getTouchedAccounts() {
         return touchedAccounts;
     }
 
+    /**
+     * Add touch accounts.
+     *
+     * @param accounts the accounts
+     */
     public void addTouchAccounts(Set<byte[]> accounts) {
         if (!isEmpty(accounts)) {
             getTouchedAccounts().addAll(accounts);
         }
     }
 
+    /**
+     * Gets log info list.
+     *
+     * @return the log info list
+     */
     public List<LogInfo> getLogInfoList() {
         if (logInfoList == null) {
             logInfoList = new ArrayList<>();
@@ -136,16 +221,31 @@ public class ProgramResult {
         return logInfoList;
     }
 
+    /**
+     * Add log info.
+     *
+     * @param logInfo the log info
+     */
     public void addLogInfo(LogInfo logInfo) {
         getLogInfoList().add(logInfo);
     }
 
+    /**
+     * Add log infos.
+     *
+     * @param logInfos the log infos
+     */
     public void addLogInfos(List<LogInfo> logInfos) {
         if (!isEmpty(logInfos)) {
             getLogInfoList().addAll(logInfos);
         }
     }
 
+    /**
+     * Gets call create list.
+     *
+     * @return the call create list
+     */
     public List<CallCreate> getCallCreateList() {
         if (callCreateList == null) {
             callCreateList = new ArrayList<>();
@@ -153,10 +253,23 @@ public class ProgramResult {
         return callCreateList;
     }
 
+    /**
+     * Add call create.
+     *
+     * @param data        the data
+     * @param destination the destination
+     * @param gasLimit    the gas limit
+     * @param value       the value
+     */
     public void addCallCreate(byte[] data, byte[] destination, byte[] gasLimit, byte[] value) {
         getCallCreateList().add(new CallCreate(data, destination, gasLimit, value));
     }
 
+    /**
+     * Gets internal transactions.
+     *
+     * @return the internal transactions
+     */
     public List<InternalTransaction> getInternalTransactions() {
         if (internalTransactions == null) {
             internalTransactions = new ArrayList<>();
@@ -164,6 +277,21 @@ public class ProgramResult {
         return internalTransactions;
     }
 
+    /**
+     * Add internal transaction internal transaction.
+     *
+     * @param parentHash     the parent hash
+     * @param deep           the deep
+     * @param nonce          the nonce
+     * @param gasPrice       the gas price
+     * @param gasLimit       the gas limit
+     * @param senderAddress  the sender address
+     * @param receiveAddress the receive address
+     * @param value          the value
+     * @param data           the data
+     * @param note           the note
+     * @return the internal transaction
+     */
     public InternalTransaction addInternalTransaction(byte[] parentHash, int deep, byte[] nonce, DataWord gasPrice, DataWord gasLimit,
                                                       byte[] senderAddress, byte[] receiveAddress, byte[] value, byte[] data, String note) {
         InternalTransaction transaction = new InternalTransaction(parentHash, deep, size(internalTransactions), nonce, gasPrice, gasLimit, senderAddress, receiveAddress, value, data, note);
@@ -171,28 +299,54 @@ public class ProgramResult {
         return transaction;
     }
 
+    /**
+     * Add internal transactions.
+     *
+     * @param internalTransactions the internal transactions
+     */
     public void addInternalTransactions(List<InternalTransaction> internalTransactions) {
         getInternalTransactions().addAll(internalTransactions);
     }
 
+    /**
+     * Reject internal transactions.
+     */
     public void rejectInternalTransactions() {
         for (InternalTransaction internalTx : getInternalTransactions()) {
             internalTx.reject();
         }
     }
 
+    /**
+     * Add future refund.
+     *
+     * @param gasValue the gas value
+     */
     public void addFutureRefund(long gasValue) {
         futureRefund += gasValue;
     }
 
+    /**
+     * Gets future refund.
+     *
+     * @return the future refund
+     */
     public long getFutureRefund() {
         return futureRefund;
     }
 
+    /**
+     * Reset future refund.
+     */
     public void resetFutureRefund() {
         futureRefund = 0;
     }
 
+    /**
+     * Merge.
+     *
+     * @param another the another
+     */
     public void merge(ProgramResult another) {
         addInternalTransactions(another.getInternalTransactions());
         if (another.getException() == null && !another.isRevert()) {

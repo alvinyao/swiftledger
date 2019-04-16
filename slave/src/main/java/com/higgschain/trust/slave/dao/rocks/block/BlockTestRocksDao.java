@@ -10,6 +10,8 @@ import org.rocksdb.Transaction;
 import org.springframework.stereotype.Service;
 
 /**
+ * The type Block test rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -19,6 +21,11 @@ public class BlockTestRocksDao extends RocksBaseDao<BlockPO> {
         return "blockTest";
     }
 
+    /**
+     * Save.
+     *
+     * @param po the po
+     */
     public void save(BlockPO po) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {

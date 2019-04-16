@@ -50,6 +50,8 @@ import java.util.Set;
  * modify the Map.  Therefore the operations that do not cause a change to this
  * class happen quickly and concurrently.
  *
+ * @param <K> the type parameter
+ * @param <V> the type parameter
  * @author The Apache MINA Project (dev@mina.apache.org)
  * @version $Rev$, $Date$
  */
@@ -77,8 +79,7 @@ public class CopyOnWriteMap<K, V> implements Map<K, V>, Cloneable {
      * initial data being held by this map is contained in
      * the supplied map.
      *
-     * @param data A Map containing the initial contents to be placed into
-     *             this class.
+     * @param data A Map containing the initial contents to be placed into             this class.
      */
     public CopyOnWriteMap(Map<K, V> data) {
         internalMap = new HashMap<K, V>(data);

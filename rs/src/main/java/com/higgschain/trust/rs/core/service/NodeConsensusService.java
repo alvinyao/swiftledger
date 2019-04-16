@@ -30,9 +30,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * The type Node consensus service.
+ *
  * @author WangQuanzhou
  * @desc node consensus service
- * @date 2018/7/5 11:38
+ * @date 2018 /7/5 11:38
  */
 @Service @Slf4j public class NodeConsensusService {
 
@@ -47,6 +49,11 @@ import java.util.UUID;
     private static final String SUCCESS = "sucess";
     private static final String FAIL = "fail";
 
+    /**
+     * Join request string.
+     *
+     * @return the string
+     */
     public String joinRequest() {
         log.info("[joinRequest] send ca auth request");
         caService.authKeyPair(nodeState.getNodeName());
@@ -74,8 +81,10 @@ import java.util.UUID;
     }
 
     /**
+     * Join consensus string.
+     *
      * @param
-     * @return
+     * @return string
      * @desc join consensus layer
      */
     public String joinConsensus() {
@@ -95,8 +104,8 @@ import java.util.UUID;
     /**
      * process join request
      *
-     * @param vo
-     * @return
+     * @param vo the vo
+     * @return resp data
      */
     public RespData joinConsensusTx(NodeOptVO vo) {
         //send and get callback result
@@ -148,8 +157,10 @@ import java.util.UUID;
     }
 
     /**
+     * Leave consensus string.
+     *
      * @param
-     * @return
+     * @return string
      * @desc process leave consensus layer
      */
     public String leaveConsensus() {

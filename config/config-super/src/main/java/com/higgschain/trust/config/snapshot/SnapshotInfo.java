@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Snapshot info.
+ *
  * @author suimi
- * @date 2018/8/27
+ * @date 2018 /8/27
  */
 @ToString @Getter @Setter public class SnapshotInfo implements Serializable {
 

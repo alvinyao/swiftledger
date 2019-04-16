@@ -27,32 +27,52 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * The type Package repository.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 @Repository @Slf4j public class PackageRepository {
 
+    /**
+     * The Package dao.
+     */
     @Autowired
     PackageDao packageDao;
 
+    /**
+     * The Pack rocks dao.
+     */
     @Autowired
     PackRocksDao packRocksDao;
 
+    /**
+     * The Pack status rocks dao.
+     */
     @Autowired
     PackStatusRocksDao packStatusRocksDao;
 
+    /**
+     * The System property repository.
+     */
     @Autowired
     SystemPropertyRepository systemPropertyRepository;
 
+    /**
+     * The Pending tx repository.
+     */
     @Autowired PendingTxRepository pendingTxRepository;
 
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
 
     /**
      * new package from repository
      *
-     * @param pack
+     * @param pack the pack
      */
     public void save(Package pack) {
         if (null == pack) {
@@ -73,9 +93,9 @@ import java.util.Set;
     /**
      * update status from repository
      *
-     * @param height
-     * @param from
-     * @param to
+     * @param height the height
+     * @param from   the from
+     * @param to     the to
      */
     public void updateStatus(Long height, PackageStatusEnum from, PackageStatusEnum to) {
         if (initConfig.isUseMySQL()) {
@@ -92,8 +112,8 @@ import java.util.Set;
     /**
      * load package from repository
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return package
      */
     public Package load(String height) {
         if (null == height) {
@@ -107,8 +127,8 @@ import java.util.Set;
     /**
      * load package from repository
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return package
      */
     public Package load(Long height) {
         PackagePO packagePO;
@@ -130,8 +150,8 @@ import java.util.Set;
     /**
      * load package from repository
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return list
      */
     public List<Long> loadHeightList(Long height) {
         List<Long> heights;
@@ -146,8 +166,8 @@ import java.util.Set;
     /**
      * load package and lock from repository
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @return package
      */
     public Package loadAndLock(Long height) {
         PackagePO packagePO;
@@ -166,7 +186,7 @@ import java.util.Set;
     /**
      * get max height from package
      *
-     * @return
+     * @return max height
      */
     public Long getMaxHeight() {
         if (initConfig.isUseMySQL()) {
@@ -177,11 +197,12 @@ import java.util.Set;
         }
     }
 
-     /**
+    /**
      * get count with package status
      *
-     * @param statusSet
-     * @return
+     * @param statusSet      the status set
+     * @param maxBlockHeight the max block height
+     * @return long
      */
     public long count(Set<String> statusSet, Long maxBlockHeight) {
         if (initConfig.isUseMySQL()) {
@@ -229,9 +250,9 @@ import java.util.Set;
     /**
      * check package status
      *
-     * @param height
-     * @param packageStatusEnum
-     * @return
+     * @param height            the height
+     * @param packageStatusEnum the package status enum
+     * @return boolean
      */
     public boolean isPackageStatus(Long height, PackageStatusEnum packageStatusEnum) {
         PackagePO packagePO = null;
@@ -255,8 +276,8 @@ import java.util.Set;
     /**
      * get max height by status
      *
-     * @param status
-     * @return
+     * @param status the status
+     * @return max height by status
      */
     public Long getMaxHeightByStatus(PackageStatusEnum status) {
         if (initConfig.isUseMySQL()) {
@@ -268,8 +289,8 @@ import java.util.Set;
     /**
      * get min height by status
      *
-     * @param status
-     * @return
+     * @param status the status
+     * @return min height by status
      */
     public Long getMinHeightByStatus(PackageStatusEnum status) {
         if (initConfig.isUseMySQL()) {
@@ -281,8 +302,9 @@ import java.util.Set;
     /**
      * delete by less than height
      *
-     * @param height
-     * @return
+     * @param height the height
+     * @param status the status
+     * @return int
      */
     public int deleteLessThanHeightAndStatus(Long height,PackageStatusEnum status) {
         if (initConfig.isUseMySQL()) {
@@ -309,6 +331,15 @@ import java.util.Set;
         return count;
     }
 
+    /**
+     * Gets for update.
+     *
+     * @param tx          the tx
+     * @param readOptions the read options
+     * @param key         the key
+     * @param exclusive   the exclusive
+     * @return the for update
+     */
     public Long getForUpdate(Transaction tx, ReadOptions readOptions, String key, boolean exclusive) {
         return packStatusRocksDao.getForUpdate(tx, readOptions, key, exclusive);
     }
@@ -324,8 +355,9 @@ import java.util.Set;
 
     /**
      * get height list by status
-     * @param status
-     * @return
+     *
+     * @param status the status
+     * @return block heights by status
      */
     public List<Long> getBlockHeightsByStatus(PackageStatusEnum status) {
         if (initConfig.isUseMySQL()) {

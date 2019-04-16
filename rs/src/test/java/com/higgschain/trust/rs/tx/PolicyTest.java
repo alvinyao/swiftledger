@@ -10,14 +10,19 @@ import org.junit.Test;
 import org.testng.collections.Lists;
 
 /**
+ * The type Policy test.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-23
+ * @date 2018 -06-23
  */
 @Slf4j public class PolicyTest {
     private static String REGISTER_POLICY_URL = "http://127.0.0.1:7070/v1/manage/policy/register";
     private static String REGISTER_RS_URL = "http://127.0.0.1:7070/v1/manage/rs/register";
 
+    /**
+     * Test.
+     */
     @Test public void test() {
         testRegistPolicy();
 //        testRegistRS();

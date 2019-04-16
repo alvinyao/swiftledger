@@ -38,9 +38,21 @@ public class DefaultApplicationState implements ApplicationState {
 
     private static final long serialVersionUID = 6771081456095596363L;
 
+    /**
+     * The State.
+     */
     protected byte[] state; // State associated with the last checkpoint
+    /**
+     * The State hash.
+     */
     protected byte[] stateHash; // Hash of the state associated with the last checkpoint
+    /**
+     * The Last cid.
+     */
     protected int lastCID = -1; // Consensus ID for the last messages batch delivered to the application
+    /**
+     * The Has state.
+     */
     protected boolean hasState; // indicates if the replica really had the requested state
 
     private CommandsInfo[] messageBatches; // batches received since the last checkpoint.
@@ -53,9 +65,12 @@ public class DefaultApplicationState implements ApplicationState {
      * Constructs a TansferableState
      * This constructor should be used when there is a valid state to construct the object with
      *
-     * @param messageBatches Batches received since the last checkpoint.
-     * @param state          State associated with the last checkpoint
-     * @param stateHash      Hash of the state associated with the last checkpoint
+     * @param messageBatches    Batches received since the last checkpoint.
+     * @param lastCheckpointCID the last checkpoint cid
+     * @param lastCID           the last cid
+     * @param state             State associated with the last checkpoint
+     * @param stateHash         Hash of the state associated with the last checkpoint
+     * @param pid               the pid
      */
     public DefaultApplicationState(CommandsInfo[] messageBatches, int lastCheckpointCID, int lastCID, byte[] state,
         byte[] stateHash, int pid) {
@@ -69,6 +84,17 @@ public class DefaultApplicationState implements ApplicationState {
         this.pid = pid;
     }
 
+    /**
+     * Instantiates a new Default application state.
+     *
+     * @param messageBatches    the message batches
+     * @param logHash           the log hash
+     * @param lastCheckpointCID the last checkpoint cid
+     * @param lastCID           the last cid
+     * @param state             the state
+     * @param stateHash         the state hash
+     * @param pid               the pid
+     */
     public DefaultApplicationState(CommandsInfo[] messageBatches, byte[] logHash, int lastCheckpointCID, int lastCID,
         byte[] state, byte[] stateHash, int pid) {
         this(messageBatches, lastCheckpointCID, lastCID, state, stateHash, pid);
@@ -186,6 +212,11 @@ public class DefaultApplicationState implements ApplicationState {
         return messageBatches;
     }
 
+    /**
+     * Sets message batches.
+     *
+     * @param messageBatches the message batches
+     */
     public void setMessageBatches(CommandsInfo[] messageBatches) {
         this.messageBatches = messageBatches;
     }

@@ -21,6 +21,9 @@ import org.testng.annotations.Test;
  * Copyright (c) 2013-2017, suimi
  */
 
+/**
+ * The type Node state test.
+ */
 @RunWith(PowerMockRunner.class) public class NodeStateTest {
 
     @InjectMocks private NodeState nodeState;
@@ -30,6 +33,9 @@ import org.testng.annotations.Test;
     private String nodeName = "prefix_nodeName";
     private String prefix = "prefix";
 
+    /**
+     * Before method.
+     */
     @BeforeMethod public void beforeMethod() {
         nodeState = new NodeState();
         MockitoAnnotations.initMocks(this);
@@ -38,6 +44,9 @@ import org.testng.annotations.Test;
         nodeState.afterPropertiesSet();
     }
 
+    /**
+     * Test register master listener.
+     */
     @Test public void testRegisterMasterListener() {
         MasterChangeListener masterChangeListener = Mockito.mock(MasterChangeListener.class);
         nodeState.registerMasterListener(masterChangeListener);
@@ -46,6 +55,9 @@ import org.testng.annotations.Test;
         Mockito.verify(masterChangeListener, Mockito.times(1)).masterChanged(masterName);
     }
 
+    /**
+     * Test change master.
+     */
     @Test public void testChangeMaster() {
         String newMasterName = "newMasterName";
         nodeState.changeMaster(newMasterName);
@@ -58,10 +70,20 @@ import org.testng.annotations.Test;
 
     }
 
+    /**
+     * Starting object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] starting() {
         return new Object[][] {new Object[] {NodeStateEnum.SelfChecking},};
     }
 
+    /**
+     * Starting exception object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] startingException() {
         return new Object[][] {new Object[] {NodeStateEnum.Starting},
             //            new Object[]{NodeStateEnum.SelfChecking},
@@ -69,11 +91,21 @@ import org.testng.annotations.Test;
             new Object[] {NodeStateEnum.Running}, new Object[] {NodeStateEnum.Offline},};
     }
 
+    /**
+     * Test change state starting.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "starting") public void testChangeStateStarting(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, toState);
         Assert.assertEquals(nodeState.getState(), toState);
     }
 
+    /**
+     * Test change state starting exception.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "startingException") public void testChangeStateStartingException(NodeStateEnum toState) {
         try {
             nodeState.changeState(NodeStateEnum.Starting, toState);
@@ -83,21 +115,41 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), NodeStateEnum.Starting);
     }
 
+    /**
+     * Self object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] self() {
         return new Object[][] {new Object[] {NodeStateEnum.AutoSync}, new Object[] {NodeStateEnum.ArtificialSync},
             new Object[] {NodeStateEnum.Running}, new Object[] {NodeStateEnum.Offline},};
     }
 
+    /**
+     * Self exception object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] selfException() {
         return new Object[][] {new Object[] {NodeStateEnum.Starting}, new Object[] {NodeStateEnum.SelfChecking},};
     }
 
+    /**
+     * Test change state self.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "self") public void testChangeStateSelf(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, toState);
         Assert.assertEquals(nodeState.getState(), toState);
     }
 
+    /**
+     * Test change state self exception.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "selfException") public void testChangeStateSelfException(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         try {
@@ -108,16 +160,31 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), NodeStateEnum.SelfChecking);
     }
 
+    /**
+     * Sync object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] sync() {
         return new Object[][] {new Object[] {NodeStateEnum.SelfChecking}, new Object[] {NodeStateEnum.Running},
             new Object[] {NodeStateEnum.Offline}};
     }
 
+    /**
+     * Sync exception object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] syncException() {
         return new Object[][] {new Object[] {NodeStateEnum.Starting}, new Object[] {NodeStateEnum.AutoSync},
             new Object[] {NodeStateEnum.ArtificialSync}};
     }
 
+    /**
+     * Test change state auto sync.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "sync") public void testChangeStateAutoSync(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.AutoSync);
@@ -125,6 +192,11 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), toState);
     }
 
+    /**
+     * Test change state auto sync exception.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "syncException") public void testChangeStateAutoSyncException(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.AutoSync);
@@ -136,6 +208,11 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), NodeStateEnum.AutoSync);
     }
 
+    /**
+     * Test change state artificial sync.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "sync") public void testChangeStateArtificialSync(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.ArtificialSync);
@@ -143,6 +220,11 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), toState);
     }
 
+    /**
+     * Test change state artificial sync exception.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "syncException") public void testChangeStateArtificialSyncException(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.ArtificialSync);
@@ -154,15 +236,30 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), NodeStateEnum.ArtificialSync);
     }
 
+    /**
+     * Running object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] running() {
         return new Object[][] {new Object[] {NodeStateEnum.SelfChecking}, new Object[] {NodeStateEnum.Offline}};
     }
 
+    /**
+     * Running exception object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] runningException() {
         return new Object[][] {new Object[] {NodeStateEnum.Starting}, new Object[] {NodeStateEnum.AutoSync},
             new Object[] {NodeStateEnum.ArtificialSync}, new Object[] {NodeStateEnum.Running},};
     }
 
+    /**
+     * Test change state running.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "running") public void testChangeStateRunning(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.Running);
@@ -170,6 +267,11 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), toState);
     }
 
+    /**
+     * Test change state running exception.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "runningException") public void testChangeStateRunningException(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.Running);
@@ -181,16 +283,31 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), NodeStateEnum.Running);
     }
 
+    /**
+     * Offline object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] offline() {
         return new Object[][] {new Object[] {NodeStateEnum.SelfChecking},};
     }
 
+    /**
+     * Offline exception object [ ] [ ].
+     *
+     * @return the object [ ] [ ]
+     */
     @DataProvider public Object[][] offlineException() {
         return new Object[][] {new Object[] {NodeStateEnum.Starting}, new Object[] {NodeStateEnum.AutoSync},
             new Object[] {NodeStateEnum.ArtificialSync}, new Object[] {NodeStateEnum.Running},
             new Object[] {NodeStateEnum.Offline},};
     }
 
+    /**
+     * Test change state offline.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "offline") public void testChangeStateOffline(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.Offline);
@@ -198,6 +315,11 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), toState);
     }
 
+    /**
+     * Test change state offline exception.
+     *
+     * @param toState the to state
+     */
     @Test(dataProvider = "offlineException") public void testChangeStateOfflineException(NodeStateEnum toState) {
         nodeState.changeState(NodeStateEnum.Starting, NodeStateEnum.SelfChecking);
         nodeState.changeState(NodeStateEnum.SelfChecking, NodeStateEnum.Offline);
@@ -209,6 +331,9 @@ import org.testng.annotations.Test;
         Assert.assertEquals(nodeState.getState(), NodeStateEnum.Offline);
     }
 
+    /**
+     * Test is state.
+     */
     @Test public void testIsState() {
         Assert.assertTrue(nodeState.isState(NodeStateEnum.Starting));
         Assert.assertFalse(nodeState.isState(NodeStateEnum.AutoSync));
@@ -216,6 +341,9 @@ import org.testng.annotations.Test;
         Assert.assertFalse(nodeState.isState(NodeStateEnum.AutoSync, NodeStateEnum.Running));
     }
 
+    /**
+     * Test not me node name reg.
+     */
     @Test public void testNotMeNodeNameReg() {
         Assert.assertEquals(nodeState.notMeNodeNameReg(),
             "(?!" + nodeName.toUpperCase() + ")" + prefix.toUpperCase() + "(\\S)*");

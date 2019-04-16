@@ -6,10 +6,15 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.*;
 
 /**
+ * The type Execute engine manager.
+ *
  * @author duhongming
  */
 @Slf4j public class ExecuteEngineManager {
 
+    /**
+     * The constant DEFAULT_LANGUAGE.
+     */
     public final static String DEFAULT_LANGUAGE = "javascript";
 
     private Map<String, Object> serviceMap;
@@ -17,6 +22,9 @@ import java.util.*;
     private ContractStateStore stateStore;
     private ExecuteConfig executeConfig;
 
+    /**
+     * Instantiates a new Execute engine manager.
+     */
     public ExecuteEngineManager() {
         serviceMap = new HashMap<>();
         engineFactories = new HashSet<>();
@@ -54,10 +62,21 @@ import java.util.*;
         throw new SmartContractException("ExecuteEngineFactory not found");
     }
 
+    /**
+     * Sets db state store.
+     *
+     * @param stateStore the state store
+     */
     public void setDbStateStore(ContractStateStore stateStore) {
         this.stateStore = stateStore;
     }
 
+    /**
+     * Register service.
+     *
+     * @param name    the name
+     * @param service the service
+     */
     public void registerService(String name, ContractApiService service) {
         if (StringUtils.isEmpty(name)) {
             log.error("service name is empty");
@@ -70,6 +89,13 @@ import java.util.*;
         this.serviceMap.put(name, service);
     }
 
+    /**
+     * Gets execute engine.
+     *
+     * @param code     the code
+     * @param language the language
+     * @return the execute engine
+     */
     public ExecuteEngine getExecuteEngine(String code, String language) {
         ExecuteContext context = ExecuteContext.getCurrent();
         context.setDbStateStore(this.stateStore);
@@ -79,10 +105,21 @@ import java.util.*;
         return engine;
     }
 
+    /**
+     * Gets execute config.
+     *
+     * @return the execute config
+     */
     public ExecuteConfig getExecuteConfig() {
         return executeConfig;
     }
 
+    /**
+     * Sets execute config.
+     *
+     * @param executeConfig the execute config
+     * @return the execute config
+     */
     public ExecuteEngineManager setExecuteConfig(ExecuteConfig executeConfig) {
         this.executeConfig = executeConfig;
         return this;

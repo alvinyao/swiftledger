@@ -23,10 +23,21 @@ package com.higgschain.trust.evmcontract.datasource;
  * Includes ReadCache for caching deserialized objects and object Serializer
  * <p>
  * Created by Anton Nashatyrev on 06.12.2016.
+ *
+ * @param <V> the type parameter
  */
 public class ObjectDataSource<V> extends SourceChainBox<byte[], V, byte[], byte[]> {
+    /**
+     * The Cache.
+     */
     ReadCache<byte[], V> cache;
+    /**
+     * The Codec.
+     */
     SourceCodec<byte[], V, byte[], byte[]> codec;
+    /**
+     * The Byte source.
+     */
     Source<byte[], byte[]> byteSource;
 
     /**

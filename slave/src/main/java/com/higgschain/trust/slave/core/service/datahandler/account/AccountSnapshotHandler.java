@@ -24,23 +24,49 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
+ * The type Account snapshot handler.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-16
+ * @date 2018 -04-16
  */
 @Component @Slf4j public class AccountSnapshotHandler implements AccountHandler {
+    /**
+     * The Account snapshot agent.
+     */
     @Autowired
     AccountSnapshotAgent accountSnapshotAgent;
+    /**
+     * The Merkle tree snapshot agent.
+     */
     @Autowired
     MerkleTreeSnapshotAgent merkleTreeSnapshotAgent;
+    /**
+     * The Freeze snapshot agent.
+     */
     @Autowired
     FreezeSnapshotAgent freezeSnapshotAgent;
+    /**
+     * The Data identity snapshot agent.
+     */
     @Autowired
     DataIdentitySnapshotAgent dataIdentitySnapshotAgent;
+    /**
+     * The Manage snapshot agent.
+     */
     @Autowired
     ManageSnapshotAgent manageSnapshotAgent;
+    /**
+     * The Data identity service.
+     */
     @Autowired DataIdentityService dataIdentityService;
+    /**
+     * The Freeze repository.
+     */
     @Autowired FreezeRepository freezeRepository;
+    /**
+     * The Account detail snapshot agent.
+     */
     @Autowired AccountDetailSnapshotAgent accountDetailSnapshotAgent;
 
     @Override public AccountInfo getAccountInfo(String accountNo) {

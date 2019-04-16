@@ -1,9 +1,11 @@
 package com.higgschain.trust.common.constant;
 
 /**
+ * The type Logger name.
+ *
  * @Description:
  * @author: pengdi
- **/
+ */
 public class LoggerName {
     /**
      * 服务流水日志名

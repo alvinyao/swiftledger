@@ -15,6 +15,9 @@
  */
 package bftsmart.tom.util;
 
+/**
+ * The type Storage.
+ */
 public class Storage {
 
     private long[] values;
@@ -22,41 +25,79 @@ public class Storage {
 
     /**
      * Creates a new instance of Storage
+     *
+     * @param size the size
      */
     public Storage(int size) {
         values = new long[size];
     }
 
+    /**
+     * Gets count.
+     *
+     * @return the count
+     */
     public int getCount() {
         return count;
     }
 
+    /**
+     * Reset.
+     */
     public void reset() {
         count = 0;
     }
 
+    /**
+     * Store.
+     *
+     * @param value the value
+     */
     public void store(long value) {
         if (count < values.length) {
             values[count++] = value;
         }
     }
 
+    /**
+     * Gets average.
+     *
+     * @param limit the limit
+     * @return the average
+     */
     public double getAverage(boolean limit) {
         long[] values = java.util.Arrays.copyOfRange(this.values, 0, count);
 
         return computeAverage(values, limit);
     }
 
+    /**
+     * Gets dp.
+     *
+     * @param limit the limit
+     * @return the dp
+     */
     public double getDP(boolean limit) {
         long[] values = java.util.Arrays.copyOfRange(this.values, 0, count);
 
         return computeDP(values, limit);
     }
 
+    /**
+     * Get values long [ ].
+     *
+     * @return the long [ ]
+     */
     public long[] getValues() {
         return values;
     }
 
+    /**
+     * Gets max.
+     *
+     * @param limit the limit
+     * @return the max
+     */
     public long getMax(boolean limit) {
         long[] values = java.util.Arrays.copyOfRange(this.values, 0, count);
         return computeMax(values, limit);
@@ -113,6 +154,12 @@ public class Storage {
         return Math.sqrt(var);
     }
 
+    /**
+     * Gets percentile.
+     *
+     * @param percentile the percentile
+     * @return the percentile
+     */
     public long getPercentile(double percentile) {
 
         long[] values = java.util.Arrays.copyOfRange(this.values, 0, count);

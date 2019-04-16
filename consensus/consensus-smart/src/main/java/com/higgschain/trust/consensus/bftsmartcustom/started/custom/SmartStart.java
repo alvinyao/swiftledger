@@ -23,6 +23,9 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The type Smart start.
+ */
 @StateListener
 @Configuration public class SmartStart implements ConsensusStateMachine {
 

@@ -15,19 +15,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Transaction validator.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-27
+ * @date 2018 -08-27
  */
 @Component public class TransactionValidator {
+    /**
+     * The Processor holder.
+     */
     @Autowired
     TxProcessorHolder processorHolder;
 
     /**
      * verify SignedTransaction
      *
-     * @param tx
+     * @param tx the tx
      * @return
+     * @throws SlaveException the slave exception
      */
     public void verify(SignedTransaction tx) throws SlaveException {
         if (tx == null) {
@@ -38,11 +44,13 @@ import org.springframework.stereotype.Component;
         }
         verify(tx.getCoreTx());
     }
+
     /**
      * verify CoreTransaction
      *
-     * @param coreTx
+     * @param coreTx the core tx
      * @return
+     * @throws SlaveException the slave exception
      */
     public void verify(CoreTransaction coreTx) throws SlaveException {
         if (coreTx == null) {

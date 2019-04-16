@@ -36,9 +36,11 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 /**
+ * The type Core tx repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-06
+ * @date 2018 -06-06
  */
 @Slf4j @Repository public class CoreTxRepository {
     @Autowired private RsConfig rsConfig;
@@ -52,9 +54,9 @@ import java.util.*;
     /**
      * create new core_transaction for INIT
      *
-     * @param coreTx
-     * @param signInfos
-     * @param blockHeight
+     * @param coreTx      the core tx
+     * @param signInfos   the sign infos
+     * @param blockHeight the block height
      */
     public void add(CoreTransaction coreTx, List<SignInfo> signInfos, Long blockHeight) {
         CoreTransactionPO po = BeanConvertor.convertBean(coreTx, CoreTransactionPO.class);
@@ -74,10 +76,10 @@ import java.util.*;
     /**
      * create new core_transaction for result data and block height
      *
-     * @param coreTx
-     * @param signInfos
-     * @param respData
-     * @param blockHeight
+     * @param coreTx      the core tx
+     * @param signInfos   the sign infos
+     * @param respData    the resp data
+     * @param blockHeight the block height
      */
     public void add(CoreTransaction coreTx, List<SignInfo> signInfos, RespData respData, Long blockHeight) {
         try {
@@ -141,9 +143,9 @@ import java.util.*;
     /**
      * query by transaction id
      *
-     * @param txId
-     * @param forUpdate
-     * @return
+     * @param txId      the tx id
+     * @param forUpdate the for update
+     * @return core transaction po
      */
     public CoreTransactionPO queryByTxId(String txId, boolean forUpdate) {
         if (rsConfig.isUseMySQL()) {
@@ -156,8 +158,8 @@ import java.util.*;
     /**
      * query by txIds
      *
-     * @param txIdList
-     * @return
+     * @param txIdList the tx id list
+     * @return list
      */
     public List<CoreTransactionPO> queryByTxIds(List<String> txIdList) {
 
@@ -170,8 +172,8 @@ import java.util.*;
     /**
      * has core_transaction for txId
      *
-     * @param txId
-     * @return
+     * @param txId the tx id
+     * @return boolean
      */
     public boolean isExist(String txId) {
         return queryByTxId(txId, false) != null;
@@ -180,8 +182,8 @@ import java.util.*;
     /**
      * update sign data by txId
      *
-     * @param txId
-     * @param signDatas
+     * @param txId      the tx id
+     * @param signDatas the sign datas
      */
     public void updateSignDatas(String txId, List<SignInfo> signDatas) {
 
@@ -200,10 +202,11 @@ import java.util.*;
     /**
      * save execute result for transaction
      *
-     * @param txId
-     * @param executResult
-     * @param respCode
-     * @param respMsg
+     * @param txId         the tx id
+     * @param executResult the execut result
+     * @param respCode     the resp code
+     * @param respMsg      the resp msg
+     * @param blockHeight  the block height
      */
     public void saveExecuteResultAndHeight(String txId, CoreTxResultEnum executResult, String respCode, String respMsg,
         Long blockHeight) {
@@ -228,8 +231,8 @@ import java.util.*;
     /**
      * convert transaction PO to BO
      *
-     * @param po
-     * @return
+     * @param po the po
+     * @return core tx bo
      */
     public CoreTxBO convertTxBO(CoreTransactionPO po) {
         CoreTxBO bo = BeanConvertor.convertBean(po, CoreTxBO.class);
@@ -250,8 +253,8 @@ import java.util.*;
     /**
      * convert transaction BO to VO
      *
-     * @param bo
-     * @return
+     * @param bo the bo
+     * @return core transaction
      */
     public CoreTransaction convertTxVO(CoreTxBO bo) {
         CoreTransaction vo = BeanConvertor.convertBean(bo, CoreTransaction.class);
@@ -267,8 +270,8 @@ import java.util.*;
     /**
      * create new core_transaction for batch
      *
-     * @param txs
-     * @param blockHeight
+     * @param txs         the txs
+     * @param blockHeight the block height
      */
     public void batchInsert(List<RsCoreTxVO> txs, Long blockHeight) {
         try {
@@ -292,8 +295,8 @@ import java.util.*;
     /**
      * update coreTx  for batch
      *
-     * @param txs
-     * @param blockHeight
+     * @param txs         the txs
+     * @param blockHeight the block height
      */
     public void batchUpdate(List<RsCoreTxVO> txs, Long blockHeight) {
         if (CollectionUtils.isEmpty(txs)) {
@@ -365,6 +368,15 @@ import java.util.*;
         return coreTransactionPOList;
     }
 
+    /**
+     * Gets for update.
+     *
+     * @param tx          the tx
+     * @param readOptions the read options
+     * @param txId        the tx id
+     * @param exclusive   the exclusive
+     * @return the for update
+     */
     public CoreTransactionPO getForUpdate(Transaction tx, ReadOptions readOptions, String txId, boolean exclusive) {
         return coreTxRocksDao.getForUpdate(tx, readOptions, txId, exclusive);
     }
@@ -372,9 +384,9 @@ import java.util.*;
     /**
      * query by transaction id
      *
-     * @param txId
-     * @param statusEnum
-     * @return
+     * @param txId       the tx id
+     * @param statusEnum the status enum
+     * @return core transaction process po
      */
     public CoreTransactionProcessPO queryStatusByTxId(String txId, CoreTxStatusEnum statusEnum) {
         if (rsConfig.isUseMySQL()) {
@@ -396,11 +408,11 @@ import java.util.*;
     /**
      * query for status by page no
      *
-     * @param coreTxStatusEnum
-     * @param row
-     * @param count
+     * @param coreTxStatusEnum the core tx status enum
+     * @param row              the row
+     * @param count            the count
      * @param preKey           for rocks db seek
-     * @return
+     * @return list
      */
     public List<CoreTransactionProcessPO> queryByStatus(CoreTxStatusEnum coreTxStatusEnum, int row, int count,
         String preKey) {
@@ -416,9 +428,9 @@ import java.util.*;
     /**
      * update status by from to
      *
-     * @param txId
-     * @param from
-     * @param to
+     * @param txId the tx id
+     * @param from the from
+     * @param to   the to
      */
     public void updateStatus(String txId, CoreTxStatusEnum from, CoreTxStatusEnum to) {
         if (rsConfig.isUseMySQL()) {
@@ -435,8 +447,8 @@ import java.util.*;
     /**
      * delete status for batch
      *
-     * @param txs
-     * @param statusEnum
+     * @param txs        the txs
+     * @param statusEnum the status enum
      */
     public void batchDelete(List<RsCoreTxVO> txs, CoreTxStatusEnum statusEnum) {
         try {
@@ -475,9 +487,9 @@ import java.util.*;
     /**
      * query by status
      *
-     * @param txId
-     * @param statusEnum
-     * @return
+     * @param txId       the tx id
+     * @param statusEnum the status enum
+     * @return core transaction process po
      */
     public CoreTransactionProcessPO queryByStatus(String txId, CoreTxStatusEnum statusEnum) {
         String key = statusEnum.getIndex() + Constant.SPLIT_SLASH + txId;
@@ -487,8 +499,8 @@ import java.util.*;
     /**
      * for failover
      *
-     * @param txs
-     * @param blockHeight
+     * @param txs         the txs
+     * @param blockHeight the block height
      */
     public void failoverBatchInsert(List<RsCoreTxVO> txs, Long blockHeight) {
         List<CoreTransactionPO> coreTransactionPOList = convert(txs, blockHeight);

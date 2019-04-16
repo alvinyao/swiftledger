@@ -21,22 +21,36 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Currency repository.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-10
+ * @date 2018 -04-10
  */
 @Repository @Slf4j public class CurrencyRepository {
+    /**
+     * The Currency info dao.
+     */
     @Autowired CurrencyInfoDao currencyInfoDao;
+    /**
+     * The Account jdbc dao.
+     */
     @Autowired AccountJDBCDao accountJDBCDao;
+    /**
+     * The Currency info rocks dao.
+     */
     @Autowired CurrencyInfoRocksDao currencyInfoRocksDao;
+    /**
+     * The Init config.
+     */
     @Autowired
     InitConfig initConfig;
 
     /**
      * query currency info
      *
-     * @param currency
-     * @return
+     * @param currency the currency
+     * @return currency info
      */
     public CurrencyInfo queryByCurrency(String currency) {
         CurrencyInfoPO currencyInfoPO;
@@ -51,8 +65,8 @@ import java.util.List;
     /**
      * check currency info
      *
-     * @param currency
-     * @return
+     * @param currency the currency
+     * @return boolean
      */
     public boolean isExits(String currency) {
         if(StringUtils.isEmpty(currency)){
@@ -67,9 +81,11 @@ import java.util.List;
     /**
      * build an new currency info
      *
-     * @param currency
-     * @param remark
-     * @return
+     * @param currency        the currency
+     * @param remark          the remark
+     * @param homomorphicPk   the homomorphic pk
+     * @param contractAddress the contract address
+     * @return currency info
      */
     public CurrencyInfo buildCurrencyInfo(String currency, String remark,String homomorphicPk, String contractAddress) {
         CurrencyInfo currencyInfo = new CurrencyInfo();
@@ -84,7 +100,7 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param currencyInfos
+     * @param currencyInfos the currency infos
      */
     public void batchInsert(List<CurrencyInfo> currencyInfos) {
         if (CollectionUtils.isEmpty(currencyInfos)) {

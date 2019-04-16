@@ -29,6 +29,8 @@ public class Serializers {
 
     /**
      * No conversion
+     *
+     * @param <T> the type parameter
      */
     public static class Identity<T> implements Serializer<T, T> {
         @Override

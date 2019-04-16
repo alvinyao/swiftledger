@@ -27,7 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 import static com.higgschain.trust.evmcontract.util.BIUtil.*;
 import static com.higgschain.trust.evmcontract.util.ByteUtil.*;
+
 /**
+ * The type Precompiled contracts.
+ *
  * @author Roman Mandeleil
  * @since 09.01.2015
  */
@@ -48,6 +51,11 @@ public class PrecompiledContracts {
     private static final DataWord ALT_BN_128_MUL_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000007");
     private static final DataWord ALT_BN_128_PAIRING_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000008");
 
+    /**
+     * List addresses list.
+     *
+     * @return the list
+     */
     public static List<DataWord> listAddresses() {
         List<DataWord> addressList = new ArrayList<>();
 
@@ -63,6 +71,13 @@ public class PrecompiledContracts {
         return addressList;
     }
 
+    /**
+     * Gets contract for address.
+     *
+     * @param address the address
+     * @param config  the config
+     * @return the contract for address
+     */
     public static PrecompiledContract getContractForAddress(DataWord address, BlockChainConfig config) {
 
         if (address == null) {
@@ -102,14 +117,35 @@ public class PrecompiledContracts {
         return res;
     }
 
+    /**
+     * The type Precompiled contract.
+     */
     public static abstract class PrecompiledContract {
+        /**
+         * Gets gas for data.
+         *
+         * @param data the data
+         * @return the gas for data
+         */
         public abstract long getGasForData(byte[] data);
 
+        /**
+         * Execute pair.
+         *
+         * @param data the data
+         * @return the pair
+         */
         public abstract Pair<Boolean, byte[]> execute(byte[] data);
     }
 
+    /**
+     * The type Identity.
+     */
     public static class Identity extends PrecompiledContract {
 
+        /**
+         * Instantiates a new Identity.
+         */
         public Identity() {
         }
 
@@ -130,6 +166,9 @@ public class PrecompiledContracts {
         }
     }
 
+    /**
+     * The type Sha 256.
+     */
     public static class Sha256 extends PrecompiledContract {
 
 
@@ -154,7 +193,9 @@ public class PrecompiledContracts {
         }
     }
 
-
+    /**
+     * The type Ripempd 160.
+     */
     public static class Ripempd160 extends PrecompiledContract {
 
 
@@ -184,7 +225,9 @@ public class PrecompiledContracts {
         }
     }
 
-
+    /**
+     * The type Ec recover.
+     */
     public static class ECRecover extends PrecompiledContract {
 
         @Override

@@ -5,13 +5,20 @@ import com.higgschain.trust.contract.ExecuteContext;
 import java.util.Map;
 
 /**
+ * The type Services resolver factory.
+ *
  * @author duhongming
- * @date 2018/04/25
+ * @date 2018 /04/25
  */
 public class ServicesResolverFactory implements ResolverFactory, Resolver {
 
     private Map<String, Object> services;
 
+    /**
+     * Instantiates a new Services resolver factory.
+     *
+     * @param variables the variables
+     */
     public ServicesResolverFactory(Map<String, Object> variables) {
         this.services = variables;
     }

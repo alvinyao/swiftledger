@@ -13,10 +13,19 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Vote receipt repository test.
+ */
 public class VoteReceiptRepositoryTest extends IntegrateBaseTest {
 
     @Autowired
     private VoteReceiptRepository voteReceiptRepository;
+
+    /**
+     * Test add.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testAdd() throws Exception {
         VoteReceipt voteReceipt = new VoteReceipt();
         voteReceipt.setTxId("test-tx-id-1");
@@ -26,6 +35,11 @@ public class VoteReceiptRepositoryTest extends IntegrateBaseTest {
         voteReceiptRepository.add(voteReceipt);
     }
 
+    /**
+     * Test batch add.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchAdd() throws Exception {
         List<VoteReceipt> voteReceipts = new ArrayList<>();
         for (int i = 2; i < 30; i++) {
@@ -58,6 +72,11 @@ public class VoteReceiptRepositoryTest extends IntegrateBaseTest {
         ThreadLocalUtils.clearRocksTx();
     }
 
+    /**
+     * Test query by tx id.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryByTxId() throws Exception {
         List<VoteReceipt> list1 = voteReceiptRepository.queryByTxId("test-tx-id-15");
         System.out.println(list1);
@@ -66,6 +85,11 @@ public class VoteReceiptRepositoryTest extends IntegrateBaseTest {
         System.out.println(list2);
     }
 
+    /**
+     * Test query for voter.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryForVoter() throws Exception {
         VoteReceipt receipt1 = voteReceiptRepository.queryForVoter("test-tx-id-13", "TRUST-TEST13");
         System.out.println(receipt1);

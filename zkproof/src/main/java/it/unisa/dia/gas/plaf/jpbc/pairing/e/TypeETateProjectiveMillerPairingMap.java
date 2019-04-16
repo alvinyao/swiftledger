@@ -8,12 +8,21 @@ import it.unisa.dia.gas.plaf.jpbc.field.gt.GTFiniteField;
 import it.unisa.dia.gas.plaf.jpbc.pairing.map.AbstractPairingMap;
 
 /**
+ * The type Type e tate projective miller pairing map.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeETateProjectiveMillerPairingMap extends AbstractPairingMap {
+    /**
+     * The Pairing.
+     */
     protected TypeEPairing pairing;
 
-
+    /**
+     * Instantiates a new Type e tate projective miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeETateProjectiveMillerPairingMap(TypeEPairing pairing) {
         super(pairing);
 
@@ -35,7 +44,14 @@ public class TypeETateProjectiveMillerPairingMap extends AbstractPairingMap {
         element.pow(pairing.phikonr);
     }
 
-
+    /**
+     * E miller proj.
+     *
+     * @param res the res
+     * @param P   the p
+     * @param QR  the qr
+     * @param R   the r
+     */
     void e_miller_proj(Element res, Point P, Point QR, Point R) {
         //collate divisions
         int n;
@@ -119,7 +135,19 @@ public class TypeETateProjectiveMillerPairingMap extends AbstractPairingMap {
         res.set(v).mul(vd);
     }
 
-
+    /**
+     * Proj double.
+     *
+     * @param Zx  the zx
+     * @param Zy  the zy
+     * @param e0  the e 0
+     * @param e1  the e 1
+     * @param e2  the e 2
+     * @param e3  the e 3
+     * @param z   the z
+     * @param z2  the z 2
+     * @param cca the cca
+     */
     void proj_double(Element Zx, Element Zy, Element e0, Element e1, Element e2, Element e3, Element z, Element z2, Element cca) {
         Element x = Zx;
         Element y = Zy;
@@ -199,6 +227,26 @@ public class TypeETateProjectiveMillerPairingMap extends AbstractPairingMap {
         */
     }
 
+    /**
+     * Do tangent.
+     *
+     * @param e      the e
+     * @param edenom the edenom
+     * @param a      the a
+     * @param b      the b
+     * @param c      the c
+     * @param e0     the e 0
+     * @param e1     the e 1
+     * @param z      the z
+     * @param z2     the z 2
+     * @param Zx     the zx
+     * @param Zy     the zy
+     * @param cca    the cca
+     * @param numx   the numx
+     * @param numy   the numy
+     * @param denomx the denomx
+     * @param denomy the denomy
+     */
     void do_tangent(Element e, Element edenom, Element a, Element b, Element c, Element e0, Element e1, Element z, Element z2,
                     Element Zx, Element Zy, Element cca, Element numx, Element numy, Element denomx, Element denomy
     ) {
@@ -270,6 +318,17 @@ public class TypeETateProjectiveMillerPairingMap extends AbstractPairingMap {
         */
     }
 
+    /**
+     * Do vertical.
+     *
+     * @param e      the e
+     * @param edenom the edenom
+     * @param Ax     the ax
+     * @param e0     the e 0
+     * @param z2     the z 2
+     * @param numx   the numx
+     * @param denomx the denomx
+     */
     void do_vertical(Element e, Element edenom, Element Ax, Element e0, Element z2, Element numx, Element denomx) {
         e0.set(numx).mul(z2);
         e0.sub(Ax);
@@ -290,6 +349,23 @@ public class TypeETateProjectiveMillerPairingMap extends AbstractPairingMap {
         */
     }
 
+    /**
+     * Do line.
+     *
+     * @param e      the e
+     * @param edenom the edenom
+     * @param A      the a
+     * @param B      the b
+     * @param a      the a
+     * @param b      the b
+     * @param c      the c
+     * @param e0     the e 0
+     * @param e1     the e 1
+     * @param numx   the numx
+     * @param numy   the numy
+     * @param denomx the denomx
+     * @param denomy the denomy
+     */
     void do_line(Element e, Element edenom, Point A, Point B, Element a, Element b, Element c, Element e0, Element e1,
                  Element numx, Element numy, Element denomx, Element denomy) {
 

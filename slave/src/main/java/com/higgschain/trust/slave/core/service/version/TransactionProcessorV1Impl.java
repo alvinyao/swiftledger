@@ -47,14 +47,19 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
+ * The type Transaction processor v 1.
+ *
  * @author WangQuanzhou
  * @desc transaction processor V1
- * @date 2018/3/28 18:01
+ * @date 2018 /3/28 18:01
  */
 @Slf4j
 @Component
 public class TransactionProcessorV1Impl implements TransactionProcessor, InitializingBean {
 
+    /**
+     * The Tx processor holder.
+     */
     @Autowired
     TxProcessorHolder txProcessorHolder;
 

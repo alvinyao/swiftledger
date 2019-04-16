@@ -32,6 +32,9 @@ import static org.apache.commons.codec.binary.Base64.decodeBase64;
 import static org.apache.commons.codec.binary.Base64.encodeBase64String;
 import static org.springframework.util.StringUtils.isEmpty;
 
+/**
+ * The type Vm utils.
+ */
 public final class VMUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("VM");
@@ -40,6 +43,11 @@ public final class VMUtils {
     private VMUtils() {
     }
 
+    /**
+     * Close quietly.
+     *
+     * @param closeable the closeable
+     */
     public static void closeQuietly(Closeable closeable) {
         try {
             if (closeable != null) {
@@ -89,6 +97,13 @@ public final class VMUtils {
         }
     }
 
+    /**
+     * Save program trace file.
+     *
+     * @param config  the config
+     * @param txHash  the tx hash
+     * @param content the content
+     */
     public static void saveProgramTraceFile(SystemProperties config, String txHash, String content) {
         File file = createProgramTraceFile(config, txHash);
         if (file != null) {
@@ -108,6 +123,13 @@ public final class VMUtils {
         }
     }
 
+    /**
+     * Compress byte [ ].
+     *
+     * @param bytes the bytes
+     * @return the byte [ ]
+     * @throws IOException the io exception
+     */
     public static byte[] compress(byte[] bytes) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -119,10 +141,24 @@ public final class VMUtils {
         return baos.toByteArray();
     }
 
+    /**
+     * Compress byte [ ].
+     *
+     * @param content the content
+     * @return the byte [ ]
+     * @throws IOException the io exception
+     */
     public static byte[] compress(String content) throws IOException {
         return compress(content.getBytes("UTF-8"));
     }
 
+    /**
+     * Decompress byte [ ].
+     *
+     * @param data the data
+     * @return the byte [ ]
+     * @throws IOException the io exception
+     */
     public static byte[] decompress(byte[] data) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(data.length);
 
@@ -134,6 +170,12 @@ public final class VMUtils {
         return baos.toByteArray();
     }
 
+    /**
+     * Zip and encode string.
+     *
+     * @param content the content
+     * @return the string
+     */
     public static String zipAndEncode(String content) {
         try {
             return encodeBase64String(compress(content));
@@ -143,6 +185,12 @@ public final class VMUtils {
         }
     }
 
+    /**
+     * Unzip and decode string.
+     *
+     * @param content the content
+     * @return the string
+     */
     public static String unzipAndDecode(String content) {
         try {
             byte[] decoded = decodeBase64(content);
@@ -155,6 +203,9 @@ public final class VMUtils {
 
     /**
      * Returns number of VM words required to hold data of size {@code size}
+     *
+     * @param size the size
+     * @return the size in words
      */
     public static long getSizeInWords(long size) {
         return size == 0 ? 0 : (size - 1) / 32 + 1;

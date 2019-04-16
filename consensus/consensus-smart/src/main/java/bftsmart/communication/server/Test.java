@@ -24,10 +24,16 @@ import bftsmart.tom.util.Storage;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * The type Test.
+ */
 public class Test {
 
     /**
+     * The entry point of application.
+     *
      * @param args the command line arguments
+     * @throws Exception the exception
      */
     public static void main(String[] args) throws Exception {
 

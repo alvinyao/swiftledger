@@ -29,12 +29,15 @@ import java.util.List;
  * an agent for contract state snapshot
  *
  * @author duhongming
- * @date 2018-04-11
+ * @date 2018 -04-11
  */
 @Slf4j
 @Component
 public class ContractStateSnapshotAgent implements CacheLoader, ContractStateStore {
 
+    /**
+     * The Merkle tree snapshot agent.
+     */
     @Autowired
     MerkleTreeSnapshotAgent merkleTreeSnapshotAgent;
     @Autowired
@@ -124,6 +127,9 @@ public class ContractStateSnapshotAgent implements CacheLoader, ContractStateSto
     public void remove(String key) {
     }
 
+    /**
+     * The type Contract state cache key.
+     */
     @Getter
     @Setter
     @NoArgsConstructor
@@ -131,10 +137,12 @@ public class ContractStateSnapshotAgent implements CacheLoader, ContractStateSto
     public static class ContractStateCacheKey extends BaseBO {
         private String address;
     }
+
     /**
      * make new key by md5
-     * @param key
-     * @return
+     *
+     * @param key the key
+     * @return string
      */
     public static String makeNewKey(String key){
         return MD5.encode(key);

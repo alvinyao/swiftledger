@@ -12,9 +12,11 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
+ * The type Accounting service.
+ *
  * @author liuyu
  * @description
- * @date 2018-05-07
+ * @date 2018 -05-07
  */
 public class AccountingService {
     /**
@@ -41,6 +43,12 @@ public class AccountingService {
      */
     private static Map<String, List<String>> FREEZE_FLOW_NO_MAP = new HashMap<>();
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception {
         List<Action> list = getOpenActions();
         setActionIndex(list);
@@ -64,7 +72,7 @@ public class AccountingService {
      * 获取 多个账户账号
      * 个数必须为2的N次幂
      *
-     * @return
+     * @return account nos
      */
     public static List<String> getAccountNos() {
         List<String> accountNos = new ArrayList<>();
@@ -77,7 +85,8 @@ public class AccountingService {
     /**
      * 获取借记账户号
      *
-     * @return
+     * @param accountNos the account nos
+     * @return debit account nos
      */
     public static List<String> getDebitAccountNos(List<String> accountNos) {
         List<String> accountNosOfDebit = new ArrayList<>();
@@ -93,7 +102,8 @@ public class AccountingService {
     /**
      * 获取贷记账户号
      *
-     * @return
+     * @param accountNos the account nos
+     * @return credit account nos
      */
     public static List<String> getCreditAccountNos(List<String> accountNos) {
         List<String> accountNosOfCredit = new ArrayList<>();
@@ -109,7 +119,7 @@ public class AccountingService {
     /**
      * 开户的 actions
      *
-     * @return
+     * @return open actions
      */
     public static List<Action> getOpenActions() {
         List<Action> list = new ArrayList<>();
@@ -125,8 +135,8 @@ public class AccountingService {
     /**
      * 创建开户的交易
      *
-     * @return
-     * @throws Exception
+     * @return open account txs
+     * @throws Exception the exception
      */
     public static List<CoreTransaction> getOpenAccountTxs() throws Exception {
         List<CoreTransaction> txs = new ArrayList<>();
@@ -145,11 +155,10 @@ public class AccountingService {
      * 获取出入金的 txs
      *
      * @param income true:入金,false:出金
-     * @param moreTx true:一个交易一个action,返回多个交易
-     *               false:单个交易多个action,返回一个交易
+     * @param moreTx true:一个交易一个action,返回多个交易               false:单个交易多个action,返回一个交易
      * @param amount 交易额
-     * @return
-     * @throws Exception
+     * @return in out txs
+     * @throws Exception the exception
      */
     public static List<CoreTransaction> getInOutTxs(boolean income, boolean moreTx, BigDecimal amount)
         throws Exception {
@@ -220,12 +229,10 @@ public class AccountingService {
     /**
      * 获取 转账txs
      *
-     * @param moreTx true:一个交易一个action,返回多个交易
-     *               false:单个交易多个action,返回一个交易
-     * @param amount 交易额
-     *               允许空值，空值时采用随机数
-     * @return
-     * @throws Exception
+     * @param moreTx true:一个交易一个action,返回多个交易               false:单个交易多个action,返回一个交易
+     * @param amount 交易额               允许空值，空值时采用随机数
+     * @return transfer txs
+     * @throws Exception the exception
      */
     public static List<CoreTransaction> getTransferTxs(boolean moreTx, BigDecimal amount) throws Exception {
         List<String> accountNos = getAccountNos();
@@ -257,10 +264,10 @@ public class AccountingService {
     /**
      * 获取 冻结交易
      *
-     * @param moreTx
+     * @param moreTx the more tx
      * @param amount 允许空值，空值时采用随机数
-     * @return
-     * @throws Exception
+     * @return freeze txs
+     * @throws Exception the exception
      */
     public static List<CoreTransaction> getFreezeTxs(boolean moreTx, BigDecimal amount) throws Exception {
         List<String> accountNos = getAccountNos();
@@ -308,10 +315,10 @@ public class AccountingService {
     /**
      * 获取 解冻交易
      *
-     * @param moreTx
+     * @param moreTx the more tx
      * @param amount 允许空值，空值时采用随机数
-     * @return
-     * @throws Exception
+     * @return un freeze txs
+     * @throws Exception the exception
      */
     public static List<CoreTransaction> getUnFreezeTxs(boolean moreTx, BigDecimal amount) throws Exception {
         List<String> accountNos = getAccountNos();

@@ -17,6 +17,12 @@ package bftsmart.tom.server;
  */
 public interface RequestVerifier {
 
+    /**
+     * Is valid request boolean.
+     *
+     * @param request the request
+     * @return the boolean
+     */
     public boolean isValidRequest(byte[] request);
 
 }

@@ -12,14 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Trasaction repository test.
+ *
  * @author liuyu
  * @description
- * @date 2018-04-27
+ * @date 2018 -04-27
  */
 public class TrasactionRepositoryTest extends IntegrateBaseTest {
+    /**
+     * The Transaction repository.
+     */
     @Autowired
     TransactionRepository transactionRepository;
 
+    /**
+     * Test query txids.
+     */
     @Test
     public void testQueryTxids(){
         List<SignedTransaction> txs = new ArrayList<>();

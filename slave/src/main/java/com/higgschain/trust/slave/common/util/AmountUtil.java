@@ -8,8 +8,10 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
+ * The type Amount util.
+ *
  * @author lingchao
- * @date 2018-04-16
+ * @date 2018 -04-16
  */
 @Slf4j public class AmountUtil {
     private static BigDecimal MAX_AMOUNT = new BigDecimal("999999999999999999.9999999999");
@@ -19,9 +21,9 @@ import java.text.DecimalFormat;
     /**
      * check amount
      *
-     * @param amount
-     * @param allowNegative
-     * @return
+     * @param amount        the amount
+     * @param allowNegative the allow negative
+     * @return boolean
      */
     public static boolean isLegal(String amount,boolean allowNegative) {
         Preconditions.checkNotNull(amount, "amount can not be null");
@@ -40,11 +42,12 @@ import java.text.DecimalFormat;
         }
         return isLegal;
     }
+
     /**
      * format amount
      *
-     * @param amount
-     * @return
+     * @param amount the amount
+     * @return string
      */
     public static String formatAmount(BigDecimal amount) {
         if (amount == null) {
@@ -64,8 +67,9 @@ import java.text.DecimalFormat;
 
     /**
      * convert string to BigDecimal
-     * @param amount
-     * @return
+     *
+     * @param amount the amount
+     * @return big decimal
      */
     public static BigDecimal convert(String amount) {
         if (StringUtils.isEmpty(amount)) {

@@ -16,6 +16,9 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * The type Abstract commit replicate composite.
+ */
 @Slf4j public abstract class AbstractCommitReplicateComposite implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -24,12 +27,19 @@ import java.util.function.Function;
 
     private Map<Class<?>, Function<ConsensusCommit<?>, ?>> classFunctionMap = new HashMap<>();
 
+    /**
+     * Instantiates a new Abstract commit replicate composite.
+     *
+     * @param filter the filter
+     */
     public AbstractCommitReplicateComposite(CompositeCommandFilter filter) {
         this.filter = filter;
     }
 
     /**
      * Registers operations for the class.
+     *
+     * @return the map
      */
     public Map<Class<?>, Function<ConsensusCommit<?>, ?>> registerCommit() {
         if(classFunctionMap.isEmpty()) {
@@ -192,6 +202,12 @@ import java.util.function.Function;
         };
     }
 
+    /**
+     * Commit adapter consensus commit.
+     *
+     * @param request the request
+     * @return the consensus commit
+     */
     public abstract ConsensusCommit<? extends AbstractConsensusCommand> commitAdapter(Object request);
 
     @Override public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

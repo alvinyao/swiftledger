@@ -21,10 +21,14 @@ import com.higgschain.trust.evmcontract.core.Repository;
 
 import java.math.BigInteger;
 
+/**
+ * The type Bi util.
+ */
 public class BIUtil {
 
-
     /**
+     * Is zero boolean.
+     *
      * @param value - not null
      * @return true - if the param is zero
      */
@@ -33,6 +37,8 @@ public class BIUtil {
     }
 
     /**
+     * Is equal boolean.
+     *
      * @param valueA - not null
      * @param valueB - not null
      * @return true - if the valueA is equal to valueB is zero
@@ -42,6 +48,8 @@ public class BIUtil {
     }
 
     /**
+     * Is not equal boolean.
+     *
      * @param valueA - not null
      * @param valueB - not null
      * @return true - if the valueA is not equal to valueB is zero
@@ -51,6 +59,8 @@ public class BIUtil {
     }
 
     /**
+     * Is less than boolean.
+     *
      * @param valueA - not null
      * @param valueB - not null
      * @return true - if the valueA is less than valueB is zero
@@ -60,6 +70,8 @@ public class BIUtil {
     }
 
     /**
+     * Is more than boolean.
+     *
      * @param valueA - not null
      * @param valueB - not null
      * @return true - if the valueA is more than valueB is zero
@@ -68,8 +80,9 @@ public class BIUtil {
         return valueA.compareTo(valueB) > 0;
     }
 
-
     /**
+     * Sum big integer.
+     *
      * @param valueA - not null
      * @param valueB - not null
      * @return sum - valueA + valueB
@@ -78,8 +91,9 @@ public class BIUtil {
         return valueA.add(valueB);
     }
 
-
     /**
+     * To bi big integer.
+     *
      * @param data = not null
      * @return new positive BigInteger
      */
@@ -88,6 +102,8 @@ public class BIUtil {
     }
 
     /**
+     * To bi big integer.
+     *
      * @param data = not null
      * @return new positive BigInteger
      */
@@ -95,36 +111,82 @@ public class BIUtil {
         return BigInteger.valueOf(data);
     }
 
-
+    /**
+     * Is positive boolean.
+     *
+     * @param value the value
+     * @return the boolean
+     */
     public static boolean isPositive(BigInteger value) {
         return value.signum() > 0;
     }
 
+    /**
+     * Is covers boolean.
+     *
+     * @param covers the covers
+     * @param value  the value
+     * @return the boolean
+     */
     public static boolean isCovers(BigInteger covers, BigInteger value) {
         return !isNotCovers(covers, value);
     }
 
+    /**
+     * Is not covers boolean.
+     *
+     * @param covers the covers
+     * @param value  the value
+     * @return the boolean
+     */
     public static boolean isNotCovers(BigInteger covers, BigInteger value) {
         return covers.compareTo(value) < 0;
     }
 
-
+    /**
+     * Transfer.
+     *
+     * @param repository the repository
+     * @param fromAddr   the from addr
+     * @param toAddr     the to addr
+     * @param value      the value
+     */
     public static void transfer(Repository repository, byte[] fromAddr, byte[] toAddr, BigInteger value) {
         repository.addBalance(fromAddr, value.negate());
         repository.addBalance(toAddr, value);
     }
 
+    /**
+     * Exit long boolean.
+     *
+     * @param value the value
+     * @return the boolean
+     */
     public static boolean exitLong(BigInteger value) {
 
         return (value.compareTo(new BigInteger(Long.MAX_VALUE + ""))) > -1;
     }
 
+    /**
+     * Is in 20 percent range boolean.
+     *
+     * @param first  the first
+     * @param second the second
+     * @return the boolean
+     */
     public static boolean isIn20PercentRange(BigInteger first, BigInteger second) {
         BigInteger five = BigInteger.valueOf(5);
         BigInteger limit = first.add(first.divide(five));
         return !isMoreThan(second, limit);
     }
 
+    /**
+     * Max big integer.
+     *
+     * @param first  the first
+     * @param second the second
+     * @return the big integer
+     */
     public static BigInteger max(BigInteger first, BigInteger second) {
         return first.compareTo(second) < 0 ? second : first;
     }
@@ -132,6 +194,10 @@ public class BIUtil {
     /**
      * Returns a result of safe addition of two {@code int} values
      * {@code Integer.MAX_VALUE} is returned if overflow occurs
+     *
+     * @param a the a
+     * @param b the b
+     * @return the int
      */
     public static int addSafely(int a, int b) {
         long res = (long) a + (long) b;

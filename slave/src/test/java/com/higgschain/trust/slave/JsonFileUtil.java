@@ -15,10 +15,17 @@ import java.util.*;
  * JsonFileUtil
  *
  * @author shenqingyan
- * @create 2018年04月10日16:53
+ * @create 2018年04月10日16 :53
  */
 @Log
 public class JsonFileUtil {
+    /**
+     * Read json file list.
+     *
+     * @param list     the list
+     * @param filepath the filepath
+     * @return the list
+     */
     //将文件内容返回为list
     public static List<String> readJsonFile(List<String> list, String filepath) {
         File file = new File(filepath);
@@ -44,6 +51,12 @@ public class JsonFileUtil {
         return list;
     }
 
+    /**
+     * Buffered reader string.
+     *
+     * @param file the file
+     * @return the string
+     */
     //读取文件内容并返回string
     public static String bufferedReader(String file) {
         String laststr = "";
@@ -63,6 +76,12 @@ public class JsonFileUtil {
         return laststr;
     }
 
+    /**
+     * String to json object json object.
+     *
+     * @param str the str
+     * @return the json object
+     */
     //    将string转换为json对象
     public static JSONObject stringToJsonObject(String str) {
         JSONObject json = new JSONObject();
@@ -74,6 +93,12 @@ public class JsonFileUtil {
         return json;
     }
 
+    /**
+     * List string to json list.
+     *
+     * @param list the list
+     * @return the list
+     */
     // 将List<String>转为List<JSONObject>
     public static List<JSONObject> listStringToJson(List<String> list) {
         Iterator it = list.iterator();
@@ -84,6 +109,12 @@ public class JsonFileUtil {
         return listobj;
     }
 
+    /**
+     * Find json file string.
+     *
+     * @param url the url
+     * @return the string
+     */
     public static String findJsonFile(String url){
         String pathProj = "./src/test/resources/"+url;
         String clazzPath = "./test-classes/"+url;
@@ -98,6 +129,12 @@ public class JsonFileUtil {
         }
     }
 
+    /**
+     * Json file to arry object [ ] [ ].
+     *
+     * @param filepath the filepath
+     * @return the object [ ] [ ]
+     */
     //Json文件转为Object[][]
     public static Object[][] jsonFileToArry(String filepath) {
         List parList = new ArrayList();

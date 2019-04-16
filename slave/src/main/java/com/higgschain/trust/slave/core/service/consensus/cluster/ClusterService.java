@@ -25,8 +25,10 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
+ * The type Cluster service.
+ *
  * @author suimi
- * @date 2018/6/11
+ * @date 2018 /6/11
  */
 @Slf4j @Service public class ClusterService implements IClusterService {
 

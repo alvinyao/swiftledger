@@ -7,8 +7,10 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
+ * The type Block request.
+ *
  * @author duhongming
- * @date 2018/9/18
+ * @date 2018 /9/18
  */
 @Getter
 @Setter

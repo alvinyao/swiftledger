@@ -8,9 +8,11 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
+ * The type Create currency vo.
+ *
  * @author liuyu
  * @description
- * @date 2019-03-27
+ * @date 2019 -03-27
  */
 @Getter
 @Setter

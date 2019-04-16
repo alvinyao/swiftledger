@@ -7,13 +7,28 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Quadratic field.
+ *
+ * @param <F> the type parameter
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class QuadraticField<F extends Field, E extends QuadraticElement> extends AbstractFieldOver<F, E> {
+    /**
+     * The Order.
+     */
     protected BigInteger order;
+    /**
+     * The Fixed length in bytes.
+     */
     protected int fixedLengthInBytes;
 
-
+    /**
+     * Instantiates a new Quadratic field.
+     *
+     * @param random      the random
+     * @param targetField the target field
+     */
     public QuadraticField(SecureRandom random, F targetField) {
         super(random, targetField);
 

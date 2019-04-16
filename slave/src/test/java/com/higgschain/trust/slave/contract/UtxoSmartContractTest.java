@@ -17,10 +17,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Utxo smart contract test.
+ */
 public class UtxoSmartContractTest extends BaseTest {
 
+    /**
+     * The Smart contract.
+     */
     @Autowired UTXOSmartContract smartContract;
 
+    /**
+     * Load code from resource file string.
+     *
+     * @param fileName the file name
+     * @return the string
+     */
     protected String loadCodeFromResourceFile(String fileName) {
         try {
             return IOUtils.toString(this.getClass().getResource(fileName), "UTF-8");
@@ -30,7 +42,9 @@ public class UtxoSmartContractTest extends BaseTest {
         }
     }
 
-
+    /**
+     * Test verify.
+     */
     @Test
     public void testVerify() {
         String code = loadCodeFromResourceFile("/utxo.js");
@@ -52,6 +66,9 @@ public class UtxoSmartContractTest extends BaseTest {
         Assert.assertTrue(isOk, "verify result");
     }
 
+    /**
+     * Test verify 2.
+     */
     @Test
     public void testVerify2() {
         String code = loadCodeFromResourceFile("/utxo.js");

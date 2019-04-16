@@ -3,8 +3,10 @@ package com.higgschain.trust.contract;
 import java.util.Map;
 
 /**
+ * The interface Execute engine factory.
+ *
  * @author duhongming
- * @date 2018/04/25
+ * @date 2018 /04/25
  */
 public interface ExecuteEngineFactory {
     /**
@@ -17,10 +19,10 @@ public interface ExecuteEngineFactory {
     /**
      * Returns the instance of ExecuteEngine implementation
      *
-     * @param code
-     * @param variables
-     * @param executeConfig
-     * @return
+     * @param code          the code
+     * @param variables     the variables
+     * @param executeConfig the execute config
+     * @return execute engine
      */
     public ExecuteEngine createExecuteEngine(String code, Map<String, Object> variables, ExecuteConfig executeConfig);
 }

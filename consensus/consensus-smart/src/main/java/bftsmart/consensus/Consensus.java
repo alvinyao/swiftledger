@@ -46,6 +46,9 @@ public class Consensus {
     private TimestampValuePair quorumWrites = null;
     private HashSet<TimestampValuePair> writeSet = new HashSet<TimestampValuePair>();
 
+    /**
+     * The Lock.
+     */
     public ReentrantLock lock = new ReentrantLock(); //this consensus lock (called by other classes)
 
     /**
@@ -140,8 +143,7 @@ public class Consensus {
      * Increments the ETS of this consensus, thus advancing
      * to the next epoch
      *
-     * @param ets New ETS for this consensus, to advance
-     *            to the next epoch. It must be greater than the current ETS
+     * @param ets New ETS for this consensus, to advance            to the next epoch. It must be greater than the current ETS
      */
     public void setETS(int ets) {
 
@@ -161,7 +163,7 @@ public class Consensus {
     /**
      * Store the value read from a Byzantine quorum of WRITES
      *
-     * @param value
+     * @param value the value
      */
     public void setQuorumWrites(byte[] value) {
 
@@ -172,8 +174,7 @@ public class Consensus {
      * Return the value read from a Byzantine quorum of WRITES that has
      * previously been stored
      *
-     * @return the value read from a Byzantine quorum of WRITES, if such
-     * value has been obtained already
+     * @return the value read from a Byzantine quorum of WRITES, if such value has been obtained already
      */
     public TimestampValuePair getQuorumWrites() {
         return quorumWrites;
@@ -211,6 +212,11 @@ public class Consensus {
 
     }
 
+    /**
+     * Gets write set.
+     *
+     * @return the write set
+     */
     public HashSet<TimestampValuePair> getWriteSet() {
         return (HashSet<TimestampValuePair>)writeSet.clone();
     }

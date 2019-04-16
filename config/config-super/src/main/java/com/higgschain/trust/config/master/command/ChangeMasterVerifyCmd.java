@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * The type Change master verify cmd.
+ *
  * @author suimi
- * @date 2018/6/5
+ * @date 2018 /6/5
  */
 @Getter @Setter @NoArgsConstructor public class ChangeMasterVerifyCmd extends ValidCommand<ChangeMasterVerify> {
     private static final long serialVersionUID = 961625577325944353L;
@@ -19,6 +21,11 @@ import lombok.Setter;
 
     private String requestId;
 
+    /**
+     * Instantiates a new Change master verify cmd.
+     *
+     * @param value the value
+     */
     public ChangeMasterVerifyCmd(ChangeMasterVerify value) {
         super(value, value.getView());
         this.requestId = String.join("_", CHANGE_MASTER_VERIFY, "" + value.getTerm(), "" + value.getView(),

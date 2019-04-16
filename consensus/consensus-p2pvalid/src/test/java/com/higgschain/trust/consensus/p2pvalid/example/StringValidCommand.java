@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type String valid command.
+ *
  * @author cwy
  */
 @Getter
@@ -12,10 +14,18 @@ import lombok.Setter;
 public class StringValidCommand extends ValidCommand<String> {
     private static final long serialVersionUID = -1L;
 
+    /**
+     * Instantiates a new String valid command.
+     */
     public StringValidCommand() {
         super();
     }
 
+    /**
+     * Instantiates a new String valid command.
+     *
+     * @param load the load
+     */
     public StringValidCommand(String load) {
         super(load, -1);
     }

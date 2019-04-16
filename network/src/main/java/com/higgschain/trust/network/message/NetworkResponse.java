@@ -1,17 +1,32 @@
 package com.higgschain.trust.network.message;
 
 /**
+ * The type Network response.
+ *
  * @author duhongming
- * @date 2018/8/21
+ * @date 2018 /8/21
  */
 public class NetworkResponse extends NetworkMessage {
 
     private final Status status;
 
+    /**
+     * Instantiates a new Network response.
+     *
+     * @param id      the id
+     * @param payload the payload
+     */
     public NetworkResponse(long id, byte[] payload) {
         this(id, Status.OK, payload);
     }
 
+    /**
+     * Instantiates a new Network response.
+     *
+     * @param id      the id
+     * @param status  the status
+     * @param payload the payload
+     */
     public NetworkResponse(long id, Status status, byte[] payload) {
         super(id, payload);
         this.status = status;
@@ -22,10 +37,18 @@ public class NetworkResponse extends NetworkMessage {
         return Type.RESPONSE;
     }
 
+    /**
+     * Status status.
+     *
+     * @return the status
+     */
     public Status status() {
         return status;
     }
 
+    /**
+     * The enum Status.
+     */
     public enum Status {
 
         /**

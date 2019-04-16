@@ -66,6 +66,9 @@ public abstract class DurabilityCoordinator implements Recoverable, BatchExecuta
     private int checkpointPortion;
     private int replicaCkpIndex;
 
+    /**
+     * Instantiates a new Durability coordinator.
+     */
     public DurabilityCoordinator() {
         try {
             md = MessageDigest.getInstance("MD5"); // TODO: shouldn't it be SHA?
@@ -351,6 +354,12 @@ public abstract class DurabilityCoordinator implements Recoverable, BatchExecuta
         logLock.unlock();
     }
 
+    /**
+     * Gets state.
+     *
+     * @param cstRequest the cst request
+     * @return the state
+     */
     public CSTState getState(CSTRequest cstRequest) {
         CSTState ret = log.getState(cstRequest);
         return ret;
@@ -412,6 +421,11 @@ public abstract class DurabilityCoordinator implements Recoverable, BatchExecuta
         return stateManager;
     }
 
+    /**
+     * Get current state hash byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getCurrentStateHash() {
         byte[] currentState = getSnapshot();
         byte[] currentStateHash = TOMUtil.computeHash(currentState);
@@ -434,11 +448,35 @@ public abstract class DurabilityCoordinator implements Recoverable, BatchExecuta
 
     }
 
+    /**
+     * Install snapshot.
+     *
+     * @param state the state
+     */
     public abstract void installSnapshot(byte[] state);
 
+    /**
+     * Get snapshot byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public abstract byte[] getSnapshot();
 
+    /**
+     * App execute batch byte [ ] [ ].
+     *
+     * @param commands the commands
+     * @param msgCtxs  the msg ctxs
+     * @return the byte [ ] [ ]
+     */
     public abstract byte[][] appExecuteBatch(byte[][] commands, MessageContext[] msgCtxs);
 
+    /**
+     * App execute unordered byte [ ].
+     *
+     * @param command the command
+     * @param msgCtx  the msg ctx
+     * @return the byte [ ]
+     */
     public abstract byte[] appExecuteUnordered(byte[] command, MessageContext msgCtx);
 }

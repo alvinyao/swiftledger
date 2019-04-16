@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
+ * The type System property rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -21,6 +23,13 @@ public class SystemPropertyRocksDao extends RocksBaseDao<SystemPropertyPO> {
         return "systemProperty";
     }
 
+    /**
+     * Save with transaction.
+     *
+     * @param key   the key
+     * @param value the value
+     * @param desc  the desc
+     */
     public void saveWithTransaction(String key, String value, String desc) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {

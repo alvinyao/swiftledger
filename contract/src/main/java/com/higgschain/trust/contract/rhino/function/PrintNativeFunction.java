@@ -8,8 +8,10 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
 /**
+ * The type Print native function.
+ *
  * @author duhongming
- * @date 2018/6/6
+ * @date 2018 /6/6
  */
 @Slf4j
 public class PrintNativeFunction extends BaseFunction {

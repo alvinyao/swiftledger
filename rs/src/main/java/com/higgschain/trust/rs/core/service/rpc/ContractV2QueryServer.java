@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Contract v 2 query server.
+ *
  * @author: lingchao
- * @datetime:2019-01-06 19:16
- **/
+ * @datetime:2019-01-06 19 :16
+ */
 @ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
 @Slf4j
 @Service

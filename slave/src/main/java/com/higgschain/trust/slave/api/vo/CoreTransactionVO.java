@@ -7,8 +7,10 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * The type Core transaction vo.
+ *
  * @author tangfashuang
- * @date 2018/05/12 15:18
+ * @date 2018 /05/12 15:18
  * @desc
  */
 @Setter

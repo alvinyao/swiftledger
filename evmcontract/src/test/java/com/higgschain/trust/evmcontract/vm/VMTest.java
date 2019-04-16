@@ -27,15 +27,25 @@ import java.util.Random;
 import static org.apache.commons.lang3.ArrayUtils.nullToEmpty;
 
 /**
+ * The type Vm test.
+ *
  * @author tangkun
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 public class VMTest {
 
+    /**
+     * The Root.
+     */
     byte[] root = null;
+    /**
+     * The Result bytes.
+     */
     byte[] resultBytes = null;
 
     /**
+     * Random hash byte [ ].
+     *
      * @return - generate random 32 byte hash
      */
     public static byte[] randomHash() {
@@ -47,6 +57,8 @@ public class VMTest {
     }
 
     /**
+     * To bi big integer.
+     *
      * @param data = not null
      * @return new positive BigInteger
      */
@@ -55,6 +67,8 @@ public class VMTest {
     }
 
     /**
+     * To bi big integer.
+     *
      * @param data = not null
      * @return new positive BigInteger
      */
@@ -62,6 +76,11 @@ public class VMTest {
         return BigInteger.valueOf(data);
     }
 
+    /**
+     * Test play.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testPlay() throws Exception {
 
@@ -85,6 +104,18 @@ public class VMTest {
 
     }
 
+    /**
+     * Invoked contract byte [ ].
+     *
+     * @param nonce          the nonce
+     * @param gasPrice       the gas price
+     * @param gas            the gas
+     * @param recieveAddress the recieve address
+     * @param value          the value
+     * @param data           the data
+     * @param db             the db
+     * @return the byte [ ]
+     */
     public byte[] invokedContract(byte[] nonce, byte[] gasPrice, byte[] gas, byte[] recieveAddress, byte[] value, byte[] data,
                                   HashMapDB db) {
         Transaction tx = new Transaction(nonce, gasPrice, gas, recieveAddress, value, data);
@@ -124,7 +155,15 @@ public class VMTest {
         return tx.getContractAddress();
     }
 
-
+    /**
+     * Create program invoke program invoke.
+     *
+     * @param tx         the tx
+     * @param block      the block
+     * @param repository the repository
+     * @param blockStore the block store
+     * @return the program invoke
+     */
     public ProgramInvoke createProgramInvoke(Transaction tx, Block block, Repository repository,
                                              BlockStore blockStore) {
         /***         ADDRESS op       ***/
@@ -180,6 +219,9 @@ public class VMTest {
                 repository, blockStore);
     }
 
+    /**
+     * Test sto.
+     */
     @Test
     public void testSTO() {
 
@@ -261,6 +303,9 @@ public class VMTest {
 //        System.out.println(System.currentTimeMillis() - time);
     }
 
+    /**
+     * Test format.
+     */
     @Test
     public void testFormat() {
 //        for (int i = 0; i < 1000; i++) {

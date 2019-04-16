@@ -8,15 +8,24 @@ import java.util.List;
 import java.util.zip.Deflater;
 import java.util.zip.GZIPOutputStream;
 
+/**
+ * The type File helper.
+ */
 public class FileHelper {
     private final static Logger LOG = Logger.getLogger(FileHelper.class);
+    /**
+     * The constant BUFFER.
+     */
     public static final int BUFFER = 1024;
+    /**
+     * The constant EXT.
+     */
     public static final String EXT = ".gz";
 
     /**
      * 获取临时路径
      *
-     * @return
+     * @return string
      */
     public static String getTempPath(){
         String classPath = FileHelper.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -33,11 +42,12 @@ public class FileHelper {
         }
         return classPath;
     }
+
     /**
      * 逐行读取文件
      *
-     * @param filePath
-     * @return
+     * @param filePath the file path
+     * @return list
      */
     public static List<String> readFiles(String filePath) {
         List<String> datas = new ArrayList<>();
@@ -71,6 +81,11 @@ public class FileHelper {
 
     /**
      * 文件写入
+     *
+     * @param filePath the file path
+     * @param datas    the datas
+     * @param encode   the encode
+     * @return the boolean
      */
     public static boolean writeFiles(String filePath, String datas, String encode) {
         try {
@@ -90,8 +105,9 @@ public class FileHelper {
     /**
      * 文件压缩
      *
-     * @param srcPath
-     * @param targetPath
+     * @param srcPath    the src path
+     * @param targetPath the target path
+     * @return the boolean
      */
     public static boolean compress(String srcPath, String targetPath) {
         FileInputStream fis = null;
@@ -124,8 +140,8 @@ public class FileHelper {
     /**
      * 数据压缩
      *
-     * @param is
-     * @param os
+     * @param is the is
+     * @param os the os
      * @throws Exception
      */
     public static void compress(InputStream is, OutputStream os) {
@@ -152,6 +168,11 @@ public class FileHelper {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         compress("/Users/liuyu/Downloads/icon.jpg", "/Users/liuyu/Downloads/tests.gz");
     }

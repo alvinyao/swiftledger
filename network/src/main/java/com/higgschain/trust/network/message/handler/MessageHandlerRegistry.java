@@ -14,8 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 /**
+ * The type Message handler registry.
+ *
  * @author duhongming
- * @date 2018/9/18
+ * @date 2018 /9/18
  */
 public class MessageHandlerRegistry {
 
@@ -23,6 +25,11 @@ public class MessageHandlerRegistry {
 
     private final ConcurrentHashMap<String, Function<Object, ?>> handlerMap = new ConcurrentHashMap<>();
 
+    /**
+     * Bind.
+     *
+     * @param handler the handler
+     */
     public void bind(Object handler) {
         List<Method> actionMethods = getActionMethods(handler);
         for (Method method : actionMethods) {
@@ -42,10 +49,22 @@ public class MessageHandlerRegistry {
         }
     }
 
+    /**
+     * Add.
+     *
+     * @param actionName the action name
+     * @param func       the func
+     */
     public void add(String actionName, Function func) {
         handlerMap.putIfAbsent(actionName, func);
     }
 
+    /**
+     * Get function.
+     *
+     * @param name the name
+     * @return the function
+     */
     public Function get(String name) {
         return handlerMap.get(name);
     }

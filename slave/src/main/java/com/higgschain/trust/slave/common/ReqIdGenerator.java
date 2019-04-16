@@ -20,6 +20,11 @@ public class ReqIdGenerator {
     @Autowired
     private SnowflakeIdWorker snowflakeIdWorker;
 
+    /**
+     * Generate req id string.
+     *
+     * @return the string
+     */
     public final String generateReqId() {
         String requestId = null;
         try {
@@ -34,6 +39,12 @@ public class ReqIdGenerator {
         return requestId;
     }
 
+    /**
+     * Reqid parse string.
+     *
+     * @param reqId the req id
+     * @return the string
+     */
     public final String reqidParse(String reqId) {
 
         String[] reqIdList = reqId.split("-");

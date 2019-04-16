@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
+ * The type Contract state rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -23,6 +25,12 @@ public class ContractStateRocksDao extends RocksBaseDao<ContractStatePO> {
         return "contractState";
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param list the list
+     * @return the int
+     */
     public int batchInsert(Collection<ContractStatePO> list) {
         if (CollectionUtils.isEmpty(list)) {
             return 0;
@@ -41,6 +49,11 @@ public class ContractStateRocksDao extends RocksBaseDao<ContractStatePO> {
         return list.size();
     }
 
+    /**
+     * Save.
+     *
+     * @param po the po
+     */
     public void save(ContractStatePO po) {
         String address = po.getAddress();
         if (keyMayExist(address) && null != get(address)) {

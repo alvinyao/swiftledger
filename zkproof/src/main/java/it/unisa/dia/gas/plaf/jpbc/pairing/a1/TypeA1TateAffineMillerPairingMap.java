@@ -11,12 +11,21 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.AbstractMillerPairingMap;
 import java.math.BigInteger;
 
 /**
+ * The type Type a 1 tate affine miller pairing map.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeA1TateAffineMillerPairingMap extends AbstractMillerPairingMap<Element> {
+    /**
+     * The Pairing.
+     */
     protected TypeA1Pairing pairing;
 
-
+    /**
+     * Instantiates a new Type a 1 tate affine miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeA1TateAffineMillerPairingMap(TypeA1Pairing pairing) {
         super(pairing);
 
@@ -138,7 +147,12 @@ public class TypeA1TateAffineMillerPairingMap extends AbstractMillerPairingMap<E
         element.set(t0);
     }
 
-
+    /**
+     * Tate pow element.
+     *
+     * @param element the element
+     * @return the element
+     */
     public Element tatePow(Element element) {
         Element t0, t1;
         t0 = element.getField().newElement();
@@ -151,6 +165,14 @@ public class TypeA1TateAffineMillerPairingMap extends AbstractMillerPairingMap<E
         return element;
     }
 
+    /**
+     * Tate pow.
+     *
+     * @param out      the out
+     * @param in       the in
+     * @param temp     the temp
+     * @param cofactor the cofactor
+     */
     final void tatePow(Point out, Point in, Point temp, BigInteger cofactor) {
         Element in1 = in.getY();
         //simpler but slower:

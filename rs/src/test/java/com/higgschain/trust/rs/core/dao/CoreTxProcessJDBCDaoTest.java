@@ -13,11 +13,15 @@ import java.util.List;
  * CoreTxProcessJDBCDao test
  *
  * @author lingchao
- * @create 2018年08月25日17:07
+ * @create 2018年08月25日17 :07
  */
 public class CoreTxProcessJDBCDaoTest extends IntegrateBaseTest {
     @Autowired
     private CoreTxProcessJDBCDao coreTxProcessJDBCDao;
+
+    /**
+     * Batch insert tx.
+     */
     @Test
     public void  batchInsertTx(){
         List<CoreTransactionProcessPO> list = Lists.newArrayList();
@@ -30,6 +34,9 @@ public class CoreTxProcessJDBCDaoTest extends IntegrateBaseTest {
         System.out.println("batchInsertTx:"+coreTxProcessJDBCDao.batchInsert(list));
     }
 
+    /**
+     * Batch update status.
+     */
     @Test
     public void  batchUpdateStatus(){
         List<CoreTransactionProcessPO> list = Lists.newArrayList();

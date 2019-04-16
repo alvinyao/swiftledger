@@ -7,13 +7,23 @@ import it.unisa.dia.gas.plaf.jpbc.util.math.BigIntegerUtils;
 import java.math.BigInteger;
 
 /**
+ * The type Zr element.
+ *
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ZrElement<F extends ZrField> extends AbstractZElement<F> {
 
+    /**
+     * The Order.
+     */
     protected BigInteger order;
 
-
+    /**
+     * Instantiates a new Zr element.
+     *
+     * @param field the field
+     */
     public ZrElement(F field) {
         super(field);
 
@@ -21,6 +31,12 @@ public class ZrElement<F extends ZrField> extends AbstractZElement<F> {
         this.order = field.getOrder();
     }
 
+    /**
+     * Instantiates a new Zr element.
+     *
+     * @param field the field
+     * @param value the value
+     */
     public ZrElement(F field, BigInteger value) {
         super(field);
 
@@ -28,6 +44,11 @@ public class ZrElement<F extends ZrField> extends AbstractZElement<F> {
         this.order = field.getOrder();
     }
 
+    /**
+     * Instantiates a new Zr element.
+     *
+     * @param zrElement the zr element
+     */
     public ZrElement(ZrElement<F> zrElement) {
         super(zrElement.getField());
 

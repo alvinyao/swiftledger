@@ -17,6 +17,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The type Register policy handler test.
+ */
 /*
  *
  * @desc
@@ -26,11 +29,22 @@ import java.util.Random;
  */
 public class RegisterPolicyHandlerTest extends BaseTest {
 
+    /**
+     * The Register policy handler.
+     */
     @Autowired
     RegisterPolicyHandler registerPolicyHandler;
 
+    /**
+     * The Block service.
+     */
     @Autowired BlockService blockService;
 
+    /**
+     * Test validate 1.
+     *
+     * @throws Exception the exception
+     */
     //policy已存在
     @Test public void testValidate1() throws Exception {
 
@@ -59,6 +73,11 @@ public class RegisterPolicyHandlerTest extends BaseTest {
         }
     }
 
+    /**
+     * Test validate 2.
+     *
+     * @throws Exception the exception
+     */
     //policy参数为空
     @Test public void testValidate2() throws Exception {
         Package pack = new Package();
@@ -78,6 +97,11 @@ public class RegisterPolicyHandlerTest extends BaseTest {
 
     }
 
+    /**
+     * Test validate 3.
+     *
+     * @throws Exception the exception
+     */
     //    policy参数校验不通过
     @Test public void testValidate3() throws Exception {
         Package pack = new Package();
@@ -103,6 +127,11 @@ public class RegisterPolicyHandlerTest extends BaseTest {
         }
     }
 
+    /**
+     * Test validate 4.
+     *
+     * @throws Exception the exception
+     */
     //rsIdList重复
     @Test public void testValidate4() throws Exception {
         Package pack = new Package();
@@ -130,6 +159,11 @@ public class RegisterPolicyHandlerTest extends BaseTest {
         }
     }
 
+    /**
+     * Test validate 5.
+     *
+     * @throws Exception the exception
+     */
     //校验通过
     @Test public void testValidate5() throws Exception {
         Package pack = new Package();
@@ -156,6 +190,11 @@ public class RegisterPolicyHandlerTest extends BaseTest {
         registerPolicyHandler.process(packContext);
     }
 
+    /**
+     * Test persist.
+     *
+     * @throws Exception the exception
+     */
     //成功增加policy
     @Test public void testPersist() throws Exception {
         Package pack = new Package();

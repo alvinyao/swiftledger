@@ -8,8 +8,10 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
+ * The type Change master verify response.
+ *
  * @author suimi
- * @date 2018/6/5
+ * @date 2018 /6/5
  */
 @Data @NoArgsConstructor @RequiredArgsConstructor @ToString(exclude = {"sign"}) public class ChangeMasterVerifyResponse
     implements Serializable {
@@ -51,6 +53,11 @@ import java.io.Serializable;
      */
     private String sign;
 
+    /**
+     * Gets sign value.
+     *
+     * @return the sign value
+     */
     public String getSignValue() {
         return String.join(",", "" + term, "" + view, voter, proposer, "" + packageHeight, "" + changeMaster);
     }

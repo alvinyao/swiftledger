@@ -16,7 +16,7 @@ import java.util.Date;
  * System  Property  repository
  *
  * @author lingchao
- * @create 2018年06月27日15:58
+ * @create 2018年06月27日15 :58
  */
 @Service
 @Slf4j
@@ -33,8 +33,8 @@ public class SystemPropertyRepository {
     /**
      * query system property by key
      *
-     * @param key
-     * @return
+     * @param key the key
+     * @return system property
      */
     public SystemProperty queryByKey(String key) {
         SystemPropertyPO systemPropertyPO;
@@ -48,9 +48,10 @@ public class SystemPropertyRepository {
 
     /**
      * add property into db
-     * @param key
-     * @param value
-     * @param desc
+     *
+     * @param key   the key
+     * @param value the value
+     * @param desc  the desc
      * @return
      */
     public void add(String key, String value, String desc){
@@ -69,9 +70,11 @@ public class SystemPropertyRepository {
 
     /**
      * add property into db
-     * @param key
-     * @param value
-     * @return
+     *
+     * @param key   the key
+     * @param value the value
+     * @param desc  the desc
+     * @return int
      */
     public int update(String key, String value, String desc){
         if (initConfig.isUseMySQL()) {
@@ -89,6 +92,13 @@ public class SystemPropertyRepository {
         }
     }
 
+    /**
+     * Save with transaction.
+     *
+     * @param key   the key
+     * @param value the value
+     * @param desc  the desc
+     */
     public void saveWithTransaction(String key, String value, String desc) {
         systemPropertyRocksDao.saveWithTransaction(key, value, desc);
     }

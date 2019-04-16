@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Transactions metric set.
+ *
  * @author duhongming
- * @date 2019/1/3
+ * @date 2019 /1/3
  */
 public class TransactionsMetricSet {
     private final Timer timer;
@@ -19,7 +21,9 @@ public class TransactionsMetricSet {
     private long lastRecordCount;
     private long currentTotalCount;
 
-
+    /**
+     * Instantiates a new Transactions metric set.
+     */
     public TransactionsMetricSet() {
         timer = new Timer();
         histogram = new Histogram(new UniformReservoir());
@@ -28,6 +32,11 @@ public class TransactionsMetricSet {
         perSecondCountGauge = new ValuedGauge<>();
     }
 
+    /**
+     * Gets metrics.
+     *
+     * @return the metrics
+     */
     public Map<String, Metric> getMetrics() {
         final Map<String, Metric> metrics = new HashMap<>();
 
@@ -52,10 +61,20 @@ public class TransactionsMetricSet {
         return metrics;
     }
 
+    /**
+     * Time timer . context.
+     *
+     * @return the timer . context
+     */
     public Timer.Context time() {
         return timer.time();
     }
 
+    /**
+     * Time.
+     *
+     * @param run the run
+     */
     public void time(Runnable run) {
         timer.time(run);
     }

@@ -30,6 +30,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+/**
+ * The type Utils.
+ */
 public class Utils {
     private static final DataWord DIVISOR = new DataWord(64);
 
@@ -41,8 +44,10 @@ public class Utils {
     public static final String JAVA_VERSION_OF_ANDROID= "0";
 
     /**
+     * Unified numeric to big integer big integer.
+     *
      * @param number should be in form '0x34fabd34....'
-     * @return String
+     * @return String big integer
      */
     public static BigInteger unifiedNumericToBigInteger(String number) {
 
@@ -70,7 +75,12 @@ public class Utils {
         return formatter.format(date);
     }
 
-
+    /**
+     * Gets image icon.
+     *
+     * @param resource the resource
+     * @return the image icon
+     */
     public static ImageIcon getImageIcon(String resource) {
         URL imageURL = ClassLoader.getSystemResource(resource);
         ImageIcon image = new ImageIcon(imageURL);
@@ -82,6 +92,12 @@ public class Utils {
      */
     static BigInteger CUBE_OF_10 = new BigInteger("1000");
 
+    /**
+     * Gets value short string.
+     *
+     * @param number the number
+     * @return the value short string
+     */
     public static String getValueShortString(BigInteger number) {
         BigInteger result = number;
         int pow = 0;
@@ -92,18 +108,35 @@ public class Utils {
         return result.toString() + "\u00b7(" + "10^" + pow + ")";
     }
 
-
+    /**
+     * Is valid address boolean.
+     *
+     * @param addr the addr
+     * @return the boolean
+     */
     public static boolean isValidAddress(byte[] addr) {
         return addr != null && addr.length == 20;
     }
 
-
+    /**
+     * Gets random.
+     *
+     * @return the random
+     */
     public static SecureRandom getRandom() {
         return random;
     }
 
+    /**
+     * The constant JAVA_VERSION.
+     */
     public static double JAVA_VERSION = getJavaVersion();
 
+    /**
+     * Gets java version.
+     *
+     * @return the java version
+     */
     static double getJavaVersion() {
         String version = System.getProperty("java.version");
 
@@ -119,7 +152,15 @@ public class Utils {
         return Double.parseDouble(version.substring(0,second));
     }
 
-
+    /**
+     * Align string.
+     *
+     * @param s          the s
+     * @param fillChar   the fill char
+     * @param targetLen  the target len
+     * @param alignRight the align right
+     * @return the string
+     */
     public static String align(String s, char fillChar, int targetLen, boolean alignRight) {
         if (targetLen <= s.length()) {
             return s;
@@ -129,6 +170,13 @@ public class Utils {
 
     }
 
+    /**
+     * Repeat string.
+     *
+     * @param s the s
+     * @param n the n
+     * @return the string
+     */
     public static String repeat(String s, int n) {
         if (s.length() == 1) {
             byte[] bb = new byte[n];

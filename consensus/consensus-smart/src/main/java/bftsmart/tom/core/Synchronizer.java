@@ -67,6 +67,11 @@ public class Synchronizer {
     private int tempBatchSize = -1;
     private boolean tempIAmLeader = false;
 
+    /**
+     * Instantiates a new Synchronizer.
+     *
+     * @param tom the tom
+     */
     public Synchronizer(TOMLayer tom) {
 
         this.tom = tom;
@@ -84,6 +89,11 @@ public class Synchronizer {
         this.lcManager = new LCManager(this.tom, this.controller, this.md);
     }
 
+    /**
+     * Gets lc manager.
+     *
+     * @return the lc manager
+     */
     public LCManager getLCManager() {
         return lcManager;
     }
@@ -92,8 +102,7 @@ public class Synchronizer {
      * This method is called when there is a timeout and the request has already
      * been forwarded to the leader
      *
-     * @param requestList List of requests that the replica wanted to order but
-     *                    didn't manage to
+     * @param requestList List of requests that the replica wanted to order but                    didn't manage to
      */
     public void triggerTimeout(List<TOMMessage> requestList) {
 
@@ -1045,6 +1054,9 @@ public class Synchronizer {
         }
     }
 
+    /**
+     * Resume lc.
+     */
     //This method is invoked by the state transfer protocol to notify the replica
     // that it can end synchronization
     public void resumeLC() {

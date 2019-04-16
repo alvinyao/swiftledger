@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Currency info rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -24,6 +26,11 @@ public class CurrencyInfoRocksDao extends RocksBaseDao<CurrencyInfoPO> {
         return "currencyInfo";
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param currencyInfos the currency infos
+     */
     public void batchInsert(List<CurrencyInfoPO> currencyInfos) {
         if (CollectionUtils.isEmpty(currencyInfos)) {
             return;

@@ -17,26 +17,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Change master replicate.
+ *
  * @author suimi
- * @date 2018/6/11
+ * @date 2018 /6/11
  */
 @P2pvalidReplicator @Component public class ChangeMasterReplicate {
 
+    /**
+     * The Node state.
+     */
     @Autowired NodeState nodeState;
 
+    /**
+     * The Term manager.
+     */
     @Autowired TermManager termManager;
 
+    /**
+     * The View manager.
+     */
     @Autowired IClusterViewManager viewManager;
 
+    /**
+     * The Node info service.
+     */
     @Autowired
     INodeInfoService nodeInfoService;
 
+    /**
+     * The Change master service.
+     */
     @Autowired ChangeMasterService changeMasterService;
 
     /**
      * handle the consensus result of validating block header
      *
-     * @param commit
+     * @param commit the commit
+     * @return the change master verify response cmd
      */
     public ChangeMasterVerifyResponseCmd handleChangeMasterVerify(ValidSyncCommit<ChangeMasterVerifyCmd> commit) {
         ChangeMasterVerifyCmd operation = commit.operation();

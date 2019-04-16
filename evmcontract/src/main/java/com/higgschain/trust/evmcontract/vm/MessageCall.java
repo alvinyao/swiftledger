@@ -57,6 +57,16 @@ public class MessageCall {
      */
     private DataWord outDataSize;
 
+    /**
+     * Instantiates a new Message call.
+     *
+     * @param type        the type
+     * @param gas         the gas
+     * @param codeAddress the code address
+     * @param endowment   the endowment
+     * @param inDataOffs  the in data offs
+     * @param inDataSize  the in data size
+     */
     public MessageCall(OpCode type, DataWord gas, DataWord codeAddress,
                        DataWord endowment, DataWord inDataOffs, DataWord inDataSize) {
         this.type = type;
@@ -67,6 +77,18 @@ public class MessageCall {
         this.inDataSize = inDataSize;
     }
 
+    /**
+     * Instantiates a new Message call.
+     *
+     * @param type        the type
+     * @param gas         the gas
+     * @param codeAddress the code address
+     * @param endowment   the endowment
+     * @param inDataOffs  the in data offs
+     * @param inDataSize  the in data size
+     * @param outDataOffs the out data offs
+     * @param outDataSize the out data size
+     */
     public MessageCall(OpCode type, DataWord gas, DataWord codeAddress,
                        DataWord endowment, DataWord inDataOffs, DataWord inDataSize,
                        DataWord outDataOffs, DataWord outDataSize) {
@@ -75,34 +97,74 @@ public class MessageCall {
         this.outDataSize = outDataSize;
     }
 
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public OpCode getType() {
         return type;
     }
 
+    /**
+     * Gets gas.
+     *
+     * @return the gas
+     */
     public DataWord getGas() {
         return gas;
     }
 
+    /**
+     * Gets code address.
+     *
+     * @return the code address
+     */
     public DataWord getCodeAddress() {
         return codeAddress;
     }
 
+    /**
+     * Gets endowment.
+     *
+     * @return the endowment
+     */
     public DataWord getEndowment() {
         return endowment;
     }
 
+    /**
+     * Gets in data offs.
+     *
+     * @return the in data offs
+     */
     public DataWord getInDataOffs() {
         return inDataOffs;
     }
 
+    /**
+     * Gets in data size.
+     *
+     * @return the in data size
+     */
     public DataWord getInDataSize() {
         return inDataSize;
     }
 
+    /**
+     * Gets out data offs.
+     *
+     * @return the out data offs
+     */
     public DataWord getOutDataOffs() {
         return outDataOffs;
     }
 
+    /**
+     * Gets out data size.
+     *
+     * @return the out data size
+     */
     public DataWord getOutDataSize() {
         return outDataSize;
     }

@@ -27,15 +27,28 @@ import java.util.Set;
 
 /**
  * Created by Anton Nashatyrev on 12.10.2016.
+ *
+ * @param <V> the type parameter
  */
 public class HashMapDBSimple<V> implements DbSource<V> {
 
+    /**
+     * The Storage.
+     */
     protected final Map<byte[], V> storage;
 
+    /**
+     * Instantiates a new Hash map db simple.
+     */
     public HashMapDBSimple() {
         this(new ByteArrayMap<V>());
     }
 
+    /**
+     * Instantiates a new Hash map db simple.
+     *
+     * @param storage the storage
+     */
     public HashMapDBSimple(ByteArrayMap<V> storage) {
         this.storage = storage;
     }
@@ -119,6 +132,11 @@ public class HashMapDBSimple<V> implements DbSource<V> {
         }
     }
 
+    /**
+     * Gets storage.
+     *
+     * @return the storage
+     */
     public Map<byte[], V> getStorage() {
         return storage;
     }

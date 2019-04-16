@@ -10,8 +10,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 /**
+ * The type Solo consensus client.
+ *
  * @author suimi
- * @date 2019/2/20
+ * @date 2019 /2/20
  */
 @Service public class SoloConsensusClient implements ConsensusClient {
 

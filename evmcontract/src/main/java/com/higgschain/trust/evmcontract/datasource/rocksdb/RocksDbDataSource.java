@@ -24,8 +24,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import static java.lang.System.arraycopy;
 
 /**
+ * The type Rocks db data source.
+ *
  * @author duhongming
- * @date 2018/11/21
+ * @date 2018 /11/21
  */
 public class RocksDbDataSource implements DbSource<byte[]> {
 
@@ -37,11 +39,26 @@ public class RocksDbDataSource implements DbSource<byte[]> {
     @Autowired
     SystemProperties config  = SystemProperties.getDefault();
 
+    /**
+     * The Name.
+     */
     String name;
+    /**
+     * The Db.
+     */
     RocksDB db;
+    /**
+     * The Read opts.
+     */
     ReadOptions readOpts;
+    /**
+     * The Alive.
+     */
     boolean alive;
 
+    /**
+     * The Settings.
+     */
     DbSettings settings = DbSettings.DEFAULT;
 
     // The native RocksDB insert/update/delete are normally thread-safe
@@ -54,14 +71,28 @@ public class RocksDbDataSource implements DbSource<byte[]> {
         RocksDB.loadLibrary();
     }
 
+    /**
+     * Instantiates a new Rocks db data source.
+     */
     public RocksDbDataSource() {
     }
 
+    /**
+     * Instantiates a new Rocks db data source.
+     *
+     * @param name the name
+     */
     public RocksDbDataSource(String name) {
         this.name = name;
         logger.debug("New RocksDbDataSource: " + name);
     }
 
+    /**
+     * Instantiates a new Rocks db data source.
+     *
+     * @param name   the name
+     * @param config the config
+     */
     public RocksDbDataSource(String name, SystemProperties config) {
         this(name);
         this.config = config;
@@ -171,6 +202,9 @@ public class RocksDbDataSource implements DbSource<byte[]> {
         }
     }
 
+    /**
+     * Backup.
+     */
     public void backup() {
         resetDbLock.readLock().lock();
         if (logger.isTraceEnabled()) {

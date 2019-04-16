@@ -7,9 +7,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Vote rule vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-06-08
+ * @date 2018 -06-08
  */
 @Getter @Setter public class VoteRuleVO extends BaseBO {
     /**

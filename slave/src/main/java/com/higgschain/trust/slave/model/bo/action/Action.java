@@ -8,9 +8,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 /**
+ * The type Action.
+ *
  * @Description: abstract action class
  * @author: pengdi
- **/
+ */
 @Getter @Setter public abstract class Action extends BaseBO {
     private static final long serialVersionUID = -9206591383343379207L;
     /**

@@ -8,8 +8,10 @@ import java.util.Arrays;
 import java.util.concurrent.*;
 
 /**
+ * The type Event dispatch thread.
+ *
  * @author duhongming
- * @date 2018/12/17
+ * @date 2018 /12/17
  */
 public class EventDispatchThread {
     private static final Logger logger = LoggerFactory.getLogger("blockchain");
@@ -29,6 +31,8 @@ public class EventDispatchThread {
     /**
      * Returns the default instance for initialization of Autowired instances
      * to be used in tests
+     *
+     * @return the default
      */
     public static EventDispatchThread getDefault() {
         if (eventDispatchThread == null) {
@@ -42,7 +46,11 @@ public class EventDispatchThread {
         return eventDispatchThread;
     }
 
-
+    /**
+     * Invoke later.
+     *
+     * @param task the task
+     */
     public void invokeLater(final Runnable task) {
         if (executor.isShutdown()) {
             return;
@@ -94,6 +102,9 @@ public class EventDispatchThread {
         return idx >= 0 ? idx : -(idx + 1) - 1;
     }
 
+    /**
+     * Shutdown.
+     */
     public void shutdown() {
         executor.shutdownNow();
         try {

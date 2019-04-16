@@ -23,6 +23,7 @@ package com.higgschain.trust.evmcontract.datasource;
  * <p>
  * Other operations are simply propagated to backing {@link DbSource}.
  *
+ * @param <V> the type parameter
  * @author Mikhail Kalinin
  * @since 01.12.2017
  */
@@ -32,6 +33,12 @@ public class PrefixLookupSource<V> implements Source<byte[], V> {
     private int prefixBytes;
     private DbSource<V> source;
 
+    /**
+     * Instantiates a new Prefix lookup source.
+     *
+     * @param source      the source
+     * @param prefixBytes the prefix bytes
+     */
     public PrefixLookupSource(DbSource<V> source, int prefixBytes) {
         this.source = source;
         this.prefixBytes = prefixBytes;

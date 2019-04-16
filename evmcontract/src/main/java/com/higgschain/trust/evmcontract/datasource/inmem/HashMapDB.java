@@ -30,19 +30,41 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by Anton Nashatyrev on 12.10.2016.
+ *
+ * @param <V> the type parameter
  */
 public class HashMapDB<V> implements DbSource<V> {
 
+    /**
+     * The Storage.
+     */
     protected final Map<byte[], V> storage;
 
+    /**
+     * The Rw lock.
+     */
     protected ReadWriteLock rwLock = new ReentrantReadWriteLock();
+    /**
+     * The Read lock.
+     */
     protected ALock readLock = new ALock(rwLock.readLock());
+    /**
+     * The Write lock.
+     */
     protected ALock writeLock = new ALock(rwLock.writeLock());
 
+    /**
+     * Instantiates a new Hash map db.
+     */
     public HashMapDB() {
         this(new ByteArrayMap<V>());
     }
 
+    /**
+     * Instantiates a new Hash map db.
+     *
+     * @param storage the storage
+     */
     public HashMapDB(ByteArrayMap<V> storage) {
         this.storage = storage;
     }
@@ -145,6 +167,11 @@ public class HashMapDB<V> implements DbSource<V> {
         }
     }
 
+    /**
+     * Gets storage.
+     *
+     * @return the storage
+     */
     public Map<byte[], V> getStorage() {
         return storage;
     }

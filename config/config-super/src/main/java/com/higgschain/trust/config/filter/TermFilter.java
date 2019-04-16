@@ -22,8 +22,10 @@ import org.springframework.stereotype.Component;
 //import org.apache.commons.lang.ArrayUtils;
 
 /**
+ * The type Term filter.
+ *
  * @author suimi
- * @date 2018/6/1
+ * @date 2018 /6/1
  */
 @Order(3) @Component @Slf4j public class TermFilter implements CommandFilter {
     @Autowired private NodeState nodeState;

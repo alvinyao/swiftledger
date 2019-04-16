@@ -7,26 +7,30 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * The interface Biz type dao.
+ */
 @Mapper public interface BizTypeDao extends BaseDao<BizTypePO> {
     /**
      * query by policy id
      *
-     * @param policyId
-     * @return
+     * @param policyId the policy id
+     * @return biz type po
      */
     BizTypePO queryByPolicyId(@Param("policyId") String policyId);
 
     /**
      * query all bizType
      *
-     * @return
+     * @return list
      */
     List<BizTypePO> queryAll();
 
     /**
      * update bizType
-     * @param policyId
-     * @param bizType
+     *
+     * @param policyId the policy id
+     * @param bizType  the biz type
      */
     void update(String policyId, String bizType);
 }

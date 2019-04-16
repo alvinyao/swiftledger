@@ -7,29 +7,69 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
+ * The type Symmetric zr field.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class SymmetricZrField extends AbstractField<SymmetricZrElement> {
+    /**
+     * The Order.
+     */
     protected BigInteger order;
+    /**
+     * The Half order.
+     */
     protected BigInteger halfOrder;
-    
+
+    /**
+     * The Nqr.
+     */
     protected SymmetricZrElement nqr;
+    /**
+     * The Fixed length in bytes.
+     */
     protected int fixedLengthInBytes;
+    /**
+     * The Two inverse.
+     */
     protected BigInteger twoInverse;
 
-
+    /**
+     * Instantiates a new Symmetric zr field.
+     *
+     * @param order the order
+     */
     public SymmetricZrField(BigInteger order) {
         this(new SecureRandom(), order, null);
     }
 
+    /**
+     * Instantiates a new Symmetric zr field.
+     *
+     * @param random the random
+     * @param order  the order
+     */
     public SymmetricZrField(SecureRandom random, BigInteger order) {
         this(random, order, null);
     }
 
+    /**
+     * Instantiates a new Symmetric zr field.
+     *
+     * @param order the order
+     * @param nqr   the nqr
+     */
     public SymmetricZrField(BigInteger order, BigInteger nqr) {
         this(new SecureRandom(), order, nqr);
     }
 
+    /**
+     * Instantiates a new Symmetric zr field.
+     *
+     * @param random the random
+     * @param order  the order
+     * @param nqr    the nqr
+     */
     public SymmetricZrField(SecureRandom random, BigInteger order, BigInteger nqr) {
         super(random);
         this.order = order;

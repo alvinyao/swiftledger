@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * The type Diagnosis controller.
+ *
  * @author Chen Jiawei
- * @date 2019-01-21
+ * @date 2019 -01-21
  */
 @Slf4j
 @CrossOrigin
@@ -23,8 +25,7 @@ public class DiagnosisController {
      * Query contract code with the specified address and the block height.
      *
      * @param address contract address, a hex string with 40 characters
-     * @param height  height of block in which contract exists, if
-     *                not given, query is on the latest block
+     * @param height  height of block in which contract exists, if                not given, query is on the latest block
      * @return the contract code
      */
     @GetMapping(path = "/contract/code")

@@ -14,10 +14,17 @@ import org.spongycastle.util.encoders.Hex;
 import java.util.Objects;
 
 /**
+ * The type Customer contract invocation executor.
+ *
  * @author Chen Jiawei
- * @date 2018-11-15
+ * @date 2018 -11-15
  */
 public class CustomerContractInvocationExecutor extends BaseContractExecutor {
+    /**
+     * Instantiates a new Customer contract invocation executor.
+     *
+     * @param contractExecutionContext the contract execution context
+     */
     CustomerContractInvocationExecutor(ContractExecutionContext contractExecutionContext) {
         super(contractExecutionContext);
     }

@@ -9,11 +9,18 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
+ * The type Poly mod element.
+ *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class PolyModElement<E extends Element> extends AbstractPolyElement<E, PolyModField> {
 
-
+    /**
+     * Instantiates a new Poly mod element.
+     *
+     * @param field the field
+     */
     public PolyModElement(PolyModField field) {
         super(field);
 
@@ -21,6 +28,11 @@ public class PolyModElement<E extends Element> extends AbstractPolyElement<E, Po
             coefficients.add((E) field.getTargetField().newElement());
     }
 
+    /**
+     * Instantiates a new Poly mod element.
+     *
+     * @param source the source
+     */
     public PolyModElement(PolyModElement<E> source) {
         super(source.getField());
 
@@ -126,6 +138,12 @@ public class PolyModElement<E extends Element> extends AbstractPolyElement<E, Po
         return true;
     }
 
+    /**
+     * Map poly mod element.
+     *
+     * @param e the e
+     * @return the poly mod element
+     */
     public PolyModElement<E> map(Element e) {
         coefficients.get(0).set(e);
         for (int i = 1; i < field.n; i++) {
@@ -508,7 +526,12 @@ public class PolyModElement<E extends Element> extends AbstractPolyElement<E, Po
         return buffer.toString();
     }
 
-
+    /**
+     * Sets from poly truncate.
+     *
+     * @param element the element
+     * @return the from poly truncate
+     */
     public PolyModElement<E> setFromPolyTruncate(PolyElement<E> element) {
         int n = element.getCoefficients().size();
         if (n > field.n)
@@ -526,6 +549,12 @@ public class PolyModElement<E extends Element> extends AbstractPolyElement<E, Po
         return this;
     }
 
+    /**
+     * Polymod const mul poly mod element.
+     *
+     * @param e the e
+     * @return the poly mod element
+     */
     public PolyModElement<E> polymodConstMul(Element e) {
         //a lies in R, e in R[x]
         for (int i = 0, n = coefficients.size(); i < n; i++) {
@@ -535,7 +564,9 @@ public class PolyModElement<E extends Element> extends AbstractPolyElement<E, Po
         return this;
     }
 
-
+    /**
+     * Square internal.
+     */
     protected void squareInternal() {
         List<E> dst;
         List<E> src = coefficients;
@@ -592,12 +623,12 @@ public class PolyModElement<E extends Element> extends AbstractPolyElement<E, Po
     /**
      * Karatsuba for degree 2 polynomials
      *
-     * @param dst
-     * @param c3
-     * @param c4
-     * @param s1
-     * @param s2
-     * @param scratch
+     * @param dst     the dst
+     * @param c3      the c 3
+     * @param c4      the c 4
+     * @param s1      the s 1
+     * @param s2      the s 2
+     * @param scratch the scratch
      */
     protected void kar_poly_2(List<E> dst, Element c3, Element c4, List<E> s1, List<E> s2, List<E> scratch) {
         Element c01, c02, c12;
@@ -637,6 +668,12 @@ public class PolyModElement<E extends Element> extends AbstractPolyElement<E, Po
         dst.set(1, (E) c01.duplicate().sub(dst.get(1)));
     }
 
+    /**
+     * Poly invert poly element.
+     *
+     * @param f the f
+     * @return the poly element
+     */
     protected PolyElement polyInvert(PolyElement f) {
         PolyField<Field> polyField = f.getField();
 

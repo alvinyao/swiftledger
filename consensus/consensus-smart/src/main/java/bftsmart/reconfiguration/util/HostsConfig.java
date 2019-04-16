@@ -25,17 +25,26 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+/**
+ * The type Hosts config.
+ */
 public class HostsConfig {
 
     private SmartConfig config;
 
     private Hashtable servers = new Hashtable();
 
+    /**
+     * Instantiates a new Hosts config.
+     */
     public HostsConfig() {
     }
 
     /**
      * Creates a new instance of ServersConfig
+     *
+     * @param configHome the config home
+     * @param fileName   the file name
      */
     public HostsConfig(String configHome, String fileName) {
         config = SpringUtil.getBean(SmartConfig.class);
@@ -93,16 +102,34 @@ public class HostsConfig {
         //        }
     }
 
+    /**
+     * Add.
+     *
+     * @param id   the id
+     * @param host the host
+     * @param port the port
+     */
     public void add(int id, String host, int port) {
         if (this.servers.get(id) == null) {
             this.servers.put(id, new Config(id, host, port));
         }
     }
 
+    /**
+     * Gets num.
+     *
+     * @return the num
+     */
     public int getNum() {
         return servers.size();
     }
 
+    /**
+     * Gets remote address.
+     *
+     * @param id the id
+     * @return the remote address
+     */
     public InetSocketAddress getRemoteAddress(int id) {
         Config c = (Config)this.servers.get(id);
         if (c != null) {
@@ -111,6 +138,12 @@ public class HostsConfig {
         return null;
     }
 
+    /**
+     * Gets server to server remote address.
+     *
+     * @param id the id
+     * @return the server to server remote address
+     */
     public InetSocketAddress getServerToServerRemoteAddress(int id) {
         Config c = (Config)this.servers.get(id);
         if (c != null) {
@@ -119,6 +152,12 @@ public class HostsConfig {
         return null;
     }
 
+    /**
+     * Gets port.
+     *
+     * @param id the id
+     * @return the port
+     */
     public int getPort(int id) {
         Config c = (Config)this.servers.get(id);
         if (c != null) {
@@ -127,6 +166,12 @@ public class HostsConfig {
         return -1;
     }
 
+    /**
+     * Gets server to server port.
+     *
+     * @param id the id
+     * @return the server to server port
+     */
     public int getServerToServerPort(int id) {
         Config c = (Config)this.servers.get(id);
         if (c != null) {
@@ -135,6 +180,11 @@ public class HostsConfig {
         return -1;
     }
 
+    /**
+     * Get hosts ids int [ ].
+     *
+     * @return the int [ ]
+     */
     public int[] getHostsIds() {
         Set s = this.servers.keySet();
         int[] ret = new int[s.size()];
@@ -147,6 +197,12 @@ public class HostsConfig {
         return ret;
     }
 
+    /**
+     * Sets port.
+     *
+     * @param id   the id
+     * @param port the port
+     */
     public void setPort(int id, int port) {
         Config c = (Config)this.servers.get(id);
         if (c != null) {
@@ -154,6 +210,12 @@ public class HostsConfig {
         }
     }
 
+    /**
+     * Gets host.
+     *
+     * @param id the id
+     * @return the host
+     */
     public String getHost(int id) {
         Config c = (Config)this.servers.get(id);
         if (c != null) {
@@ -162,6 +224,12 @@ public class HostsConfig {
         return null;
     }
 
+    /**
+     * Gets local address.
+     *
+     * @param id the id
+     * @return the local address
+     */
     public InetSocketAddress getLocalAddress(int id) {
         Config c = (Config)this.servers.get(id);
         if (c != null) {
@@ -170,11 +238,30 @@ public class HostsConfig {
         return null;
     }
 
+    /**
+     * The type Config.
+     */
     public class Config {
+        /**
+         * The Id.
+         */
         public int id;
+        /**
+         * The Host.
+         */
         public String host;
+        /**
+         * The Port.
+         */
         public int port;
 
+        /**
+         * Instantiates a new Config.
+         *
+         * @param id   the id
+         * @param host the host
+         * @param port the port
+         */
         public Config(int id, String host, int port) {
             this.id = id;
             this.host = host;

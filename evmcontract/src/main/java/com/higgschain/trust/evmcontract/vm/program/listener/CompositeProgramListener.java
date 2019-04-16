@@ -22,7 +22,9 @@ import com.higgschain.trust.evmcontract.vm.DataWord;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * The type Composite program listener.
+ */
 public class CompositeProgramListener implements ProgramListener {
 
     private List<ProgramListener> listeners = new ArrayList<>();
@@ -76,10 +78,20 @@ public class CompositeProgramListener implements ProgramListener {
         }
     }
 
+    /**
+     * Add listener.
+     *
+     * @param listener the listener
+     */
     public void addListener(ProgramListener listener) {
         listeners.add(listener);
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     public boolean isEmpty() {
         return listeners.isEmpty();
     }

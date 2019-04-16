@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * The type Rocks db controller.
+ *
  * @author tangfashuang
  */
 @RestController
@@ -20,6 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class RocksDbController {
 
     @Autowired private RocksDbService rocksDbService;
+
+    /**
+     * Gets data.
+     *
+     * @param columnFamily the column family
+     * @param key          the key
+     * @return the data
+     */
     @RequestMapping(value = "/data/get", method = RequestMethod.GET)
     public RespData getData(@RequestParam("columnFamily") String columnFamily, @RequestParam("key") String key) {
         if (StringUtils.isEmpty(columnFamily)) {

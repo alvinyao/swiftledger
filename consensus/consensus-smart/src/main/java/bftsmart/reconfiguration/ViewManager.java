@@ -28,6 +28,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * The type View manager.
+ *
  * @author eduardo
  */
 public class ViewManager {
@@ -40,16 +42,27 @@ public class ViewManager {
     //in the system will execute the reconfiguration request
     private List<Integer> addIds = new LinkedList<Integer>();
 
+    /**
+     * Instantiates a new View manager.
+     */
     public ViewManager() {
         this("");
     }
 
+    /**
+     * Instantiates a new View manager.
+     *
+     * @param configHome the config home
+     */
     public ViewManager(String configHome) {
         this.id = loadID(configHome);
         this.controller = new ServerViewController(id, configHome);
         this.rec = new Reconfiguration(id);
     }
 
+    /**
+     * Connect.
+     */
     public void connect() {
         this.rec.connect();
     }
@@ -85,12 +98,26 @@ public class ViewManager {
         }
     }
 
+    /**
+     * Add server.
+     *
+     * @param id   the id
+     * @param ip   the ip
+     * @param port the port
+     * @param sign the sign
+     */
     public void addServer(int id, String ip, int port, byte[] sign) {
         this.controller.getStaticConf().addHostInfo(id, ip, port);
         rec.addServer(id, ip, port, sign);
         addIds.add(id);
     }
 
+    /**
+     * Remove server.
+     *
+     * @param id   the id
+     * @param sign the sign
+     */
     public void removeServer(int id, byte[] sign) {
         rec.removeServer(id, sign);
     }
@@ -99,6 +126,9 @@ public class ViewManager {
     //        rec.setF(f);
     //    }
 
+    /**
+     * Execute updates.
+     */
     public void executeUpdates() {
         connect();
         ReconfigureReply r = rec.execute();
@@ -118,6 +148,12 @@ public class ViewManager {
         return new ServerConnection(controller, null, remoteId, null, null);
     }
 
+    /**
+     * Send response.
+     *
+     * @param targets the targets
+     * @param sm      the sm
+     */
     public void sendResponse(Integer[] targets, VMMessage sm) {
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
 
@@ -142,10 +178,18 @@ public class ViewManager {
         //br.ufsc.das.tom.util.Logger.println("(ServersCommunicationLayer.send) Finished sending messages to replicas");
     }
 
+    /**
+     * Close.
+     */
     public void close() {
         rec.close();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         ViewManager viewManager = new ViewManager();

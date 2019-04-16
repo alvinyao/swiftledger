@@ -3,6 +3,8 @@ package it.unisa.dia.gas.jpbc;
 import java.math.BigInteger;
 
 /**
+ * The interface Element pow pre processing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 1.0.0
  */

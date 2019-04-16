@@ -24,8 +24,10 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.List;
 
 /**
+ * The type P 2 p valid scheduler.
+ *
  * @author tangfashuang
- * @date 2018/04/09 15:30
+ * @date 2018 /04/09 15:30
  */
 @ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true) @Component
 @Slf4j public class P2PValidScheduler {

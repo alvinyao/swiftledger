@@ -8,16 +8,31 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type File channel disk.
+ *
+ * @param <S> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 1.0.0
  */
 public class FileChannelDisk<S extends Sector> implements Disk<S> {
 
+    /**
+     * The Sectors.
+     */
     protected List<Sector> sectors;
+    /**
+     * The Sectors map.
+     */
     protected Map<String, Sector> sectorsMap;
 
+    /**
+     * The Channel.
+     */
     protected FileChannel channel;
 
+    /**
+     * Instantiates a new File channel disk.
+     */
     public FileChannelDisk() {
         this.sectors = new ArrayList<Sector>();
         this.sectorsMap = new HashMap<String, Sector>();
@@ -40,7 +55,12 @@ public class FileChannelDisk<S extends Sector> implements Disk<S> {
             }
     }
 
-
+    /**
+     * Map to file channel disk.
+     *
+     * @param channel the channel
+     * @return the file channel disk
+     */
     public FileChannelDisk<S> mapTo(FileChannel channel) {
         try {
             this.channel = channel;
@@ -58,6 +78,12 @@ public class FileChannelDisk<S extends Sector> implements Disk<S> {
         return this;
     }
 
+    /**
+     * Map to file channel disk.
+     *
+     * @param filePath the file path
+     * @return the file channel disk
+     */
     public FileChannelDisk<S> mapTo(String filePath) {
         int size = 0;
         for (Sector sector : sectors) {
@@ -83,7 +109,13 @@ public class FileChannelDisk<S extends Sector> implements Disk<S> {
         return this;
     }
 
-
+    /**
+     * Add sector file channel disk.
+     *
+     * @param name   the name
+     * @param sector the sector
+     * @return the file channel disk
+     */
     public FileChannelDisk<S> addSector(String name, S sector) {
         sectors.add(sector);
         if (name != null)

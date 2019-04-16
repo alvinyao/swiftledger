@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Tx out rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -23,6 +25,12 @@ public class TxOutRocksDao extends RocksBaseDao<TxOutPO>{
         return "txOut";
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param txOutPOList the tx out po list
+     * @return the int
+     */
     public int batchInsert(List<TxOutPO> txOutPOList) {
         if (CollectionUtils.isEmpty(txOutPOList)) {
             return 0;

@@ -12,6 +12,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The type Package dao test.
+ */
 /*
  *
  * @desc
@@ -26,12 +29,20 @@ public class PackageDaoTest extends BaseTest {
 
     private PackagePO packagePO = new PackagePO();
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @BeforeMethod public void setUp() throws Exception {
         packagePO.setStatus(PackageStatusEnum.WAIT_PERSIST_CONSENSUS.getCode());
         packagePO.setPackageTime(System.currentTimeMillis());
         packagePO.setHeight(4L);
     }
 
+    /**
+     * Save.
+     */
     @Test
     public  void save() {
         packageDao.add(packagePO);
@@ -43,6 +54,9 @@ public class PackageDaoTest extends BaseTest {
         Assert.assertEquals(po.getStatus(), packagePO.getStatus());
     }
 
+    /**
+     * Query by height.
+     */
     @Test public void queryByHeight() {
         PackagePO po = packageDao.queryByHeight(packagePO.getHeight());
 
@@ -51,9 +65,15 @@ public class PackageDaoTest extends BaseTest {
         Assert.assertEquals(po.getStatus(), packagePO.getStatus());
     }
 
+    /**
+     * Query by height for update.
+     */
     @Test public void queryByHeightForUpdate() {
     }
 
+    /**
+     * Update status.
+     */
     @Test public void updateStatus() {
         packageDao.updateStatus(2L, PackageStatusEnum.RECEIVED.getCode(), PackageStatusEnum.WAIT_PERSIST_CONSENSUS.getCode());
 
@@ -63,11 +83,17 @@ public class PackageDaoTest extends BaseTest {
 
     }
 
+    /**
+     * Gets max height.
+     */
     @Test public void getMaxHeight() {
         Long max = packageDao.getMaxHeight();
         Assert.assertEquals(4L, max.longValue());
     }
 
+    /**
+     * Query by status.
+     */
     @Test public void queryByStatus() {
         List<PackagePO> packagePOList = packageDao.queryByStatus(PackageStatusEnum.WAIT_PERSIST_CONSENSUS.getCode());
         packagePOList.forEach(packagePO1 ->  {
@@ -76,7 +102,9 @@ public class PackageDaoTest extends BaseTest {
         Assert.assertEquals(2, packagePOList.size());
     }
 
-
+    /**
+     * Count with status.
+     */
     @Test public void countWithStatus() {
         Set<String> statusSet = new HashSet<>();
 //        statusSet.add(PackageStatusEnum.SUBMIT_CONSENSUS_SUCCESS.getCode());

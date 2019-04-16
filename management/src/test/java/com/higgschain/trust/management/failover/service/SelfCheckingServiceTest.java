@@ -21,21 +21,51 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Self checking service test.
+ */
 @RunWith(PowerMockRunner.class) public class SelfCheckingServiceTest {
 
+    /**
+     * The Self checking service.
+     */
     @Autowired @InjectMocks
     SelfCheckingService selfCheckingService;
 
+    /**
+     * The Node state.
+     */
     @Mock NodeState nodeState;
+    /**
+     * The Block sync service.
+     */
     @Mock
     BlockSyncService blockSyncService;
+    /**
+     * The Block service.
+     */
     @Mock BlockService blockService;
+    /**
+     * The Block repository.
+     */
     @Mock BlockRepository blockRepository;
 
+    /**
+     * The Block.
+     */
     @Mock Block block;
+    /**
+     * The Header.
+     */
     @Mock BlockHeader header;
+    /**
+     * The Properties.
+     */
     @Mock NodeProperties properties;
 
+    /**
+     * Before.
+     */
     @BeforeClass public void before() {
         MockitoAnnotations.initMocks(this);
         long height = 1L;
@@ -45,10 +75,16 @@ import static org.testng.Assert.assertEquals;
         Mockito.when(properties.getStartupRetryTime()).thenReturn(1);
     }
 
+    /**
+     * Before method.
+     */
     @BeforeMethod public void beforeMethod() {
         Mockito.reset(nodeState);
     }
 
+    /**
+     * Test check true not master.
+     */
     @Test public void testCheckTrueNotMaster() {
 
         Mockito.when(nodeState.isMaster()).thenReturn(false);
@@ -58,6 +94,9 @@ import static org.testng.Assert.assertEquals;
         selfCheckingService.autoCheck();
     }
 
+    /**
+     * Test check true not master 1.
+     */
     @Test public void testCheckTrueNotMaster1() {
         Mockito.when(nodeState.isMaster()).thenReturn(false);
 
@@ -68,6 +107,9 @@ import static org.testng.Assert.assertEquals;
         selfCheckingService.autoCheck();
     }
 
+    /**
+     * Test check false not master.
+     */
     @Test public void testCheckFalseNotMaster() {
         Mockito.when(nodeState.isMaster()).thenReturn(false);
 
@@ -79,6 +121,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test check false not master 2.
+     */
     @Test public void testCheckFalseNotMaster2() {
         Mockito.when(nodeState.isMaster()).thenReturn(false);
 
@@ -92,6 +137,9 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test check bft valid out.
+     */
     //    @Test
     public void testCheckBftValidOut() {
         Mockito.when(nodeState.isMaster()).thenReturn(false);

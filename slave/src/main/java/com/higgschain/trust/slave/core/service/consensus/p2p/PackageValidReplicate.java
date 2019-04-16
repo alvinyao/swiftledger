@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Package valid replicate.
+ *
  * @author suimi
- * @date 2018/6/11
+ * @date 2018 /6/11
  */
 @Slf4j @P2pvalidReplicator @Component public class PackageValidReplicate {
 
@@ -31,7 +33,7 @@ import org.springframework.stereotype.Component;
     /**
      * majority of this cluster has persisted this command
      *
-     * @param commit
+     * @param commit the commit
      */
     public void receivePersisted(P2PValidCommit<PersistCommand> commit) {
         // validate param

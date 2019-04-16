@@ -13,20 +13,36 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
- * @author Angelo De Caro (jpbclib@gmail.com)
- * The curve is defined as E : y^2 = x^2 + b
- * for some b \in F_q.
+ * The type Type f curve generator.
+ *
+ * @author Angelo De Caro (jpbclib@gmail.com) The curve is defined as E : y^2 = x^2 + b for some b \in F_q.
  */
 public class TypeFCurveGenerator implements PairingParametersGenerator {
+    /**
+     * The Random.
+     */
     protected SecureRandom random;
+    /**
+     * The R bits.
+     */
     protected int rBits; // The number of bits in r, the order of the subgroup G1
 
-
+    /**
+     * Instantiates a new Type f curve generator.
+     *
+     * @param random the random
+     * @param rBits  the r bits
+     */
     public TypeFCurveGenerator(SecureRandom random, int rBits) {
         this.random = random;
         this.rBits = rBits;
     }
 
+    /**
+     * Instantiates a new Type f curve generator.
+     *
+     * @param rBits the r bits
+     */
     public TypeFCurveGenerator(int rBits) {
         this(new SecureRandom(), rBits);
     }
@@ -133,7 +149,12 @@ public class TypeFCurveGenerator implements PairingParametersGenerator {
         return params;
     }
 
-
+    /**
+     * Try minus x big integer.
+     *
+     * @param x the x
+     * @return the big integer
+     */
     protected BigInteger tryMinusX(BigInteger x) {
         // 36x^4 + 36x^3 + 24x^2 - 6x + 1 = ((36(x - 1)x + 24)x - 6)x + 1
 
@@ -147,6 +168,12 @@ public class TypeFCurveGenerator implements PairingParametersGenerator {
                 .add(BigInteger.ONE);
     }
 
+    /**
+     * Try plus x big integer.
+     *
+     * @param x the x
+     * @return the big integer
+     */
     protected BigInteger tryPlusX(BigInteger x) {
         // 36x^4 + 36x^3 + 24x^2 + 6x + 1 = ((36(x - 1)x + 24)x + 6)x + 1
         return x.add(BigInteger.ONE)
@@ -159,7 +186,11 @@ public class TypeFCurveGenerator implements PairingParametersGenerator {
                 .add(BigInteger.ONE);
     }
 
-
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         if (args.length < 1)
             throw new IllegalArgumentException("Too few arguments. Usage <rbits>");

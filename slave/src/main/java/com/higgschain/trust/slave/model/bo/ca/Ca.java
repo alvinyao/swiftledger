@@ -8,9 +8,11 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * @desc TODO  
+ * The type Ca.
+ *
  * @author WangQuanzhou
- * @date 2018/6/5 16:15    
+ * @desc TODO
+ * @date 2018 /6/5 16:15
  */
 @Getter @Setter public class Ca extends BaseBO implements MerkleTreeSnapshotAgent.MerkleDataNode {
     private String version;

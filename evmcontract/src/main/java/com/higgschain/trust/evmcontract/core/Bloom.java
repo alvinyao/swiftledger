@@ -28,25 +28,52 @@ import java.util.Arrays;
  * @author Roman Mandeleil
  * @since 20.11.2014
  */
-
 public class Bloom {
 
+    /**
+     * The constant MEM_SIZE.
+     */
     public static final long MEM_SIZE = 256 + 16;
 
+    /**
+     * The constant _8STEPS.
+     */
     final static int _8STEPS = 8;
+    /**
+     * The constant _3LOW_BITS.
+     */
     final static int _3LOW_BITS = 7;
+    /**
+     * The constant ENSURE_BYTE.
+     */
     final static int ENSURE_BYTE = 255;
 
+    /**
+     * The Data.
+     */
     byte[] data = new byte[256];
 
-
+    /**
+     * Instantiates a new Bloom.
+     */
     public Bloom() {
     }
 
+    /**
+     * Instantiates a new Bloom.
+     *
+     * @param data the data
+     */
     public Bloom(byte[] data) {
         this.data = data;
     }
 
+    /**
+     * Create bloom.
+     *
+     * @param toBloom the to bloom
+     * @return the bloom
+     */
     public static Bloom create(byte[] toBloom) {
 
         int mov1 = (((toBloom[0] & ENSURE_BYTE) & (_3LOW_BITS)) << _8STEPS) + ((toBloom[1]) & ENSURE_BYTE);
@@ -63,22 +90,43 @@ public class Bloom {
         return bloom;
     }
 
+    /**
+     * Or.
+     *
+     * @param bloom the bloom
+     */
     public void or(Bloom bloom) {
         for (int i = 0; i < data.length; ++i) {
             data[i] |= bloom.data[i];
         }
     }
 
+    /**
+     * Matches boolean.
+     *
+     * @param topicBloom the topic bloom
+     * @return the boolean
+     */
     public boolean matches(Bloom topicBloom) {
         Bloom copy = copy();
         copy.or(topicBloom);
         return this.equals(copy);
     }
 
+    /**
+     * Get data byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getData() {
         return data;
     }
 
+    /**
+     * Copy bloom.
+     *
+     * @return the bloom
+     */
     public Bloom copy() {
         return new Bloom(Arrays.copyOf(getData(), getData().length));
     }

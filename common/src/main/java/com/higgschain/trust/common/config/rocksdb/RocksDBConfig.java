@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * data source config
  *
  * @author baizhengwen
- * @date 2018/2/24
+ * @date 2018 /2/24
  */
 @Configuration @Slf4j public class RocksDBConfig {
 
@@ -74,6 +74,12 @@ import java.util.stream.Collectors;
 
     }
 
+    /**
+     * Rocks db wrapper rocks db wrapper.
+     *
+     * @return the rocks db wrapper
+     * @throws RocksDBException the rocks db exception
+     */
     @Bean public RocksDBWrapper rocksDBWrapper() throws RocksDBException {
 
         ColumnFamilyOptions options = new ColumnFamilyOptions();

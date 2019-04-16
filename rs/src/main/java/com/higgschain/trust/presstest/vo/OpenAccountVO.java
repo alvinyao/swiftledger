@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Open account vo.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-31
+ * @date 2018 -08-31
  */
 @Getter
 @Setter

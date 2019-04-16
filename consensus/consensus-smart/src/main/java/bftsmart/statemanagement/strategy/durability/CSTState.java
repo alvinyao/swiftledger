@@ -60,6 +60,19 @@ public class CSTState implements ApplicationState {
 
     private final int pid;
 
+    /**
+     * Instantiates a new Cst state.
+     *
+     * @param state          the state
+     * @param hashCheckpoint the hash checkpoint
+     * @param logLower       the log lower
+     * @param hashLogLower   the hash log lower
+     * @param logUpper       the log upper
+     * @param hashLogUpper   the hash log upper
+     * @param checkpointCID  the checkpoint cid
+     * @param lastCID        the last cid
+     * @param pid            the pid
+     */
     public CSTState(byte[] state, byte[] hashCheckpoint, CommandsInfo[] logLower, byte[] hashLogLower,
         CommandsInfo[] logUpper, byte[] hashLogUpper, int checkpointCID, int lastCID, int pid) {
         setSerializedState(state);
@@ -124,6 +137,11 @@ public class CSTState implements ApplicationState {
             return null; // there was no proof for the consensus
     }
 
+    /**
+     * Gets checkpoint cid.
+     *
+     * @return the checkpoint cid
+     */
     public int getCheckpointCID() {
         return checkpointCID;
     }
@@ -148,22 +166,47 @@ public class CSTState implements ApplicationState {
         }
     }
 
+    /**
+     * Get hash log upper byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getHashLogUpper() {
         return hashLogUpper;
     }
 
+    /**
+     * Get hash log lower byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getHashLogLower() {
         return hashLogLower;
     }
 
+    /**
+     * Get log upper commands info [ ].
+     *
+     * @return the commands info [ ]
+     */
     public CommandsInfo[] getLogUpper() {
         return logUpper;
     }
 
+    /**
+     * Get log lower commands info [ ].
+     *
+     * @return the commands info [ ]
+     */
     public CommandsInfo[] getLogLower() {
         return logLower;
     }
 
+    /**
+     * Get hash checkpoint byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public byte[] getHashCheckpoint() {
         return hashCheckpoint;
     }

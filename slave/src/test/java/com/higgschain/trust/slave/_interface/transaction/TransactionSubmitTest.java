@@ -16,6 +16,9 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * The type Transaction submit test.
+ */
 @Slf4j public class TransactionSubmitTest extends InterfaceCommonTest {
     private static String PROVIDER_ROOT_PATH = "java/com/higgs/trust/slave/core/service/transaction/submit/";
 
@@ -25,6 +28,11 @@ import static org.testng.Assert.assertEquals;
         return PROVIDER_ROOT_PATH;
     }
 
+    /**
+     * Param validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 1) public void paramValidate(Map<?, ?> param) {
         log.info("[paramValidate]param:{}", param);
         try {
@@ -40,6 +48,11 @@ import static org.testng.Assert.assertEquals;
         }
     }
 
+    /**
+     * Test regular.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 2) public void testRegular(Map<?, ?> param) {
         log.info("[testRegular]param:{}", param);
         RespData respData = blockChainService.submitTransactions(getTxList(param));
@@ -47,6 +60,11 @@ import static org.testng.Assert.assertEquals;
         executeAfterSql(param);
     }
 
+    /**
+     * Test exception.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider", priority = 3) public void testException(Map<?, ?> param) {
         log.info("[testException]param:{}", param);
         executeBeforeSql(param);

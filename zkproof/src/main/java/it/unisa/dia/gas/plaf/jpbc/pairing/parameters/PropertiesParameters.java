@@ -10,18 +10,29 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
+ * The type Properties parameters.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class PropertiesParameters implements PairingParameters, Externalizable {
 
+    /**
+     * The Parameters.
+     */
     protected final Map<String, String> parameters;
 
-
+    /**
+     * Instantiates a new Properties parameters.
+     */
     public PropertiesParameters() {
         this.parameters = new LinkedHashMap<String, String>();
     }
 
-
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public String getType() {
         return parameters.get("type");
     }
@@ -138,6 +149,12 @@ public class PropertiesParameters implements PairingParameters, Externalizable {
         parameters.put(key, value);
     }
 
+    /**
+     * Put bytes.
+     *
+     * @param key   the key
+     * @param bytes the bytes
+     */
     public void putBytes(String key, byte[] bytes) {
         parameters.put(key, Base64.encodeBytes(bytes, 0, bytes.length));
     }
@@ -146,6 +163,12 @@ public class PropertiesParameters implements PairingParameters, Externalizable {
         return parameters.remove(key);
     }
 
+    /**
+     * Load properties parameters.
+     *
+     * @param inputStream the input stream
+     * @return the properties parameters
+     */
     public PropertiesParameters load(InputStream inputStream) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         try {
@@ -172,6 +195,12 @@ public class PropertiesParameters implements PairingParameters, Externalizable {
         return this;
     }
 
+    /**
+     * Load properties parameters.
+     *
+     * @param path the path
+     * @return the properties parameters
+     */
     public PropertiesParameters load(String path) {
         InputStream inputStream;
 

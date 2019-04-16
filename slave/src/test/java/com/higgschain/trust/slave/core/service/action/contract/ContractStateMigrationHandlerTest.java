@@ -12,14 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
 /**
+ * The type Contract state migration handler test.
+ *
  * @author duhongming
- * @date 2018/6/21
+ * @date 2018 /6/21
  */
 public class ContractStateMigrationHandlerTest extends BaseTest {
     @Autowired
     private ContractStateMigrationHandler stateMigrationHandler;
+    /**
+     * The Snapshot.
+     */
     @Autowired
     SnapshotService snapshot;
+    /**
+     * The Package service.
+     */
     @Autowired
     PackageServiceImpl packageService;
 
@@ -32,6 +40,9 @@ public class ContractStateMigrationHandlerTest extends BaseTest {
         return action;
     }
 
+    /**
+     * Test process.
+     */
     @Test
     public void testProcess() {
         Action action = createAction();

@@ -32,13 +32,37 @@ public class BloomedSource extends AbstractChainedSource<byte[], byte[], byte[],
 
     private byte[] filterKey = HashUtil.sha3("filterKey".getBytes());
 
+    /**
+     * The Filter.
+     */
     QuotientFilter filter;
+    /**
+     * The Hits.
+     */
     int hits = 0;
+    /**
+     * The Misses.
+     */
     int misses = 0;
+    /**
+     * The False misses.
+     */
     int falseMisses = 0;
+    /**
+     * The Dirty.
+     */
     boolean dirty = false;
+    /**
+     * The Max bloom size.
+     */
     int maxBloomSize;
 
+    /**
+     * Instantiates a new Bloomed source.
+     *
+     * @param source       the source
+     * @param maxBloomSize the max bloom size
+     */
     public BloomedSource(Source<byte[], byte[]> source, int maxBloomSize) {
         super(source);
         this.maxBloomSize = maxBloomSize;
@@ -61,10 +85,18 @@ public class BloomedSource extends AbstractChainedSource<byte[], byte[], byte[],
 
     }
 
+    /**
+     * Start blooming.
+     *
+     * @param filter the filter
+     */
     public void startBlooming(QuotientFilter filter) {
         this.filter = filter;
     }
 
+    /**
+     * Stop blooming.
+     */
     public void stopBlooming() {
         filter = null;
     }

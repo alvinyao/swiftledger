@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author tangfashuang
+ * The type Rs pub key.
  *
+ * @author tangfashuang
  */
 @Getter
 @Setter

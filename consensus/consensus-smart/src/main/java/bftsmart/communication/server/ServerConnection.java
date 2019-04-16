@@ -48,6 +48,9 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ServerConnection {
 
+    /**
+     * The constant MAC_ALGORITHM.
+     */
     public static final String MAC_ALGORITHM = "HmacMD5";
     private static final long POOL_TIME = 5000;
     //private static final int SEND_QUEUE_SIZE = 50;
@@ -57,6 +60,9 @@ public class ServerConnection {
     private DataInputStream socketInStream = null;
     private int remoteId;
     private boolean useSenderThread;
+    /**
+     * The Out queue.
+     */
     protected LinkedBlockingQueue<byte[]> outQueue;// = new LinkedBlockingQueue<byte[]>(SEND_QUEUE_SIZE);
     private HashSet<Integer> noMACs = null; // this is used to keep track of data to be sent without a MAC.
     // It uses the reference id for that same data
@@ -72,6 +78,15 @@ public class ServerConnection {
     private Lock sendLock;
     private boolean doWork = true;
 
+    /**
+     * Instantiates a new Server connection.
+     *
+     * @param controller the controller
+     * @param socket     the socket
+     * @param remoteId   the remote id
+     * @param inQueue    the in queue
+     * @param replica    the replica
+     */
     public ServerConnection(ServerViewController controller, Socket socket, int remoteId,
         LinkedBlockingQueue<SystemMessage> inQueue, ServiceReplica replica) {
 
@@ -135,6 +150,11 @@ public class ServerConnection {
         //******* EDUARDO END **************//
     }
 
+    /**
+     * Gets secret key.
+     *
+     * @return the secret key
+     */
     public SecretKey getSecretKey() {
         return authKey;
     }
@@ -151,6 +171,10 @@ public class ServerConnection {
 
     /**
      * Used to send packets to the remote server.
+     *
+     * @param data   the data
+     * @param useMAC the use mac
+     * @throws InterruptedException the interrupted exception
      */
     public final void send(byte[] data, boolean useMAC) throws InterruptedException {
         if (useSenderThread) {
@@ -267,8 +291,7 @@ public class ServerConnection {
     /**
      * (Re-)establish connection between peers.
      *
-     * @param newSocket socket created when this server accepted the connection
-     *                  (only used if processId is less than remoteId)
+     * @param newSocket socket created when this server accepted the connection                  (only used if processId is less than remoteId)
      */
     protected void reconnect(Socket newSocket) {
 
@@ -315,6 +338,9 @@ public class ServerConnection {
         connectLock.unlock();
     }
 
+    /**
+     * Authenticate and establish auth key.
+     */
     //TODO!
     public void authenticateAndEstablishAuthKey() {
         if (authKey != null || socketOutStream == null || socketInStream == null) {
@@ -440,6 +466,9 @@ public class ServerConnection {
      */
     private class SenderThread extends Thread {
 
+        /**
+         * Instantiates a new Sender thread.
+         */
         public SenderThread() {
             super("Sender for " + remoteId);
         }
@@ -473,6 +502,9 @@ public class ServerConnection {
      */
     protected class ReceiverThread extends Thread {
 
+        /**
+         * Instantiates a new Receiver thread.
+         */
         public ReceiverThread() {
             super("Receiver for " + remoteId);
         }
@@ -554,6 +586,11 @@ public class ServerConnection {
 
         private ServiceReplica replica;
 
+        /**
+         * Instantiates a new Ttp receiver thread.
+         *
+         * @param replica the replica
+         */
         public TTPReceiverThread(ServiceReplica replica) {
             super("TTPReceiver for " + remoteId);
             this.replica = replica;

@@ -4,12 +4,13 @@ package it.unisa.dia.gas.jpbc;
  * This interface represents an element with two coordinates.
  * (A point over an elliptic curve).
  *
+ * @param <E> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  * @since 1.0.0
  */
 public interface Point<E extends Element> extends Element, Vector<E> {
 
-    /**              
+    /**
      * Returns the x-coordinate.
      *
      * @return the x-coordinate.

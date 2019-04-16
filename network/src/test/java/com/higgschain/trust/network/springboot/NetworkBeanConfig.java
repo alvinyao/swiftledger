@@ -9,27 +9,49 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * The type Network bean config.
+ *
  * @author duhongming
- * @date 2018/9/11
+ * @date 2018 /9/11
  */
 @Configuration
 public class NetworkBeanConfig {
+    /**
+     * Instantiates a new Network bean config.
+     */
     public NetworkBeanConfig() {
         System.out.println("NetworkBeanConfig ..." + host);
     }
 
+    /**
+     * The Host.
+     */
     @Value("${network.host}")
     public String host;
 
+    /**
+     * The Port.
+     */
     @Value("${network.port}")
     public int port;
 
+    /**
+     * The Peers.
+     */
     @Value("${network.peers}")
     public String[] peers;
 
+    /**
+     * The Http port.
+     */
     @Value("${server.port}")
     public int httpPort;
 
+    /**
+     * Gets network manage.
+     *
+     * @return the network manage
+     */
     @Bean
     public NetworkManage getNetworkManage() {
         if (peers == null || peers.length == 0) {

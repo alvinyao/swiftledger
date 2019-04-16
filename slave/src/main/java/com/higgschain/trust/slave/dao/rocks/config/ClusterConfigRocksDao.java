@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Cluster config rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -23,6 +25,11 @@ public class ClusterConfigRocksDao extends RocksBaseDao<ClusterConfigPO>{
         return "clusterConfig";
     }
 
+    /**
+     * Save with transaction.
+     *
+     * @param clusterConfigPO the cluster config po
+     */
     public void saveWithTransaction(ClusterConfigPO clusterConfigPO) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -39,6 +46,12 @@ public class ClusterConfigRocksDao extends RocksBaseDao<ClusterConfigPO>{
         txPut(tx, key, clusterConfigPO);
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param clusterConfigPOList the cluster config po list
+     * @return the int
+     */
     public int batchInsert(List<ClusterConfigPO> clusterConfigPOList) {
         if (CollectionUtils.isEmpty(clusterConfigPOList)) {
             return 0;

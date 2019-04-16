@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * The type P 2 p consensus controller.
+ *
  * @author cwy
  */
 @RequestMapping(value = "/consensus/p2p") @RestController @Slf4j public class P2pConsensusController {
@@ -18,6 +20,12 @@ import org.springframework.web.bind.annotation.*;
 
     @Autowired private SyncReceiveService syncReceiveService;
 
+    /**
+     * Receive command valid response wrap.
+     *
+     * @param validCommandWrap the valid command wrap
+     * @return the valid response wrap
+     */
     @RequestMapping(value = "/receive_command", method = RequestMethod.POST) @ResponseBody
     public ValidResponseWrap<? extends ResponseCommand> receiveCommand(@RequestBody ValidCommandWrap validCommandWrap) {
         try {
@@ -29,6 +37,12 @@ import org.springframework.web.bind.annotation.*;
         return ValidResponseWrap.successResponse(null);
     }
 
+    /**
+     * Receive command sync valid response wrap.
+     *
+     * @param validCommandWrap the valid command wrap
+     * @return the valid response wrap
+     */
     @RequestMapping(value = "/receive_command_sync", method = RequestMethod.POST) @ResponseBody
     public ValidResponseWrap<? extends ResponseCommand> receiveCommandSync(
         @RequestBody ValidCommandWrap validCommandWrap) {

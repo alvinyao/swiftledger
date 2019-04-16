@@ -19,8 +19,10 @@ import org.springframework.util.StringUtils;
 import java.math.BigInteger;
 
 /**
+ * The type Contract invoke v 2 handler.
+ *
  * @author kongyu
- * @date 2018/11/30
+ * @date 2018 /11/30
  */
 @Slf4j
 @Component

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * The type Vote rule jdbc dao.
+ */
 @Component public class VoteRuleJDBCDao {
 
     @Autowired private NamedParameterJdbcTemplate jdbc;
@@ -18,8 +21,8 @@ import java.util.List;
     /**
      * batch insert
      *
-     * @param list
-     * @return
+     * @param list the list
+     * @return int
      */
     public int batchInsert(List<VoteRulePO> list) {
         StringBuilder sql = new StringBuilder("INSERT INTO vote_rule "

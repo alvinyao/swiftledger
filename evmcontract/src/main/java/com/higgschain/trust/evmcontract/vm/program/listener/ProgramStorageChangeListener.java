@@ -22,6 +22,9 @@ import com.higgschain.trust.evmcontract.vm.DataWord;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Program storage change listener.
+ */
 public class ProgramStorageChangeListener extends ProgramListenerAdaptor {
 
     private Map<DataWord, DataWord> diff = new HashMap<>();
@@ -36,10 +39,20 @@ public class ProgramStorageChangeListener extends ProgramListenerAdaptor {
         // TODO: ...
     }
 
+    /**
+     * Gets diff.
+     *
+     * @return the diff
+     */
     public Map<DataWord, DataWord> getDiff() {
         return new HashMap<>(diff);
     }
 
+    /**
+     * Merge.
+     *
+     * @param diff the diff
+     */
     public void merge(Map<DataWord, DataWord> diff) {
         this.diff.putAll(diff);
     }

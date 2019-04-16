@@ -15,11 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Issue currency handler.
+ *
  * @author liuyu
  * @description issue currency
- * @date 2018-04-19
+ * @date 2018 -04-19
  */
 @Slf4j @Component public class IssueCurrencyHandler implements ActionHandler {
+    /**
+     * The Account snapshot handler.
+     */
     @Autowired AccountSnapshotHandler accountSnapshotHandler;
 
     @Override public void verifyParams(Action action) throws SlaveException {

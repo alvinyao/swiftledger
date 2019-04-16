@@ -22,8 +22,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Provider;
 
+/**
+ * The type Ec key factory.
+ */
 public final class ECKeyFactory {
 
+    /**
+     * The constant ALGORITHM.
+     */
     public static final String ALGORITHM = "EC";
 
     private static final String ALGORITHM_ASSERTION_MSG =
@@ -44,10 +50,22 @@ public final class ECKeyFactory {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static KeyFactory getInstance() {
         return Holder.INSTANCE;
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param provider the provider
+     * @return the instance
+     * @throws NoSuchProviderException the no such provider exception
+     */
     public static KeyFactory getInstance(final String provider) throws NoSuchProviderException {
         try {
             return KeyFactory.getInstance(ALGORITHM, provider);
@@ -56,6 +74,12 @@ public final class ECKeyFactory {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @param provider the provider
+     * @return the instance
+     */
     public static KeyFactory getInstance(final Provider provider) {
         try {
             return KeyFactory.getInstance(ALGORITHM, provider);

@@ -13,15 +13,30 @@ import it.unisa.dia.gas.plaf.jpbc.pairing.map.AbstractMillerPairingPreProcessing
 import java.math.BigInteger;
 
 /**
+ * The type Type a tate projective miller pairing map.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeATateProjectiveMillerPairingMap extends AbstractMillerPairingMap {
+    /**
+     * The Pairing.
+     */
     protected TypeAPairing pairing;
 
+    /**
+     * The Pairing pre processing table length.
+     */
     protected int pairingPreProcessingTableLength = -1;
+    /**
+     * The Pairing pre processing lenght in bytes.
+     */
     protected int pairingPreProcessingLenghtInBytes = -1;
 
-
+    /**
+     * Instantiates a new Type a tate projective miller pairing map.
+     *
+     * @param pairing the pairing
+     */
     public TypeATateProjectiveMillerPairingMap(TypeAPairing pairing) {
         super(pairing);
 
@@ -220,7 +235,14 @@ public class TypeATateProjectiveMillerPairingMap extends AbstractMillerPairingMa
         imPart.set(b).mul(Qy);
     }
 
-
+    /**
+     * Tate pow.
+     *
+     * @param out      the out
+     * @param in       the in
+     * @param temp     the temp
+     * @param cofactor the cofactor
+     */
     final void tatePow(Point out, Point in, Point temp, BigInteger cofactor) {
         Element in1 = in.getY();
         //simpler but slower:
@@ -241,6 +263,13 @@ public class TypeATateProjectiveMillerPairingMap extends AbstractMillerPairingMa
         lucasOdd(out, in, temp, cofactor);
     }
 
+    /**
+     * Tate pow.
+     *
+     * @param out      the out
+     * @param in       the in
+     * @param cofactor the cofactor
+     */
     final void tatePow(Point out, Point in, BigInteger cofactor) {
         Element in1 = in.getY();
         //simpler but slower:
@@ -261,6 +290,18 @@ public class TypeATateProjectiveMillerPairingMap extends AbstractMillerPairingMa
         lucasOdd(out, in, temp, cofactor);
     }
 
+    /**
+     * Twice projective.
+     *
+     * @param e0 the e 0
+     * @param a  the a
+     * @param b  the b
+     * @param c  the c
+     * @param Vx the vx
+     * @param Vy the vy
+     * @param z  the z
+     * @param z2 the z 2
+     */
     final void twiceProjective(Element e0, Element a, Element b, Element c, Element Vx, Element Vy, Element z, Element z2) {
         // e0 = 3x^2 + cca z^4  (cca = 1)
         e0.set(Vx).square().add(a.set(e0).twice()).add(a.set(z2).square());
@@ -286,18 +327,36 @@ public class TypeATateProjectiveMillerPairingMap extends AbstractMillerPairingMa
         Vy.set(e0).sub(b);
     }
 
-
+    /**
+     * Gets pairing pre processing table length.
+     *
+     * @return the pairing pre processing table length
+     */
     public int getPairingPreProcessingTableLength() {
        getPairingPreProcessingLengthInBytes();
        return pairingPreProcessingTableLength;
     }
 
+    /**
+     * The type Type a tate projective miller pairing pre processing.
+     */
     public class TypeATateProjectiveMillerPairingPreProcessing extends AbstractMillerPairingPreProcessing {
 
+        /**
+         * Instantiates a new Type a tate projective miller pairing pre processing.
+         *
+         * @param source the source
+         * @param offset the offset
+         */
         public TypeATateProjectiveMillerPairingPreProcessing(byte[] source, int offset) {
             super(pairing, source, offset);
         }
 
+        /**
+         * Instantiates a new Type a tate projective miller pairing pre processing.
+         *
+         * @param in1 the in 1
+         */
         public TypeATateProjectiveMillerPairingPreProcessing(Point in1) {
             super(in1, getPairingPreProcessingTableLength());
 

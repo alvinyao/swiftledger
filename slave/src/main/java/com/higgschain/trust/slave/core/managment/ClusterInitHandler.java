@@ -25,9 +25,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * The type Cluster init handler.
+ *
  * @author WangQuanzhou
  * @desc init ca handler
- * @date 2018/6/6 10:25
+ * @date 2018 /6/6 10:25
  */
 @Slf4j @Component public class ClusterInitHandler {
 
@@ -36,11 +38,23 @@ import java.util.List;
      */
     public final static String DEFAULT_HASH_FLAG = "NO_TREE";
 
+    /**
+     * The Node state.
+     */
     @Autowired NodeState nodeState;
+    /**
+     * The Genius block service.
+     */
     @Autowired
     GeniusBlockService geniusBlockService;
+    /**
+     * The Merkle service.
+     */
     @Autowired
     MerkleService merkleService;
+    /**
+     * The Block service.
+     */
     @Autowired
     BlockService blockService;
 
@@ -51,7 +65,7 @@ import java.util.List;
      * 3、更新节点配置信息
      * 4、生成CA信息插入db
      *
-     * @param caActionList
+     * @param caActionList the ca action list
      */
     public void process(List<Action> caActionList) {
 
@@ -109,6 +123,11 @@ import java.util.List;
         return block;
     }
 
+    /**
+     * Generate block time date.
+     *
+     * @return the date
+     */
     public Date generateBlockTime() {
         String string = "2018-06-06 20:00:00";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

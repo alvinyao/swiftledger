@@ -23,8 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The type Policy repository.
+ *
  * @author tangfashuang
- * @date 2018/04/02
+ * @date 2018 /04/02
  * @desc provide repository for business
  */
 @Repository @Slf4j public class PolicyRepository {
@@ -44,6 +46,12 @@ import java.util.Map;
      */
     private Map<String,Policy> policyCache = new HashMap<>();
 
+    /**
+     * Gets policy by id.
+     *
+     * @param policyId the policy id
+     * @return the policy by id
+     */
     public Policy getPolicyById(String policyId) {
         if(policyCache.containsKey(policyId)){
             return policyCache.get(policyId);
@@ -87,6 +95,12 @@ import java.util.Map;
         return p;
     }
 
+    /**
+     * Convert policy to policy po policy po.
+     *
+     * @param policy the policy
+     * @return the policy po
+     */
     public PolicyPO convertPolicyToPolicyPO(Policy policy) {
         if (null == policy) {
             return null;
@@ -100,6 +114,12 @@ import java.util.Map;
         return policyPO;
     }
 
+    /**
+     * Convert policy po to policy policy.
+     *
+     * @param policyPO the policy po
+     * @return the policy
+     */
     public Policy convertPolicyPOToPolicy(PolicyPO policyPO) {
 
         Policy policy = new Policy();
@@ -117,6 +137,12 @@ import java.util.Map;
         return policy;
     }
 
+    /**
+     * Convert action to policy policy.
+     *
+     * @param action the action
+     * @return the policy
+     */
     public Policy convertActionToPolicy(RegisterPolicy action) {
         Policy policy = new Policy();
         policy.setPolicyId(action.getPolicyId());
@@ -127,6 +153,12 @@ import java.util.Map;
         return policy;
     }
 
+    /**
+     * Gets policy type.
+     *
+     * @param policyId the policy id
+     * @return the policy type
+     */
     public String getPolicyType(String policyId) {
         InitPolicyEnum initPolicyEnum = InitPolicyEnum.getInitPolicyEnumByPolicyId(policyId);
 
@@ -137,6 +169,12 @@ import java.util.Map;
         return initPolicyEnum.getType();
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param policyPOList the policy po list
+     * @return the int
+     */
     public int batchInsert(List<PolicyPO> policyPOList) {
         policyCache.clear();
         if (initConfig.isUseMySQL()) {

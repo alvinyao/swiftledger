@@ -22,8 +22,14 @@ import java.security.NoSuchProviderException;
 import java.security.Provider;
 import java.security.Signature;
 
+/**
+ * The type Ec signature factory.
+ */
 public final class ECSignatureFactory {
 
+    /**
+     * The constant RAW_ALGORITHM.
+     */
     public static final String RAW_ALGORITHM = "NONEwithECDSA";
 
     private static final String RAW_ALGORITHM_ASSERTION_MSG =
@@ -32,6 +38,11 @@ public final class ECSignatureFactory {
     private ECSignatureFactory() {
     }
 
+    /**
+     * Gets raw instance.
+     *
+     * @return the raw instance
+     */
     public static Signature getRawInstance() {
         try {
             return Signature.getInstance(RAW_ALGORITHM);
@@ -40,6 +51,13 @@ public final class ECSignatureFactory {
         }
     }
 
+    /**
+     * Gets raw instance.
+     *
+     * @param provider the provider
+     * @return the raw instance
+     * @throws NoSuchProviderException the no such provider exception
+     */
     public static Signature getRawInstance(final String provider) throws NoSuchProviderException {
         try {
             return Signature.getInstance(RAW_ALGORITHM, provider);
@@ -48,6 +66,12 @@ public final class ECSignatureFactory {
         }
     }
 
+    /**
+     * Gets raw instance.
+     *
+     * @param provider the provider
+     * @return the raw instance
+     */
     public static Signature getRawInstance(final Provider provider) {
         try {
             return Signature.getInstance(RAW_ALGORITHM, provider);

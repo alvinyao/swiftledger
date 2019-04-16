@@ -16,14 +16,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Ca update handler.
+ *
  * @author WangQuanzhou
  * @desc update ca handler
- * @date 2018/6/6 10:25
+ * @date 2018 /6/6 10:25
  */
 @Slf4j @Component public class CaUpdateHandler implements ActionHandler {
 
+    /**
+     * The Ca snapshot handler.
+     */
     @Autowired
     CaSnapshotHandler caSnapshotHandler;
+    /**
+     * The Ca helper.
+     */
     @Autowired CaHelper caHelper;
 
     @Override public void verifyParams(Action action) throws SlaveException {

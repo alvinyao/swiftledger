@@ -24,8 +24,18 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type File util.
+ */
 public class FileUtil {
 
+    /**
+     * Recursive list list.
+     *
+     * @param path the path
+     * @return the list
+     * @throws IOException the io exception
+     */
     public static List<String> recursiveList(String path) throws IOException {
 
         final List<String> files = new ArrayList<>();
@@ -56,6 +66,12 @@ public class FileUtil {
         return files;
     }
 
+    /**
+     * Recursive delete boolean.
+     *
+     * @param fileName the file name
+     * @return the boolean
+     */
     public static boolean recursiveDelete(String fileName) {
         File file = new File(fileName);
         if (file.exists()) {

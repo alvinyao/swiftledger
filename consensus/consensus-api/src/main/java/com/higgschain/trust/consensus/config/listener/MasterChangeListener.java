@@ -1,7 +1,15 @@
 package com.higgschain.trust.consensus.config.listener;
 
+/**
+ * The interface Master change listener.
+ */
 public interface MasterChangeListener {
 
+    /**
+     * Before change.
+     *
+     * @param masterName the master name
+     */
     void beforeChange(String masterName);
 
     /**

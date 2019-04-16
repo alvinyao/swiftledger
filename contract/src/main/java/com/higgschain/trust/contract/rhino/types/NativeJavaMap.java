@@ -8,13 +8,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Native java map.
+ *
  * @author duhongming
- * @date 2018/6/6
+ * @date 2018 /6/6
  */
 public class NativeJavaMap extends NativeJavaObject {
 
     private Map<String, Object> map;
 
+    /**
+     * Instantiates a new Native java map.
+     *
+     * @param map the map
+     */
     public NativeJavaMap(Map<String, Object> map) {
         this.map = map;
         if (map == null) {

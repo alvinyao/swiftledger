@@ -42,40 +42,103 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
     //the fields bellow are not serialized!!!
     private transient int id; // ID for this message. It should be unique
 
+    /**
+     * The Timestamp.
+     */
     public transient long timestamp = 0; // timestamp to be used by the application
 
+    /**
+     * The Seed.
+     */
     public transient long seed = 0; // seed for the nonces
+    /**
+     * The Num of nonces.
+     */
     public transient int numOfNonces = 0; // number of nonces
 
+    /**
+     * The Destination.
+     */
     public transient int destination = -1; // message destination
+    /**
+     * The Signed.
+     */
     public transient boolean signed = false; // is this message signed?
 
+    /**
+     * The Reception time.
+     */
     public transient long receptionTime;//the reception time of this message
+    /**
+     * The Timeout.
+     */
     public transient boolean timeout = false;//this message was timed out?
 
+    /**
+     * The Recv from client.
+     */
     public transient boolean recvFromClient = false;
     // Did the client already sent this message to me, or did it arrived in the batch?
 
+    /**
+     * The Serialized message.
+     */
     //the bytes received from the client and its MAC and signature
     public transient byte[] serializedMessage = null;
+    /**
+     * The Serialized message signature.
+     */
     public transient byte[] serializedMessageSignature = null;
+    /**
+     * The Serialized message mac.
+     */
     public transient byte[] serializedMessageMAC = null;
 
+    /**
+     * The Consensus start time.
+     */
     //for benchmarking purposes
     public transient long consensusStartTime = 0; //time the consensus is created
+    /**
+     * The Propose received time.
+     */
     public transient long proposeReceivedTime = 0; //time the propose is received
+    /**
+     * The Write sent time.
+     */
     public transient long writeSentTime = 0; //time the replica' write message is sent
+    /**
+     * The Accept sent time.
+     */
     public transient long acceptSentTime = 0; //time the replica' accept message is sent
+    /**
+     * The Decision time.
+     */
     public transient long decisionTime = 0; //time the decision is established
+    /**
+     * The Delivery time.
+     */
     public transient long deliveryTime = 0; //time the request is delivered
+    /**
+     * The Executed time.
+     */
     public transient long executedTime = 0; //time the request is executed
 
+    /**
+     * The Reply.
+     */
     //the reply associated with this message
     public transient TOMMessage reply = null;
+    /**
+     * The Already proposed.
+     */
     public transient boolean alreadyProposed = false;
 
     private int replyServer = -1;
 
+    /**
+     * Instantiates a new Tom message.
+     */
     public TOMMessage() {
     }
 
@@ -133,6 +196,8 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
 
     /**
      * Retrieves the debug info from the TOM layer
+     *
+     * @param info the info
      */
     public void setDebugInfo(DebugInfo info) {
         this.info = info;
@@ -158,14 +223,29 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
         return sequence;
     }
 
+    /**
+     * Gets operation id.
+     *
+     * @return the operation id
+     */
     public int getOperationId() {
         return operationId;
     }
 
+    /**
+     * Gets view id.
+     *
+     * @return the view id
+     */
     public int getViewID() {
         return viewID;
     }
 
+    /**
+     * Gets req type.
+     *
+     * @return the req type
+     */
     public TOMMessageType getReqType() {
         return type;
     }
@@ -221,6 +301,12 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
         return "(sender: " + sender + ",sequence: " + sequence + ",operationId: " + operationId + ",session: " + session + ")";
     }
 
+    /**
+     * W external.
+     *
+     * @param out the out
+     * @throws IOException the io exception
+     */
     public void wExternal(DataOutput out) throws IOException {
         out.writeInt(sender);
         out.writeInt(viewID);
@@ -238,6 +324,13 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
         }
     }
 
+    /**
+     * R external.
+     *
+     * @param in the in
+     * @throws IOException            the io exception
+     * @throws ClassNotFoundException the class not found exception
+     */
     public void rExternal(DataInput in) throws IOException, ClassNotFoundException {
         sender = in.readInt();
         viewID = in.readInt();
@@ -278,6 +371,12 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
         return id >>> 20;
     }
 
+    /**
+     * Message to bytes byte [ ].
+     *
+     * @param m the m
+     * @return the byte [ ]
+     */
     public static byte[] messageToBytes(TOMMessage m) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
@@ -289,6 +388,12 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
         return baos.toByteArray();
     }
 
+    /**
+     * Bytes to message tom message.
+     *
+     * @param b the b
+     * @return the tom message
+     */
     public static TOMMessage bytesToMessage(byte[] b) {
         ByteArrayInputStream bais = new ByteArrayInputStream(b);
         DataInputStream dis = new DataInputStream(bais);
@@ -341,10 +446,20 @@ public class TOMMessage extends SystemMessage implements Externalizable, Compara
         return super.clone();
     }
 
+    /**
+     * Gets reply server.
+     *
+     * @return the reply server
+     */
     public int getReplyServer() {
         return replyServer;
     }
 
+    /**
+     * Sets reply server.
+     *
+     * @param replyServer the reply server
+     */
     public void setReplyServer(int replyServer) {
         this.replyServer = replyServer;
     }

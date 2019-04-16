@@ -20,12 +20,23 @@ import org.slf4j.LoggerFactory;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The type Logger.
+ */
 public class Logger {
 
     private static final org.slf4j.Logger log = LoggerFactory.getLogger("SmartLog");
+    /**
+     * The constant debug.
+     */
     //public static long startInstant = System.currentTimeMillis();
     public static boolean debug = false;
 
+    /**
+     * Println.
+     *
+     * @param msg the msg
+     */
     public static void println(String msg) {
         if (debug) {
             //            String dataActual = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());
@@ -37,6 +48,12 @@ public class Logger {
         }
     }
 
+    /**
+     * Println 2.
+     *
+     * @param l   the l
+     * @param msg the msg
+     */
     public static void println2(java.util.logging.Logger l, String msg) {
         if (debug) {
             String dataActual = new SimpleDateFormat("HH:mm:ss:SSS").format(new Date());
@@ -48,10 +65,21 @@ public class Logger {
         }
     }
 
+    /**
+     * Print error.
+     *
+     * @param msg the msg
+     * @param e   the e
+     */
     public static void printError(String msg, Throwable e) {
         log.error(msg, e);
     }
 
+    /**
+     * Print error.
+     *
+     * @param msg the msg
+     */
     public static void printError(String msg) {
         log.error(msg);
     }

@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * The type Atomix raft properties.
+ */
 @Configuration @ConfigurationProperties(prefix = "atomix") @Getter @Setter @ToString public class AtomixRaftProperties {
 
     private String address;

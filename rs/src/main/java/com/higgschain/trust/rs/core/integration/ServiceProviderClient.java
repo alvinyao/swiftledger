@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * The interface Service provider client.
+ */
 //@FeignClient("${higgs.trust.prefix}")
 public interface ServiceProviderClient {
     /**
      * voting transaction
      *
-     * @param nodeName
-     * @param votingRequest
-     * @return
+     * @param nodeName      the node name
+     * @param votingRequest the voting request
+     * @return vote receipt
      */
     @RequestMapping(value = "/voting", method = RequestMethod.POST)
     VoteReceipt voting(String nodeName, @RequestBody VotingRequest votingRequest);
@@ -26,9 +29,9 @@ public interface ServiceProviderClient {
     /**
      * receipt vote
      *
-     * @param nodeName
-     * @param receiptRequest
-     * @return
+     * @param nodeName       the node name
+     * @param receiptRequest the receipt request
+     * @return resp data
      */
     @RequestMapping(value = "/receipting", method = RequestMethod.POST)
     RespData<String> receipting(String nodeName, @RequestBody ReceiptRequest receiptRequest);

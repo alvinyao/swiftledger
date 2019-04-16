@@ -17,6 +17,9 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Pending tx repository test.
+ */
 /*
  *
  * @desc
@@ -42,6 +45,11 @@ public class PendingTxRepositoryTest extends BaseTest {
 
     private List<SignedTransaction> signedTransactions = new ArrayList<>();
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @BeforeMethod public void setUp() throws Exception {
         signedTx = initTx();
 
@@ -89,24 +97,52 @@ public class PendingTxRepositoryTest extends BaseTest {
         return signedTransaction;
     }
 
+    /**
+     * Is exist.
+     */
     @Test public void isExist() {
         Assert.assertEquals(true, pendingTxRepository.isExist("pending-tx-test-4"));
     }
 
+    /**
+     * Test batch insert to rocks.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsertToRocks() throws Exception {
 
     }
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsert() throws Exception {
 
     }
 
+    /**
+     * Test get transactions by height 1.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testGetTransactionsByHeight1() throws Exception {
     }
 
+    /**
+     * Test query tx ids.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testQueryTxIds() throws Exception {
     }
 
+    /**
+     * Test delete less than height.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testDeleteLessThanHeight() throws Exception {
 
     }

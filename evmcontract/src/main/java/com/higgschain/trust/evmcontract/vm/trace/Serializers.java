@@ -33,10 +33,16 @@ import org.spongycastle.util.encoders.Hex;
 
 import java.io.IOException;
 
+/**
+ * The type Serializers.
+ */
 public final class Serializers {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("vmtrace");
 
+    /**
+     * The type Data word serializer.
+     */
     public static class DataWordSerializer extends JsonSerializer<DataWord> {
 
         @Override
@@ -45,6 +51,9 @@ public final class Serializers {
         }
     }
 
+    /**
+     * The type Byte array serializer.
+     */
     public static class ByteArraySerializer extends JsonSerializer<byte[]> {
 
         @Override
@@ -53,6 +62,9 @@ public final class Serializers {
         }
     }
 
+    /**
+     * The type Op code serializer.
+     */
     public static class OpCodeSerializer extends JsonSerializer<Byte> {
 
         @Override
@@ -61,7 +73,13 @@ public final class Serializers {
         }
     }
 
-
+    /**
+     * Serialize fields only string.
+     *
+     * @param value  the value
+     * @param pretty the pretty
+     * @return the string
+     */
     public static String serializeFieldsOnly(Object value, boolean pretty) {
         try {
             ObjectMapper mapper = createMapper(pretty);
@@ -81,6 +99,12 @@ public final class Serializers {
                 .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE);
     }
 
+    /**
+     * Create mapper object mapper.
+     *
+     * @param pretty the pretty
+     * @return the object mapper
+     */
     public static ObjectMapper createMapper(boolean pretty) {
         ObjectMapper mapper = new ObjectMapper();
         if (pretty) {

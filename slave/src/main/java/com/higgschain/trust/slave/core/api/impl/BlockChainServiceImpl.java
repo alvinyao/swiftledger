@@ -47,8 +47,10 @@ import java.util.concurrent.Executor;
 import static com.higgschain.trust.consensus.config.NodeState.MASTER_NA;
 
 /**
+ * The type Block chain service.
+ *
  * @author tangfashuang
- * @date 2918/04/14 16:52
+ * @date 2918 /04/14 16:52
  * @desc block chain service
  */
 @Slf4j @Service public class BlockChainServiceImpl implements BlockChainService {

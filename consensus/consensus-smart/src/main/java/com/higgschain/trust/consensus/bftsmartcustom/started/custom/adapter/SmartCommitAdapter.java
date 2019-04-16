@@ -3,11 +3,21 @@ package com.higgschain.trust.consensus.bftsmartcustom.started.custom.adapter;
 import com.higgschain.trust.consensus.core.ConsensusCommit;
 import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
 
+/**
+ * The type Smart commit adapter.
+ *
+ * @param <T> the type parameter
+ */
 public class SmartCommitAdapter<T extends AbstractConsensusCommand> implements ConsensusCommit<T> {
 
     private T command;
     private boolean isClosed;
 
+    /**
+     * Instantiates a new Smart commit adapter.
+     *
+     * @param object the object
+     */
     public SmartCommitAdapter(Object object) {
         if (object instanceof AbstractConsensusCommand) {
             this.command = (T)object;

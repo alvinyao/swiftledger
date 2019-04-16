@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Account repository test.
+ */
 public class AccountRepositoryTest extends BaseTest {
     @Autowired
     private AccountRepository accountRepository;
@@ -22,13 +25,28 @@ public class AccountRepositoryTest extends BaseTest {
     @Autowired
     private InitConfig initConfig;
 
+    /**
+     * Test batch insert.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsert() throws Exception {
 
     }
 
+    /**
+     * Test batch update.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchUpdate() throws Exception {
     }
 
+    /**
+     * Test batch insert account detail.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsertAccountDetail() throws Exception {
         List<AccountDetail> accountDetails = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
@@ -51,6 +69,11 @@ public class AccountRepositoryTest extends BaseTest {
         ThreadLocalUtils.clearRocksTx();
     }
 
+    /**
+     * Test batch insert dc records.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testBatchInsertDcRecords() throws Exception {
         List<AccountDcRecord> accountDcRecords = new ArrayList<>();
         for (int i = 0; i < 200; i++) {

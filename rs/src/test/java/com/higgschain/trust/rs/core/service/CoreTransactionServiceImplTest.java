@@ -16,6 +16,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Core transaction service impl test.
+ */
 public class CoreTransactionServiceImplTest extends IntegrateBaseTest {
     @Autowired private CoreTransactionServiceImpl coreTransactionService;
 ////    //数据驱动

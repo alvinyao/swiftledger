@@ -14,8 +14,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Vote rule rocks dao.
+ *
  * @author tangfashuang
- * @desc key: policyId, value: voteRulePO
+ * @desc key : policyId, value: voteRulePO
  */
 @Service
 @Slf4j
@@ -25,6 +27,11 @@ public class VoteRuleRocksDao extends RocksBaseDao<VoteRulePO>{
         return "voteRule";
     }
 
+    /**
+     * Save with transaction.
+     *
+     * @param voteRulePO the vote rule po
+     */
     public void saveWithTransaction(VoteRulePO voteRulePO) {
         Transaction tx = ThreadLocalUtils.getRocksTx();
         if (null == tx) {
@@ -41,6 +48,11 @@ public class VoteRuleRocksDao extends RocksBaseDao<VoteRulePO>{
         txPut(tx, policyId, voteRulePO);
     }
 
+    /**
+     * Batch insert.
+     *
+     * @param voteRulePOs the vote rule p os
+     */
     public void batchInsert(List<VoteRulePO> voteRulePOs) {
         if (CollectionUtils.isEmpty(voteRulePOs)) {
             return;

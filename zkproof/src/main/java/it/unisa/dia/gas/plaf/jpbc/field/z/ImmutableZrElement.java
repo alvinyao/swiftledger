@@ -5,10 +5,17 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.math.BigInteger;
 
 /**
+ * The type Immutable zr element.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class ImmutableZrElement extends ZrElement {
 
+    /**
+     * Instantiates a new Immutable zr element.
+     *
+     * @param zrElement the zr element
+     */
     public ImmutableZrElement(ZrElement zrElement) {
         super(zrElement);
         this.immutable = true;

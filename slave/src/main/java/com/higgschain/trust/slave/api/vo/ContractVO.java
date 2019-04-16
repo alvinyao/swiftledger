@@ -7,8 +7,10 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * The type Contract vo.
+ *
  * @author duhongming
- * @date 2018/5/16
+ * @date 2018 /5/16
  */
 @Getter
 @Setter

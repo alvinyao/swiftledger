@@ -10,10 +10,21 @@ import org.testng.annotations.Test;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Log replicate handler impl test.
+ */
 public class LogReplicateHandlerImplTest extends BaseTest {
+    /**
+     * The Log replicate handler.
+     */
     @Autowired
     LogReplicateHandler logReplicateHandler;
 
+    /**
+     * Test replicate package.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testReplicatePackage() throws Exception {
         List<Package> packageVOList = new LinkedList<>();
         Package pack = new Package();

@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
+ * The type Cluster opt tx.
+ *
  * @author suimi
- * @date 2018/9/4
+ * @date 2018 /9/4
  */
 @Data @NoArgsConstructor public class ClusterOptTx {
 
@@ -47,10 +49,22 @@ import java.util.List;
      */
     private List<SignatureInfo> signatureList;
 
-    public enum Operation {
-        JOIN, LEAVE
+    /**
+     * The enum Operation.
+     */
+    public enum Operation {/**
+     * Join operation.
+     */
+    JOIN,
+        /**
+         * Leave operation.
+         */
+        LEAVE
     }
 
+    /**
+     * The type Signature info.
+     */
     @Data @AllArgsConstructor @NoArgsConstructor public static class SignatureInfo {
         private String signer;
         private String sign;

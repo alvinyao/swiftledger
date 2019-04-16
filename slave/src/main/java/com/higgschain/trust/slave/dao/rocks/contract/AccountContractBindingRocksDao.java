@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
+ * The type Account contract binding rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -22,6 +24,12 @@ public class AccountContractBindingRocksDao extends RocksBaseDao<AccountContract
         return "accountContractBinding";
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param list the list
+     * @return the int
+     */
     public int batchInsert(Collection<AccountContractBindingPO> list) {
         if (CollectionUtils.isEmpty(list)) {
             return 0;

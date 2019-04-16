@@ -14,7 +14,7 @@ import java.util.List;
  * DataIdentity jdbc Dao
  *
  * @author lingchao
- * @create 2018年06月20日17:17
+ * @create 2018年06月20日17 :17
  */
 @Service
 public class DataIdentityJDBCDao {
@@ -24,8 +24,8 @@ public class DataIdentityJDBCDao {
     /**
      * batch insert
      *
-     * @param dataIdentityList
-     * @return
+     * @param dataIdentityList the data identity list
+     * @return int
      */
     public int batchInsert(List<DataIdentityPO> dataIdentityList) {
         if (CollectionUtils.isEmpty(dataIdentityList)) {

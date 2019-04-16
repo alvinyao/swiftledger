@@ -8,7 +8,7 @@ import lombok.Setter;
  * object with status
  *
  * @author lingchao
- * @create 2018年06月07日10:38
+ * @create 2018年06月07日10 :38
  */
 @Getter
 @Setter

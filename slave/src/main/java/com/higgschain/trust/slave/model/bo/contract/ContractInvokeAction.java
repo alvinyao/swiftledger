@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type Contract invoke action.
+ *
  * @author duhongming
  * @description the action of contract invoke
- * @date 2018-04-08
+ * @date 2018 -04-08
  */
 @Getter @Setter public class ContractInvokeAction extends Action {
 

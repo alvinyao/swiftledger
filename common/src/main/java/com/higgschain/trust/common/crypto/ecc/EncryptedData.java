@@ -28,9 +28,21 @@ import java.util.Arrays;
  * private key bytes were encrypted. You need these for decryption.</p>
  */
 public final class EncryptedData {
+    /**
+     * The Initialisation vector.
+     */
     public final byte[] initialisationVector;
+    /**
+     * The Encrypted bytes.
+     */
     public final byte[] encryptedBytes;
 
+    /**
+     * Instantiates a new Encrypted data.
+     *
+     * @param initialisationVector the initialisation vector
+     * @param encryptedBytes       the encrypted bytes
+     */
     public EncryptedData(byte[] initialisationVector, byte[] encryptedBytes) {
         this.initialisationVector = Arrays.copyOf(initialisationVector, initialisationVector.length);
         this.encryptedBytes = Arrays.copyOf(encryptedBytes, encryptedBytes.length);

@@ -21,9 +21,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * The type Merkle service.
+ *
  * @author WangQuanzhou
  * @desc merkle tree service
- * @date 2018/4/10 16:38
+ * @date 2018 /4/10 16:38
  */
 @Service @Slf4j public class MerkleServiceImpl implements MerkleService {
 

@@ -29,8 +29,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * The type Transaction builder.
+ *
  * @author Chen Jiawei
- * @date 2019-01-03
+ * @date 2019 -01-03
  */
 @Slf4j
 public class TransactionBuilder {
@@ -50,7 +52,15 @@ public class TransactionBuilder {
         JSON.DEFAULT_GENERATE_FEATURE |= SerializerFeature.MapSortField.getMask();
     }
 
-
+    /**
+     * Generate contract query request v 2 contract query request v 2.
+     *
+     * @param height          the height
+     * @param methodSignature the method signature
+     * @param parameters      the parameters
+     * @param receiverAddress the receiver address
+     * @return the contract query request v 2
+     */
     public static ContractQueryRequestV2 generateContractQueryRequestV2(long height, String methodSignature, Object[] parameters, String receiverAddress) {
         ContractQueryRequestV2 contractQueryRequestV2 = new ContractQueryRequestV2();
 
@@ -62,6 +72,17 @@ public class TransactionBuilder {
         return contractQueryRequestV2;
     }
 
+    /**
+     * Generate signed transaction with contract invocation signed transaction.
+     *
+     * @param contractSenderAddress   the contract sender address
+     * @param contractReceiverAddress the contract receiver address
+     * @param transactionSenderId     the transaction sender id
+     * @param contractMethodSignature the contract method signature
+     * @param privateKey              the private key
+     * @param methodArgs              the method args
+     * @return the signed transaction
+     */
     public static SignedTransaction generateSignedTransactionWithContractInvocation(
             String contractSenderAddress,
             String contractReceiverAddress,
@@ -107,6 +128,18 @@ public class TransactionBuilder {
         return signedTransaction;
     }
 
+    /**
+     * Generate signed transaction with contract creation signed transaction.
+     *
+     * @param contractSenderAddress    the contract sender address
+     * @param transactionSenderId      the transaction sender id
+     * @param contractFileAbsolutePath the contract file absolute path
+     * @param contractName             the contract name
+     * @param constructorSignature     the constructor signature
+     * @param privateKey               the private key
+     * @param constructorArgs          the constructor args
+     * @return the signed transaction
+     */
     public static SignedTransaction generateSignedTransactionWithContractCreation(
             String contractSenderAddress,
             String transactionSenderId,

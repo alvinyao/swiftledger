@@ -33,6 +33,11 @@ public class Solc {
 
     private File solc = null;
 
+    /**
+     * Instantiates a new Solc.
+     *
+     * @param config the config
+     */
     Solc(SystemProperties config) {
         try {
             init(config);
@@ -89,6 +94,11 @@ public class Solc {
         }
     }
 
+    /**
+     * Gets executable.
+     *
+     * @return the executable
+     */
     public File getExecutable() {
         return solc;
     }

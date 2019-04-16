@@ -13,6 +13,9 @@ import org.springframework.http.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type P 2 p valid config.
+ */
 @Slf4j
 @Configuration
 public class P2pValidConfig {
@@ -23,6 +26,11 @@ public class P2pValidConfig {
     @Value("${higgs.trust.nodeName}")
     private String myNodeName;
 
+    /**
+     * Http message converters http message converters.
+     *
+     * @return the http message converters
+     */
     @Bean
     public HttpMessageConverters HttpMessageConverters() {
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();

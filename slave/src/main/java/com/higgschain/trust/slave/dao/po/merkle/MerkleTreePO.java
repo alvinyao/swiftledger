@@ -7,9 +7,11 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * The type Merkle tree po.
+ *
  * @author WangQuanzhou
  * @desc merkle tree po
- * @date 2018/3/29 16:30
+ * @date 2018 /3/29 16:30
  */
 @Getter @Setter public class MerkleTreePO extends BaseEntity {
 
@@ -32,9 +34,20 @@ import java.util.Date;
     // update time
     private Date updateTime;
 
+    /**
+     * Instantiates a new Merkle tree po.
+     */
     public MerkleTreePO() {
     }
 
+    /**
+     * Instantiates a new Merkle tree po.
+     *
+     * @param rootHash   the root hash
+     * @param totalLevel the total level
+     * @param maxIndex   the max index
+     * @param treeType   the tree type
+     */
     public MerkleTreePO(String rootHash, int totalLevel, Long maxIndex, String treeType) {
         this.rootHash = rootHash;
         this.totalLevel = totalLevel;

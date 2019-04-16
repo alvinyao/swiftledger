@@ -31,6 +31,11 @@ public class BufferPoolMetricSet implements MetricSet {
 
     private final MBeanServer mBeanServer;
 
+    /**
+     * Instantiates a new Buffer pool metric set.
+     *
+     * @param mBeanServer the m bean server
+     */
     public BufferPoolMetricSet(MBeanServer mBeanServer) {
         this.mBeanServer = mBeanServer;
     }

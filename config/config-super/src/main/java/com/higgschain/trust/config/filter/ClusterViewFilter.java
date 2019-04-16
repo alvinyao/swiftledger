@@ -18,8 +18,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
+ * The type Cluster view filter.
+ *
  * @author suimi
- * @date 2018/9/4
+ * @date 2018 /9/4
  */
 @Order(2) @Component @Slf4j public class ClusterViewFilter implements CommandFilter {
 

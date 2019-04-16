@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * The type Config jdbc dao.
+ *
  * @author liuyu
  * @description
- * @date 2018-08-02
+ * @date 2018 -08-02
  */
 @Component @Slf4j public class ConfigJDBCDao {
     @Autowired private NamedParameterJdbcTemplate jdbc;
@@ -23,7 +25,7 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param nodes
+     * @param nodes the nodes
      */
     public void batchEnable(List<String> nodes) {
         String sql = "UPDATE config SET ";
@@ -51,7 +53,7 @@ import java.util.List;
     /**
      * batch update
      *
-     * @param nodes
+     * @param nodes the nodes
      */
     public void batchCancel(List<String> nodes) {
         String sql = "UPDATE config SET ";

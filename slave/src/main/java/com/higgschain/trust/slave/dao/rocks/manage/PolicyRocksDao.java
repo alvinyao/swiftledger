@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Policy rocks dao.
+ *
  * @author tangfashuang
  */
 @Service
@@ -23,6 +25,12 @@ public class PolicyRocksDao extends RocksBaseDao<PolicyPO> {
         return "policy";
     }
 
+    /**
+     * Batch insert int.
+     *
+     * @param policyPOList the policy po list
+     * @return the int
+     */
     public int batchInsert(List<PolicyPO> policyPOList) {
         if (CollectionUtils.isEmpty(policyPOList)) {
             log.info("[PolicyRocksDao.batchInsert] policyPOList is empty");

@@ -13,12 +13,15 @@ import java.util.List;
  * TxOutDao test
  *
  * @author lingchao
- * @create 2018年03月29日15:51
+ * @create 2018年03月29日15 :51
  */
 public class TxOutJDBCDaoTest extends BaseTest {
 
     @Autowired private TxOutJDBCDao txOutDao;
 
+    /**
+     * Batch insert test.
+     */
     public void batchInsertTest() {
         long count = 0L;
         do {
@@ -50,7 +53,10 @@ public class TxOutJDBCDaoTest extends BaseTest {
         }while (count!=1L);
     }
 
-     public void batchUpdateTest() {
+    /**
+     * Batch update test.
+     */
+    public void batchUpdateTest() {
 
         List<TxOutPO> txOutPOList = new ArrayList<>();
         TxOutPO txOutPO = new TxOutPO();
@@ -74,6 +80,9 @@ public class TxOutJDBCDaoTest extends BaseTest {
         System.out.println("batchUpdate :" + txOutDao.batchUpdate(txOutPOList));
     }
 
+    /**
+     * Batch all test.
+     */
     @Test public void batchAllTest() {
         batchInsertTest();
         batchUpdateTest();

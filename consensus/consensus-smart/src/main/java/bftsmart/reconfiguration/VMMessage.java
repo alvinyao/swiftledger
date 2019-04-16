@@ -22,19 +22,35 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 /**
+ * The type Vm message.
+ *
  * @author eduardo
  */
 public class VMMessage extends SystemMessage {
     private ReconfigureReply reply;
 
+    /**
+     * Instantiates a new Vm message.
+     */
     public VMMessage() {
     }
 
+    /**
+     * Instantiates a new Vm message.
+     *
+     * @param reply the reply
+     */
     public VMMessage(ReconfigureReply reply) {
         super();
         this.reply = reply;
     }
 
+    /**
+     * Instantiates a new Vm message.
+     *
+     * @param from  the from
+     * @param reply the reply
+     */
     public VMMessage(int from, ReconfigureReply reply) {
         super(from);
         this.reply = reply;
@@ -52,6 +68,11 @@ public class VMMessage extends SystemMessage {
         this.reply = (ReconfigureReply)in.readObject();
     }
 
+    /**
+     * Gets reply.
+     *
+     * @return the reply
+     */
     public ReconfigureReply getReply() {
         return reply;
     }

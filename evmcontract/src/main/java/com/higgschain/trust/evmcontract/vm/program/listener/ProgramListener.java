@@ -19,19 +19,57 @@ package com.higgschain.trust.evmcontract.vm.program.listener;
 
 import com.higgschain.trust.evmcontract.vm.DataWord;
 
+/**
+ * The interface Program listener.
+ */
 public interface ProgramListener {
 
+    /**
+     * On memory extend.
+     *
+     * @param delta the delta
+     */
     void onMemoryExtend(int delta);
 
+    /**
+     * On memory write.
+     *
+     * @param address the address
+     * @param data    the data
+     * @param size    the size
+     */
     void onMemoryWrite(int address, byte[] data, int size);
 
+    /**
+     * On stack pop.
+     */
     void onStackPop();
 
+    /**
+     * On stack push.
+     *
+     * @param value the value
+     */
     void onStackPush(DataWord value);
 
+    /**
+     * On stack swap.
+     *
+     * @param from the from
+     * @param to   the to
+     */
     void onStackSwap(int from, int to);
 
+    /**
+     * On storage put.
+     *
+     * @param key   the key
+     * @param value the value
+     */
     void onStoragePut(DataWord key, DataWord value);
 
+    /**
+     * On storage clear.
+     */
     void onStorageClear();
 }

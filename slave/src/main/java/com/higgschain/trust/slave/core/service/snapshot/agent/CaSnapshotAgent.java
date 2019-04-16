@@ -29,16 +29,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * The type Ca snapshot agent.
+ *
  * @author WangQuanzhou
  * @desc ca snapshot agent
- * @date 2018/6/6 11:29
+ * @date 2018 /6/6 11:29
  */
 @Slf4j @Component public class CaSnapshotAgent implements CacheLoader {
 
+    /**
+     * The Snapshot.
+     */
     @Autowired SnapshotService snapshot;
+    /**
+     * The Ca repository.
+     */
     @Autowired
     CaRepository caRepository;
+    /**
+     * The Cluster config repository.
+     */
     @Autowired ClusterConfigRepository clusterConfigRepository;
+    /**
+     * The Cluster node repository.
+     */
     @Autowired ClusterNodeRepository clusterNodeRepository;
 
     /**
@@ -73,9 +87,11 @@ import java.util.List;
     }
 
     /**
-     * @param user
-     * @param usage
-     * @return
+     * Gets ca.
+     *
+     * @param user  the user
+     * @param usage the usage
+     * @return ca
      * @desc query CA
      */
     public CaPO getCa(String user, String usage) {
@@ -85,8 +101,8 @@ import java.util.List;
     /**
      * query ClusterConfig
      *
-     * @param clusterName
-     * @return
+     * @param clusterName the cluster name
+     * @return cluster config
      */
     public ClusterConfigPO getClusterConfig(String clusterName) {
         return get(new ClusterConfigCacheKey(clusterName));
@@ -95,8 +111,8 @@ import java.util.List;
     /**
      * query nodeName
      *
-     * @param nodeName
-     * @return
+     * @param nodeName the node name
+     * @return cluster node
      */
     public ClusterNodePO getClusterNode(String nodeName) {
         return get(new ClusterNodeCacheKey(nodeName));
@@ -105,7 +121,7 @@ import java.util.List;
     /**
      * save CA
      *
-     * @param ca
+     * @param ca the ca
      */
     public void saveCa(Ca ca) {
         CaPO caPO = new CaPO();
@@ -116,7 +132,7 @@ import java.util.List;
     /**
      * update CA
      *
-     * @param ca
+     * @param ca the ca
      */
     public void updateCa(Ca ca) {
         CaPO caPO = new CaPO();
@@ -127,7 +143,7 @@ import java.util.List;
     /**
      * save ClusterConfig
      *
-     * @param clusterConfig
+     * @param clusterConfig the cluster config
      */
     public void saveClusterConfig(ClusterConfig clusterConfig) {
         ClusterConfigPO clusterConfigPO = new ClusterConfigPO();
@@ -138,7 +154,7 @@ import java.util.List;
     /**
      * save ClusterConfig
      *
-     * @param clusterConfig
+     * @param clusterConfig the cluster config
      */
     public void updateClusterConfig(ClusterConfig clusterConfig) {
         ClusterConfigPO clusterConfigPO = new ClusterConfigPO();
@@ -149,7 +165,7 @@ import java.util.List;
     /**
      * save ClusterNode
      *
-     * @param clusterNode
+     * @param clusterNode the cluster node
      */
     public void saveClusterNode(ClusterNode clusterNode) {
         ClusterNodePO clusterNodePO = new ClusterNodePO();
@@ -160,7 +176,7 @@ import java.util.List;
     /**
      * save ClusterNode
      *
-     * @param clusterNode
+     * @param clusterNode the cluster node
      */
     public void updateClusterNode(ClusterNode clusterNode) {
         ClusterNodePO clusterNodePO = new ClusterNodePO();

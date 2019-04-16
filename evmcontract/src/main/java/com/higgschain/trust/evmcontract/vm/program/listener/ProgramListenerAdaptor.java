@@ -19,6 +19,9 @@ package com.higgschain.trust.evmcontract.vm.program.listener;
 
 import com.higgschain.trust.evmcontract.vm.DataWord;
 
+/**
+ * The type Program listener adaptor.
+ */
 public class ProgramListenerAdaptor implements ProgramListener {
 
     @Override

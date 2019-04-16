@@ -44,9 +44,21 @@ public class Epoch implements Serializable {
 
     private boolean alreadyRemoved = false; // indicates if this epoch was removed from its consensus
 
+    /**
+     * The Prop value.
+     */
     public byte[] propValue = null; // proposed value
+    /**
+     * The Deserialized prop value.
+     */
     public TOMMessage[] deserializedPropValue = null; //utility var
+    /**
+     * The Prop value hash.
+     */
     public byte[] propValueHash = null; // proposed value hash
+    /**
+     * The Proof.
+     */
     public HashSet<ConsensusMessage> proof; // proof from other processes
 
     private View lastView = null;
@@ -56,7 +68,7 @@ public class Epoch implements Serializable {
     /**
      * Creates a new instance of Epoch for acceptors
      *
-     * @param controller
+     * @param controller the controller
      * @param parent     Consensus to which this epoch belongs
      * @param timestamp  Timestamp of the epoch
      */
@@ -153,10 +165,20 @@ public class Epoch implements Serializable {
         return this.alreadyRemoved;
     }
 
+    /**
+     * Add to proof.
+     *
+     * @param pm the pm
+     */
     public void addToProof(ConsensusMessage pm) {
         proof.add(pm);
     }
 
+    /**
+     * Gets proof.
+     *
+     * @return the proof
+     */
     public Set<ConsensusMessage> getProof() {
         return proof;
     }

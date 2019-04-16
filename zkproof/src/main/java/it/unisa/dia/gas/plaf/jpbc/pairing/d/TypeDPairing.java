@@ -18,26 +18,90 @@ import java.security.SecureRandom;
 import java.util.List;
 
 /**
+ * The type Type d pairing.
+ *
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class TypeDPairing extends AbstractPairing {
+    /**
+     * The Curve params.
+     */
     protected PairingParameters curveParams;
 
+    /**
+     * The K.
+     */
     protected int k;
 
-    protected BigInteger q, n, r, h;
-    protected BigInteger a, b;
+    /**
+     * The Q.
+     */
+    protected BigInteger q, /**
+     * The N.
+     */
+    n, /**
+     * The R.
+     */
+    r, /**
+     * The H.
+     */
+    h;
+    /**
+     * The A.
+     */
+    protected BigInteger a, /**
+     * The B.
+     */
+    b;
 
-    protected PolyModElement xPowq, xPowq2;
-    protected Element nqrInverse, nqrInverseSquare;
-    protected BigInteger tateExp, phikOnr;
+    /**
+     * The X powq.
+     */
+    protected PolyModElement xPowq, /**
+     * The X powq 2.
+     */
+    xPowq2;
+    /**
+     * The Nqr inverse.
+     */
+    protected Element nqrInverse, /**
+     * The Nqr inverse square.
+     */
+    nqrInverseSquare;
+    /**
+     * The Tate exp.
+     */
+    protected BigInteger tateExp, /**
+     * The Phik onr.
+     */
+    phikOnr;
 
+    /**
+     * The Fq.
+     */
     protected Field Fq;
+    /**
+     * The Fqk.
+     */
     protected Field<? extends Point<Polynomial>> Fqk;
+    /**
+     * The Fqd.
+     */
     protected PolyModField Fqd;
-    protected CurveField Eq, Etwist;
+    /**
+     * The Eq.
+     */
+    protected CurveField Eq, /**
+     * The Etwist.
+     */
+    Etwist;
 
-
+    /**
+     * Instantiates a new Type d pairing.
+     *
+     * @param random      the random
+     * @param curveParams the curve params
+     */
     public TypeDPairing(SecureRandom random, PairingParameters curveParams) {
         super(random);
 
@@ -48,6 +112,11 @@ public class TypeDPairing extends AbstractPairing {
         initFields();
     }
 
+    /**
+     * Instantiates a new Type d pairing.
+     *
+     * @param curveParams the curve params
+     */
     public TypeDPairing(PairingParameters curveParams) {
         this(new SecureRandom(), curveParams);
     }
@@ -57,7 +126,11 @@ public class TypeDPairing extends AbstractPairing {
         return false;
     }
 
-
+    /**
+     * Save twist properties parameters.
+     *
+     * @return the properties parameters
+     */
     public PropertiesParameters saveTwist() {
         PropertiesParameters params = (PropertiesParameters) curveParams;
 
@@ -68,6 +141,9 @@ public class TypeDPairing extends AbstractPairing {
         return params;
     }
 
+    /**
+     * Init params.
+     */
     protected void initParams() {
         // validate the type
         String type = curveParams.getString("type");
@@ -88,7 +164,9 @@ public class TypeDPairing extends AbstractPairing {
         b = curveParams.getBigInteger("b");
     }
 
-
+    /**
+     * Init fields.
+     */
     protected void initFields() {
         // Init Zr
         Zr = initFp(r);
@@ -162,34 +240,74 @@ public class TypeDPairing extends AbstractPairing {
         GT = initGT();
    }
 
+    /**
+     * Init fp field.
+     *
+     * @param order the order
+     * @return the field
+     */
     protected Field initFp(BigInteger order) {
         return new ZrField(random, order);
     }
 
+    /**
+     * Init eq curve field.
+     *
+     * @return the curve field
+     */
     protected CurveField initEq() {
         return new CurveField(random, Fq.newElement().set(a),Fq.newElement().set(b), r, h);
     }
 
+    /**
+     * Init eq map curve field.
+     *
+     * @return the curve field
+     */
     protected CurveField initEqMap() {
         return new CurveField(random, Fqd.newElement().map(Eq.getA()), Fqd.newElement().map(Eq.getB()), r);
     }
 
+    /**
+     * Init poly poly field.
+     *
+     * @return the poly field
+     */
     protected PolyField initPoly() {
         return new PolyField(random, Fq);
     }
 
+    /**
+     * Init poly mod poly mod field.
+     *
+     * @param irred the irred
+     * @return the poly mod field
+     */
     protected PolyModField initPolyMod(PolyElement irred) {
         return new PolyModField(random, irred, curveParams.getBigInteger("nqr"));
     }
 
+    /**
+     * Init quadratic quadratic field.
+     *
+     * @return the quadratic field
+     */
     protected QuadraticField initQuadratic() {
         return new QuadraticField(random, Fqd);
     }
 
+    /**
+     * Init gt field.
+     *
+     * @return the field
+     */
     protected Field initGT() {
         return new GTFiniteField(random, r, pairingMap, Fqk);
     }
 
+    /**
+     * Init map.
+     */
     protected void initMap() {
         pairingMap = new TypeDTateAffineNoDenomMillerPairingMap(this);
     }

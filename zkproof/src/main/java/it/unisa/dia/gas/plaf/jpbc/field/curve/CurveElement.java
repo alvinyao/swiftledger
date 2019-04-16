@@ -7,13 +7,24 @@ import it.unisa.dia.gas.plaf.jpbc.util.math.BigIntegerUtils;
 import java.math.BigInteger;
 
 /**
+ * The type Curve element.
+ *
+ * @param <E> the type parameter
+ * @param <F> the type parameter
  * @author Angelo De Caro (jpbclib@gmail.com)
  */
 public class CurveElement<E extends Element, F extends CurveField> extends AbstractPointElement<E, F> {
 
+    /**
+     * The Inf flag.
+     */
     protected int infFlag;
 
-
+    /**
+     * Instantiates a new Curve element.
+     *
+     * @param field the field
+     */
     public CurveElement(F field) {
         super(field);
 
@@ -22,6 +33,11 @@ public class CurveElement<E extends Element, F extends CurveField> extends Abstr
         this.infFlag = 1;
     }
 
+    /**
+     * Instantiates a new Curve element.
+     *
+     * @param curveElement the curve element
+     */
     public CurveElement(CurveElement<E, F> curveElement) {
         super(curveElement.getField());
 
@@ -360,7 +376,11 @@ public class CurveElement<E extends Element, F extends CurveField> extends Abstr
         return len;
     }
 
-
+    /**
+     * Is valid boolean.
+     *
+     * @return the boolean
+     */
     public boolean isValid() {
         Element t0, t1;
 
@@ -375,7 +395,9 @@ public class CurveElement<E extends Element, F extends CurveField> extends Abstr
         return t0.isEqual(t1);
     }
 
-
+    /**
+     * Twice internal.
+     */
     protected void twiceInternal() {
         // We have P1 = P2 so the tangent line T at P1 ha slope
         //lambda = (3x^2 + a) / 2y
@@ -392,12 +414,20 @@ public class CurveElement<E extends Element, F extends CurveField> extends Abstr
         infFlag = 0;
     }
 
+    /**
+     * Sets point from x.
+     */
     protected void setPointFromX() {
         infFlag = 0;
         y.set(x.duplicate().square().add(field.a).mul(x).add(field.b).sqrt());
     }
 
-
+    /**
+     * Is equal boolean.
+     *
+     * @param element the element
+     * @return the boolean
+     */
     protected boolean isEqual(CurveElement element) {
         if (this.infFlag != 0 || element.infFlag != 0) {
             return (this.infFlag != 0 && element.infFlag != 0);
@@ -406,11 +436,20 @@ public class CurveElement<E extends Element, F extends CurveField> extends Abstr
         return x.isEqual(element.x) && y.isEqual(element.y);
     }
 
-
+    /**
+     * Sets x.
+     *
+     * @param x the x
+     */
     public void setX(E x) {
         this.x = x;
     }
 
+    /**
+     * Sets y.
+     *
+     * @param y the y
+     */
     public void setY(E y) {
         this.y = y;
     }

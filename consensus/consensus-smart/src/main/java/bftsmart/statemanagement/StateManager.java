@@ -27,29 +27,93 @@ import bftsmart.tom.core.TOMLayer;
  */
 public interface StateManager {
 
+    /**
+     * Request app state.
+     *
+     * @param cid the cid
+     */
     public void requestAppState(int cid);
 
+    /**
+     * Analyze state.
+     *
+     * @param cid the cid
+     */
     public void analyzeState(int cid);
 
+    /**
+     * State timeout.
+     */
     public void stateTimeout();
 
+    /**
+     * Init.
+     *
+     * @param tomLayer the tom layer
+     * @param dt       the dt
+     */
     public void init(TOMLayer tomLayer, DeliveryThread dt);
 
+    /**
+     * Sm request deliver.
+     *
+     * @param msg   the msg
+     * @param isBFT the is bft
+     */
     public void SMRequestDeliver(SMMessage msg, boolean isBFT);
 
+    /**
+     * Sm reply deliver.
+     *
+     * @param msg   the msg
+     * @param isBFT the is bft
+     */
     public void SMReplyDeliver(SMMessage msg, boolean isBFT);
 
+    /**
+     * Ask current consensus id.
+     */
     public void askCurrentConsensusId();
 
+    /**
+     * Current consensus id asked.
+     *
+     * @param sender the sender
+     */
     public void currentConsensusIdAsked(int sender);
 
+    /**
+     * Current consensus id received.
+     *
+     * @param msg the msg
+     */
     public void currentConsensusIdReceived(SMMessage msg);
 
+    /**
+     * Sets last cid.
+     *
+     * @param lastCID the last cid
+     */
     public void setLastCID(int lastCID);
 
+    /**
+     * Init last cid.
+     *
+     * @param lastCID the last cid
+     */
     public void initLastCID(int lastCID);
 
+    /**
+     * Gets last cid.
+     *
+     * @return the last cid
+     */
     public int getLastCID();
 
+    /**
+     * Is retrieving state boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRetrievingState();
 }

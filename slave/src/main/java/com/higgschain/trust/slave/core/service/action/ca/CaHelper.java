@@ -11,10 +11,23 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Ca helper.
+ */
 @Slf4j @Component public class CaHelper {
+    /**
+     * The Ca snapshot handler.
+     */
     @Autowired
     CaSnapshotHandler caSnapshotHandler;
 
+    /**
+     * Validate boolean.
+     *
+     * @param caAction the ca action
+     * @param type     the type
+     * @return the boolean
+     */
     public boolean validate(CaAction caAction, ActionTypeEnum type) {
         // convert action and validate it
         log.info("[CaHelper.process] is start,params:{}", caAction);
@@ -50,8 +63,8 @@ import org.springframework.stereotype.Component;
     /**
      * param verify
      *
-     * @param caAction
-     * @throws SlaveException
+     * @param caAction the ca action
+     * @throws SlaveException the slave exception
      */
     public void verifyParams(CaAction caAction) throws SlaveException {
         if(StringUtils.isEmpty(caAction.getUser())){

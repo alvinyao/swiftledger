@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Type;
 
 /**
+ * The type Http service provider client.
+ *
  * @author duhongming
- * @date 2018/9/14
+ * @date 2018 /9/14
  */
 @Component
 public class HttpServiceProviderClient implements ServiceProviderClient {

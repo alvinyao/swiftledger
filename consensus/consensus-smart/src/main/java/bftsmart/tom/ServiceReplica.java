@@ -51,11 +51,26 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ServiceReplica {
 
+    /**
+     * The type Message context pair.
+     */
     class MessageContextPair {
 
+        /**
+         * The Message.
+         */
         TOMMessage message;
+        /**
+         * The Msg ctx.
+         */
         MessageContext msgCtx;
 
+        /**
+         * Instantiates a new Message context pair.
+         *
+         * @param message the message
+         * @param msgCtx  the msg ctx
+         */
         MessageContextPair(TOMMessage message, MessageContext msgCtx) {
             this.message = message;
             this.msgCtx = msgCtx;
@@ -141,6 +156,11 @@ public class ServiceReplica {
         Logger.println("replier set replica context");
     }
 
+    /**
+     * Sets reply controller.
+     *
+     * @param replier the replier
+     */
     public void setReplyController(Replier replier) {
         this.replier = replier;
     }
@@ -173,6 +193,11 @@ public class ServiceReplica {
         initReplica();
     }
 
+    /**
+     * Join msg received.
+     *
+     * @param msg the msg
+     */
     public void joinMsgReceived(VMMessage msg) {
         ReconfigureReply r = msg.getReply();
 
@@ -198,6 +223,7 @@ public class ServiceReplica {
      * ordered to the replica and gather the reply to forward to the client
      *
      * @param message the request received from the delivery thread
+     * @param msgCtx  the msg ctx
      */
     public final void receiveReadonlyMessage(TOMMessage message, MessageContext msgCtx) {
         byte[] response = null;
@@ -229,6 +255,9 @@ public class ServiceReplica {
         }
     }
 
+    /**
+     * Kill.
+     */
     public void kill() {
 
         Thread t = new Thread() {
@@ -242,6 +271,9 @@ public class ServiceReplica {
         t.start();
     }
 
+    /**
+     * Restart.
+     */
     public void restart() {
         Thread t = new Thread() {
 
@@ -273,6 +305,15 @@ public class ServiceReplica {
         t.start();
     }
 
+    /**
+     * Receive messages.
+     *
+     * @param consId    the cons id
+     * @param regencies the regencies
+     * @param leaders   the leaders
+     * @param cDecs     the c decs
+     * @param requests  the requests
+     */
     public void receiveMessages(int consId[], int regencies[], int leaders[], CertifiedDecision[] cDecs,
         TOMMessage[][] requests) {
         int numRequests = 0;
@@ -547,11 +588,21 @@ public class ServiceReplica {
         return replicaCtx;
     }
 
+    /**
+     * Gets server communication system.
+     *
+     * @return the server communication system
+     */
     public ServerCommunicationSystem getServerCommunicationSystem() {
 
         return cs;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }

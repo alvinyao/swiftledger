@@ -9,6 +9,9 @@ import org.crsh.cli.Usage
 import org.crsh.command.InvocationContext
 import org.springframework.beans.factory.BeanFactory
 
+/**
+ *  The type Biz type.
+ */
 @Slf4j
 @Usage("for biz type operation")
 class bizType {

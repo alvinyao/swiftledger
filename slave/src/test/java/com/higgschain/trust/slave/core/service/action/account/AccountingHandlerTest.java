@@ -23,33 +23,65 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Accounting handler test.
+ *
  * @author liuyu
  * @description
- * @date 2018-03-28
+ * @date 2018 -03-28
  */
 public class AccountingHandlerTest extends IntegrateBaseTest {
+    /**
+     * The Open account handler.
+     */
     @Autowired
     OpenAccountHandler openAccountHandler;
+    /**
+     * The Account operation handler.
+     */
     @Autowired
     AccountOperationHandler accountOperationHandler;
+    /**
+     * The Account freeze handler.
+     */
     @Autowired
     AccountFreezeHandler accountFreezeHandler;
+    /**
+     * The Account un freeze handler.
+     */
     @Autowired
     AccountUnFreezeHandler accountUnFreezeHandler;
+    /**
+     * The Block service.
+     */
     @Autowired BlockService blockService;
+    /**
+     * The Snapshot service.
+     */
     @Autowired SnapshotService snapshotService;
+    /**
+     * The Issue currency handler.
+     */
     @Autowired
     IssueCurrencyHandler issueCurrencyHandler;
 
+    /**
+     * Before.
+     */
     @Before public void before() {
         snapshotService.startTransaction();
 
     }
 
+    /**
+     * After.
+     */
     @After public void after() {
 
     }
 
+    /**
+     * Test open account.
+     */
     @Test public void testOpenAccount() {
         OpenAccount accountBO = new OpenAccount();
         accountBO.setType(ActionTypeEnum.OPEN_ACCOUNT);
@@ -65,6 +97,11 @@ public class AccountingHandlerTest extends IntegrateBaseTest {
        // openAccountHandler.persist(packContext);
     }
 
+    /**
+     * Test operation account.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testOperationAccount() throws Exception {
         AccountOperation action = new AccountOperation();
         action.setType(ActionTypeEnum.ACCOUNTING);
@@ -100,6 +137,11 @@ public class AccountingHandlerTest extends IntegrateBaseTest {
       //  accountOperationHandler.persist(packContext);
     }
 
+    /**
+     * Test freeze.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testFreeze() throws Exception {
         AccountFreeze action = new AccountFreeze();
         action.setType(ActionTypeEnum.FREEZE);
@@ -134,6 +176,11 @@ public class AccountingHandlerTest extends IntegrateBaseTest {
       //  accountFreezeHandler.persist(packContext);
     }
 
+    /**
+     * Test un freeze.
+     *
+     * @throws Exception the exception
+     */
     @Test public void testUnFreeze() throws Exception {
         Package pack = new Package();
         pack.setHeight(1L);
@@ -161,6 +208,9 @@ public class AccountingHandlerTest extends IntegrateBaseTest {
       //  accountUnFreezeHandler.persist(packContext);
     }
 
+    /**
+     * Test issue currency.
+     */
     @Test public void testIssueCurrency() {
         Action action = TestDataMaker.makeCurrencyAction("CNY");
         PackContext packContext = new PackContext(new Package(), new Block());

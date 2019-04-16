@@ -24,7 +24,6 @@ import java.util.Map;
 
 import static com.higgschain.trust.evmcontract.vm.OpCode.Tier.*;
 
-
 /**
  * Instruction set for the Ethereum Virtual Machine
  * See Yellow Paper: http://www.gavwood.com/Paper.pdf
@@ -193,8 +192,14 @@ public enum OpCode {
      */
     CODECOPY(0x39, 3, 0, VeryLowTier),
 
+    /**
+     * Returndatasize op code.
+     */
     RETURNDATASIZE(0x3d, 0, 1, BaseTier),
 
+    /**
+     * Returndatacopy op code.
+     */
     RETURNDATACOPY(0x3e, 3, 0, VeryLowTier),
     /**
      * (0x3a) Get price of gas in current
@@ -561,9 +566,21 @@ public enum OpCode {
      * (0xa[n]) log some data for some addres with 0..n tags [addr [tag0..tagn] data]
      */
     LOG0(0xa0, 2, 0, SpecialTier),
+    /**
+     * Log 1 op code.
+     */
     LOG1(0xa1, 3, 0, SpecialTier),
+    /**
+     * Log 2 op code.
+     */
     LOG2(0xa2, 4, 0, SpecialTier),
+    /**
+     * Log 3 op code.
+     */
     LOG3(0xa3, 5, 0, SpecialTier),
+    /**
+     * Log 4 op code.
+     */
     LOG4(0xa4, 6, 0, SpecialTier),
 
     /*  System operations   */
@@ -647,7 +664,11 @@ public enum OpCode {
                 EnumSet.copyOf(Arrays.asList(callFlags));
     }
 
-
+    /**
+     * Val byte.
+     *
+     * @return the byte
+     */
     public byte val() {
         return opcode;
     }
@@ -661,22 +682,50 @@ public enum OpCode {
         return require;
     }
 
+    /**
+     * Ret int.
+     *
+     * @return the int
+     */
     public int ret() {
         return ret;
     }
 
+    /**
+     * As int int.
+     *
+     * @return the int
+     */
     public int asInt() {
         return opcode;
     }
 
+    /**
+     * Contains boolean.
+     *
+     * @param code the code
+     * @return the boolean
+     */
     public static boolean contains(String code) {
         return STRING_TO_BYTE_MAP.containsKey(code.trim());
     }
 
+    /**
+     * Byte val byte.
+     *
+     * @param code the code
+     * @return the byte
+     */
     public static byte byteVal(String code) {
         return STRING_TO_BYTE_MAP.get(code);
     }
 
+    /**
+     * Code op code.
+     *
+     * @param code the code
+     * @return the op code
+     */
     public static OpCode code(byte code) {
         return INT_TO_TYPE_MAP[code & 0xFF];
     }
@@ -687,6 +736,8 @@ public enum OpCode {
 
     /**
      * Indicates that opcode is a call
+     *
+     * @return the boolean
      */
     public boolean isCall() {
         return getCallFlags().contains(CallFlags.Call);
@@ -700,6 +751,8 @@ public enum OpCode {
 
     /**
      * Indicates that the code is executed in the context of the caller
+     *
+     * @return the boolean
      */
     public boolean callIsStateless() {
         checkCall();
@@ -708,6 +761,8 @@ public enum OpCode {
 
     /**
      * Indicates that the opcode has value parameter (3rd on stack)
+     *
+     * @return the boolean
      */
     public boolean callHasValue() {
         checkCall();
@@ -716,6 +771,8 @@ public enum OpCode {
 
     /**
      * Indicates that any state modifications are disallowed during the call
+     *
+     * @return the boolean
      */
     public boolean callIsStatic() {
         checkCall();
@@ -724,26 +781,62 @@ public enum OpCode {
 
     /**
      * Indicates that value and message sender are propagated from parent to child scope
+     *
+     * @return the boolean
      */
     public boolean callIsDelegate() {
         checkCall();
         return getCallFlags().contains(CallFlags.Delegate);
     }
 
+    /**
+     * Gets tier.
+     *
+     * @return the tier
+     */
     public Tier getTier() {
         return this.tier;
     }
 
-    public enum Tier {
-        ZeroTier(0),
+    /**
+     * The enum Tier.
+     */
+    public enum Tier {/**
+     * Zero tier tier.
+     */
+    ZeroTier(0),
+        /**
+         * Base tier tier.
+         */
         BaseTier(2),
+        /**
+         * Very low tier tier.
+         */
         VeryLowTier(3),
+        /**
+         * Low tier tier.
+         */
         LowTier(5),
+        /**
+         * Mid tier tier.
+         */
         MidTier(8),
+        /**
+         * High tier tier.
+         */
         HighTier(10),
+        /**
+         * Ext tier tier.
+         */
         ExtTier(20),
+        /**
+         * The Special tier.
+         */
         //TODO #POC9 is this correct?? "multiparam" from cpp
         SpecialTier(1),
+        /**
+         * Invalid tier tier.
+         */
         InvalidTier(0);
 
 
@@ -753,6 +846,11 @@ public enum OpCode {
             this.level = level;
         }
 
+        /**
+         * As int int.
+         *
+         * @return the int
+         */
         public int asInt() {
             return level;
         }

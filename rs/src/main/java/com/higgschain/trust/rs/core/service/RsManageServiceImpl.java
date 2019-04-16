@@ -46,8 +46,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Rs manage service.
+ *
  * @author tangfashuang
- * @date 2018/05/18 11:31
+ * @date 2018 /05/18 11:31
  * @desc rs manage service
  */
 @Service @Slf4j public class RsManageServiceImpl implements RsManageService {

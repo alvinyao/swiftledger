@@ -15,8 +15,14 @@ import org.testng.util.Strings;
 
 import java.util.Map;
 
+/**
+ * The type Contract creation handler interface test.
+ */
 public class ContractCreationHandlerInterfaceTest extends ContractBaseTest {
 
+    /**
+     * The Snapshot.
+     */
     @Autowired SnapshotService snapshot;
     @Autowired private ContractCreationHandler creationHandler;
     @Autowired private ContractSnapshotAgent agent;
@@ -55,6 +61,11 @@ public class ContractCreationHandlerInterfaceTest extends ContractBaseTest {
         return "java/com/higgs/trust/slave/core/service/contract/creation/";
     }
 
+    /**
+     * Test validate.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider",priority = 0)
     public void testValidate(Map<?, ?> param) {
         PackContext packContext = createPackContext(param);
@@ -63,12 +74,20 @@ public class ContractCreationHandlerInterfaceTest extends ContractBaseTest {
         snapshot.commit();
     }
 
+    /**
+     * Test persist.
+     *
+     * @param param the param
+     */
     @Test(dataProvider = "defaultProvider",priority = 1)
     public void testPersist(Map<?, ?> param) {
         PackContext packContext = createPackContext(param);
         doTestPersist(param, packContext, creationHandler);
     }
 
+    /**
+     * Clear db.
+     */
     @AfterClass
     public void clearDb() {
         //executeDelete("TRUNCATE TABLE contract;");

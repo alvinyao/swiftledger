@@ -25,8 +25,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
+ * The type Master package cache.
+ *
  * @author tangfashuang
- * @date 2018/06/13 17:41
+ * @date 2018 /06/13 17:41
  * @desc set packHeight=null when master change
  */
 @Slf4j
@@ -95,14 +97,30 @@ public class MasterPackageCache implements MasterChangeListener {
         }
     }
 
+    /**
+     * Gets pack height.
+     *
+     * @return the pack height
+     */
     public Long getPackHeight() {
         return packHeight.get();
     }
 
+    /**
+     * Get last pack time long.
+     *
+     * @return the long
+     */
     public Long getLastPackTime(){
         return packTime.get();
     }
 
+    /**
+     * Get pending tx queue object [ ].
+     *
+     * @param count the count
+     * @return the object [ ]
+     */
     public Object[] getPendingTxQueue(int count) {
         if (null == pendingTxQueue.peekFirst()) {
             return null;
@@ -137,11 +155,19 @@ public class MasterPackageCache implements MasterChangeListener {
         return objs;
     }
 
+    /**
+     * Append deque first.
+     *
+     * @param signedTransaction the signed transaction
+     */
     public void appendDequeFirst(SignedTransaction signedTransaction) {
         pendingTxQueue.offerFirst(new TermedTransaction(signedTransaction, nodeState.getCurrentTerm()));
     }
 
     /**
+     * Append deque last boolean.
+     *
+     * @param signedTx the signed tx
      * @return if exist will return false
      */
     public boolean appendDequeLast(SignedTransaction signedTx) {
@@ -154,6 +180,11 @@ public class MasterPackageCache implements MasterChangeListener {
         return true;
     }
 
+    /**
+     * Gets pending tx queue size.
+     *
+     * @return the pending tx queue size
+     */
     public int getPendingTxQueueSize() {
         return pendingTxQueue.size();
     }
@@ -161,7 +192,7 @@ public class MasterPackageCache implements MasterChangeListener {
     /**
      * set height for package
      *
-     * @param pack
+     * @param pack the pack
      */
     public void setPackageHeight(Package pack) {
         try {
@@ -177,21 +208,34 @@ public class MasterPackageCache implements MasterChangeListener {
     /**
      * put command to queue
      *
-     * @param command
-     * @throws InterruptedException
+     * @param command the command
+     * @throws InterruptedException the interrupted exception
      */
     public void putPendingPack(PackageCommand command) throws InterruptedException {
         pendingPack.offer(command, 100, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * Gets pending pack size.
+     *
+     * @return the pending pack size
+     */
     public int getPendingPackSize() {
         return pendingPack.size();
     }
 
+    /**
+     * Gets package.
+     *
+     * @return the package
+     */
     public PackageCommand getPackage() {
         return pendingPack.poll();
     }
 
+    /**
+     * The type Termed transaction.
+     */
     @Getter
     @Setter
     @AllArgsConstructor
