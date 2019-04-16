@@ -13,6 +13,33 @@
         consensus for business synergies
     </description>
     <url>https://github.com/Aurorasic/swiftledger</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:Aurorasic/swiftledger.git</connection>
+        <developerConnection>scm:git:ssh://github.com/:Aurorasic/swiftledger.git</developerConnection>
+        <url>http://github.com/Aurorasic/swiftledger/tree/master</url>
+        <tag>HEAD</tag>
+    </scm>
+    <developers>
+        <developer>
+            <name>swiftledger</name>
+            <email>swiftledger@primeledger.cn</email>
+            <organization>https://www.higgschain.com</organization>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>lichengcai</name>
+            <email>lichengcai@primeledger.cn</email>
+            <organization>https://www.higgschain.com</organization>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
 
     <modules>
         <module>slave</module>
@@ -40,35 +67,7 @@
         <netty.version>4.1.27.Final</netty.version>
     </properties>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
-    <scm>
-        <connection>scm:git:git@github.com:Aurorasic/swiftledger.git</connection>
-        <developerConnection>scm:git:git@github.com:Aurorasic/swiftledger.git</developerConnection>
-        <url>git@github.com:Aurorasic/swiftledger</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <developers>
-        <developer>
-            <name>swiftledger</name>
-            <email>swiftledger@primeledger.cn</email>
-            <organization>https://www.higgschain.com</organization>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>lichengcai</name>
-            <email>lichengcai@primeledger.cn</email>
-            <organization>https://www.higgschain.com</organization>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
 
     <dependencyManagement>
         <dependencies>
