@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Charsets;
 import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.evmcontract.crypto.ECKey;
+import com.higgschain.trust.evmcontract.facade.exception.ContractExecutionException;
 import com.higgschain.trust.rs.common.enums.RsCoreErrorEnum;
 import com.higgschain.trust.rs.common.exception.RsCoreException;
 import com.higgschain.trust.rs.common.utils.CoreTransactionConvertor;
@@ -185,8 +186,15 @@ import java.util.stream.Collectors;
                     RsCoreErrorEnum.RS_CORE_GET_CONTRACT_ADDR_BY_CURRENCY_ERROR.getDescription(), null);
             }
         }
-        List<?> result = contractV2QueryService
-            .query(null, contractAddress, METHOD_GET_SIGN_HASH, vo.getFromAddr(), vo.getToAddr(), amount);
+        List<?> result;
+        try {
+            result =  contractV2QueryService
+                .query(null, contractAddress, METHOD_GET_SIGN_HASH, vo.getFromAddr(), vo.getToAddr(), amount);
+        }catch(ContractExecutionException e){
+            log.error("getSignHashValue has error",e);
+            return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getCode(),
+                e.getMessage(), null);
+        }
         if (CollectionUtils.isEmpty(result) || result.get(0) == null) {
             log.info("getSignHashValue result is empty");
             return RespData.error(RsCoreErrorEnum.RS_CORE_CONTRACT_EXECUTE_ERROR.getCode(),
