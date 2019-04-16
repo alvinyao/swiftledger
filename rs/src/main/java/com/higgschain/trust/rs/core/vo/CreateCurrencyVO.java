@@ -2,8 +2,8 @@ package com.higgschain.trust.rs.core.vo;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -20,7 +20,7 @@ public class CreateCurrencyVO extends BaseVO{
     @NotNull
     private String currency;
     @NotNull
-    @Max(64)
+    @Length(max = 64)
     private String address;
     @NotNull
     private BigDecimal amount;
