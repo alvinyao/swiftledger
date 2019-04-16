@@ -549,7 +549,7 @@
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>true</useReleaseProfile>
-                    <releaseProfiles>release</releaseProfiles>
+                    <releaseProfiles>release,ossrh</releaseProfiles>
                     <goals>deploy</goals>
                 </configuration>
             </plugin>
