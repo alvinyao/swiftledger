@@ -22,7 +22,7 @@ public class MultiSignRuleVO extends BaseBO {
      *
      */
     @NotNull
-    @Length(max = 64)
+    @Length(min = 1,max = 64)
     private String requestId;
     /**
      *  addresses that participate in multiple signatures

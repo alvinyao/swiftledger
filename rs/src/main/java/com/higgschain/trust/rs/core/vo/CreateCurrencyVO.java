@@ -16,11 +16,12 @@ import java.math.BigDecimal;
 @Setter
 public class CreateCurrencyVO extends BaseVO{
     @NotNull
+    @Length(min = 1,max = 64)
     private String requestId;
     @NotNull
     private String currency;
     @NotNull
-    @Length(max = 64)
+    @Length(min = 1,max = 64)
     private String address;
     @NotNull
     private BigDecimal amount;

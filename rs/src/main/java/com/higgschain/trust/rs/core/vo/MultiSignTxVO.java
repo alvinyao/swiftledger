@@ -22,7 +22,7 @@ public class MultiSignTxVO extends BaseBO {
      *
      */
     @NotNull
-    @Length(max = 64)
+    @Length(min = 1,max = 64)
     private String requestId;
     /**
      * currency name
@@ -33,13 +33,13 @@ public class MultiSignTxVO extends BaseBO {
      * from address the Multi-Sign contract address
      */
     @NotNull
-    @Length(max = 64)
+    @Length(min = 1,max = 64)
     private String fromAddr;
     /**
      *to address
      */
     @NotNull
-    @Length(max = 64)
+    @Length(min = 1,max = 64)
     private String toAddr;
     /**
      * the amount incurred
