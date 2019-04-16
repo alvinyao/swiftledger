@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>com.higgschain.trust</groupId>
     <artifactId>parent</artifactId>
@@ -45,8 +46,8 @@
         <connection>scm:git:git@github.com:Aurorasic/swiftledger.git</connection>
         <developerConnection>scm:git:git@github.com:Aurorasic/swiftledger.git</developerConnection>
         <url>git@github.com:Aurorasic/swiftledger</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <developers>
         <developer>
@@ -476,7 +477,7 @@
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -544,6 +545,7 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>true</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
                 </configuration>
             </plugin>
         </plugins>
@@ -552,6 +554,12 @@
     <profiles>
         <profile>
             <id>release</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gpg.executable>gpg2</gpg.executable>
+            </properties>
             <build>
                 <pluginManagement>
                     <plugins>
@@ -561,7 +569,7 @@
                             <version>1.6.3</version>
                             <extensions>true</extensions>
                             <configuration>
-                                <serverId>releases</serverId>
+                                <serverId>ossrh</serverId>
                                 <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                                 <autoReleaseAfterClose>true</autoReleaseAfterClose>
                             </configuration>
@@ -604,12 +612,12 @@
 
     <distributionManagement>
         <repository>
-            <id>releases</id>
+            <id>ossrh</id>
             <name>snapshots repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>ossrh</id>
             <name>Nexus Snapshot Repository</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
