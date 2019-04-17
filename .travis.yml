@@ -11,6 +11,8 @@ addons:
   sonarcloud:
     organization: "aurorasic-github"
 
+script: mvn package -DskipTests=true -Dmaven.javadoc.skip=true
+
 after_success:
   - mvn -s ./bin/setting.xml deploy -DskipTests=true -Dmaven.javadoc.skip=true
   - mvn jacoco:report  sonar:sonar
