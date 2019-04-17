@@ -21,6 +21,7 @@ import com.higgschain.trust.evmcontract.config.BlockChainConfig;
 import com.higgschain.trust.evmcontract.crypto.ECKey;
 import com.higgschain.trust.evmcontract.crypto.HashUtil;
 import org.apache.commons.lang3.tuple.Pair;
+import org.spongycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class PrecompiledContracts {
     private static final Ripempd160 RIPEMPD_160 = new Ripempd160();
     private static final Identity IDENTITY = new Identity();
     private static final ModExp MOD_EXP = new ModExp();
+    private static final Policy POLICY = new Policy();
 
     private static final DataWord EC_RECOVER_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000001");
     private static final DataWord SHA_256_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000002");
@@ -50,6 +52,7 @@ public class PrecompiledContracts {
     private static final DataWord ALT_BN_128_ADD_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000006");
     private static final DataWord ALT_BN_128_MUL_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000007");
     private static final DataWord ALT_BN_128_PAIRING_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000008");
+    private static final DataWord POLICY_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000009");
 
     /**
      * List addresses list.
@@ -67,6 +70,7 @@ public class PrecompiledContracts {
         addressList.add(ALT_BN_128_ADD_ADDR);
         addressList.add(ALT_BN_128_MUL_ADDR);
         addressList.add(ALT_BN_128_PAIRING_ADDR);
+        addressList.add(POLICY_ADDR);
 
         return addressList;
     }
@@ -99,6 +103,10 @@ public class PrecompiledContracts {
         // Byzantium precompiles
         if (address.equals(MOD_EXP_ADDR) && config.eip198()) {
             return MOD_EXP;
+        }
+
+        if (address.equals(POLICY_ADDR) ) {
+            return POLICY;
         }
 
         return null;
@@ -394,6 +402,19 @@ public class PrecompiledContracts {
         private BigInteger parseArg(byte[] data, int offset, int len) {
             byte[] bytes = parseBytes(data, offset, len);
             return bytesToBigInteger(bytes);
+        }
+    }
+
+    public static class Policy extends PrecompiledContract{
+
+        @Override
+        public long getGasForData(byte[] data) {
+            return 0;
+        }
+
+        @Override
+        public Pair<Boolean, byte[]> execute(byte[] data) {
+            return  Pair.of(true, Hex.decode("1111111111111111111111111111111111111111111111111111111111111111"));
         }
     }
 }
