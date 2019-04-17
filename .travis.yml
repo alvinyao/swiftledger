@@ -2,8 +2,9 @@ language: java
 branches:
   only:
     - master
-    - /^release.*$/
-    - /^dev.*$/
+    - /^release(-|_).*$/
+    - /^dev(-|_).*$/
+    - /^feature(-|_).*$/
 jdk:
   - oraclejdk8
 
