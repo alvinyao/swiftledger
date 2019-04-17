@@ -4,7 +4,6 @@ branches:
     - master
     - /^release(-|_).*$/
     - /^dev(-|_).*$/
-    - /^feature(-|_).*$/
 jdk:
   - oraclejdk8
 
@@ -19,5 +18,5 @@ addons:
 script: mvn package -DskipTests=true -Dmaven.javadoc.skip=true
 
 after_success:
-  - mvn -s .bin/setting.xml deploy -DskipTests -Dmaven.javadoc.skip=true
+  - mvn -s bin/settings.xml deploy -DskipTests -Dmaven.javadoc.skip=true
   - mvn jacoco:report  sonar:sonar
