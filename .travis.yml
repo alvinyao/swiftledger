@@ -1,9 +1,4 @@
 language: java
-branches:
-  only:
-    - master
-    - /^release.*$/
-    - /^dev.*$/
 
 jdk:
   - oraclejdk8
