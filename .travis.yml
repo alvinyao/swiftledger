@@ -6,6 +6,7 @@ branches:
     - /^release(-|_).*$/
     - /^dev(-|_).*$/
     - /^v(\d+.){1,2}\d+.*$/
+    - /^feature(-|_).*$/
 jdk:
   - oraclejdk8
 
