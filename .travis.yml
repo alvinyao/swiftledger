@@ -1,9 +1,11 @@
 language: java
+
 branches:
   only:
     - master
     - /^release(-|_).*$/
     - /^dev(-|_).*$/
+    - /^v(\d+.){1,2}\d+.*$/
 jdk:
   - oraclejdk8
 
@@ -18,5 +20,5 @@ addons:
 script: mvn package -DskipTests=true -Dmaven.javadoc.skip=true
 
 after_success:
-  - mvn -s bin/settings.xml deploy -DskipTests -Dmaven.javadoc.skip=true
+  - bin/deploy-snapshot.sh
   - mvn jacoco:report  sonar:sonar
