@@ -7,7 +7,7 @@ USE trust;
 CREATE TABLE
 IF NOT EXISTS `currency_info` (
 	`id` BIGINT (20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-	`currency` VARCHAR (24) NOT NULL COMMENT 'currency',
+	`currency` VARCHAR (24) binary NOT NULL COMMENT 'currency',
 	`remark` VARCHAR (64) DEFAULT NULL COMMENT 'remark',
 	`homomorphicPk` TEXT DEFAULT NULL COMMENT 'homomorphicPk',
 	`contract_address` VARCHAR (64) DEFAULT NULL COMMENT 'contract address',

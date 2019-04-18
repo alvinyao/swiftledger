@@ -1,10 +1,13 @@
 language: java
+
 branches:
   only:
     - master
     - /^release(-|_).*$/
     - /^dev(-|_).*$/
+    - /^v(\d+.){1,2}\d+.*$/
     - /^feature(-|_).*$/
+
 jdk:
   - oraclejdk8
 
@@ -16,8 +19,10 @@ addons:
   sonarcloud:
     organization: "aurorasic-github"
 
-script: mvn package -DskipTests=true -Dmaven.javadoc.skip=true
+install: mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+script: skip
 
 after_success:
-  - mvn -s .bin/setting.xml deploy -DskipTests -Dmaven.javadoc.skip=true
+  - bin/deploy-snapshot.sh
   - mvn jacoco:report  sonar:sonar
