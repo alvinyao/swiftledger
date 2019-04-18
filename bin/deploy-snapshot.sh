@@ -6,6 +6,6 @@ if [[ $TRAVIS_BRANCH == master ]] || \
    [[ $TRAVIS_BRANCH == feature* ]] ;
 then
   echo -e "Publishing maven snapshot...\n"
-  mvn -s bin/settings.xml deploy -Dmaven.install.skip=true -Dmaven.javadoc.skip=true -B
+  mvn -s bin/settings.xml deploy -DskipTests -Dmaven.install.skip=true -Dmaven.javadoc.skip=true -B
   echo -e "Published maven snapshot"
 fi
