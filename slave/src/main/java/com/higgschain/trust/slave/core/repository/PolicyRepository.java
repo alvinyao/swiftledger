@@ -111,6 +111,10 @@ import java.util.Map;
         policyPO.setDecisionType(policy.getDecisionType().getCode());
         policyPO.setContractAddr(policy.getContractAddr());
         policyPO.setRsIds(JSON.toJSONString(policy.getRsIds()));
+        policyPO.setVerifyNum(policy.getVerifyNum());
+        if(!CollectionUtils.isEmpty(policy.getMustRsIds())) {
+            policyPO.setMustRsIds(JSON.toJSONString(policy.getMustRsIds()));
+        }
         return policyPO;
     }
 
@@ -130,6 +134,11 @@ import java.util.Map;
             policy.setContractAddr(policyPO.getContractAddr());
             policy.setRsIds(JSON.parseObject(policyPO.getRsIds(), new TypeReference<List<String>>() {
             }));
+            policy.setVerifyNum(policyPO.getVerifyNum());
+            if(!StringUtils.isEmpty(policyPO.getMustRsIds())) {
+                policy.setMustRsIds(JSON.parseObject(policyPO.getMustRsIds(), new TypeReference<List<String>>() {
+                }));
+            }
         } catch (Throwable e) {
             log.error("json object parse exception.", e);
             return null;
@@ -150,6 +159,8 @@ import java.util.Map;
         policy.setDecisionType(action.getDecisionType());
         policy.setContractAddr(action.getContractAddr());
         policy.setRsIds(action.getRsIds());
+        policy.setVerifyNum(action.getVerifyNum());
+        policy.setMustRsIds(action.getMustRsIds());
         return policy;
     }
 

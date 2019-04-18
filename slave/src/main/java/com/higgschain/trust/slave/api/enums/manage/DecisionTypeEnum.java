@@ -7,14 +7,19 @@ package com.higgschain.trust.slave.api.enums.manage;
  * @description
  * @date 2018 -06-06
  */
-public enum DecisionTypeEnum {/**
- * The Full vote.
- */
-FULL_VOTE("FULL_VOTE","require all vote"),
+public enum DecisionTypeEnum {
+    /**
+     *  The Full vote.
+    */
+    FULL_VOTE("FULL_VOTE","require all vote"),
     /**
      * The One vote.
      */
-    ONE_VOTE("ONE_VOTE","just one vote")
+    ONE_VOTE("ONE_VOTE","just one vote"),
+    /**
+     * user assign number
+     */
+    ASSIGN_NUM("ASSIGN_NUM","user assign number")
     ;
     private String code;
     private String desc;

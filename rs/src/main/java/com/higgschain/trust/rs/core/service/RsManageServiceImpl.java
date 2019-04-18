@@ -3,6 +3,7 @@ package com.higgschain.trust.rs.core.service;
 import com.alibaba.fastjson.JSONObject;
 import com.higgschain.trust.common.dao.RocksUtils;
 import com.higgschain.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.rs.common.config.RsConfig;
 import com.higgschain.trust.rs.common.enums.RespCodeEnum;
@@ -20,7 +21,6 @@ import com.higgschain.trust.slave.api.enums.ActionTypeEnum;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.DecisionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
-import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.core.repository.PolicyRepository;
 import com.higgschain.trust.slave.core.repository.RsNodeRepository;
 import com.higgschain.trust.slave.core.repository.ca.CaRepository;
@@ -33,6 +33,7 @@ import com.higgschain.trust.slave.model.bo.manage.RegisterRS;
 import com.higgschain.trust.slave.model.bo.manage.RsNode;
 import com.higgschain.trust.slave.model.enums.biz.RsNodeStatusEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.rocksdb.Transaction;
 import org.rocksdb.WriteOptions;
@@ -44,6 +45,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The type Rs manage service.
@@ -329,6 +331,27 @@ import java.util.List;
             return new RespData(RespCodeEnum.POLICY_ALREADY_EXIST.getRespCode(),
                 RespCodeEnum.POLICY_ALREADY_EXIST.getMsg());
         }
+        DecisionTypeEnum type = DecisionTypeEnum.getBycode(registerPolicyVO.getDecisionType());
+        if(type == null){
+            return new RespData(RespCodeEnum.POLICY_DECISION_TYPE_IS_ERROR.getRespCode(),
+                RespCodeEnum.POLICY_DECISION_TYPE_IS_ERROR.getMsg());
+        }
+        //check for ASSIGN_NUM type
+        if(type == DecisionTypeEnum.ASSIGN_NUM && !CollectionUtils.isEmpty(registerPolicyVO.getMustRsIds())){
+            int size = registerPolicyVO.getMustRsIds().size();
+            int rsSize = registerPolicyVO.getRsIds().size();
+            if(size > rsSize){
+                return new RespData(RespCodeEnum.POLICY_MUST_RS_IS_ERROR.getRespCode(),
+                    RespCodeEnum.POLICY_MUST_RS_IS_ERROR.getMsg());
+            }
+            //check exist
+            List<String> collect = registerPolicyVO.getMustRsIds().stream().filter(a -> registerPolicyVO.getRsIds().contains(a)).collect(Collectors.toList());
+            if (CollectionUtils.isEmpty(collect)) {
+                log.info("[checkPolicy] mustRsIds.item can`t found in rsIds");
+                return new RespData(RespCodeEnum.POLICY_MUST_RS_IS_ERROR.getRespCode(),
+                    RespCodeEnum.POLICY_MUST_RS_IS_ERROR.getMsg());
+            }
+        }
         return null;
     }
 
@@ -340,6 +363,8 @@ import java.util.List;
         registerPolicy.setPolicyName(registerPolicyVO.getPolicyName());
         registerPolicy.setDecisionType(DecisionTypeEnum.getBycode(registerPolicyVO.getDecisionType()));
         registerPolicy.setRsIds(registerPolicyVO.getRsIds());
+        registerPolicy.setVerifyNum(registerPolicyVO.getVerifyNum());
+        registerPolicy.setMustRsIds(registerPolicyVO.getMustRsIds());
         registerPolicy.setType(ActionTypeEnum.REGISTER_POLICY);
         registerPolicy.setIndex(0);
         actions.add(registerPolicy);

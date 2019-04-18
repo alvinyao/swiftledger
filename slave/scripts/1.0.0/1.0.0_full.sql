@@ -217,6 +217,8 @@ IF NOT EXISTS `policy` (
 	`rs_ids` VARCHAR (1024) NOT NULL COMMENT 'the id list create related to rs',
 	`decision_type` VARCHAR (16) NOT NULL COMMENT 'the decision type for vote ,1.FULL_VOTE,2.ONE_VOTE',
 	`contract_addr` VARCHAR (64) DEFAULT NULL COMMENT 'the contract address for vote rule',
+	`verifyNum` int(8) DEFAULT NULL COMMENT 'verifyNum',
+	`mustRsIds` VARCHAR(1024) DEFAULT NULL COMMENT 'mustRsIds',
 	`create_time` datetime (3) NOT NULL COMMENT 'create time',
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `uniq_policy` (`policy_id`)

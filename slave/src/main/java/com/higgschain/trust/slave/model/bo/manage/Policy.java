@@ -32,13 +32,21 @@ import java.util.List;
      */
     private List<String> rsIds;
     /**
-     * the decision type for vote ,1.FULL_VOTE,2.ONE_VOTE
+     * the decision type for vote ,1.FULL_VOTE,2.ONE_VOTE,3.ASSIGN_NUM
      */
     private DecisionTypeEnum decisionType;
     /**
      * the contract address for vote rule
      */
     private String contractAddr;
+    /**
+     * the number to verify
+     */
+    private int verifyNum;
+    /**
+     * rs-ids that must be verified
+     */
+    private List<String> mustRsIds;
 
     @Override public String getUniqKey() {
         return policyId;

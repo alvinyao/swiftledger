@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -56,4 +57,14 @@ public class RegisterPolicyVO extends BaseVO {
      */
     @NotEmpty
     private List<String> rsIds;
+
+    /**
+     * the number to verify
+     */
+    @Min(0)
+    private int verifyNum;
+    /**
+     * rs-ids that must be verified
+     */
+    private List<String> mustRsIds;
 }
