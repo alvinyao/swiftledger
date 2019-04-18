@@ -17,15 +17,22 @@
  */
 package com.higgschain.trust.evmcontract.vm;
 
+import com.google.common.base.Strings;
 import com.higgschain.trust.evmcontract.config.BlockChainConfig;
 import com.higgschain.trust.evmcontract.crypto.ECKey;
 import com.higgschain.trust.evmcontract.crypto.HashUtil;
+import com.higgschain.trust.evmcontract.enums.ExtendsParamTypeEnum;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import static com.higgschain.trust.evmcontract.util.BIUtil.*;
 import static com.higgschain.trust.evmcontract.util.ByteUtil.*;
 
@@ -35,6 +42,7 @@ import static com.higgschain.trust.evmcontract.util.ByteUtil.*;
  * @author Roman Mandeleil
  * @since 09.01.2015
  */
+@Slf4j
 public class PrecompiledContracts {
 
     private static final ECRecover EC_RECOVER = new ECRecover();
@@ -52,7 +60,7 @@ public class PrecompiledContracts {
     private static final DataWord ALT_BN_128_ADD_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000006");
     private static final DataWord ALT_BN_128_MUL_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000007");
     private static final DataWord ALT_BN_128_PAIRING_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000008");
-    private static final DataWord POLICY_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000009");
+    private static final DataWord POLICY_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000099999999");
 
     /**
      * List addresses list.
@@ -129,6 +137,9 @@ public class PrecompiledContracts {
      * The type Precompiled contract.
      */
     public static abstract class PrecompiledContract {
+
+        @Setter
+        private Map<String,Object> extendsParamMap;
         /**
          * Gets gas for data.
          *
@@ -144,6 +155,10 @@ public class PrecompiledContracts {
          * @return the pair
          */
         public abstract Pair<Boolean, byte[]> execute(byte[] data);
+
+        public Map<String,Object> getExtendsParamMap(){
+            return extendsParamMap;
+        }
     }
 
     /**
@@ -414,7 +429,15 @@ public class PrecompiledContracts {
 
         @Override
         public Pair<Boolean, byte[]> execute(byte[] data) {
-            return  Pair.of(true, Hex.decode("1111111111111111111111111111111111111111111111111111111111111111"));
+
+            if(getExtendsParamMap() == null || getExtendsParamMap().get(ExtendsParamTypeEnum.POLICY_ID.getCode()) == null){
+                log.warn("get transaction policyId is null");
+                return  Pair.of(true, Hex.decode(""));
+            }
+
+            String policyId = getExtendsParamMap().get(ExtendsParamTypeEnum.POLICY_ID.getCode()).toString();
+            log.info("get transaction policyId :{}",policyId);
+            return  Pair.of(true, Hex.decode(policyId));
         }
     }
 }

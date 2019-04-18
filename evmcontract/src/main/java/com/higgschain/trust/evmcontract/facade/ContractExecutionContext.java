@@ -7,6 +7,9 @@ import com.higgschain.trust.evmcontract.facade.constant.Constant;
 import lombok.Getter;
 import org.spongycastle.util.encoders.Hex;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Context for contract execution. All fields should be filled when an instance
  * of this class is created. All needed data for executing contract comes from
@@ -139,6 +142,13 @@ public class ContractExecutionContext {
     @Getter
     private SystemProperties systemProperties = SystemProperties.getDefault();
 
+
+    /**
+     * extends params map
+     */
+    @Getter
+    private Map<String,Object> extendsParamMap ;
+
     /**
      * Instantiates a new Contract execution context.
      *
@@ -159,7 +169,7 @@ public class ContractExecutionContext {
     public ContractExecutionContext(ContractTypeEnum contractType, byte[] transactionHash, byte[] nonce,
                                     byte[] senderAddress, byte[] receiverAddress, byte[] value, byte[] data,
                                     byte[] parentHash, byte[] minerAddress, long timestamp, long number,
-                                    BlockStore blockStore, Repository blockRepository) {
+                                    BlockStore blockStore, Repository blockRepository, Map extendsParamMap) {
         this.contractType = contractType;
         this.transactionHash = transactionHash;
         this.nonce = nonce;
@@ -173,6 +183,7 @@ public class ContractExecutionContext {
         this.number = number;
         this.blockStore = blockStore;
         this.blockRepository = blockRepository;
+        this.extendsParamMap = extendsParamMap;
     }
 
     @Override

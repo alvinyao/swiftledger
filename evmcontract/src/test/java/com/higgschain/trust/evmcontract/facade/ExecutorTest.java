@@ -91,7 +91,7 @@ public class ExecutorTest {
             byte[] receiverAddress, byte[] value, byte[] data, byte[] parentHash, byte[] minerAddress,
             long timestamp, long number) {
         return new ContractExecutionContext(contractType, transactionHash, nonce, senderAddress, receiverAddress,
-                value, data, parentHash, minerAddress, timestamp, number, blockStore, blockRepository);
+                value, data, parentHash, minerAddress, timestamp, number, blockStore, blockRepository, null);
     }
 
 

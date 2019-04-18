@@ -87,7 +87,7 @@ public class ContractCreationV2Handler implements ActionHandler {
         byte[] value = new BigInteger("0").toByteArray();
         byte[] data = Hex.decode(creationAction.getCode());
         byte[] parentHash = Hex.decode(parentBlockHash);
-        //TODO tangKun address just for test ? 2018-12-12
+
         byte[] minerAddress = Hex.decode("095e7baea6a6c7c4c2dfeb977efac326af552d87");
         ContractExecutionContext contractExecutionContext = new ContractExecutionContext(
                 ContractTypeEnum.CONTRACT_CREATION,
@@ -102,7 +102,8 @@ public class ContractCreationV2Handler implements ActionHandler {
                 timestamp,
                 number,
                 blockchain.getBlockStore(),
-                blockchain.getRepositorySnapshot()
+                blockchain.getRepositorySnapshot(),
+                null
         );
         Executor<ContractExecutionResult> executor = executorFactory.createExecutor(contractExecutionContext);
         ContractExecutionResult result = executor.execute();

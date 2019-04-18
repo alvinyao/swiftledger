@@ -1,6 +1,7 @@
 package com.higgschain.trust.slave.core.service.action.contract;
 
 import com.higgschain.trust.common.utils.Profiler;
+import com.higgschain.trust.evmcontract.enums.ExtendsParamTypeEnum;
 import com.higgschain.trust.evmcontract.facade.*;
 import com.higgschain.trust.evmcontract.facade.compile.ContractInvocation;
 import com.higgschain.trust.slave.common.enums.SlaveErrorEnum;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The type Contract invoke v 2 handler.
@@ -50,8 +53,12 @@ public class ContractInvokeV2Handler implements ActionHandler {
 
         ContractInvocation contractInvocation = new ContractInvocation();
         byte[] invokeFuncData = contractInvocation.getBytecodeForInvokeContract(invokeAction.getMethodSignature(), invokeAction.getArgs());
-        //TODO tangKun address just for test ? 2018-12-12
+
         byte[] minerAddress = Hex.decode("095e7baea6a6c7c4c2dfeb977efac326af552d87");
+        Map<String,Object> extendsParamMap  = new HashMap(){{
+            put(ExtendsParamTypeEnum.POLICY_ID.getCode(), actionData.getCurrentTransaction().getCoreTx().getPolicyId());
+        }};
+
         ContractExecutionContext contractExecutionContext = buildContractExecutionContext(ContractTypeEnum.CUSTOMER_CONTRACT_INVOCATION,
                 txId.getBytes(),
                 null,
@@ -62,7 +69,8 @@ public class ContractInvokeV2Handler implements ActionHandler {
                 Hex.decode(parentBlockHash),
                 minerAddress,
                 timestamp,
-                blockHeight);
+                blockHeight,
+                extendsParamMap);
 
         ContractExecutorFactory executorFactory = new ContractExecutorFactory();
 
@@ -75,10 +83,10 @@ public class ContractInvokeV2Handler implements ActionHandler {
     private ContractExecutionContext buildContractExecutionContext(
             ContractTypeEnum contractType, byte[] transactionHash, byte[] nonce, byte[] senderAddress,
             byte[] receiverAddress, byte[] value, byte[] data, byte[] parentHash, byte[] minerAddress,
-            long timestamp, long number) {
+            long timestamp, long number, Map<String,Object> extendsParamMap) {
         return new ContractExecutionContext(contractType, transactionHash, nonce, senderAddress, receiverAddress,
                 value, data, parentHash, minerAddress, timestamp, number, blockchain.getBlockStore(),
-                blockchain.getRepositorySnapshot());
+                blockchain.getRepositorySnapshot(), extendsParamMap);
     }
 
     @Override

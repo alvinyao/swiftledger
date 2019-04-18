@@ -1698,7 +1698,6 @@ public class Program {
         }
 
         long requiredGas = contract.getGasForData(data);
-        requiredGas = -10;
         if (requiredGas > msg.getGas().longValue()) {
             //matches cpp logic
             this.refundGas(0, "call pre-compiled");
@@ -1708,7 +1707,7 @@ public class Program {
             if (logger.isDebugEnabled()) {
                 logger.debug("Call {}(data = {})", contract.getClass().getSimpleName(), toHexString(data));
             }
-
+            contract.setExtendsParamMap(transaction.getExtendsParamMap());
             Pair<Boolean, byte[]> out = contract.execute(data);
             // success
             if (out.getLeft()) {

@@ -21,6 +21,8 @@ package com.higgschain.trust.evmcontract.core;
 import com.higgschain.trust.evmcontract.crypto.ECKey;
 import com.higgschain.trust.evmcontract.crypto.HashUtil;
 import com.higgschain.trust.evmcontract.util.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.BigIntegers;
@@ -29,6 +31,7 @@ import org.spongycastle.util.encoders.Hex;
 import java.math.BigInteger;
 import java.security.SignatureException;
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 
@@ -111,6 +114,10 @@ public class Transaction {
     /* Indicates if this transaction has been parsed
      * from the RLP-encoded data */
     protected boolean parsed = false;
+
+    @Setter
+    @Getter
+    Map<String,Object> extendsParamMap;
 
     /**
      * Instantiates a new Transaction.

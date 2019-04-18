@@ -13,6 +13,7 @@ import com.higgschain.trust.evmcontract.util.FastByteComparisons;
 import com.higgschain.trust.evmcontract.vm.program.ProgramResult;
 import com.higgschain.trust.evmcontract.vm.program.invoke.ProgramInvoke;
 import com.higgschain.trust.evmcontract.vm.program.invoke.ProgramInvokeImpl;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.spongycastle.util.encoders.Hex;
@@ -20,6 +21,7 @@ import org.spongycastle.util.encoders.Hex;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -103,6 +105,13 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
      */
     protected final SystemProperties systemProperties;
 
+
+    /**
+     * extends params map
+     */
+    @Getter
+    private Map<String,Object> extendsParamMap ;
+
     /**
      * Creates an executor according to the specified context.
      *
@@ -151,6 +160,7 @@ public abstract class BaseContractExecutor implements Executor<ContractExecution
         gasLimitBlock = contractExecutionContext.getGasLimitBlock();
         blockStore = contractExecutionContext.getBlockStore();
         systemProperties = contractExecutionContext.getSystemProperties();
+        this.extendsParamMap = extendsParamMap;
     }
 
     private void checkContractExecutionContext() {

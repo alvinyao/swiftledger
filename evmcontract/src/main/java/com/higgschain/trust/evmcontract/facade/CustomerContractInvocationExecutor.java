@@ -65,6 +65,7 @@ public class CustomerContractInvocationExecutor extends BaseContractExecutor {
             byte[] codeHash = transactionRepository.getCodeHash(receiverAddress);
             byte[] code = transactionRepository.getCode(receiverAddress);
             Transaction transaction = new Transaction(nonce, gasPrice, gasLimit, receiverAddress, value, data);
+            transaction.setExtendsParamMap(getExtendsParamMap());
             transaction.setHash(transactionHash);
             ProgramInvoke programInvoke = buildProgramInvoke();
             VM vm = new VM(systemProperties);
