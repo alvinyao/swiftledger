@@ -92,6 +92,6 @@ public class ContractQuery {
 
         return new ContractExecutionContext(contractType, transactionHash, nonce, senderAddress, receiverAddress,
                 value, data, parentHash, minerAddress, timestamp, number,
-                blockchain.getBlockStore(), repository);
+                blockchain.getBlockStore(), repository, null);
     }
 }
