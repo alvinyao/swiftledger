@@ -24,14 +24,12 @@ import com.higgschain.trust.evmcontract.crypto.HashUtil;
 import com.higgschain.trust.evmcontract.enums.ExtendsParamTypeEnum;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static com.higgschain.trust.evmcontract.util.BIUtil.*;
 import static com.higgschain.trust.evmcontract.util.ByteUtil.*;
@@ -50,7 +48,7 @@ public class PrecompiledContracts {
     private static final Ripempd160 RIPEMPD_160 = new Ripempd160();
     private static final Identity IDENTITY = new Identity();
     private static final ModExp MOD_EXP = new ModExp();
-    private static final Policy POLICY = new Policy();
+    private static final STACS STACS = new STACS();
 
     private static final DataWord EC_RECOVER_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000001");
     private static final DataWord SHA_256_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000002");
@@ -60,7 +58,7 @@ public class PrecompiledContracts {
     private static final DataWord ALT_BN_128_ADD_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000006");
     private static final DataWord ALT_BN_128_MUL_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000007");
     private static final DataWord ALT_BN_128_PAIRING_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000000000008");
-    private static final DataWord POLICY_ADDR = new DataWord("0000000000000000000000000000000000000000000000000000000099999999");
+    private static final DataWord STACS_ADDR = new DataWord("5354414353000000000000000000000000000000000000000000000000000001");
 
     /**
      * List addresses list.
@@ -78,7 +76,7 @@ public class PrecompiledContracts {
         addressList.add(ALT_BN_128_ADD_ADDR);
         addressList.add(ALT_BN_128_MUL_ADDR);
         addressList.add(ALT_BN_128_PAIRING_ADDR);
-        addressList.add(POLICY_ADDR);
+        addressList.add(STACS_ADDR);
 
         return addressList;
     }
@@ -113,8 +111,8 @@ public class PrecompiledContracts {
             return MOD_EXP;
         }
 
-        if (address.equals(POLICY_ADDR) ) {
-            return POLICY;
+        if (address.equals(STACS_ADDR) ) {
+            return STACS;
         }
 
         return null;
@@ -420,7 +418,7 @@ public class PrecompiledContracts {
         }
     }
 
-    public static class Policy extends PrecompiledContract{
+    public static class STACS extends PrecompiledContract{
 
         @Override
         public long getGasForData(byte[] data) {
@@ -430,12 +428,15 @@ public class PrecompiledContracts {
         @Override
         public Pair<Boolean, byte[]> execute(byte[] data) {
 
-            if(getExtendsParamMap() == null || getExtendsParamMap().get(ExtendsParamTypeEnum.POLICY_ID.getCode()) == null){
-                log.warn("get transaction policyId is null");
+            String hexKey = Hex.toHexString(data);
+            if(StringUtils.isEmpty(hexKey) ||
+                    getExtendsParamMap() == null ||
+                    getExtendsParamMap().get(hexKey) == null){
+                log.warn("get transaction policyId is null hexKey:{}",hexKey);
                 return  Pair.of(true, Hex.decode(""));
             }
 
-            String policyId = getExtendsParamMap().get(ExtendsParamTypeEnum.POLICY_ID.getCode()).toString();
+            String policyId = getExtendsParamMap().get(hexKey).toString();
             log.info("get transaction policyId :{}",policyId);
             return  Pair.of(true, Hex.decode(policyId));
         }

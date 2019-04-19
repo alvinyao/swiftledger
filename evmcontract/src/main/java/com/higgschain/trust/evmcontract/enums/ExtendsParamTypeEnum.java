@@ -10,7 +10,8 @@ import lombok.Setter;
  */
 public enum ExtendsParamTypeEnum {
 
-    POLICY_ID("policy_id","tx policy id");
+    //'policy_id' hex str
+    POLICY_ID("0000000000000000000000000000000000000000000000706f6c6963795f6964","tx policy id");
 
     /**
      * type code
