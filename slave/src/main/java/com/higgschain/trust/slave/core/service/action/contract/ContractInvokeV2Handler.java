@@ -57,6 +57,7 @@ public class ContractInvokeV2Handler implements ActionHandler {
         byte[] minerAddress = Hex.decode("095e7baea6a6c7c4c2dfeb977efac326af552d87");
         Map<String,Object> extendsParamMap  = new HashMap(){{
             put(ExtendsParamTypeEnum.POLICY_ID.getCode(), actionData.getCurrentTransaction().getCoreTx().getPolicyId());
+            put(ExtendsParamTypeEnum.TX_ID.getCode(), txId);
         }};
 
         ContractExecutionContext contractExecutionContext = buildContractExecutionContext(ContractTypeEnum.CUSTOMER_CONTRACT_INVOCATION,

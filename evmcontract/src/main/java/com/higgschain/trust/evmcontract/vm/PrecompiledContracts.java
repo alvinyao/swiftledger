@@ -436,9 +436,9 @@ public class PrecompiledContracts {
                 return  Pair.of(true, Hex.decode(""));
             }
 
-            String policyId = getExtendsParamMap().get(hexKey).toString();
-            log.info("get transaction policyId :{}",policyId);
-            return  Pair.of(true, Hex.decode(policyId));
+            String value = getExtendsParamMap().get(hexKey).toString();
+            log.info("get key :{} value:{}", hexKey, value);
+            return  Pair.of(true, Hex.decode(value));
         }
     }
 }

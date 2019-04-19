@@ -114,7 +114,7 @@ public class AppTest
     public void testHex(){
         System.out.println(Hex.toHexString("STACS".getBytes(Charsets.UTF_8)));
         System.out.println(Hex.toHexString("policy_id".getBytes(Charsets.UTF_8)));
-        String hexStr = Hex.toHexString("policy_id".getBytes(Charsets.UTF_8));
+        String hexStr = Hex.toHexString("tx_id".getBytes(Charsets.UTF_8));
         System.out.println(Strings.padStart(hexStr,64,'0'));
     }
 
