@@ -31,10 +31,12 @@ import com.higgschain.trust.slave.common.exception.SlaveException;
 import com.higgschain.trust.slave.core.repository.RsNodeRepository;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.SignInfo;
+import com.higgschain.trust.slave.model.bo.manage.Policy;
 import com.higgschain.trust.slave.model.bo.manage.RsNode;
 import com.higgschain.trust.slave.model.enums.biz.RsNodeStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.rocksdb.Transaction;
 import org.rocksdb.WriteOptions;
@@ -51,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 /**
  * The type Vote service.
@@ -100,11 +103,11 @@ import java.util.concurrent.Future;
             try {
                 VoteReceipt receipt = future.get();
                 if (receipt == null) {
-                    log.error("[requestVoting]receipt is null {}",receipt);
+                    log.error("[requestVoting]receipt is null {}", receipt);
                     continue;
                 }
                 if (StringUtils.isEmpty(receipt.getTxId()) || StringUtils.isEmpty(receipt.getVoter())) {
-                    log.error("[requestVoting]receipt.txId is null or voter is null {}",receipt);
+                    log.error("[requestVoting]receipt.txId is null or voter is null {}", receipt);
                     continue;
                 }
                 receipts.add(receipt);
@@ -312,8 +315,9 @@ import java.util.concurrent.Future;
         return signInfos;
     }
 
-    @Override public boolean getDecision(List<VoteReceipt> receipts, DecisionTypeEnum decisionType) {
-        if(log.isDebugEnabled()){
+    @Override public boolean getDecision(List<VoteReceipt> receipts, Policy policy) {
+        DecisionTypeEnum decisionType = policy.getDecisionType();
+        if (log.isDebugEnabled()) {
             log.debug("[getDecision]decisionType:{},receipts:{}", decisionType, receipts);
         }
         if (decisionType == DecisionTypeEnum.FULL_VOTE) {
@@ -332,6 +336,34 @@ import java.util.concurrent.Future;
                 }
             }
             return false;
+        } else if (decisionType == DecisionTypeEnum.ASSIGN_NUM) {
+            if (policy.getVerifyNum() == 0) {
+                log.info("[getDecision] verifyNum == 0");
+                return true;
+            }
+            int successCount = 0;
+            List<String> successArr = new ArrayList<>(receipts.size());
+            for (VoteReceipt item : receipts) {
+                if (item.getVoteResult() == VoteResultEnum.AGREE) {
+                    successCount++;
+                    successArr.add(item.getVoter());
+                }
+            }
+            if (successCount < policy.getVerifyNum()) {
+                log.info("[getDecision] successCount:{} is less than verifyNum:{}", successCount,
+                    policy.getVerifyNum());
+                return false;
+            }
+            if (!CollectionUtils.isEmpty(policy.getMustRsIds())) {
+                List<String> collect =
+                    successArr.stream().filter(a -> policy.getMustRsIds().contains(a)).collect(Collectors.toList());
+                if (CollectionUtils.isEmpty(collect) || collect.size() != policy.getMustRsIds().size()) {
+                    log.info("[getDecision] mustRsIds is verify fail successArr:{},mustArr:{},rsIds:{}", successArr,
+                        policy.getMustRsIds(),policy.getRsIds());
+                    return false;
+                }
+            }
+            return true;
         }
         //default
         return false;

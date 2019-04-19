@@ -8,11 +8,13 @@
         <result column="decision_type" property="decisionType"/>
         <result column="contract_addr" property="contractAddr"/>
         <result column="rs_ids" property="rsIds"/>
+        <result column="verifyNum" property="verifyNum"/>
+        <result column="mustRsIds" property="mustRsIds"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
     <!-- policy table all fields -->
     <sql id="baseColumnList">
-		policy_id,policy_name,decision_type,contract_addr,rs_ids,create_time
+		policy_id,policy_name,decision_type,contract_addr,rs_ids,verifyNum,mustRsIds,create_time
 	</sql>
     <!-- 查询条件 -->
     <sql id="baseWhereClause">
@@ -27,6 +29,12 @@
             <if test="rsIds != null and rsIds != ''">
                 and rs_ids=#{rsIds}
             </if>
+            <if test="verifyNum != null and verifyNum != ''">
+                and verifyNum=#{verifyNum}
+            </if>
+            <if test="mustRsIds != null and mustRsIds != ''">
+                and mustRsIds=#{mustRsIds}
+            </if>
             <if test="createTime != null">
                 and create_time=#{createTime}
             </if>
@@ -35,8 +43,8 @@
     <!-- 插入记录 -->
     <insert id="add" parameterType="object">
 		insert into
-		policy(policy_id,policy_name,decision_type,contract_addr,rs_ids,create_time)
-		values(#{policyId},#{policyName},#{decisionType},#{contractAddr},#{rsIds},now(3))
+		policy(policy_id,policy_name,decision_type,contract_addr,rs_ids,verifyNum,mustRsIds,create_time)
+		values(#{policyId},#{policyName},#{decisionType},#{contractAddr},#{rsIds},#{verifyNum},#{mustRsIds},now(3))
 	</insert>
     <!-- 删除记录 -->
     <delete id="delete" parameterType="object">
@@ -68,10 +76,10 @@
 
     <insert id="batchInsert" parameterType="java.util.List">
         insert into
-        policy(policy_id,policy_name,decision_type,contract_addr,rs_ids,create_time)
+        policy(policy_id,policy_name,decision_type,contract_addr,rs_ids,verifyNum,mustRsIds,create_time)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.policyId}, #{item.policyName}, #{item.decisionType},#{item.contractAddr},#{item.rsIds}, now(3))
+            (#{item.policyId}, #{item.policyName}, #{item.decisionType},#{item.contractAddr},#{item.rsIds},#{item.verifyNum},#{item.mustRsIds},now(3))
         </foreach>
     </insert>
 

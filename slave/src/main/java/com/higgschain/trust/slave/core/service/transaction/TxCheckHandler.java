@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * The type Tx check handler.
@@ -51,9 +52,10 @@ import java.util.*;
             //get policy
             InitPolicyEnum policyEnum = InitPolicyEnum.getInitPolicyEnumByPolicyId(ctx.getPolicyId());
             List<RsPubKey> rsPubKeyList = null;
+            Policy policy = null;
             DecisionTypeEnum decisionType;
             if (policyEnum == null) {
-                Policy policy = policyRepository.getPolicyById(ctx.getPolicyId());
+                policy = policyRepository.getPolicyById(ctx.getPolicyId());
                 if (policy == null || CollectionUtils.isEmpty(policy.getRsIds())) {
                     log.error("acquire policy failed. policyId={}", ctx.getPolicyId());
                     return false;
@@ -77,12 +79,12 @@ import java.util.*;
                 //verify self sign
                 boolean r = signVerify(action.getSignValue(), signInfo, action.getPubKey());
                 if (!r) {
-                    log.error("verify node action sign has error, signValue:{},signInfo:{},pubKey:{}", action.getSignValue(),
-                        signInfo, action.getPubKey());
+                    log.error("verify node action sign has error, signValue:{},signInfo:{},pubKey:{}",
+                        action.getSignValue(), signInfo, action.getPubKey());
                     return false;
                 }
                 //reset pubkey by all 'CONSENSUS' from cluster
-                if(rsPubKeyList!=null){
+                if (rsPubKeyList != null) {
                     rsPubKeyList.clear();
                 }
                 rsPubKeyList = caRepository.getAllPubkeyByUsage(UsageEnum.CONSENSUS);
@@ -92,7 +94,7 @@ import java.util.*;
                 return true;
             }
             Profiler.enter("[doVerifySign]");
-            return verifyRsSign(ctx, signedTransaction.getSignatureList(), rsPubKeyList, decisionType);
+            return verifyRsSign(ctx, signedTransaction.getSignatureList(), rsPubKeyList, decisionType, policy);
         } catch (Throwable e) {
             log.error("verify signatures exception. ", e);
             return false;
@@ -137,10 +139,11 @@ import java.util.*;
      * @param signatureList
      * @param rsPubKeyList
      * @param decisionType
+     * @param policy
      * @return
      */
     private boolean verifyRsSign(CoreTransaction ctx, List<SignInfo> signatureList, List<RsPubKey> rsPubKeyList,
-        DecisionTypeEnum decisionType) {
+        DecisionTypeEnum decisionType, Policy policy) {
         boolean flag = false;
         try {
             String signValue = JSON.toJSONString(ctx);
@@ -169,6 +172,39 @@ import java.util.*;
                     }
                 }
                 flag = false;
+            } else if (DecisionTypeEnum.ASSIGN_NUM == decisionType) {
+                if (policy == null) {
+                    log.error("[TxCheckHandler] policy is null");
+                    return false;
+                }
+                if (policy.getVerifyNum() == 0) {
+                    log.info("[TxCheckHandler] verifyNum == 0 policyId:{}", policy.getPolicyId());
+                    return true;
+                }
+                int successCount = 0;
+                List<String> successArr = new ArrayList<>(rsPubKeyList.size());
+                for (RsPubKey rsPubKey : rsPubKeyList) {
+                    if (null != rsPubKey && signVerify(signValue, signedMap.get(rsPubKey.getRsId()),
+                        rsPubKey.getPubKey())) {
+                        successCount++;
+                        successArr.add(rsPubKey.getRsId());
+                    }
+                }
+                if (successCount < policy.getVerifyNum()) {
+                    log.info("[TxCheckHandler] successCount:{} is less than verifyNum:{} policyId:{}", successCount,
+                        policy.getVerifyNum(), policy.getPolicyId());
+                    return false;
+                }
+                if (!CollectionUtils.isEmpty(policy.getMustRsIds())) {
+                    List<String> collect =
+                        successArr.stream().filter(a -> policy.getMustRsIds().contains(a)).collect(Collectors.toList());
+                    if (CollectionUtils.isEmpty(collect) || collect.size() != policy.getMustRsIds().size()) {
+                        log.info("[TxCheckHandler] mustRsIds is verify fail successArr:{},mustArr:{},rsIds:{}",
+                            successArr, policy.getMustRsIds(), policy.getRsIds());
+                        return false;
+                    }
+                }
+                return true;
             }
         } catch (Throwable e) {
             log.error("verify signature exception. ", e);

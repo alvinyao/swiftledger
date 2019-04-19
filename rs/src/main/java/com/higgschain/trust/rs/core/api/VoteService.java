@@ -9,6 +9,7 @@ import com.higgschain.trust.slave.api.enums.manage.DecisionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.VotePatternEnum;
 import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.model.bo.SignInfo;
+import com.higgschain.trust.slave.model.bo.manage.Policy;
 
 import java.util.List;
 
@@ -76,10 +77,10 @@ public interface VoteService {
      * get decision from receipts
      *
      * @param receipts     the receipts
-     * @param decisionType the decision type
+     * @param policy      the policy
      * @return decision
      */
-    boolean getDecision(List<VoteReceipt> receipts, DecisionTypeEnum decisionType);
+    boolean getDecision(List<VoteReceipt> receipts, Policy policy);
 
     /**
      * query all request for init result

@@ -98,6 +98,14 @@ public enum RespCodeEnum {
      * Request duplicate resp code enum.
      */
     REQUEST_DUPLICATE("100", "030", "请求重复"),
+    /**
+     * Policy decision type is error
+     */
+    POLICY_DECISION_TYPE_IS_ERROR("100", "031", "policy决议类型错误"),
+    /**
+     * policy must rs is error
+     */
+    POLICY_MUST_RS_IS_ERROR("100", "032", "policy必须验证的RS数据错误"),
 
     /**
      * Bill holder not existed resp code enum.
