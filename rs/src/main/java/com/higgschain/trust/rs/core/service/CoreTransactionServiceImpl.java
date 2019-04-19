@@ -395,7 +395,7 @@ public class CoreTransactionServiceImpl implements CoreTransactionService, Initi
                 receipts.addAll(lastReceipts);
             }
             //get decision result from receipts
-            boolean decision = voteService.getDecision(receipts, policy.getDecisionType());
+            boolean decision = voteService.getDecision(receipts, policy);
             log.debug("[processInitTx]decision:{}", decision);
             if (!decision) {
                 toEndOrCallBackByError(bo, CoreTxStatusEnum.INIT, RsCoreErrorEnum.RS_CORE_VOTE_DECISION_FAIL, true);
@@ -525,7 +525,7 @@ public class CoreTransactionServiceImpl implements CoreTransactionService, Initi
             return;
         }
         //get decision result
-        boolean decision = voteService.getDecision(receipts, policy.getDecisionType());
+        boolean decision = voteService.getDecision(receipts, policy);
         log.info("[processNeedVoteTx]decision:{}", decision);
         if (!decision) {
             toEndOrCallBackByError(bo, CoreTxStatusEnum.NEED_VOTE, RsCoreErrorEnum.RS_CORE_VOTE_DECISION_FAIL, true);
