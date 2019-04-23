@@ -247,6 +247,7 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     public String buildContractCode(String sourceCode, String contractor,String policyId, Object... contractInitArgs) {
         try {
             if(!StringUtils.isEmpty(policyId) && contractInitArgs != null){
+                //TODO:需要转换为bytes32类型
                 contractInitArgs[contractInitArgs.length] = policyId;
             }
             SolidityCompiler.Result res =
