@@ -68,7 +68,7 @@ import java.util.concurrent.TimeUnit;
                     return "-1";
                 }
             });
-            if (value == null || StringUtils.equals("-1", String.valueOf(null))) {
+            if (value == null || StringUtils.equals("-1", String.valueOf(value))) {
                 return null;
             }
             return (T)value;

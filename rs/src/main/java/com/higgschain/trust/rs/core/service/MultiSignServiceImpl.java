@@ -110,7 +110,7 @@ import java.util.stream.Collectors;
         log.info("createAddress contract code is:{}", contractHexCode);
         //build contract code
         contractHexCode = coreTransactionConvertor
-            .buildContractCode(contractHexCode, MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME, rule.getAddrs(),
+            .buildContractCode(contractHexCode, MULTI_SIGN_CONTRACT_CONSTRUCTOR_NAME,null,rule.getAddrs(),
                 rule.getVerifyNum(), rule.getMustAddrs());
         //create contract address
         String contractAddress = Hex.toHexString(new ECKey().getAddress());

@@ -23,6 +23,7 @@ import com.higgschain.trust.slave.model.bo.utxo.TxIn;
 import com.higgschain.trust.slave.model.bo.utxo.TxOut;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.spongycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -221,13 +222,14 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
      *
      * @param in               the in
      * @param contractor       the contractor
+     * @param policyId       the policyId
      * @param contractInitArgs the contract init args
      * @return the string
      */
-    public String buildContractCode(InputStream in, String contractor, Object... contractInitArgs) {
+    public String buildContractCode(InputStream in, String contractor,String policyId, Object... contractInitArgs) {
         try {
             String sourceCode = IOUtils.toString(in, Charsets.UTF_8);
-            return buildContractCode(sourceCode, contractor, contractInitArgs);
+            return buildContractCode(sourceCode, contractor,policyId, contractInitArgs);
         } catch (IOException e) {
             throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CONTRACT_READ_ERROR, e);
         }
@@ -238,11 +240,16 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
      *
      * @param sourceCode       the source code
      * @param contractor       the contractor
+     * @param policyId         the policyId
      * @param contractInitArgs the contract init args
      * @return the string
      */
-    public String buildContractCode(String sourceCode, String contractor, Object... contractInitArgs) {
+    public String buildContractCode(String sourceCode, String contractor,String policyId, Object... contractInitArgs) {
         try {
+            if(!StringUtils.isEmpty(policyId) && contractInitArgs != null){
+                //TODO:需要转换为bytes32类型
+                contractInitArgs[contractInitArgs.length] = policyId;
+            }
             SolidityCompiler.Result res =
                 SolidityCompiler.compile(sourceCode.getBytes(), true, ABI, BIN, INTERFACE, METADATA);
             CompilationResult result = CompilationResult.parse(res.output);

@@ -84,7 +84,7 @@ import java.util.List;
 
     private CoreTransaction buildCreateContractCoreTx(ContractCreateV2Request request) {
         String hexCode =
-            convertor.buildContractCode(request.getSourceCode(), request.getContractor(), request.getInitArgs());
+            convertor.buildContractCode(request.getSourceCode(), request.getContractor(), null,request.getInitArgs());
         ContractCreationV2Action createAction =
             convertor.buildContractCreationV2Action(request.getFromAddr(), request.getContractAddress(), hexCode, 0);
         return convertor.buildCoreTransaction(request.getTxId(), null, Collections.singletonList(createAction),
