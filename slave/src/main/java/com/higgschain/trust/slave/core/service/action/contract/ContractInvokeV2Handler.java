@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class ContractInvokeV2Handler implements ActionHandler {
     @Autowired
     private Blockchain blockchain;
 
-    private void processCustomerContractInvocation(ActionData actionData) {
+    private void processCustomerContractInvocation(ActionData actionData)  {
         if (!(actionData.getCurrentAction() instanceof ContractInvokeV2Action)) {
             throw new IllegalArgumentException("action need a type of ContractInvokeV2Action");
         }
@@ -55,8 +56,13 @@ public class ContractInvokeV2Handler implements ActionHandler {
         byte[] invokeFuncData = contractInvocation.getBytecodeForInvokeContract(invokeAction.getMethodSignature(), invokeAction.getArgs());
 
         byte[] minerAddress = Hex.decode("095e7baea6a6c7c4c2dfeb977efac326af552d87");
+       final String policyId =  actionData.getCurrentTransaction().getCoreTx().getPolicyId();
         Map<String,Object> extendsParamMap  = new HashMap(){{
-            put(ExtendsParamTypeEnum.POLICY_ID.getCode(), actionData.getCurrentTransaction().getCoreTx().getPolicyId());
+            try {
+                put(ExtendsParamTypeEnum.POLICY_ID.getCode(), Hex.toHexString(policyId.getBytes("UTF-8")));
+            } catch (UnsupportedEncodingException e) {
+                log.error("failed to convert hex policy id :{}",policyId);
+            }
             put(ExtendsParamTypeEnum.TX_ID.getCode(), txId);
         }};
 

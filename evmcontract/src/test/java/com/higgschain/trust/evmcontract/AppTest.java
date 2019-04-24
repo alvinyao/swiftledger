@@ -3,9 +3,11 @@ package com.higgschain.trust.evmcontract;
 import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.junit.Assert;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,11 +113,15 @@ public class AppTest
     }
 
     @Test
-    public void testHex(){
+    public void testHex() throws UnsupportedEncodingException {
         System.out.println(Hex.toHexString("STACS".getBytes(Charsets.UTF_8)));
         System.out.println(Hex.toHexString("policy_id".getBytes(Charsets.UTF_8)));
         String hexStr = Hex.toHexString("tx_id".getBytes(Charsets.UTF_8));
         System.out.println(Strings.padStart(hexStr,64,'0'));
+
+
+        String str = "0000000000000000000000000000000000000000000000706f6c6963795f6964";
+        Assert.assertEquals(str, Hex.toHexString(str.getBytes("UTF-8")));
     }
 
 }

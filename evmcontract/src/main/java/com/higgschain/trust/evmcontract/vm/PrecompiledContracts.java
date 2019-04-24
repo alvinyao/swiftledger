@@ -61,6 +61,11 @@ public class PrecompiledContracts {
     private static final DataWord STACS_ADDR = new DataWord("5354414353000000000000000000000000000000000000000000000000000001");
 
     /**
+     * length of hex
+     */
+    public static final int HEX_LENGTH_OF_DATA_WORD = 64;
+
+    /**
      * List addresses list.
      *
      * @return the list
@@ -437,6 +442,14 @@ public class PrecompiledContracts {
             }
 
             String value = getExtendsParamMap().get(hexKey).toString();
+
+            if(value.length() < HEX_LENGTH_OF_DATA_WORD){
+                value = Strings.padStart(value, HEX_LENGTH_OF_DATA_WORD,'0');
+            }else  if( value.length() % HEX_LENGTH_OF_DATA_WORD != 0){
+                value = Strings.padStart(value, value.length()
+                        + (HEX_LENGTH_OF_DATA_WORD - (value.length() % HEX_LENGTH_OF_DATA_WORD)),'0');
+            }
+
             log.info("get key :{} value:{}", hexKey, value);
             return  Pair.of(true, Hex.decode(value));
         }
