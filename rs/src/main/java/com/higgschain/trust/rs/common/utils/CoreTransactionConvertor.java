@@ -2,6 +2,7 @@ package com.higgschain.trust.rs.common.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Charsets;
+import com.google.common.base.Strings;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.evmcontract.solidity.Abi;
 import com.higgschain.trust.evmcontract.solidity.compiler.CompilationResult;
@@ -248,14 +249,11 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     public String buildContractCode(String sourceCode, String contractor,String policyId, Object... contractInitArgs) {
         try {
             if(!StringUtils.isEmpty(policyId) && contractInitArgs != null){
-                byte[] bytes= Hex.encode(policyId.getBytes(StandardCharsets.UTF_8));
-                byte[] policyIdBytes32 = null;
-                int len = 32 - bytes.length;
-                if (len>0){
-                    policyIdBytes32 = new byte[32];
-                    System.arraycopy(bytes,0,policyIdBytes32,len,bytes.length);
+                String policyIdHexString = Hex.toHexString(policyId.getBytes(StandardCharsets.UTF_8));
+                if (policyIdHexString.length() < 64) {
+                    policyIdHexString = Strings.padStart(policyIdHexString, 64, '0');
                 }
-//                Hex.toHexString(policyIdBytes32);
+                byte[] policyIdBytes32 = Hex.decode(policyIdHexString);
                 contractInitArgs[contractInitArgs.length] = policyIdBytes32;
             }
             SolidityCompiler.Result res =
