@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompiler.Options.*;
@@ -247,8 +248,15 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
     public String buildContractCode(String sourceCode, String contractor,String policyId, Object... contractInitArgs) {
         try {
             if(!StringUtils.isEmpty(policyId) && contractInitArgs != null){
-                //TODO:需要转换为bytes32类型
-                contractInitArgs[contractInitArgs.length] = policyId;
+                byte[] bytes= Hex.encode(policyId.getBytes(StandardCharsets.UTF_8));
+                byte[] policyIdBytes32 = null;
+                int len = 32 - bytes.length;
+                if (len>0){
+                    policyIdBytes32 = new byte[32];
+                    System.arraycopy(bytes,0,policyIdBytes32,len,bytes.length);
+                }
+//                Hex.toHexString(policyIdBytes32);
+                contractInitArgs[contractInitArgs.length] = policyIdBytes32;
             }
             SolidityCompiler.Result res =
                 SolidityCompiler.compile(sourceCode.getBytes(), true, ABI, BIN, INTERFACE, METADATA);
