@@ -253,8 +253,7 @@ import static com.higgschain.trust.evmcontract.solidity.compiler.SolidityCompile
                 if (policyIdHexString.length() < 64) {
                     policyIdHexString = Strings.padStart(policyIdHexString, 64, '0');
                 }
-                byte[] policyIdBytes32 = Hex.decode(policyIdHexString);
-                contractInitArgs[contractInitArgs.length] = policyIdBytes32;
+                contractInitArgs[contractInitArgs.length] = policyIdHexString;
             }
             SolidityCompiler.Result res =
                 SolidityCompiler.compile(sourceCode.getBytes(), true, ABI, BIN, INTERFACE, METADATA);
