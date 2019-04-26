@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Aurorasic/swiftledger.svg?branch=master)](https://travis-ci.org/Aurorasic/swiftledger)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.higgschain.trust%3Aparent&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.higgschain.trust%3Aparent)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Aurorasic_swiftledger&metric=alert_status)](https://sonarcloud.io/dashboard?id=Aurorasic_swiftledger)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.higgschain.trust/parent/badge.svg?cache=foo)](https://search.maven.org/search?q=g:%22com.higgschain.trust%22%20AND%20a:%22parent%22)
 # 欢迎来到 SWIFTLEDGER
 
