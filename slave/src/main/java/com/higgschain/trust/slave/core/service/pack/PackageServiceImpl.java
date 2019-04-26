@@ -480,7 +480,6 @@ import java.util.stream.Collectors;
                         RocksUtils.txCommit(tx);
                     } finally {
                         ThreadLocalUtils.clearRocksTx();
-                        ;
                     }
                 }
             } catch (SlaveException e) {
