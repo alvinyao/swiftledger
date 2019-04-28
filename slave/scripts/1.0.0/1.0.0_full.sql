@@ -117,7 +117,7 @@ CREATE TABLE
 IF NOT EXISTS `pending_transaction` (
 	`id` BIGINT (20) NOT NULL AUTO_INCREMENT COMMENT 'id',
 	`tx_id` VARCHAR (64) NOT NULL COMMENT 'transaction id',
-	`tx_data` TEXT NOT NULL COMMENT 'transaction data',
+	`tx_data` MEDIUMTEXT NOT NULL COMMENT 'transaction data',
 	`status` VARCHAR (32) NOT NULL COMMENT 'transaction handle status',
 	`height` BIGINT (20) DEFAULT NULL COMMENT 'block height',
 	`create_time` datetime (3) NOT NULL COMMENT 'create time',
