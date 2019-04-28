@@ -4,6 +4,7 @@ import com.higgschain.trust.common.dao.RocksUtils;
 import com.higgschain.trust.common.enums.MonitorTargetEnum;
 import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgschain.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.config.view.IClusterViewService;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.management.exception.FailoverExecption;
@@ -16,7 +17,6 @@ import com.higgschain.trust.slave.common.exception.SlaveException;
 import com.higgschain.trust.slave.core.repository.BlockRepository;
 import com.higgschain.trust.slave.core.repository.PackageRepository;
 import com.higgschain.trust.slave.core.service.block.BlockService;
-import com.higgschain.trust.slave.core.service.consensus.view.ClusterViewService;
 import com.higgschain.trust.slave.core.service.pack.PackageProcess;
 import com.higgschain.trust.slave.core.service.pack.PackageService;
 import com.higgschain.trust.slave.model.bo.Block;
@@ -54,7 +54,7 @@ public class FailoverSchedule {
     @Autowired private InitConfig initConfig;
     @Autowired private PackageProcess packageProcess;
     @Autowired private SyncService syncService;
-    @Autowired private ClusterViewService clusterViewService;
+    @Autowired private IClusterViewService clusterViewService;
 
     /**
      * 自动failover，判断状态是否为NodeStateEnum.Running

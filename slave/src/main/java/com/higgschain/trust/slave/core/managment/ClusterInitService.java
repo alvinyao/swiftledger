@@ -2,6 +2,7 @@ package com.higgschain.trust.slave.core.managment;
 
 import com.higgschain.trust.common.dao.RocksUtils;
 import com.higgschain.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.config.view.IClusterViewService;
 import com.higgschain.trust.consensus.config.NodeProperties;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
@@ -13,7 +14,6 @@ import com.higgschain.trust.slave.common.config.InitConfig;
 import com.higgschain.trust.slave.core.repository.BlockRepository;
 import com.higgschain.trust.slave.core.repository.config.ConfigRepository;
 import com.higgschain.trust.slave.core.service.ca.CaInitService;
-import com.higgschain.trust.slave.core.service.consensus.view.ClusterViewService;
 import com.higgschain.trust.slave.model.bo.config.Config;
 import com.higgschain.trust.slave.model.enums.UsageEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +38,7 @@ import java.util.List;
  * @desc cluster init service
  * @date 2018 /6/28 19:53
  */
-@StateListener
-@Service @Slf4j public class ClusterInitService {
+@StateListener @Service @Slf4j public class ClusterInitService {
 
     @Autowired private BlockRepository blockRepository;
 
@@ -51,38 +50,32 @@ import java.util.List;
 
     @Autowired private TransactionTemplate txRequired;
 
-    @Autowired private ClusterViewService clusterViewService;
+    @Autowired private IClusterViewService clusterViewService;
 
     @Autowired private InitConfig initConfig;
 
-    @Autowired
-    private NodeProperties nodeProperties;
-    @Autowired
-    private NetworkManage networkManage;
+    @Autowired private NodeProperties nodeProperties;
+    @Autowired private NetworkManage networkManage;
 
     /**
      * The Pub key for biz.
      */
-    @Value("${higgs.trust.keys.bizPublicKey}")
-    String pubKeyForBiz;
+    @Value("${higgs.trust.keys.bizPublicKey}") String pubKeyForBiz;
 
     /**
      * The Pri key for biz.
      */
-    @Value("${higgs.trust.keys.bizPrivateKey}")
-    String priKeyForBiz;
+    @Value("${higgs.trust.keys.bizPrivateKey}") String priKeyForBiz;
 
     /**
      * The Pub key for consensus.
      */
-    @Value("${higgs.trust.keys.consensusPublicKey}")
-    String pubKeyForConsensus;
+    @Value("${higgs.trust.keys.consensusPublicKey}") String pubKeyForConsensus;
 
     /**
      * The Pri key for consensus.
      */
-    @Value("${higgs.trust.keys.consensusPrivateKey}")
-    String priKeyForConsensus;
+    @Value("${higgs.trust.keys.consensusPrivateKey}") String priKeyForConsensus;
 
     /**
      * Init.
@@ -90,8 +83,7 @@ import java.util.List;
      * @throws IOException          the io exception
      * @throws InterruptedException the interrupted exception
      */
-    @StateChangeListener(value = NodeStateEnum.Initialize, before = true)
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @StateChangeListener(value = NodeStateEnum.Initialize, before = true) @Order(Ordered.HIGHEST_PRECEDENCE)
     public void init() throws IOException, InterruptedException {
         if (needInit()) {
             // 1、生成公私钥,存入db
@@ -104,7 +96,8 @@ import java.util.List;
         Config config = configRepository.getBizConfig(nodeState.getNodeName());
         nodeState.setPrivateKey(null != config ? config.getPriKey() : null);
 
-        List<Config> configList = configRepository.getConfig(new Config(nodeState.getNodeName(), UsageEnum.CONSENSUS.getCode()));
+        List<Config> configList =
+            configRepository.getConfig(new Config(nodeState.getNodeName(), UsageEnum.CONSENSUS.getCode()));
         nodeState.setConsensusPrivateKey(null != configList ? configList.get(0).getPriKey() : null);
 
         //if the node is slave need to do it
@@ -122,7 +115,7 @@ import java.util.List;
      */
     private void initClusterViewFromCluster() throws InterruptedException {
         if (!nodeProperties.isStandby() || !nodeProperties.isSlave()) {
-           return;
+            return;
         }
         boolean retry = false;
         int i = 1;
@@ -134,12 +127,12 @@ import java.util.List;
                 retry = true;
                 Thread.sleep(1000);
             }
-        } while (retry && ++i< 20);
+        } while (retry && ++i < 20);
     }
 
     private boolean needInit() {
         //when it is RS node and  use rocks DB，need to generateKeyPair
-        if (initConfig.isUseMySQL() && !nodeProperties.isSlave() ){
+        if (initConfig.isUseMySQL() && !nodeProperties.isSlave()) {
             return false;
         }
         // 1、 本地没有创世块，集群也没有创世块时（即集群初始启动），需要生成公私钥，以及创世块
@@ -161,8 +154,7 @@ import java.util.List;
         }
         if (initConfig.isUseMySQL()) {
             txRequired.execute(new TransactionCallbackWithoutResult() {
-                @Override
-                protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                @Override protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
                     // load keyPair for cluster from json file
                     saveConfig(pubKeyForBiz, priKeyForBiz, UsageEnum.BIZ);
                     saveConfig(pubKeyForConsensus, priKeyForConsensus, UsageEnum.CONSENSUS);

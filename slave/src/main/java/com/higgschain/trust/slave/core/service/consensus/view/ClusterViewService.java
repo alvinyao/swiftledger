@@ -6,6 +6,7 @@ package com.higgschain.trust.slave.core.service.consensus.view;
 import com.higgschain.trust.config.crypto.CryptoUtil;
 import com.higgschain.trust.config.view.ClusterView;
 import com.higgschain.trust.config.view.IClusterViewManager;
+import com.higgschain.trust.config.view.IClusterViewService;
 import com.higgschain.trust.config.view.LastPackage;
 import com.higgschain.trust.consensus.config.NodeProperties;
 import com.higgschain.trust.consensus.config.NodeState;
@@ -36,7 +37,7 @@ import java.util.Map;
  * @author suimi
  * @date 2018 /6/19
  */
-@Slf4j @Service public class ClusterViewService {
+@Slf4j @Service public class ClusterViewService implements IClusterViewService {
 
     private static final String DEFAULT_CLUSTER_INFO_ID = "cluster_info_id";
 
@@ -61,7 +62,7 @@ import java.util.Map;
      *
      * @param useCurrentHeight the use current height
      */
-    public void initClusterViewFromDB(boolean useCurrentHeight) {
+    @Override public void initClusterViewFromDB(boolean useCurrentHeight) {
         //RS node do not to initClusterView
         if (!nodeProperties.isSlave()) {
             return;
@@ -78,7 +79,7 @@ import java.util.Map;
             Collections.singletonList(new ClusterView(0, useCurrentHeight ? height + 1 : 2, consensusNodeMap)));
 
         //reset the last package time
-        if (maxBlockHeight > height) {
+        if (maxBlockHeight < height) {
             Package pack = packageRepository.load(height);
             viewManager.resetLastPackage(new LastPackage(pack.getHeight(), pack.getPackageTime()));
         } else {
@@ -90,7 +91,7 @@ import java.util.Map;
     /**
      * get the cluster info through consensus, if timeout, null will be return
      */
-    public void initClusterViewFromCluster() {
+    @Override public void initClusterViewFromCluster() {
         log.info("init clusterInfo by cluster");
         initClusterViewFromAnyNode();
         ResponseCommand<?> responseCommand = null;

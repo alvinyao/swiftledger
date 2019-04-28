@@ -26,6 +26,17 @@ public interface INodeInfoService {
     Long blockHeight();
 
     /**
+     * get the max height
+     *
+     * @return the max height
+     */
+    default long getMaxHeight() {
+        Long packageHeight = packageHeight();
+        Long blockHeight = blockHeight();
+        return Math.max(packageHeight == null ? 0 : packageHeight, blockHeight == null ? 0 : blockHeight);
+    }
+
+    /**
      * is the current node  qualified for master
      *
      * @return boolean

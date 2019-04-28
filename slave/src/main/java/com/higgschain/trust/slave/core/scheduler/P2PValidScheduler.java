@@ -44,7 +44,7 @@ public class P2PValidScheduler {
 
     @Autowired private IClusterService clusterService;
 
-    private BlockService blockService;
+    @Autowired private BlockService blockService;
 
     @Value("${p2p.valid.limit:1000}") private int validLimit;
     @Value("${p2p.valid.p2pRetryNum:3}") private int p2pRetryNum;
