@@ -4,9 +4,9 @@
 package com.higgschain.trust.slave.core.service.consensus.cluster;
 
 import com.higgschain.trust.common.constant.Constant;
-import com.higgschain.trust.config.crypto.CryptoUtil;
-import com.higgschain.trust.config.view.ClusterView;
-import com.higgschain.trust.config.view.IClusterViewManager;
+import com.higgschain.trust.consensus.util.CryptoUtil;
+import com.higgschain.trust.consensus.view.ClusterView;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.consensus.p2pvalid.api.P2pConsensusClient;

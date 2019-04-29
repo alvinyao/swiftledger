@@ -48,7 +48,6 @@
         <module>contract</module>
         <module>evmcontract</module>
         <module>tester</module>
-        <module>config</module>
         <module>management</module>
         <module>network</module>
         <module>zkproof</module>
@@ -117,6 +116,16 @@
             </dependency>
             <dependency>
                 <groupId>com.higgschain.trust</groupId>
+                <artifactId>consensus-p2pvalid</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.higgschain.trust</groupId>
+                <artifactId>consensus-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus-smart</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -128,31 +137,6 @@
             <dependency>
                 <groupId>com.higgschain.trust</groupId>
                 <artifactId>consensus-atomix</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.higgschain.trust</groupId>
-                <artifactId>consensus-p2pvalid</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.higgschain.trust</groupId>
-                <artifactId>config</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.higgschain.trust</groupId>
-                <artifactId>config-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.higgschain.trust</groupId>
-                <artifactId>config-properties</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.higgschain.trust</groupId>
-                <artifactId>config-super</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

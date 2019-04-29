@@ -3,7 +3,7 @@ package com.higgschain.trust.rs.core.service;
 import com.higgschain.trust.common.crypto.Crypto;
 import com.higgschain.trust.common.crypto.KeyPair;
 import com.higgschain.trust.common.utils.HashUtil;
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.rs.common.enums.RespCodeEnum;

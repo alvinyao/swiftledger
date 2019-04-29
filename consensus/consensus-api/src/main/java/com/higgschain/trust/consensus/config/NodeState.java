@@ -1,9 +1,9 @@
 package com.higgschain.trust.consensus.config;
 
-import com.higgschain.trust.consensus.config.listener.MasterChangeListener;
-import com.higgschain.trust.consensus.config.listener.StateChangeListener;
-import com.higgschain.trust.consensus.config.listener.StateChangeListenerAdaptor;
-import com.higgschain.trust.consensus.config.listener.StateListener;
+import com.higgschain.trust.consensus.listener.MasterChangeListener;
+import com.higgschain.trust.consensus.listener.StateChangeListener;
+import com.higgschain.trust.consensus.listener.StateChangeListenerAdaptor;
+import com.higgschain.trust.consensus.listener.StateListener;
 import com.higgschain.trust.consensus.exception.ConsensusError;
 import com.higgschain.trust.consensus.exception.ConsensusException;
 import lombok.Getter;

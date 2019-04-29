@@ -3,7 +3,7 @@ package com.higgschain.trust.slave.core.managment.master;
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import com.higgschain.trust.common.constant.Constant;
 import com.higgschain.trust.consensus.config.NodeState;
-import com.higgschain.trust.consensus.config.listener.MasterChangeListener;
+import com.higgschain.trust.consensus.listener.MasterChangeListener;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.core.repository.BlockRepository;
 import com.higgschain.trust.slave.core.repository.PackageRepository;

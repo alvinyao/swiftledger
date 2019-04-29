@@ -1,11 +1,12 @@
 package com.higgschain.trust.consensus.p2pvalid.core.storage;
 
-import com.higgschain.trust.config.crypto.CryptoUtil;
-import com.higgschain.trust.config.view.ClusterView;
+
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.p2pvalid.core.ResponseCommand;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommand;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommandWrap;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidResponseWrap;
+import com.higgschain.trust.consensus.view.ClusterView;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

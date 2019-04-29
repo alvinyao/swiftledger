@@ -1,6 +1,6 @@
 package com.higgschain.trust.slave.integration.block;
 
-import com.higgschain.trust.config.view.IClusterViewManager;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import com.higgschain.trust.network.HttpClient;
 import com.higgschain.trust.network.NetworkManage;
 import com.higgschain.trust.common.vo.RespData;

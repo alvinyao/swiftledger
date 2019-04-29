@@ -1,6 +1,6 @@
 package com.higgschain.trust.consensus.core;
 
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
 
 import java.util.concurrent.CompletableFuture;
 

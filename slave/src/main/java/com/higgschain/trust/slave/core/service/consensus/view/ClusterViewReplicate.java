@@ -8,8 +8,8 @@ package com.higgschain.trust.slave.core.service.consensus.view;
  * @date 2018/6/11
  */
 
-import com.higgschain.trust.config.view.ClusterView;
-import com.higgschain.trust.config.view.IClusterViewManager;
+import com.higgschain.trust.consensus.view.ClusterView;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import com.higgschain.trust.consensus.p2pvalid.annotation.P2pvalidReplicator;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidSyncCommit;
 import org.springframework.beans.factory.annotation.Autowired;

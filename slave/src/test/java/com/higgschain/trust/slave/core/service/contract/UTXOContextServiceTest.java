@@ -2,7 +2,7 @@ package com.higgschain.trust.slave.core.service.contract;
 
 import com.google.common.collect.Lists;
 import com.higgschain.trust.common.crypto.KeyPair;
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.slave.BaseTest;
 import com.higgschain.trust.slave.model.bo.utxo.Sign;
 import org.springframework.beans.factory.annotation.Autowired;

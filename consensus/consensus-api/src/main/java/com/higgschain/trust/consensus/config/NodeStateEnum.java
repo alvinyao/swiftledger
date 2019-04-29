@@ -3,10 +3,12 @@ package com.higgschain.trust.consensus.config;
 /**
  * The enum Node state enum.
  */
-public enum NodeStateEnum {/**
- * Starting node state enum.
- */
-Starting("启动中"),
+public enum NodeStateEnum {
+
+    /**
+     * Starting node state enum.
+     */
+    Starting("启动中"),
     /**
      * Initialize node state enum.
      */

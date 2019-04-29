@@ -3,7 +3,7 @@
  */
 package com.higgschain.trust.consensus.atomix.core.primitive;
 
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
 import io.atomix.primitive.Synchronous;
 import lombok.extern.slf4j.Slf4j;
 

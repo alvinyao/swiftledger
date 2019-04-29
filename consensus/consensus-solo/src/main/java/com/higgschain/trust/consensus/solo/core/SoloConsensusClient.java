@@ -1,8 +1,8 @@
 package com.higgschain.trust.consensus.solo.core;
 
-import com.higgschain.trust.consensus.core.AbstractCommitReplicateComposite;
 import com.higgschain.trust.consensus.core.ConsensusClient;
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.core.replicate.AbstractCommitReplicateComposite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

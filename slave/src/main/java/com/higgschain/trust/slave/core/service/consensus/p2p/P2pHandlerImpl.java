@@ -1,7 +1,7 @@
 package com.higgschain.trust.slave.core.service.consensus.p2p;
 
-import com.higgschain.trust.config.view.ClusterView;
-import com.higgschain.trust.config.view.IClusterViewManager;
+import com.higgschain.trust.consensus.view.ClusterView;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidConsensus;
 import com.higgschain.trust.slave.common.enums.SlaveErrorEnum;
 import com.higgschain.trust.slave.common.exception.SlaveException;

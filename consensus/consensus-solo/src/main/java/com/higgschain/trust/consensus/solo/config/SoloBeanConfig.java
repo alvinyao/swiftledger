@@ -1,8 +1,8 @@
 package com.higgschain.trust.consensus.solo.config;
 
-import com.higgschain.trust.consensus.core.AbstractCommitReplicateComposite;
-import com.higgschain.trust.consensus.core.DefaultCommitReplicateComposite;
-import com.higgschain.trust.consensus.core.filter.CompositeCommandFilter;
+import com.higgschain.trust.consensus.filter.CompositeCommandFilter;
+import com.higgschain.trust.consensus.core.replicate.AbstractCommitReplicateComposite;
+import com.higgschain.trust.consensus.core.replicate.DefaultCommitReplicateComposite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

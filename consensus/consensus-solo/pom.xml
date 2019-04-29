@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.higgschain.trust</groupId>
-            <artifactId>config-super</artifactId>
+            <artifactId>consensus-core</artifactId>
         </dependency>
     </dependencies>
 

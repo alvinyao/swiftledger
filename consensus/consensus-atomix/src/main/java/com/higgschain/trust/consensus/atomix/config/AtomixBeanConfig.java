@@ -3,12 +3,12 @@
  */
 package com.higgschain.trust.consensus.atomix.config;
 
-import com.higgschain.trust.consensus.core.DefaultCommitReplicateComposite;
 import com.higgschain.trust.consensus.atomix.core.primitive.CommandPrimitiveType;
-import com.higgschain.trust.consensus.core.AbstractCommitReplicateComposite;
-import com.higgschain.trust.consensus.core.DefaultConsensusSnapshot;
-import com.higgschain.trust.consensus.core.IConsensusSnapshot;
-import com.higgschain.trust.consensus.core.filter.CompositeCommandFilter;
+import com.higgschain.trust.consensus.core.replicate.AbstractCommitReplicateComposite;
+import com.higgschain.trust.consensus.core.replicate.DefaultCommitReplicateComposite;
+import com.higgschain.trust.consensus.snapshot.DefaultConsensusSnapshot;
+import com.higgschain.trust.consensus.snapshot.IConsensusSnapshot;
+import com.higgschain.trust.consensus.filter.CompositeCommandFilter;
 import io.atomix.cluster.discovery.NodeDiscoveryConfig;
 import io.atomix.cluster.discovery.NodeDiscoveryProvider;
 import io.atomix.core.AtomixConfig;

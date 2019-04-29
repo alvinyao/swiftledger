@@ -1,9 +1,9 @@
 package com.higgschain.trust.consensus.p2pvalid.api;
 
-import com.higgschain.trust.config.view.IClusterViewManager;
 import com.higgschain.trust.consensus.p2pvalid.core.ResponseCommand;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommandWrap;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidResponseWrap;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import com.higgschain.trust.network.Address;
 import com.higgschain.trust.network.NetworkManage;
 import lombok.extern.slf4j.Slf4j;

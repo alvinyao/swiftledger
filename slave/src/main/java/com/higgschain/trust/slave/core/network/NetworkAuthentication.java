@@ -1,6 +1,6 @@
 package com.higgschain.trust.slave.core.network;
 
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.network.Authentication;
 import com.higgschain.trust.network.Peer;
 import org.springframework.stereotype.Component;

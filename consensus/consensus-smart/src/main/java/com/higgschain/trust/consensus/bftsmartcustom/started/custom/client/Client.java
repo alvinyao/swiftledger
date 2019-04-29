@@ -2,7 +2,7 @@ package com.higgschain.trust.consensus.bftsmartcustom.started.custom.client;
 
 import bftsmart.tom.ServiceProxy;
 import com.higgschain.trust.consensus.core.ConsensusClient;
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
 import io.atomix.utils.serializer.Namespace;
 import io.atomix.utils.serializer.Serializer;
 import org.slf4j.Logger;

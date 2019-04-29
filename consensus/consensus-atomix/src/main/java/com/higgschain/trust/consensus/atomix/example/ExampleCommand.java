@@ -1,6 +1,6 @@
 package com.higgschain.trust.consensus.atomix.example;
 
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
 import lombok.Getter;
 
 /**

@@ -1,7 +1,7 @@
 package com.higgschain.trust.rs.core.service;
 
 import com.alibaba.fastjson.JSON;
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.rs.common.config.RsConfig;
 import com.higgschain.trust.rs.core.api.SignService;

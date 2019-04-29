@@ -43,6 +43,14 @@ public enum ConsensusError implements ErrorInfo {
      * The Config node state change invoke failed.
      */
     CONFIG_NODE_STATE_CHANGE_INVOKE_FAILED("114","the state change listener invoke failed",false),
+    /**
+     * The Config view package height incorrect.
+     */
+    CONFIG_VIEW_PACKAGE_HEIGHT_INCORRECT("115","the package height is incorrect at view",false),
+    /**
+     * The Config view unsupported operation.
+     */
+    CONFIG_VIEW_UNSUPPORTED_OPERATION("116","unsupported view operation",false),
     ;
 
     //@formatter:on

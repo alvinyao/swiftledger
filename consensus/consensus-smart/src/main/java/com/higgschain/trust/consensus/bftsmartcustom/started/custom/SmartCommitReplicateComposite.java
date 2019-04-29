@@ -1,9 +1,9 @@
 package com.higgschain.trust.consensus.bftsmartcustom.started.custom;
 
 import com.higgschain.trust.consensus.bftsmartcustom.started.custom.adapter.SmartCommitAdapter;
-import com.higgschain.trust.consensus.core.AbstractCommitReplicateComposite;
 import com.higgschain.trust.consensus.core.ConsensusCommit;
-import com.higgschain.trust.consensus.core.filter.CompositeCommandFilter;
+import com.higgschain.trust.consensus.filter.CompositeCommandFilter;
+import com.higgschain.trust.consensus.core.replicate.AbstractCommitReplicateComposite;
 import org.springframework.stereotype.Component;
 
 /**

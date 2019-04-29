@@ -3,9 +3,9 @@
  */
 package com.higgschain.trust.consensus.atomix.core.primitive;
 
-import com.higgschain.trust.consensus.core.AbstractCommitReplicateComposite;
-import com.higgschain.trust.consensus.core.IConsensusSnapshot;
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.core.replicate.AbstractCommitReplicateComposite;
+import com.higgschain.trust.consensus.snapshot.IConsensusSnapshot;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
 import io.atomix.primitive.PrimitiveManagementService;
 import io.atomix.primitive.PrimitiveType;
 import io.atomix.primitive.service.PrimitiveService;

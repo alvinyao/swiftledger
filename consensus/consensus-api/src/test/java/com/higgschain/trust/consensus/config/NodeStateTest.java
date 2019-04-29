@@ -1,17 +1,18 @@
 package com.higgschain.trust.consensus.config;
 
-import com.higgschain.trust.consensus.config.NodeProperties;
-import com.higgschain.trust.consensus.config.NodeState;
-import com.higgschain.trust.consensus.config.NodeStateEnum;
-import com.higgschain.trust.consensus.config.listener.MasterChangeListener;
 import com.higgschain.trust.consensus.exception.ConsensusError;
 import com.higgschain.trust.consensus.exception.ConsensusException;
+import com.higgschain.trust.consensus.listener.MasterChangeListener;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -24,9 +25,14 @@ import org.testng.annotations.Test;
 /**
  * The type Node state test.
  */
+@SpringBootTest
+@PowerMockRunnerDelegate(SpringRunner.class)
 @RunWith(PowerMockRunner.class) public class NodeStateTest {
 
+    @Mock
+    private ApplicationContext applicationContext;
     @InjectMocks private NodeState nodeState;
+
 
     @Mock private NodeProperties properties;
 
@@ -47,7 +53,8 @@ import org.testng.annotations.Test;
     /**
      * Test register master listener.
      */
-    @Test public void testRegisterMasterListener() {
+    @Test
+    public void testRegisterMasterListener() {
         MasterChangeListener masterChangeListener = Mockito.mock(MasterChangeListener.class);
         nodeState.registerMasterListener(masterChangeListener);
         String masterName = "masterName";

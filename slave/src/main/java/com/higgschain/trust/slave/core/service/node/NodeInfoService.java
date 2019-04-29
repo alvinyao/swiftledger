@@ -3,9 +3,9 @@
  */
 package com.higgschain.trust.slave.core.service.node;
 
-import com.higgschain.trust.config.master.INodeInfoService;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
+import com.higgschain.trust.consensus.core.master.INodeInfoService;
 import com.higgschain.trust.slave.core.repository.BlockRepository;
 import com.higgschain.trust.slave.core.repository.PackageRepository;
 import com.higgschain.trust.slave.model.enums.biz.PackageStatusEnum;

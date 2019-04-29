@@ -3,7 +3,7 @@ package com.higgschain.trust.consensus.p2pvalid.core.exchange;
 import com.google.common.base.Charsets;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommand;
 import lombok.Getter;
 import lombok.Setter;

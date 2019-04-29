@@ -4,7 +4,7 @@ import com.higgschain.trust.common.dao.RocksUtils;
 import com.higgschain.trust.common.enums.MonitorTargetEnum;
 import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgschain.trust.common.utils.ThreadLocalUtils;
-import com.higgschain.trust.config.view.IClusterViewService;
+import com.higgschain.trust.consensus.view.IClusterViewService;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.management.exception.FailoverExecption;

@@ -1,11 +1,11 @@
 package com.higgschain.trust.slave.core.network;
 
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.config.NodeProperties;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
-import com.higgschain.trust.consensus.config.listener.StateChangeListener;
-import com.higgschain.trust.consensus.config.listener.StateListener;
+import com.higgschain.trust.consensus.listener.StateChangeListener;
+import com.higgschain.trust.consensus.listener.StateListener;
 import com.higgschain.trust.network.Address;
 import com.higgschain.trust.network.NetworkConfig;
 import com.higgschain.trust.network.NetworkManage;

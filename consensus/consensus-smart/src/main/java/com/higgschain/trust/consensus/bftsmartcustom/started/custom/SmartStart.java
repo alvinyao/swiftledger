@@ -5,10 +5,10 @@ import com.higgschain.trust.consensus.bftsmartcustom.started.custom.client.Clien
 import com.higgschain.trust.consensus.bftsmartcustom.started.custom.config.SmartConfig;
 import com.higgschain.trust.consensus.bftsmartcustom.started.custom.server.Server;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
-import com.higgschain.trust.consensus.config.listener.StateChangeListener;
-import com.higgschain.trust.consensus.config.listener.StateListener;
+import com.higgschain.trust.consensus.listener.StateChangeListener;
+import com.higgschain.trust.consensus.listener.StateListener;
 import com.higgschain.trust.consensus.core.ConsensusStateMachine;
-import com.higgschain.trust.consensus.core.IConsensusSnapshot;
+import com.higgschain.trust.consensus.snapshot.IConsensusSnapshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -12,8 +12,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>consensus-api</module>
-        <module>consensus-smart</module>
         <module>consensus-p2pvalid</module>
+        <module>consensus-core</module>
+        <module>consensus-smart</module>
         <module>consensus-atomix</module>
         <module>consensus-solo</module>
     </modules>

@@ -6,7 +6,7 @@ import com.higgschain.trust.IntegrateBaseTest;
 import com.higgschain.trust.common.crypto.Crypto;
 import com.higgschain.trust.common.crypto.KeyPair;
 import com.higgschain.trust.common.enums.CryptoTypeEnum;
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.slave.api.enums.ActionTypeEnum;
 import com.higgschain.trust.slave.api.enums.utxo.UTXOActionTypeEnum;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;

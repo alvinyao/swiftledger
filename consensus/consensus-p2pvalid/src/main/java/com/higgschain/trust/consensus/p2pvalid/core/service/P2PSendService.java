@@ -1,15 +1,15 @@
 package com.higgschain.trust.consensus.p2pvalid.core.service;
 
-import com.higgschain.trust.config.crypto.CryptoUtil;
-import com.higgschain.trust.config.view.ClusterView;
-import com.higgschain.trust.config.view.IClusterViewManager;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.p2pvalid.api.P2pConsensusClient;
 import com.higgschain.trust.consensus.p2pvalid.core.ResponseCommand;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommand;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommandWrap;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidResponseWrap;
+import com.higgschain.trust.consensus.view.ClusterView;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

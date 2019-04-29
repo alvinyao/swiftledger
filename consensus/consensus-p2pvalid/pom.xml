@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>com.higgschain.trust</groupId>
-            <artifactId>config-api</artifactId>
+            <artifactId>consensus-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.higgschain.trust</groupId>
@@ -36,7 +36,6 @@
         <dependency>
             <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
             <artifactId>concurrentlinkedhashmap-lru</artifactId>
-            <version>1.4.2</version>
         </dependency>
     </dependencies>
 

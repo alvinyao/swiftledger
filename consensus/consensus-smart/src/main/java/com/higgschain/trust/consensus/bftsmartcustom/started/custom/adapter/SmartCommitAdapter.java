@@ -1,7 +1,7 @@
 package com.higgschain.trust.consensus.bftsmartcustom.started.custom.adapter;
 
 import com.higgschain.trust.consensus.core.ConsensusCommit;
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
 
 /**
  * The type Smart commit adapter.

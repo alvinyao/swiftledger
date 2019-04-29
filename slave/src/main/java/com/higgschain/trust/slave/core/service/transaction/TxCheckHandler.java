@@ -2,7 +2,7 @@ package com.higgschain.trust.slave.core.service.transaction;
 
 import com.alibaba.fastjson.JSON;
 import com.higgschain.trust.common.utils.Profiler;
-import com.higgschain.trust.config.crypto.CryptoUtil;
+import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.DecisionTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;

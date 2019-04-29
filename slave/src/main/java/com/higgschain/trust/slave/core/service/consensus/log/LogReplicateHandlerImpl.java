@@ -1,7 +1,7 @@
 package com.higgschain.trust.slave.core.service.consensus.log;
 
-import com.higgschain.trust.config.crypto.CryptoUtil;
-import com.higgschain.trust.config.view.IClusterViewManager;
+import com.higgschain.trust.consensus.util.CryptoUtil;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import com.higgschain.trust.consensus.config.NodeProperties;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.core.ConsensusClient;

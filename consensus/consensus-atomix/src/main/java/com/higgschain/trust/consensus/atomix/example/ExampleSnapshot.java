@@ -3,7 +3,7 @@
  */
 package com.higgschain.trust.consensus.atomix.example;
 
-import com.higgschain.trust.consensus.core.IConsensusSnapshot;
+import com.higgschain.trust.consensus.snapshot.IConsensusSnapshot;
 import lombok.extern.slf4j.Slf4j;
 
 /**

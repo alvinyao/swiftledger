@@ -1,10 +1,10 @@
 package commands
 
 import com.higgschain.trust.common.utils.LogLevelChanger
-import com.higgschain.trust.config.view.ClusterViewManager
 import com.higgschain.trust.consensus.config.NodeState
 import com.higgschain.trust.consensus.config.NodeStateEnum
 import com.higgschain.trust.consensus.core.ConsensusStateMachine
+import com.higgschain.trust.consensus.view.IClusterViewManager
 import com.higgschain.trust.slave.core.repository.PackageRepository
 import com.higgschain.trust.slave.core.service.block.BlockService
 import com.higgschain.trust.slave.core.service.consensus.cluster.IClusterService
@@ -124,7 +124,7 @@ class node {
     @Command
     def views(InvocationContext context) {
         BeanFactory beans = context.attributes['spring.beanfactory']
-        def viewManager = beans.getBean(ClusterViewManager.class)
+        def viewManager = beans.getBean(IClusterViewManager.class)
         viewManager.getViews().forEach({ v -> context.provide(View: v.id, FaultNum: v.faultNum, StartHeight: v.startHeight, EndHeight: v.endHeight, NodeNames: v.nodeNames) })
         out.println("")
     }
@@ -148,7 +148,7 @@ class node {
     def log(InvocationContext context,
                        @Usage("log name") @Required @Argument String logName,
                        @Usage("level") @Required @Argument String level) {
-        LogLevelChanger.change(logName, level);
+        LogLevelChanger.change(logName, level)
     }
 
 }

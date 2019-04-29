@@ -2,12 +2,12 @@ package com.higgschain.trust.slave.core.managment;
 
 import com.higgschain.trust.common.dao.RocksUtils;
 import com.higgschain.trust.common.utils.ThreadLocalUtils;
-import com.higgschain.trust.config.view.IClusterViewService;
+import com.higgschain.trust.consensus.view.IClusterViewService;
 import com.higgschain.trust.consensus.config.NodeProperties;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
-import com.higgschain.trust.consensus.config.listener.StateChangeListener;
-import com.higgschain.trust.consensus.config.listener.StateListener;
+import com.higgschain.trust.consensus.listener.StateChangeListener;
+import com.higgschain.trust.consensus.listener.StateListener;
 import com.higgschain.trust.network.NetworkManage;
 import com.higgschain.trust.slave.api.enums.VersionEnum;
 import com.higgschain.trust.slave.common.config.InitConfig;

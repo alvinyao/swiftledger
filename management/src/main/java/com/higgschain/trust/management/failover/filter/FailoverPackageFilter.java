@@ -4,9 +4,9 @@
 package com.higgschain.trust.management.failover.filter;
 
 import com.higgschain.trust.consensus.core.ConsensusCommit;
-import com.higgschain.trust.consensus.core.command.AbstractConsensusCommand;
-import com.higgschain.trust.consensus.core.filter.CommandFilter;
-import com.higgschain.trust.consensus.core.filter.CommandFilterChain;
+import com.higgschain.trust.consensus.command.AbstractConsensusCommand;
+import com.higgschain.trust.consensus.filter.CommandFilter;
+import com.higgschain.trust.consensus.filter.CommandFilterChain;
 import com.higgschain.trust.slave.core.repository.BlockRepository;
 import com.higgschain.trust.slave.model.bo.consensus.PackageCommand;
 import lombok.extern.slf4j.Slf4j;

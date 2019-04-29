@@ -1,10 +1,10 @@
 package com.higgschain.trust.consensus.p2pvalid.core.storage;
 
-import com.higgschain.trust.config.view.IClusterViewManager;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.p2pvalid.api.P2pConsensusClient;
 import com.higgschain.trust.consensus.p2pvalid.core.ResponseCommand;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommand;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

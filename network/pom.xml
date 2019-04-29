@@ -8,14 +8,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.higgschain.trust</groupId>
     <artifactId>network</artifactId>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>com.higgschain.trust</groupId>-->
-            <!--<artifactId>common</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
@@ -57,16 +52,6 @@
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.higgschain.trust</groupId>-->
-            <!--<artifactId>consensus-p2pvalid</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.higgschain.trust</groupId>-->
-            <!--<artifactId>slave</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
     </dependencies>
 
 </project>

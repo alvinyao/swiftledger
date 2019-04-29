@@ -5,7 +5,7 @@ import com.higgschain.trust.common.constant.Constant;
 import com.higgschain.trust.common.enums.MonitorTargetEnum;
 import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgschain.trust.common.utils.TraceUtils;
-import com.higgschain.trust.config.view.ClusterOptTx;
+import com.higgschain.trust.consensus.view.ClusterOptTx;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.slave.api.enums.ActionTypeEnum;

@@ -3,7 +3,7 @@
  */
 package com.higgschain.trust.slave.core.service.consensus.view;
 
-import com.higgschain.trust.config.view.ClusterView;
+import com.higgschain.trust.consensus.view.ClusterView;
 import com.higgschain.trust.consensus.p2pvalid.core.IdValidCommand;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

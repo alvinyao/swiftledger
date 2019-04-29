@@ -3,11 +3,11 @@
  */
 package com.higgschain.trust.slave.core.service.consensus.view;
 
-import com.higgschain.trust.config.crypto.CryptoUtil;
-import com.higgschain.trust.config.view.ClusterView;
-import com.higgschain.trust.config.view.IClusterViewManager;
-import com.higgschain.trust.config.view.IClusterViewService;
-import com.higgschain.trust.config.view.LastPackage;
+import com.higgschain.trust.consensus.util.CryptoUtil;
+import com.higgschain.trust.consensus.view.ClusterView;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
+import com.higgschain.trust.consensus.view.IClusterViewService;
+import com.higgschain.trust.consensus.view.LastPackage;
 import com.higgschain.trust.consensus.config.NodeProperties;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.p2pvalid.api.P2pConsensusClient;

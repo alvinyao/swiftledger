@@ -1,7 +1,7 @@
 package com.higgschain.trust.rs.core.integration;
 
 import com.alibaba.fastjson.TypeReference;
-import com.higgschain.trust.config.view.IClusterViewManager;
+import com.higgschain.trust.consensus.view.IClusterViewManager;
 import com.higgschain.trust.network.HttpClient;
 import com.higgschain.trust.network.NetworkManage;
 import com.higgschain.trust.slave.api.vo.CaVO;
