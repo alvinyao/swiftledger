@@ -43,14 +43,6 @@ public class NetworkManage {
     protected final MessagingService messagingService;
     private final DiscoveryPeersService discoveryPeersService;
     private final ExecutorService executor = Executors.newFixedThreadPool(4);
-    /**
-     * The Connected peers.
-     */
-    final Set<Peer> connectedPeers = Sets.newCopyOnWriteArraySet();
-    /**
-     * The Unconnected peers.
-     */
-    final Set<Peer> unconnectedPeers = Sets.newCopyOnWriteArraySet();
     private List<NetworkListener> listeners;
     private HttpClient httpClient;
     private RpcClient rpcClient;
@@ -110,14 +102,13 @@ public class NetworkManage {
     private void initDefaultListener() {
         listeners.add(((event, message) -> {
             if (event == NetworkListener.Event.LEAVE) {
-                Address address = (Address) message;
+                Address address = (Address)message;
                 Peer peer = peers.getByAddress(address);
 
                 if (peer != null) {
-                    connectedPeers.remove(peer);
-                    unconnectedPeers.add(peer);
+                    peer.setConnected(false);
                 }
-                log.info("Peer {} disconnected", message);;
+                log.info("Peer {} disconnected", message);
             }
         }));
     }
@@ -129,16 +120,6 @@ public class NetworkManage {
      */
     public Set<Peer> getPeers() {
         return peers.getPeers();
-    }
-
-    /**
-     * Update peer connected.
-     *
-     * @param address   the address
-     * @param connected the connected
-     */
-    public void updatePeerConnected(Address address, boolean connected) {
-        this.peers.updatePeerConnected(address, connected);
     }
 
     /**
@@ -327,8 +308,8 @@ public class NetworkManage {
      */
     public <T, R> void registerHandler(String type, Function<T, R> handler, Executor executor) {
         messagingService.registerHandler(type, (address, payload) -> {
-             R ret = handler.apply((T)Hessian.parse(payload));
-             return Hessian.serialize(ret);
+            R ret = handler.apply((T)Hessian.parse(payload));
+            return Hessian.serialize(ret);
         }, executor);
     }
 

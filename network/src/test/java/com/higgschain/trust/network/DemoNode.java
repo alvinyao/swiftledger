@@ -52,13 +52,6 @@ public class DemoNode {
                     networkManage.getPeers().forEach(System.out::println);
                     break;
                 }
-                case "connected": {
-                    networkManage.connectedPeers.forEach(System.out::println);
-                    break;
-                }
-                case "unconnected": {
-                    networkManage.unconnectedPeers.forEach(System.out::println);
-                }
             }
         }
     }

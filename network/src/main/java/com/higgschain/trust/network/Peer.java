@@ -2,6 +2,7 @@ package com.higgschain.trust.network;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The type Peer.
@@ -11,11 +12,6 @@ import java.util.Objects;
  */
 public class Peer implements Serializable {
 
-    /**
-     * The constant MAX_TRY_CONNECT_TIMES.
-     */
-    public static final int MAX_TRY_CONNECT_TIMES = 10;
-
     private long nonce;
     private Address address;
     private String publicKey = "";
@@ -23,6 +19,7 @@ public class Peer implements Serializable {
     private int httpPort;
     private boolean isSlave;
     private transient boolean connected = false;
+    private transient AtomicInteger connectTimes = new AtomicInteger(0);
 
     /**
      * Instantiates a new Peer.
@@ -176,10 +173,17 @@ public class Peer implements Serializable {
     /**
      * Sets connected.
      *
-     * @param connected the connected
+     * @param connected if connected
+     * @return connect failed times
      */
-    public void setConnected(boolean connected) {
+    public synchronized int setConnected(boolean connected) {
         this.connected = connected;
+        if (connected) {
+            connectTimes.lazySet(0);
+            return 0;
+        } else {
+            return connectTimes.incrementAndGet();
+        }
     }
 
     /**
@@ -193,29 +197,29 @@ public class Peer implements Serializable {
         nodeName = newPeer.nodeName;
         httpPort = newPeer.httpPort;
         isSlave = newPeer.isSlave;
+        connectTimes.lazySet(0);
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return Objects.hash(address, publicKey, nodeName);
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
 
-        Peer that = (Peer) obj;
-        return nodeName.equals(nodeName) && publicKey.equals(that.publicKey) && this.address.equals(that.address) && this.isSlave == that.isSlave;
+        Peer that = (Peer)obj;
+        return nodeName.equals(nodeName) && publicKey.equals(that.publicKey) && this.address.equals(that.address)
+            && this.isSlave == that.isSlave;
     }
 
-    @Override
-    public String toString() {
-        String pubKey = (publicKey != null && publicKey.length() > 24)
-                ? String.format("%s...%s", publicKey.substring(0, 12), publicKey.substring(this.publicKey.length() - 12))
-                : publicKey;
-        return String.format("%s, name=%s, nonce=%s publicKey=%s, connected=%s",
-                address.toString(), nodeName, nonce, pubKey, connected);
+    @Override public String toString() {
+        String pubKey = (publicKey != null && publicKey.length() > 24) ?
+            String.format("%s...%s", publicKey.substring(0, 12), publicKey.substring(this.publicKey.length() - 12)) :
+            publicKey;
+        return String
+            .format("%s, name=%s, nonce=%s publicKey=%s, connected=%s", address.toString(), nodeName, nonce, pubKey,
+                connected);
     }
 }

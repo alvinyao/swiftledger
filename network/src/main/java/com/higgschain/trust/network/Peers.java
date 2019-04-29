@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * The type Peers.
@@ -18,6 +19,11 @@ import java.util.Set;
 public final class Peers {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
+
+    /**
+     * The constant MAX_TRY_CONNECT_TIMES.
+     */
+    public static final int MAX_TRY_CONNECT_TIMES = 200;
 
     /**
      * The Map.
@@ -65,6 +71,15 @@ public final class Peers {
      */
     public Set<Peer> getPeers() {
         return Sets.newConcurrentHashSet(map.values());
+    }
+
+    /**
+     * get connected peers
+     *
+     * @return the active peers
+     */
+    public Set<Peer> getActivePeers() {
+        return Sets.newConcurrentHashSet(map.values().stream().filter(Peer::isConnected).collect(Collectors.toSet()));
     }
 
     /**
@@ -139,6 +154,16 @@ public final class Peers {
     }
 
     /**
+     * remove peer
+     *
+     * @param peer peer
+     * @return remove peer
+     */
+    public Peer remove(Peer peer) {
+        return map.remove(peer.getAddress());
+    }
+
+    /**
      * Update peer connected.
      *
      * @param address   the address
@@ -147,7 +172,11 @@ public final class Peers {
     public void updatePeerConnected(Address address, boolean connected) {
         Peer peer = map.get(address);
         if (peer != null) {
-            peer.setConnected(connected);
+            int times = peer.setConnected(connected);
+            if (times >= MAX_TRY_CONNECT_TIMES) {
+                Peer removed = map.remove(address);
+                log.warn("removed unconnected peer:{}", removed);
+            }
         } else {
             log.warn("{} not fond", address);
         }

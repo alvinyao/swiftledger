@@ -496,7 +496,6 @@ public class MessagingService {
                             response.setPeer(networkManage.localPeer());
 
                             networkManage.addPeer(newPeer);
-                            networkManage.updatePeerConnected(networkRequest.sender(), true);
                             ctx.writeAndFlush(new NetworkResponse(message.id(), Hessian.serialize(response)));
                         }
                         return;

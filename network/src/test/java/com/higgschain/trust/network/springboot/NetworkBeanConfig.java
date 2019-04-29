@@ -74,7 +74,7 @@ public class NetworkBeanConfig {
                 .singleton()
                 .build();
         NetworkManage networkManage = new NetworkManage(networkConfig);
-//        networkManage.start();
+        networkManage.start();
         return networkManage;
     }
 }
