@@ -46,12 +46,7 @@ import org.springframework.stereotype.Component;
         if (!nodeState.isState(NodeStateEnum.Running)) {
             throw new RuntimeException(String.format("the node state is not running, please try again latter"));
         }
-        ValidCommandWrap validCommandWrap = new ValidCommandWrap();
-        validCommandWrap.setCommandClass(validCommand.getClass());
-        validCommandWrap.setFromNode(nodeState.getNodeName());
-        validCommandWrap.setSign(CryptoUtil.getProtocolCrypto()
-            .sign(validCommand.getMessageDigestHash(), nodeState.getConsensusPrivateKey()));
-        validCommandWrap.setValidCommand(validCommand);
+        ValidCommandWrap validCommandWrap = ValidCommandWrap.builder(nodeState).withCommand(validCommand).build();
         ClusterView view = viewManager.getView(validCommand.getView());
         if (view == null) {
             throw new RuntimeException(String.format("the view %d not exist", validCommand.getView()));

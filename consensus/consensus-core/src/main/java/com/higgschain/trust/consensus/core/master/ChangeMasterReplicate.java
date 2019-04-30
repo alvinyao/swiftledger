@@ -42,8 +42,7 @@ import org.springframework.stereotype.Component;
     /**
      * The Node info service.
      */
-    @Autowired
-    INodeInfoService nodeInfoService;
+    @Autowired INodeInfoService nodeInfoService;
 
     /**
      * The Change master service.
@@ -62,15 +61,14 @@ import org.springframework.stereotype.Component;
         boolean changeMaster = false;
         if (!changeMasterService.getMasterHeartbeat().get() && verify.getTerm() == nodeState.getCurrentTerm() + 1
             && verify.getView() == viewManager.getCurrentViewId()) {
-            Long maxHeight = nodeInfoService.packageHeight();
-            maxHeight = maxHeight == null ? 0 : maxHeight;
-            if (verify.getPackageHeight() >= maxHeight) {
+            long maxHeight = nodeInfoService.getMaxHeight();
+            if (verify.getMaxHeight() >= maxHeight) {
                 changeMaster = true;
             }
         }
         ChangeMasterVerifyResponse response =
             new ChangeMasterVerifyResponse(verify.getTerm(), verify.getView(), nodeState.getNodeName(),
-                verify.getProposer(), verify.getPackageHeight(), changeMaster);
+                verify.getProposer(), verify.getMaxHeight(), changeMaster);
         String sign = CryptoUtil.getProtocolCrypto().sign(response.getSignValue(), nodeState.getConsensusPrivateKey());
         response.setSign(sign);
         return new ChangeMasterVerifyResponseCmd(operation.messageDigest(), response);

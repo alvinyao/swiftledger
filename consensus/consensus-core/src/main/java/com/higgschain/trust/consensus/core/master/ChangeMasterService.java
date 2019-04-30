@@ -39,8 +39,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author suimi
  * @date 2018 /6/4
  */
-@StateListener
-@Slf4j @Service public class ChangeMasterService implements MasterChangeListener {
+@StateListener @Slf4j @Service public class ChangeMasterService implements MasterChangeListener {
 
     /**
      * has the master heartbeat
@@ -156,18 +155,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
         ClusterView currentView = viewManager.getCurrentView();
         List<String> nodeNames = currentView.getNodeNames();
         Map<String, ChangeMasterVerifyResponse> heightMap = new HashMap<>();
-        Long maxHeight = nodeInfoService.blockHeight();
-        long packageHeight = maxHeight == null ? 0 : maxHeight;
+        long maxHeight = nodeInfoService.getMaxHeight();
         ChangeMasterVerify verify =
             new ChangeMasterVerify(nodeState.getCurrentTerm() + 1, viewManager.getCurrentViewId(),
-                nodeState.getNodeName(), packageHeight);
+                nodeState.getNodeName(), maxHeight);
         ChangeMasterVerifyCmd cmd = new ChangeMasterVerifyCmd(verify);
-        ValidCommandWrap validCommandWrap = new ValidCommandWrap();
-        validCommandWrap.setCommandClass(cmd.getClass());
-        validCommandWrap.setFromNode(nodeState.getNodeName());
-        validCommandWrap
-            .setSign(CryptoUtil.getProtocolCrypto().sign(cmd.getMessageDigestHash(), nodeState.getConsensusPrivateKey()));
-        validCommandWrap.setValidCommand(cmd);
+        ValidCommandWrap validCommandWrap = ValidCommandWrap.builder(nodeState).withCommand(cmd).build();
         nodeNames.forEach((nodeName) -> {
             try {
                 ValidResponseWrap<? extends ResponseCommand> validResponseWrap =
@@ -194,7 +187,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
         ChangeMasterVerifyResponse response = cmd.get();
         ClusterView currentView = viewManager.getCurrentView();
         String pubKey = currentView.getPubKey(response.getVoter());
-        if(StringUtils.isBlank(pubKey)){
+        if (StringUtils.isBlank(pubKey)) {
             return false;
         }
         return CryptoUtil.getProtocolCrypto().verify(response.getSignValue(), response.getSign(), pubKey);
