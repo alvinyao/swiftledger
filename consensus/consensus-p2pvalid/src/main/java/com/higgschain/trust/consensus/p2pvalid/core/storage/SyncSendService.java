@@ -1,6 +1,5 @@
 package com.higgschain.trust.consensus.p2pvalid.core.storage;
 
-
 import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.p2pvalid.core.ResponseCommand;
 import com.higgschain.trust.consensus.p2pvalid.core.ValidCommand;
@@ -39,7 +38,7 @@ import java.util.concurrent.atomic.AtomicInteger;
             CommandCounter<T> value = entry.getValue();
             int counter = value.getCounter().get();
             if (counter >= view.getVerifiedQuorum()) {
-                if(maxCounter < counter){
+                if (maxCounter < counter) {
                     maxCounter = counter;
                     command = value.getCommand();
                 }
@@ -53,12 +52,7 @@ import java.util.concurrent.atomic.AtomicInteger;
         if (log.isDebugEnabled()) {
             log.debug("sync send command {}", validCommand);
         }
-        ValidCommandWrap validCommandWrap = new ValidCommandWrap();
-        validCommandWrap.setCommandClass(validCommand.getClass());
-        validCommandWrap.setFromNode(nodeState.getNodeName());
-        validCommandWrap.setSign(CryptoUtil.getProtocolCrypto()
-            .sign(validCommand.getMessageDigestHash(), nodeState.getConsensusPrivateKey()));
-        validCommandWrap.setValidCommand(validCommand);
+        ValidCommandWrap validCommandWrap = ValidCommandWrap.builder(nodeState).withCommand(validCommand).build();
         ConcurrentHashMap<String, CommandCounter<T>> resultMap = new ConcurrentHashMap<>();
         List<String> nodeNames = view.getNodeNames();
         CountDownLatch countDownLatch = new CountDownLatch(nodeNames.size());
@@ -68,7 +62,7 @@ import java.util.concurrent.atomic.AtomicInteger;
                     log.info("sync send command to node {} ", nodeName);
                     ValidResponseWrap<? extends ResponseCommand> validResponseWrap =
                         p2pConsensusClient.syncSend(nodeName, validCommandWrap);
-                    if(validResponseWrap.isSucess()) {
+                    if (validResponseWrap.isSucess()) {
                         Object result = validResponseWrap.result();
                         if (result != null) {
                             if (result instanceof ResponseCommand) {

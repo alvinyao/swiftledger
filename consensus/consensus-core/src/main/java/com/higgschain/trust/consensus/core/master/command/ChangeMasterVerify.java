@@ -38,6 +38,6 @@ import java.io.Serializable;
     /**
      * the package height
      */
-    private long packageHeight;
+    private long maxHeight;
 
 }

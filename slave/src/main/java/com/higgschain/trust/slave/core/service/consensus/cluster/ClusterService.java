@@ -96,17 +96,11 @@ import java.util.*;
     }
 
     @Override public Map<String, Long> getAllClusterHeight() {
-        ClusterView currentView = viewManager.getCurrentView();
-        List<String> nodeNames = currentView.getNodeNames();
+        List<String> nodeNames = viewManager.getCurrentView().getNodeNames();
         Map<String, Long> heightMap = new HashMap<>();
         String requestId = DEFAULT_CLUSTER_HEIGHT_ID + Constant.SPLIT_SLASH + System.currentTimeMillis();
         ClusterHeightCmd cmd = new ClusterHeightCmd(requestId, 1, IClusterViewManager.CURRENT_VIEW_ID);
-        ValidCommandWrap validCommandWrap = new ValidCommandWrap();
-        validCommandWrap.setCommandClass(cmd.getClass());
-        validCommandWrap.setFromNode(nodeState.getNodeName());
-        validCommandWrap.setSign(
-            CryptoUtil.getProtocolCrypto().sign(cmd.getMessageDigestHash(), nodeState.getConsensusPrivateKey()));
-        validCommandWrap.setValidCommand(cmd);
+        ValidCommandWrap validCommandWrap = ValidCommandWrap.builder(nodeState).withCommand(cmd).build();
         nodeNames.forEach((nodeName) -> {
             Long height = null;
             try {
@@ -131,17 +125,11 @@ import java.util.*;
     }
 
     @Override public Map<String, String> getAllClusterState() {
-        ClusterView currentView = viewManager.getCurrentView();
-        List<String> nodeNames = currentView.getNodeNames();
+        List<String> nodeNames = viewManager.getCurrentView().getNodeNames();
         Map<String, String> stateMap = new HashMap<>();
         String requestId = DEFAULT_CLUSTER_HEIGHT_ID + Constant.SPLIT_SLASH + System.currentTimeMillis();
         ClusterStateCmd cmd = new ClusterStateCmd(requestId, 1, IClusterViewManager.CURRENT_VIEW_ID);
-        ValidCommandWrap validCommandWrap = new ValidCommandWrap();
-        validCommandWrap.setCommandClass(cmd.getClass());
-        validCommandWrap.setFromNode(nodeState.getNodeName());
-        validCommandWrap.setSign(
-            CryptoUtil.getProtocolCrypto().sign(cmd.getMessageDigestHash(), nodeState.getConsensusPrivateKey()));
-        validCommandWrap.setValidCommand(cmd);
+        ValidCommandWrap validCommandWrap = ValidCommandWrap.builder(nodeState).withCommand(cmd).build();
         nodeNames.forEach((nodeName) -> {
             try {
                 ValidResponseWrap<? extends ResponseCommand> validResponseWrap =

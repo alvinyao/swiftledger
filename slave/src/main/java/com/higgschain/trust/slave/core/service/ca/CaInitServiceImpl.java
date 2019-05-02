@@ -10,6 +10,7 @@ import com.higgschain.trust.slave.common.exception.SlaveException;
 import com.higgschain.trust.slave.core.managment.ClusterInitHandler;
 import com.higgschain.trust.slave.model.bo.action.Action;
 import com.higgschain.trust.slave.model.bo.ca.CaAction;
+import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -81,7 +82,7 @@ import java.util.List;
     private List<Action> acquirePubKeys() throws IOException {
         JSONObject geniusBlock;
         if (StringUtils.isBlank(geniusPath)) {
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("geniusBlock.json");
+           @Cleanup InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("geniusBlock.json");
             String jsonText = IOUtils.toString(inputStream, "UTF-8");
             geniusBlock = JSON.parseObject(jsonText);
         } else {

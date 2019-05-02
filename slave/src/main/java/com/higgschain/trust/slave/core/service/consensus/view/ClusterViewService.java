@@ -121,12 +121,7 @@ import java.util.Map;
         do {
             ClusterViewCmd command = new ClusterViewCmd(DEFAULT_CLUSTER_INFO_ID + "," + System.currentTimeMillis(),
                 IClusterViewManager.CURRENT_VIEW_ID);
-            ValidCommandWrap commandWrap = new ValidCommandWrap();
-            commandWrap.setCommandClass(command.getClass());
-            commandWrap.setFromNode(nodeState.getNodeName());
-            commandWrap.setSign(CryptoUtil.getProtocolCrypto()
-                .sign(command.getMessageDigestHash(), nodeState.getConsensusPrivateKey()));
-            commandWrap.setValidCommand(command);
+            ValidCommandWrap commandWrap = ValidCommandWrap.builder(nodeState).withCommand(command).build();
             try {
                 response = client.syncSendFeign(nodeState.notMeNodeNameReg(), commandWrap);
             } catch (Exception e) {
