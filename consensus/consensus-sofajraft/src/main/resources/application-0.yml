@@ -1,0 +1,14 @@
+sofajraft:
+  serverIdStr: 127.0.0.1:9000
+  initConfStr: 127.0.0.1:9000,127.0.0.1:9001,127.0.0.1:9002
+  dataPath: /tmp/sofajraft/data0
+  port: 10000
+logging:
+  path: /tmp/sofajraft/log0
+management:
+  shell:
+    ssh:
+      port: 2000
+  port: 6060
+server:
+  port: 7070

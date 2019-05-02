@@ -17,6 +17,7 @@
         <module>consensus-smart</module>
         <module>consensus-atomix</module>
         <module>consensus-solo</module>
+        <module>consensus-sofajraft</module>
     </modules>
 
 </project>
