@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @date 2018 /8/15
  */
 @Slf4j
-@Component
+//@Component
 public class ExampleSnapshot implements IConsensusSnapshot {
 
     /**

@@ -38,7 +38,7 @@ public class SofajraftStateMachine extends StateMachineAdapter {
     private AbstractCommitReplicateComposite replicateComposite;
 
     @Autowired
-    private IConsensusSnapshot exampleSnapshot;
+    private IConsensusSnapshot snapshot;
 
     public boolean isLeader() {
         return this.leaderTerm.get() > 0;
@@ -79,14 +79,14 @@ public class SofajraftStateMachine extends StateMachineAdapter {
     public void onSnapshotSave(SnapshotWriter writer, Closure done) {
         Utils.runInThread(() -> {
             final SofajraftSnapshotFile snapshotFile = new SofajraftSnapshotFile(writer.getPath() + File.separator + "data");
-            if (snapshotFile.save(exampleSnapshot.getSnapshot())) {
+            if (snapshotFile.save(snapshot.getSnapshot())) {
                 if (writer.addFile("data")) {
                     done.run(Status.OK());
                 } else {
                     done.run(new Status(RaftError.EIO, "Fail to add file to writer"));
                 }
             } else {
-                done.run(new Status(RaftError.EIO, "Fail to save counter exampleSnapshot %s", snapshotFile.getPath()));
+                done.run(new Status(RaftError.EIO, "Fail to save counter snapshot %s", snapshotFile.getPath()));
             }
         });
     }
@@ -94,7 +94,7 @@ public class SofajraftStateMachine extends StateMachineAdapter {
     @Override
     public boolean onSnapshotLoad(SnapshotReader reader) {
         if (isLeader()) {
-            log.warn("Leader is not supposed to load exampleSnapshot");
+            log.warn("Leader is not supposed to load snapshot");
             return false;
         }
         if (reader.getFileMeta("data") == null) {
@@ -103,10 +103,10 @@ public class SofajraftStateMachine extends StateMachineAdapter {
         }
         final SofajraftSnapshotFile snapshotFile = new SofajraftSnapshotFile(reader.getPath() + File.separator + "data");
         try {
-            exampleSnapshot.installSnapshot(snapshotFile.load());
+            snapshot.installSnapshot(snapshotFile.load());
             return true;
         } catch (final IOException e) {
-            log.error("Fail to load exampleSnapshot from {}", snapshotFile.getPath());
+            log.error("Fail to load snapshot from {}", snapshotFile.getPath());
             return false;
         }
     }

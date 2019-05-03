@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * @create 2018 -08-01
  */
 @Slf4j
-@Component
-@Replicator
+//@Component
+//@Replicator
 public class ExampleCommandReplicator {
 
     /**
