@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.higgschain.trust</groupId>
-            <artifactId>consensus-atomix</artifactId>
+            <artifactId>consensus-sofajraft</artifactId>
         </dependency>
         <dependency>
             <groupId>com.higgschain.trust</groupId>

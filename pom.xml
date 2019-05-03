@@ -141,6 +141,11 @@
             </dependency>
             <dependency>
                 <groupId>com.higgschain.trust</groupId>
+                <artifactId>consensus-sofajraft</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.higgschain.trust</groupId>
                 <artifactId>management</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -387,12 +392,6 @@
                 <groupId>com.alipay.sofa</groupId>
                 <artifactId>hessian</artifactId>
                 <version>3.3.6</version>
-            </dependency>
-            <!-- log -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.21</version>
             </dependency>
             <!-- disruptor -->
             <dependency>
