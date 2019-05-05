@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `vote_request_record` (
 	`id` BIGINT (20) NOT NULL AUTO_INCREMENT COMMENT 'id',
 	`tx_id` VARCHAR (64) NOT NULL COMMENT 'transaction id',
 	`sender` VARCHAR (32) NOT NULL COMMENT 'the rsId of the sender for the tx',
-	`tx_data` TEXT NOT NULL COMMENT 'the tx data',
+	`tx_data` MEDIUMTEXT NOT NULL COMMENT 'the tx data',
 	`sign` VARCHAR (1024) DEFAULT NULL COMMENT 'the sign data of voter',
 	`vote_result` VARCHAR (16) NOT NULL COMMENT 'vote result 1.INIT 2.AGREE 3.DISAGREE',
 	`create_time` datetime(3) NOT NULL COMMENT 'create time',
