@@ -1,6 +1,5 @@
 package com.higgschain.trust.rs.core.service;
 
-import bsh.StringUtil;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.consensus.core.ConsensusStateMachine;
@@ -21,11 +20,11 @@ import com.higgschain.trust.slave.core.repository.config.ConfigRepository;
 import com.higgschain.trust.slave.model.bo.CoreTransaction;
 import com.higgschain.trust.slave.model.bo.SignInfo;
 import com.higgschain.trust.slave.model.bo.action.Action;
+import com.higgschain.trust.slave.model.bo.ca.Ca;
 import com.higgschain.trust.slave.model.bo.config.Config;
 import com.higgschain.trust.slave.model.bo.node.NodeAction;
 import com.higgschain.trust.slave.model.enums.UsageEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +66,11 @@ public class NodeConsensusService {
      */
     public String joinRequest() {
         log.info("[joinRequest] send ca auth request");
-        caService.authKeyPair(nodeState.getNodeName());
+        RespData<Ca> caRespData = caService.acquireCA(nodeState.getNodeName());
+        if (caRespData == null || caRespData.getData() == null || !caRespData.getData().isValid()) {
+            log.error("[joinRequest] current node's ca is not exist or invalid");
+            return "current node's ca is not exist or invalid";
+        }
         log.info("[joinRequest] end send ca auth request");
 
         log.info("[joinRequest] send join consensus request");
@@ -82,7 +85,7 @@ public class NodeConsensusService {
         vo.setPubKey(pubKey);
         vo.setSign(sign);
         vo.setSignValue(signValue);
-        Optional<Peer> peerOptional = NetworkManage.getInstance().getPeers().stream().filter((peer) -> !StringUtils.equals(nodeName, peer.getNodeName()) && !peer.isSlave()).findFirst();
+        Optional<Peer> peerOptional = NetworkManage.getInstance().getAnyMasterPeerExclude(nodeName);
         if (!peerOptional.isPresent()) {
             log.error("[joinRequest] alive peer to send join request not found");
             return FAIL;

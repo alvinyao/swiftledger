@@ -1,13 +1,13 @@
 package com.higgschain.trust.network;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.higgschain.trust.network.utils.Hessian;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -102,7 +102,7 @@ public class NetworkManage {
     private void initDefaultListener() {
         listeners.add(((event, message) -> {
             if (event == NetworkListener.Event.LEAVE) {
-                Address address = (Address)message;
+                Address address = (Address) message;
                 Peer peer = peers.getByAddress(address);
 
                 if (peer != null) {
@@ -111,6 +111,15 @@ public class NetworkManage {
                 log.info("Peer {} disconnected", message);
             }
         }));
+    }
+
+    /**
+     * Gets peers.
+     *
+     * @return the peers
+     */
+    public Optional<Peer> getAnyMasterPeerExclude(String nodeName) {
+        return peers.getPeers().stream().filter((peer) -> !peer.getNodeName().equals(nodeName) && !peer.isSlave()).findFirst();
     }
 
     /**
@@ -308,7 +317,7 @@ public class NetworkManage {
      */
     public <T, R> void registerHandler(String type, Function<T, R> handler, Executor executor) {
         messagingService.registerHandler(type, (address, payload) -> {
-            R ret = handler.apply((T)Hessian.parse(payload));
+            R ret = handler.apply((T) Hessian.parse(payload));
             return Hessian.serialize(ret);
         }, executor);
     }
@@ -323,7 +332,7 @@ public class NetworkManage {
      */
     public <T, R> void registerHandler(String type, Function<T, R> handler) {
         messagingService.registerHandler(type, (address, payload) -> {
-            R ret = handler.apply((T)Hessian.parse(payload));
+            R ret = handler.apply((T) Hessian.parse(payload));
             return Hessian.serialize(ret);
         }, executor);
     }
