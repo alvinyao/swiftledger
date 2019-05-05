@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +16,9 @@ import java.util.List;
  * @author suimi
  * @date 2018 /9/4
  */
-@Data @NoArgsConstructor public class ClusterOptTx {
+@Data
+@NoArgsConstructor
+public class ClusterOptTx implements Serializable {
 
     /**
      * the node name
@@ -52,10 +55,11 @@ import java.util.List;
     /**
      * The enum Operation.
      */
-    public enum Operation {/**
-     * Join operation.
-     */
-    JOIN,
+    public enum Operation {
+        /**
+         * Join operation.
+         */
+        JOIN,
         /**
          * Leave operation.
          */
@@ -65,7 +69,10 @@ import java.util.List;
     /**
      * The type Signature info.
      */
-    @Data @AllArgsConstructor @NoArgsConstructor public static class SignatureInfo {
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class SignatureInfo implements Serializable {
         private String signer;
         private String sign;
     }

@@ -94,11 +94,11 @@ import java.util.*;
             }
             if (!respData.isSuccess()) {
                 log.error("send tx error, resp = {}", respData);
-                return FAIL;
+                throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CA_AUTH_ERROR);
             }
         } catch (Throwable e2) {
             log.error("send ca auth error", e2);
-            return FAIL;
+            throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CA_AUTH_ERROR);
         }
 
         // insert ca into db (for consensus layer) if not exist
@@ -274,6 +274,7 @@ import java.util.*;
         coreTx.setPolicyId(InitPolicyEnum.CA_AUTH.getPolicyId());
         coreTx.setActionList(buildAuthActionList(list));
         coreTx.setTxType(TxTypeEnum.CA.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 
@@ -314,6 +315,7 @@ import java.util.*;
         coreTx.setPolicyId(InitPolicyEnum.CA_UPDATE.getPolicyId());
         coreTx.setActionList(buildUpdateActionList(caVO));
         coreTx.setTxType(TxTypeEnum.CA.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 
@@ -339,6 +341,7 @@ import java.util.*;
         coreTx.setPolicyId(InitPolicyEnum.CA_CANCEL.getPolicyId());
         coreTx.setActionList(buildCancelActionList(caVO));
         coreTx.setTxType(TxTypeEnum.CA.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 

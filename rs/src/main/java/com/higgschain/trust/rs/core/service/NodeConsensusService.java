@@ -1,8 +1,11 @@
 package com.higgschain.trust.rs.core.service;
 
+import bsh.StringUtil;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
 import com.higgschain.trust.consensus.core.ConsensusStateMachine;
+import com.higgschain.trust.network.NetworkManage;
+import com.higgschain.trust.network.Peer;
 import com.higgschain.trust.rs.core.api.CaService;
 import com.higgschain.trust.rs.core.api.CoreTransactionService;
 import com.higgschain.trust.rs.core.api.SignService;
@@ -22,12 +25,11 @@ import com.higgschain.trust.slave.model.bo.config.Config;
 import com.higgschain.trust.slave.model.bo.node.NodeAction;
 import com.higgschain.trust.slave.model.enums.UsageEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * The type Node consensus service.
@@ -36,15 +38,24 @@ import java.util.UUID;
  * @desc node consensus service
  * @date 2018 /7/5 11:38
  */
-@Service @Slf4j public class NodeConsensusService {
+@Service
+@Slf4j
+public class NodeConsensusService {
 
-    @Autowired private NodeState nodeState;
-    @Autowired private CoreTransactionService coreTransactionService;
-    @Autowired private NodeClient nodeClient;
-    @Autowired private ConsensusStateMachine consensusStateMachine;
-    @Autowired private SignService signService;
-    @Autowired private ConfigRepository configRepository;
-    @Autowired private CaService caService;
+    @Autowired
+    private NodeState nodeState;
+    @Autowired
+    private CoreTransactionService coreTransactionService;
+    @Autowired
+    private NodeClient nodeClient;
+    @Autowired
+    private ConsensusStateMachine consensusStateMachine;
+    @Autowired
+    private SignService signService;
+    @Autowired
+    private ConfigRepository configRepository;
+    @Autowired
+    private CaService caService;
 
     private static final String SUCCESS = "sucess";
     private static final String FAIL = "fail";
@@ -71,7 +82,12 @@ import java.util.UUID;
         vo.setPubKey(pubKey);
         vo.setSign(sign);
         vo.setSignValue(signValue);
-        RespData respData = nodeClient.nodeJoin(nodeState.notMeNodeNameReg(), vo);
+        Optional<Peer> peerOptional = NetworkManage.getInstance().getPeers().stream().filter((peer) -> !StringUtils.equals(nodeName, peer.getNodeName()) && !peer.isSlave()).findFirst();
+        if (!peerOptional.isPresent()) {
+            log.error("[joinRequest] alive peer to send join request not found");
+            return FAIL;
+        }
+        RespData respData = nodeClient.nodeJoin(peerOptional.get().getNodeName(), vo);
         if (!respData.isSuccess()) {
             log.error("resp = {}", respData);
             return FAIL;
@@ -113,7 +129,7 @@ import java.util.UUID;
             coreTransactionService.submitTx(constructJoinCoreTx(vo));
         } catch (Throwable e) {
             log.error("send node join transaction error", e);
-            return new RespData(RespCodeEnum.SYS_FAIL.getRespCode(),RespCodeEnum.SYS_FAIL.getMsg());
+            return new RespData(RespCodeEnum.SYS_FAIL.getRespCode(), RespCodeEnum.SYS_FAIL.getMsg());
         }
         log.info("[joinConsensusTx] submit joinConsensusTx to slave success");
         return new RespData();
@@ -134,6 +150,7 @@ import java.util.UUID;
         coreTx.setActionList(buildJoinActionList(vo));
         //set transaction type
         coreTx.setTxType(TxTypeEnum.NODE.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 
@@ -200,6 +217,7 @@ import java.util.UUID;
         coreTx.setActionList(buildLeaveActionList(nodeName));
         //set transaction type
         coreTx.setTxType(TxTypeEnum.NODE.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 

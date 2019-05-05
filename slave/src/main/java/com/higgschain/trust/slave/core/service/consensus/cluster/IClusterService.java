@@ -45,6 +45,14 @@ public interface IClusterService {
     Boolean validatingHeader(BlockHeader header);
 
     /**
+     * cluster validates the block header with view
+     *
+     * @param header block header
+     * @return boolean
+     */
+    Boolean validatingHeaderWithView(BlockHeader header);
+
+    /**
      * Get the height of all node
      *
      * @return the all cluster height

@@ -3,6 +3,7 @@ package com.higgschain.trust.consensus.sofajraft.config;
 import com.alipay.remoting.InvokeCallback;
 import com.alipay.remoting.exception.RemotingException;
 import com.alipay.remoting.rpc.RpcServer;
+import com.alipay.sofa.jraft.CliService;
 import com.alipay.sofa.jraft.RaftGroupService;
 import com.alipay.sofa.jraft.StateMachine;
 import com.alipay.sofa.jraft.conf.Configuration;
@@ -41,6 +42,15 @@ public class SofajraftServer implements ConsensusClient, ConsensusStateMachine {
 
     @Autowired
     private BoltCliClientService cliClientService;
+
+    @Autowired
+    private CliService cliService;
+
+    @Autowired
+    private PeerId serverId;
+
+    @Autowired
+    private Configuration initConf;
 
     private RaftGroupService raftGroupService;
 
@@ -90,14 +100,6 @@ public class SofajraftServer implements ConsensusClient, ConsensusStateMachine {
             final NodeOptions nodeOptions = new NodeOptions();
             nodeOptions.setElectionTimeoutMs(properties.getElectionTimeoutMs());
             nodeOptions.setSnapshotIntervalSecs(properties.getSnapshotIntervalSecs());
-            final PeerId serverId = new PeerId();
-            if (!serverId.parse(properties.getServerIdStr())) {
-                throw new IllegalArgumentException("Fail to parse serverId:" + properties.getServerIdStr());
-            }
-            final Configuration initConf = new Configuration();
-            if (!initConf.parse(properties.getInitConfStr())) {
-                throw new IllegalArgumentException("Fail to parse initConf:" + properties.getInitConfStr());
-            }
             // 设置初始集群配置
             nodeOptions.setInitialConf(initConf);
 
@@ -134,12 +136,12 @@ public class SofajraftServer implements ConsensusClient, ConsensusStateMachine {
 
     @Override
     public void leaveConsensus() {
-
+        cliService.removePeer(properties.getGroupId(), initConf, serverId);
     }
 
     @Override
     public void joinConsensus() {
-
+        cliService.addPeer(properties.getGroupId(), initConf, serverId);
     }
 
     public RaftGroupService getRaftGroupService() {

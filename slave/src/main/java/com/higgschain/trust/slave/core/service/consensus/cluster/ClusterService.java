@@ -159,4 +159,16 @@ import java.util.*;
         return responseCommand == null ? null : (Boolean)responseCommand.get();
     }
 
+    /**
+     * validating the block header through consensus with view, if timeout, null will be return
+     *
+     * @param header block header
+     * @return
+     */
+    @Override public Boolean validatingHeaderWithView(BlockHeader header) {
+        BlockHeaderCmd command = new BlockHeaderCmd(header, viewManager.getViewWithHeight(header.getHeight()).getId());
+        ResponseCommand<?> responseCommand = validConsensus.submitSync(command);
+        return responseCommand == null ? null : (Boolean)responseCommand.get();
+    }
+
 }

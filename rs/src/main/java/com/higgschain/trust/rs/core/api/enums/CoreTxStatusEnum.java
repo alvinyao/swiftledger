@@ -12,25 +12,25 @@ import java.util.List;
  * @description
  * @date 2018 -05-12
  */
-public enum CoreTxStatusEnum {/**
- * The Init.
- */
-INIT("01","INIT","the init status"),
+public enum CoreTxStatusEnum {
+    /**
+     * The Init.
+     */
+    INIT("01", "INIT", "the init status"),
     /**
      * The Need vote.
      */
-    NEED_VOTE("02","NEED_VOTE","need vote by async"),
+    NEED_VOTE("02", "NEED_VOTE", "need vote by async"),
     /**
      * The Wait.
      */
-    WAIT("03","WAIT","wait submit to slave")
-    ;
+    WAIT("03", "WAIT", "wait submit to slave");
 
     private String index;
     private String code;
     private String desc;
 
-    CoreTxStatusEnum(String index, String code,String desc){
+    CoreTxStatusEnum(String index, String code, String desc) {
         this.index = index;
         this.code = code;
         this.desc = desc;
@@ -42,9 +42,9 @@ INIT("01","INIT","the init status"),
      * @param code the code
      * @return the core tx status enum
      */
-    public static CoreTxStatusEnum formCode(String code){
-        for(CoreTxStatusEnum coreTxStatusEnum : values()){
-            if(StringUtils.equals(code,coreTxStatusEnum.getCode())){
+    public static CoreTxStatusEnum formCode(String code) {
+        for (CoreTxStatusEnum coreTxStatusEnum : values()) {
+            if (StringUtils.equals(code, coreTxStatusEnum.getCode())) {
                 return coreTxStatusEnum;
             }
         }
@@ -57,9 +57,9 @@ INIT("01","INIT","the init status"),
      * @param index the index
      * @return the core tx status enum
      */
-    public static CoreTxStatusEnum formIndex(String index){
-        for(CoreTxStatusEnum coreTxStatusEnum : values()){
-            if(StringUtils.equals(index,coreTxStatusEnum.getIndex())){
+    public static CoreTxStatusEnum formIndex(String index) {
+        for (CoreTxStatusEnum coreTxStatusEnum : values()) {
+            if (StringUtils.equals(index, coreTxStatusEnum.getIndex())) {
                 return coreTxStatusEnum;
             }
         }
