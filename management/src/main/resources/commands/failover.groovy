@@ -1,9 +1,9 @@
 package commands
 
 
-import com.higgschain.trust.config.view.IClusterViewManager
 import com.higgschain.trust.consensus.config.NodeState
 import com.higgschain.trust.consensus.config.NodeStateEnum
+import com.higgschain.trust.consensus.view.IClusterViewManager
 import com.higgschain.trust.management.failover.scheduler.FailoverSchedule
 import com.higgschain.trust.management.failover.service.SelfCheckingService
 import com.higgschain.trust.management.failover.service.SyncService

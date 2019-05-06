@@ -119,7 +119,7 @@ public class NetworkManage {
      * @return the peers
      */
     public Optional<Peer> getAnyMasterPeerExclude(String nodeName) {
-        return peers.getPeers().stream().filter((peer) -> !peer.getNodeName().equals(nodeName) && !peer.isSlave()).findFirst();
+        return peers.getPeers().stream().filter((peer) -> !peer.getNodeName().equals(nodeName) && !peer.isBackup()).findFirst();
     }
 
     /**
