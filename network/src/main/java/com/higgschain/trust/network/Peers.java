@@ -90,7 +90,7 @@ public final class Peers {
      */
     public Peer getPeer(String nodeName) {
         for (Peer peer : map.values()) {
-            if (nodeName.equals(peer.getNodeName()) && !peer.isSlave()) {
+            if (nodeName.equals(peer.getNodeName()) && !peer.isBackup()) {
                 return peer;
             }
         }
@@ -105,7 +105,7 @@ public final class Peers {
      */
     public Peer getBackupPeer(String nodeName) {
         for (Peer peer : map.values()) {
-            if (nodeName.equals(peer.getNodeName()) && peer.isSlave()) {
+            if (nodeName.equals(peer.getNodeName()) && peer.isBackup()) {
                 return peer;
             }
         }

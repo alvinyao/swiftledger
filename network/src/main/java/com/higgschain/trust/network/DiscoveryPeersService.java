@@ -83,7 +83,7 @@ public class DiscoveryPeersService {
             return;
         }
 
-        if (peer.isSlave()) {
+        if (peer.isBackup()) {
             return;
         }
 

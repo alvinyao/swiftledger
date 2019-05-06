@@ -39,7 +39,7 @@ import java.util.List;
  * @author tangfashuang
  * @date 2018 /04/09 15:30
  */
-@ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "higgs.trust.slave", havingValue = "true", matchIfMissing = true)
 @Service
 @Slf4j
 public class PackageScheduler {

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * The type Tx process init schedule.
  */
-@ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "higgs.trust.slave", havingValue = "true", matchIfMissing = true)
 @Service
 @Slf4j
 public class TxProcessInitSchedule {

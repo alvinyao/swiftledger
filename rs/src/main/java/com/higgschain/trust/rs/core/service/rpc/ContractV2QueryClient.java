@@ -16,7 +16,7 @@ import java.util.List;
  * @author: lingchao
  * @datetime:2019-01-05 23 :32
  */
-@ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "false")
+@ConditionalOnProperty(name = "higgs.trust.slave", havingValue = "false")
 @Service
 public class ContractV2QueryClient implements ContractV2QueryService {
     @Autowired

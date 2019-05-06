@@ -69,8 +69,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 @Slf4j
 public class CoreTransactionServiceImpl implements CoreTransactionService, InitializingBean {
-    @Value("${higgs.trust.isSlave:false}")
-    private boolean isSlave;
+    @Value("${higgs.trust.slave:false}")
+    private boolean slave;
     @Autowired
     private TransactionTemplate txRequired;
     @Autowired
@@ -118,7 +118,7 @@ public class CoreTransactionServiceImpl implements CoreTransactionService, Initi
     @Override
     public void afterPropertiesSet() throws Exception {
         log.info("Init redis distribution topic listener to process tx.");
-        if (!isSlave) {
+        if (!slave) {
             log.info("this node not slave do not need to initAsyncProcessInitTxListener");
             return;
         }

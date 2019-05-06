@@ -17,7 +17,7 @@ public class Peer implements Serializable {
     private String publicKey = "";
     private String nodeName = "";
     private int httpPort;
-    private boolean isSlave;
+    private boolean backup;
     private transient boolean connected = false;
     private transient AtomicInteger connectTimes = new AtomicInteger(0);
 
@@ -144,21 +144,21 @@ public class Peer implements Serializable {
     }
 
     /**
-     * Is slave boolean.
+     * Is backup boolean.
      *
      * @return the boolean
      */
-    public boolean isSlave() {
-        return isSlave;
+    public boolean isBackup() {
+        return backup;
     }
 
     /**
-     * Sets slave.
+     * Sets backup.
      *
-     * @param slave the slave
+     * @param backup the backup
      */
-    public void setSlave(boolean slave) {
-        isSlave = slave;
+    public void setBackup(boolean backup) {
+        this.backup = backup;
     }
 
     /**
@@ -196,7 +196,7 @@ public class Peer implements Serializable {
         publicKey = newPeer.publicKey;
         nodeName = newPeer.nodeName;
         httpPort = newPeer.httpPort;
-        isSlave = newPeer.isSlave;
+        backup = newPeer.backup;
         connectTimes.lazySet(0);
     }
 
@@ -211,7 +211,7 @@ public class Peer implements Serializable {
 
         Peer that = (Peer)obj;
         return nodeName.equals(nodeName) && publicKey.equals(that.publicKey) && this.address.equals(that.address)
-            && this.isSlave == that.isSlave;
+            && this.backup == that.backup;
     }
 
     @Override public String toString() {

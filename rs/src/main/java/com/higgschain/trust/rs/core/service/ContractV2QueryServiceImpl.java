@@ -15,7 +15,7 @@ import java.util.List;
  * @author: lingchao
  * @datetime:2019-01-05 23 :28
  */
-@ConditionalOnProperty(name = "higgs.trust.isSlave", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "higgs.trust.slave", havingValue = "true", matchIfMissing = true)
 @Slf4j
 @Service
 public class ContractV2QueryServiceImpl implements ContractV2QueryService {

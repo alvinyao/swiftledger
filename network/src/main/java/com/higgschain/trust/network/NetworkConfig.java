@@ -201,7 +201,7 @@ public class NetworkConfig {
             config.localPeer.setConnected(true);
             config.localPeer.setNonce(nonce);
             config.localPeer.setHttpPort(config.httpPort);
-            config.localPeer.setSlave(config.isBackupNode());
+            config.localPeer.setBackup(config.isBackupNode());
 
             config.signature = config.authentication.sign(config.localPeer, config.privateKey);
 

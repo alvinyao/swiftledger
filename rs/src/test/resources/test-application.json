@@ -99,8 +99,8 @@
         "tryTimes": 10
       },
       "geniusPath": "/data/home/admin/trust-integration/geniusBlock.json",
-      "isSlave": true,
-      "isStandby": false,
+      "slave": true,
+      "standby": false,
       "keys": {
         "bizPublicKey":"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1Tos7UppFSndWL9giXebNOPjQvrFu4ugpZyjf1szXBy+R7lElgR/uPqKc8sd+ss8GNxSuCfkkDhdIjJwaitZVRCgST+t2vzTuDXa2brzb8YCdkwCG6ucKp5NQ3+YS9vh0GUtL3MTAIXMYYnwFDAg/va82L0mqOoPSF13SnRzI4wIDAQAB",
 
