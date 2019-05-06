@@ -57,6 +57,9 @@ public class SofajraftServer implements ConsensusClient, ConsensusStateMachine {
     @Override
     public <T> CompletableFuture<?> submit(AbstractConsensusCommand<T> command) {
         PeerId peerId = raftGroupService.getRaftNode().getLeaderId();
+        if (null == peerId) {
+            throw new RuntimeException("sofajraft has no leader now!");
+        }
         CompletableFuture future = new CompletableFuture();
         try {
             cliClientService.getRpcClient().invokeWithCallback(peerId.getEndpoint().toString(), command, new InvokeCallback() {
