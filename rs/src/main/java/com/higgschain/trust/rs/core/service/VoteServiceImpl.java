@@ -341,6 +341,9 @@ import java.util.stream.Collectors;
                 log.info("[getDecision] verifyNum == 0");
                 return true;
             }
+            //self is already agreeed
+            receipts.add(new VoteReceipt(null,rsConfig.getRsName(),null,VoteResultEnum.AGREE));
+
             int successCount = 0;
             List<String> successArr = new ArrayList<>(receipts.size());
             for (VoteReceipt item : receipts) {
