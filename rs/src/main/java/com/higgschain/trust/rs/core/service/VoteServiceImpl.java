@@ -47,6 +47,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.testng.collections.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -341,12 +342,18 @@ import java.util.stream.Collectors;
                 log.info("[getDecision] verifyNum == 0");
                 return true;
             }
+            //make a new list
+            List<VoteReceipt> newReceipts = Lists.newArrayList();
+            newReceipts.addAll(receipts);
             //self is already agreeed
-            receipts.add(new VoteReceipt(null,rsConfig.getRsName(),null,VoteResultEnum.AGREE));
+            VoteReceipt vr = new VoteReceipt();
+            vr.setVoter(rsConfig.getRsName());
+            vr.setVoteResult(VoteResultEnum.AGREE);
+            newReceipts.add(vr);
 
             int successCount = 0;
-            List<String> successArr = new ArrayList<>(receipts.size());
-            for (VoteReceipt item : receipts) {
+            List<String> successArr = new ArrayList<>(newReceipts.size());
+            for (VoteReceipt item : newReceipts) {
                 if (item.getVoteResult() == VoteResultEnum.AGREE) {
                     successCount++;
                     successArr.add(item.getVoter());
