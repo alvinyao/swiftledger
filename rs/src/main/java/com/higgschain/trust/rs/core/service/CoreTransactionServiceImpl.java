@@ -6,6 +6,7 @@ import com.higgschain.trust.common.enums.MonitorTargetEnum;
 import com.higgschain.trust.common.utils.BeanConvertor;
 import com.higgschain.trust.common.utils.MonitorLogUtils;
 import com.higgschain.trust.common.utils.ThreadLocalUtils;
+import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.config.view.ClusterView;
 import com.higgschain.trust.config.view.IClusterViewManager;
 import com.higgschain.trust.rs.common.config.RsConfig;
@@ -31,7 +32,6 @@ import com.higgschain.trust.slave.api.enums.RespCodeEnum;
 import com.higgschain.trust.slave.api.enums.TxTypeEnum;
 import com.higgschain.trust.slave.api.enums.manage.InitPolicyEnum;
 import com.higgschain.trust.slave.api.enums.manage.VotePatternEnum;
-import com.higgschain.trust.common.vo.RespData;
 import com.higgschain.trust.slave.api.vo.TransactionVO;
 import com.higgschain.trust.slave.common.exception.SlaveException;
 import com.higgschain.trust.slave.common.util.asynctosync.HashBlockingMap;
@@ -377,14 +377,14 @@ public class CoreTransactionServiceImpl implements CoreTransactionService, Initi
         signInfos.addAll(bo.getSignDatas());
         //update signDatas
         coreTxRepository.updateSignDatas(bo.getTxId(), signInfos);
-        //save already voting result for SYNC pattern
-        if (votePattern == VotePatternEnum.SYNC) {
-            voteReceiptRepository.batchAdd(receipts);
-        }
         //when there is failure as net-timeout,should retry
         if (receipts.size() < needVoters.size()) {
             log.error("[processInitTx]receipts.size:{} is less than voters.size:{} txId:{}", receipts.size(),
                     needVoters.size(), bo.getTxId());
+            //save already voting result for SYNC pattern
+            if (votePattern == VotePatternEnum.SYNC) {
+                voteReceiptRepository.batchAdd(receipts);
+            }
             return null;
         }
         //check vote decision for SYNC pattern
