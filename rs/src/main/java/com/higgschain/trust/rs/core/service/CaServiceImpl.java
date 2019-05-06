@@ -6,6 +6,8 @@ import com.higgschain.trust.common.utils.HashUtil;
 import com.higgschain.trust.consensus.util.CryptoUtil;
 import com.higgschain.trust.consensus.config.NodeState;
 import com.higgschain.trust.consensus.config.NodeStateEnum;
+import com.higgschain.trust.network.NetworkManage;
+import com.higgschain.trust.network.Peer;
 import com.higgschain.trust.rs.common.enums.RespCodeEnum;
 import com.higgschain.trust.rs.common.enums.RsCoreErrorEnum;
 import com.higgschain.trust.rs.common.exception.RsCoreException;
@@ -94,11 +96,11 @@ import java.util.*;
             }
             if (!respData.isSuccess()) {
                 log.error("send tx error, resp = {}", respData);
-                return FAIL;
+                throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CA_AUTH_ERROR);
             }
         } catch (Throwable e2) {
             log.error("send ca auth error", e2);
-            return FAIL;
+            throw new RsCoreException(RsCoreErrorEnum.RS_CORE_CA_AUTH_ERROR);
         }
 
         // insert ca into db (for consensus layer) if not exist
@@ -255,6 +257,17 @@ import java.util.*;
             log.info("[acquireCA] param is null");
             return null;
         }
+
+        if (!nodeState.isState(NodeStateEnum.Running)) {
+            Optional<Peer> peerOptional = NetworkManage.getInstance().getAnyMasterPeerExclude(nodeState.getNodeName());
+            if (!peerOptional.isPresent()) {
+                log.error("[acquireCA] alive peer to send acquireCA request not found");
+                return null;
+            }
+            log.info("current node is Offline, send tx by other node");
+            return caClient.acquireCA(peerOptional.get().getNodeName(), user);
+        }
+
         Ca ca = caRepository.getCaForBiz(user);
         if (null == ca) {
             log.info("[acquireCA] user={}, ca information is null", user);
@@ -274,6 +287,7 @@ import java.util.*;
         coreTx.setPolicyId(InitPolicyEnum.CA_AUTH.getPolicyId());
         coreTx.setActionList(buildAuthActionList(list));
         coreTx.setTxType(TxTypeEnum.CA.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 
@@ -314,6 +328,7 @@ import java.util.*;
         coreTx.setPolicyId(InitPolicyEnum.CA_UPDATE.getPolicyId());
         coreTx.setActionList(buildUpdateActionList(caVO));
         coreTx.setTxType(TxTypeEnum.CA.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 
@@ -339,6 +354,7 @@ import java.util.*;
         coreTx.setPolicyId(InitPolicyEnum.CA_CANCEL.getPolicyId());
         coreTx.setActionList(buildCancelActionList(caVO));
         coreTx.setTxType(TxTypeEnum.CA.getCode());
+        coreTx.setSendTime(new Date());
         return coreTx;
     }
 

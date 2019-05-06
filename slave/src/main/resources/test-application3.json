@@ -1,9 +1,4 @@
 {
-  "TRUST": {
-    "ribbon": {
-      "NFLoadBalancerRuleClassName": "com.higgschain.trust.common.feign.RequestHeaderRoundRobinRule"
-    }
-  },
   "atomix": {
     "address": "127.0.0.1:8803",
     "cluster": {
@@ -13,17 +8,14 @@
       "3": "127.0.0.1:8803"
     }
   },
+  "sofajraft": {
+    "serverIdStr": "127.0.0.1:8803",
+    "initConfStr": "127.0.0.1:8800,127.0.0.1:8801,127.0.0.1:8802,127.0.0.1:8803",
+    "dataPath": "/tmp/trust3/sofajraft/data3"
+  },
   "config": {
     "term": {
       "maxTermsSize": 8
-    }
-  },
-  "eureka": {
-    "client": {
-      "enabled": true,
-      "serviceUrl": {
-        "defaultZone": "http://localhost:8761/eureka/"
-      }
     }
   },
   "higgs": {
@@ -42,7 +34,7 @@
         "consensusPublicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl26CKTqV/KmO8OmD0wSNiMysDKFOvKKDX/FOQEOpuBC/dffFaturWtQHaTUfje9vSwi3gFCL0k5kJQvnlIrscCVmx+j+I0x6O2G4LM7mQovCaxjRmBtIJHvurUMgVJLibazhVFbPvVn6UMv2I58PTDqdekXJ0Urz9vmr5yrHZEpw20MBFO7Ve0J+TXVQ0pamX9zVnVSgeSgBu9w+ex/8t0lJkeQJrauJ47MnHYobVVKgwktwIPQMZVhiFlp1fkwr+xuI1OAfaqfPyLAnWTT60L8AhpxEfo3LiLG7UdLlZMgpjadEEiS6NZONb8hXi9mbQAYfORokkwXdVOuHlJcdRQIDAQAB",
         "consensusPrivateKey": "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCXboIpOpX8qY7w6YPTBI2IzKwMoU68ooNf8U5AQ6m4EL9198Vq26ta1AdpNR+N729LCLeAUIvSTmQlC+eUiuxwJWbH6P4jTHo7YbgszuZCi8JrGNGYG0gke+6tQyBUkuJtrOFUVs+9WfpQy/Yjnw9MOp16RcnRSvP2+avnKsdkSnDbQwEU7tV7Qn5NdVDSlqZf3NWdVKB5KAG73D57H/y3SUmR5Amtq4njsycdihtVUqDCS3Ag9AxlWGIWWnV+TCv7G4jU4B9qp8/IsCdZNPrQvwCGnER+jcuIsbtR0uVkyCmNp0QSJLo1k41vyFeL2ZtABh85GiSTBd1U64eUlx1FAgMBAAECggEAIL1CpNlGviaGge1qk7/DPdVKSTzCwiO8lYydJ2W5ltMAIegcpXqytGNs6sESfmRKwoUy7yn64NAT9LJ7MfFLJv/fFc94ynbpYldBM2bT/4Up1m+6ONGFKmYk9w6xObe7/oxG9y4BoeWHKdq+73qfGxL9Iwddl8NFtZrLIKJuE29zbOJN/8n8WQmpmtYW49m0MPXOtRz/e9G0iSao8/k3wyRiQQkSnTjvlYbeZC+TCbH8fePI5Q2hL6elhK7ufi+Ye//XOo2o8MjIv+DOSw8DFZ1VTd1Fi7An2+T2DJPZZ3dwW1f/8+pg9zV1Fe8B6qHJWsRcCw8DybDy9AKuEozFYQKBgQDQBjr0H2iyYQOkRd3R3UAdCC+URdt8P3trurI76VmS5i2QRPOyQdJnsiWbGppInrFz6b/22XLtf453q6Zm02IRviNyVImzm/Oas0Td3XObZkyS8gUDa9Uadb6pJ9gmsi+UTk9aHKq2fSux6MW3JJixmU7R+hUBbMZou41YR5Cy6QKBgQC6Wws27a7SqkMj4YwChx1n7GjNlXyQRd3LtD8qUyZNjXXkYlxyQ7EnR7/1AFqQAL4UeZOSag7pNq4yZGhebxvrvUwnAgwHIG3AiR0yGzuPt5/Qu18g97vcmRYyBohb89Ksbp6yjAvN4uSgjDGoxnBppnfeqjIzYSKNv/wqngHF/QKBgCUUlzmgx6bUSDPmCE46ZA1IwkJp2V/iaPuhAdhQFhlrUj/fKplhxkGZrb5iFZJQR01kI0W7KRNQo3KNdFHr6BVFkUf17b3IVLoErofly4+twoSHA4HCnO/kgSHh6lOre3OyKc7kQUHaOgmydlvY+CbgLv6a11ezrgJJPD66Mv7RAoGAPWWxlC9K4e1moXO2BT8u2QZyoQkXORFLuclw5iju/a4VoWEmxB65Rw/Elpu/OqKD/Yrwq9R1hTCWw9OA71v7/vcnF9L803xDrKOAEvoV7Yu6A7M37EyygEOPpHuygVkbl+P6NSke2n5ehOarlceLUcOeyqWYVIU0NS+DjSbxvqECgYB5y2cNZ2Ux5Lo1AG992RjxfX+TQW57vCNPyFB63doUGNRuXYGDz732lTJ6asoy5WDUxi1QcOKWsS/BaOkT5iFXIoNsDbjnf7c/IfdTglor6qvQQ2Wg/WqSS1NGxAJrIsgpEtuOA3MWTIYHDDJTeope6hnM+1xXXZpXOItV1eYcvg=="
       },
-      "geniusPath":"D:/workspace_idea/DL/trust/slave/src/main/resources/geniusBlock.json"
+      "geniusPath":"/Users/chizhong/Documents/code/rs-demo/swiftledger/slave/src/main/resources/geniusBlock-local.json"
     }
   },
   "management": {
@@ -82,7 +74,7 @@
         "maxWait": 60000,
         "min-evictable-idle-time-millis": 300000,
         "minIdle": 1,
-        "password": "920125",
+        "password": "root",
         "time-between-eviction-runs-millis": 60000,
         "url": "jdbc:mysql://localhost:3306/trust3?useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true&useAffectedRows=true",
         "username": "root"
@@ -94,6 +86,22 @@
     "batch": {
       "tx": {
         "limit": 200
+      }
+    },
+    "rocksdb": {
+      "extra": {
+        "name": "trust-extra.db",
+        "size": 99999999999
+      },
+      "file": {
+        "root": "/tmp/trust3/rocks/"
+      },
+      "flash": {
+        "name": "trust.db",
+        "size": 10000000000
+      },
+      "transaction": {
+        "lockTimeout": 10000
       }
     },
     "schedule": {
@@ -119,8 +127,8 @@
     }
   },
   "logging": {
-    "config": "classpath:logback.xml",
-    "path": "/tmp/log3"
+    "config": "classpath:logback-spring.xml",
+    "path": "/tmp/trust3/log"
   },
   "hystrix": {
     "command": {

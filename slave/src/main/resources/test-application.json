@@ -1,9 +1,7 @@
 {
-  "runMode": "run",
-  "TRUST": {
-    "ribbon": {
-      "NFLoadBalancerRuleClassName": "com.higgschain.trust.common.feign.RequestHeaderRoundRobinRule"
-    }
+  "logging": {
+    "config": "classpath:logback-spring.xml",
+    "path": "/tmp/trust0/log"
   },
   "atomix": {
     "address": "127.0.0.1:8800",
@@ -13,6 +11,11 @@
       "2": "127.0.0.1:8802",
       "3": "127.0.0.1:8803"
     }
+  },
+  "sofajraft": {
+    "serverIdStr": "127.0.0.1:8800",
+    "initConfStr": "127.0.0.1:8800,127.0.0.1:8801,127.0.0.1:8802,127.0.0.1:8803",
+    "dataPath": "/tmp/trust0/sofajraft/data0"
   },
   "config": {
     "term": {
@@ -43,7 +46,7 @@
         "consensusPublicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4CkXxDiD147k9vzZ0c9SU6gamK5hEQUXPTmZJsvvsEd81obOdcVys3MC879R28pKX+ccWU50Rf9YfwECnRkMBUQz7byuwfCk2fjrZpJLQ77uyQmEW08Y3RAb5iTYvHGVB3cPP+ZMSBRrW0apKec3atOGM1bYWkhud30MOvirGwf2swu7mEQNn4eFKHeK2hhIcannozFfJL0rRtk0Zlv7m6hIWdQ2CztV8PVfj+yA8IjoLb2x64r8UQYrYmjxM2ZbEITfXvjpJrrFM8tus3Mtcl+m6NH8X/k1pLPGi6VPBsFwh5g3M4szYn01QffPSL+gMI8YvoaycgWutSlRNzXkuwIDAQAB",
         "consensusPrivateKey": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDgKRfEOIPXjuT2/NnRz1JTqBqYrmERBRc9OZkmy++wR3zWhs51xXKzcwLzv1Hbykpf5xxZTnRF/1h/AQKdGQwFRDPtvK7B8KTZ+OtmkktDvu7JCYRbTxjdEBvmJNi8cZUHdw8/5kxIFGtbRqkp5zdq04YzVthaSG53fQw6+KsbB/azC7uYRA2fh4Uod4raGEhxqeejMV8kvStG2TRmW/ubqEhZ1DYLO1Xw9V+P7IDwiOgtvbHrivxRBitiaPEzZlsQhN9e+OkmusUzy26zcy1yX6bo0fxf+TWks8aLpU8GwXCHmDczizNifTVB989Iv6Awjxi+hrJyBa61KVE3NeS7AgMBAAECggEBAJWpWgDcaspE0YJGF3gJn8HS/s7pvk0KxRVPm31Xs9RSJntkzfu7tHUzWMk8935zdWzKdRb7Vo5VidRh7EjPLENn4fPcgiFide5CT4jQLAgzNmJrRD9idAtEchwahcprW0D8sOXM8Sk+2N68Mr2TbmCYkYU9en3s1jRY/Q1ycWs9idpGiRosIUBOGUQSZ9do2mK5omsRpGdnDOpxDLL/fgGh0nJauUkySaTVB0fCwgECwINj23hZjfbqTQipSF1/g8V7zPwdXW7/49JJrretkRpd447wZQX/JR9VC68qleo/VbhG6JcAp/Ks2jrKZezXJKwaOpW0CnpR/JvwaeU3wCECgYEA+ABV2wTS9El2YVCn7Qw1Yx/uE7M+6GVGhfRM6W0TKfb2WQkhDD8eoOzfpsXSnZdtgXx7TglqcoNiO9KUrYgxNYplg6z2vAomomi9I9Rhk1CCzicYHEwuFVaKt8Fsc+Rwip4gwCakZc15ezYKF6a5uSXjmhg0CHXu/qYFIV+uEFUCgYEA52PpdcNE8RrQzB4jL/E4U+wGu4w6i/HIM5/VwiOYVbJ07I1+IqL5GGNdPT42YcsMpg3KaYWoZlKEq5tmXDOlGMOCgAo44djYFI09szcVe3myu/1/EKWdDUO7zBdv5HGAtaiFYmvujjBJFiM13PDiHHlYxkkAcy+GTPAyf5yL8M8CgYB8pVaBhTQt2bppAOvVxZwTnRnAxwdoMHa4nugFLnBCWEDK0T7N8++F/GgQXz8TO+eq/BDRUQQyV/yIird1XI03Fr8c5lMAga2XVUMy/eyo6P9Fc/q3RkanLN79qnbC7N7vnLhjO0jHbfWPysJZzs9r0jJJ4b5NPlEHphPQCVHoHQKBgET8abc9b4l+mC+y8ISzozqKDPvPdAkTHcAecCmAWUN7gBainK+Q7TkTLtI6gRYo5m1/gRBy0+Elyv4qx5rHnvpCF986rPjQoKOH9JRA4Pu+LcaUblS1O5yfzBauCiMOn/QI+TN9wFLOHIwoFT/45UDeANSlISg2TBEWL8gSETrLAoGAZc3rdHbXjxveqgMLfWjGdL5GJw+LlXQMbv6ucbDrlDt6MtJFmFmyycaGcEb+8RwWRJF0+N53uIGUW5BHf2EFR2Wdjm9ZxWoHfIe4CIMWxfCJsDzWc7ksAOTnHJNeWpe/1dnC73WJMHWTzwpm+NJkUYQu6Ag7nN8a7q3RisnUlkw="
       },
-      "geniusPath": "E:\\workspace\\trust\\slave\\src\\main\\resources\\geniusBlock.json"
+      "geniusPath": "/Users/chizhong/Documents/code/rs-demo/swiftledger/slave/src/main/resources/geniusBlock-local.json"
     }
   },
   "management": {
@@ -85,7 +88,7 @@
         "minIdle": 1,
         "password": "root",
         "time-between-eviction-runs-millis": 60000,
-        "url": "jdbc:mysql://192.168.99.100:3306/trust?useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true&useAffectedRows=true",
+        "url": "jdbc:mysql://localhost:3306/trust?useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true&useAffectedRows=true",
         "username": "root"
       },
       "type": "com.alibaba.druid.pool.DruidDataSource"
@@ -95,6 +98,22 @@
     "batch": {
       "tx": {
         "limit": 200
+      }
+    },
+    "rocksdb": {
+      "extra": {
+        "name": "trust-extra.db",
+        "size": 99999999999
+      },
+      "file": {
+        "root": "/tmp/trust0/rocks/"
+      },
+      "flash": {
+        "name": "trust.db",
+        "size": 10000000000
+      },
+      "transaction": {
+        "lockTimeout": 10000
       }
     },
     "schedule": {
@@ -115,16 +134,12 @@
         "masterName": ""
       },
       "password": "",
-      "address": "redis://192.168.99.100:6379",
+      "address": "redis://localhost:6379",
       "single": true,
       "key": {
         "mode": "manual"
       }
     }
-  },
-  "logging": {
-    "config": "classpath:logback.xml",
-    "path": "/tmp/log"
   },
   "hystrix": {
     "command": {

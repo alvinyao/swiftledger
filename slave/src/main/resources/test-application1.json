@@ -1,10 +1,4 @@
 {
-  "runMode": "run",
-  "TRUST": {
-    "ribbon": {
-      "NFLoadBalancerRuleClassName": "com.higgschain.trust.common.feign.RequestHeaderRoundRobinRule"
-    }
-  },
   "atomix": {
     "address": "127.0.0.1:8801",
     "cluster": {
@@ -13,6 +7,11 @@
       "2": "127.0.0.1:8802",
       "3": "127.0.0.1:8803"
     }
+  },
+  "sofajraft": {
+    "serverIdStr": "127.0.0.1:8801",
+    "initConfStr": "127.0.0.1:8800,127.0.0.1:8801,127.0.0.1:8802,127.0.0.1:8803",
+    "dataPath": "/tmp/trust1/sofajraft/data1"
   },
   "config": {
     "term": {
@@ -43,7 +42,7 @@
         "consensusPublicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj5oZwOnv2p8JFG6sN/CEO8k5FJL8ipPiUay48JmtAjMwBRuA+wZjLWYT9CXzRPBHd1d62gXPkvbZXRXnd/YBy5d3UsF/jyiTUgyrB7iP1gn0QCgVDshUG/j0za7GRu/MNwLJF+KJcGLPVGSdEYZAmzN8V2fYJtuoKuPQL55/5lYoZnIPKlwZ/4+Z6h9uZ9iAN3OICGKTaZWdptHTlbqUdXu5B4S4b9Lr0yOixD8VzqueFrcDWQCEzyDRd9zcLhTiM1wVw6nqFli3iND564dxVbm3KQuH9eM8Vgyd6fH83LklG3zzoHOrIJzTobblM3GSl6ySVpqNGub5FYJSBmo76QIDAQAB",
         "consensusPrivateKey": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCPmhnA6e/anwkUbqw38IQ7yTkUkvyKk+JRrLjwma0CMzAFG4D7BmMtZhP0JfNE8Ed3V3raBc+S9tldFed39gHLl3dSwX+PKJNSDKsHuI/WCfRAKBUOyFQb+PTNrsZG78w3AskX4olwYs9UZJ0RhkCbM3xXZ9gm26gq49Avnn/mVihmcg8qXBn/j5nqH25n2IA3c4gIYpNplZ2m0dOVupR1e7kHhLhv0uvTI6LEPxXOq54WtwNZAITPINF33NwuFOIzXBXDqeoWWLeI0Pnrh3FVubcpC4f14zxWDJ3p8fzcuSUbfPOgc6sgnNOhtuUzcZKXrJJWmo0a5vkVglIGajvpAgMBAAECggEAGRLMGl3+bkrEeBfW5DGPtSyuVcRQahXmN2KULBZ5GeA8KzghLjNwT7X6F/AkaM4XfGP+5GCNXNjTHSi88Lo4mAbLY9y7XBC2oGXr2v5DxxiX2DfnbVxXK0ct31f78Njf7F8FI7F/U+s8zjx/HFc3oqG7vTs5h5dk5pA+goIHTP1LyBP4UZI1n4mjstnydTWQLIvGpSu+RrMeDiPIaoT2SDu9GRoPMtc3E1xw+o5dbZlWRsJmcS5iyC1WtCUIF/JO921Yk0GIPxlRgsZjGj8qTTqlaQLlzAuQ9vlAdc/jqdU4qzmb5COJF35x8lkMIAEQUowGshLuJ9ktQs6nGN7nAQKBgQDsK7I+3hKNr6btgq9gU4UHvDZzVMb7Mx+rHzhDHaV3NR2n7zR/UkUvCcPs9dN5re7j90RFZ6nBxcvECVs4c6CswcacaEOJFBXtC4rXpmiuFO+5NaRcIvcoU7gG0n4IFuYoUdQEyMr62wTUERAd3WqZnsOeGoWUYc/LC3bogVmaoQKBgQCbqLZGQI18nOJb/S4HbnYdrAhS8OXQZpLVtYhe0cMrxC5uDZ28CYWNHzPmD/CFVPVJHvaYuboA+KPkqNXi4mDnZQED2Nu63K+jZ1/RwyJf6eX2+nzruui+mqHrboQZEOJNBnXJ3hercFtFgPgRKWQwN4VOCF3l+v2EWY5ESA6kSQKBgEIZAKwDryGkdY2ns7m75lGB5aNlqMMJTeWwuShflb3FSeWEVycDOYWur/0T1/oIKgH3ZE4gcyxeVWcqTzN/eQqguRtxOuWUj4ZmYpd0ZXvDNEybrMJ0rsPEmo6ePtO4xPWn4TTtlZGb1sAbfm09WOZhvtHzDku3DFcBgGgWO6PBAoGBAI0JDD4S9x9VNnOKrk3lc/fmi5Q62L8+cQRZeroO7PuWwUrN44EgT3VSND/baV4lYClkeKJghXujzTu9Di6IVqzSA11s+4oPssQnQdZZK6gj0U06ID2mGIO6r8MVW3MqrSCFHexN4rxfDROoixthmXlmlM3jHtDl3RYx3olXkIyhAoGAVZbPlh5OugF0E0gPtxGiOvLOB9ZK+hUaMh4O/6w6OG/CbJhQfAIk+TOUAY7kzhTtWHORGCjIaPSJo0bp5jsfcQctpK6mOOx1WiKiXDvMc7ChrJWz0jfpy4GTOnY+WJiOd+W29xNBeai2VY1nsg/zli7gM2swK5kLxJNzv/det0Y="
       },
-      "geniusPath":"D:/workspace_idea/DL/trust/slave/src/main/resources/geniusBlock.json"
+      "geniusPath":"/Users/chizhong/Documents/code/rs-demo/swiftledger/slave/src/main/resources/geniusBlock-local.json"
     }
   },
   "management": {
@@ -83,7 +82,7 @@
         "maxWait": 60000,
         "min-evictable-idle-time-millis": 300000,
         "minIdle": 1,
-        "password": "920125",
+        "password": "root",
         "time-between-eviction-runs-millis": 60000,
         "url": "jdbc:mysql://localhost:3306/trust1?useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true&useAffectedRows=true",
         "username": "root"
@@ -95,6 +94,22 @@
     "batch": {
       "tx": {
         "limit": 200
+      }
+    },
+    "rocksdb": {
+      "extra": {
+        "name": "trust-extra.db",
+        "size": 99999999999
+      },
+      "file": {
+        "root": "/tmp/trust1/rocks/"
+      },
+      "flash": {
+        "name": "trust.db",
+        "size": 10000000000
+      },
+      "transaction": {
+        "lockTimeout": 10000
       }
     },
     "schedule": {
@@ -120,8 +135,8 @@
     }
   },
   "logging": {
-    "config": "classpath:logback.xml",
-    "path": "/tmp/log1"
+    "config": "classpath:logback-spring.xml",
+    "path": "/tmp/trust1/log"
   },
   "hystrix": {
     "command": {

@@ -68,7 +68,7 @@ public class P2PValidScheduler {
         int tryTimes = 0;
         Boolean headerValid = null;
         do {
-            headerValid = clusterService.validatingHeader(maxHeader);
+            headerValid = clusterService.validatingHeaderWithView(maxHeader);
             if (headerValid != null) {
                 break;
             }
